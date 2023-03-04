@@ -25,7 +25,10 @@
 	</beans:bean>
 	
 	
+	<beans:bean class="kr.co.mirak.pay.PayServiceImpl">		
+		<beans:constructor-arg ref="sqlSessionTemplate" />
+	</beans:bean>
 	
-	
+
 	
 </beans:beans>
