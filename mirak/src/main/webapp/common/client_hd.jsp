@@ -23,7 +23,7 @@
 		<!-- START nav -->
 		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 			<div class="container">
-				<h1><a class="navbar-brand" href="index.html">MiRak</a></h1>
+				<h1><a class="navbar-brand" href="index.jsp">MiRak</a></h1>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="oi oi-menu"></span> Menu
 				</button>
@@ -33,7 +33,7 @@
 						<li class="nav-item"><a href="about.html" class="nav-link">2,3인세트</a></li>
 						<li class="nav-item"><a href="blog.html" class="nav-link">1인세트</a></li>
 						<li class="nav-item"><a href="contact.html" class="nav-link">가입</a></li>
-						<li class="nav-item"><a href="contact.html" class="nav-link">로그인</a></li>
+						<li class="nav-item"><a href="login.do" class="nav-link">로그인</a></li>
 						<li class="nav-item"><a href="cart.html" class="nav-link">장바구니</a></li>
 					</ul>
 				</div>
