@@ -5,7 +5,6 @@
  <mapper namespace="kr.co.mirak.member.MemberMapper">
  
  	<!-- <resultMap type="memberList" id="memberResult">
-		<id property="mem_num" column="MEM_NUM"></id>
 		<result property="mem_id" column="MEM_ID"/>
 		<result property="mem_pw" column="MEM_PW"/>
 		<result property="mem_name" column="MEM_NAME"/>
@@ -17,7 +16,7 @@
 	</resultMap> -->
  	<select id="getMemberList" resultType="kr.co.mirak.member.MemberVO">
 		<![CDATA[
-			SELECT * FROM MEMBER
+			SELECT MEM_ID, MEM_NAME, MEM_AGE, MEM_GENDER,MEM_PHONE  FROM MEMBER
 		]]>	
 	</select>
 	
