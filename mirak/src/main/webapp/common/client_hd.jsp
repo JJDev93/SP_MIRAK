@@ -6,6 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>MiRak</title>
+	<link rel="icon" href="${path}/resources/images/favicon.gif">
 	
 	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="${path}/resources/css/open-iconic-bootstrap.min.css">

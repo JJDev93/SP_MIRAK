@@ -60,6 +60,4 @@ public class MemberVO {
 				+ mem_phone + ", mem_token=" + mem_token + ", mem_age=" + mem_age + ", mem_gender=" + mem_gender
 				+ ", mem_regdate=" + mem_regdate + "]";
 	}
-	
-	
 }
