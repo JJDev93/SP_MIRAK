@@ -36,22 +36,36 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginView(@ModelAttribute("memver") MemberVO vo) {
 		System.out.println("로그인 화면으로 이동...");
-		return "login";
+		return "member/login";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(MemberVO vo, HttpSession session) {
-		
-		MemberVO member = memberService.login(vo);
-		
-		if(member.getMem_id() == null || member.getMem_id().equals("")) {
-			throw new IllegalArgumentException("아이디는 반드시 입력해야 합니다.");
+		String memid = memberService.login();
+		if(memid == null || memid.equals("")) {
+//			throw new IllegalArgumentException("아이디는 반드시 입력해야 합니다.");
+			System.out.println(vo.getMem_id());
 		}
-		if (member.getMem_id() != null) {
-			session.setAttribute("mem_id", member.getMem_id());
-			return "memberinfo";
-		} else
-			return "login";
+		if (memid != null) {
+			System.out.println("dd");
+			session.setAttribute("mem_id", memid);
+			System.out.println("0");
+			return "index";
+		} else {
+			System.out.println("d");
+			return "member/login";
+		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
 

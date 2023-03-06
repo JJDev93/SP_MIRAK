@@ -4,7 +4,7 @@
 
  <mapper namespace="kr.co.mirak.member.MemberMapper">
   	<select id="login" parameterType="kr.co.mirak.member.MemberVO">
- 		select * from member where mem_id=#{memid} and mem_pw=#{mempw}
+ 		select mem_id from member where mem_id=#{memid} and mem_pw=#{mempw}
 	</select>
 
 <!--  	<insert id="insert" parameterType="org.sp.mybatis.Emp"> -->

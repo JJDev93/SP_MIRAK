@@ -15,10 +15,10 @@ public class MemberServiceImpl implements MemberService {
 		this.sqlSessionTemplate = sqlSessionTemplate;
 	}
 	
-	public MemberVO login(MemberVO vo) {
+	public String login() {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-//		MemberVO vo = mapper.memberVO();
-		return vo;
+		String memberid = mapper.login();
+		return memberid;
 	}
 	public MemberVO info(int id) {
 		// TODO Auto-generated method stub
