@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.mybatis.spring.SqlSessionTemplate;
-/*
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +31,7 @@ public class LoginController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 
-/*
+
 	@RequestMapping(value = "/member", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
@@ -47,4 +47,4 @@ public class LoginController {
 	}
 	
 }
-*/
+

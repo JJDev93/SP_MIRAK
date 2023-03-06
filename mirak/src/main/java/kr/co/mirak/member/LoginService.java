@@ -1,5 +1,5 @@
 
-/*
+
 package kr.co.mirak.member;
 
 import java.util.List;
@@ -11,4 +11,3 @@ public interface LoginService {
 	int update(MemberVO vo);
 	int delete(int id);
 }
-*/
