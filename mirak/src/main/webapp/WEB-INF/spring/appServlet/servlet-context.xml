@@ -29,6 +29,10 @@
 		<beans:constructor-arg ref="sqlSessionTemplate" />
 	</beans:bean>
 	
+	
+	<beans:bean class="kr.co.mirak.cart.CartServiceImpl">		
+		<beans:constructor-arg ref="sqlSessionTemplate" />
+	</beans:bean>
 
 	
 </beans:beans>
