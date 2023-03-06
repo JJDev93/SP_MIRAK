@@ -16,6 +16,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	public MemberVO login(MemberVO vo) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+//		MemberVO vo = mapper.memberVO();
 		return vo;
 	}
 	public List<MemberVO> list() {
