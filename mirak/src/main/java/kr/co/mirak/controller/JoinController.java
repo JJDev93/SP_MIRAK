@@ -1,3 +1,4 @@
+
 package kr.co.mirak.controller;
 
 import java.util.Locale;
@@ -47,3 +48,4 @@ public class JoinController {
 	
 
 }
+

@@ -32,14 +32,14 @@ public class LoginController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/loginform", method = RequestMethod.GET)
 	public String loginView(@ModelAttribute("Member") MemberVO vo) {
 		System.out.println("로그인 화면으로 이동...");
 		return "login";
 	}
 	
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginform", method = RequestMethod.POST)
 	public String login(MemberVO vo, HttpSession session) {
 		if(vo.getMem_id() == null || vo.getMem_id().equals("")) {
 			throw new IllegalArgumentException("아이디는 반드시 입력해야 합니다.");
