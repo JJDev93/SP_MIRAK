@@ -44,12 +44,14 @@ public class LoginController {
 		
 		if(mem_id == null || mem_id.equals("")) {
 //			throw new IllegalArgumentException("아이디는 반드시 입력해야 합니다.");
+			System.out.println("아이디는 반드시 입력해야 합니다.");
 		}
 		if (mem_id != null) {
 			model.addAttribute("mem_id", mem_id);
+			System.out.println("로그인 성공!!");
 			return "redirect:/";
 		} else {
-			System.out.println("d");
+			System.out.println("로그인 실패");
 			return "member/login";
 		}
 	}
