@@ -13,11 +13,35 @@ public class MemberServiceImpl implements MemberService{
 	public MemberServiceImpl(SqlSessionTemplate sqlSessionTemplate) {
 		this.sqlSessionTemplate = sqlSessionTemplate;
 	}	
-
+	
+	@Override
 	public List<MemberVO> getMemberList() {
 		MemberMapper mamberDAO = sqlSessionTemplate.getMapper(MemberMapper.class);
 		List<MemberVO> memberList = mamberDAO.getMemberList();
 		return memberList;
 	}
 
+	@Override
+	public MemberVO info(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int insert(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int update(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int delete(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
