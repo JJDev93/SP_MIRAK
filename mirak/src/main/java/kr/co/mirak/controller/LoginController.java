@@ -15,12 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.mirak.HomeController;
-import kr.co.mirak.pay.PayService;
-import kr.co.mirak.pay.PayVO;
+import kr.co.mirak.member.MemberVO;
 
-/**
- * Handles requests for the application home page.
- */
+
 @Controller
 public class LoginController {
 	@Autowired
@@ -46,11 +43,11 @@ public class LoginController {
 	}
 	
 	
-//	@RequestMapping("/pay/payList")
+//	@RequestMapping("/member/memberlist")
 //	public String getEmpList(Model model) {
 //		
-//		List<PayVO> list = service.list();
+//		List<MemberVO> list = service.list();
 //		model.addAttribute("payList", list);
-//		return "pay";
+//		return "member";
 //	}
 }
