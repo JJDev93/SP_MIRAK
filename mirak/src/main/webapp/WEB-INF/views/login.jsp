@@ -9,10 +9,10 @@
           <div class="col-md-6 order-md-last d-flex" >
             <form action="#" class="bg-white p-5 contact-form">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="이메일(ID)">
+                <input type="text" class="form-control" name="memid" value="${member.memid }" placeholder="이메일(ID)">
               </div>
               <div class="form-group"> 
-                <input type="text" class="form-control" placeholder="비밀번호">
+                <input type="text" class="form-control" name="mempw" value="${member.mempw }" placeholder="비밀번호">
               </div>
               <div class="form-group">
                 <input type="submit" value="로그인" class="btn btn-primary py-3 px-5">

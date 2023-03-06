@@ -16,6 +16,5 @@ public class PayVO {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}	
-	
+	}
 }
