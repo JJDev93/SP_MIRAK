@@ -24,12 +24,13 @@
 					<table class="table">
 						<thead class="thead-primary">
 							<tr class="text-center">
-								<th>&nbsp;</th>
-								<th>&nbsp;</th>
+								<th>선택</th>
+								<th>이미지</th>
 								<th>상품명</th>
 								<th>가격</th>
-								<th>갯수</th>
-								<th>Total</th>
+								<th>요일선택</th>
+								<th>배송횟수</th>
+								<th>총가격</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -41,6 +42,7 @@
 									<p>Far far away, behind the word mountains, far from the countries</p>
 								</td>
 								<td class="price">$4.90</td>
+								<td>월수금</td>
 								<td class="quantity">
 									<div class="input-group mb-3">
 										<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
@@ -58,6 +60,7 @@
 									<p>Far far away, behind the word mountains, far from the countries</p>
 								</td>
 								<td class="price">34442</td>
+								<td>월수금</td>
 								<td class="quantity">
 									<div class="input-group mb-3">
 										<input type="button" onclick='count("plus")' value="+">
