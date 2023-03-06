@@ -26,9 +26,9 @@
 							<tr class="text-center">
 								<th>&nbsp;</th>
 								<th>&nbsp;</th>
-								<th>Product name</th>
-								<th>Price</th>
-								<th>Quantity</th>
+								<th>상품명</th>
+								<th>가격</th>
+								<th>갯수</th>
 								<th>Total</th>
 							</tr>
 						</thead>
@@ -57,7 +57,7 @@
 									<h3>Bell Pepper</h3>
 									<p>Far far away, behind the word mountains, far from the countries</p>
 								</td>
-								<td class="price">$15.70</td>
+								<td class="price">34442</td>
 								<td class="quantity">
 									<div class="input-group mb-3">
 										<input type="button" onclick='count("plus")' value="+">
@@ -67,52 +67,21 @@
 								</td>
 								<td class="total">$15.70</td>
 							</tr>
+							
+							
+							<tr class="text-center">
+							<c:forEach items="${cartList }" var="cart" varStatus="status">
+								<td class="product-name">${cart.cart_code }</td>
+							</c:forEach>
+							</tr>
+							
+							
 							<!-- END TR-->
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
-		<div class="row justify-content-end">
-			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-				<div class="cart-total mb-3">
-					<h3>Coupon Code</h3>
-					<p>Enter your coupon code if you have one</p>
-					<form action="#" class="info">
-						<div class="form-group">
-							<label for="">Coupon code</label> <input type="text"
-								class="form-control text-left px-3" placeholder="">
-						</div>
-					</form>
-				</div>
-				<p>
-					<a href="checkout.html" class="btn btn-primary py-3 px-4">Apply
-						Coupon</a>
-				</p>
-			</div>
-			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-				<div class="cart-total mb-3">
-					<h3>Estimate shipping and tax</h3>
-					<p>Enter your destination to get a shipping estimate</p>
-					<form action="#" class="info">
-						<div class="form-group">
-							<label for="">Country</label> <input type="text"
-								class="form-control text-left px-3" placeholder="">
-						</div>
-						<div class="form-group">
-							<label for="country">State/Province</label> <input type="text"
-								class="form-control text-left px-3" placeholder="">
-						</div>
-						<div class="form-group">
-							<label for="country">Zip/Postal Code</label> <input type="text"
-								class="form-control text-left px-3" placeholder="">
-						</div>
-					</form>
-				</div>
-				<p>
-					<a href="checkout.html" class="btn btn-primary py-3 px-4">Estimate</a>
-				</p>
-			</div>
 			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
 				<div class="cart-total mb-3">
 					<h3>Cart Totals</h3>
