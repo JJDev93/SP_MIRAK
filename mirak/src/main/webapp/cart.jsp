@@ -51,7 +51,7 @@
 							<!-- END TR-->
 
 							<tr class="text-center">
-								<td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+								<td class="product-remove"><input type="checkbox"></td>
 								<td class="image-prod"><div class="img" style="background-image: url(${path}/resources/images/product-4.jpg);"></div></td>
 								<td class="product-name">
 									<h3>Bell Pepper</h3>
@@ -60,7 +60,9 @@
 								<td class="price">$15.70</td>
 								<td class="quantity">
 									<div class="input-group mb-3">
-										<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+										<input type="button" onclick='count("plus")' value="+">
+										<input type="button" onclick='count("minus")' value="-">
+										<div id="result">1</div>
 									</div>
 								</td>
 								<td class="total">$15.70</td>
@@ -162,3 +164,23 @@
 </body>
 </html>
 <script src="${path}/resources/js/main.js"></script>
+
+<script>
+function count(type)  {
+	  // 결과를 표시할 element
+	  const resultElement = document.getElementById('result');
+	  
+	  // 현재 화면에 표시된 값
+	  let number = resultElement.innerText;
+	  
+	  // 더하기/빼기
+	  if(type === 'plus') {
+	    number = parseInt(number) + 1;
+	  }else if(type === 'minus')  {
+	    number = parseInt(number) - 1;
+	  }
+	  
+	  // 결과 출력
+	  resultElement.innerText = number;
+	}
+</script>
