@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProductDAO">
+
+<!-- 	<resultMap id="productResult" type="kr.co.mirak.product.ProductVO"> -->
+<!-- 		<id property="pro_code" column="pro_code" /> -->
+<!-- 		<result property="pro_name" column="pro_name" /> -->
+<!-- 		<result property="pro_price" column="pro_price" /> -->
+<!-- 		<result property="pro_desc" column="pro_desc" /> -->
+		
+<!-- 	</resultMap> -->
+
+
+<!-- 	<insert id="insertProduct" -->
+<!-- 		parameterType="kr.co.mirak.product.ProductVO"> -->
+<!-- 		<![CDATA[ -->
+<!-- 		INSERT INTO PRODUCT(pro_code, pro_name, pro_price,pro_desc,pro_cnt) -->
+<!-- 		VALUES(#{pro_code}, #{pro_name}, #{pro_price},#{pro_desc},#{pro_cnt}); -->
+		
+<!-- 		]]> -->
+<!-- 	</insert> -->
+	
+		<insert id="insertProduct"
+		parameterType="product">
+		<![CDATA[
+		INSERT INTO PRODUCT(pro_code, pro_name, pro_price,pro_desc,pro_cnt)
+		VALUES(#{pro_code}, #{pro_name}, #{pro_price},#{pro_desc},#{pro_cnt});
+		INSERT INTO OPTION(opt_name,opt_price) VALUES(#{opt_name},#{opt_price});
+		
+		]]>
+	</insert>
+	
+
+	<select id="productList" resultType="kr.co.mirak.product.ProductVO">
+		
+		<![CDATA[
+		SELECT pro_code, pro_name, pro_price,pro_desc,pro_cnt from product;
+		
+		]]>
+
+	</select>
+	
+	<select id="optionList" resultType="kr.co.mirak.product.ProductVO">
+		
+		<![CDATA[
+		SELECT opt_name, opt_price from option;
+		
+		]]>
+	</select>
+	
+	
+	<select id="productDetail" resultType="kr.co.mirak.product.ProductVO">
+		<![CDATA[
+		SELECT *
+		FROM PRODUCT
+		WHERE pro_code = #{pro_code}
+		]]>
+	</select>
+	
+	
+
+
+</mapper>
