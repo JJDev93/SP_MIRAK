@@ -10,15 +10,14 @@ public class MemberServiceImpl implements MemberService {
 
 	public MemberServiceImpl() {}
 	
-
 	public MemberServiceImpl(SqlSessionTemplate sqlSessionTemplate) {
 		this.sqlSessionTemplate = sqlSessionTemplate;
-	}	
+	}
 	
-	public String login() {
+	public MemberVO login(MemberVO vo) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		String memberid = mapper.login();
-		return memberid;
+		MemberVO memVO  = mapper.login(vo);
+		return memVO;
 	}
 	
 	public List<MemberVO> getMemberList() {
@@ -26,6 +25,7 @@ public class MemberServiceImpl implements MemberService {
 		List<MemberVO> memberList = mamberDAO.getMemberList();
 		return memberList;
 	}
+	
 
 	@Override
 	public MemberVO info(int id) {
@@ -35,7 +35,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int insert(MemberVO vo) {
-		// TODO Auto-generated method stub
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
 		return 0;
 	}
 
