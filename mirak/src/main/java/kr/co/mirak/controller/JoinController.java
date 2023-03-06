@@ -19,33 +19,17 @@ import kr.co.mirak.member.MemberVO;
 @Controller
 public class JoinController {
 
-	
-	@Autowired //컨트롤러 서비스 연결
+	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-	
-//	private MemberService service;
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-//	public JoinController(MemberService service) {
-//		this.service = service;
-//		
-//	}
-	
 
-	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
 	@RequestMapping("/join")
 	public String joinGET(Model model) {
 		logger.info("회원가입페이지입니다.");
 		logger.info(model.toString());
-		
-	
-		
-		
-	return "member/login";
+		return "member/login";
 		
 	}
 	
-
 }
-
