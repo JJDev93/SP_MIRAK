@@ -23,7 +23,7 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-xl-7 ftco-animate">
-				<form action="#" class="billing-form">
+				<form action="join" method="post" class="billing-form">
 					<h3 class="mb-4 billing-heading">회원가입</h3>
 					<div class="row align-items-end">
 						<div class="col-md-6">
@@ -42,7 +42,6 @@
 						<div class="container">
 							<div class="row block-9">
 								<div class="col-md-12 order-md-last ">
-									<form action="#" class="bg-white p-5 contact-form">
 										<div class="form-group">
 											<label for="ID">아이디</label> <input type="text"
 												class="form-control" placeholder="이메일(ID)">
@@ -56,7 +55,6 @@
 											<label for="PW">비밀번호 확인</label> <input type="text"
 												class="form-control" placeholder="비밀번호 확인">
 										</div>										
-									</form>
 								</div>
 							</div>
 						</div>

@@ -9,6 +9,12 @@
  		select * from test
  	</select>
  	
+ 	<insert id="insert">
+ 	
+ 	insert into member (mem_id , mem_pw , mem_name , mem_age , mem_gender ,mem_phone)
+ 		values(#{mem_id}, #{mem_pw}, #{mem_name} , #{mem_age} , #{mem_gender} , #{mem_phone})
+ 	</insert>
+ 	
  	<!-- 
  	<select id="info" resultType="org.sp.mybatis.Emp">
  		select * from emp2 where empno=#{empno}

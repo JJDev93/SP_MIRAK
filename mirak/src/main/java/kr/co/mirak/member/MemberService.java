@@ -8,4 +8,8 @@ public interface MemberService {
 	int insert(MemberVO vo);
 	int update(MemberVO vo);
 	int delete(int id);
+	
+	
+	
+
 }
