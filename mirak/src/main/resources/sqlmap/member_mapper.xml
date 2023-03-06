@@ -20,23 +20,13 @@
 		]]>	
 	</select>
 	
- 	<!-- 
- 	<select id="info" resultType="org.sp.mybatis.Emp">
- 		select * from emp2 where empno=#{empno}
+ 	<select id="list" resultType="kr.co.mirak.member.MemberVO">
+ 		select * from test
  	</select>
  	
- 	<insert id="insert" parameterType="org.sp.mybatis.Emp">
- 		insert into emp2 (empno, ename, deptno, job, sal)
- 		values (#{empno}, #{ename}, #{deptno}, #{job}, #{sal})
+ 	<insert id="insert">
+ 	
+ 	insert into member (mem_id , mem_pw , mem_name , mem_age , mem_gender ,mem_phone)
+ 		values(#{mem_id}, #{mem_pw}, #{mem_name} , #{mem_age} , #{mem_gender} , #{mem_phone})
  	</insert>
- 	
- 	<update id="update" parameterType="org.sp.mybatis.Emp">
- 		update emp2 set deptno=#{deptno}, sal=#{sal}
- 		where empno=#{empno}
- 	</update>
- 	
- 	<delete id="delete">
- 		delete from emp2 where empno=#{empno}
- 	</delete>
- 	 -->
  </mapper>
