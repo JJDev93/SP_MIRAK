@@ -21,6 +21,8 @@ public class JoinController {
 
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	
+	private MemberService memberService;
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
