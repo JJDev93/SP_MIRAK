@@ -23,11 +23,14 @@
 	</resultMap> -->
  	<select id="getMemberList" resultType="kr.co.mirak.member.MemberVO">
 		<![CDATA[
-			SELECT MEM_ID, MEM_NAME, MEM_AGE, MEM_GENDER,MEM_PHONE  FROM MEMBER
+			SELECT MEM_ID, MEM_NAME, MEM_AGE, MEM_GENDER, MEM_PHONE, MEM_REGDATE FROM MEMBER
 		]]>	
 	</select>
- 	<insert id="insert">
- 	insert into member (mem_id , mem_pw , mem_name , mem_age , mem_gender ,mem_phone)
+ 	
+ 	<insert id="insert" parameterType="kr.co.mirak.member.MemberVO">
+ 	<![CDATA[
+ 		insert into member (mem_id , mem_pw , mem_name , mem_age , mem_gender ,mem_phone)
  		values(#{mem_id}, #{mem_pw}, #{mem_name} , #{mem_age} , #{mem_gender} , #{mem_phone})
+ 		]]>	
  	</insert>
  </mapper>
