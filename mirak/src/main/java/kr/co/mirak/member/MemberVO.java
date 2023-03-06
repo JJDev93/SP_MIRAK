@@ -3,10 +3,9 @@ package kr.co.mirak.member;
 import java.util.Date;
 
 public class MemberVO {
-	private String mem_id, mem_PW, mem_name, mem_phone, nen_token;
+	private String mem_id, mem_PW, mem_name, mem_phone, mem_token;
 	private int mem_age, mem_gender;
 	private Date mem_regdate;
-	
 	public String getMem_id() {
 		return mem_id;
 	}
@@ -31,11 +30,11 @@ public class MemberVO {
 	public void setMem_phone(String mem_phone) {
 		this.mem_phone = mem_phone;
 	}
-	public String getNen_token() {
-		return nen_token;
+	public String getMem_token() {
+		return mem_token;
 	}
-	public void setNen_token(String nen_token) {
-		this.nen_token = nen_token;
+	public void setMem_token(String mem_token) {
+		this.mem_token = mem_token;
 	}
 	public int getMem_age() {
 		return mem_age;
@@ -58,8 +57,9 @@ public class MemberVO {
 	@Override
 	public String toString() {
 		return "MemberVO [mem_id=" + mem_id + ", mem_PW=" + mem_PW + ", mem_name=" + mem_name + ", mem_phone="
-				+ mem_phone + ", nen_token=" + nen_token + ", mem_age=" + mem_age + ", mem_gender=" + mem_gender
+				+ mem_phone + ", mem_token=" + mem_token + ", mem_age=" + mem_age + ", mem_gender=" + mem_gender
 				+ ", mem_regdate=" + mem_regdate + "]";
 	}
+	
 	
 }

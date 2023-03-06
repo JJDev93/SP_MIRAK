@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
-public class LoginServiceImpl implements LoginService{
+public class MemberServiceImpl implements MemberService{
 	
 	private SqlSessionTemplate sqlSessionTemplate;
 
-	public LoginServiceImpl() {}
+	public MemberServiceImpl() {}
 	
-	public LoginServiceImpl(SqlSessionTemplate sqlSessionTemplate) {
+	public MemberServiceImpl(SqlSessionTemplate sqlSessionTemplate) {
 		this.sqlSessionTemplate = sqlSessionTemplate;
 	}	
 
