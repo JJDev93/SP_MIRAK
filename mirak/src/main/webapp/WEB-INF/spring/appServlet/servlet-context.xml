@@ -31,4 +31,12 @@
 	<beans:bean class="kr.co.mirak.member.MemberServiceImpl">		
 		<beans:constructor-arg ref="sqlSessionTemplate" />
 	</beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/**" />
+			<exclude-mapping path="/*" />	
+			<beans:bean id="Interceptor" class="kr.co.mirak.controller.Interceptor" />
+		</interceptor> 
+	</interceptors>
 </beans:beans>
