@@ -40,9 +40,7 @@ public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(MemberVO memberVO, Model model) {
-		System.out.println(memberVO);
 		String mem_id = memberService.login(memberVO).getMem_id();
-		System.out.println(memberService.login(memberVO));
 		
 		if(mem_id == null || mem_id.equals("")) {
 //			throw new IllegalArgumentException("아이디는 반드시 입력해야 합니다.");
