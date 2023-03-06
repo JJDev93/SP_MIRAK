@@ -18,7 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 import kr.co.mirak.HomeController;
@@ -34,23 +33,23 @@ public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginView(@ModelAttribute("memver") MemberVO vo) {
+	public String loginView() {
 		System.out.println("로그인 화면으로 이동...");
 		return "member/login";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(MemberVO vo, HttpSession session) {
-		String memid = memberService.login();
-		if(memid == null || memid.equals("")) {
+	public String login(MemberVO memberVO, Model model) {
+		System.out.println(memberVO);
+		String mem_id = memberService.login(memberVO).getMem_id();
+		System.out.println(memberService.login(memberVO));
+		
+		if(mem_id == null || mem_id.equals("")) {
 //			throw new IllegalArgumentException("아이디는 반드시 입력해야 합니다.");
-			System.out.println(vo.getMem_id());
 		}
-		if (memid != null) {
-			System.out.println("dd");
-			session.setAttribute("mem_id", memid);
-			System.out.println("0");
-			return "index";
+		if (mem_id != null) {
+			model.addAttribute("mem_id", mem_id);
+			return "redirect:/";
 		} else {
 			System.out.println("d");
 			return "member/login";
