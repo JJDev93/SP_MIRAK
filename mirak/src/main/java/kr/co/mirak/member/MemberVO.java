@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class MemberVO {
 	private String mem_id, mem_PW, mem_name, mem_phone, mem_token;
-	private int mem_age, mem_gender;
+	private int mem_age, mem_gender, mem_point;
 	private Date mem_regdate;
 	public String getMem_id() {
 		return mem_id;
@@ -48,6 +48,12 @@ public class MemberVO {
 	public void setMem_gender(int mem_gender) {
 		this.mem_gender = mem_gender;
 	}
+	public int getMem_point() {
+		return mem_point;
+	}
+	public void setMem_point(int mem_point) {
+		this.mem_point = mem_point;
+	}
 	public Date getMem_regdate() {
 		return mem_regdate;
 	}
@@ -58,6 +64,8 @@ public class MemberVO {
 	public String toString() {
 		return "MemberVO [mem_id=" + mem_id + ", mem_PW=" + mem_PW + ", mem_name=" + mem_name + ", mem_phone="
 				+ mem_phone + ", mem_token=" + mem_token + ", mem_age=" + mem_age + ", mem_gender=" + mem_gender
-				+ ", mem_regdate=" + mem_regdate + "]";
+				+ ", mem_point=" + mem_point + ", mem_regdate=" + mem_regdate + "]";
 	}
+	
+
 }

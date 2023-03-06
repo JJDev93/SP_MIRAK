@@ -26,6 +26,8 @@ public class MemberServiceImpl implements MemberService {
 		List<MemberVO> memberList = mamberDAO.getMemberList();
 		return memberList;
 	}
+	
+
 
 
 	@Override
@@ -36,7 +38,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int insert(MemberVO vo) {
-		// TODO Auto-generated method stub
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
 		return 0;
 	}
 
