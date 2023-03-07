@@ -23,7 +23,7 @@ import kr.co.mirak.pay.PayVO;
 @Controller
 public class PayController {
 	@Autowired
-	private PayService service;
+	private PayService service; 
 	
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
