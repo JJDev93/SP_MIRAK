@@ -6,31 +6,36 @@
   	<select id="login" parameterType="kr.co.mirak.member.MemberVO" resultType="kr.co.mirak.member.MemberVO">
  		select mem_id from member where mem_id=#{mem_id} and mem_pw=#{mem_pw}
 	</select>
-
-<!--  	<insert id="insert" parameterType="org.sp.mybatis.Emp"> -->
-<!--  		insert into emp2 (empno, ename, deptno, job, sal) -->
-<!--  		values (#{empno}, #{ename}, #{deptno}, #{job}, #{sal}) -->
-<!--  	</insert> -->
- 	<!-- <resultMap type="memberList" id="memberResult">
-		<result property="mem_id" column="MEM_ID"/>
-		<result property="mem_pw" column="MEM_PW"/>
-		<result property="mem_name" column="MEM_NAME"/>
-		<result property="mem_age" column="MEM_AGE"/>
-		<result property="mem_gender" column="MEM_GENDER"/>
-		<result property="mem_phone" column="MEM_PHONE"/>
-		<result property="mem_token" column="MEM_TOKEN"/>
-		<result property="mem_regdate" column="MEM_REGDATE"/>
-	</resultMap> -->
  	<select id="getMemberList" resultType="kr.co.mirak.member.MemberVO">
 		<![CDATA[
 			SELECT MEM_ID, MEM_NAME, MEM_AGE, MEM_GENDER, MEM_PHONE, MEM_REGDATE FROM MEMBER
 		]]>	
 	</select>
- 	
  	<insert id="createUser" parameterType="kr.co.mirak.member.MemberVO">
  	<![CDATA[
  		insert into member (mem_id , mem_pw , mem_name , mem_age , mem_gender ,mem_phone)
  		values(#{mem_id}, #{mem_pw}, #{mem_name} , #{mem_age} , #{mem_gender} , #{mem_phone})
  		]]>	
  	</insert>
+<!--  	<insert id="insert" parameterType="org.sp.mybatis.Emp"> -->
+<!--  		insert into emp2 (empno, ename, deptno, job, sal) -->
+<!--  		values (#{empno}, #{ename}, #{deptno}, #{job}, #{sal}) -->
+<!--  	</insert> -->
+<!--  	<resultMap type="kr.co.mirak.member.MemberVO" id="memberList"> -->
+<!-- 		<result property="mem_id" column="MEM_ID"/> -->
+<!-- 		<result property="mem_pw" column="MEM_PW"/> -->
+<!-- 		<result property="mem_name" column="MEM_NAME"/> -->
+<!-- 		<result property="mem_age" column="MEM_AGE"/> -->
+<!-- 		<result property="mem_gender" column="MEM_GENDER"/> -->
+<!-- 		<result property="mem_phone" column="MEM_PHONE"/> -->
+<!-- 		<result property="mem_token" column="MEM_TOKEN"/> -->
+<!-- 		<result property="mem_regdate" column="MEM_REGDATE"/> -->
+<!-- 	</resultMap> -->
+	
+	<select id="mypage" resultType="kr.co.mirak.member.MemberVO">
+ 		select * from member
+ 		where mem_id=#{mem_id}
+	</select>
+	
+	
  </mapper>
