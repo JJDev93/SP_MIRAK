@@ -38,14 +38,15 @@ public class JoinController {
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String joinSeccess(MemberVO vo , Model model) {
 		
-		sqlSessionTemplate.insert("member.join",vo);
+//		sqlSessionTemplate.insert("member.join",vo);
 		
 		
-		memberService.createUser(vo);
+		int seccess = memberService.createUser(vo);
 		
 		
 		System.out.println("가입성공" );
-		return "redirect:/member/login";
+		System.out.println(seccess);
+		return "member/login";
 	}
 }
 

@@ -29,10 +29,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public void createUser(MemberVO vo) {
+	public int createUser(MemberVO vo) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		MemberVO MVO  = mapper.createUser(vo);
-		return ;
+		int seccess  = mapper.createUser(vo);
+		return seccess;
 
 	}
 	

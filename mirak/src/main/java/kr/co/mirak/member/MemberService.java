@@ -13,5 +13,5 @@ public interface MemberService {
 	int delete(int id);
 	List<MemberVO> getMemberList();
 	
-	void createUser(MemberVO vo);
+	int createUser(MemberVO vo);
 }
