@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +41,29 @@ public class PayController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "pay/pay";
+	}
+	
+	@RequestMapping(value = "/payApproval", method = RequestMethod.GET)
+	public String payApproval(Model model) {
+		return "pay/payApproval";
+	}
+	
+	@RequestMapping(value = "/payCancel", method = RequestMethod.GET)
+	public String payCancel(Model model) {
+		return "pay/payCancel";
+	}
+	@RequestMapping(value = "/payFail", method = RequestMethod.GET)
+	public String payFail(Model model) {
+		return "pay/payFail";
+	}
+	
+	@RequestMapping(value = "pay/asdf", method = RequestMethod.POST)
+	public String home(PayVO payVO) {
+		System.out.println(payVO);
+		service.insert(payVO);
+		
+		return "redirect:payList";
 	}
 	
 	
@@ -53,4 +74,9 @@ public class PayController {
 		model.addAttribute("payList", list);
 		return "pay";
 	}
+	
+	
+	
+	
+	
 }

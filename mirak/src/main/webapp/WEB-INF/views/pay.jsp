@@ -15,7 +15,14 @@
 		<c:forEach var="p" items="${payList }">
 			${p.id }			${p.name }
 			
+			
 		</c:forEach>
+		<br>
+		<form action="asdf" method="post">
+			<input type="text" name="name">
+			<input type="submit">
+		</form>
+		
 		
 		
 	</div>
