@@ -30,7 +30,7 @@ public class KakaoPay {
 
 		// 서버로 요청할 Header
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Authorization", "KakaoAK " + "e67362eef59249c3dc3f4f2d26d99971");
+		headers.add("Authorization", "KakaoAK " + "");
 		headers.add("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
 		// 서버로 요청할 Body
