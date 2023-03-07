@@ -40,7 +40,7 @@ public class LoginController {
 			model.addAttribute("mem_id", mem_id);
 			if (mem_id.equals("admin")) {
 				System.out.println("어드민 로그인 성공!!");
-				return "member/admin_member_list";
+				return "redirect:admin/member";
 			}else{
 				System.out.println("로그인 성공!!");
 				return "redirect:/";
