@@ -35,7 +35,7 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/**" />
-			<exclude-mapping path="/*" />	
+			<exclude-mapping path="/" />	
 			<beans:bean id="Interceptor" class="kr.co.mirak.controller.Interceptor" />
 		</interceptor> 
 	</interceptors>

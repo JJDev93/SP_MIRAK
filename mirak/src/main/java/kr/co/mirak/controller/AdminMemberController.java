@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.mirak.member.MemberService;
 import kr.co.mirak.member.MemberVO;
@@ -15,16 +18,23 @@ public class AdminMemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping("/admin/member")
+	@RequestMapping(value="/admin/members", method=RequestMethod.GET)
 	public String getMemeberList(Model model) {
 		List<MemberVO> memberList = memberService.getMemberList();
 		model.addAttribute("memberList", memberList);
 		return "member/admin_member_list";
 	}
+	
+	@RequestMapping(value="/admin/members/{pageInfo}", method=RequestMethod.GET)
+	public String getMemeberList(@PathVariable int pageInfo, Model model) {
+		List<MemberVO> memberList = memberService.getMemberList();
+		model.addAttribute("memberList", memberList);
+		return "member/admin_member_list";
+	}
 
-	@RequestMapping("/admin/member/detail")
-	public String getMemeberDetail(Model model) {
-		
+	@RequestMapping(value="/admin/members/{member}", method=RequestMethod.GET)
+	public String getMemeberDetail(@PathVariable String member, Model model) {
+		System.out.println("찾으려는 멤버 id = " + member);
 		return "member/admin_member_detail";
 	}
 }
