@@ -26,6 +26,8 @@ public class MemberServiceImpl implements MemberService {
 		return memberList;
 	}
 	
+	
+	
 
 	@Override
 	public MemberVO info(int id) {
@@ -35,7 +37,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int insert(MemberVO vo) {
-		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		
 		return 0;
 	}
 

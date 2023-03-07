@@ -23,6 +23,7 @@ import kr.co.mirak.member.MemberVO;
 public class JoinController {
 
 	private SqlSessionTemplate sqlSessionTemplate;
+	
 	@Autowired
 	private MemberService memberService;
 	
@@ -35,13 +36,13 @@ public class JoinController {
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String joinSeccess(@ModelAttribute MemberVO vo) {
-		//insert
+	public String joinSeccess(MemberVO vo , Model model) {
 		
-	
 		sqlSessionTemplate.insert("member.join",vo);
 		
-		System.out.println("가입성공");
+		
+		
+		System.out.println("가입성공" );
 		return "redirect:/member/login";
 	}
 }
