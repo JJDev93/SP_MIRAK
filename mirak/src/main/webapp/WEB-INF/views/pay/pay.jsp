@@ -22,26 +22,15 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
-					<form action="#" class="billing-form">
+					
+					<form id="orderForm" class="billing-form" action="/pay/payList" method="post">
 						<h3 class="mb-4 billing-heading">주소</h3>
 						<div class="row align-items-end">
 							
 							<div class="w-100"></div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="country">배송지 선택</label>
-									<div class="select-wrap">
-										<div class="icon">
-											<span class="ion-ios-arrow-down"></span>
-										</div>
-										<select name="" id="" class="form-control">
-											<option value="">집</option>
-											<option value="">엄마집</option>
-											<option value="">누나네</option>
-											<option value="">직접 입력</option>
-											
-										</select>
-									</div>
+									
 								</div>
 							</div>
 							
@@ -51,15 +40,7 @@
 									<label for="streetaddress">주소</label> <input type="text" class="form-control">
 								</div>
 							</div>
-							
-							<div class="w-100"></div>
-							<div class="col-md-12">
-								<div class="form-group mt-4">
-									<div class="radio">
-										<label class="mr-3"> <input type="checkbox" name="optradio">주소지 저장하기</label> 
-									</div>
-								</div>
-							</div>
+						
 							
 							<div class="w-100"></div>
 							<div class="col-md-12">
@@ -143,7 +124,9 @@
 									</div>
 								</div>
 								<p>
-									<a id="order" href="#" class="btn btn-primary py-3 px-4">주문하기</a>
+									<button type="submit" form="orderForm" id="order" class="btn btn-primary py-3 px-4">주문하기</a>
+									
+									
 								</p>
 							</div>
 						</div>

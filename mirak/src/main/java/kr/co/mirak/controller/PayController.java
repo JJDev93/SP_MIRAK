@@ -25,6 +25,7 @@ public class PayController {
 	@Autowired
 	private PayService service;
 	
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
@@ -44,10 +45,10 @@ public class PayController {
 		return "pay/pay";
 	}
 	
-	@RequestMapping(value = "/payApproval", method = RequestMethod.GET)
-	public String payApproval(Model model) {
-		return "pay/payApproval";
-	}
+//	@RequestMapping(value = "/payApproval", method = RequestMethod.GET)
+//	public String payApproval(Model model) {
+//		return "pay/payApproval";
+//	}
 	
 	@RequestMapping(value = "/payCancel", method = RequestMethod.GET)
 	public String payCancel(Model model) {
