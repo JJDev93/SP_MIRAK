@@ -29,7 +29,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="firstname">이름</label> <input type="text" name="mem_name"
-									class="form-control" placeholder="">
+									class="form-control" placeholder="이름" required="required">
 							</div>
 						</div>
 
@@ -38,17 +38,17 @@
 							<div class="row block-9">
 								<div class="col-md-12 order-md-last ">
 										<div class="form-group">
-											<label for="ID">아이디</label> <input type="text" name="mem_id"
-												class="form-control" placeholder="이메일(ID)">
+											<label for="ID">아이디</label> <input type="text" name="mem_id" 
+												class="form-control" placeholder="이메일(ID)" required="required" >
 										</div>
 										<div class="form-group">
-											<label for="PW">비밀번호</label> <input type="text" name="mem_pw"
-												class="form-control" placeholder="비밀번호">
+											<label for="PW">비밀번호</label> <input type="password" name="mem_pw"
+												class="form-control" placeholder="비밀번호" required="required">
 										</div>
 										
 										<div class="form-group">
-											<label for="PW">비밀번호 확인</label> <input type="text"
-												class="form-control" placeholder="비밀번호 확인">
+											<label for="Pw">비밀번호 확인</label> <input type="password"
+												class="form-control" placeholder="비밀번호 확인" required="required">
 										</div>										
 								</div>
 							</div>
@@ -58,7 +58,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="age">나이</label> <input type="text" name="mem_age"
-									class="form-control" placeholder="나이를 입력해주세요">
+									class="form-control" placeholder="나이를 입력해주세요" required="required">
 							</div>
 						</div>
 						<div class="w-100"></div>
@@ -75,7 +75,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="phone">Phone</label> <input type="text" name="mem_phone"
-									class="form-control" placeholder="' - ' 빼고 숫자만 입력해 주세요">
+									class="form-control" placeholder="' - ' 빼고 숫자만 입력해 주세요" required="required">
 							</div>
 						</div>
 						
@@ -121,5 +121,7 @@
 <script src="${path}/resources/js/jquery.animateNumber.min.js"></script>
 <script src="${path}/resources/js/scrollax.min.js"></script>
 <script src="${path}/resources/js/main.js"></script>
+
+
 </body>
 </html>
