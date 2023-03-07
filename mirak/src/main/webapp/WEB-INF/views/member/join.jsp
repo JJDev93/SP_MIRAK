@@ -84,11 +84,16 @@
                         </div>
                      </div>
                      <div class="w-100"></div>
-                     <div class="form-group">
-                        <input type="submit" value="회원 가입"
-                           class="btn btn-primary py-3 px-5">
-                     </div>
-                  </div>
+ 						<div class="col-md-6">
+							<input type="submit" value="회원가입" class="btn btn-primary py-3 px-5 w-100">
+						</div>
+						
+						<div class="col-md-6">
+							<a href="index.jsp" class="btn btn-secondary py-3 px-5 w-100">가입취소</a>
+						</div>
+					</div>                    
+                   
+                  	</div>
                </form>
                <!-- END -->
             </div>
