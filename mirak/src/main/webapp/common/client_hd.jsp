@@ -33,6 +33,11 @@
 						<li class="nav-item active"><a href="" class="nav-link">프리미엄</a></li>
 						<li class="nav-item"><a href="about.html" class="nav-link">2,3인세트</a></li>
 						<li class="nav-item"><a href="blog.html" class="nav-link">1인세트</a></li>
+<<<<<<< HEAD
+=======
+						<li class="nav-item"><a href="join" class="nav-link">가입</a></li>
+						<li class="nav-item"><a href="login" class="nav-link">로그인</a></li>
+>>>>>>> branch 'Member' of https://github.com/ywshin0112/mirak.git
 						<li class="nav-item"><a href="cart.html" class="nav-link">장바구니</a></li>
 						<li class="nav-item"><a href="login" class="nav-link">로그인</a></li>
 						<li class="nav-item"><a href="/join" class="nav-link">회원가입</a></li>
