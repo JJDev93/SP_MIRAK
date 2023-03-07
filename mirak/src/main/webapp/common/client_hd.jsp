@@ -35,6 +35,7 @@
 						<li class="nav-item"><a href="blog.html" class="nav-link">1인세트</a></li>
 						<li class="nav-item"><a href="cart.html" class="nav-link">장바구니</a></li>
 						<li class="nav-item"><a href="login" class="nav-link">로그인</a></li>
+						<li class="nav-item"><a href="mypage" class="nav-link">마이페이지</a></li>
 						<li class="nav-item"><a href="join" class="nav-link">회원가입</a></li>
 					</ul>
 				</div>

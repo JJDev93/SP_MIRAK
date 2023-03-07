@@ -67,7 +67,7 @@
                         <div class="form-group">
                            <label for="gender">성별</label>
                            <div>
-                              <input type="radio" name="gender" value="man" name="mem_gender">남
+                              <input type="radio" name="gender" value="man" name="mem_gender" checked>남
                               &nbsp;&nbsp;&nbsp; 
                               <input type="radio" name="gender" value="woman" name="mem_gender">여
                            </div>
