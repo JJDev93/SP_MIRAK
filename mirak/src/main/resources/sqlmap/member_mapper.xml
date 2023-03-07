@@ -27,7 +27,7 @@
 		]]>	
 	</select>
  	
- 	<insert id="insert" parameterType="kr.co.mirak.member.MemberVO">
+ 	<insert id="createUser" parameterType="kr.co.mirak.member.MemberVO">
  	<![CDATA[
  		insert into member (mem_id , mem_pw , mem_name , mem_age , mem_gender ,mem_phone)
  		values(#{mem_id}, #{mem_pw}, #{mem_name} , #{mem_age} , #{mem_gender} , #{mem_phone})

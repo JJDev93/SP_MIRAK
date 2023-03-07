@@ -1,5 +1,6 @@
 package kr.co.mirak.member;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -7,7 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 public class MemberServiceImpl implements MemberService {
 
 	private SqlSessionTemplate sqlSessionTemplate;
-
+	
+	
 	public MemberServiceImpl() {}
 	
 	public MemberServiceImpl(SqlSessionTemplate sqlSessionTemplate) {
@@ -26,9 +28,15 @@ public class MemberServiceImpl implements MemberService {
 		return memberList;
 	}
 	
-	
-	
+	@Override
+	public void createUser(MemberVO vo) {
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		MemberVO MVO  = mapper.createUser(vo);
+		return ;
 
+	}
+	
+	
 	@Override
 	public MemberVO info(int id) {
 		// TODO Auto-generated method stub
@@ -37,7 +45,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int insert(MemberVO vo) {
-		
+		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -52,4 +60,10 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+
+
+
+		
 }

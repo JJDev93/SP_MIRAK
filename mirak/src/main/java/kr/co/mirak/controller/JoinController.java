@@ -41,6 +41,8 @@ public class JoinController {
 		sqlSessionTemplate.insert("member.join",vo);
 		
 		
+		memberService.createUser(vo);
+		
 		
 		System.out.println("가입성공" );
 		return "redirect:/member/login";

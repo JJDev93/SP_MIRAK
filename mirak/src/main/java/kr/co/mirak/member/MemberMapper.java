@@ -13,4 +13,8 @@ public interface MemberMapper {
 	int update(MemberVO vo);
 	int delete(int id);
 	List<MemberVO> getMemberList();
+	
+	MemberVO createUser(MemberVO vo);
+	
+	
 }
