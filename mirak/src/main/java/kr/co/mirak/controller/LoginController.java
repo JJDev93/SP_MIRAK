@@ -41,15 +41,21 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(MemberVO memberVO, Model model) {
 		String mem_id = memberService.login(memberVO).getMem_id();
-		
+		System.out.println("로그인한 아이디 : " + mem_id);
 		if(mem_id == null || mem_id.equals("")) {
 //			throw new IllegalArgumentException("아이디는 반드시 입력해야 합니다.");
 			System.out.println("아이디는 반드시 입력해야 합니다.");
 		}
+		
 		if (mem_id != null) {
 			model.addAttribute("mem_id", mem_id);
-			System.out.println("로그인 성공!!");
-			return "redirect:/";
+			if (mem_id == "admin") {
+				System.out.println("어드민 로그인 성공!!");
+				return "admin/member";
+			}else{
+				System.out.println("로그인 성공!!");
+				return "redirect:/";
+			}
 		} else {
 			System.out.println("로그인 실패");
 			return "member/login";
