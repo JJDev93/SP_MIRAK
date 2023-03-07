@@ -38,6 +38,8 @@
 	<script src="${path}/resources/js/jquery.animateNumber.min.js"></script>
 	<script src="${path}/resources/js/scrollax.min.js"></script>
 	<script src="${path}/resources/js/main.js"></script>
+	<script src="${path}/resources/js/pwcheck.js"></script>
+	
 	
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
