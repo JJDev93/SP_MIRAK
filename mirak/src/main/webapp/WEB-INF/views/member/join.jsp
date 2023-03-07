@@ -26,66 +26,60 @@
 				<form action="join" method="post" class="billing-form">
 					<h3 class="mb-4 billing-heading">회원가입</h3>
 					<div class="row align-items-end">
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="firstname">이름</label> <input type="text" name="mem_name"
-									class="form-control" placeholder="">
-							</div>
-						</div>
-
-						<div class="w-100"></div>
 						<div class="container">
 							<div class="row block-9">
 								<div class="col-md-12 order-md-last ">
-										<div class="form-group">
-											<label for="ID">아이디</label> <input type="text" name="mem_id"
-												class="form-control" placeholder="이메일(ID)">
-										</div>
-										<div class="form-group">
-											<label for="PW">비밀번호</label> <input type="text" name="mem_pw"
-												class="form-control" placeholder="비밀번호">
-										</div>
-										
-										<div class="form-group">
-											<label for="PW">비밀번호 확인</label> <input type="text"
-												class="form-control" placeholder="비밀번호 확인">
-										</div>										
+									<div class="form-group">
+										<label for="ID">아이디</label> <input type="text" name="mem_id"
+											class="form-control" placeholder="이메일(ID)">
+									</div>
+									<div class="form-group">
+										<label for="PW">비밀번호</label> <input type="text" name="mem_pw"
+											class="form-control" placeholder="비밀번호">
+									</div>
+									<div class="form-group">
+										<label for="PW">비밀번호 확인</label> <input type="text"
+											class="form-control" placeholder="비밀번호 확인">
+									</div>
 								</div>
+							</div>
+						</div>
+						<div class="w-100"></div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="firstname">이름</label> <input type="text"
+									name="mem_name" class="form-control" placeholder="이름을 입력해주세요">
+							</div>
+						</div>
+						<div class="w-100"></div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="age">나이</label> <input type="text" name="mem_age" id="age" class="form-control" placeholder="나이를 입력해주세요">
 							</div>
 						</div>
 
 						<div class="w-100"></div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="age">나이</label> <input type="text" name="mem_age"
-									class="form-control" placeholder="나이를 입력해주세요">
+								<label for="gender">성별</label>
+								<div>
+									<input type="radio" name="gender" value="man" name="mem_gender">남
+									&nbsp;&nbsp;&nbsp; 
+									<input type="radio" name="gender" value="woman" name="mem_gender">여
+								</div>
 							</div>
 						</div>
 						<div class="w-100"></div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<div>
-								<label for="gender">성별</label></div> 
-								<input type="radio" name="gender"value="man" name="mem_gender">남 &nbsp;&nbsp;&nbsp;
-								<input type="radio" name="gender" value="woman" name="mem_gender">여	
+								<label for="phone">Phone</label> <input type="tel" name="mem_phone" class="form-control" maxlength="11" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="' - ' 빼고 숫자만 입력해 주세요">
 							</div>
 						</div>
-						
 						<div class="w-100"></div>
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="phone">Phone</label> <input type="text" name="mem_phone"
-									class="form-control" placeholder="' - ' 빼고 숫자만 입력해 주세요">
-							</div>
+						<div class="form-group">
+							<input type="submit" value="회원 가입"
+								class="btn btn-primary py-3 px-5">
 						</div>
-						
-						
-						
-						<div class="w-100"></div>
-						      <div class="form-group">
-               					 <input type="submit" value="회원 가입"  class="btn btn-primary py-3 px-5">
-              				</div>
-						
 					</div>
 				</form>
 				<!-- END -->
