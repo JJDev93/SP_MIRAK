@@ -24,13 +24,14 @@
 					<table class="table">
 						<thead class="thead-primary">
 							<tr class="text-center">
-								<th>선택</th>
+								<td class="product-remove"><input type="checkbox" name="allCheck" id="allCheck" checked /></td>				
 								<th>이미지</th>
 								<th>상품명</th>
 								<th>가격</th>
 								<th>요일선택</th>
 								<th>배송횟수</th>
 								<th>총가격</th>
+								<th>ㅇㅇ</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -46,6 +47,11 @@
 								<td>${c.day }</td>
 								<td>${c.count }</td>
 								<td>${c.price * c.count }</td>
+								<td class="cart_info_td">
+									<input type="hidden" class="price_input" value="${c.price }">
+									<input type="hidden" class="count_input" value="${c.count }">
+									<input type="hidden" class="totalPrice_input" value="${c.price * c.count }">
+								</td>
 							</tr>
 							</c:forEach>
 							
@@ -58,23 +64,23 @@
 		</div>
 			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
 				<div class="cart-total mb-3">
-					<h3>Cart Totals</h3>
+					<h3>장바구니 합계</h3>
 					<p class="d-flex">
-						<span>상품갯수</span> <span>3개</span>
+						<span>상품 가짓수</span> <span class="totalKind_span"></span>
 					</p>
 					<p class="d-flex">
-						<span>상품합계</span> <span>1000원</span>
+						<span>상품합계</span> <span class="totalPrice_span"></span>
 					</p>
 					<p class="d-flex">
-						<span>배송비</span> <span>무료</span>
+						<span>배송비</span> <span class="delivery_price"></span>
 					</p>
 					<hr>
 					<p class="d-flex total-price">
-						<span>총 결제금액</span> <span>10000000원</span>
+						<span>총 결제금액</span> <span class="finalTotalPrice_span"></span>
 					</p>
 				</div>
 				<p>
-					<a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a>
+					<a href="checkout.html" class="btn btn-primary py-3 px-4">결제하기</a>
 				</p>
 			</div>
 		</div>
@@ -108,3 +114,47 @@
 </html>
 <script src="${path}/resources/js/main.js"></script>
 
+<script>
+$(document).ready(function(){
+	
+	let totalPrice = 0;				// 총 가격
+	let totalCount = 0;				// 총 갯수
+	let totalKind = 0;				// 총 종류
+	let deliveryPrice = 0;			// 배송비
+	let finalTotalPrice = 0; 		// 최종 가격(총 가격 + 배송비)
+	
+	$(".cart_info_td").each(function(index, element){
+		
+		// 총 가격
+		totalPrice += parseInt($(element).find(".totalPrice_input").val());
+		// 총 갯수
+		totalCount += parseInt($(element).find(".count_input").val());
+		// 총 종류
+		totalKind += 1;	
+	});
+	
+	/* 배송비 결정 */
+	if(totalPrice >= 100000){
+		deliveryPrice = 0;
+	} else if(totalPrice == 0){
+		deliveryPrice = 0;
+	} else {
+		deliveryPrice = 10000;	
+	}
+	
+	/* 최종 가격 */
+	finalTotalPrice = totalPrice + deliveryPrice;
+	
+	/* 값 삽입 */
+	// 총 가격
+	$(".totalPrice_span").text(totalPrice);
+	// 총 갯수
+	$(".totalCount_span").text(totalCount);
+	// 총 종류
+	$(".totalKind_span").text(totalKind);
+	// 배송비
+	$(".delivery_price").text(deliveryPrice);	
+	// 최종 가격(총 가격 + 배송비)
+	$(".finalTotalPrice_span").text(finalTotalPrice);
+});	
+</script>
