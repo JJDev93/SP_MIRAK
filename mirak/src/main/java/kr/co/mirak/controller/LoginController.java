@@ -1,24 +1,13 @@
 package kr.co.mirak.controller;
 
 
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
-import org.mybatis.spring.SqlSessionTemplate;
-
-
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 
 import kr.co.mirak.HomeController;
 import kr.co.mirak.member.MemberService;
@@ -49,9 +38,9 @@ public class LoginController {
 		
 		if (mem_id != null) {
 			model.addAttribute("mem_id", mem_id);
-			if (mem_id == "admin") {
+			if (mem_id.equals("admin")) {
 				System.out.println("어드민 로그인 성공!!");
-				return "admin/member";
+				return "member/admin_member_list";
 			}else{
 				System.out.println("로그인 성공!!");
 				return "redirect:/";
