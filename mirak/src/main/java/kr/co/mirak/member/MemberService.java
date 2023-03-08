@@ -7,6 +7,7 @@ public interface MemberService {
 	List<MemberVO> getMemberList();
 	int createUser(MemberVO vo);
 	MemberVO mypage(MemberVO vo);
+	MemberVO getMemberDetail(MemberVO vo);
 	
 //	MemberVO info(int id);
 //	int insert(MemberVO vo);
