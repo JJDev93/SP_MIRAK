@@ -12,7 +12,4 @@ public interface MemberMapper {
 	int memupdate(MemberVO vo);
 	int memdelete(MemberVO vo);
 	MemberVO getMemberDetail(MemberVO vo);
-//	MemberVO info(int id);
-//	int insert(MemberVO vo);
-//	int delete(int id);
 }

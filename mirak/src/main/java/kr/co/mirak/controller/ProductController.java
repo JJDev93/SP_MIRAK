@@ -140,10 +140,11 @@ public class ProductController {
 	@RequestMapping(value = "/pay")
 	public String productPay() {
 		
-		
-
+	
 		return "/pay/pay";
 	}
+	
+	
 	
 
 }
