@@ -28,8 +28,9 @@ public class PayServiceImpl implements PayService {
 	}
 
 	public int insert(PayVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		PayMapper dao = sqlSessionTemplate.getMapper(PayMapper.class);
+		int a = dao.insert(vo);
+		return a;
 	}
 
 	public int update(PayVO vo) {
