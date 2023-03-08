@@ -48,4 +48,11 @@ public class AdminMemberController {
 		System.out.println("로그아웃 성공!!");
 		return "redirect:/";
 	}
+	
+//	//인덱스
+//	@RequestMapping("/admin")
+//	public String index() {
+//		System.out.println("인덱스 이동...");
+//		return "/";
+//	}
 }

@@ -19,13 +19,6 @@ public class LoginController {
 	@Autowired
 	private MemberService memberService;
 	
-	//인덱스
-		@RequestMapping(value = "/index", method = RequestMethod.GET)
-		public String index() {
-			System.out.println("인덱스 이동...");
-			return "index";
-		}
-	
 	//로그인페이지
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginView() {
