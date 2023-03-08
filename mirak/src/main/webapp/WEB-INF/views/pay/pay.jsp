@@ -23,9 +23,11 @@
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
 					
-					<form id="orderForm" class="billing-form" action="/pay/payList" method="post">
-						<h3 class="mb-4 billing-heading">주소</h3>
+					<form id="orderForm" class="billing-form" action="/paySubmit" method="post">
+						<h3 class="mb-4 billing-heading">주문 확인</h3>
 						<div class="row align-items-end">
+						
+							<input type="hidden" name="pro_code" value="${product.pro_code }" >
 							
 							<div class="w-100"></div>
 							<div class="col-md-12">
@@ -37,7 +39,7 @@
 							<div class="w-100"></div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="streetaddress">주소</label> <input type="text" class="form-control">
+									<label for="address">주소</label> <input type="text" name="mem_address" class="form-control" id="address" value="${payVO.mem_address}">
 								</div>
 							</div>
 						
@@ -45,21 +47,21 @@
 							<div class="w-100"></div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="streetaddress">받는 사람</label> <input type="text" class="form-control" placeholder="이름">
+									<label for="receiverName">받는 사람</label> <input type="text" name="mem_name" class="form-control" placeholder="이름" id="receiverName" value="${payVO.mem_name}">
 								</div>
 							</div>
 							
 							<div class="w-100"></div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="streetaddress">휴대폰 번호</label> <input type="tel" class="form-control" maxlength="11" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="">
+									<label for="phone">휴대폰 번호</label> <input type="tel" name="mem_phone" class="form-control" maxlength="11" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="" id="phone" value="${payVO.mem_phone}">
 								</div>
 							</div>
 							
 							<div class="w-100"></div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="towncity">배송 요청사항</label> <input type="text" class="form-control" placeholder="">
+									<label for="req">배송 요청사항</label> <input type="text" name="pay_req" class="form-control" placeholder="" id="req">
 								</div>
 							</div>
 							
@@ -74,17 +76,17 @@
 							<div class="cart-detail cart-total p-3 p-md-4">
 								<h3 class="billing-heading mb-4">Cart Total</h3>
 								<p class="d-flex">
-									<span>Subtotal</span> <span>$20.60</span>
+									<span>상품 가격</span> <span>${cart_totprice}</span>
 								</p>
 								<p class="d-flex">
-									<span>Delivery</span> <span>$0.00</span>
+									<span>배송료</span> <span>$0.00</span>
 								</p>
 								<p class="d-flex">
 									<span>Discount</span> <span>$3.00</span>
 								</p>
 								<hr>
 								<p class="d-flex total-price">
-									<span>Total</span> <span>$17.60</span>
+									<span>총 결제금액</span> <span>$100</span>
 								</p>
 							</div>
 						</div>
@@ -124,8 +126,8 @@
 									</div>
 								</div>
 								<p>
-									<button type="submit" form="orderForm" id="order" class="btn btn-primary py-3 px-4">주문하기</a>
-									
+									<button type="submit" form="orderForm" id="order" class="btn btn-primary py-3 px-5 l-100">주문</button><br>									
+									<a href="/" class="btn btn-black py-3 px-5 l-100">취소</a>
 									
 								</p>
 							</div>
@@ -140,29 +142,7 @@
 	
 	<jsp:include page="/common/client_ft.jsp" />
 	
-	<!-- loader -->
-	<div id="ftco-loader" class="show fullscreen">
-		<svg class="circular" width="48px" height="48px">
-					<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke="#eeeeee" />
-					<circle class="path" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
-				</svg>
-	</div>
-	
-	<script src="${path}/resources/js/jquery.min.js"></script>
-	<script src="${path}/resources/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="${path}/resources/js/bootstrap.min.js"></script>
-	<script src="${path}/resources/js/jquery.easing.1.3.js"></script>
-	<script src="${path}/resources/js/jquery.waypoints.min.js"></script>
-	<script src="${path}/resources/js/jquery.stellar.min.js"></script>
-	<script src="${path}/resources/js/owl.carousel.min.js"></script>
-	<script src="${path}/resources/js/jquery.magnific-popup.min.js"></script>
-	<script src="${path}/resources/js/aos.js"></script>
-	<script src="${path}/resources/js/jquery.animateNumber.min.js"></script>
-	<script src="${path}/resources/js/scrollax.min.js"></script>
-	<script src="${path}/resources/js/main.js"></script>
-	
+
 	<script>
 	const kakaopay = function() {
 		fetch("kapi.kakao.com/v1/payment/ready", {
