@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<jsp:include page="client_hd.jsp"></jsp:include>
+<jsp:include page="/common/client_hd.jsp"></jsp:include>
 
 <div class="hero-wrap hero-bread"
 	style="background-image: url('${path}/resources/images/bg_1.jpg');">
@@ -25,6 +25,7 @@
 <section class="ftco-section">
 	<div class="container">
 		<div class="row">
+		<input type="hidden" name="pro_code" value="pro_code">
 
 			<div class="col-lg-6 mb-5 ftco-animate">
 				<a href="${path}/resources/images/product/${product.pro_image}"
@@ -48,6 +49,10 @@
 							class="form-control input-number" min="1" max="100" placeholder="수량을 입력하세요">
 
 					</div>
+					
+					총 가격 : ${product.pro_price * pro_cnt} 
+
+			
 
 
 				</div>
@@ -55,8 +60,8 @@
 				<p>
 <!-- 					<a href="" class="btn btn-black py-3 px-5">장바구니</a> &nbsp; &nbsp; &nbsp; -->
 <!-- 					<a href="" class="btn btn-black py-3 px-5">즉시구매</a> -->
-						<input type="button" formaction="" value="장바구니" class="btn btn-black py-3 px-5">
-						<input type="button" formaction="" value="즉시 구매" class="btn btn-black py-3 px-5">
+						<input type="button" formaction="cartList" value="장바구니" class="btn btn-black py-3 px-5">
+						<input type="button" formaction="pay" value="즉시 구매" class="btn btn-black py-3 px-5">
 				</p>
 			</div>
 		</div>
@@ -66,21 +71,7 @@
 </form>
 
 
-<jsp:include page="client_ft.jsp"></jsp:include>
+<jsp:include page="/common/client_ft.jsp"></jsp:include>
 
-
-
-<script src="${path}/resources/js/jquery.min.js"></script>
-<script src="${path}/resources/js/jquery-migrate-3.0.1.min.js"></script>
-<script src="${path}/resources/js/bootstrap.min.js"></script>
-<script src="${path}/resources/js/jquery.easing.1.3.js"></script>
-<script src="${path}/resources/js/jquery.waypoints.min.js"></script>
-<script src="${path}/resources/js/jquery.stellar.min.js"></script>
-<script src="${path}/resources/js/owl.carousel.min.js"></script>
-<script src="${path}/resources/js/jquery.magnific-popup.min.js"></script>
-<script src="${path}/resources/js/aos.js"></script>
-<script src="${path}/resources/js/jquery.animateNumber.min.js"></script>
-<script src="${path}/resources/js/scrollax.min.js"></script>
-<script src="${path}/resources/js/main.js"></script>
 </body>
 </html>

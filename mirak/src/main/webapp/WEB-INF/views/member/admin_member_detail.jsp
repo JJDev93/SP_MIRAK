@@ -49,7 +49,7 @@
 				</div>
 			</div>
 		</form>		
-		<a href="/admin/member" class="btn btn-secondary">목록</a>
+		<a href="/adminMembers" class="btn btn-secondary">목록</a>
 	</div>
 </div>
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>

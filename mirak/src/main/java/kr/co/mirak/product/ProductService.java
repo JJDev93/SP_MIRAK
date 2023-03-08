@@ -27,5 +27,8 @@ public interface ProductService {
 
 	// 상품 삭제
 	void deleteProduct(ProductVO vo);
+	
+
+	
 
 }
