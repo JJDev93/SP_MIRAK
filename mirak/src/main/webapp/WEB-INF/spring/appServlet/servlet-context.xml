@@ -30,11 +30,12 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-
 	<beans:bean class="kr.co.mirak.pay.PayServiceImpl">
 		<beans:constructor-arg ref="sqlSessionTemplate" />
 	</beans:bean>
-
+	<beans:bean class="kr.co.mirak.member.MemberServiceImpl">		
+		<beans:constructor-arg ref="sqlSessionTemplate" />
+	</beans:bean>
 
 	<!-- 업로드 패스 설정 -->
 <!-- 	<beans:bean class="java.lang.String" id="uploadPath"> -->
@@ -45,12 +46,6 @@
 	<!-- 일반 파일 업로드 경로 -->
 	<resources mapping="/images/**" location="/WEB-INF/views/images/pro_images" />
 
-
-	<beans:bean class="kr.co.mirak.member.MemberServiceImpl">		
-		<beans:constructor-arg ref="sqlSessionTemplate" />
-	</beans:bean>
-	
-
 	<interceptors>
 		<interceptor>
 			<mapping path="/**" />
@@ -58,11 +53,5 @@
 			<beans:bean id="Interceptor" class="kr.co.mirak.controller.Interceptor" />
 		</interceptor> 
 	</interceptors>
-
-	<beans:bean class="kr.co.mirak.cart.CartServiceImpl">		
-		<beans:constructor-arg ref="sqlSessionTemplate" />
-	</beans:bean>
-
-	
 
 </beans:beans>

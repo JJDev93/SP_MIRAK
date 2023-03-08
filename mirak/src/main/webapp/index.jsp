@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+
 <jsp:include page="./common/client_hd.jsp"></jsp:include>
 	<!-- START 슬라이더 -->
 	<section id="home-section" class="hero">
@@ -245,8 +246,8 @@
 	<!-- END 공지, 추천 -->
 
 	<jsp:include page="./common/client_ft.jsp"></jsp:include>
-	
+	<script src="${path}/resources/js/main.js"></script>
 </body>
+
 </html>
-<script src="${path}/resources/js/main.js"></script>
 	
