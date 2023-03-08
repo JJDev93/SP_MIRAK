@@ -39,7 +39,7 @@
 							<li class="nav-item"><a href="join" class="nav-link">회원가입</a></li>
 						<%} else if (session.getAttribute("mem_id").equals("admin")) {%>
 							<li class="nav-item"><a href="logout" class="nav-link">로그아웃</a></li>
-							<li class="nav-item"><a href="admin/members" class="nav-link">Admin</a></li>
+							<li class="nav-item"><a href="adminMembers" class="nav-link">Admin</a></li>
 						<%} else {%>
 						<li class="nav-item"><a href="logout" class="nav-link">로그아웃</a></li>
 						<li class="nav-item"><a href="mypage" class="nav-link">마이페이지</a></li>
