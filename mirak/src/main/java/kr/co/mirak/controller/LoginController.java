@@ -41,7 +41,7 @@ public class LoginController {
 			session.setAttribute("mem_id", mem_id);
 			if (mem_id.equals("admin")) {
 				System.out.println("어드민 로그인 성공!!");
-				mav.setViewName("redirect:admin/members");
+				mav.setViewName("redirect:/adminMembers");
 			}else{
 				System.out.println("로그인 성공!!");
 				mav.setViewName("redirect:/");
