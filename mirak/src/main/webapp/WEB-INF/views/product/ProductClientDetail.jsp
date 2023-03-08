@@ -50,7 +50,12 @@
 
 					</div>
 					
-					총 가격 : ${product.pro_price * pro_cnt} 
+					인풋 가격 : <input type="text" value="${product.pro_price}">
+					
+					총 가격 : ${product.pro_price}
+					수량 : ${pro_cnt}
+					
+					ㅎㅇ : <%=request.getParameter("product.pro_price") %>
 
 			
 
