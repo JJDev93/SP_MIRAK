@@ -45,7 +45,7 @@
 					<tbody>
 						<c:forEach items="${memberList}" var="member">
 						<tr>
-							<th scope="row"><a href="/admin/members/${member.mem_id}">${member.mem_id }</a></th>
+							<th scope="row"><a href="/adminMembers/${member.mem_id}">${member.mem_id }</a></th>
 							<td>${member.mem_name }</td>
 							<td>${member.mem_age }</td>
 							<td>${member.mem_gender }</td>

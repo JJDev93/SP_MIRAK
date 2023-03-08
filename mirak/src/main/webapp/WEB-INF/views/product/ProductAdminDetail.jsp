@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<jsp:include page="admin_hd.jsp"></jsp:include>
+<jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <div class="ftco-section">
 	<div class="container">
 		<div class="justify-content-center mb-3 pb-3">
@@ -43,19 +43,18 @@
 				
 				<div class="col-md-12">
 					<div class="form-group">
-						<label for="imagefile">이미지</label>
+						<label for="imagefile">이미지 파일</label>
 					</div>
-					<img alt="1" src="${path}/resources/images/product/${product.pro_image}" style="width:200px; heigt:200px; margin-bottom:30px;">
+					<img alt="1" src="${path}/resources/images/product/${product.pro_image}" style="width:200px; heigt:200px;">
 				</div>
 				
-			
 				<div class="col-md-12">
 					<div class="form-group">
 						<label for="cnt">이미지 파일</label> <input type="file" class="form-control" id="cnt" name="uploadFile">
 					</div>
 				</div>
 				
-				<br><br><br><br>
+				<br><br><br><br><br><br><br><br><br>
 				
 				<div class="col-md-12">
 					<div class="form-group">
@@ -70,4 +69,4 @@
 		<a href="deleteproduct?pro_code=${product.pro_code}" class="btn btn-danger">삭제</a>
 	</div>
 </div>
-<jsp:include page="admin_ft.jsp"></jsp:include>
+<jsp:include page="/common/admin_ft.jsp"></jsp:include>clude>

@@ -30,10 +30,12 @@ public class ProductController {
 
 //	 상품 Client 리스트
 	@RequestMapping("/ProductClientList")
-	public String productclientList(ProductVO vo, Model model) {
+	public String productclientList(ProductVO vo, Model model)  {
 
-		model.addAttribute("productList", productService.productList(vo));
+		model.addAttribute("productList", productService.productList(vo));	
 
+		
+		
 		return "/product/ProductClientList";
 
 	}
@@ -127,13 +129,22 @@ public class ProductController {
 
 		return "redirect:/ProductAdminList";
 	}
-	
+
 	// 장바구니 화면으로 이동
 //	@RequestMapping(value = "/ProductAdminRegister")
 //	public String productcartList() {
 //
 //		return "/product/ProductAdminRegister";
 //	}
+	
+	@RequestMapping(value = "/pay")
+	public String productPay() {
+		
+	
+		return "/pay/pay";
+	}
+	
+	
 	
 
 }

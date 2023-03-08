@@ -34,9 +34,11 @@ public class AdminMemberController {
 		return "member/admin_member_list";
 	}
 
-	@RequestMapping(value="/adminMembers/{member}", method=RequestMethod.GET)
-	public String getMemeberDetail(@PathVariable String member, Model model) {
-		System.out.println("찾으려는 멤버 id = " + member);
+	@RequestMapping(value="/adminMembers/{memberid}", method=RequestMethod.GET)
+	public String getMemeberDetail(@PathVariable String memberid, MemberVO vo, Model model) {
+		vo.setMem_id(memberid);
+		MemberVO member = memberService.getMemberDetail(vo);
+		model.addAttribute("member", member);
 		return "member/admin_member_detail";
 	}
 	

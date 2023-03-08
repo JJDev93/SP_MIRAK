@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<jsp:include page="admin_hd.jsp"></jsp:include>
+<jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <div class="ftco-section">
 	<div class="container">
 		<div class="justify-content-center mb-3 pb-3">
@@ -60,4 +60,4 @@
 		</div>
 	</div>
 </div>
-<jsp:include page="admin_ft.jsp"></jsp:include>
+<jsp:include page="/common/admin_ft.jsp"></jsp:include>
