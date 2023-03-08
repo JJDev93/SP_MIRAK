@@ -1,7 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="admin_hd.jsp"></jsp:include>
+<jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <div class="ftco-section">
 	<div class="container">
 		<div class="justify-content-center mb-3 pb-3">
@@ -56,9 +56,8 @@
 				
 			</div>
 		</form>		
-		<a href="#" class="btn btn-secondary">목록</a>
-		<a href="#" class="btn btn-primary">수정</a>
-		<a href="#" class="btn btn-danger">삭제</a>
+		<a href="ProductAdminList" class="btn btn-secondary">목록</a>
+
 	</div>
 </div>
-<jsp:include page="admin_ft.jsp"></jsp:include>
+<jsp:include page="/common/client_ft.jsp"></jsp:include>

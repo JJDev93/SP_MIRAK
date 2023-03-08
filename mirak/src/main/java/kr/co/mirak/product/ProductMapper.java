@@ -19,5 +19,10 @@ public interface ProductMapper {
 	void updateProduct(ProductVO vo);
 
 	void deleteProduct(ProductVO vo);
+	
+	
+
+	
+	
 
 }
