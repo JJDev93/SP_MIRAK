@@ -26,6 +26,7 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" value="classpath:/sqlmap/**/*_mapper.xml" />
+		<property name="configLocation" value="classpath:sql-map-config.xml"/>
 	</bean>
 
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
@@ -50,6 +51,14 @@
 		
 		<aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
 	</aop:config>
+	
+	<!-- 파일 업로드를 위한 MutipartResolver 구현체 CommonsMultipartResolver bean 등록 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="104857600" />
+		<property name="maxUploadSizePerFile" value="104857600" />
+		<property name="maxInMemorySize" value="104857600" />
+	</bean>
 	
 
 </beans>
