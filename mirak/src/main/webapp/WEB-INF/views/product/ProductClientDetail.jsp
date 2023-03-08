@@ -46,27 +46,19 @@
 
 
 						<div class="input-group col-md-6 d-flex mb-3">
-							<span class="input-group-btn mr-2">
-								<button type="button" class="quantity-left-minus btn"
-									value="-" data-type="minus" data-field="" onclick='count("minus")'>
-									
-								</button>
-							</span> 
+							 
 							<input type="text" id="result" name="pro_cnt"
 								class="form-control input-number" min="1" max="100"
 								placeholder="수량을 입력하세요" >
-								 <span class="input-group-btn ml-2">
-								<button type="button" class="quantity-right-plus btn"
-									value="+" data-type="plus" data-field="" onclick='count("plus")'>
-									
-								</button>
-							</span>
+								
+								 
 						</div>
 						
 						
+						<div id="print">총 금액:</div>
+						<button onclick="document.getElementById('print').innerHTML='innerHTML로 문구를 띄어주다'">출력</button>
 
-
-						총 가격 : ${product.pro_price}
+						
 
 
 
@@ -90,23 +82,10 @@
 
 
 <script>
-function count(type)  {
-	  // 결과를 표시할 element
-	  const resultElement = document.getElementById('result');
-	  
-	  // 현재 화면에 표시된 값
-	  let number = resultElement.innerText;
-	  
-	  // 더하기/빼기
-	  if(type === 'plus') {
-	    number = parseInt(number) + 1;
-	  }else if(type === 'minus')  {
-	    number = parseInt(number) - 1;
-	  }
-	  
-	  // 결과 출력
-	  resultElement.innerText = number;
-	}
+
+function multi(){
+	총 가격 : ${product.pro_price * pro_cnt}
+}
 
 </script>
 
