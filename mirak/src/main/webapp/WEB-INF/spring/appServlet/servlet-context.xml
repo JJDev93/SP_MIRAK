@@ -50,6 +50,7 @@
 		<beans:constructor-arg ref="sqlSessionTemplate" />
 	</beans:bean>
 	
+
 	<interceptors>
 		<interceptor>
 			<mapping path="/**" />
@@ -57,4 +58,11 @@
 			<beans:bean id="Interceptor" class="kr.co.mirak.controller.Interceptor" />
 		</interceptor> 
 	</interceptors>
+
+	<beans:bean class="kr.co.mirak.cart.CartServiceImpl">		
+		<beans:constructor-arg ref="sqlSessionTemplate" />
+	</beans:bean>
+
+	
+
 </beans:beans>
