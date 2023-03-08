@@ -43,28 +43,27 @@
 						<tbody>
 							<c:forEach var="c" items="${cartList }">
 								<tr class="text-center">
-									<td class="image-prod"><div class="img"
-											style="background-image: url(${path}/resources/images/product-4.jpg);"></div></td>
+									<td class="image-prod"><div>${c.pro_image }</div></td>
 									<td class="product-name">
-										<h3>${c.name }</h3>
-										<p>도시락 상품 설명입니다</p>
+										<h3>${c.pro_name }</h3>
+										<p>${c.pro_desc }</p>
 									</td>
-									<td>${c.price }</td>
-									<td>${c.day }</td>
+									<td>${c.pro_price }</td>
+									<td>${c.cart_day }</td>
 									<td>
 										<div class="quantity_div">
-											<input type="text" value="${c.count}" class="quantity_input">
+											<input type="text" value="${c.cart_cnt}" class="quantity_input">
 											<button class="quantity_btn plus_btn">+</button>
 											<button class="quantity_btn minus_btn">-</button>
-										</div> <a class="quantity_update_btn" data-cartId="${c.cartId}">변경</a>
+										</div> <a class="quantity_update_btn" data-cartId="${c.cart_code}">변경</a>
 									</td>
-									<td>${c.price * c.count }</td>
+									<td>${c.pro_price * c.cart_cnt }</td>
 									<td class="cart_info"><input type="checkbox"
 										class="cart_checkbox" checked="checked"> <input
-										type="hidden" class="price_input" value="${c.price }">
-										<input type="hidden" class="count_input" value="${c.count }">
+										type="hidden" class="price_input" value="${c.pro_price }">
+										<input type="hidden" class="count_input" value="${c.cart_cnt }">
 										<input type="hidden" class="totalPrice_input"
-										value="${c.price * c.count }"></td>
+										value="${c.pro_price * c.cart_cnt }"></td>
 								</tr>
 							</c:forEach>
 
@@ -72,7 +71,7 @@
 							<form action="/cart/update" method="post" class="quantity_update_form">
 								<input type="hidden" name="cartId" class="update_cartId">
 								<input type="hidden" name="count" class="update_count">
-								<input type="hidden" name="mem_id" value="${member.mem_id}">
+								<input type="hidden" name="mem_id" value="${c.mem_id}">
 							</form>
 							<!-- END TR-->
 						</tbody>
@@ -98,10 +97,9 @@
 				</p>
 			</div>
 			<p>
-				<a href="checkout.html" class="btn btn-primary py-3 px-4">결제하기</a>
+				<input class="btn btn-primary py-3 px-4" type="submit" value="결제하기">
 			</p>
 		</div>
-	</div>
 	</div>
 </section>
 

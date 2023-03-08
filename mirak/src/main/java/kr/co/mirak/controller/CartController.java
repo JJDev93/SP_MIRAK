@@ -50,6 +50,12 @@ public class CartController {
 		return "cart/cart";
 	}
 	
-	
+	@RequestMapping("/cartList2")
+	public String getEmpList2(Model model) {
+		
+		List<CartVO> list = service.list();
+		model.addAttribute("cartList", list);
+		return "cart/cart_admin";
+	}
 
 }
