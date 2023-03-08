@@ -22,61 +22,93 @@
 </div>
 
 <form method="post">
-<section class="ftco-section">
-	<div class="container">
-		<div class="row">
-		<input type="hidden" name="pro_code" value="pro_code">
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row">
+				<input type="hidden" name="pro_code" value="pro_code">
 
-			<div class="col-lg-6 mb-5 ftco-animate">
-				<a href="${path}/resources/images/product/${product.pro_image}"
-					class="image-popup"><img alt="1"
-					src="${path}/resources/images/product/${product.pro_image}" style="width:350px; height:250px;"></a>
-			</div>
-			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
-				<h3>${product.pro_name}</h3>
-
-				<p class="price">
-					 <span>가격: ${product.pro_price}</span>
-				</p>
-				<p>${product.pro_desc}</p>
-
-
-				<div class="row mt-4">
-
-
-					<div class="input-group col-md-6 d-flex mb-3">
-						<input type="text" id="quantity" name="pro_cnt"
-							class="form-control input-number" min="1" max="100" placeholder="수량을 입력하세요">
-
-					</div>
-					
-					인풋 가격 : <input type="text" value="${product.pro_price}">
-					
-					총 가격 : ${product.pro_price}
-					수량 : ${pro_cnt}
-					
-					ㅎㅇ : <%=request.getParameter("product.pro_price") %>
-
-			
-
-
+				<div class="col-lg-6 mb-5 ftco-animate">
+					<a href="${path}/resources/images/product/${product.pro_image}"
+						class="image-popup"><img alt="1"
+						src="${path}/resources/images/product/${product.pro_image}"
+						style="width: 350px; height: 250px;"></a>
 				</div>
-				<br><br>
-				<p>
-<!-- 					<a href="" class="btn btn-black py-3 px-5">장바구니</a> &nbsp; &nbsp; &nbsp; -->
-<!-- 					<a href="" class="btn btn-black py-3 px-5">즉시구매</a> -->
-						<input type="button" formaction="cartList" value="장바구니" class="btn btn-black py-3 px-5">
+				<div class="col-lg-6 product-details pl-md-5 ftco-animate">
+					<h3>${product.pro_name}</h3>
+
+					<p class="price">
+						<span>가격: ${product.pro_price}</span>
+					</p>
+					<p>${product.pro_desc}</p>
+
+
+					<div class="row mt-4">
+
+
+						<div class="input-group col-md-6 d-flex mb-3">
+							<span class="input-group-btn mr-2">
+								<button type="button" class="quantity-left-minus btn"
+									value="-" data-type="minus" data-field="" onclick='count("minus")'>
+									
+								</button>
+							</span> 
+							<input type="text" id="result" name="pro_cnt"
+								class="form-control input-number" min="1" max="100"
+								placeholder="수량을 입력하세요" >
+								 <span class="input-group-btn ml-2">
+								<button type="button" class="quantity-right-plus btn"
+									value="+" data-type="plus" data-field="" onclick='count("plus")'>
+									
+								</button>
+							</span>
+						</div>
+						
+						
+
+
+						총 가격 : ${product.pro_price}
+
+
+
+
+<!-- formaction="" -->
+					</div>
+					<br> <br>
+					<p>
+						<input type="submit" formaction="cartList" value="장바구니" class="btn btn-black py-3 px-5"> 
 						<input type="button" formaction="pay" value="즉시 구매" class="btn btn-black py-3 px-5">
-				</p>
+					</p>
+				</div>
 			</div>
 		</div>
-	</div>
 
-</section>
+	</section>
 </form>
 
 
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
+
+
+<script>
+function count(type)  {
+	  // 결과를 표시할 element
+	  const resultElement = document.getElementById('result');
+	  
+	  // 현재 화면에 표시된 값
+	  let number = resultElement.innerText;
+	  
+	  // 더하기/빼기
+	  if(type === 'plus') {
+	    number = parseInt(number) + 1;
+	  }else if(type === 'minus')  {
+	    number = parseInt(number) - 1;
+	  }
+	  
+	  // 결과 출력
+	  resultElement.innerText = number;
+	}
+
+</script>
 
 </body>
 </html>
