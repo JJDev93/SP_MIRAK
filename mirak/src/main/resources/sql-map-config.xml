@@ -6,8 +6,6 @@
 	<!-- Alias 설정 -->
 	<typeAliases>
 		<typeAlias alias="product" type="kr.co.mirak.product.ProductVO" />
-		
+		<typeAlias alias="member" type="kr.co.mirak.member.MemberVO" />
 	</typeAliases>
-	
-
 </configuration>

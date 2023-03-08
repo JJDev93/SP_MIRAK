@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.co.mirak.product.Criteria;
 import kr.co.mirak.product.ProductService;
 import kr.co.mirak.product.ProductVO;
 

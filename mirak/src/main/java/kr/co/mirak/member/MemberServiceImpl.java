@@ -42,6 +42,14 @@ public class MemberServiceImpl implements MemberService {
 		MemberVO memVO  = mapper.mypage(vo);
 		return memVO;
 	}
+	
+	//어드민 회원상세정보
+	public MemberVO getMemberDetail(MemberVO vo){
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		MemberVO memVO  = mapper.getMemberDetail(vo);
+		return memVO;
+	}
+	
 //	@Override
 //	public MemberVO info(int id) {
 //		// TODO Auto-generated method stub
