@@ -1,46 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<jsp:include page="admin_hd.jsp"></jsp:include>
+<div class="ftco-section">
+	<div class="container">
+		<div class="justify-content-center mb-3 pb-3">
+			<div class="heading-section text-center">
+				<h2>상품목록</h2>
+				<p>상품 목록 페이지 입니다.</p>
+			</div>
+		</div>
+		<a href="ProductAdminRegister" class="btn btn-primary mb-4">상품 추가</a>
 
+		<div class="bd-example-snippet bd-code-snippet">
+			<div class="bd-example">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">이미지</th>
+							<th scope="col">상품코드</th>
+							<th scope="col">상품명</th>
+							<th scope="col">상품가격</th>
+							<th scope="col">상품설명</th>
+							
+						
+						</tr>
+					</thead>
+					<tbody>
+						
+						<c:forEach items="${productList}" var="product">
+						
+							<tr>
+								<td> <img alt="1" src="${path}/resources/images/product/${product.pro_image}" style="width:100px; height:100px;"></td>
+								<td>${product.pro_code }</td>
+								<td><a
+									href="ProductAdminDetail?pro_code=${product.pro_code}">${product.pro_name }</a></td>
+									
+								<td>${product.pro_price }</td>
+								<td>${product.pro_desc }</td>
+								
+								
 
-	<table border="1" cellpadding="0" cellspacing="0" width="500">
-		<tr>
-			<th bgcolor="orange" width="100">상품코드</th>
-			<th bgcolor="orange" width="100">상품명</th>
-			<th bgcolor="orange" width="100">상품가격</th>
-			<th bgcolor="orange" width="100">상품설명</th>
-			<th bgcolor="orange" width="100">반찬 개수</th>
-			<th bgcolor="orange" width="200">옵션명</th>
-			<th bgcolor="orange" width="200">옵션가격</th>
+							</tr>
+						</c:forEach>
 
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row mt-5">
+			<div class="col text-center">
+				<div class="block-27">
 
-		</tr>
-		<c:forEach items="${productList}" var="product" varStatus="status">
-			<tr>
-				<td>${product.pro_code }</td>
-				<td><a href="ProductAdminDetail?pro_code=${product.pro_code}">${product.pro_name }</a></td>
-				<td>${product.pro_price }</td>
-				<td>${product.pro_desc }</td>
-				<td>${product.pro_cnt }</td>
-				<td>${optionList[status.index].opt_name }</td>
-				<td>${optionList[status.index].opt_price }</td>
-				
-
-			</tr>
-		</c:forEach>
-	
-
-
-	</table>
-	<br>
-	<a href="ProductAdminRegister">상품 등록</a>
-
-</body>
-</html>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<jsp:include page="admin_ft.jsp"></jsp:include>
