@@ -42,12 +42,12 @@ public class CartController {
 		return "home";
 	}
 	
-	@RequestMapping("/cart/cartList")
+	@RequestMapping("/cartList")
 	public String getEmpList(Model model) {
 		
 		List<CartVO> list = service.list();
 		model.addAttribute("cartList", list);
-		return "cart";
+		return "cart/cart";
 	}
 	
 	
