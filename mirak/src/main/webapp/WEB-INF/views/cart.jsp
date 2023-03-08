@@ -23,21 +23,23 @@
 				<div class="cart-list">
 					<table class="table">
 						<thead class="thead-primary">
-							<tr class="text-center">
-								<td class="product-remove"><input type="checkbox" name="allCheck" id="allCheck" checked /></td>				
+							<tr class="text-center">		
 								<th>이미지</th>
 								<th>상품명</th>
 								<th>가격</th>
 								<th>요일선택</th>
 								<th>배송횟수</th>
 								<th>총가격</th>
-								<th>ㅇㅇ</th>
+								<th>
+									<div class="all_check_input_div">
+										<input type="checkbox" class="all_check" checked="checked">
+										<span class="all_chcek_span">전체선택</span>
+									</div></th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="c" items="${cartList }">
 							<tr class="text-center">
-								<td class="product-remove"><input type="checkbox" checked></td>
 								<td class="image-prod"><div class="img" style="background-image: url(${path}/resources/images/product-4.jpg);"></div></td>
 								<td class="product-name">
 									<h3>${c.name }</h3>
@@ -47,7 +49,8 @@
 								<td>${c.day }</td>
 								<td>${c.count }</td>
 								<td>${c.price * c.count }</td>
-								<td class="cart_info_td">
+								<td class="cart_info">
+									<input type="checkbox" class="cart_checkbox" checked="checked">
 									<input type="hidden" class="price_input" value="${c.price }">
 									<input type="hidden" class="count_input" value="${c.count }">
 									<input type="hidden" class="totalPrice_input" value="${c.price * c.count }">
@@ -115,7 +118,33 @@
 <script src="${path}/resources/js/main.js"></script>
 
 <script>
-$(document).ready(function(){
+$(document).ready(function() {
+	// 종합 정보 삽입
+	setTotalInfo();
+});
+
+// 체크에 따른 정보 변화
+$(".cart_checkbox").on("change", function(){
+	// 총 주문 정보 세팅(배송비, 총 가격, 물품 수, 종류)
+	setTotalInfo($(".cart_info"));
+});
+
+// 체크박스 전체 선택
+$(".all_check").on("click", function(){
+
+	// 체크박스 체크 해제
+	if($(".all_check").prop("checked")){
+		$(".cart_checkbox").attr("checked", true);
+	} else{
+		$(".cart_checkbox").attr("checked", false);
+	}
+	
+	// 총 주문 정보 세팅(배송비, 총 가격, 물품 수, 종류)
+	setTotalInfo($(".cart_info"));
+});
+
+// 총 주문 정보 세팅(배송비, 총 가격, 물품 수, 종류)
+function setTotalInfo(){
 	
 	let totalPrice = 0;				// 총 가격
 	let totalCount = 0;				// 총 갯수
@@ -123,17 +152,19 @@ $(document).ready(function(){
 	let deliveryPrice = 0;			// 배송비
 	let finalTotalPrice = 0; 		// 최종 가격(총 가격 + 배송비)
 	
-	$(".cart_info_td").each(function(index, element){
+	$(".cart_info").each(function(index, element){
 		
-		// 총 가격
-		totalPrice += parseInt($(element).find(".totalPrice_input").val());
-		// 총 갯수
-		totalCount += parseInt($(element).find(".count_input").val());
-		// 총 종류
-		totalKind += 1;	
+		if ($(element).find(".cart_checkbox").is(":checked") === true) {	// 체크 여부 확인
+			// 총 가격
+			totalPrice += parseInt($(element).find(".totalPrice_input").val());
+			// 총 갯수
+			totalCount += parseInt($(element).find(".count_input").val());
+			// 총 종류
+			totalKind += 1;
+		}
 	});
 	
-	/* 배송비 결정 */
+	// 배송비
 	if(totalPrice >= 100000){
 		deliveryPrice = 0;
 	} else if(totalPrice == 0){
@@ -142,19 +173,18 @@ $(document).ready(function(){
 		deliveryPrice = 10000;	
 	}
 	
-	/* 최종 가격 */
+	// 최종 결제금액
 	finalTotalPrice = totalPrice + deliveryPrice;
-	
-	/* 값 삽입 */
+
 	// 총 가격
-	$(".totalPrice_span").text(totalPrice);
+	$(".totalPrice_span").text(totalPrice.toLocaleString());
 	// 총 갯수
 	$(".totalCount_span").text(totalCount);
-	// 총 종류
+	// 총 가짓수
 	$(".totalKind_span").text(totalKind);
 	// 배송비
 	$(".delivery_price").text(deliveryPrice);	
 	// 최종 가격(총 가격 + 배송비)
-	$(".finalTotalPrice_span").text(finalTotalPrice);
-});	
+	$(".finalTotalPrice_span").text(finalTotalPrice.toLocaleString());
+}
 </script>
