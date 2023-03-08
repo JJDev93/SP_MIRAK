@@ -47,12 +47,12 @@
                               
                               <div class="form-group">
                                  <label for="pw">비밀번호</label> 
-                                 <input type="password" name="mem_pw" class="form-control" id="pw" onchange="check_pw()" placeholder="비밀번호" required="required"  value="${member.mem_pw }">
+                                 <input type="password" name="mem_pw" class="form-control" id="pw" onchange="check_pw()" placeholder="비밀번호" required="required"  value="123456789">
                               </div>
                               
                               <div class="form-group">
                                  <label for="pw2">비밀번호 확인</label> 
-                                 <input type="password" class="form-control" id="pw2" onchange="check_pw()" placeholder="비밀번호 확인" required="required">
+                                 <input type="password" class="form-control" id="pw2" onchange="check_pw()" placeholder="비밀번호 확인" required="required" value="123456789">
                              	 <span id="check"></span>
                               </div>
                            </div>

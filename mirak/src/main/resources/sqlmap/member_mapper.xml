@@ -35,7 +35,6 @@
 	<update id="memupdate" parameterType="kr.co.mirak.member.MemberVO">
 		<![CDATA[
 			UPDATE MEMBER SET
-				MEM_PW = #{mem_pw},
 				MEM_NAME = #{mem_name},
 				MEM_AGE = #{mem_age},
 				MEM_GENDER = #{mem_gender},
