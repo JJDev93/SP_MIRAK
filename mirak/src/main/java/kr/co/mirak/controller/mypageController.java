@@ -22,16 +22,31 @@ public class mypageController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	//마이페이지 이동
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public String mypageview(MemberVO vo, Model model, HttpSession session) {
 		System.out.println("마이페이지로 이동..");
-		
 		String myid = (String)session.getAttribute("mem_id");
 		vo.setMem_id(myid);
 		MemberVO member = memberService.mypage(vo);
 	    model.addAttribute("member", member);
-		
 		return "member/mypage";
+	}
+
+	// 회원정보 수정
+	@RequestMapping(value = "/memupdate", method = RequestMethod.POST)
+	public String memupdate(MemberVO vo , Model model){
+		memberService.memupdate(vo);
+		System.out.println("회원정보 수정 완료...");
+		return "redirect:mypage";
+	}
+	
+	// 회원탈퇴
+	@RequestMapping("/memdelete")
+	public String memdelete(MemberVO vo, Model model) {
+		memberService.memdelete(vo);
+		System.out.println("회원탈퇴 성공!");
+		return "redirect:/logout";
 	}
 }
 

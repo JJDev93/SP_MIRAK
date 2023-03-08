@@ -77,7 +77,7 @@
                      <div class="col-md-6">
                         <div class="form-group">
                            <label for="phone">Phone</label> 
-                           <input type="text" name="mem_phone" class="form-control" placeholder=" ' - ' 빼고 입력해주세요 " required="required">
+                           <input type="text" name="mem_phone" class="form-control" placeholder=" ' - ' 빼고 입력해주세요 " required="required" >
                      <!--  <input type="tel" name="mem_phone" class="form-control" maxlength="11" pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                       placeholder="' - ' 빼고 숫자만 입력해 주세요">  -->
                        
@@ -91,12 +91,8 @@
 						<div class="col-md-6">
 							<a href="index.jsp" class="btn btn-secondary py-3 px-5 w-100">가입취소</a>
 						</div>
-					</div>                    
-                   
-                  	</div>
+					</div>
                </form>
-               <!-- END -->
-            </div>
             <!-- .col-md-8 -->
          </div>
       </div>

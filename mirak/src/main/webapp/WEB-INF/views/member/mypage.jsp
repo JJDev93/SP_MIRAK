@@ -34,58 +34,59 @@
 		<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-xl-7 ftco-animate">
-				<form action="#" method="post" class="billing-form">
+				<form action="memupdate" method="post" class="contact-form">
 					<h3 class="mb-4 billing-heading">회원정보 수정</h3>
 					<div class="row align-items-end">
 						<div class="container">
-							<div class="row block-9">
-								<div class="col-md-12 order-md-last ">
-									<div class="form-group">
-										<label for="ID">아이디</label> <input type="text" name="mem_id"
-										value="${member.mem_id }"
-											class="form-control" >
-									</div>
-									<div class="form-group">
-										<label for="PW">비밀번호</label> <input type="text" name="mem_pw"
-										value="${member.mem_pw }"
-											class="form-control" >
-									</div>
-									<div class="form-group">
-										<label for="PW">비밀번호 확인</label> <input type="text"
-											class="form-control" placeholder="비밀번호 확인">
-									</div>
-								</div>
-							</div>
-						</div>
+                        <div class="row block-9">
+                           <div class="col-md-12 order-md-last ">
+                              <div class="form-group">
+                                 <label for="ID">아이디</label> 
+                                 <input type="text" name="mem_id" class="form-control" placeholder="이메일(ID)" required="required"  value="${member.mem_id }" readonly>
+                              </div>
+                              
+                              <div class="form-group">
+                                 <label for="pw">비밀번호</label> 
+                                 <input type="password" name="mem_pw" class="form-control" id="pw" onchange="check_pw()" placeholder="비밀번호" required="required"  value="${member.mem_pw }">
+                              </div>
+                              
+                              <div class="form-group">
+                                 <label for="pw2">비밀번호 확인</label> 
+                                 <input type="password" class="form-control" id="pw2" onchange="check_pw()" placeholder="비밀번호 확인" required="required">
+                             	 <span id="check"></span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
 						<div class="w-100"></div>
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="firstname">이름</label> <input type="text"
-									name="mem_name" value="${member.mem_name }" class="form-control" >
-							</div>
-						</div>
-						<div class="w-100"></div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="age">나이</label> <input type="text" name="mem_age" id="age" value="${member.mem_age }"class="form-control" >
-							</div>
-						</div>
-
-						<div class="w-100"></div>
+                     <div class="col-md-12">
+                        <div class="form-group">
+                           <label for="firstname">이름</label> <input type="text"
+                              name="mem_name" class="form-control" placeholder="이름을 입력해주세요" required="required"  value="${member.mem_name }">
+                        </div>
+                     </div>
+                     <div class="w-100"></div>
+                     <div class="col-md-6">
+                        <div class="form-group">
+                           <label for="age">나이</label> <input type="text" name="mem_age" id="age" class="form-control" placeholder="나이를 입력해주세요" required="required"  value="${member.mem_age }">
+                        </div>
+                     </div>
+   
+                     <div class="w-100"></div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="gender">성별</label>
 								<div>
 									<c:choose>
 										<c:when test="${member.mem_gender == '1'}">
-											<input type="radio" name="gender" value="man" name="mem_gender" checked>남
+											<input type="radio" name="mem_gender" value="1" checked>남
                              				 &nbsp;&nbsp;&nbsp; 
-                              				<input type="radio" name="gender" value="woman" name="mem_gender">여
+                              				<input type="radio" name="mem_gender" value="0" >여
                               			</c:when>
 										<c:when test="${member.mem_gender == '0' }">
-											<input type="radio" name="gender" value="man" name="mem_gender" >남
-                             				 &nbsp;&nbsp;&nbsp; 
-                              				<input type="radio" name="gender" value="woman" name="mem_gender" checked>여
+											<input type="radio" name="mem_gender" value="1">남
+                              				&nbsp;&nbsp;&nbsp; 
+                             				 <input type="radio" name="mem_gender" value="0"checked>여
 										</c:when>
 									</c:choose>
 
@@ -95,11 +96,8 @@
 						<div class="w-100"></div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="phone">Phone</label> <input type="tel"
-									name="mem_phone" class="form-control" maxlength="11"
-									pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-									value="${member.mem_phone }"
-									>
+								<label for="phone">Phone</label>
+									<input type="text" name="mem_phone" class="form-control" placeholder=" ' - ' 빼고 입력해주세요 " required="required" value="${member.mem_phone }">
 							</div>
 						</div>
 						<div class="w-100"></div>
@@ -107,10 +105,10 @@
 								<input type="submit" value="수정하기" class="btn btn-primary py-3 px-5">
 							</div>
 							<div class="col-md-6 text-center">
-								<a href="#" class="btn btn-secondary py-3 px-5 l-100" >회원탈퇴</a>
+								<a href="memdelete?mem_id=${member.mem_id }" class="btn btn-secondary py-3 px-5 l-100" >회원탈퇴</a>
 							</div>
 						</div>
-					</form>
+				</form>
 			</div>
 		</div>
 	</div>

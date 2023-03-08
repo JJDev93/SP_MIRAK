@@ -9,6 +9,8 @@ public interface MemberMapper {
 	List<MemberVO> getMemberList();
 	int createUser(MemberVO vo);
 	MemberVO mypage(MemberVO vo);
+	int memupdate(MemberVO vo);
+	int memdelete(MemberVO vo);
 	
 //	MemberVO info(int id);
 //	int insert(MemberVO vo);

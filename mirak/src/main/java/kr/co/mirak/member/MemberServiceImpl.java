@@ -32,8 +32,8 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int createUser(MemberVO vo) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		int seccess  = mapper.createUser(vo);
-		return seccess;
+		int success  = mapper.createUser(vo);
+		return success;
 	}
 	
 	//마이페이지
@@ -41,6 +41,18 @@ public class MemberServiceImpl implements MemberService {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
 		MemberVO memVO  = mapper.mypage(vo);
 		return memVO;
+	}
+	
+	public int memupdate(MemberVO vo) {
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		int updatesuccess  = mapper.memupdate(vo);
+		return updatesuccess;
+	}
+	
+	public int memdelete(MemberVO vo) {
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		int deletesuccess  = mapper.memdelete(vo);
+		return deletesuccess;
 	}
 //	@Override
 //	public MemberVO info(int id) {

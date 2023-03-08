@@ -37,5 +37,23 @@
  		where mem_id=#{mem_id}
 	</select>
 	
+	<update id="memupdate" parameterType="kr.co.mirak.member.MemberVO">
+		<![CDATA[
+			UPDATE MEMBER SET
+				MEM_PW = #{mem_pw},
+				MEM_NAME = #{mem_name},
+				MEM_AGE = #{mem_age},
+				MEM_GENDER = #{mem_gender},
+				MEM_PHONE = #{mem_phone}
+			WHERE MEM_ID = #{mem_id}
+		]]>
+	</update>
+
+	<delete id="memdelete" parameterType="kr.co.mirak.member.MemberVO">
+		<![CDATA[
+			DELETE FROM MEMBER
+			WHERE MEM_ID = #{mem_id}
+		]]>
+	</delete>
 	
  </mapper>

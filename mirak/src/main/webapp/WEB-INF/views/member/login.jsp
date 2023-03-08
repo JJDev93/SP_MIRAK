@@ -49,12 +49,12 @@
 					
 					<div class="form-group">
 					<label for="ID">아이디</label>
-						<input type="text" class="form-control" id="ID" name="mem_id" placeholder="이메일(ID)">
+						<input type="text" class="form-control" id="ID" name="mem_id" placeholder="이메일(ID)" required="required">
 					</div>
 					
 					<div class="form-group">
 					<label for="PW">비밀번호</label>
-						<input type="password" id="PW" class="form-control" name="mem_pw" placeholder="비밀번호">
+						<input type="password" id="PW" class="form-control" name="mem_pw" placeholder="비밀번호" required="required">
 					</div>
 					
 					<div class="form-group row">
