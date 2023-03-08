@@ -47,7 +47,14 @@
 								</td>
 								<td>${c.price }</td>
 								<td>${c.day }</td>
-								<td>${c.count }</td>
+								<td>
+									<div class="quantity_div">
+										<input type="text" value="${c.count}" class="quantity_input">	
+										<button class="quantity_btn plus_btn">+</button>
+										<button class="quantity_btn minus_btn">-</button>
+									</div>
+									<a class="quantity_update_btn" data-cartId="${c.cartId}">변경</a>								
+								</td>
 								<td>${c.price * c.count }</td>
 								<td class="cart_info">
 									<input type="checkbox" class="cart_checkbox" checked="checked">
@@ -57,6 +64,13 @@
 								</td>
 							</tr>
 							</c:forEach>
+							
+							<!-- 수량 조정 form -->
+			<form action="/cart/update" method="post" class="quantity_update_form">
+				<input type="hidden" name="cartId" class="update_cartId">
+				<input type="hidden" name="count" class="update_count">
+				<input type="hidden" name="mem_id" value="${member.mem_id}">
+			</form>	
 							
 							
 							<!-- END TR-->
@@ -187,4 +201,27 @@ function setTotalInfo(){
 	// 최종 가격(총 가격 + 배송비)
 	$(".finalTotalPrice_span").text(finalTotalPrice.toLocaleString());
 }
+
+// 수량 조절 버튼
+$(".plus_btn").on("click", function(){
+	let quantity = $(this).parent("div").find("input").val();
+	$(this).parent("div").find("input").val(++quantity);
+});
+$(".minus_btn").on("click", function(){
+	let quantity = $(this).parent("div").find("input").val();
+	if(quantity > 1){
+		$(this).parent("div").find("input").val(--quantity);		
+	}
+});
+
+// 수량 수정 버튼
+$(".quantity_update_btn").on("click", function(){
+	let cartId = $(this).data("cartid");
+	let count = $(this).parent("td").find("input").val();
+	$(".update_cartId").val(cartId);
+	$(".update_count").val(count);
+	$(".quantity_update_form").submit();
+	
+});
+
 </script>
