@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<jsp:include page="client_hd.jsp"></jsp:include>
+<jsp:include page="/common/client_hd.jsp"></jsp:include>
 <div class="hero-wrap hero-bread"
 	style="background-image: url('${path}/resources/images/bg_1.jpg');">
 	<div class="container">
@@ -30,7 +30,7 @@
 							<div class="product">
 									<a href="ProductClientDetail?pro_code=${product.pro_code}"
 										class="img-prod"> <img alt="1"
-										src="${path}/resources/images/product/${product.pro_image}">
+										src="${path}/resources/images/product/${product.pro_image}" style="width:350px; height:250px;">
 									</a>
 									<div class="text py-3 pb-4 px-3 text-center">
 										<h3>
@@ -48,26 +48,27 @@
 
 
 	</div>
+	
+	<div class="row mt-5">
+			<div class="col text-center">
+				<div class="block-27">
+					<ul>
+						<li><a href="#">&lt;</a></li>
+						<li class="active"><span>1</span></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li><a href="#">&gt;</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 
 
 </section>
 
 
-<jsp:include page="client_ft.jsp"></jsp:include>
-
-
-
-<script src="${path}/resources/js/jquery.min.js"></script>
-<script src="${path}/resources/js/jquery-migrate-3.0.1.min.js"></script>
-<script src="${path}/resources/js/bootstrap.min.js"></script>
-<script src="${path}/resources/js/jquery.easing.1.3.js"></script>
-<script src="${path}/resources/js/jquery.waypoints.min.js"></script>
-<script src="${path}/resources/js/jquery.stellar.min.js"></script>
-<script src="${path}/resources/js/owl.carousel.min.js"></script>
-<script src="${path}/resources/js/jquery.magnific-popup.min.js"></script>
-<script src="${path}/resources/js/aos.js"></script>
-<script src="${path}/resources/js/jquery.animateNumber.min.js"></script>
-<script src="${path}/resources/js/scrollax.min.js"></script>
-<script src="${path}/resources/js/main.js"></script>
+<jsp:include page="/common/client_ft.jsp"></jsp:include>
 </body>
 </html>

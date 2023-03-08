@@ -17,7 +17,7 @@
 		resultType="kr.co.mirak.product.ProductVO">
 		
 		<![CDATA[
- 		SELECT pro_code, pro_name, pro_price, pro_desc, pro_image from product; 
+ 		SELECT pro_code, pro_name, pro_price, pro_desc, pro_image from product limit 10;
 		
  		]]>
 
@@ -75,6 +75,15 @@
 			DELETE FROM PRODUCT WHERE pro_code=#{pro_code}
 		]]>
 	</delete>
+	
+	<!-- 	페이징 처리 (상품 총 개수 출력) -->
+	<select id="count">
+		<![CDATA[
+		select count(pro_code) from product
+		]]>
+	</select>
+
+
 
 
 

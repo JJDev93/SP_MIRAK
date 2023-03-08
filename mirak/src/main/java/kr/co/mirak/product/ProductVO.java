@@ -11,6 +11,8 @@ public class ProductVO {
 	
 	private int pro_cnt;
 
+	private int cart_cnt;
+	
 	public String getPro_code() {
 		return pro_code;
 	}

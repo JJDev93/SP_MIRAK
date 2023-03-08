@@ -23,7 +23,7 @@
 			        <a class="nav-link active" aria-current="page" href="/admin/members">회원관리</a>
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link" href="#">상품관리</a>
+			        <a class="nav-link" href="ProductAdminList">상품관리</a>
 			      </li>
 			      <li class="nav-item">
 			        <a class="nav-link" href="#">장바구니</a>

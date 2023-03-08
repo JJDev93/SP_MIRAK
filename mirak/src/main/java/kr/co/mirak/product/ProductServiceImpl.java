@@ -66,5 +66,9 @@ public class ProductServiceImpl implements ProductService {
 		mapper.deleteProduct(vo);
 
 	}
+	
+	
+	
+	
 
 }

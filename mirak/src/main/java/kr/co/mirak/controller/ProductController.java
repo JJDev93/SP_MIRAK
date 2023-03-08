@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.mirak.product.Criteria;
 import kr.co.mirak.product.ProductService;
 import kr.co.mirak.product.ProductVO;
 
@@ -30,10 +31,12 @@ public class ProductController {
 
 //	 상품 Client 리스트
 	@RequestMapping("/ProductClientList")
-	public String productclientList(ProductVO vo, Model model) {
+	public String productclientList(ProductVO vo, Model model)  {
 
-		model.addAttribute("productList", productService.productList(vo));
+		model.addAttribute("productList", productService.productList(vo));	
 
+		
+		
 		return "/product/ProductClientList";
 
 	}
@@ -127,13 +130,21 @@ public class ProductController {
 
 		return "redirect:/ProductAdminList";
 	}
-	
+
 	// 장바구니 화면으로 이동
 //	@RequestMapping(value = "/ProductAdminRegister")
 //	public String productcartList() {
 //
 //		return "/product/ProductAdminRegister";
 //	}
+	
+	@RequestMapping(value = "/pay")
+	public String productPay() {
+		
+		
+
+		return "/pay/pay";
+	}
 	
 
 }
