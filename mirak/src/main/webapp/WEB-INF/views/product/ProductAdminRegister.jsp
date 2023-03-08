@@ -48,20 +48,17 @@
 				</div>
 				
 				
-				<div class="col-md-6">
+				<div class="col-md-12">
 					<div class="form-group">
 						<input type="submit" class="form-control" value="상품 등록">
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<input type="reset" class="form-control" value="다시 입력">
 					</div>
 				</div>
 				
 			</div>
 		</form>		
-		<a href="ProductAdminList" class="btn btn-secondary">목록</a>
+		<a href="#" class="btn btn-secondary">목록</a>
+		<a href="#" class="btn btn-primary">수정</a>
+		<a href="#" class="btn btn-danger">삭제</a>
 	</div>
 </div>
 <jsp:include page="admin_ft.jsp"></jsp:include>

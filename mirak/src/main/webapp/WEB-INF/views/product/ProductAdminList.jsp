@@ -23,28 +23,24 @@
 							<th scope="col">상품명</th>
 							<th scope="col">상품가격</th>
 							<th scope="col">상품설명</th>
-
-
+							
+						
 						</tr>
 					</thead>
 					<tbody>
-
+						
 						<c:forEach items="${productList}" var="product">
-
+						
 							<tr>
-								<td><a
-									href="ProductAdminDetail?pro_code=${product.pro_code}"> <img
-										alt="1"
-										src="${path}/resources/images/product/${product.pro_image}"
-										style="width: 100px; height: 100px;"></a></td>
+								<td> <img alt="1" src="${path}/resources/images/product/${product.pro_image}" style="width:100px; height:100px;"></td>
 								<td>${product.pro_code }</td>
 								<td><a
 									href="ProductAdminDetail?pro_code=${product.pro_code}">${product.pro_name }</a></td>
-
+									
 								<td>${product.pro_price }</td>
 								<td>${product.pro_desc }</td>
-
-
+								
+								
 
 							</tr>
 						</c:forEach>
@@ -55,7 +51,9 @@
 		</div>
 		<div class="row mt-5">
 			<div class="col text-center">
-				<div class="block-27"></div>
+				<div class="block-27">
+
+				</div>
 			</div>
 		</div>
 	</div>

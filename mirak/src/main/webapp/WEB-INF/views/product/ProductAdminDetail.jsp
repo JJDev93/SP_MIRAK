@@ -43,19 +43,18 @@
 				
 				<div class="col-md-12">
 					<div class="form-group">
-						<label for="imagefile">이미지</label>
+						<label for="imagefile">이미지 파일</label>
 					</div>
-					<img alt="1" src="${path}/resources/images/product/${product.pro_image}" style="width:200px; heigt:200px; margin-bottom:30px;">
+					<img alt="1" src="${path}/resources/images/product/${product.pro_image}" style="width:200px; heigt:200px;">
 				</div>
 				
-			
 				<div class="col-md-12">
 					<div class="form-group">
 						<label for="cnt">이미지 파일</label> <input type="file" class="form-control" id="cnt" name="uploadFile">
 					</div>
 				</div>
 				
-				<br><br><br><br>
+				<br><br><br><br><br><br><br><br><br>
 				
 				<div class="col-md-12">
 					<div class="form-group">

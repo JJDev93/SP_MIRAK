@@ -29,7 +29,7 @@
 			<div class="col-lg-6 mb-5 ftco-animate">
 				<a href="${path}/resources/images/product/${product.pro_image}"
 					class="image-popup"><img alt="1"
-					src="${path}/resources/images/product/${product.pro_image}" style="width:350px; height:250px;"></a>
+					src="${path}/resources/images/product/${product.pro_image}"></a>
 			</div>
 			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
 				<h3>${product.pro_name}</h3>

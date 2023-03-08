@@ -30,7 +30,7 @@
 							<div class="product">
 									<a href="ProductClientDetail?pro_code=${product.pro_code}"
 										class="img-prod"> <img alt="1"
-										src="${path}/resources/images/product/${product.pro_image}" style="width:350px; height:250px;">
+										src="${path}/resources/images/product/${product.pro_image}">
 									</a>
 									<div class="text py-3 pb-4 px-3 text-center">
 										<h3>
