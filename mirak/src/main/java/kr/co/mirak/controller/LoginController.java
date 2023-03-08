@@ -18,13 +18,15 @@ import kr.co.mirak.member.MemberVO;
 public class LoginController {
 	@Autowired
 	private MemberService memberService;
-		
+	
+	//로그인페이지
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginView() {
 		System.out.println("로그인 화면으로 이동...");
 		return "member/login";
 	}
-
+	
+	//로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(MemberVO memberVO, ModelAndView mav, HttpSession session) {
 		String mem_id = memberService.login(memberVO).getMem_id();
@@ -49,5 +51,14 @@ public class LoginController {
 			mav.setViewName("member/login");
 		}
 		return mav;
+	}
+		
+	//로그아웃
+	@RequestMapping("/logout")
+		public String logout(HttpSession session) {
+			session.invalidate();
+
+			System.out.println("로그아웃 성공!!");
+			return "redirect:/";
 	}
 }

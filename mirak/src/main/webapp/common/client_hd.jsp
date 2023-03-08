@@ -33,10 +33,13 @@
 						<li class="nav-item active"><a href="" class="nav-link">프리미엄</a></li>
 						<li class="nav-item"><a href="about.html" class="nav-link">2,3인세트</a></li>
 						<li class="nav-item"><a href="blog.html" class="nav-link">1인세트</a></li>
-						<li class="nav-item"><a href="cart.html" class="nav-link">장바구니</a></li>
-						<li class="nav-item"><a href="login" class="nav-link">로그인</a></li>
-						<li class="nav-item"><a href="mypage" class="nav-link">마이페이지</a></li>
-						<li class="nav-item"><a href="join" class="nav-link">회원가입</a></li>
+						<%if (session.getAttribute("mem_id") == null) {%>
+							<li class="nav-item"><a href="login" class="nav-link">로그인</a></li>
+							<li class="nav-item"><a href="join" class="nav-link">회원가입</a></li>
+						<%} else {%>
+							<li class="nav-item"><a href="logout" class="nav-link">로그아웃</a></li>
+							<li class="nav-item"><a href="mypage" class="nav-link">마이페이지</a></li>
+						<%}%>
 					</ul>
 				</div>
 			</div>
