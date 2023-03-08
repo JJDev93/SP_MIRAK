@@ -2,6 +2,8 @@ package kr.co.mirak.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,5 +38,14 @@ public class AdminMemberController {
 	public String getMemeberDetail(@PathVariable String member, Model model) {
 		System.out.println("찾으려는 멤버 id = " + member);
 		return "member/admin_member_detail";
+	}
+	
+	// 로그아웃
+	@RequestMapping("/admin/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+
+		System.out.println("로그아웃 성공!!");
+		return "redirect:/";
 	}
 }

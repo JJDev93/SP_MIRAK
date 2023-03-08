@@ -24,7 +24,7 @@
 		<!-- START nav -->
 		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 			<div class="container">
-				<h1><a class="navbar-brand" href="index.jsp">MiRak</a></h1>
+				<h1><a class="navbar-brand" href="index">MiRak</a></h1>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="oi oi-menu"></span> Menu
 				</button>
@@ -36,9 +36,12 @@
 						<%if (session.getAttribute("mem_id") == null) {%>
 							<li class="nav-item"><a href="login" class="nav-link">로그인</a></li>
 							<li class="nav-item"><a href="join" class="nav-link">회원가입</a></li>
-						<%} else {%>
+						<%} else if (session.getAttribute("mem_id").equals("admin")) {%>
 							<li class="nav-item"><a href="logout" class="nav-link">로그아웃</a></li>
-							<li class="nav-item"><a href="mypage" class="nav-link">마이페이지</a></li>
+							<li class="nav-item"><a href="admin/members" class="nav-link">Admin</a></li>
+						<%} else {%>
+						<li class="nav-item"><a href="logout" class="nav-link">로그아웃</a></li>
+						<li class="nav-item"><a href="mypage" class="nav-link">마이페이지</a></li>
 						<%}%>
 					</ul>
 				</div>
