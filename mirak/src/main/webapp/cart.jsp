@@ -24,12 +24,13 @@
 					<table class="table">
 						<thead class="thead-primary">
 							<tr class="text-center">
-								<th>&nbsp;</th>
-								<th>&nbsp;</th>
-								<th>Product name</th>
-								<th>Price</th>
-								<th>Quantity</th>
-								<th>Total</th>
+								<th>선택</th>
+								<th>이미지</th>
+								<th>상품명</th>
+								<th>가격</th>
+								<th>요일선택</th>
+								<th>배송횟수</th>
+								<th>총가격</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -41,6 +42,7 @@
 									<p>Far far away, behind the word mountains, far from the countries</p>
 								</td>
 								<td class="price">$4.90</td>
+								<td>월수금</td>
 								<td class="quantity">
 									<div class="input-group mb-3">
 										<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
@@ -51,66 +53,38 @@
 							<!-- END TR-->
 
 							<tr class="text-center">
-								<td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+								<td class="product-remove"><input type="checkbox"></td>
 								<td class="image-prod"><div class="img" style="background-image: url(${path}/resources/images/product-4.jpg);"></div></td>
 								<td class="product-name">
 									<h3>Bell Pepper</h3>
 									<p>Far far away, behind the word mountains, far from the countries</p>
 								</td>
-								<td class="price">$15.70</td>
+								<td class="price">34442</td>
+								<td>월수금</td>
 								<td class="quantity">
 									<div class="input-group mb-3">
-										<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+										<input type="button" onclick='count("plus")' value="+">
+										<input type="button" onclick='count("minus")' value="-">
+										<div id="result">1</div>
 									</div>
 								</td>
 								<td class="total">$15.70</td>
 							</tr>
+							
+							
+							<tr class="text-center">
+							<c:forEach items="${cartList }" var="cart" varStatus="status">
+								<td class="product-name">${cart.cart_code }</td>
+							</c:forEach>
+							</tr>
+							
+							
 							<!-- END TR-->
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
-		<div class="row justify-content-end">
-			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-				<div class="cart-total mb-3">
-					<h3>Coupon Code</h3>
-					<p>Enter your coupon code if you have one</p>
-					<form action="#" class="info">
-						<div class="form-group">
-							<label for="">Coupon code</label> <input type="text"
-								class="form-control text-left px-3" placeholder="">
-						</div>
-					</form>
-				</div>
-				<p>
-					<a href="checkout.html" class="btn btn-primary py-3 px-4">Apply
-						Coupon</a>
-				</p>
-			</div>
-			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-				<div class="cart-total mb-3">
-					<h3>Estimate shipping and tax</h3>
-					<p>Enter your destination to get a shipping estimate</p>
-					<form action="#" class="info">
-						<div class="form-group">
-							<label for="">Country</label> <input type="text"
-								class="form-control text-left px-3" placeholder="">
-						</div>
-						<div class="form-group">
-							<label for="country">State/Province</label> <input type="text"
-								class="form-control text-left px-3" placeholder="">
-						</div>
-						<div class="form-group">
-							<label for="country">Zip/Postal Code</label> <input type="text"
-								class="form-control text-left px-3" placeholder="">
-						</div>
-					</form>
-				</div>
-				<p>
-					<a href="checkout.html" class="btn btn-primary py-3 px-4">Estimate</a>
-				</p>
-			</div>
 			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
 				<div class="cart-total mb-3">
 					<h3>Cart Totals</h3>
@@ -162,3 +136,23 @@
 </body>
 </html>
 <script src="${path}/resources/js/main.js"></script>
+
+<script>
+function count(type)  {
+	  // 결과를 표시할 element
+	  const resultElement = document.getElementById('result');
+	  
+	  // 현재 화면에 표시된 값
+	  let number = resultElement.innerText;
+	  
+	  // 더하기/빼기
+	  if(type === 'plus') {
+	    number = parseInt(number) + 1;
+	  }else if(type === 'minus')  {
+	    number = parseInt(number) - 1;
+	  }
+	  
+	  // 결과 출력
+	  resultElement.innerText = number;
+	}
+</script>
