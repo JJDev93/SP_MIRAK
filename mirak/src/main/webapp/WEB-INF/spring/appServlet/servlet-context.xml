@@ -33,7 +33,6 @@
 	<beans:bean class="kr.co.mirak.pay.PayServiceImpl">
 		<beans:constructor-arg ref="sqlSessionTemplate" />
 	</beans:bean>
-<<<<<<< HEAD
 	<beans:bean class="kr.co.mirak.member.MemberServiceImpl">		
 		<beans:constructor-arg ref="sqlSessionTemplate" />
 	</beans:bean>
@@ -46,9 +45,6 @@
 <!-- 		<beans:constructor-arg -->
 <!-- 			value="C:\Dev\MiRak\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\mirak\" /> -->
 <!-- 	</beans:bean> -->
-=======
->>>>>>> refs/remotes/origin/Product
-
 	<!-- 일반 파일 업로드 경로 -->
 	<resources mapping="/images/**" location="/WEB-INF/views/images/pro_images" />
 
@@ -60,9 +56,4 @@
 		</interceptor> 
 	</interceptors>
 
-<<<<<<< HEAD
-=======
-	
-
->>>>>>> refs/remotes/origin/Product
 </beans:beans>
