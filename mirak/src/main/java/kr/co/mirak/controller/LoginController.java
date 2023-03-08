@@ -30,25 +30,23 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(MemberVO memberVO, ModelAndView mav, HttpSession session) {
 		String mem_id = memberService.login(memberVO).getMem_id();
-		System.out.println("로그인한 아이디 : " + mem_id);
-		
-		if(mem_id == null || mem_id.equals("")) {
-//			throw new IllegalArgumentException("아이디는 반드시 입력해야 합니다.");
-			System.out.println("아이디는 반드시 입력해야 합니다.");
-		}
-		
-		if (mem_id != null) {
-			session.setAttribute("mem_id", mem_id);
-			if (mem_id.equals("admin")) {
-				System.out.println("어드민 로그인 성공!!");
-				mav.setViewName("redirect:/adminMembers");
-			}else{
-				System.out.println("로그인 성공!!");
-				mav.setViewName("redirect:/");
+		try {
+			if (mem_id != null) {
+				session.setAttribute("mem_id", mem_id);
+				if (mem_id.equals("admin")) {
+					System.out.println("어드민 로그인 성공!!");
+					mav.setViewName("redirect:/adminMembers");
+				}else{
+					System.out.println("로그인 성공!!");
+					mav.setViewName("redirect:/");
+				}
+			} else {
+				System.out.println("로그인 실패");
+				mav.setViewName("member/login");
 			}
-		} else {
-			System.out.println("로그인 실패");
-			mav.setViewName("member/login");
+			
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
 		return mav;
 	}
