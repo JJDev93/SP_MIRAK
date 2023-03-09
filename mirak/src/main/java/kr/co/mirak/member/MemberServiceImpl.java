@@ -48,6 +48,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	public int memdelete(MemberVO vo) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+<<<<<<< HEAD
 		int success  = mapper.memdelete(vo);
 		return success;
 	}
@@ -82,5 +83,9 @@ public class MemberServiceImpl implements MemberService {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
 		MemberVO memVO  = mapper.getMemberInfo(memId);
 		return memVO;
+=======
+		int deletesuccess  = mapper.memdelete(vo);
+		return deletesuccess;
+>>>>>>> refs/remotes/origin/Product
 	}
 }
