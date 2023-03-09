@@ -69,10 +69,10 @@ public class MemberServiceImpl implements MemberService {
 
 	//아이디체크
 	@Override
-	public int idCheck(String id) {
+	public int idCheck(String id) throws Exception{
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		int cnt = mapper.idCheck(id);
-		return cnt;
+		int result = mapper.idCheck(id);
+		return result;
 	}
 
 	

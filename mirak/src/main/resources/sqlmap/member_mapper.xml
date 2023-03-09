@@ -48,7 +48,7 @@
 	
 	
 		<!-- 아이디 확인 -->
-	<select id="idCheck" parameterType="String" resultType="int">
+	<select id="idCheck" parameterType="kr.co.mirak.member.MemberVO" resultType="int">
 		SELECT count(*) FROM MEMBER WHERE mem_id= #{mem_id}
 	</select>
 	
