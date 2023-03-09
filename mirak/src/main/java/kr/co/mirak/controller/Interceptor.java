@@ -28,7 +28,7 @@ public class Interceptor extends HandlerInterceptorAdapter{
 	      if(mem_id == null || mem_id.trim().equals("")) {
 	         logger.info(">> interceptor catch!!! userId is null.. ");
 	         session.invalidate();
-	         response.sendRedirect(request.getContextPath() + "/login");
+	         response.sendRedirect("/login");
 	         return false;
 	      }
 	      return true;
