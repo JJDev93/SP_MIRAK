@@ -2,7 +2,13 @@ package kr.co.mirak.pay;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.mybatis.spring.SqlSessionTemplate;
+
+import kr.co.mirak.cart.CartVO;
+import kr.co.mirak.product.ProductMapper;
+import kr.co.mirak.product.ProductVO;
 
 public class PayServiceImpl implements PayService {
 
@@ -42,5 +48,33 @@ public class PayServiceImpl implements PayService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	public ProductVO productDetail(ProductVO vo) {
+		ProductMapper mapper = sqlSessionTemplate.getMapper(ProductMapper.class);
+		return mapper.productDetail(vo);
+	}
+	
+	public List<CartVO> cartCheckList(HttpSession session) {
+		String myid = (String)session.getAttribute("mem_id");
+		PayMapper mapper = sqlSessionTemplate.getMapper(PayMapper.class);
+		List<CartVO> list  = mapper.cartCheckList(myid);
+		return list;
+	}
+	
+	public List<PayVO> adaptPayVO(PayStringVO payStringVO, HttpSession session) {
+		String myid = (String)session.getAttribute("mem_id");
+		//pro_code, cart_cnt, pay_req 
+				
+		String[] proCode = payStringVO.getPro_code().split(",");
+		String[] cartCnt = payStringVO.getCart_cnt().split(",");
+		String[] payReq = payStringVO.getPay_req().split(",");
+		
+		
+		
+
+		
+		return null;		
+	}
+	
 
 }

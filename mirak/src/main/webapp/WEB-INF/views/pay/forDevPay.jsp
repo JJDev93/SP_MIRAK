@@ -7,12 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="pay" method="post">
+<form method="post">
 
 	<input type="text" name="pro_code" value="O01">
 	<input type="text" name="cart_cnt" value="1">
 
-<input type="submit">
+<input type="submit" formaction="/pay" value="pay">
+
+<button formaction="/cartpay">cartpay</button>
 </form>
 </body>
 </html>
