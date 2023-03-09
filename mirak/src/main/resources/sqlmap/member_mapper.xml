@@ -29,7 +29,7 @@
 	<delete id="memdelete" parameterType="kr.co.mirak.member.MemberVO">
 		<![CDATA[
 			DELETE FROM MEMBER
-			WHERE MEM_ID = #{mem_id}
+			WHERE MEM_ID = #{mem_id} and MEM_PW = #{mem_pw}
 		]]>
 	</delete>
 

@@ -26,26 +26,38 @@ public class mypageController {
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public String mypageview(Model model, HttpSession session) {
 		System.out.println("마이페이지로 이동..");
+		
 		MemberVO member = memberService.getMemberInfo(session);
+//		model.addAttribute("message", message);
 	    model.addAttribute("member", member);
+	    System.out.println(member);
 		return "member/mypage";
 	}
 
 	// 회원정보 수정
 	@RequestMapping(value = "/memupdate", method = RequestMethod.POST)
-	public String memupdate(MemberVO vo , Model model){
+	public String memupdate(MemberVO vo, Model model){
 		memberService.memupdate(vo);
 		System.out.println("회원정보 수정 완료...");
 		return "redirect:mypage";
 	}
 	
 	// 회원탈퇴
-	@RequestMapping("/memdelete")
-	public String memdelete(MemberVO vo, Model model) {
-		System.out.println(vo);
-		memberService.memdelete(vo);
-		System.out.println("회원탈퇴 성공!");
-		return "redirect:/logout";
+	@RequestMapping(value="/memdelete", method = RequestMethod.POST)
+	public String memdelete(MemberVO vo, Model model, HttpSession session) {
+		try {
+			vo.setMem_id((String) session.getAttribute("mem_id"));
+			int success = memberService.memdelete(vo);
+			if (success == 0) {
+				model.addAttribute("message", "비밀번호 확인해주세요......");
+				return "redirect:mypage";
+			} else if (success == 1) {
+				return "redirect:/logout";
+			}
+		} catch (Exception e) {
+			model.addAttribute("message", "비밀번호 확인해주세요......");
+		}
+		return "redirect:mypage";
 	}
 }
 

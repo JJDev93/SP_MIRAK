@@ -62,8 +62,8 @@ public class MemberServiceImpl implements MemberService {
 	
 	public int memdelete(MemberVO vo) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		int deletesuccess  = mapper.memdelete(vo);
-		return deletesuccess;
+		int success  = mapper.memdelete(vo);
+		return success;
 	}
 
 
