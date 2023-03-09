@@ -1,9 +1,6 @@
 package kr.co.mirak.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
@@ -47,14 +44,9 @@ public class PayController {
 	// 상품에서 바로 넘어올때
 	@RequestMapping(value = "/pay", method = RequestMethod.POST)
 	public String postPay(Model model, PayVO payVO, MemberVO vo ,HttpSession session) {
-		
-		String myid = (String)session.getAttribute("mem_id");
-		vo.setMem_id(myid);
-		MemberVO member = memberService.mypage(vo);
+		MemberVO member = memberService.getMemberInfo(session);
 	    model.addAttribute("member", member);
-		
 		model.addAttribute("payVO", payVO);
-
 		return "pay/pay";
 	}
 
