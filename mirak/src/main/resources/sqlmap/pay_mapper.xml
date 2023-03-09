@@ -17,6 +17,13 @@
  		values (#{name})
  	</insert>
  	
+ 	<!-- 카트 목록 -->
+	<select id="cartCheckList" resultType="kr.co.mirak.cart.CartVO">
+	
+		select * from cart where mem_id=#{myid} and cart_check=1
+	
+	</select>
+ 	
  	<!-- 
  	<select id="info" resultType="kr.co.mirak.pay.PayVO">
  		select * from emp2 where empno=#{empno}

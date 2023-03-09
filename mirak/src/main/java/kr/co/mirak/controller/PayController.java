@@ -1,5 +1,6 @@
 package kr.co.mirak.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,10 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.mirak.HomeController;
+import kr.co.mirak.cart.CartVO;
 import kr.co.mirak.member.MemberService;
 import kr.co.mirak.member.MemberVO;
+import kr.co.mirak.pay.PayListVO;
 import kr.co.mirak.pay.PayService;
+import kr.co.mirak.pay.PayStringVO;
 import kr.co.mirak.pay.PayVO;
+import kr.co.mirak.product.ProductService;
+import kr.co.mirak.product.ProductVO;
 
 /**
  * Handles requests for the application home page.
@@ -27,6 +33,8 @@ public class PayController {
 	private PayService payService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private ProductService productService;
 	
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -38,25 +46,47 @@ public class PayController {
 	@RequestMapping(value = "/pay", method = RequestMethod.GET)
 	public String getPay(HttpSession session) {
 		session.setAttribute("mem_id", "abc@naver.com");
+		//session.invalidate();
 		return "pay/forDevPay";
 	}
 
 	// 상품에서 바로 넘어올때
 	@RequestMapping(value = "/pay", method = RequestMethod.POST)
-	public String postPay(Model model, PayVO payVO, MemberVO vo ,HttpSession session) {
-		MemberVO member = memberService.getMemberInfo(session);
-	    model.addAttribute("member", member);
-		model.addAttribute("payVO", payVO);
+	public String postPay(Model model, ProductVO productVO, HttpSession session) {
+		
+		//회원정보
+	    model.addAttribute("memberVO", memberService.getMemberInfo(session));
+	    
+	    //상품정보 (수량넘어옴)
+	    // payvo 넘겨서 수량, 
+	    int cnt = productVO.getCart_cnt();
+	    productVO = productService.productDetail(productVO);
+	    productVO.setCart_cnt(cnt);
+	    List<ProductVO> list = new ArrayList<ProductVO>();
+	    list.add(productVO);
+	    
+	    model.addAttribute("codecheck", 0);
+	    model.addAttribute("productList", list);
+	    
+		
+		
 		return "pay/pay";
 	}
 
 	// 카트에서 넘어올때
-	@RequestMapping(value = "/Cartpay", method = RequestMethod.POST)
-	public String cartpay(Model model, HttpSession session) {
+	@RequestMapping(value = "/cartpay", method = RequestMethod.POST)
+	public String cartpay(Model model, ProductVO productVO, HttpSession session) {
 		
-		
+		//회원정보
+	    model.addAttribute("memberVO", memberService.getMemberInfo(session));
+	    
+	    //상품정보 (수량넘어옴)
+	    // payvo 넘겨서 수량, 
+	    
+	    model.addAttribute("codecheck", 1);
+	    model.addAttribute("productList", payService.cartCheckList(session));
+	    
 
-		model.addAttribute("payVO", "");
 
 		return "pay/pay";
 	}
@@ -76,7 +106,7 @@ public class PayController {
 		return "pay/payFail";
 	}
 
-	@RequestMapping(value = "pay/asdf", method = RequestMethod.POST)
+	@RequestMapping(value = "/pay/asdf", method = RequestMethod.POST)
 	public String home(PayVO payVO) {
 		System.out.println(payVO);
 		payService.insert(payVO);
@@ -93,12 +123,18 @@ public class PayController {
 	}
 
 	@RequestMapping(value = "/paySubmit", method = RequestMethod.POST)
-	public String mypage(PayVO payVO) {
-
-		// 실제 결제
+	public String mypage(PayStringVO payStringVO, HttpSession session) {
 
 		// 결제 DB 추가
-
+		
+		System.out.println(payStringVO);
+		List<PayVO> list = payService.adaptPayVO(payStringVO, session);
+ 
+		// 실제 결제
+		
+		
+		
+		
 		// mypage 결제내역으로 이동 아직 페이지 없음
 		return "redirect:/mypage";
 	}
