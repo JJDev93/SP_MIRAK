@@ -42,6 +42,7 @@ public class mypageController {
 	// 회원탈퇴
 	@RequestMapping("/memdelete")
 	public String memdelete(MemberVO vo, Model model) {
+		System.out.println(vo);
 		memberService.memdelete(vo);
 		System.out.println("회원탈퇴 성공!");
 		return "redirect:/logout";

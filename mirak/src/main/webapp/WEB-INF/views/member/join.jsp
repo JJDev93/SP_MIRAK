@@ -104,6 +104,7 @@
             <!-- .col-md-8 -->
          </div>
       </div>
+      </div>
    </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
 
