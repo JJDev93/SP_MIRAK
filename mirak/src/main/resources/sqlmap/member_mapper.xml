@@ -39,10 +39,10 @@
 		]]>	
 	</select>
 	
- 	<select id="getMemberInfo" resultType="member">
+ 	<select id="getMemberInfo" parameterType="String" resultType="member" >
 		<![CDATA[
 			SELECT MEM_ID, MEM_NAME, MEM_AGE, MEM_GENDER, MEM_PHONE, MEM_REGDATE FROM MEMBER
-			WHERE MEM_ID=#{mem_id}
+			WHERE MEM_ID=#{myid}
 		]]>	
 	</select>
 	

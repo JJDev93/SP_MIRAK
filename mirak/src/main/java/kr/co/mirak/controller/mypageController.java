@@ -24,11 +24,9 @@ public class mypageController {
 	
 	//마이페이지 이동
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
-	public String mypageview(MemberVO vo, Model model, HttpSession session) {
+	public String mypageview(Model model, HttpSession session) {
 		System.out.println("마이페이지로 이동..");
-		String myid = (String)session.getAttribute("mem_id");
-		vo.setMem_id(myid);
-		MemberVO member = memberService.getMemberInfo(vo);
+		MemberVO member = memberService.getMemberInfo(session);
 	    model.addAttribute("member", member);
 		return "member/mypage";
 	}

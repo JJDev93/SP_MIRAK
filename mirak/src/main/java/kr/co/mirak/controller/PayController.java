@@ -1,9 +1,6 @@
 package kr.co.mirak.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,89 +23,84 @@ import kr.co.mirak.pay.PayVO;
  */
 @Controller
 public class PayController {
-	@Autowired
-	private PayService payService;
-	@Autowired
-	private MemberService memberService;
-	
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+   @Autowired
+   private PayService payService;
+   @Autowired
+   private MemberService memberService;
+   
+   
+   private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+   /**
+    * Simply selects the home view to render by returning its name.
+    */
 
-	@RequestMapping(value = "/pay", method = RequestMethod.GET)
-	public String getPay(HttpSession session) {
-		session.setAttribute("mem_id", "abc@naver.com");
-		return "pay/forDevPay";
-	}
+   @RequestMapping(value = "/pay", method = RequestMethod.GET)
+   public String getPay(HttpSession session) {
+      session.setAttribute("mem_id", "abc@naver.com");
+      return "pay/forDevPay";
+   }
 
-	// 상품에서 바로 넘어올때
-	@RequestMapping(value = "/pay", method = RequestMethod.POST)
-	public String postPay(Model model, PayVO payVO, MemberVO vo ,HttpSession session) {
-		
-		String myid = (String)session.getAttribute("mem_id");
-		vo.setMem_id(myid);
-		MemberVO member = memberService.getMemberInfo(vo);
-	    model.addAttribute("member", member);
-		
-		model.addAttribute("payVO", payVO);
+   // 상품에서 바로 넘어올때
+   @RequestMapping(value = "/pay", method = RequestMethod.POST)
+   public String postPay(Model model, PayVO payVO, MemberVO vo ,HttpSession session) {
+      MemberVO member = memberService.getMemberInfo(session);
+       model.addAttribute("member", member);
+      model.addAttribute("payVO", payVO);
+      return "pay/pay";
+   }
 
-		return "pay/pay";
-	}
+   // 카트에서 넘어올때
+   @RequestMapping(value = "/Cartpay", method = RequestMethod.POST)
+   public String cartpay(Model model, HttpSession session) {
+      
+      
 
-	// 카트에서 넘어올때
-	@RequestMapping(value = "/Cartpay", method = RequestMethod.POST)
-	public String cartpay(Model model, HttpSession session) {
-		
-		
+      model.addAttribute("payVO", "");
 
-		model.addAttribute("payVO", "");
+      return "pay/pay";
+   }
 
-		return "pay/pay";
-	}
+//   @RequestMapping(value = "/payApproval", method = RequestMethod.GET)
+//   public String payApproval(Model model) {
+//      return "pay/payApproval";
+//   }
 
-//	@RequestMapping(value = "/payApproval", method = RequestMethod.GET)
-//	public String payApproval(Model model) {
-//		return "pay/payApproval";
-//	}
+   @RequestMapping(value = "/payCancel", method = RequestMethod.GET)
+   public String payCancel(Model model) {
+      return "pay/payCancel";
+   }
 
-	@RequestMapping(value = "/payCancel", method = RequestMethod.GET)
-	public String payCancel(Model model) {
-		return "pay/payCancel";
-	}
+   @RequestMapping(value = "/payFail", method = RequestMethod.GET)
+   public String payFail(Model model) {
+      return "pay/payFail";
+   }
 
-	@RequestMapping(value = "/payFail", method = RequestMethod.GET)
-	public String payFail(Model model) {
-		return "pay/payFail";
-	}
+   @RequestMapping(value = "pay/asdf", method = RequestMethod.POST)
+   public String home(PayVO payVO) {
+      System.out.println(payVO);
+      payService.insert(payVO);
 
-	@RequestMapping(value = "pay/asdf", method = RequestMethod.POST)
-	public String home(PayVO payVO) {
-		System.out.println(payVO);
-		payService.insert(payVO);
+      return "redirect:payList";
+   }
 
-		return "redirect:payList";
-	}
+   @RequestMapping("/pay/payList")
+   public String getEmpList(Model model) {
 
-	@RequestMapping("/pay/payList")
-	public String getEmpList(Model model) {
+      List<PayVO> list = payService.list();
+      model.addAttribute("payList", list);
+      return "pay";
+   }
 
-		List<PayVO> list = payService.list();
-		model.addAttribute("payList", list);
-		return "pay";
-	}
+   @RequestMapping(value = "/paySubmit", method = RequestMethod.POST)
+   public String mypage(PayVO payVO) {
 
-	@RequestMapping(value = "/paySubmit", method = RequestMethod.POST)
-	public String mypage(PayVO payVO) {
+      // 실제 결제
 
-		// 실제 결제
+      // 결제 DB 추가
 
-		// 결제 DB 추가
-
-		// mypage 결제내역으로 이동 아직 페이지 없음
-		return "redirect:/mypage";
-	}
+      // mypage 결제내역으로 이동 아직 페이지 없음
+      return "redirect:/mypage";
+   }
 
 }

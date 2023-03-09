@@ -4,6 +4,16 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 
+<script>
+function idPost() {
+	let hiddenForm = document.createElement('form');
+    hiddenForm.setAttribute('method', 'post');
+    hiddenForm.setAttribute('action', 'cartList');
+    document.body.appendChild(hiddenForm);
+    hiddenForm.submit();
+}
+</script>
+
 <div class="hero-wrap hero-bread"
 	style="background-image: url('${path}/resources/images/bg_1.jpg');">
 	<div class="container">
@@ -11,7 +21,7 @@
 			class="row no-gutters slider-text align-items-center justify-content-center">
 			<div class="col-md-9 ftco-animate text-center">
 				<p class="breadcrumbs">
-					<span class="mr-2"><a href="index.html">My Page</a></span> <span></span>
+					<span class="mr-2"><a href="#">My Page</a></span> <span></span>
 				</p>
 				<h1 class="mb-0 bread">마이 페이지</h1>
 			</div>
@@ -24,8 +34,8 @@
 			<div class="row justify-content-center">
 				<div class="col-md-10 mb-5 text-center">
 					<ul class="nav nav-tabs">
-						<li class="nav-item"><a class="nav-link active" href="#">마이페이지</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">장바구니</a></li>
+						<li class="nav-item"><a class="nav-link active" href="mypage" >마이페이지</a></li>
+						<li class="nav-item"><a class="nav-link" href="javascript:idPost()">장바구니</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">결제내역</a></li>
 					</ul>
 				</div>
