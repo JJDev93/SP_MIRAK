@@ -45,10 +45,19 @@
 					<tbody>
 						<c:forEach items="${memberList}" var="member">
 						<tr>
-							<th scope="row"><a href="/adminMembers/${member.mem_id}">${member.mem_id }</a></th>
+							<td scope="row"><a href="/adminMember/${member.mem_id}">${member.mem_id }</a></td>
 							<td>${member.mem_name }</td>
 							<td>${member.mem_age }</td>
-							<td>${member.mem_gender }</td>
+							<td>
+								<c:choose>
+									<c:when test="${member.mem_gender == '1'}">
+										남	
+									</c:when>
+									<c:when test="${member.mem_gender == '0' }">
+										여
+									</c:when>
+								</c:choose>
+							</td>
 							<td>${member.mem_phone }</td>
 							<td><fmt:formatDate value="${member.mem_regdate }"/></td>
 						</tr>

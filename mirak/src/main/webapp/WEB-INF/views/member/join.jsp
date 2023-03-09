@@ -25,9 +25,9 @@
 			class="row no-gutters slider-text align-items-center justify-content-center">
 			<div class="col-md-9 ftco-animate text-center">
 				<p class="breadcrumbs">
-					<span class="mr-2"><a href="index.html">어서오세요</a></span> <span></span>
+					<span class="mr-2"><a href="index.html">Welecom to MiRak</a></span> <span></span>
 				</p>
-				<h1 class="mb-0 bread">회원가입 해보자</h1>
+				<h1 class="mb-0 bread">Join Page</h1>
 			</div>
 		</div>
 	</div>
@@ -42,12 +42,19 @@
 						<div class="container">
 							<div class="row block-9">
 								<div class="col-md-12 order-md-last ">
-									<div class="form-group">
-										<label for="id">아이디</label> <input type="email" name="mem_id"
-											id="id" class="form-control" placeholder="이메일(ID)"
-											required="required"> <span class="id_input_re_1">사용
-											가능한 아이디입니다.</span> <span class="id_input_re_2">아이디가 이미 존재합니다.</span>
+								
+								<div class="form-group">
+								<label for="id">아이디</label>
+								<div class="row mb-4">
+									<div class="col-sm-8">
+										<input type="email" name="mem_id" id="id" class="form-control" placeholder="이메일(ID)" required="required">
 											
+									</div>
+									<div class="col-sm-4">
+										<button type="button" class="form-control" value="N" id="idCheck" onclick="fn_idCheck();" >중복확인</button>
+									</div>
+								</div>
+																						
 									</div>
 
 									<div class="form-group">
@@ -142,9 +149,25 @@
 			</div>
 		</div>
 </section>
->>>>>>> branch 'member' of https://github.com/ywshin0112/mirak.git
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
+<script>
 
+function fn_idCheck() {
+    $.ajax({
+        url : "/idCheck",
+        type : "POST",
+        dataType :"JSON",
+        data : {"id" : $("#id").val()},
+        success : function (data) {
+            if(data == 1) {
+                alert("중복된 이메일입니다.");
+            } else if (data == 0) {
+                $("#idCheck").attr("value", "Y");
+                alert("사용 가능한 이메일입니다.")
+            }
+        }
 
+    })
+}
 
-
+ </script>

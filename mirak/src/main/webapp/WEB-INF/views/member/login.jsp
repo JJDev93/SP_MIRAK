@@ -116,5 +116,3 @@
 	</div>
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
-</body>
-</html>
