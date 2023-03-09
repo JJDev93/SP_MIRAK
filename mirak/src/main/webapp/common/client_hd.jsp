@@ -6,8 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>MiRak</title>
-	<link rel="icon" href="${path}/resources/images/favicon.gif">
-	
+	<link rel="icon" href="${path}/resources/images/favicon.gif">	
 	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="${path}/resources/css/open-iconic-bootstrap.min.css">
 	<link rel="stylesheet" href="${path}/resources/css/animate.css">
@@ -34,6 +33,7 @@
 						<li class="nav-item"><a href="/ProductClientListP" class="nav-link">프리미엄</a></li>
 						<li class="nav-item"><a href="/ProductClientListT" class="nav-link">2,3인세트</a></li>
 						<li class="nav-item"><a href="/ProductClientListO" class="nav-link">1인세트</a></li>
+
 						<%if (session.getAttribute("mem_id") == null) {%>
 							<li class="nav-item"><a href="/login" class="nav-link">로그인</a></li>
 							<li class="nav-item"><a href="/join" class="nav-link">회원가입</a></li>
@@ -50,5 +50,6 @@
 		</nav>
 	</header>
 	<!-- END nav -->
+	
 </body>
 </html>

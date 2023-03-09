@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <div class="ftco-section">
@@ -10,7 +11,7 @@
 				<p>상품 상세페이지 입니다.</p>
 			</div>
 		</div>
-		<form action="productupdate" method="post" enctype="multipart/form-data" class="p-5 bg-light mb-4">
+		<form action="/productupdate" method="post" enctype="multipart/form-data" class="p-5 bg-light mb-4">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group">
@@ -65,8 +66,8 @@
 				
 			</div>
 		</form>		
-		<a href="ProductAdminList" class="btn btn-secondary">목록</a>
-		<a href="deleteproduct?pro_code=${product.pro_code}" class="btn btn-danger">삭제</a>
+		<a href="/ProductAdminList" class="btn btn-secondary">목록</a>
+		<a href="/deleteproduct?pro_code=${product.pro_code}" class="btn btn-danger">삭제</a>
 	</div>
 </div>
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>clude>

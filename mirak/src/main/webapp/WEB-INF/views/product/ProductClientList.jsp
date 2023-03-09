@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
 li{
 
@@ -8,10 +9,37 @@ float:left;
 margin-right:10px;
 
 }
+
+.ajax{
+
+	text-align:center;
+
+}
+
+.ajax a{
+	margin-left:30px;
+	line-height:100px; 
+	display:inline-block;
+	vertical-align:middle;
+	font-size:20px;
+	
+}
+
+
+
+
+.qwer{
+
+
+}
+
+
 </style>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+
 <div id="test">
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
+
 
 <div class="hero-wrap hero-bread"
 	style="background-image: url('${path}/resources/images/bg_1.jpg');" >
@@ -28,7 +56,12 @@ margin-right:10px;
 	</div>
 </div>
 
-
+<div style="margin: 0 auto; width:500px; height:100px;" class="ajax">
+<a href="javascript:acyncMovePage('/ProductClientList');" >전체메뉴</a>
+<a href="javascript:acyncMovePage('/ProductClientListP');" >프리미엄</a>
+<a href="javascript:acyncMovePage('/ProductClientListT');" >2,3인세트</a>
+<a href="javascript:acyncMovePage('/ProductClientListO');">1인세트</a>
+</div>
 <section class="ftco-section">
 
 	<div class="container">
@@ -38,13 +71,13 @@ margin-right:10px;
 					<c:forEach items="${productList}" var="product" >
 						<div class="col-md-6 col-lg-4 ftco-animate">
 							<div class="product" >
-									<a href="ProductClientDetail?pro_code=${product.pro_code}"
+									<a href="ProductClientDetail/${product.pro_code}"
 										class="img-prod"> <img alt="1"
 										src="${path}/resources/images/product/${product.pro_image}" style="width:350px; height:250px;">
 									</a>
 									<div class="text py-3 pb-4 px-3 text-center">
 										<h3>
-											<a href="ProductClientDetail?pro_code=${product.pro_code}">${product.pro_name}</a>
+											<a href="ProductClientDetail/${product.pro_code}">${product.pro_name}</a>
 										</h3>
 				
 				
@@ -78,22 +111,29 @@ margin-right:10px;
 <!-- 		</div> -->
  		
         
-       <div class="row mt-5" >
-        <div class="col text-center">
+ 
+        <div class="col text-center"  style="margin: 0 auto; width:500px; height:100px; background-color:gray;">
         	<div class="block-27">
+				  <div class="col text-center">
+        	<div class="block-27">
+					
  			<!-- 각 번호 페이지 버튼 -->
  				<table>
  				<tr>
                 <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
                		 <ul style="text-align:center;">
-                    	<li class="pageInfo_btn"><a href="ProductClientList?pageNum=${num}&amount=6">${num}</a></li>
+<%--                     	<li class="pageInfo_btn"><a href="ProductClientList?pageNum=${num}">${num}</a></li> --%>
+						<li class="pageInfo_btn">
+						<a href="javascript:acyncMovePage('/ProductClientList?pageNum=${num}');">${num}</a></li>
                     </ul>
                 </c:forEach>
                 </tr>
                 </table>
-                </div>
+                	</div>
+              	</div>
+                	</div>
         </div>
-    </div>
+  
 
 
 </section>
@@ -109,6 +149,27 @@ $(".pageInfo a").on("click", function(e){
      moveForm.attr("action", "/ProductClientList");
      moveForm.submit();
 });
+
+
+
+function acyncMovePage(url){
+   // ajax option
+   var ajaxOption = {
+           url : url,
+           async : true,
+           type : "POST",
+           dataType : "html",
+           cache : false
+   };
+   
+   $.ajax(ajaxOption).done(function(data){
+       // Contents 영역 삭제
+       $('#test').children().remove();
+       // Contents 영역 교체
+       $('#test').html(data);
+   });
+}
+
 </script>
 
 <script src="${path}/resources/js/product/product.js"></script>

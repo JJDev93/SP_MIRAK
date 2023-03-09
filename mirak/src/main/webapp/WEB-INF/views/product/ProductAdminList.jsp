@@ -1,7 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+li{
+
+float:left;
+margin-right:10px;
+
+}
+</style>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<div id="test">
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <div class="ftco-section">
 	<div class="container">
@@ -33,13 +43,13 @@
 
 							<tr>
 								<td><a
-									href="ProductAdminDetail?pro_code=${product.pro_code}"> <img
+									href="ProductAdminDetail/${product.pro_code}"> <img
 										alt="1"
 										src="${path}/resources/images/product/${product.pro_image}"
 										style="width: 100px; height: 100px;"></a></td>
 								<td>${product.pro_code }</td>
 								<td><a
-									href="ProductAdminDetail?pro_code=${product.pro_code}">${product.pro_name }</a></td>
+									href="ProductAdminDetail/${product.pro_code}">${product.pro_name }</a></td>
 
 								<td>${product.pro_price }</td>
 								<td>${product.pro_desc }</td>
@@ -51,6 +61,22 @@
 
 					</tbody>
 				</table>
+				 <div class="row mt-5" >
+        <div class="col text-center">
+        	<div class="block-27">
+ 			<!-- 각 번호 페이지 버튼 -->
+ 				<table>
+ 				<tr>
+                <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+               		 <ul style="text-align:center;">
+						<li class="pageInfo_btn"><a href="javascript:acyncMovePage('ProductAdminList?pageNum=${num}&amount=6');">${num}</a></li>
+                    </ul>
+                </c:forEach>
+                </tr>
+                </table>
+                </div>
+        </div>
+    </div>
 			</div>
 		</div>
 		<div class="row mt-5">
@@ -61,3 +87,27 @@
 	</div>
 </div>
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>
+</div>
+
+<script>
+
+
+ function acyncMovePage(url){
+    // ajax option
+    var ajaxOption = {
+            url : url,
+            async : true,
+            type : "POST",
+            dataType : "html",
+            cache : false
+    };
+    
+    $.ajax(ajaxOption).done(function(data){
+        // Contents 영역 삭제
+        $('#test').children().remove();
+        // Contents 영역 교체
+        $('#test').html(data);
+    });
+}
+
+</script>

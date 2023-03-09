@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.mirak.product.Criteria;
@@ -22,11 +23,32 @@ public class ProductController {
 
 	// 상품 Admin 리스트
 	@RequestMapping("/ProductAdminList")
-	public String productList(ProductVO vo, Model model) {
+	public String productadminList(ProductVO vo, Model model, Criteria cri) {
 
-		model.addAttribute("productList", productService.productList(vo));
+		model.addAttribute("productList", productService.getListPaging(cri));
+
+		int total = productService.getTotal();
+
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+
+		model.addAttribute("pageMaker", pageMake);
 
 		return "/product/ProductAdminList";
+
+	}
+
+//	 상품 Client 리스트
+	@RequestMapping("/ProductClientList")
+	public String productList(ProductVO vo, Model model, Criteria cri) {
+
+//		model.addAttribute("productList", productService.productList(vo));
+		model.addAttribute("productList", productService.getListPaging(cri));
+		int total = productService.getTotal();
+
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+
+		model.addAttribute("pageMaker", pageMake);
+		return "/product/ProductClientList";
 
 	}
 
@@ -41,7 +63,7 @@ public class ProductController {
 //	}
 
 //	 상품 Client 프리미엄 리스트
-	@RequestMapping("/ProductClientListP")
+	@RequestMapping("/ProductClientList/P")
 	public String productclientList1(ProductVO vo, Model model, Criteria cri) {
 
 		model.addAttribute("productList", productService.productList1(cri));
@@ -93,7 +115,7 @@ public class ProductController {
 	}
 
 	// 상품 등록
-	@RequestMapping(value = "/productregister")
+	@RequestMapping(value = "/productregister" , method = RequestMethod.POST)
 	public String productregister(ProductVO vo) throws IOException {
 
 		// 파일 업로드 처리
@@ -111,7 +133,7 @@ public class ProductController {
 	}
 
 	// 상품 Client 상세 페이지
-	@RequestMapping(value = "/ProductClientDetail")
+	@RequestMapping(value = "/ProductClientDetail/{pro_code}")
 	public String productclientDetail(ProductVO vo, Model model) {
 
 		model.addAttribute("product", productService.productDetail(vo));
@@ -122,7 +144,7 @@ public class ProductController {
 	}
 
 	// 상품 Admin 상세 페이지
-	@RequestMapping(value = "/ProductAdminDetail")
+	@RequestMapping(value = "/ProductAdminDetail/{pro_code}")
 	public String productDetail(ProductVO vo, Model model) {
 		model.addAttribute("product", productService.productDetail(vo));
 
@@ -133,7 +155,7 @@ public class ProductController {
 	}
 
 	// 상품 수정
-	@RequestMapping("/productupdate")
+	@RequestMapping(value = "/productupdate")
 	public String updateProduct(ProductVO vo) {
 		productService.updateProduct(vo);
 
@@ -146,30 +168,6 @@ public class ProductController {
 		productService.deleteProduct(vo);
 
 		return "redirect:/ProductAdminList";
-	}
-
-
-
-
-//	@RequestMapping("/list")
-//	public void boardListGET(Model model, Criteria cri) {
-//
-//		model.addAttribute("list", productService.getListPaging(cri));
-//
-//	}
-
-	@RequestMapping("/ProductClientList")
-	public String productList(ProductVO vo, Model model, Criteria cri) {
-
-//		model.addAttribute("productList", productService.productList(vo));
-		model.addAttribute("productList", productService.getListPaging(cri));
-		int total = productService.getTotal();
-
-		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
-
-		model.addAttribute("pageMaker", pageMake);
-		return "/product/ProductClientList";
-
 	}
 
 }
