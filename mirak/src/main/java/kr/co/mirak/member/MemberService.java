@@ -14,4 +14,5 @@ public interface MemberService {
 	List<MemberVO> getMemberList(Optional<Integer> pageStart);
 	MemberVO getMemberDetail(String memId);
 	int idCheck(String id) throws Exception;
+	int memberCheck(MemberVO vo);;
 }
