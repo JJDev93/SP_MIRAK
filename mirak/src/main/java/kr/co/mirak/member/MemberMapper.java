@@ -11,4 +11,5 @@ public interface MemberMapper {
 	MemberVO getMemberInfo(MemberVO vo);
 	int memupdate(MemberVO vo);
 	int memdelete(MemberVO vo);
+	int idCheck(String id);
 }

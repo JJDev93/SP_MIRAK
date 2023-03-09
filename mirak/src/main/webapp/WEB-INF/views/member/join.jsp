@@ -4,6 +4,19 @@
 
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
+<style>
+
+/* 중복아이디 존재하지 않는경우 */
+.id_input_re_1 {
+	color: green;
+	display: none;
+}
+/* 중복아이디 존재하는 경우 */
+.id_input_re_2 {
+	color: red;
+	display: none;
+}
+</style>
 
 <div class="hero-wrap hero-bread"
 	style="background-image: url('${path}/resources/images/bg_1.jpg');">
@@ -30,9 +43,10 @@
 							<div class="row block-9">
 								<div class="col-md-12 order-md-last ">
 									<div class="form-group">
-										<label for="ID">아이디</label> <input type="text" name="mem_id"
-											class="form-control" placeholder="이메일(ID)"
-											required="required">
+										<label for="id">아이디</label> <input type="email" name="mem_id"
+											id="id" class="form-control" placeholder="이메일(ID)"
+											required="required"> <span class="id_input_re_1">사용
+											가능한 아이디입니다.</span> <span class="id_input_re_2">아이디가 이미 존재합니다.</span>
 									</div>
 
 									<div class="form-group">
@@ -87,9 +101,31 @@
 									placeholder=" ' - ' 빼고 입력해주세요 " required="required">
 								<!--  <input type="tel" name="mem_phone" class="form-control" maxlength="11" pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                       placeholder="' - ' 빼고 숫자만 입력해 주세요">  -->
-
 							</div>
 						</div>
+
+						<div class="w-100"></div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="streetaddress">Address</label>
+								<div class="row mb-4">
+									<div class="col-sm-8">
+										<input type="text" class="form-control"
+											placeholder="주소지를 입력해주세요" readonly="readonly">
+									</div>
+									<div class="col-sm-4">
+										<input type="button" class="form-control" value="주소찾기">
+									</div>
+								</div>
+
+
+								<input type="text" class="form-control mb-4" readonly="readonly">
+								<input type="text" class="form-control" placeholder="싱세주소작성">
+							</div>
+						</div>
+
+
+
 						<div class="w-100"></div>
 						<div class="col-md-6">
 							<input type="submit" value="회원가입"
@@ -100,12 +136,18 @@
 							<a href="index.jsp" class="btn btn-secondary py-3 px-5 w-100">가입취소</a>
 						</div>
 					</div>
-               </form>
-            <!-- .col-md-8 -->
-         </div>
-      </div>
-   </section>
+				</form>
+				<!-- .col-md-8 -->
+			</div>
+		</div>
+</section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
+
+<script>
+
+
+</script>
+
 
 
 
