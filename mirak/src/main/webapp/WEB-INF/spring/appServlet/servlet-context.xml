@@ -52,7 +52,7 @@
 		<interceptor>
 			<mapping path="/**" />
 			<exclude-mapping path="/" />	
-			<beans:bean id="Interceptor" class="kr.co.mirak.controller.Interceptor" />
+			<beans:bean class="kr.co.mirak.controller.Interceptor" />
 		</interceptor> 
 	</interceptors>
 
