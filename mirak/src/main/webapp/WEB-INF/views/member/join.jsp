@@ -150,7 +150,6 @@
 		</div>
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
-
 <script>
 
 function fn_idCheck() {
