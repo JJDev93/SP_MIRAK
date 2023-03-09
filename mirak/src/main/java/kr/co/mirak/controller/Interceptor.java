@@ -11,7 +11,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class Interceptor extends HandlerInterceptorAdapter{
 	   private static final Logger logger = LoggerFactory.getLogger(Interceptor.class);
-	   static final String[] EXCLUDE_URL_LIST = { "/", "/join", "/login", "/product" };
+	   static final String[] EXCLUDE_URL_LIST = {"/join", "/login", "/product" };
 	   
 	   @Override
 	   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -23,9 +23,9 @@ public class Interceptor extends HandlerInterceptorAdapter{
 	      }
 	      
 	      HttpSession session = request.getSession();
-	      String memberId = (String) session.getAttribute("memberId");
+	      String mem_id = (String) session.getAttribute("mem_id");
 	      
-	      if(memberId == null || memberId.trim().equals("")) {
+	      if(mem_id == null || mem_id.trim().equals("")) {
 	         logger.info(">> interceptor catch!!! userId is null.. ");
 	         session.invalidate();
 	         response.sendRedirect(request.getContextPath() + "/login");
