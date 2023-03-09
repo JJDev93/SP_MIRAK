@@ -25,9 +25,9 @@
 			class="row no-gutters slider-text align-items-center justify-content-center">
 			<div class="col-md-9 ftco-animate text-center">
 				<p class="breadcrumbs">
-					<span class="mr-2"><a href="index.html">어서오세요</a></span> <span></span>
+					<span class="mr-2"><a href="index.html">Welecom to MiRak</a></span> <span></span>
 				</p>
-				<h1 class="mb-0 bread">회원가입 해보자</h1>
+				<h1 class="mb-0 bread">Join Page</h1>
 			</div>
 		</div>
 	</div>
