@@ -11,7 +11,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class Interceptor extends HandlerInterceptorAdapter{
 	   private static final Logger logger = LoggerFactory.getLogger(Interceptor.class);
-	   static final String[] EXCLUDE_URL_LIST = {"/join", "/login", "/product" };
+	   static final String[] EXCLUDE_URL_LIST = {"/join", "/idCheck", "/login", "/product" };
 	   
 	   @Override
 	   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
