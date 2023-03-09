@@ -30,6 +30,7 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(MemberVO memberVO, ModelAndView mav, HttpSession session) {
 		String mem_id = memberService.login(memberVO).getMem_id();
+		int idCheck = 0;
 		try {
 			if (mem_id != null) {
 				session.setAttribute("mem_id", mem_id);

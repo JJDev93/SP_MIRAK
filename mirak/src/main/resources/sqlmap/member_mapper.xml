@@ -33,9 +33,11 @@
 		]]>
 	</delete>
 
- 	<select id="getMemberList" resultType="member">
+ 	<select id="getMemberList" resultType="member" parameterType="Int">
 		<![CDATA[
 			SELECT MEM_ID, MEM_NAME, MEM_AGE, MEM_GENDER, MEM_PHONE, MEM_REGDATE FROM MEMBER
+			ORDER BY MEM_REGDATE
+			LIMIT 10 OFFSET #{page}
 		]]>	
 	</select>
 	
@@ -45,6 +47,21 @@
 			WHERE MEM_ID=#{myid}
 		]]>	
 	</select>
+	
+	
+		<!-- 아이디 확인 -->
+	<select id="idCheck" parameterType="kr.co.mirak.member.MemberVO" resultType="int">
+		SELECT count(*) FROM MEMBER WHERE mem_id= #{mem_id}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 <!--  	<insert id="insert" parameterType="org.sp.mybatis.Emp"> -->
 <!--  		insert into emp2 (empno, ename, deptno, job, sal) -->
 <!--  		values (#{empno}, #{ename}, #{deptno}, #{job}, #{sal}) -->
