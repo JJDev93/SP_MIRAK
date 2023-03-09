@@ -47,6 +47,21 @@
 			WHERE MEM_ID=#{myid}
 		]]>	
 	</select>
+	
+	
+		<!-- 아이디 확인 -->
+	<select id="idCheck" parameterType="kr.co.mirak.member.MemberVO" resultType="int">
+		SELECT count(*) FROM MEMBER WHERE mem_id= #{mem_id}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 <!--  	<insert id="insert" parameterType="org.sp.mybatis.Emp"> -->
 <!--  		insert into emp2 (empno, ename, deptno, job, sal) -->
 <!--  		values (#{empno}, #{ename}, #{deptno}, #{job}, #{sal}) -->

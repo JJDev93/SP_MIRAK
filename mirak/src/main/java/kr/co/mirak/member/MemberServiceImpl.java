@@ -51,6 +51,16 @@ public class MemberServiceImpl implements MemberService {
 		int deletesuccess  = mapper.memdelete(vo);
 		return deletesuccess;
 	}
+
+
+	//아이디체크
+	@Override
+	public int idCheck(String id) throws Exception{
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		int result = mapper.idCheck(id);
+		return result;
+	}
+
 	
 	//ADMIN 리스트
 	public List<MemberVO> getMemberList(Optional<Integer> pageStart) {

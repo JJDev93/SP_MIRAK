@@ -13,4 +13,5 @@ public interface MemberService {
 	int memdelete(MemberVO vo);
 	List<MemberVO> getMemberList(Optional<Integer> pageStart);
 	MemberVO getMemberDetail(String memId);
+	int idCheck(String id) throws Exception;
 }

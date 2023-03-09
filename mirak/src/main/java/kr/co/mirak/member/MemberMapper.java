@@ -9,4 +9,5 @@ public interface MemberMapper {
 	int memdelete(MemberVO vo);
 	List<MemberVO> getMemberList(Integer page);
 	MemberVO getMemberInfo(String memId);
+	int idCheck(String id);
 }
