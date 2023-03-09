@@ -63,12 +63,12 @@ public class ProductController {
 //	}
 
 //	 상품 Client 프리미엄 리스트
-	@RequestMapping("/ProductClientList/P")
+	@RequestMapping("/ProductClientListP")
 	public String productclientList1(ProductVO vo, Model model, Criteria cri) {
 
 		model.addAttribute("productList", productService.productList1(cri));
 //		model.addAttribute("productList", productService.getListPaging(cri));
-		int total = productService.getTotal();
+		int total = productService.getTotalP();
 
 		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
 
@@ -83,7 +83,7 @@ public class ProductController {
 
 		model.addAttribute("productList", productService.productList2(cri));
 //		model.addAttribute("productList", productService.getListPaging(cri));
-		int total = productService.getTotal();
+		int total = productService.getTotalT();
 
 		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
 
@@ -98,7 +98,7 @@ public class ProductController {
 
 		model.addAttribute("productList", productService.productList3(cri));
 //		model.addAttribute("productList", productService.getListPaging(cri));
-		int total = productService.getTotal();
+		int total = productService.getTotalO();
 
 		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
 
@@ -115,7 +115,7 @@ public class ProductController {
 	}
 
 	// 상품 등록
-	@RequestMapping(value = "/productregister" , method = RequestMethod.POST)
+	@RequestMapping(value = "/productregister", method = RequestMethod.POST)
 	public String productregister(ProductVO vo) throws IOException {
 
 		// 파일 업로드 처리

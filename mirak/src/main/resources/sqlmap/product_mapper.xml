@@ -32,7 +32,7 @@
 
 	<select id="productList2"
 		resultType="kr.co.mirak.product.ProductVO">
-select * from (select * from product)  as T1  where pro_code like '%T%' limit #{skip},#{amount}
+		select * from (select * from product)  as T1  where pro_code like '%T%' limit #{skip},#{amount}
 		
 
 	</select>
@@ -81,6 +81,29 @@ select * from (select * from product)  as T1  where pro_code like '%T%' limit #{
 		select count(*) from product
 		]]>
 	</select>
+	
+	<!-- 	페이징 처리 (프리미엄 상품 개수 출력) -->
+	<select id="getTotalP" resultType="int">
+		<![CDATA[
+		select count(*) from product where pro_code like "%P%";
+		]]>
+	</select>
+	
+	<!-- 	페이징 처리 (2,3인 상품 개수 출력) -->
+	<select id="getTotalT" resultType="int">
+		<![CDATA[
+		select count(*) from product where pro_code like "%T%";
+		]]>
+	</select>
+	
+	<!-- 	페이징 처리 (1인 상품 개수 출력) -->
+	<select id="getTotalO" resultType="int">
+		<![CDATA[
+		select count(*) from product where pro_code like "%O%";
+		]]>
+	</select>
+	
+	
 
 	<select id="getListPaging"
 		resultType="kr.co.mirak.product.ProductVO">

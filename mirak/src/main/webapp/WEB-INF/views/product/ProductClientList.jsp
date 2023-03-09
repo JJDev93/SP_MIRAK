@@ -10,36 +10,12 @@ margin-right:10px;
 
 }
 
-.ajax{
-
-	text-align:center;
-
-}
-
-.ajax a{
-	margin-left:30px;
-	line-height:100px; 
-	display:inline-block;
-	vertical-align:middle;
-	font-size:20px;
-	
-}
-
-
-
-
-.qwer{
-
-
-}
-
 
 </style>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 <div id="test">
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
-
 
 <div class="hero-wrap hero-bread"
 	style="background-image: url('${path}/resources/images/bg_1.jpg');" >
@@ -56,12 +32,7 @@ margin-right:10px;
 	</div>
 </div>
 
-<div style="margin: 0 auto; width:500px; height:100px;" class="ajax">
-<a href="javascript:acyncMovePage('/ProductClientList');" >전체메뉴</a>
-<a href="javascript:acyncMovePage('/ProductClientListP');" >프리미엄</a>
-<a href="javascript:acyncMovePage('/ProductClientListT');" >2,3인세트</a>
-<a href="javascript:acyncMovePage('/ProductClientListO');">1인세트</a>
-</div>
+
 <section class="ftco-section">
 
 	<div class="container">
@@ -91,7 +62,7 @@ margin-right:10px;
 
 
 	</div>
-	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
         <input type="hidden" name="amount" value="${pageMaker.cri.amount }"> 
 	
 <!-- 	<div class="row mt-5"> -->
@@ -112,35 +83,38 @@ margin-right:10px;
  		
         
  
-        <div class="col text-center"  style="margin: 0 auto; width:500px; height:100px; background-color:gray;">
-        	<div class="block-27">
-				  <div class="col text-center">
-        	<div class="block-27">
+        <div class="col text-center"  style="margin: 0 auto; width:500px; height:100px;">
+        	<div class="block-27" style="text-align:center;">
+				<div class="col text-center">
+        			
 					
  			<!-- 각 번호 페이지 버튼 -->
  				<table>
  				<tr>
                 <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+               
                		 <ul style="text-align:center;">
-<%--                     	<li class="pageInfo_btn"><a href="ProductClientList?pageNum=${num}">${num}</a></li> --%>
-						<li class="pageInfo_btn">
-						<a href="javascript:acyncMovePage('/ProductClientList?pageNum=${num}');">${num}</a></li>
+						
+<%-- <li class="pageInfo_btn"><a href="ProductClientList?pageNum=${num}">${num}</a></li> --%>
+							<li class="pageInfo_btn"><a href="javascript:acyncMovePage('/ProductClientList?pageNum=${num}');">${num}</a></li>
+
+
                     </ul>
                 </c:forEach>
-                </tr>
+            </tr>
                 </table>
-                	</div>
+                	
               	</div>
-                	</div>
+           </div>
         </div>
   
 
 
 </section>
- 
-</div>
- 
 
+<jsp:include page="/common/client_ft.jsp"></jsp:include>
+</div>
+</body>
 <script>
 $(".pageInfo a").on("click", function(e){
 	 
@@ -171,8 +145,16 @@ function acyncMovePage(url){
 }
 
 </script>
-
-<script src="${path}/resources/js/product/product.js"></script>
-<jsp:include page="/common/client_ft.jsp"></jsp:include>
-</body>
 </html>
+
+<%-- 						 <c:set var="type" value="${pro_code}"/> --%>
+						 						 
+<%-- 						 <c:if test="${type eq '%P%'}"> --%>
+<%-- 						<li class="pageInfo_btn"><a href="javascript:acyncMovePage('/ProductClientListP?pageNum=${num}');">${num}</a></li> --%>
+<%-- 						</c:if> --%>
+<%-- 						<c:if test="${type eq '%T%'}"> --%>
+<%-- 						<li class="pageInfo_btn"><a href="javascript:acyncMovePage('/ProductClientListT?pageNum=${num}');">${num}</a></li> --%>
+<%-- 						</c:if> --%>
+<%-- 						<c:if test="${type eq '%O%'}"> --%>
+<%-- 						<li class="pageInfo_btn"><a href="javascript:acyncMovePage('/ProductClientListO?pageNum=${num}');">${num}</a></li> --%>
+<%-- 						</c:if> --%>

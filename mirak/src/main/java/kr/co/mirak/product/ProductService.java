@@ -31,8 +31,15 @@ public interface ProductService {
 	/* 게시판 총 갯수 */
 	public int getTotal();
 
+	/* 프리미엄 총 갯수 */
+	public int getTotalP();
+
+	/* 2,3인 총 갯수 */
+	public int getTotalT();
+
+	/* 1인 총 갯수 */
+	public int getTotalO();
+
 	List<ProductVO> getListPaging(Criteria cri);
-	
-	
 
 }

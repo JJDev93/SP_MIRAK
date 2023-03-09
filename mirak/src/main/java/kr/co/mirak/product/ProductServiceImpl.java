@@ -69,7 +69,6 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 
-
 	public List<ProductVO> getListPaging(Criteria cri) {
 		ProductMapper mapper = sqlSessionTemplate.getMapper(ProductMapper.class);
 		return mapper.getListPaging(cri);
@@ -80,5 +79,19 @@ public class ProductServiceImpl implements ProductService {
 		return mapper.getTotal();
 	}
 
+	public int getTotalP() {
+		ProductMapper mapper = sqlSessionTemplate.getMapper(ProductMapper.class);
+		return mapper.getTotalP();
+	}
+
+	public int getTotalT() {
+		ProductMapper mapper = sqlSessionTemplate.getMapper(ProductMapper.class);
+		return mapper.getTotalT();
+	}
+
+	public int getTotalO() {
+		ProductMapper mapper = sqlSessionTemplate.getMapper(ProductMapper.class);
+		return mapper.getTotalO();
+	}
 
 }
