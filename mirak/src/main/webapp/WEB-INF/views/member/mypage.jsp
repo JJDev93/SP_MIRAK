@@ -52,7 +52,7 @@ function idPost() {
                            <div class="col-md-12 order-md-last ">
                               <div class="form-group">
                                  <label for="ID">아이디</label> 
-                                 <input type="text" name="mem_id" class="form-control" placeholder="이메일(ID)" required="required"  value="${member.mem_id }" readonly>
+                                 <input type="text" name="mem_id" id="id" class="form-control" placeholder="이메일(ID)" required="required"  value="${member.mem_id }" readonly>
                               </div>
                               
                               <div class="form-group">
@@ -108,7 +108,6 @@ function idPost() {
                      <div class="form-group">
                         <label for="phone">Phone</label>
                            <input type="text" name="mem_phone" class="form-control" placeholder=" ' - ' 빼고 입력해주세요 " required="required" value="${member.mem_phone }">
-                     	<label style="color:red" >${message }</label>
                      </div>
                   </div>
                   <div class="w-100"></div>
@@ -116,7 +115,7 @@ function idPost() {
                         <input type="submit" value="수정하기" class="btn btn-primary py-3 px-5">
                      </div>
                      <div class="col-md-6 text-center">
-								<button type="button" id="" class="btn btn-secondary py-3 px-5 l-100" data-toggle="modal" data-target="#exampleModal">회원탈퇴</button>
+								<button type="button" class="btn btn-secondary py-3 px-5 l-100" data-toggle="modal" data-target="#exampleModal">회원탈퇴</button>
 							</div>
                   </div>
             </form>
@@ -124,7 +123,7 @@ function idPost() {
       </div>
    </div>
    <!-- Modal -->
-	<form action="memdelete" method="post">
+	<form action="memdelete", method="post">
 		<div class="modal fade" id="exampleModal" tabindex="9999"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -141,7 +140,7 @@ function idPost() {
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary" >탈퇴하기</button>
+						<button type="button" class="btn btn-primary" id="memberCheck" onclick="fn_memberCheck();" >탈퇴하기</button>
 					</div>
 				</div>
 			</div>
@@ -150,5 +149,31 @@ function idPost() {
 </section>
 
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
+<script>
+function fn_memberCheck() {
+    $.ajax({
+        url : "/memberCheck",
+        type : "POST",
+        dataType :"JSON",
+        data : {"id" : $("#id").val(), 
+        	    "pw" : $("#pw").val()},
+        success : function (data) {
+        	console.log(pw.value);
+            if(pw.value == ""){
+            	alert("비밀번호를 입력해주세요");
+            }
+            
+            if(data == 0) {
+                alert("비밀번호가 틀렸습니다.");
+            } else if(data == 1) {
+            	$("#memberCheck").attr("value", "Y");
+            	alert("회원탈퇴가 완료되었습니다.");
+            } 
+            
+            	
+        }
+    })
+}
+ </script>
 </body>
 </html>

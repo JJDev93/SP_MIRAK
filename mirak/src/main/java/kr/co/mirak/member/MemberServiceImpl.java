@@ -83,4 +83,12 @@ public class MemberServiceImpl implements MemberService {
 		MemberVO memVO  = mapper.getMemberInfo(memId);
 		return memVO;
 	}
+	
+	//멤버 체크
+	@Override
+	public int memberCheck(MemberVO vo) {
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		int result = mapper.memberCheck(vo);
+		return result;
+	}
 }
