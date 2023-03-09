@@ -11,9 +11,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 
 public class Interceptor extends HandlerInterceptorAdapter{
-<<<<<<< HEAD
 	private static final Logger logger = LoggerFactory.getLogger(Interceptor.class);
-	static final String[] EXCLUDE_URL_LIST = {"/login", "/join", "/product"};
+	static final String[] EXCLUDE_URL_LIST = {"/join", "/idCheck", "/login", "/product" };
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
@@ -54,29 +53,4 @@ public class Interceptor extends HandlerInterceptorAdapter{
 		}
 		return true;
 	}
-=======
-	   private static final Logger logger = LoggerFactory.getLogger(Interceptor.class);
-	   static final String[] EXCLUDE_URL_LIST = {"/join", "/idCheck", "/login", "/product" };
-	   
-	   @Override
-	   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-	      String regUrl = request.getRequestURL().toString();
-	      for (String target : EXCLUDE_URL_LIST) {
-	         if (regUrl.indexOf(target) > -1) {
-	            return true;
-	         }
-	      }
-	      
-	      HttpSession session = request.getSession();
-	      String mem_id = (String) session.getAttribute("mem_id");
-	      
-	      if(mem_id == null || mem_id.trim().equals("")) {
-	         logger.info(">> interceptor catch!!! userId is null.. ");
-	         session.invalidate();
-	         response.sendRedirect("/login");
-	         return false;
-	      }
-	      return true;
-	   }
->>>>>>> refs/remotes/origin/member
 }
