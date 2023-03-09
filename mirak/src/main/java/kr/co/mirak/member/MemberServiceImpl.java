@@ -1,6 +1,7 @@
 package kr.co.mirak.member;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,13 +24,6 @@ public class MemberServiceImpl implements MemberService {
 		return memVO;
 	}
 	
-	//admin list
-	public List<MemberVO> getMemberList() {
-		MemberMapper mamberDAO = sqlSessionTemplate.getMapper(MemberMapper.class);
-		List<MemberVO> memberList = mamberDAO.getMemberList();
-		return memberList;
-	}
-	
 	//회원가입
 	@Override
 	public int createUser(MemberVO vo) {
@@ -46,14 +40,6 @@ public class MemberServiceImpl implements MemberService {
 		return memVO;
 	}
 	
-	//ID값으로 회원 정보 확인
-//	public MemberVO getMemberDetail(HttpSession session){
-//		String myid = (String)session.getAttribute("mem_id");
-//		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-//		MemberVO memVO  = mapper.getMemberInfo(myid);
-//		return memVO;
-//	}
-	
 	public int memupdate(MemberVO vo) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
 		int updatesuccess  = mapper.memupdate(vo);
@@ -66,10 +52,24 @@ public class MemberServiceImpl implements MemberService {
 		return deletesuccess;
 	}
 	
-	//어드민 회원상세정보
-//	public MemberVO getMemberDetail(MemberVO vo){
-//		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-//		MemberVO memVO  = mapper.getMemberDetail(vo);
-//		return memVO;
-//	}
+	//ADMIN 리스트
+	public List<MemberVO> getMemberList(Optional<Integer> pageStart) {
+		int page;
+		if (pageStart.isPresent()) {
+			page = pageStart.get();
+	    }else {
+	    	page = 0;
+	    }
+		MemberMapper mamberDAO = sqlSessionTemplate.getMapper(MemberMapper.class);
+		List<MemberVO> memberList = mamberDAO.getMemberList(page);
+		System.out.println(page+"페이지로 이동");
+		return memberList;
+	}
+	
+	//ADMIN ID값으로 회원 정보 확인
+	public MemberVO getMemberDetail(String memId){
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		MemberVO memVO  = mapper.getMemberInfo(memId);
+		return memVO;
+	}
 }

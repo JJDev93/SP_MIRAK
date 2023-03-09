@@ -33,9 +33,11 @@
 		]]>
 	</delete>
 
- 	<select id="getMemberList" resultType="member">
+ 	<select id="getMemberList" resultType="member" parameterType="Int">
 		<![CDATA[
 			SELECT MEM_ID, MEM_NAME, MEM_AGE, MEM_GENDER, MEM_PHONE, MEM_REGDATE FROM MEMBER
+			ORDER BY MEM_REGDATE
+			LIMIT 10 OFFSET #{page}*10
 		]]>	
 	</select>
 	

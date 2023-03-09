@@ -13,38 +13,39 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group">
-						<label for="name">Name *</label> <input type="text"
-							class="form-control" id="name">
+						<label for="ID">아이디</label> 
+						<input type="text" class="form-control" id="ID" value="${member.mem_id }" readonly>
 					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="form-group">
-						<label for="email">Email *</label> <input type="email"
-							class="form-control" id="email">
+						<label for="name">이름</label> 
+						<input type="text" class="form-control" id="name" value="${member.mem_name }" readonly>
 					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="form-group">
-						<label for="website">Website</label> <input type="url"
-							class="form-control" id="website">
+						<label for="age">나이</label> 
+						<input type="text" class="form-control" id="age" value="${member.mem_age }" readonly>
 					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="form-group">
-						<label for="website">Website</label> <input type="url"
-							class="form-control" id="website">
+						<label for="gender">성별</label> 
+						<c:choose>
+							<c:when test="${member.mem_gender == '1'}">
+								<input type="text" class="form-control" id="gender" value="남" readonly>
+	                        </c:when>
+							<c:when test="${member.mem_gender == '0' }">
+								<input type="text" class="form-control" id="gender" value="여" readonly>
+							</c:when>
+						</c:choose>
 					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="form-group">
-						<label for="website">Website</label> <input type="url"
-							class="form-control" id="website">
-					</div>
-				</div>
-				<div class="col-md-12">
-					<div class="form-group">
-						<label for="website">Website</label> <input type="url"
-							class="form-control" id="website">
+						<label for="phone">연락처</label> 
+						<input type="text" class="form-control" id="phone" value="${member.mem_phone }" readonly>
 					</div>
 				</div>
 			</div>
