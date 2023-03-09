@@ -2,6 +2,8 @@ package kr.co.mirak.member;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 public class MemberServiceImpl implements MemberService {
@@ -36,12 +38,21 @@ public class MemberServiceImpl implements MemberService {
 		return success;
 	}
 	
-	//마이페이지
-	public MemberVO mypage(MemberVO vo){
+	//세션 값으로 회원 정보 확인
+	public MemberVO getMemberInfo(HttpSession session){
+		String myid = (String)session.getAttribute("mem_id");
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		MemberVO memVO  = mapper.mypage(vo);
+		MemberVO memVO  = mapper.getMemberInfo(myid);
 		return memVO;
 	}
+	
+	//ID값으로 회원 정보 확인
+//	public MemberVO getMemberDetail(HttpSession session){
+//		String myid = (String)session.getAttribute("mem_id");
+//		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+//		MemberVO memVO  = mapper.getMemberInfo(myid);
+//		return memVO;
+//	}
 	
 	public int memupdate(MemberVO vo) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
@@ -53,12 +64,5 @@ public class MemberServiceImpl implements MemberService {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
 		int deletesuccess  = mapper.memdelete(vo);
 		return deletesuccess;
-	}
-	
-	//어드민 회원상세정보
-	public MemberVO getMemberDetail(MemberVO vo){
-		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		MemberVO memVO  = mapper.getMemberDetail(vo);
-		return memVO;
 	}
 }
