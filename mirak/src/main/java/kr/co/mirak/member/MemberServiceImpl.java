@@ -36,10 +36,10 @@ public class MemberServiceImpl implements MemberService {
 		return success;
 	}
 	
-	//마이페이지
-	public MemberVO mypage(MemberVO vo){
+	//회원 정보 확인
+	public MemberVO getMemberInfo(MemberVO vo){
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		MemberVO memVO  = mapper.mypage(vo);
+		MemberVO memVO  = mapper.getMemberInfo(vo);
 		return memVO;
 	}
 	
@@ -53,12 +53,5 @@ public class MemberServiceImpl implements MemberService {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
 		int deletesuccess  = mapper.memdelete(vo);
 		return deletesuccess;
-	}
-	
-	//어드민 회원상세정보
-	public MemberVO getMemberDetail(MemberVO vo){
-		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		MemberVO memVO  = mapper.getMemberDetail(vo);
-		return memVO;
 	}
 }

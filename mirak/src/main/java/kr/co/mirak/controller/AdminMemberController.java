@@ -37,7 +37,7 @@ public class AdminMemberController {
 	@RequestMapping(value="/adminMembers/{memberid}", method=RequestMethod.GET)
 	public String getMemeberDetail(@PathVariable String memberid, MemberVO vo, Model model) {
 		vo.setMem_id(memberid);
-		MemberVO member = memberService.getMemberDetail(vo);
+		MemberVO member = memberService.getMemberInfo(vo);
 		model.addAttribute("member", member);
 		return "member/admin_member_detail";
 	}
