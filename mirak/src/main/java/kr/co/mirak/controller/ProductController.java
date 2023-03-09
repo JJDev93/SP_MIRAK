@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.mirak.product.Criteria;
+import kr.co.mirak.product.PageMakerDTO;
 import kr.co.mirak.product.ProductService;
 import kr.co.mirak.product.ProductVO;
 
@@ -29,42 +31,58 @@ public class ProductController {
 	}
 
 //	 상품 Client 리스트
-	@RequestMapping("/ProductClientList")
-	public String productclientList(ProductVO vo, Model model)  {
-
-		model.addAttribute("productList", productService.productList(vo));	
-
-		
-		
-		return "/product/ProductClientList";
-
-	}
+//	@RequestMapping("/ProductClientList")
+//	public String productclientList(ProductVO vo, Model model) {
+//
+//		model.addAttribute("productList", productService.productList(vo));
+//
+//		return "/product/ProductClientList";
+//
+//	}
 
 //	 상품 Client 프리미엄 리스트
 	@RequestMapping("/ProductClientListP")
-	public String productclientList1(ProductVO vo, Model model) {
+	public String productclientList1(ProductVO vo, Model model, Criteria cri) {
 
-		model.addAttribute("productList", productService.productList1(vo));
+		model.addAttribute("productList", productService.productList1(cri));
+//		model.addAttribute("productList", productService.getListPaging(cri));
+		int total = productService.getTotal();
 
-		return "/product/ProductClientList";
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+
+		model.addAttribute("pageMaker", pageMake);
+
+		return "/product/ProductClientListP";
 	}
 
 //	 상품 Client 2,3인 리스트
 	@RequestMapping("/ProductClientListT")
-	public String productclientList2(ProductVO vo, Model model) {
+	public String productclientList2(ProductVO vo, Model model, Criteria cri) {
 
-		model.addAttribute("productList", productService.productList2(vo));
+		model.addAttribute("productList", productService.productList2(cri));
+//		model.addAttribute("productList", productService.getListPaging(cri));
+		int total = productService.getTotal();
 
-		return "/product/ProductClientList";
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+
+		model.addAttribute("pageMaker", pageMake);
+
+		return "/product/ProductClientListT";
 	}
 
 //	 상품 Client 1인 리스트
 	@RequestMapping("/ProductClientListO")
-	public String productclientList3(ProductVO vo, Model model) {
+	public String productclientList3(ProductVO vo, Model model, Criteria cri) {
 
-		model.addAttribute("productList", productService.productList3(vo));
+		model.addAttribute("productList", productService.productList3(cri));
+//		model.addAttribute("productList", productService.getListPaging(cri));
+		int total = productService.getTotal();
 
-		return "/product/ProductClientList";
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+
+		model.addAttribute("pageMaker", pageMake);
+
+		return "/product/ProductClientListO";
 	}
 
 	// 상품 등록 페이지 이동
@@ -130,21 +148,28 @@ public class ProductController {
 		return "redirect:/ProductAdminList";
 	}
 
-	// 장바구니 화면으로 이동
-//	@RequestMapping(value = "/ProductAdminRegister")
-//	public String productcartList() {
+
+
+
+//	@RequestMapping("/list")
+//	public void boardListGET(Model model, Criteria cri) {
 //
-//		return "/product/ProductAdminRegister";
+//		model.addAttribute("list", productService.getListPaging(cri));
+//
 //	}
-	
-	@RequestMapping(value = "/pay")
-	public String productPay() {
-		
-	
-		return "/pay/pay";
+
+	@RequestMapping("/ProductClientList")
+	public String productList(ProductVO vo, Model model, Criteria cri) {
+
+//		model.addAttribute("productList", productService.productList(vo));
+		model.addAttribute("productList", productService.getListPaging(cri));
+		int total = productService.getTotal();
+
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+
+		model.addAttribute("pageMaker", pageMake);
+		return "/product/ProductClientList";
+
 	}
-	
-	
-	
 
 }

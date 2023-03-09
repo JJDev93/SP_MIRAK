@@ -55,15 +55,9 @@
 						</div>
 						
 						
-						<div id="print">총 금액:</div>
-						<button onclick="document.getElementById('print').innerHTML='innerHTML로 문구를 띄어주다'">출력</button>
-
 						
 
-
-
-
-<!-- formaction="" -->
+						
 					</div>
 					<br> <br>
 					<p>
@@ -82,10 +76,6 @@
 
 
 <script>
-
-function multi(){
-	총 가격 : ${product.pro_price * pro_cnt}
-}
 
 </script>
 

@@ -21,26 +21,28 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 
-	public List<ProductVO> productList1(ProductVO vo) {
+	public List<ProductVO> productList1(Criteria cri) {
 
 		ProductMapper mapper = sqlSessionTemplate.getMapper(ProductMapper.class);
-		List<ProductVO> productList = mapper.productList1(vo);
+		List<ProductVO> productList = mapper.productList1(cri);
 
 		return productList;
 
 	}
-	public List<ProductVO> productList2(ProductVO vo) {
+
+	public List<ProductVO> productList2(Criteria cri) {
 
 		ProductMapper mapper = sqlSessionTemplate.getMapper(ProductMapper.class);
-		List<ProductVO> productList = mapper.productList2(vo);
+		List<ProductVO> productList = mapper.productList2(cri);
 
 		return productList;
 
 	}
-	public List<ProductVO> productList3(ProductVO vo) {
+
+	public List<ProductVO> productList3(Criteria cri) {
 
 		ProductMapper mapper = sqlSessionTemplate.getMapper(ProductMapper.class);
-		List<ProductVO> productList = mapper.productList3(vo);
+		List<ProductVO> productList = mapper.productList3(cri);
 
 		return productList;
 
@@ -66,9 +68,17 @@ public class ProductServiceImpl implements ProductService {
 		mapper.deleteProduct(vo);
 
 	}
-	
-	
-	
-	
+
+
+	public List<ProductVO> getListPaging(Criteria cri) {
+		ProductMapper mapper = sqlSessionTemplate.getMapper(ProductMapper.class);
+		return mapper.getListPaging(cri);
+	}
+
+	public int getTotal() {
+		ProductMapper mapper = sqlSessionTemplate.getMapper(ProductMapper.class);
+		return mapper.getTotal();
+	}
+
 
 }
