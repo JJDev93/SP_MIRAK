@@ -136,7 +136,7 @@
 
 						<div class="w-100"></div>
 						<div class="col-md-6">
-							<input type="submit" value="회원가입"
+							<input type="submit" value="회원가입" id="joinSubmit"
 								class="btn btn-primary py-3 px-5 w-100">
 						</div>
 
@@ -150,7 +150,6 @@
 		</div>
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
-
 <script>
 
 function fn_idCheck() {
@@ -160,15 +159,23 @@ function fn_idCheck() {
         dataType :"JSON",
         data : {"id" : $("#id").val()},
         success : function (data) {
+        	
+            if(id.value == ""){
+            	alert("이메일을 입력해주세요")
+            	return false;
+            }
+        	
             if(data == 1) {
-                alert("중복된 이메일입니다.");
+                alert("이미 사용중인 이메일입니다.");
             } else if (data == 0) {
                 $("#idCheck").attr("value", "Y");
                 alert("사용 가능한 이메일입니다.")
-            }
+            };
+
         }
 
     })
 }
+
 
  </script>

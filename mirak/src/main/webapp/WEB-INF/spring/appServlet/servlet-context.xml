@@ -51,8 +51,9 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/**" />
-			<exclude-mapping path="/" />	
-			<beans:bean class="kr.co.mirak.controller.Interceptor" />
+			<exclude-mapping path="/" />				
+			<exclude-mapping path="/resources/**" />
+			<beans:bean id="Interceptor" class="kr.co.mirak.controller.Interceptor" />
 		</interceptor> 
 	</interceptors>
 
