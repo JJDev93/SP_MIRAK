@@ -65,7 +65,7 @@ public class MemberServiceImpl implements MemberService {
 		int deletesuccess  = mapper.memdelete(vo);
 		return deletesuccess;
 	}
-<<<<<<< HEAD
+
 
 	//아이디체크
 	@Override
@@ -74,7 +74,7 @@ public class MemberServiceImpl implements MemberService {
 		int cnt = mapper.idCheck(id);
 		return cnt;
 	}
-=======
+
 	
 	//어드민 회원상세정보
 //	public MemberVO getMemberDetail(MemberVO vo){
@@ -82,5 +82,4 @@ public class MemberServiceImpl implements MemberService {
 //		MemberVO memVO  = mapper.getMemberDetail(vo);
 //		return memVO;
 //	}
->>>>>>> branch 'member' of https://github.com/ywshin0112/mirak.git
 }
