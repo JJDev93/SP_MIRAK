@@ -3,7 +3,7 @@ package kr.co.mirak.cart;
 import java.util.List;
 
 public interface CartMapper {
-	List<CartVO> list();
+	List<CartVO> list(CartVO vo);
 	CartVO info(int id);
 	int insert(CartVO vo);
 	int update(CartVO vo);

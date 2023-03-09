@@ -8,7 +8,7 @@
 	<!-- 카트 목록 -->
 	<select id="list" resultType="kr.co.mirak.cart.CartVO">
 	
-		select * from cart
+		select * from cart where mem_id=#{mem_id} and cart_show=1
 	
 	</select>
 	
@@ -17,8 +17,8 @@
 	<!-- 카트 추가 -->
 	<insert id="insert">
 	
-		insert into cart(mem_id, name, price, day, count)
-		values(#{mem_id}, #{name}, #{price}, #{day}, #{count}) 
+		insert into cart(cart_cnt, cart_totprice, pro_name, pro_price, pro_desc, pro_image,)
+		values(#{cart_cnt}, #{cart_totprice}, #{pro_name}, #{pro_price}, #{pro_desc}, #{pro_image}) 
 	
 	</insert>
 	
@@ -26,14 +26,14 @@
 	<!-- 카트 수량 수정 -->
 	<update id="update">
 	
-		update cart set count=#{count} where cartId = #{cartId}
+		update cart set cart_cnt=#{cart_cnt} where cart_code = #{cart_code}
 	
 	</update>
 
 	<!-- 카트 삭제 -->
 	<delete id="delete">
 	
-		delete from cart where cartId = #{cartId}
+		delete from cart where car_code = #{cart_code}
 	
 	</delete>
 	

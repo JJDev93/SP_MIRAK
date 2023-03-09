@@ -14,10 +14,10 @@ public class CartServiceImpl implements CartService {
       this.sqlSessionTemplate = sqlSessionTemplate;
    }   
 
-   public List<CartVO> list() {
+   public List<CartVO> list(CartVO vo) {
 
-      CartMapper dao = sqlSessionTemplate.getMapper(CartMapper.class);
-      List<CartVO> list = dao.list();
+      CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
+      List<CartVO> list = mapper.list(vo);
 
       return list;
    }

@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,20 +44,33 @@ public class CartController {
 		return "home";
 	}
 	
-	@RequestMapping("/cartList")
-	public String getEmpList(Model model) {
+	@RequestMapping(value = "/cartList", method = RequestMethod.POST)	// client cart
+	public String cartList(Model model, CartVO vo, HttpSession session) {
 		
-		List<CartVO> list = service.list();
+		String mem_id = (String)session.getAttribute("mem_id");
+		vo.setMem_id(mem_id);
+		System.out.println("mem_id : "+mem_id);
+		
+		List<CartVO> list = service.list(vo);
 		model.addAttribute("cartList", list);
+		System.out.println(list);
 		return "cart/cart";
 	}
 	
-	@RequestMapping("/cartList2")
-	public String getEmpList2(Model model) {
+	@RequestMapping(value = "/cartList2", method = RequestMethod.POST)	// admin cart
+	public String cartList2(Model model,  CartVO vo) {
 		
-		List<CartVO> list = service.list();
+		List<CartVO> list = service.list(vo);
 		model.addAttribute("cartList", list);
 		return "cart/cart_admin";
 	}
+	
+	@RequestMapping(value = "/goPay", method = RequestMethod.POST)	// 결제하기
+	public String goPay(Model model, HttpSession session) {
 
+		model.addAttribute("CartVO", "");
+
+		return "pay/pay";
+	}
+	
 }
