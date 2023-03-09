@@ -39,6 +39,8 @@
 	<script src="${path}/resources/js/scrollax.min.js"></script>
 	<script src="${path}/resources/js/main.js"></script>
 	<script src="${path}/resources/js/pwcheck.js"></script>
+	<script src="${path}/resources/js/idCheck.js"></script>
+	
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">
