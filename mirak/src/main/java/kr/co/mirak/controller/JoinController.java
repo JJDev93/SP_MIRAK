@@ -68,23 +68,9 @@ public class JoinController {
 			throw new RuntimeException();
 		}
 		return "member/login";
-	}
-	
-	
-	
+	}	
 	
 }
 
 
 
-
-
-
-
-/*
- * @RequestMapping("/join") public String joinGET(Model model) {
- * logger.info("회원가입페이지입니다."); logger.info(model.toString()); return
- * "member/login";
- * 
- * }
- */
