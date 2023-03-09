@@ -1,28 +1,20 @@
 
 package kr.co.mirak.controller;
 
-import java.util.Locale;
-
-import javax.servlet.http.HttpSession;
-
-import org.mybatis.spring.SqlSessionTemplate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.co.mirak.HomeController;
 import kr.co.mirak.member.MemberService;
 import kr.co.mirak.member.MemberVO;
 
 @Controller
 public class JoinController {
 
-	private SqlSessionTemplate sqlSessionTemplate;
+//	private SqlSessionTemplate sqlSessionTemplate;
 	
 	@Autowired
 	private MemberService memberService;
@@ -46,7 +38,33 @@ public class JoinController {
 		System.out.println(success);
 		return "member/login";
 	}
+	
+	//아이디 체크
+	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
+	public int idCheck(@RequestParam("id") String id)  {
+		
+		int cnt = memberService.idCheck(id);
+
+			if(cnt == 0) {
+				System.out.println("사용불가능");
+			}else if (cnt == 1) {
+				System.out.println("사용가능");
+			}
+		
+		return cnt;
+	}
+	
+	
+	
+	
+	
 }
+
+
+
+
+
+
 
 /*
  * @RequestMapping("/join") public String joinGET(Model model) {

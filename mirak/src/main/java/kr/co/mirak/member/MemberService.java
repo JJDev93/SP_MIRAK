@@ -11,4 +11,5 @@ public interface MemberService {
 	MemberVO getMemberInfo(HttpSession session);
 	int memupdate(MemberVO vo);
 	int memdelete(MemberVO vo);
+	int idCheck(String id);
 }
