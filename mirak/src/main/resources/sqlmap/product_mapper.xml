@@ -14,7 +14,7 @@
 
 
 	<select id="productList"
-		resultType="kr.co.mirak.product.ProductVO">
+		resultType="product">
 		
 		<![CDATA[
  		SELECT pro_code, pro_name, pro_price, pro_desc, pro_image from product limit 6;
@@ -24,14 +24,14 @@
 	</select>
 
 	<select id="productList1"
-		resultType="kr.co.mirak.product.ProductVO">
+		resultType="product">
 
 		select * from (select * from product)  as T1  where pro_code like '%P%' limit #{skip},#{amount}
 
 	</select>
 
 	<select id="productList2"
-		resultType="kr.co.mirak.product.ProductVO">
+		resultType="product">
 		select * from (select * from product)  as T1  where pro_code like '%T%' limit #{skip},#{amount}
 		
 
@@ -40,7 +40,7 @@
 <!-- SELECT pro_code, pro_name, pro_price, pro_desc, pro_image from product where -->
 <!-- 		pro_code like '%T%' -->
 	<select id="productList3"
-		resultType="kr.co.mirak.product.ProductVO">
+		resultType="product">
 
 		select * from (select * from product)  as T1  where pro_code like '%O%' limit #{skip},#{amount}
 
@@ -48,7 +48,7 @@
 
 
 	<select id="productDetail"
-		resultType="kr.co.mirak.product.ProductVO">
+		resultType="product">
 		<![CDATA[
 		SELECT *
 		FROM PRODUCT
@@ -106,7 +106,7 @@
 	
 
 	<select id="getListPaging"
-		resultType="kr.co.mirak.product.ProductVO">
+		resultType="product">
 		
 		<![CDATA[
   		 
