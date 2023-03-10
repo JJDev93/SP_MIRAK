@@ -10,6 +10,7 @@ public interface MemberMapper {
 	List<MemberVO> getMemberList(Integer page);
 	MemberVO getMemberInfo(String memId);
 	int idCheck(String id);
+	
 	int memberCheck(MemberVO vo);
 	
 }

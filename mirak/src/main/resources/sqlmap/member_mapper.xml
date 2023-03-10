@@ -10,8 +10,8 @@
 	</select>
  	<insert id="createUser" parameterType="member">
  		<![CDATA[
-	 		INSERT INTO MEMBER (MEM_ID, MEM_PW , MEM_NAME, MEM_AGE, MEM_GENDER ,MEM_PHONE)
-	 		VALUES(#{mem_id}, #{mem_pw}, #{mem_name} , #{mem_age} , #{mem_gender} , #{mem_phone})
+	 		INSERT INTO MEMBER (MEM_ID, MEM_PW , MEM_NAME, MEM_AGE, MEM_GENDER ,MEM_PHONE, MEM_ADD1, MEM_ADD2, MEM_ZIPCODE)
+	 		VALUES(#{mem_id}, #{mem_pw}, #{mem_name} , #{mem_age} , #{mem_gender} , #{mem_phone} , #{mem_add1} , #{mem_add2} , #{mem_zipcode})
  		]]>	
  	</insert>
 	
@@ -26,12 +26,6 @@
 		]]>
 	</update>
 
-	<delete id="memdelete" parameterType="kr.co.mirak.member.MemberVO">
-		<![CDATA[
-			DELETE FROM MEMBER
-			WHERE MEM_ID = #{mem_id} and MEM_PW = #{mem_pw}
-		]]>
-	</delete>
 
  	<select id="getMemberList" resultType="member" parameterType="Int">
 		<![CDATA[
@@ -52,6 +46,21 @@
 	<select id="idCheck" parameterType="kr.co.mirak.member.MemberVO" resultType="int">
 		SELECT count(*) FROM MEMBER WHERE mem_id= #{mem_id}
 	</select>
+	
+	
+	
+	
+	
+	<!-- 회원탈퇴 -->
+	<delete id="memdelete" parameterType="kr.co.mirak.member.MemberVO">
+		<![CDATA[
+			DELETE FROM MEMBER
+			WHERE MEM_ID = #{mem_id} and MEM_PW = #{mem_pw}
+		]]>
+	</delete>
+	
+	
+	
 	<!-- 아이디, 비번 확인 -->
 	<select id="memberCheck" parameterType="kr.co.mirak.member.MemberVO" resultType="int">
 		SELECT count(*) FROM MEMBER 

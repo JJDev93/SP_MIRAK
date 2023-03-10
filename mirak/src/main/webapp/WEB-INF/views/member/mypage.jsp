@@ -44,7 +44,7 @@ function idPost() {
       <div class="container">
       <div class="row justify-content-center">
          <div class="col-xl-7 ftco-animate">
-            <form action="memupdate" method="post" class="contact-form">
+            <form action="memupdate" method="post" class="contact-form" id="delForm">
                <h3 class="mb-4 billing-heading">회원정보 수정</h3>
                <div class="row align-items-end">
                   <div class="container">
@@ -115,13 +115,19 @@ function idPost() {
                         <input type="submit" value="수정하기" class="btn btn-primary py-3 px-5">
                      </div>
                      <div class="col-md-6 text-center">
-								<button type="button" class="btn btn-secondary py-3 px-5 l-100" data-toggle="modal" data-target="#exampleModal">회원탈퇴</button>
+								<button type="button" id="submit" class="btn btn-secondary py-3 px-5 l-100" data-toggle="modal" data-target="#exampleModal">회원탈퇴</button>
 							</div>
                   </div>
             </form>
+            
+            
+     
+            
+            
          </div>
       </div>
    </div>
+   
    <!-- Modal -->
 	<form action="memdelete", method="post">
 		<div class="modal fade" id="exampleModal" tabindex="9999"
@@ -146,6 +152,11 @@ function idPost() {
 			</div>
 		</div>
 	</form>
+	
+
+	
+	
+	
 </section>
 
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
