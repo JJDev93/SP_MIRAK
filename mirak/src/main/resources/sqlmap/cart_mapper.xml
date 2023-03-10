@@ -40,7 +40,7 @@
 	<!-- 카트 삭제 -->
 	<delete id="delete">
 	
-		DELETE FROM CART WHERE CAR_CODE = #{cart_code}
+		DELETE FROM CART WHERE CART_CODE = #{cart_code}
 	
 	</delete>
 	
