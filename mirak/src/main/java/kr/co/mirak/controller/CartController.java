@@ -44,7 +44,7 @@ public class CartController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/cartClientList", method = RequestMethod.GET)	// client cart
+	@RequestMapping(value = "/cartClientList", method = RequestMethod.POST)	// client cart
 	public String cartList(Model model, CartVO vo, HttpSession session) {
 		
 		String mem_id = (String)session.getAttribute("mem_id");
