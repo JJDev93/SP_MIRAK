@@ -16,27 +16,27 @@ import kr.co.mirak.product.ProductService;
 
 @Controller
 public class CartController {
-	
-	@Autowired 
-	private CartService cartService;
-	
-	@Autowired
-	private ProductService productService;
-	
-	@RequestMapping(value = "/cartClientList", method = RequestMethod.GET)	
-	public String cartClientList(Model model, CartVO vo, HttpSession session) {
-		String mem_id = (String)session.getAttribute("mem_id");
-		vo.setMem_id(mem_id);
-		
-		List<CartVO> list = cartService.cartClientList(vo);
-		model.addAttribute("cartList", list);
-		
-		System.out.println(mem_id + "의 카트 리스트");
-		System.out.println(list);
-		return "cart/cart";
-	}
-	
-	@RequestMapping(value = "/cartClientList", method = RequestMethod.POST)   // client cart
+   
+   @Autowired 
+   private CartService cartService;
+   
+   @Autowired
+   private ProductService productService;
+   
+   @RequestMapping(value = "/cartClientList", method = RequestMethod.GET)   
+   public String cartClientList(Model model, CartVO vo, HttpSession session) {
+      String mem_id = (String)session.getAttribute("mem_id");
+      vo.setMem_id(mem_id);
+      
+      List<CartVO> list = cartService.cartClientList(vo);
+      model.addAttribute("cartList", list);
+      
+      System.out.println(mem_id + "의 카트 리스트");
+      System.out.println(list);
+      return "cart/cart";
+   }
+   
+   @RequestMapping(value = "/cartClientList", method = RequestMethod.POST)   // client cart
     public String cartList(Model model, CartVO vo, HttpSession session) {
     
        System.out.println(vo);
@@ -52,21 +52,21 @@ public class CartController {
        System.out.println(list);
        return "cart/cart";
     }
-		
-	
-	@RequestMapping(value = "/cartAdminList", method = RequestMethod.GET)
-	public String cartList2(Model model) {
-		List<CartVO> list = cartService.cartAdminList();
-		model.addAttribute("cartList", list);
-		return "cart/cart_admin";
-	}
-	
-	@RequestMapping(value = "/goPay", method = RequestMethod.POST)	// 결제하기
-	public String goPay(Model model, HttpSession session) {
+      
+   
+   @RequestMapping(value = "/cartAdminList", method = RequestMethod.GET)
+   public String cartList2(Model model) {
+      List<CartVO> list = cartService.cartAdminList();
+      model.addAttribute("cartList", list);
+      return "cart/cart_admin";
+   }
+   
+   @RequestMapping(value = "/goPay", method = RequestMethod.POST)   // 결제하기
+   public String goPay(Model model, HttpSession session) {
 
-		model.addAttribute("CartVO", "");
+      model.addAttribute("CartVO", "");
 
-		return "/cartpay";
-	}
-	
+      return "/cartpay";
+   }
+   
 }

@@ -18,10 +18,9 @@
 	</div>
 </div>
 
+
 <%
 session = request.getSession();
-
-
 %>
 
 
@@ -51,46 +50,74 @@ session = request.getSession();
 						<tbody>
 							<c:forEach var="c" items="${cartList }">
 								<tr class="text-center">
-									<td class="image-prod"><div><img alt="1"
-						src="${path}/resources/images/product/${c.pro_image}"
-						style="width: 200px; height: 150px;"></div></td>
+									<td class="image-prod"><div>
+											<img alt="1"
+												src="${path}/resources/images/product/${c.pro_image}"
+												style="width: 200px; height: 150px;">
+										</div></td>
 									<td class="product-name">
-										<h3>${c.pro_code } ${c.pro_name }</h3>
+										<h3>${c.pro_code }${c.pro_name }</h3>
 										<p>${c.pro_desc }</p>
 									</td>
 									<td>${c.pro_price }</td>
 									<td>${c.cart_day }</td>
 									<td>
 										<div class="quantity_div">
+											<input type="text" value="${c.cart_cnt}"
+												class="quantity_input">
+
+
+<button type="button">모달창</button>
+
+<div class="modal">
+  <div class="modal_content" 
+       title="클릭하면 창이 닫힙니다.">
+    여기에 모달창 내용을 적어줍니다.<br>
+    이미지여도 좋고 글이어도 좋습니다.
+  </div>
+</div>
+											
+
+
+
+										</div> <!--
+										<div class="quantity_div">
 											<input type="text" value="${c.cart_cnt}" class="quantity_input">
 											<button class="quantity_btn plus_btn">+</button>
 											<button class="quantity_btn minus_btn">-</button>
 										</div>
 										<a class="quantity_update_btn" data-cartId="${c.cart_code}">변경</a>
+										 -->
 									</td>
 									<td>${c.pro_price * c.cart_cnt }</td>
-									<td class="cart_info">${c.cart_check }
-										<input type="checkbox" class="cart_checkbox" checked="checked">
-										<input type="hidden" class="price_input" value="${c.pro_price }">
-										<input type="hidden" class="count_input" value="${c.cart_cnt }">
-										<input type="hidden" class="totalPrice_input" value="${c.pro_price * c.cart_cnt }">
-										<input type="hidden" class="_input" value="${c.pro_code }">
+									<td class="cart_info">${c.cart_check }<input
+										type="checkbox" class="cart_checkbox" checked="checked">
+										<input type="hidden" class="price_input"
+										value="${c.pro_price }"> <input type="hidden"
+										class="count_input" value="${c.cart_cnt }"> <input
+										type="hidden" class="totalPrice_input"
+										value="${c.pro_price * c.cart_cnt }"> <input
+										type="hidden" class="_input" value="${c.pro_code }">
 									</td>
 								</tr>
 							</c:forEach>
 </form>
 
 							<!-- 수량 조정 form -->
-							<form action="/cart/update" method="post" class="quantity_update_form">
+							<form action="/cart/update" method="post"
+								class="quantity_update_form">
 								<input type="hidden" name="cartId" class="update_cartId">
 								<input type="hidden" name="count" class="update_count">
 								<input type="hidden" name="mem_id" value="${c.mem_id}">
 							</form>
-							
+
 							<!-- 주문 form -->
 							<form action="/pay/${c.mem_id}" method="post" class="pay_form">
 
-							</form>			
+							</form>
+
+							
+
 							<!-- END TR-->
 						</tbody>
 					</table>
@@ -115,7 +142,8 @@ session = request.getSession();
 				</p>
 			</div>
 			<p>
-				<input class="pay_btn btn-primary py-3 px-4" type="submit" value="결제하기">
+				<input class="pay_btn btn-primary py-3 px-4" type="submit"
+					value="결제하기">
 			</p>
 		</div>
 	</div>
@@ -124,6 +152,20 @@ session = request.getSession();
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
 
 <script>
+
+$(function(){ 
+
+	  $("button").click(function(){
+	    $(".modal").fadeIn();
+	  });
+	  
+	  $(".modal_content").click(function(){
+	    $(".modal").fadeOut();
+	  });
+	  
+	});
+
+	
 	$(document).ready(function() {
 		// 종합 정보 삽입
 		setTotalInfo();
@@ -199,7 +241,7 @@ session = request.getSession();
 		$(".finalTotalPrice_span").text(finalTotalPrice.toLocaleString());
 	}
 
-	// 수량 조절 버튼
+	/* 수량 조절 버튼
 	$(".plus_btn").on("click", function() {
 		let quantity = $(this).parent("div").find("input").val();
 		$(this).parent("div").find("input").val(++quantity);
@@ -211,7 +253,7 @@ session = request.getSession();
 		}
 	});
 
-	// 수량 수정 버튼
+	 수량 수정 버튼
 	$(".quantity_update_btn").on("click", function() {
 		let cartId = $(this).data("cartid");
 		let count = $(this).parent("td").find("input").val();
@@ -220,33 +262,45 @@ session = request.getSession();
 		$(".quantity_update_form").submit();
 
 	});
-	
-	// 결제 페이지 이동 
-	$(".pay_btn").on("click", function(){
-		
-		let form_contents ='';
-		let orderNumber = 0;
-		
-		$(".cart_info").each(function (index, element) {
-			
-			if($(element).find(".cart_checkbox").is(":checked") === true) {	// 체크 여부 확인
-				
-				let pro_name = $(element).find(".pro_name_input").val();
-				let cart_cnt = $(element).find(".cart_cnt_input").val();
-				
-				let pro_name_input = "<input name='orders[" + orderNumber + "].pro_name' type='hidden' value='" + pro_name + "'>";
-				form_contents += pro_name_input;
-				
-				let cart_cnt_input = "<input name='orders[" + orderNumber + "].cart_cnt' type='hidden' value='" + cart_cnt + "'>";
-				form_contents += cart_cnt_input;
-				
-				orderNumber += 1;
-				
-			}
-		});	
+	 */
 
-		$(".pay_form").html(form_contents);
-		$(".pay_form").submit();
-		
-	});
+	// 결제 페이지 이동 
+	$(".pay_btn")
+			.on(
+					"click",
+					function() {
+
+						let form_contents = '';
+						let orderNumber = 0;
+
+						$(".cart_info")
+								.each(
+										function(index, element) {
+
+											if ($(element).find(
+													".cart_checkbox").is(
+													":checked") === true) { // 체크 여부 확인
+
+												let pro_name = $(element).find(
+														".pro_name_input")
+														.val();
+												let cart_cnt = $(element).find(
+														".cart_cnt_input")
+														.val();
+
+												let pro_name_input = "<input name='orders[" + orderNumber + "].pro_name' type='hidden' value='" + pro_name + "'>";
+												form_contents += pro_name_input;
+
+												let cart_cnt_input = "<input name='orders[" + orderNumber + "].cart_cnt' type='hidden' value='" + cart_cnt + "'>";
+												form_contents += cart_cnt_input;
+
+												orderNumber += 1;
+
+											}
+										});
+
+						$(".pay_form").html(form_contents);
+						$(".pay_form").submit();
+
+					});
 </script>
