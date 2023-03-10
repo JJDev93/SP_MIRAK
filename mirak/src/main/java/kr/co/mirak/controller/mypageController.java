@@ -63,14 +63,23 @@ public class mypageController {
 //		return "redirect:mypage";
 //	}
 	
+	
+	
+	
 	//멤버 체크
-	@RequestMapping(value = "/memberCheck", method = RequestMethod.POST)
-	@ResponseBody
-	public int memberCheck(MemberVO vo)throws Exception{
-		int result = memberService.memberCheck(vo);
-		return result;
-	}
+//	@RequestMapping(value = "/memberCheck", method = RequestMethod.POST)
+//	@ResponseBody
+//	public int memberCheck(MemberVO vo)throws Exception{
+//		int result = memberService.memberCheck(vo);
+//		return result;
+//	}
+
 }
+
+
+
+
+
 
 
 
