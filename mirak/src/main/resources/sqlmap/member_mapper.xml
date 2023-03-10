@@ -55,7 +55,9 @@
 	</select>
 	<!-- 아이디, 비번 확인 -->
 	<select id="memberCheck" parameterType="kr.co.mirak.member.MemberVO" resultType="int">
-		SELECT count(*) FROM MEMBER WHERE mem_id= #{mem_id} and mem_pw=#{mem_pw}
+		SELECT count(*) FROM MEMBER 
+		WHERE mem_id= #{mem_id} 
+		and mem_pw=#{mem_pw}
 	</select>
 	
 	
