@@ -6,9 +6,16 @@
 
 
 	<!-- 카트 목록 -->
-	<select id="list" resultType="kr.co.mirak.cart.CartVO">
+	<select id="cartClientList" resultType="kr.co.mirak.cart.CartVO">
 	
-		select * from cart
+		SELECT * FROM CART WHERE MEM_Id = #{mem_id} and CART_SHOW =1
+	
+	</select>
+	
+	<!-- 어드민용 카트 전체 목록 -->
+	<select id="cartAdminList" resultType="kr.co.mirak.cart.CartVO">
+	
+		SELECT MEM_ID, PRO_NAME, PRO_PRICE, CART_START, CART_DAY, CART_CNT, CART_TOTPRICE, CART_SHOW FROM CART
 	
 	</select>
 	
@@ -17,23 +24,23 @@
 	<!-- 카트 추가 -->
 	<insert id="insert">
 	
-		insert into cart(mem_id, name, price, day, count)
-		values(#{mem_id}, #{name}, #{price}, #{day}, #{count}) 
-	
+		INSERT INTO CART (CART_CNT, CART_TOTPRICE, PRO_NAME, PRO_PRICE, PRO_DESC, PRO_IMAGE)
+		VALUES ( #{cart_cnt}, #{cart_totprice}, #{pro_name}, #{pro_price}, #{pro_desc}, #{pro_image} )
+		
 	</insert>
 	
 	
 	<!-- 카트 수량 수정 -->
 	<update id="update">
 	
-		update cart set count=#{count} where cartId = #{cartId}
+		UPDATE CART SET CART_CNT = #{cart_cnt} WHERE CART_CODE = #{cart_code}
 	
 	</update>
 
 	<!-- 카트 삭제 -->
 	<delete id="delete">
 	
-		delete from cart where cartId = #{cartId}
+		DELETE FROM CART WHERE CAR_CODE = #{cart_code}
 	
 	</delete>
 	
