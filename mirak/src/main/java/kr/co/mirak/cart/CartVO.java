@@ -10,6 +10,7 @@ public class CartVO {
 	private int cart_cnt;
 	private int cart_show;
 	private int cart_totprice;
+	private int cart_check;
 	private String mem_id;
 	private String pro_code;
 	private String pro_name;
@@ -53,6 +54,12 @@ public class CartVO {
 	public void setCart_totprice(int cart_totprice) {
 		this.cart_totprice = cart_totprice;
 	}
+	public int getCart_check() {
+		return cart_check;
+	}
+	public void setCart_check(int cart_check) {
+		this.cart_check = cart_check;
+	}
 	public String getMem_id() {
 		return mem_id;
 	}
@@ -94,8 +101,8 @@ public class CartVO {
 	public String toString() {
 		return "CartVO [cart_code=" + cart_code + ", cart_start=" + cart_start + ", cart_day=" + cart_day
 				+ ", cart_cnt=" + cart_cnt + ", cart_show=" + cart_show + ", cart_totprice=" + cart_totprice
-				+ ", mem_id=" + mem_id + ", pro_code=" + pro_code + ", pro_name=" + pro_name + ", pro_price="
-				+ pro_price + ", pro_desc=" + pro_desc + ", pro_image=" + pro_image + "]";
+				+ ", cart_check=" + cart_check + ", mem_id=" + mem_id + ", pro_code=" + pro_code + ", pro_name="
+				+ pro_name + ", pro_price=" + pro_price + ", pro_desc=" + pro_desc + ", pro_image=" + pro_image + "]";
 	}
 	
 }

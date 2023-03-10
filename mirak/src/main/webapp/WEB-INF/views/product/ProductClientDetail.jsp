@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 
@@ -29,7 +30,8 @@
 
 				<div class="col-lg-6 mb-5 ftco-animate">
 					<a href="${path}/resources/images/product/${product.pro_image}"
-						class="image-popup"><img alt="1"
+						class="image-popup">
+						<img alt="1"
 						src="${path}/resources/images/product/${product.pro_image}"
 						style="width: 350px; height: 250px;"></a>
 				</div>
@@ -47,7 +49,7 @@
 
 						<div class="input-group col-md-6 d-flex mb-3">
 							 
-							<input type="text" id="result" name="pro_cnt"
+							<input type="text" id="result" name="cart_cnt"
 								class="form-control input-number" min="1" max="100"
 								placeholder="수량을 입력하세요" >
 								
@@ -55,20 +57,15 @@
 						</div>
 						
 						
-						<div id="print">총 금액:</div>
-						<button onclick="document.getElementById('print').innerHTML='innerHTML로 문구를 띄어주다'">출력</button>
-
 						
 
-
-
-
-<!-- formaction="" -->
+						
 					</div>
 					<br> <br>
 					<p>
-						<input type="submit" formaction="cartList" value="장바구니" class="btn btn-black py-3 px-5"> 
-						<input type="button" formaction="pay" value="즉시 구매" class="btn btn-black py-3 px-5">
+						<input type="submit" formaction="/cartClientList" value="장바구니" class="btn btn-black py-3 px-5"> 
+<!-- 						<input type="submit" formaction="/cartList" value="장바구니" class="btn btn-black py-3 px-5">  -->
+						<input type="submit" formaction="/pay" value="즉시 구매" class="btn btn-black py-3 px-5">
 					</p>
 				</div>
 			</div>
@@ -82,10 +79,6 @@
 
 
 <script>
-
-function multi(){
-	총 가격 : ${product.pro_price * pro_cnt}
-}
 
 </script>
 

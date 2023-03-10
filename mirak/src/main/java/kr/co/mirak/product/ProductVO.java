@@ -12,25 +12,9 @@ public class ProductVO {
 	private int pro_cnt;
 
 	private int cart_cnt;
-	
+
 	public String getPro_code() {
 		return pro_code;
-	}
-
-	public MultipartFile getUploadFile() {
-		return uploadFile;
-	}
-
-	public void setUploadFile(MultipartFile uploadFile) {
-		this.uploadFile = uploadFile;
-	}
-
-	public int getPro_cnt() {
-		return pro_cnt;
-	}
-
-	public void setPro_cnt(int pro_cnt) {
-		this.pro_cnt = pro_cnt;
 	}
 
 	public void setPro_code(String pro_code) {
@@ -69,11 +53,38 @@ public class ProductVO {
 		this.pro_price = pro_price;
 	}
 
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+	}
+
+	public int getPro_cnt() {
+		return pro_cnt;
+	}
+
+	public void setPro_cnt(int pro_cnt) {
+		this.pro_cnt = pro_cnt;
+	}
+
+	public int getCart_cnt() {
+		return cart_cnt;
+	}
+
+	public void setCart_cnt(int cart_cnt) {
+		this.cart_cnt = cart_cnt;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductVO [pro_code=" + pro_code + ", pro_name=" + pro_name + ", pro_desc=" + pro_desc + ", pro_image="
-				+ pro_image + ", pro_price=" + pro_price + ", uploadFile=" + uploadFile + "]";
+				+ pro_image + ", pro_price=" + pro_price + ", uploadFile=" + uploadFile + ", pro_cnt=" + pro_cnt
+				+ ", cart_cnt=" + cart_cnt + "]";
 	}
+	
+	
 
 	
 
