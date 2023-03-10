@@ -10,4 +10,7 @@ public interface CartMapper {
 	int insert(CartVO vo);
 	int update(CartVO vo);
 	int delete(int id);
+	
+	CartVO productToCart(CartVO vo);
+	
 }

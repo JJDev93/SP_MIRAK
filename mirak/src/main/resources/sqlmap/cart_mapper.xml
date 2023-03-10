@@ -23,11 +23,11 @@
 	
 	<!-- 카트 추가 -->
 	<insert id="insert">
-	
-		INSERT INTO CART (CART_CNT, CART_TOTPRICE, PRO_NAME, PRO_PRICE, PRO_DESC, PRO_IMAGE)
-		VALUES ( #{cart_cnt}, #{cart_totprice}, #{pro_name}, #{pro_price}, #{pro_desc}, #{pro_image} )
-		
-	</insert>
+   
+      INSERT INTO CART (MEM_ID, PRO_CODE, CART_CNT, CART_TOTPRICE, PRO_NAME, PRO_PRICE, PRO_DESC, PRO_IMAGE)
+      VALUES (#{mem_id}, #{pro_code}, #{cart_cnt}, #{cart_totprice}, #{pro_name}, #{pro_price}, #{pro_desc}, #{pro_image} )
+      
+   </insert>
 	
 	
 	<!-- 카트 수량 수정 -->
@@ -40,8 +40,18 @@
 	<!-- 카트 삭제 -->
 	<delete id="delete">
 	
-		DELETE FROM CART WHERE CAR_CODE = #{cart_code}
+		DELETE FROM CART WHERE CART_CODE = #{cart_code}
 	
 	</delete>
+	
+	<!-- product cartVO형태로 담기 -->
+   <select id="productToCart" resultType="kr.co.mirak.cart.CartVO">
+      <![CDATA[
+      SELECT *
+      FROM PRODUCT
+      WHERE pro_code = #{pro_code}
+      ]]>
+   </select>
+	
 	
   </mapper>

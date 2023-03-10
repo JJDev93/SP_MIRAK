@@ -2,6 +2,8 @@ package kr.co.mirak.cart;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 public class CartServiceImpl implements CartService {
@@ -35,10 +37,19 @@ public class CartServiceImpl implements CartService {
       return null;
    }
 
-   public int insert(CartVO vo) {
-      // TODO Auto-generated method stub
-      return 0;
-   }
+   public int insert(CartVO vo, HttpSession session) {
+	      
+	      String mem_id = (String)session.getAttribute("mem_id");
+	      int cart_cnt = vo.getCart_cnt();
+	      System.out.println(mem_id + cart_cnt);
+	      CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
+	      vo = mapper.productToCart(vo);      
+	      vo.setMem_id(mem_id);
+	      vo.setCart_cnt(cart_cnt);
+	      int result = mapper.insert(vo);      
+	      
+	      return result;
+	   }
 
    public int update(CartVO vo) {
       // TODO Auto-generated method stub
