@@ -4,15 +4,6 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 
-<script>
-function idPost() {
-   let hiddenForm = document.createElement('form');
-    hiddenForm.setAttribute('method', 'post');
-    hiddenForm.setAttribute('action', 'cartClientList');
-    document.body.appendChild(hiddenForm);
-    hiddenForm.submit();
-}
-</script>
 
 <div class="hero-wrap hero-bread"
    style="background-image: url('${path}/resources/images/bg_1.jpg');">
@@ -35,7 +26,7 @@ function idPost() {
             <div class="col-md-10 mb-5 text-center">
                <ul class="nav nav-tabs">
                   <li class="nav-item"><a class="nav-link active" href="mypage" >마이페이지</a></li>
-                  <li class="nav-item"><a class="nav-link" href="javascript:idPost()">장바구니</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/cartClientList">장바구니</a></li>
                   <li class="nav-item"><a class="nav-link" href="#">결제내역</a></li>
                </ul>
             </div>
@@ -44,7 +35,7 @@ function idPost() {
       <div class="container">
       <div class="row justify-content-center">
          <div class="col-xl-7 ftco-animate">
-            <form action="memupdate" method="post" class="contact-form">
+            <form action="memupdate" method="post" class="contact-form" id="delForm">
                <h3 class="mb-4 billing-heading">회원정보 수정</h3>
                <div class="row align-items-end">
                   <div class="container">
@@ -115,13 +106,19 @@ function idPost() {
                         <input type="submit" value="수정하기" class="btn btn-primary py-3 px-5">
                      </div>
                      <div class="col-md-6 text-center">
-								<button type="button" class="btn btn-secondary py-3 px-5 l-100" data-toggle="modal" data-target="#exampleModal">회원탈퇴</button>
+								<button type="button" id="submit" class="btn btn-secondary py-3 px-5 l-100" data-toggle="modal" data-target="#exampleModal">회원탈퇴</button>
 							</div>
                   </div>
             </form>
+            
+            
+     
+            
+            
          </div>
       </div>
    </div>
+   
    <!-- Modal -->
 	<form action="memdelete", method="post">
 		<div class="modal fade" id="exampleModal" tabindex="9999"
@@ -146,6 +143,11 @@ function idPost() {
 			</div>
 		</div>
 	</form>
+	
+
+	
+	
+	
 </section>
 
 <jsp:include page="/common/client_ft.jsp"></jsp:include>

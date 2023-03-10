@@ -14,37 +14,44 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
 	<!-- DB -->
-	<context:property-placeholder location="classpath:config/database.properties" />
-	
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<context:property-placeholder
+		location="classpath:config/database.properties" />
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driver}" />
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>
 
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath:/sqlmap/**/*_mapper.xml" />
-		<property name="configLocation" value="classpath:sql-map-config.xml"/>
+		<property name="mapperLocations"
+			value="classpath:/sqlmap/**/*_mapper.xml" />
+		<property name="configLocation"
+			value="classpath:sql-map-config.xml" />
 	</bean>
 
-	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+	<bean id="sqlSessionTemplate"
+		class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
-	
-	
+
+
 	<!-- Transaction 설정 -->
-	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	<tx:advice id="txAdvice" transaction-manager="txManager">
 		<tx:attributes>
-			<tx:method name="get*" read-only="true"/>
-			<tx:method name="*"/>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="*" />
 		</tx:attributes>
 	</tx:advice>
-	
+
 	<!-- 파일 업로드를 위한 MutipartResolver 구현체 CommonsMultipartResolver bean 등록 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -52,6 +59,11 @@
 		<property name="maxUploadSizePerFile" value="104857600" />
 		<property name="maxInMemorySize" value="104857600" />
 	</bean>
-	
+
+
+
+	<!-- email 인증 관련 -->
+
+
 
 </beans>

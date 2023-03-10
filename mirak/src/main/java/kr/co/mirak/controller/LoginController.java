@@ -28,25 +28,36 @@ public class LoginController {
 	
 	//로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(MemberVO memberVO, ModelAndView mav, HttpSession session) {
+	public String login(MemberVO memberVO, HttpSession session, Model model) {
+		System.out.println("로그인을 시도합니다.");
+		String returnURL = "";
+		String preUrl = (String) session.getAttribute("pre_url");
+		System.out.println("preUrl : " + preUrl);
+		
 		try {
 			String mem_id = memberService.login(memberVO).getMem_id();
 			if (mem_id != null) {
 				session.setAttribute("mem_id", mem_id);
-				System.out.println("로그인 성공!!");
-				mav.setViewName("redirect:/");
+				System.out.println("로그인 성공!");
+				if(preUrl != null) {
+					System.out.println("이전 페이지로 이동");
+					returnURL = "redirect:"  + preUrl;
+				}else {
+					System.out.println("메인으로 이동");
+					returnURL = "redirect:/";
+				}
 			} else {
-				System.out.println("로그인 실패");
-				mav.setViewName("member/login");
+				System.out.println("로그인 실패ㅠ 로그인 페이지로 이동");
+				returnURL = "member/login";
 			}
-			return mav;
+			
 		}catch (Exception e) {
 			e.printStackTrace();
-			mav.setViewName("member/login");
-			mav.addObject("message", "아이디와 비밀번호 확인해주세요......");
-			System.out.println(mav);
-			return mav;
+			returnURL = "member/login";
+			model.addAttribute("message", "아이디와 비밀번호 확인해주세요......");
 		}
+		session.removeAttribute("pre_url");
+		return returnURL;
 	}
 		
 	//로그아웃
