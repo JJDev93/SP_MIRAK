@@ -8,7 +8,7 @@
 function idPost() {
    let hiddenForm = document.createElement('form');
     hiddenForm.setAttribute('method', 'post');
-    hiddenForm.setAttribute('action', 'cartList');
+    hiddenForm.setAttribute('action', 'cartClientList');
     document.body.appendChild(hiddenForm);
     hiddenForm.submit();
 }
