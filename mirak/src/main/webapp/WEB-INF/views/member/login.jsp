@@ -56,7 +56,9 @@
 					<label for="PW">비밀번호</label>
 						<input type="password" id="PW" class="form-control" name="mem_pw" placeholder="비밀번호" required="required">
 					</div>
-					
+					<div>
+						<label style="color:red">${message }</label>
+					</div>
 					<div class="form-group row">
 						<div class="col-md-6">
 							<input type="submit" value="로그인" class="btn btn-primary py-3 px-5 w-100">
@@ -114,5 +116,3 @@
 	</div>
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
-</body>
-</html>

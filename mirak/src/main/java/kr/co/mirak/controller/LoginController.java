@@ -29,8 +29,8 @@ public class LoginController {
 	//로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(MemberVO memberVO, ModelAndView mav, HttpSession session) {
-		String mem_id = memberService.login(memberVO).getMem_id();
 		try {
+			String mem_id = memberService.login(memberVO).getMem_id();
 			if (mem_id != null) {
 				session.setAttribute("mem_id", mem_id);
 				if (mem_id.equals("admin")) {
@@ -44,11 +44,14 @@ public class LoginController {
 				System.out.println("로그인 실패");
 				mav.setViewName("member/login");
 			}
-			
+			return mav;
 		}catch (Exception e) {
 			e.printStackTrace();
+			mav.setViewName("member/login");
+			mav.addObject("message", "아이디와 비밀번호 확인해주세요......");
+			System.out.println(mav);
+			return mav;
 		}
-		return mav;
 	}
 		
 	//로그아웃

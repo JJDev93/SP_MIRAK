@@ -1,6 +1,7 @@
 package kr.co.mirak.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.mirak.member.MemberService;
 import kr.co.mirak.member.MemberVO;
@@ -20,24 +20,18 @@ public class AdminMemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping(value="/adminMembers", method=RequestMethod.GET)
-	public String getMemeberList(Model model) {
-		List<MemberVO> memberList = memberService.getMemberList();
+	@RequestMapping(value={"/adminMembers", "/adminMembers/{pageStart}"}, method=RequestMethod.GET)
+	public String getMemeberList(@PathVariable Optional<Integer> pageStart, Model model) {
+		List<MemberVO> memberList = memberService.getMemberList(pageStart);
 		model.addAttribute("memberList", memberList);
 		return "member/admin_member_list";
 	}
 	
-	@RequestMapping(value="/adminMembers/{pageInfo}", method=RequestMethod.GET)
-	public String getMemeberList(@PathVariable int pageInfo, Model model) {
-		List<MemberVO> memberList = memberService.getMemberList();
-		model.addAttribute("memberList", memberList);
-		return "member/admin_member_list";
-	}
-
-	@RequestMapping(value="/adminMembers/{memberid}", method=RequestMethod.GET)
-	public String getMemeberDetail(@PathVariable String memberid, MemberVO vo, Model model) {
-		vo.setMem_id(memberid);
-		MemberVO member = memberService.getMemberDetail(vo);
+	@RequestMapping(value="/adminMember/{memId}", method=RequestMethod.GET)	
+	public String getMemberDetail(@PathVariable String memId, Model model) {
+		System.out.println("====== 어드민 상세페이지 ======");
+		System.out.println("memId = " + memId);
+		MemberVO member = memberService.getMemberDetail(memId);
 		model.addAttribute("member", member);
 		return "member/admin_member_detail";
 	}

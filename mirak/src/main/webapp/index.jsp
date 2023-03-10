@@ -246,7 +246,6 @@
 	<!-- END 공지, 추천 -->
 
 	<jsp:include page="./common/client_ft.jsp"></jsp:include>
-	<script src="${path}/resources/js/main.js"></script>
 </body>
 
 </html>
