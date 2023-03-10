@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.mirak.product.Criteria;
+import kr.co.mirak.product.PageMakerDTO;
 import kr.co.mirak.product.ProductService;
 import kr.co.mirak.product.ProductVO;
 
@@ -20,9 +23,15 @@ public class ProductController {
 
 	// 상품 Admin 리스트
 	@RequestMapping("/ProductAdminList")
-	public String productList(ProductVO vo, Model model) {
+	public String productadminList(ProductVO vo, Model model, Criteria cri) {
 
-		model.addAttribute("productList", productService.productList(vo));
+		model.addAttribute("productList", productService.getListPaging(cri));
+
+		int total = productService.getTotal();
+
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+
+		model.addAttribute("pageMaker", pageMake);
 
 		return "/product/ProductAdminList";
 
@@ -30,39 +39,70 @@ public class ProductController {
 
 //	 상품 Client 리스트
 	@RequestMapping("/ProductClientList")
-	public String productclientList(ProductVO vo, Model model)  {
+	public String productList(ProductVO vo, Model model, Criteria cri) {
 
-		model.addAttribute("productList", productService.productList(vo));	
+//		model.addAttribute("productList", productService.productList(vo));
+		model.addAttribute("productList", productService.getListPaging(cri));
+		int total = productService.getTotal();
 
-		
-		
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+
+		model.addAttribute("pageMaker", pageMake);
 		return "/product/ProductClientList";
 
 	}
 
+//	 상품 Client 리스트
+//	@RequestMapping("/ProductClientList")
+//	public String productclientList(ProductVO vo, Model model) {
+//
+//		model.addAttribute("productList", productService.productList(vo));
+//
+//		return "/product/ProductClientList";
+//
+//	}
+
 //	 상품 Client 프리미엄 리스트
 	@RequestMapping("/ProductClientListP")
-	public String productclientList1(ProductVO vo, Model model) {
+	public String productclientList1(ProductVO vo, Model model, Criteria cri) {
 
-		model.addAttribute("productList", productService.productList1(vo));
+		model.addAttribute("productList", productService.productList1(cri));
+//		model.addAttribute("productList", productService.getListPaging(cri));
+		int total = productService.getTotalP();
+
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+
+		model.addAttribute("pageMaker", pageMake);
 
 		return "/product/ProductClientList";
 	}
 
 //	 상품 Client 2,3인 리스트
 	@RequestMapping("/ProductClientListT")
-	public String productclientList2(ProductVO vo, Model model) {
+	public String productclientList2(ProductVO vo, Model model, Criteria cri) {
 
-		model.addAttribute("productList", productService.productList2(vo));
+		model.addAttribute("productList", productService.productList2(cri));
+//		model.addAttribute("productList", productService.getListPaging(cri));
+		int total = productService.getTotalT();
+
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+
+		model.addAttribute("pageMaker", pageMake);
 
 		return "/product/ProductClientList";
 	}
 
 //	 상품 Client 1인 리스트
 	@RequestMapping("/ProductClientListO")
-	public String productclientList3(ProductVO vo, Model model) {
+	public String productclientList3(ProductVO vo, Model model, Criteria cri) {
 
-		model.addAttribute("productList", productService.productList3(vo));
+		model.addAttribute("productList", productService.productList3(cri));
+//		model.addAttribute("productList", productService.getListPaging(cri));
+		int total = productService.getTotalO();
+
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+
+		model.addAttribute("pageMaker", pageMake);
 
 		return "/product/ProductClientList";
 	}
@@ -75,7 +115,7 @@ public class ProductController {
 	}
 
 	// 상품 등록
-	@RequestMapping(value = "/productregister")
+	@RequestMapping(value = "/productregister", method = RequestMethod.POST)
 	public String productregister(ProductVO vo) throws IOException {
 
 		// 파일 업로드 처리
@@ -93,7 +133,7 @@ public class ProductController {
 	}
 
 	// 상품 Client 상세 페이지
-	@RequestMapping(value = "/ProductClientDetail")
+	@RequestMapping(value = "/ProductClientDetail/{pro_code}")
 	public String productclientDetail(ProductVO vo, Model model) {
 
 		model.addAttribute("product", productService.productDetail(vo));
@@ -104,7 +144,7 @@ public class ProductController {
 	}
 
 	// 상품 Admin 상세 페이지
-	@RequestMapping(value = "/ProductAdminDetail")
+	@RequestMapping(value = "/ProductAdminDetail/{pro_code}")
 	public String productDetail(ProductVO vo, Model model) {
 		model.addAttribute("product", productService.productDetail(vo));
 
@@ -115,7 +155,7 @@ public class ProductController {
 	}
 
 	// 상품 수정
-	@RequestMapping("/productupdate")
+	@RequestMapping(value = "/productupdate")
 	public String updateProduct(ProductVO vo) {
 		productService.updateProduct(vo);
 
@@ -129,22 +169,5 @@ public class ProductController {
 
 		return "redirect:/ProductAdminList";
 	}
-
-	// 장바구니 화면으로 이동
-//	@RequestMapping(value = "/ProductAdminRegister")
-//	public String productcartList() {
-//
-//		return "/product/ProductAdminRegister";
-//	}
-	
-	@RequestMapping(value = "/pay")
-	public String productPay() {
-		
-	
-		return "/pay/pay";
-	}
-	
-	
-	
 
 }
