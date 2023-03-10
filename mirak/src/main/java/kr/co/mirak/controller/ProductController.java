@@ -74,7 +74,7 @@ public class ProductController {
 
 		model.addAttribute("pageMaker", pageMake);
 
-		return "/product/ProductClientListP";
+		return "/product/ProductClientList";
 	}
 
 //	 상품 Client 2,3인 리스트
@@ -89,7 +89,7 @@ public class ProductController {
 
 		model.addAttribute("pageMaker", pageMake);
 
-		return "/product/ProductClientListT";
+		return "/product/ProductClientList";
 	}
 
 //	 상품 Client 1인 리스트
@@ -104,7 +104,7 @@ public class ProductController {
 
 		model.addAttribute("pageMaker", pageMake);
 
-		return "/product/ProductClientListO";
+		return "/product/ProductClientList";
 	}
 
 	// 상품 등록 페이지 이동
