@@ -18,6 +18,14 @@
 	</div>
 </div>
 
+<%
+session = request.getSession();
+
+
+%>
+
+
+<form action="/cartList" method="post">
 <section class="ftco-section ftco-cart">
 	<div class="container">
 		<div class="row">
@@ -30,7 +38,7 @@
 								<th>상품명</th>
 								<th>가격</th>
 								<th>요일선택</th>
-								<th>배송횟수</th>
+								<th>갯수</th>
 								<th>총가격</th>
 								<th>
 									<div class="all_check_input_div">
@@ -45,7 +53,7 @@
 								<tr class="text-center">
 									<td class="image-prod"><div>${c.pro_image }</div></td>
 									<td class="product-name">
-										<h3>${c.pro_name }</h3>
+										<h3>${c.pro_code } ${c.pro_name }</h3>
 										<p>${c.pro_desc }</p>
 									</td>
 									<td>${c.pro_price }</td>
@@ -55,17 +63,20 @@
 											<input type="text" value="${c.cart_cnt}" class="quantity_input">
 											<button class="quantity_btn plus_btn">+</button>
 											<button class="quantity_btn minus_btn">-</button>
-										</div> <a class="quantity_update_btn" data-cartId="${c.cart_code}">변경</a>
+										</div>
+										<a class="quantity_update_btn" data-cartId="${c.cart_code}">변경</a>
 									</td>
 									<td>${c.pro_price * c.cart_cnt }</td>
-									<td class="cart_info"><input type="checkbox"
-										class="cart_checkbox" checked="checked"> <input
-										type="hidden" class="price_input" value="${c.pro_price }">
+									<td class="cart_info">${c.cart_check }
+										<input type="checkbox" class="cart_checkbox" checked="checked">
+										<input type="hidden" class="price_input" value="${c.pro_price }">
 										<input type="hidden" class="count_input" value="${c.cart_cnt }">
-										<input type="hidden" class="totalPrice_input"
-										value="${c.pro_price * c.cart_cnt }"></td>
+										<input type="hidden" class="totalPrice_input" value="${c.pro_price * c.cart_cnt }">
+										<input type="hidden" class="_input" value="${c.pro_code }">
+									</td>
 								</tr>
 							</c:forEach>
+</form>
 
 							<!-- 수량 조정 form -->
 							<form action="/cart/update" method="post" class="quantity_update_form">
@@ -73,6 +84,11 @@
 								<input type="hidden" name="count" class="update_count">
 								<input type="hidden" name="mem_id" value="${c.mem_id}">
 							</form>
+							
+							<!-- 주문 form -->
+							<form action="/pay/${c.mem_id}" method="post" class="pay_form">
+
+							</form>			
 							<!-- END TR-->
 						</tbody>
 					</table>
@@ -97,7 +113,7 @@
 				</p>
 			</div>
 			<p>
-				<input class="btn btn-primary py-3 px-4" type="submit" value="결제하기">
+				<input class="pay_btn btn-primary py-3 px-4" type="submit" value="결제하기">
 			</p>
 		</div>
 	</div>
@@ -201,5 +217,34 @@
 		$(".update_count").val(count);
 		$(".quantity_update_form").submit();
 
+	});
+	
+	// 결제 페이지 이동 
+	$(".pay_btn").on("click", function(){
+		
+		let form_contents ='';
+		let orderNumber = 0;
+		
+		$(".cart_info").each(function (index, element) {
+			
+			if($(element).find(".cart_checkbox").is(":checked") === true) {	// 체크 여부 확인
+				
+				let pro_name = $(element).find(".pro_name_input").val();
+				let cart_cnt = $(element).find(".cart_cnt_input").val();
+				
+				let pro_name_input = "<input name='orders[" + orderNumber + "].pro_name' type='hidden' value='" + pro_name + "'>";
+				form_contents += pro_name_input;
+				
+				let cart_cnt_input = "<input name='orders[" + orderNumber + "].cart_cnt' type='hidden' value='" + cart_cnt + "'>";
+				form_contents += cart_cnt_input;
+				
+				orderNumber += 1;
+				
+			}
+		});	
+
+		$(".pay_form").html(form_contents);
+		$(".pay_form").submit();
+		
 	});
 </script>
