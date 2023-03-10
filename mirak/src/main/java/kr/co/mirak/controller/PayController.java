@@ -89,10 +89,10 @@ public class PayController {
 		return "pay/pay";
 	}
 
-//	@RequestMapping(value = "/payApproval", method = RequestMethod.GET)
-//	public String payApproval(Model model) {
-//		return "pay/payApproval";
-//	}
+	@RequestMapping(value = "/payApproval", method = RequestMethod.GET)
+	public String payApproval(Model model) {
+		return "pay/payApproval";
+	}
 
 	@RequestMapping(value = "/payCancel", method = RequestMethod.GET)
 	public String payCancel(Model model) {
@@ -130,11 +130,10 @@ public class PayController {
  
 		// 실제 결제
 		
-		
-		
-		
 		// mypage 결제내역으로 이동 아직 페이지 없음
 		return "redirect:/mypage";
 	}
+	
+	
 
 }

@@ -48,13 +48,14 @@ public class MemberServiceImpl implements MemberService {
 		int updatesuccess  = mapper.memupdate(vo);
 		return updatesuccess;
 	}
-	
-	public int memdelete(MemberVO vo) {
-		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		int success  = mapper.memdelete(vo);
-		return success;
-	}
 
+	@Override
+	public int memdelete(MemberVO vo){
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		int seccess = mapper.memdelete(vo);
+		return seccess;	
+	}
+	
 
 	//아이디체크
 	@Override
@@ -89,13 +90,16 @@ public class MemberServiceImpl implements MemberService {
 		return memVO;
 	}
 	
+	
+	
 	//멤버 체크
 	@Override
 	public int memberCheck(MemberVO vo) {
-		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		int result = mapper.memberCheck(vo);
-		return result;
+	MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+	int result = mapper.memberCheck(vo);
+	return result;
 	}
+
 
 	
 	
@@ -123,4 +127,5 @@ public class MemberServiceImpl implements MemberService {
 	//여기까지
 	
 	
+
 }

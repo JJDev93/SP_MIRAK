@@ -13,8 +13,10 @@ public interface MemberMapper {
 //	List<MemberVO> getMemberList(Integer page);
 	MemberVO getMemberInfo(String memId);
 	int idCheck(String id);
+	
 	int memberCheck(MemberVO vo);
 	
+
 	// 김원중이 건드린 부분
 	
 	/* 게시판 총 갯수 */
@@ -30,5 +32,4 @@ public interface MemberMapper {
     // 여기까지!
     
     
-	
 }

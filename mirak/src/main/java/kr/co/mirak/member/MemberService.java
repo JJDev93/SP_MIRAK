@@ -18,7 +18,7 @@ public interface MemberService {
 	MemberVO getMemberDetail(String memId);
 	int idCheck(String id) throws Exception;
 	int memberCheck(MemberVO vo);;
-	
+
 	//김원중이 건드린 부분
 	
 	/* 게시판 총 갯수 */
@@ -29,4 +29,5 @@ public interface MemberService {
 	MemberVO getMemberDetail(MemberVO mvo);
 	
 	//여기까지
+
 }

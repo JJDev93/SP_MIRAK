@@ -110,7 +110,16 @@ document.addEventListener('DOMContentLoaded', function(){
 							</div>
 							
 							
+							
 						</div>
+						
+						<!-- 카카오페이 관련 -->
+						
+						
+						
+						
+						
+						
 					</form>
 					<!-- END -->
 				</div>
@@ -241,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			let totalPrice = parseInt($("#total-price").text().replace(/,/g,''))
 			let discountPrice = totalPrice - totalPayPrice 
 			let usePoint = $("#point-use").val()
-			let useUserCouponNo = $(":radio[name='userCoupon']:checked").val()
+			
 			
 			// 카카오페이 결제전송
 			$.ajax({
@@ -256,7 +265,6 @@ document.addEventListener('DOMContentLoaded', function(){
 					,tel:tel
 					,email:email
 					,usePoint:usePoint
-					,useCouponNo:useUserCouponNo	
 					
 				},
 				success:function(response){
