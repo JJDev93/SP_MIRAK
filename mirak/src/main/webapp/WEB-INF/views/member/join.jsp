@@ -4,19 +4,7 @@
 
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
-<style>
 
-/* 중복아이디 존재하지 않는경우 */
-.id_input_re_1 {
-	color: green;
-	display: none;
-}
-/* 중복아이디 존재하는 경우 */
-.id_input_re_2 {
-	color: red;
-	display: none;
-}
-</style>
 
 <div class="hero-wrap hero-bread"
 	style="background-image: url('${path}/resources/images/bg_1.jpg');">
@@ -25,7 +13,8 @@
 			class="row no-gutters slider-text align-items-center justify-content-center">
 			<div class="col-md-9 ftco-animate text-center">
 				<p class="breadcrumbs">
-					<span class="mr-2"><a href="index.html">Welecom to MiRak</a></span> <span></span>
+					<span class="mr-2"><a href="index.html">Welecom to MiRak</a></span>
+					<span></span>
 				</p>
 				<h1 class="mb-0 bread">Join Page</h1>
 			</div>
@@ -42,19 +31,35 @@
 						<div class="container">
 							<div class="row block-9">
 								<div class="col-md-12 order-md-last ">
-								
-								<div class="form-group">
-								<label for="id">아이디</label>
-								<div class="row mb-4">
-									<div class="col-sm-8">
-										<input type="email" name="mem_id" id="id" class="form-control" placeholder="이메일(ID)" required="required">
-											
-									</div>
-									<div class="col-sm-4">
-										<button type="button" class="form-control" value="N" id="idCheck" onclick="fn_idCheck();" >중복확인</button>
-									</div>
-								</div>
-																						
+
+									<div class="form-group">
+										<label for="id">이메일(ID)</label>
+										<div class="row mb-4">
+											<div class="col-sm-6">
+												<input type="email" path="memMail" name="mem_id" id="id"
+													class="form-control" placeholder="이메일(ID)"
+													required="required">
+											</div>
+
+											<div class="col-sm-3">
+												<button type="button" class="form-control" value="N"
+													id="idCheck" onclick="fn_idCheck();">중복확인</button>
+											</div>
+
+											<div class="col-sm-3">
+												<button type="button" id="mailAuth" onclick="return false;"
+													class="form-control mb-2">메일인증</button>
+											</div>
+
+											<div class="col-sm-6">
+
+												<input class="form-control mail_check_input"
+													placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled"
+													maxlength="6"> <span id="mail_check_warn"></span>
+
+											</div>
+										</div>
+
 									</div>
 
 									<div class="form-group">
@@ -115,20 +120,21 @@
 						<div class="w-100"></div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label for="streetaddress">Address</label>
+								<label for="streetaddress">주소</label>
 								<div class="row mb-4">
 									<div class="col-sm-8">
-										<input type="text" class="form-control"
+										<input type="text" class="form-control" id="address_input_1" name="mem_zipcode"
 											placeholder="주소지를 입력해주세요" readonly="readonly">
 									</div>
 									<div class="col-sm-4">
-										<input type="button" class="form-control" value="주소찾기">
+										<button type="button" class="form-control address button" 
+											onclick="execution_daum_address();">우편번호찾기</button>
 									</div>
 								</div>
 
 
-								<input type="text" class="form-control mb-4" readonly="readonly">
-								<input type="text" class="form-control" placeholder="싱세주소작성">
+								<input type="text" class="form-control mb-4" readonly="readonly" id="address_input_2" placeholder="주소작성" readonly="readonly" name="mem_add1" >
+								<input type="text" class="form-control" placeholder="상세주소작성"  id="address_input_3" readonly="readonly" name="mem_add2" >
 							</div>
 						</div>
 
@@ -150,4 +156,9 @@
 		</div>
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
+
+
+	
+
+
 
