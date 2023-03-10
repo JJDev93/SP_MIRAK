@@ -25,7 +25,7 @@ session = request.getSession();
 %>
 
 
-<form action="/cartList" method="post">
+<form action="/cartpay" method="post">
 <section class="ftco-section ftco-cart">
 	<div class="container">
 		<div class="row">
@@ -51,7 +51,9 @@ session = request.getSession();
 						<tbody>
 							<c:forEach var="c" items="${cartList }">
 								<tr class="text-center">
-									<td class="image-prod"><div>${c.pro_image }</div></td>
+									<td class="image-prod"><div><img alt="1"
+						src="${path}/resources/images/product/${c.pro_image}"
+						style="width: 200px; height: 150px;"></div></td>
 									<td class="product-name">
 										<h3>${c.pro_code } ${c.pro_name }</h3>
 										<p>${c.pro_desc }</p>

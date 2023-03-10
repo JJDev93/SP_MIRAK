@@ -12,20 +12,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.mirak.cart.CartService;
 import kr.co.mirak.cart.CartVO;
+import kr.co.mirak.product.ProductService;
 
 @Controller
 public class CartController {
 	
 	@Autowired 
-	private CartService service;
+	private CartService cartService;
 	
+	@Autowired
+	private ProductService productService;
 	
 	@RequestMapping(value = "/cartClientList", method = RequestMethod.GET)	
 	public String cartClientList(Model model, CartVO vo, HttpSession session) {
 		String mem_id = (String)session.getAttribute("mem_id");
 		vo.setMem_id(mem_id);
 		
-		List<CartVO> list = service.cartClientList(vo);
+		List<CartVO> list = cartService.cartClientList(vo);
 		model.addAttribute("cartList", list);
 		
 		System.out.println(mem_id + "의 카트 리스트");
@@ -33,23 +36,27 @@ public class CartController {
 		return "cart/cart";
 	}
 	
-	@RequestMapping(value = "/cartClientList", method = RequestMethod.POST)	// client cart
-	public String cartList(Model model, CartVO vo, HttpSession session) {
+	@RequestMapping(value = "/cartClientList", method = RequestMethod.POST)   // client cart
+    public String cartList(Model model, CartVO vo, HttpSession session) {
+    
+       System.out.println(vo);
+       String mem_id = (String)session.getAttribute("mem_id");
+       
+       cartService.insert(vo, session);
+       String pro_code =  vo.getPro_code();
+       
+       vo.setMem_id(mem_id);
+       
+       List<CartVO> list = cartService.cartClientList(vo);
+       model.addAttribute("cartList", list);
+       System.out.println(list);
+       return "cart/cart";
+    }
 		
-		String mem_id = (String)session.getAttribute("mem_id");
-		vo.setMem_id(mem_id);
-		
-		System.out.println(mem_id + "의 카트 리스트");
-		
-		List<CartVO> list = service.cartClientList(vo);
-		model.addAttribute("cartList", list);
-		System.out.println(list);
-		return "cart/cart";
-	}
 	
 	@RequestMapping(value = "/cartAdminList", method = RequestMethod.GET)
 	public String cartList2(Model model) {
-		List<CartVO> list = service.cartAdminList();
+		List<CartVO> list = cartService.cartAdminList();
 		model.addAttribute("cartList", list);
 		return "cart/cart_admin";
 	}
@@ -59,7 +66,7 @@ public class CartController {
 
 		model.addAttribute("CartVO", "");
 
-		return "pay/pay";
+		return "/cartpay";
 	}
 	
 }
