@@ -26,7 +26,7 @@
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
-				<input type="hidden" name="pro_code" value="pro_code">
+				<input type="hidden" name="pro_code" value="${product.pro_code }">
 
 				<div class="col-lg-6 mb-5 ftco-animate">
 					<a href="${path}/resources/images/product/${product.pro_image}"
