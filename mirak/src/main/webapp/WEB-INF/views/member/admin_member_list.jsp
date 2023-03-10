@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!-- 이 부분 필요하면 삭제! -->
+<style>
+li{
+
+float:left;
+margin-right:10px;
+
+}
+</style>
+
+<div id="test">  <!-- 이 부분 필요하면 삭제! -->
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <div class="ftco-section">
 	<div class="container">
@@ -45,7 +56,7 @@
 					<tbody>
 						<c:forEach items="${memberList}" var="member">
 						<tr>
-							<td scope="row"><a href="/adminMember/${member.mem_id}">${member.mem_id }</a></td>
+							<td scope="row"><a href="adminMember/${member.mem_id}">${member.mem_id }</a></td>
 							<td>${member.mem_name }</td>
 							<td>${member.mem_age }</td>
 							<td>
@@ -66,21 +77,72 @@
 				</table>
 			</div>
 		</div>
-		<div class="row mt-5">
-			<div class="col text-center">
-				<div class="block-27">
-					<ul>
-						<li><a href="#">&lt;</a></li>
-						<li class="active"><span>1</span></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#">&gt;</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
+<!-- 		<div class="row mt-5"> -->
+<!-- 			<div class="col text-center"> -->
+<!-- 				<div class="block-27"> -->
+<!-- 					<ul> -->
+<!-- 						<li><a href="#">&lt;</a></li> -->
+<!-- 						<li class="active"><span>1</span></li> -->
+<!-- 						<li><a href="#">2</a></li> -->
+<!-- 						<li><a href="#">3</a></li> -->
+<!-- 						<li><a href="#">4</a></li> -->
+<!-- 						<li><a href="#">5</a></li> -->
+<!-- 						<li><a href="#">&gt;</a></li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+
+
+<!--  김원중이 건드린 부분 -->
+		 <div class="row mt-5" >
+        <div class="col text-center">
+        	<div class="block-27">
+ 			<!-- 각 번호 페이지 버튼 -->
+ 				<table>
+ 				<tr>
+                <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+               		 <ul style="text-align:center;">
+						<li class="pageInfo_btn"><a href="javascript:acyncMovePage('adminMembers?pageNum=${num}');">${num}</a></li>
+                    </ul>                
+                </c:forEach>
+                </tr>
+                </table>
+                </div>
+        </div>
+    </div>
+<!--  여기까지!  -->
+
+
+
 	</div>
 </div>
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>
+
+</div> <!-- 이 부분 필요하면 삭제! -->
+
+
+<!-- 이 부분 필요하면 삭제! -->
+<script>
+
+
+ function acyncMovePage(url){
+    // ajax option
+    var ajaxOption = {
+            url : url,
+            async : true,
+            type : "GET",
+            dataType : "html",
+            cache : false
+    };
+    
+    $.ajax(ajaxOption).done(function(data){
+        // Contents 영역 삭제
+        $('#test').children().remove();
+        // Contents 영역 교체
+        $('#test').html(data);
+    });
+}
+
+</script>
+<!-- 여기까지! -->

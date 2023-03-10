@@ -62,6 +62,7 @@ public class PayController {
 	    List<ProductVO> list = new ArrayList<ProductVO>();
 	    list.add(productVO);
 	    
+	    System.out.println(productVO);
 	    model.addAttribute("codecheck", 0);
 	    model.addAttribute("productList", list);
 	    
