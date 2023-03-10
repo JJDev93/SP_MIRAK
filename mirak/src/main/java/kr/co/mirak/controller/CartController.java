@@ -44,23 +44,23 @@ public class CartController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/cartList", method = RequestMethod.POST)	// client cart
+	@RequestMapping(value = "/cartClientList", method = RequestMethod.POST)	// client cart
 	public String cartList(Model model, CartVO vo, HttpSession session) {
 		
 		String mem_id = (String)session.getAttribute("mem_id");
 		vo.setMem_id(mem_id);
 		System.out.println("mem_id : "+mem_id);
 		
-		List<CartVO> list = service.list(vo);
+		List<CartVO> list = service.cartClientList(vo);
 		model.addAttribute("cartList", list);
 		System.out.println(list);
 		return "cart/cart";
 	}
 	
-	@RequestMapping(value = "/cartList2", method = RequestMethod.POST)	// admin cart
-	public String cartList2(Model model,  CartVO vo) {
+	@RequestMapping(value = "/cartAdminList", method = RequestMethod.GET)	// admin cart
+	public String cartList2(Model model) {
 		
-		List<CartVO> list = service.list(vo);
+		List<CartVO> list = service.cartAdminList();
 		model.addAttribute("cartList", list);
 		return "cart/cart_admin";
 	}
