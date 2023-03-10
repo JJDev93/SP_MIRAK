@@ -23,7 +23,6 @@ public class CartController {
 	@Autowired
 	private ProductService productService;
 	
-	
 	@RequestMapping(value = "/cartClientList", method = RequestMethod.GET)	
 	public String cartClientList(Model model, CartVO vo, HttpSession session) {
 		String mem_id = (String)session.getAttribute("mem_id");
