@@ -15,27 +15,10 @@ public class Interceptor extends HandlerInterceptorAdapter{
 	static final String[] EXCLUDE_URL_LIST = {"/admin", "/join", "/idCheck", "/login", "/ProductClientList", "/ProductClientListP", "/ProductClientListT", "/ProductClientListQ", "/ProductClientDetail" };
 
 	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-		// TODO Auto-generated method stub
-		super.postHandle(request, response, handler, modelAndView);
-	}
-
-	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-		// TODO Auto-generated method stub
-		super.afterCompletion(request, response, handler, ex);
-	}
-
-	@Override
-	public void afterConcurrentHandlingStarted(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		// TODO Auto-generated method stub
-		super.afterConcurrentHandlingStarted(request, response, handler);
-	}
-
-	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		System.out.println("[preHandle]");
 		String regUrl = request.getRequestURL().toString();
-
+		
 		for (String target : EXCLUDE_URL_LIST) {
 			if (regUrl.indexOf(target) > -1) {
 				return true;
@@ -44,13 +27,32 @@ public class Interceptor extends HandlerInterceptorAdapter{
 
 		HttpSession session = request.getSession();
 		String memberId = (String) session.getAttribute("mem_id");
-
+		
 		if(memberId == null || memberId.trim().equals("")) {
 			logger.info(">> interceptor catch!!! mem_id is null.. ");
 			session.invalidate();
+			
+			String preUrl = request.getRequestURI().toString();
+
+			System.out.println("-------------------");
+			System.out.println("mem_id : " + memberId);
+			System.out.println("getRequestURI : " + request.getRequestURI().toString());
+			System.out.println("-------------------");
+			
+			request.getSession().setAttribute("pre_url", preUrl);
+			
 			response.sendRedirect(request.getContextPath() + "/login");
 			return false;
+		} else {
+			return true;
 		}
-		return true;
+		
+	}
+	
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("[postHandle]");
+		super.postHandle(request, response, handler, modelAndView);
 	}
 }

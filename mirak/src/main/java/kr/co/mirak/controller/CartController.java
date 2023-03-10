@@ -19,6 +19,20 @@ public class CartController {
 	@Autowired 
 	private CartService service;
 	
+	
+	@RequestMapping(value = "/cartClientList", method = RequestMethod.GET)	
+	public String cartClientList(Model model, CartVO vo, HttpSession session) {
+		String mem_id = (String)session.getAttribute("mem_id");
+		vo.setMem_id(mem_id);
+		
+		List<CartVO> list = service.cartClientList(vo);
+		model.addAttribute("cartList", list);
+		
+		System.out.println(mem_id + "의 카트 리스트");
+		System.out.println(list);
+		return "cart/cart";
+	}
+	
 	@RequestMapping(value = "/cartClientList", method = RequestMethod.POST)	// client cart
 	public String cartList(Model model, CartVO vo, HttpSession session) {
 		
