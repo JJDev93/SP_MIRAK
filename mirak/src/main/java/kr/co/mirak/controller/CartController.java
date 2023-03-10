@@ -57,7 +57,7 @@ public class CartController {
 		return "cart/cart";
 	}
 	
-	@RequestMapping(value = "/cartAdminList", method = RequestMethod.GET)	// admin cart
+	@RequestMapping(value = "/cartAdminList", method = RequestMethod.POST)	// admin cart
 	public String cartList2(Model model) {
 		
 		List<CartVO> list = service.cartAdminList();
