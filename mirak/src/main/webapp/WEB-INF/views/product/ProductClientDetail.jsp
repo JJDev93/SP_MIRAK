@@ -50,7 +50,7 @@
 						<div class="input-group col-md-6 d-flex mb-3">
 							 
 							<input type="text" id="result" name="cart_cnt" class="form-control input-number" min="1" max="100" value="1"
-								placeholder="수량을 입력하세요" >
+								placeholder="수량을 입력하세요" onchange="payBtnCnt()">
 								
 								 
 						</div>
@@ -60,7 +60,8 @@
 					<p>
 							<input type="submit" formaction="/cartClientList" value="장바구니" class="btn btn-black py-3 px-5"> 
 <!--                   <input type="submit" formaction="/cartList" value="장바구니" class="btn btn-black py-3 px-5">  -->
-                			<input type="submit" formaction="/pay" value="즉시 구매" class="btn btn-black py-3 px-5">
+                			<input type="submit" formaction="/pay/${product.pro_code }/" value="즉시 구매" class="btn btn-black py-3 px-5">
+                			<a href="/pay/${product.pro_code }/1" id="payBtn" class="btn btn-black py-3 px-5">즉시 구매</a>
 					</p>
 					
 				
@@ -76,7 +77,10 @@
 
 
 <script>
-
+const payBtnCnt = function() {
+	let cnt = document.getElementById("result").value
+	document.getElementById("payBtn").href = "/pay/${product.pro_code }/"  + cnt;
+}
 </script>
 
 </body>

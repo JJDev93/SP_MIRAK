@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -39,40 +40,31 @@ public class PayController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-
 	@RequestMapping(value = "/pay", method = RequestMethod.GET)
-	public String getPay(HttpSession session) {
-		session.setAttribute("mem_id", "abc@naver.com");
-		//session.invalidate();
-		return "pay/forDevPay";
+	public String getPay() {		
+
+		return "redirect:/";
 	}
 
-	// 상품에서 바로 넘어올때
-	@RequestMapping(value = "/pay", method = RequestMethod.POST)
-	public String postPay(Model model, ProductVO productVO, HttpSession session) {
+	@RequestMapping(value = "/pay/{pro_code}/{cart_cnt}", method = RequestMethod.GET)
+	public String getPayFromProduct(Model model, ProductVO productVO, HttpSession session, @PathVariable("pro_code") String pro_code, @PathVariable("cart_cnt") String cart_cnt) {
 		
-		//회원정보
+		//회원
 	    model.addAttribute("memberVO", memberService.getMemberInfo(session));
 	    
-	    //상품정보 (수량넘어옴)
-	    // payvo 넘겨서 수량, 
-	    int cnt = productVO.getCart_cnt();
-	    productVO = productService.productDetail(productVO);
-	    productVO.setCart_cnt(cnt);
-	    List<ProductVO> list = new ArrayList<ProductVO>();
-	    list.add(productVO);
-	    
-	    System.out.println(productVO);
+	    //pro or cart
 	    model.addAttribute("codecheck", 0);
-	    model.addAttribute("productList", list);
 	    
-		
-		
+	    //품목
+	    productVO = productService.productDetail(productVO);	    
+	    model.addAttribute("productList", payService.payFromProduct(productVO, cart_cnt));
+	    
+	    
 		return "pay/pay";
 	}
 
 	// 카트에서 넘어올때
-	@RequestMapping(value = "/cartpay", method = RequestMethod.POST)
+	@RequestMapping(value = "/pay", method = RequestMethod.POST)
 	public String cartpay(Model model, ProductVO productVO, HttpSession session) {
 		
 		//회원정보

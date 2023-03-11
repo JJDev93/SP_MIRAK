@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import kr.co.mirak.cart.CartVO;
+import kr.co.mirak.product.ProductVO;
 
 public interface PayService {	
 	List<PayVO> list();
@@ -14,5 +15,5 @@ public interface PayService {
 	int delete(int id);
 	List<CartVO> cartCheckList(HttpSession session);
 	List<PayVO> adaptPayVO(PayStringVO payStringVO, HttpSession session);
-	
+	List<ProductVO> payFromProduct(ProductVO productVO, String cart_cnt);
 }
