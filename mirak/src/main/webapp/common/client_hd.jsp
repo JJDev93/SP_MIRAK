@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="${path}/resources/css/ionicons.min.css">
 	<link rel="stylesheet" href="${path}/resources/css/bootstrap-datepicker.css">
 	<link rel="stylesheet" href="${path}/resources/css/style.css">
+	<link rel="stylesheet" href="${path}/resources/css/emailCheck.css">
 </head>
 <body class="goto-here">
 	<header>
