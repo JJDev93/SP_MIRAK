@@ -44,6 +44,7 @@
 	<script src="${path}/resources/js/pwcheck.js"></script>
 	<script src="${path}/resources/js/idCheck.js"></script>
 	<script src="${path}/resources/js/daumAddress.js"></script>
+	<script src="${path}/resources/js/emailCheck.js"></script>
     
 		
 
