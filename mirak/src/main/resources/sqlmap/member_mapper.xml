@@ -29,7 +29,10 @@
 				MEM_NAME = #{mem_name},
 				MEM_AGE = #{mem_age},
 				MEM_GENDER = #{mem_gender},
-				MEM_PHONE = #{mem_phone}
+				MEM_PHONE = #{mem_phone},
+				MEM_ADD1 = #{mem_add1},
+				MEM_ADD2 = #{mem_add2},
+				MEM_ZIPCODE= #{mem_zipcode}
 			WHERE MEM_ID = #{mem_id}
 		]]>
 	</update>
@@ -45,7 +48,7 @@
 	
  	<select id="getMemberInfo" parameterType="String" resultType="member" >
 		<![CDATA[
-			SELECT MEM_ID, MEM_NAME, MEM_AGE, MEM_GENDER, MEM_PHONE, MEM_REGDATE FROM MEMBER
+			SELECT MEM_ID, MEM_NAME, MEM_AGE, MEM_GENDER, MEM_PHONE, MEM_REGDATE, MEM_ADD1, MEM_ADD2, MEM_ZIPCODE FROM MEMBER
 			WHERE MEM_ID=#{myid}
 		]]>	
 	</select>

@@ -163,4 +163,3 @@
 		
 	}
 </script>
->>>>>>> branch 'member' of https://github.com/ywshin0112/mirak.git
