@@ -82,12 +82,12 @@
                               <c:when test="${member.mem_gender == '1'}">
                                  <input type="radio" name="mem_gender" value="1" checked>남
                                           &nbsp;&nbsp;&nbsp; 
-                                          <input type="radio" name="mem_gender" value="0" >여
+                                          <input type="radio" name="mem_gender" value="2" >여
                                        </c:when>
-                              <c:when test="${member.mem_gender == '0' }">
+                              <c:when test="${member.mem_gender == '2' }">
                                  <input type="radio" name="mem_gender" value="1">남
                                           &nbsp;&nbsp;&nbsp; 
-                                          <input type="radio" name="mem_gender" value="0"checked>여
+                                          <input type="radio" name="mem_gender" value="2"checked>여
                               </c:when>
                            </c:choose>
 
@@ -101,6 +101,32 @@
                            <input type="text" name="mem_phone" class="form-control" placeholder=" ' - ' 빼고 입력해주세요 " required="required" value="${member.mem_phone }">
                      </div>
                   </div>
+                  
+                  <div class="w-100"></div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="streetaddress">주소</label>
+								<div class="row mb-4">
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="address_input_1"
+											name="mem_zipcode" placeholder="주소지를 입력해주세요" value="${member.mem_zipcode }"
+											readonly="readonly">
+									</div>
+									<div class="col-sm-4">
+										<button type="button" class="form-control address button"
+											onclick="execution_daum_address();">우편번호찾기</button>
+									</div>
+								</div>
+
+
+								<input type="text" class="form-control mb-4" readonly="readonly"
+									id="address_input_2" placeholder="주소작성" readonly="readonly" value="${member.mem_add1 }"
+									name="mem_add1"> <input type="text"
+									class="form-control" placeholder="상세주소작성" id="address_input_3" value="${member.mem_add2 }"
+									readonly="readonly" name="mem_add2">
+							</div>
+						</div>
+                  
                   <div class="w-100"></div>
                      <div class="col-md-6 text-center">
                         <input type="submit" value="수정하기" class="btn btn-primary py-3 px-5">
