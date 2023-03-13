@@ -25,8 +25,8 @@
          <div class="row justify-content-center">
             <div class="col-md-10 mb-5 text-center">
                <ul class="nav nav-tabs">
-                  <li class="nav-item"><a class="nav-link active" href="mypage" >마이페이지</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/cartClientList">장바구니</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="/mypage" >마이페이지</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/cart">장바구니</a></li>
                   <li class="nav-item"><a class="nav-link" href="#">결제내역</a></li>
                </ul>
             </div>

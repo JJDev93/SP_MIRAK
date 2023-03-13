@@ -30,5 +30,10 @@ public interface MemberService {
 	MemberVO getMemberDetail(MemberVO mvo);
 	
 	//여기까지
+	
+	
+	
+	
+	
 
 }
