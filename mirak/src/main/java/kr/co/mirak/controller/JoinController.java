@@ -1,7 +1,6 @@
 
 package kr.co.mirak.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,18 +24,7 @@ public class JoinController {
 		return "member/join";
 	}
 
-	/*
-	 * @RequestMapping(value = "/join", method = RequestMethod.POST) public String
-	 * joinsuccess(MemberVO vo , Model model) {
-	 * 
-	 * // sqlSessionTemplate.insert("member.join",vo);
-	 * 
-	 * int success = memberService.createUser(vo);
-	 * 
-	 * System.out.println("가입성공" ); System.out.println(success); return
-	 * "member/login"; }
-	 * 
-	 */
+
 	// 아이디 체크
 	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
 	@ResponseBody
@@ -62,26 +50,13 @@ public class JoinController {
 		}
 		return "member/login";
 	}
+	
+	
+	
+	
+	
+	//이메일인증
 
-	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

@@ -199,12 +199,12 @@
 			<artifactId>mail</artifactId>
 			<version>1.4.7</version>
 		</dependency>
-
+		
 		<!-- spring-context-support -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
-			<version>5.3.18</version>
+			<version>${org.springframework-version}</version>
 		</dependency>
 
 	</dependencies>
