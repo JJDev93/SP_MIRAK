@@ -1,14 +1,11 @@
 package kr.co.mirak.controller;
 
-import java.util.Enumeration;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 
@@ -35,19 +32,19 @@ public class Interceptor extends HandlerInterceptorAdapter{
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		logger.info("===== [preHandle 시작] =====");
+		//logger.info("===== [preHandle 시작] =====");
 		String refUrl = request.getHeader("Referer");
 		String regUrl = request.getRequestURL().toString();
 		String preUrl = request.getRequestURI().toString();
 
-		logger.info("[preHandle] request.getHeader() " + refUrl);
-		logger.info("[preHandle] request.getRequestURL() " + regUrl);
-		logger.info("[preHandle] request.getRequestURI() " + preUrl);
-
-
-
-		logger.info("[cart_cnt] " + request.getParameter("cart_cnt"));
-		logger.info("[pro_code] " + request.getParameter("pro_code"));
+//		logger.info("[preHandle] request.getHeader() " + refUrl);
+//		logger.info("[preHandle] request.getRequestURL() " + regUrl);
+//		logger.info("[preHandle] request.getRequestURI() " + preUrl);
+//
+//
+//
+//		logger.info("[cart_cnt] " + request.getParameter("cart_cnt"));
+//		logger.info("[pro_code] " + request.getParameter("pro_code"));
 
 
 		for (String target : EXCLUDE_URL_LIST) {
@@ -58,7 +55,7 @@ public class Interceptor extends HandlerInterceptorAdapter{
 
 		HttpSession session = request.getSession();
 		String memberId = (String) session.getAttribute("mem_id");
-		logger.info("[memberId] " + memberId);
+		//logger.info("[memberId] " + memberId);
 
 		if(memberId == null || memberId.trim().equals("")) {
 			logger.info(">> interceptor catch!!! mem_id is null.. ");
@@ -70,24 +67,9 @@ public class Interceptor extends HandlerInterceptorAdapter{
 
 			return false;
 		} else {
-			logger.info("===== [preHandle 끝] =====");
+			//logger.info("===== [preHandle 끝] =====");
 			return true;
 		}
-	}
-
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-		//		logger.info("===== [postHandle 시작] =====");
-		//		logger.info("[cart_cnt] " + request.getParameter("cart_cnt"));
-		//		logger.info("[pro_code] " + request.getParameter("pro_code"));
-		//		System.out.println("getModel().values() : " + modelAndView.getModel().values());
-		//		logger.info("===== [postHandle 끝] =====");
-	}
-
-	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-		//logger.info("===== [afterCompletion 시작] =====");
-		//logger.info("===== [afterCompletion 끝] =====");
 	}
 
 }
