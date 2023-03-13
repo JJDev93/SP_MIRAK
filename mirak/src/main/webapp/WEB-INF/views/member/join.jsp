@@ -4,8 +4,6 @@
 
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
-
-
 <div class="hero-wrap hero-bread"
 	style="background-image: url('${path}/resources/images/bg_1.jpg');">
 	<div class="container">
@@ -37,14 +35,33 @@
 										<div class="row mb-4">
 											<div class="col-sm-6">
 												<input type="email" name="mem_id" id="id"
-													class="form-control emaill" placeholder="이메일(ID)"
+													class="form-control emaill mail_input" placeholder="이메일(ID)"
 													required="required">
 											</div>
 
 											<div class="col-sm-3">
-												<button type="button" class="form-control" value="N"
+												<button type="button" class="form-control mb-3" value="N"
 													id="idCheck" onclick="fn_idCheck();">중복확인</button>
 											</div>
+
+											<div class="col-sm-6 mail_check_wrap">
+											<div class="mail_check_input_box" id="mail_check_input_box_false">
+												<input class="form-control" id="mail_check_input" disabled="disabled"
+													placeholder="인증번호 6자리를 입력해주세요!"
+													maxlength="6">
+													
+													<div class="clearfix"></div>
+                    									<span id="mail_check_input_box_warn"></span>
+													
+													</div>
+											</div>
+											
+											<div class="col-sm-3">
+												<button type="button" id="mail_check_button"
+													class="form-control mb-2  doubleChk">인증번호발송</button>
+													
+											</div>
+											
 
 										</div>
 
@@ -148,9 +165,6 @@
 	</div>
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
-
-
-
 
 
 
