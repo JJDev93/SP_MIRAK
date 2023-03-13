@@ -79,13 +79,8 @@
 				<div class="row justify-content-center ftco-services">
 					<div class="col-sm-4 text-center ftco-animate">
 						<div class="media block-6 services mb-md-0 mb-4">
-							<a href="" > 
-								<img alt="" src="https://developers.kakao.com/docs/static/image/ko/m/kakaologin.png" style="height: 200px;" >
-								<span class="flaticon-shipped"></span>
-							</a>
-							<div class="media-body">
-								<h3 class="heading"></h3>
-							</div>
+							<script src="https://apis.google.com/js/platform.js" async defer></script>
+							<div class="g-signin2" data-onsuccess="onSignIn"></div>
 						</div>
 					</div>
 					<div class="col-sm-4 text-center ftco-animate">
