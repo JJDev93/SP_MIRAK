@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 public class CartServiceImpl implements CartService {
    
@@ -37,7 +39,7 @@ public class CartServiceImpl implements CartService {
       return null;
    }
 
-   public int insert(CartVO vo, HttpSession session) {
+   public int cartInsert(CartVO vo, HttpSession session) {
 	      
 	      String mem_id = (String)session.getAttribute("mem_id");
 	      int cart_cnt = vo.getCart_cnt();
@@ -46,19 +48,39 @@ public class CartServiceImpl implements CartService {
 	      vo = mapper.productToCart(vo);      
 	      vo.setMem_id(mem_id);
 	      vo.setCart_cnt(cart_cnt);
-	      int result = mapper.insert(vo);      
+	      int result = mapper.cartInsert(vo);      
 	      
 	      return result;
 	   }
 
-   public int update(CartVO vo) {
-      // TODO Auto-generated method stub
-      return 0;
+   // ?
+   public int cartUpdate(CartVO vo, HttpSession session) {
+	   
+	   String mem_id = (String)session.getAttribute("mem_id");
+	      int cart_cnt = vo.getCart_cnt();
+	      System.out.println(mem_id + cart_cnt);
+	      CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
+	      vo = mapper.productToCart(vo);      
+	      vo.setMem_id(mem_id);
+	      vo.setCart_cnt(cart_cnt);
+	      int result = mapper.cartUpdate(vo);      
+	      
+	      return result;
    }
 
-   public int delete(int id) {
-      // TODO Auto-generated method stub
-      return 0;
+   // ?
+   public int cartDelete(CartVO vo, HttpSession session) {
+	   
+	   String mem_id = (String)session.getAttribute("mem_id");
+	      int cart_cnt = vo.getCart_cnt();
+	      System.out.println(mem_id + cart_cnt);
+	      CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
+	      vo = mapper.productToCart(vo);      
+	      vo.setMem_id(mem_id);
+	      vo.setCart_cnt(cart_cnt);
+	      int result = mapper.cartDelete(vo);      
+	      
+	      return result;
    }
    
 }

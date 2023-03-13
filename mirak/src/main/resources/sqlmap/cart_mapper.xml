@@ -22,7 +22,7 @@
 	<!-- CartVO info (int id);  -->
 	
 	<!-- 카트 추가 -->
-	<insert id="insert">
+	<insert id="cartInsert">
    
       INSERT INTO CART (MEM_ID, PRO_CODE, CART_CNT, CART_TOTPRICE, PRO_NAME, PRO_PRICE, PRO_DESC, PRO_IMAGE)
       VALUES (#{mem_id}, #{pro_code}, #{cart_cnt}, #{cart_totprice}, #{pro_name}, #{pro_price}, #{pro_desc}, #{pro_image} )
@@ -31,14 +31,14 @@
 	
 	
 	<!-- 카트 수량 수정 -->
-	<update id="update">
+	<update id="cartUpdate">
 	
 		UPDATE CART SET CART_CNT = #{cart_cnt} WHERE CART_CODE = #{cart_code}
 	
 	</update>
 
 	<!-- 카트 삭제 -->
-	<delete id="delete">
+	<delete id="cartDelete">
 	
 		DELETE FROM CART WHERE CART_CODE = #{cart_code}
 	

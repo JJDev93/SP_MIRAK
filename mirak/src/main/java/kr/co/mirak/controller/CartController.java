@@ -42,7 +42,9 @@ public class CartController {
        System.out.println(vo);
        String mem_id = (String)session.getAttribute("mem_id");
        
-       cartService.insert(vo, session);
+       cartService.cartInsert(vo, session);
+//       cartService.cartUpdate(vo, session);
+//       cartService.cartDelete(vo, session);
        String pro_code =  vo.getPro_code();
        
        vo.setMem_id(mem_id);
@@ -68,5 +70,6 @@ public class CartController {
 
       return "/cartpay";
    }
+
    
 }
