@@ -58,9 +58,10 @@
 					</div>
 					<br> <br>
 					<p>
-							<input type="submit" formaction="/cartClientList" value="장바구니" class="btn btn-black py-3 px-5"> 
-<!--                   <input type="submit" formaction="/cartList" value="장바구니" class="btn btn-black py-3 px-5">  -->
-                			<input type="submit" formaction="/pay/${product.pro_code }/" value="즉시 구매" class="btn btn-black py-3 px-5">
+							<%-- <input type="submit" formaction="/cart/${product.pro_code }" id="cartBtn" value="장바구니" class="btn btn-black py-3 px-5">  --%>
+							<a href="/cart/${product.pro_code }/1" id="cartBtn" class="btn btn-black py-3 px-5">장바구니</a>
+							<!-- <input type="submit" formaction="/cartList" value="장바구니" class="btn btn-black py-3 px-5">  -->
+                			<%-- <input type="submit" formaction="/pay/${product.pro_code }/" value="즉시 구매" class="btn btn-black py-3 px-5"> --%>
                 			<a href="/pay/${product.pro_code }/1" id="payBtn" class="btn btn-black py-3 px-5">즉시 구매</a>
 					</p>
 					
@@ -78,8 +79,9 @@
 
 <script>
 const payBtnCnt = function() {
-	let cnt = document.getElementById("result").value
+	let cnt = document.getElementById("result").value;
 	document.getElementById("payBtn").href = "/pay/${product.pro_code }/"  + cnt;
+	document.getElementById("cartBtn").formaction = "/cart/${product.pro_code }" + cnt;
 }
 </script>
 

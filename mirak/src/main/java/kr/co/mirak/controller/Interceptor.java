@@ -1,5 +1,7 @@
 package kr.co.mirak.controller;
 
+import java.util.Enumeration;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,48 +13,81 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 
 public class Interceptor extends HandlerInterceptorAdapter{
-   private static final Logger logger = LoggerFactory.getLogger(Interceptor.class);
-   static final String[] EXCLUDE_URL_LIST = {"/admin", "/join", "/idCheck", "/login", "/ProductClientList", "/ProductClientListP", "/ProductClientListT", "/ProductClientListQ", "/ProductClientDetail" };
+	private static final Logger logger = LoggerFactory.getLogger(Interceptor.class);
 
-   @Override
-   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-      System.out.println("[preHandle]");
-      String regUrl = request.getRequestURL().toString();
-      
-      for (String target : EXCLUDE_URL_LIST) {
-         if (regUrl.indexOf(target) > -1) {
-            return true;
-         }
-      }
+	static final String[] EXCLUDE_URL_LIST = {"/admin", "/join", "/idCheck", "/login", "/ProductClientList", "/ProductClientListP", "/ProductClientListT", "/ProductClientListQ", "/ProductClientDetail" };
 
-      HttpSession session = request.getSession();
-      String memberId = (String) session.getAttribute("mem_id");
-      
-      if(memberId == null || memberId.trim().equals("")) {
-         logger.info(">> interceptor catch!!! mem_id is null.. ");
-         session.invalidate();
-         
-         String preUrl = request.getRequestURI().toString();
+//	private void getDestination(HttpServletRequest request) {
+//        String uri = request.getRequestURI();
+//        String query = request.getQueryString();
+//        
+//        if (query == null || query.equals("null")) {
+//            query = "";
+//        } else {
+//            query = "?" + query;
+//        }
+//
+//        if (request.getMethod().equals("GET")) {
+//            logger.info("destination : " + (uri + query));
+//            request.getSession().setAttribute("destination", uri + query);
+//        }
+//    }
+	
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		logger.info("===== [preHandle 시작] =====");
+		String refUrl = request.getHeader("Referer");
+		String regUrl = request.getRequestURL().toString();
+		String preUrl = request.getRequestURI().toString();
+				
+		logger.info("[preHandle] request.getHeader() " + refUrl);
+		logger.info("[preHandle] request.getRequestURL() " + regUrl);
+		logger.info("[preHandle] request.getRequestURI() " + preUrl);
+		
+		
+		
+		logger.info("[cart_cnt] " + request.getParameter("cart_cnt"));
+		logger.info("[pro_code] " + request.getParameter("pro_code"));
 
-         System.out.println("-------------------");
-         System.out.println("mem_id : " + memberId);
-         System.out.println("getRequestURI : " + request.getRequestURI().toString());
-         System.out.println("-------------------");
-         
-         request.getSession().setAttribute("pre_url", preUrl);
-         
-         response.sendRedirect(request.getContextPath() + "/login");
-         return false;
-      } else {
-         return true;
-      }
-      
-   }
-   
-   @Override
-   public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-      // TODO Auto-generated method stub
-      System.out.println("[postHandle]");
-      super.postHandle(request, response, handler, modelAndView);
-   }
+
+		for (String target : EXCLUDE_URL_LIST) {
+			if (regUrl.indexOf(target) > -1) {
+				return true;
+			}
+		}
+
+		HttpSession session = request.getSession();
+		String memberId = (String) session.getAttribute("mem_id");
+		logger.info("[memberId] " + memberId);
+		
+		if(memberId == null || memberId.trim().equals("")) {
+			logger.info(">> interceptor catch!!! mem_id is null.. ");
+			session.invalidate();
+			
+			request.getSession().setAttribute("pre_url", preUrl);
+			response.sendRedirect(request.getContextPath() + "/login");
+			logger.info("===== [preHandle 끝] =====");
+
+			return false;
+		} else {
+			logger.info("===== [preHandle 끝] =====");
+			return true;
+		}
+	}
+
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+//		logger.info("===== [postHandle 시작] =====");
+//		logger.info("[cart_cnt] " + request.getParameter("cart_cnt"));
+//		logger.info("[pro_code] " + request.getParameter("pro_code"));
+//		System.out.println("getModel().values() : " + modelAndView.getModel().values());
+//		logger.info("===== [postHandle 끝] =====");
+	}
+
+	@Override
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+		//logger.info("===== [afterCompletion 시작] =====");
+		//logger.info("===== [afterCompletion 끝] =====");
+	}
+
 }
