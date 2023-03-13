@@ -4,8 +4,6 @@
 
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
-
-
 <div class="hero-wrap hero-bread"
 	style="background-image: url('${path}/resources/images/bg_1.jpg');">
 	<div class="container">
@@ -36,28 +34,35 @@
 										<label for="id">이메일(ID)</label>
 										<div class="row mb-4">
 											<div class="col-sm-6">
-												<input type="email" path="memMail" name="mem_id" id="id"
-													class="form-control" placeholder="이메일(ID)"
+												<input type="email" name="mem_id" id="id"
+													class="form-control emaill mail_input" placeholder="이메일(ID)"
 													required="required">
 											</div>
 
 											<div class="col-sm-3">
-												<button type="button" class="form-control" value="N"
+												<button type="button" class="form-control mb-3" value="N"
 													id="idCheck" onclick="fn_idCheck();">중복확인</button>
 											</div>
 
+											<div class="col-sm-6 mail_check_wrap">
+											<div class="mail_check_input_box" id="mail_check_input_box_false">
+												<input class="form-control" id="mail_check_input" disabled="disabled"
+													placeholder="인증번호 6자리를 입력해주세요!"
+													maxlength="6">
+													
+													<div class="clearfix"></div>
+                    									<span id="mail_check_input_box_warn"></span>
+													
+													</div>
+											</div>
+											
 											<div class="col-sm-3">
-												<button type="button" id="mailAuth" onclick="return false;"
-													class="form-control mb-2">메일인증</button>
+												<button type="button" id="mail_check_button"
+													class="form-control mb-2  doubleChk">인증번호발송</button>
+													
 											</div>
+											
 
-											<div class="col-sm-6">
-
-												<input class="form-control mail_check_input"
-													placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled"
-													maxlength="6"> <span id="mail_check_warn"></span>
-
-											</div>
 										</div>
 
 									</div>
@@ -123,18 +128,22 @@
 								<label for="streetaddress">주소</label>
 								<div class="row mb-4">
 									<div class="col-sm-8">
-										<input type="text" class="form-control" id="address_input_1" name="mem_zipcode"
-											placeholder="주소지를 입력해주세요" readonly="readonly">
+										<input type="text" class="form-control" id="address_input_1"
+											name="mem_zipcode" placeholder="주소지를 입력해주세요"
+											readonly="readonly">
 									</div>
 									<div class="col-sm-4">
-										<button type="button" class="form-control address button" 
+										<button type="button" class="form-control address button"
 											onclick="execution_daum_address();">우편번호찾기</button>
 									</div>
 								</div>
 
 
-								<input type="text" class="form-control mb-4" readonly="readonly" id="address_input_2" placeholder="주소작성" readonly="readonly" name="mem_add1" >
-								<input type="text" class="form-control" placeholder="상세주소작성"  id="address_input_3" readonly="readonly" name="mem_add2" >
+								<input type="text" class="form-control mb-4" readonly="readonly"
+									id="address_input_2" placeholder="주소작성" readonly="readonly"
+									name="mem_add1"> <input type="text"
+									class="form-control" placeholder="상세주소작성" id="address_input_3"
+									readonly="readonly" name="mem_add2">
 							</div>
 						</div>
 
@@ -153,11 +162,9 @@
 				<!-- .col-md-8 -->
 			</div>
 		</div>
+	</div>
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
-
-
-	
 
 
 
