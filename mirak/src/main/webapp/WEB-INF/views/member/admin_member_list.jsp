@@ -56,7 +56,7 @@ margin-right:10px;
 					<tbody>
 						<c:forEach items="${memberList}" var="member">
 						<tr>
-							<td scope="row"><a href="adminMember/${member.mem_id}">${member.mem_id }</a></td>
+							<td scope="row"><a href="adminMember/${member.mem_name}">${member.mem_id }</a></td>
 							<td>${member.mem_name }</td>
 							<td>${member.mem_age }</td>
 							<td>
@@ -101,11 +101,23 @@ margin-right:10px;
  			<!-- 각 번호 페이지 버튼 -->
  				<table>
  				<tr>
+ 				<!-- 이전페이지 버튼 -->
+ 				<c:if test="${pageMaker.prev}">
+               		 <ul>
+                    <li class="pageInfo_btn previous"><a href="javascript:acyncMovePage('adminMembers?pageNum= ${pageMaker.startPage-1}');">&lt;</a></li>
+                    </ul>
+                </c:if>
                 <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
                		 <ul style="text-align:center;">
 						<li class="pageInfo_btn"><a href="javascript:acyncMovePage('adminMembers?pageNum=${num}');">${num}</a></li>
                     </ul>                
                 </c:forEach>
+                <!-- 다음페이지 버튼 -->
+                <c:if test="${pageMaker.next}">
+                	<ul>
+                    <li class="pageInfo_btn next"><a href="javascript:acyncMovePage('adminMembers?pageNum=${pageMaker.endPage + 1 }');">&gt;</a></li>
+                    </ul>
+                </c:if> 
                 </tr>
                 </table>
                 </div>

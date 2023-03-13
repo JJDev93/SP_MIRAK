@@ -11,6 +11,7 @@ margin-right:10px;
 }
 </style>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<%-- <c:set var="path" value="${request.getSession().getServletContext().getRealPath('resources/images/product')}" /> --%>
 <div id="test">
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <div class="ftco-section">
@@ -67,11 +68,23 @@ margin-right:10px;
  			<!-- 각 번호 페이지 버튼 -->
  				<table>
  				<tr>
+ 				 <!-- 이전페이지 버튼 -->
+                <c:if test="${pageMaker.prev}">
+               		 <ul>
+                    <li class="pageInfo_btn previous"><a href="javascript:acyncMovePage('ProductAdminList?pageNum= ${pageMaker.startPage-1}');">&lt;</a></li>
+                    </ul>
+                </c:if>
                 <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
                		 <ul style="text-align:center;">
-						<li class="pageInfo_btn"><a href="javascript:acyncMovePage('ProductAdminList?pageNum=${num}&amount=6');">${num}</a></li>
+						<li class="pageInfo_btn"><a href="javascript:acyncMovePage('ProductAdminList?pageNum=${num}');">${num}</a></li>
                     </ul>
                 </c:forEach>
+                <!-- 다음페이지 버튼 -->
+                <c:if test="${pageMaker.next}">
+                	<ul>
+                    <li class="pageInfo_btn next"><a href="javascript:acyncMovePage('ProductAdminList?pageNum=${pageMaker.endPage + 1 }');">&gt;</a></li>
+                    </ul>
+                </c:if>    
                 </tr>
                 </table>
                 </div>
