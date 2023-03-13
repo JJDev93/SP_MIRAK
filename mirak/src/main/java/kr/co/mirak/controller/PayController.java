@@ -1,12 +1,9 @@
 package kr.co.mirak.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.co.mirak.HomeController;
 import kr.co.mirak.member.MemberService;
 import kr.co.mirak.pay.PayService;
 import kr.co.mirak.pay.PayStringVO;
@@ -34,12 +30,6 @@ public class PayController {
 	@Autowired
 	private ProductService productService;
 	
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/pay", method = RequestMethod.GET)
 	public String getPay() {		
 
