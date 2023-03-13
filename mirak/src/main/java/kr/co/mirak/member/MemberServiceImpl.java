@@ -34,7 +34,12 @@ public class MemberServiceImpl implements MemberService {
 		int success  = mapper.createUser(vo);
 		return success;
 	}
-	
+	@Override
+	public int naverinsert(MemberVO vo) {
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		int success  = mapper.naverinsert(vo);
+		return success;
+	}
 	//세션 값으로 회원 정보 확인
 	public MemberVO getMemberInfo(HttpSession session){
 		String myid = (String)session.getAttribute("mem_id");

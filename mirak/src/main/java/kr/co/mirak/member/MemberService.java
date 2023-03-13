@@ -11,6 +11,7 @@ import kr.co.mirak.product.Criteria;
 public interface MemberService {
 	MemberVO login(MemberVO vo);
 	int createUser(MemberVO vo);
+	int naverinsert(MemberVO vo);
 	MemberVO getMemberInfo(HttpSession session);
 	int memupdate(MemberVO vo);
 	int memdelete(MemberVO vo);

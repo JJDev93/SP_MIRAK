@@ -14,6 +14,13 @@
 	 		VALUES(#{mem_id}, #{mem_pw}, #{mem_name} , #{mem_age} , #{mem_gender} , #{mem_phone} , #{mem_add1} , #{mem_add2} , #{mem_zipcode})
  		]]>	
  	</insert>
+
+	<insert id="naverinsert" parameterType="member">
+ 		<![CDATA[
+	 		INSERT INTO MEMBER (MEM_ID, MEM_PW , MEM_NAME, MEM_GENDER)
+	 		VALUES(#{mem_id}, #{mem_pw}, #{mem_name} , #{mem_gender})
+ 		]]>
+	</insert>
 	
 	<update id="memupdate" parameterType="kr.co.mirak.member.MemberVO">
 		<![CDATA[

@@ -5,7 +5,6 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 
-
 <div class="hero-wrap hero-bread"
 	style="background-image: url('${path}/resources/images/bg_1.jpg');">
 	<div class="container">
@@ -37,7 +36,7 @@
 										<div class="row mb-4">
 											<div class="col-sm-6">
 												<input type="email" path="memMail" name="mem_id" id="id"
-													class="form-control" placeholder="이메일(ID)"
+													class="form-control" placeholder="이메일(ID)" value="${member.mem_id }"
 													required="required">
 											</div>
 
@@ -65,7 +64,7 @@
 									<div class="form-group">
 										<label for="pw">비밀번호</label> <input type="password"
 											name="mem_pw" class="form-control" id="pw"
-											onchange="check_pw()" placeholder="비밀번호" required="required">
+											onchange="check_pw()" placeholder="비밀번호" required="required" value="${member.mem_pw }">
 									</div>
 
 									<div class="form-group">
@@ -83,7 +82,7 @@
 							<div class="form-group">
 								<label for="firstname">이름</label> <input type="text"
 									name="mem_name" class="form-control" placeholder="이름을 입력해주세요"
-									required="required">
+									required="required" value="${member.mem_name }">
 							</div>
 						</div>
 						<div class="w-100"></div>
@@ -91,7 +90,7 @@
 							<div class="form-group">
 								<label for="age">나이</label> <input type="text" name="mem_age"
 									id="age" class="form-control" placeholder="나이를 입력해주세요"
-									required="required">
+									required="required" value="${member.mem_age }">
 							</div>
 						</div>
 
@@ -100,9 +99,21 @@
 							<div class="form-group">
 								<label for="gender">성별</label>
 								<div>
-									<input type="radio" name="gender" value="man" name="mem_gender"
-										checked>남 &nbsp;&nbsp;&nbsp; <input type="radio"
-										name="gender" value="woman" name="mem_gender">여
+									<c:choose>
+										<c:when test="${member.mem_gender == '1'}">
+											<input type="radio" name="gender" value="man"
+												name="mem_gender" checked>남 
+											&nbsp;&nbsp;&nbsp; 
+										<input type="radio" name="gender" value="woman"
+												name="mem_gender">여
+										</c:when>
+										<c:when test="${member.mem_gender == '0' }">
+											<input type="radio" name="mem_gender" value="1">남
+                                          &nbsp;&nbsp;&nbsp; 
+                                          <input type="radio"
+												name="mem_gender" value="0" checked>여
+                             	 </c:when>
+									</c:choose>
 								</div>
 							</div>
 						</div>
@@ -111,7 +122,7 @@
 							<div class="form-group">
 								<label for="phone">Phone</label> <input type="text"
 									name="mem_phone" class="form-control"
-									placeholder=" ' - ' 빼고 입력해주세요 " required="required">
+									placeholder=" ' - ' 빼고 입력해주세요 " required="required" value="${member.mem_phone }">
 								<!--  <input type="tel" name="mem_phone" class="form-control" maxlength="11" pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                       placeholder="' - ' 빼고 숫자만 입력해 주세요">  -->
 							</div>
