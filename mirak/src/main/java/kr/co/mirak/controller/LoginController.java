@@ -24,7 +24,7 @@ public class LoginController {
 
 	// 로그인페이지
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginView() {
+	public String loginView(Model model) {
 		System.out.println("로그인 화면으로 이동...");
 		return "member/login";
 	}
