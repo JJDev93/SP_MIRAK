@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,6 +36,13 @@ public class JoinController {
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String joinview() {
 		System.out.println("회원가입 화면으로 이동!");
+		return "member/join";
+	}
+	
+	@RequestMapping(value = "/apiJoin", method = RequestMethod.GET)
+	public String joinview(MemberVO vo) {
+		System.out.println("API 회원가입 화면으로 이동!");
+		System.out.println(vo);
 		return "member/join";
 	}
 

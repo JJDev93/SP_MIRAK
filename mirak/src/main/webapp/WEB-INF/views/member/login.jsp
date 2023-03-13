@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
+<!-- 네아로 SDK -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2-nopolyfill.js" charset="utf-8"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
 
       .hr-sect {
@@ -83,17 +86,9 @@
 							<div class="g-signin2" data-onsuccess="onSignIn"></div>
 						</div>
 					</div>
-					<div class="col-sm-4 text-center ftco-animate">
-						<div class="media block-6 services mb-md-0 mb-4">
-							<a href="" >
-								<img alt="" src="https://developers.kakao.com/docs/static/image/ko/m/kakaologin.png" style="height: 200px;">
-								<span class="flaticon-diet"></span>
-							</a>
-							<div class="media-body">
-								<h3 class="heading"></h3>
-							</div>
-						</div>
-					</div>
+<!-- 					네이버로그인 -->
+					<div class="col-sm-4 text-center ftco-animate" id="naverIdLogin"></div>
+					
 					<div class="col-sm-4 text-center ftco-animate">
 						<div class="media block-6 services mb-md-0 mb-4">
 							<a href="" >
@@ -111,3 +106,61 @@
 	</div>
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
+<script type="text/javascript">
+	var naverLogin = new naver.LoginWithNaverId(
+		{
+			clientId: "zkOzac5hPC_Qw6v8eOzQ",
+			callbackUrl: "http://localhost:8080/login",
+			isPopup: false,
+			loginButton: {color: "green", type: 1, height: 60}
+// 			callbackHandle: true
+		}
+	);
+	naverLogin.init();
+
+	window.addEventListener('load', function () {
+		naverLogin.getLoginStatus(function (status) {
+			if (status) {
+			    var mem_id = naverLogin.user.getEmail();
+			    if(naverLogin.user.getGender() == 'F'){
+			        var mem_gender = 2
+			    } else {
+			        var mem_gender = 1
+			    }
+			    var mem_pw = naverLogin.user.getId();
+			    var mem_name = naverLogin.user.getName();
+			    
+			    console.log(naverLogin.user);
+			    $.ajax({
+			        type: 'post',
+			        url: 'naverSave',
+			        data: {'mem_id':mem_id, 'mem_gender':mem_gender, 'mem_pw':mem_pw, 'mem_name':mem_name},
+					success: function(result) {
+						if(result=='loginsuccess') {
+							alert("로그인 성공하였습니다.");
+							console.log('성공 : ' + result);
+							location.href="/";
+						} else if(result=='no') {
+							console.log('실패')
+						}
+					},
+					error: function(result) {
+						console.log('오류 발생')
+					}
+				})
+
+			} else {
+				console.log("callback 처리에 실패하였습니다.");
+			}
+			});
+		});
+	function naverLogout() {
+		openPopUp();
+		setTimeout(function() {
+			closePopUp();
+			}, 1000);
+		
+		
+	}
+</script>
+>>>>>>> branch 'member' of https://github.com/ywshin0112/mirak.git
