@@ -9,12 +9,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.co.mirak.product.Criteria;
 import kr.co.mirak.product.PageMakerDTO;
 import kr.co.mirak.product.ProductService;
 import kr.co.mirak.product.ProductVO;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 @Controller
 public class ProductController {
 
@@ -107,7 +110,7 @@ public class ProductController {
 
 	// 상품 등록
 	@RequestMapping(value = "/productregister", method = RequestMethod.POST)
-	public String productregister(ProductVO vo) throws IOException {
+	public String productregister(ProductVO vo,MultipartHttpServletRequest request ) throws IOException {
 
 		// 파일 업로드 처리
 		MultipartFile uploadFile = vo.getUploadFile();
@@ -115,6 +118,8 @@ public class ProductController {
 			String fileName = uploadFile.getOriginalFilename();
 			uploadFile.transferTo(
 					new File("C:/Users/hi/git/mirak/mirak/src/main/webapp/resources/images/product/" + fileName));
+	
+
 		}
 
 		productService.insertProduct(vo);
@@ -160,5 +165,18 @@ public class ProductController {
 
 		return "redirect:/ProductAdminList";
 	}
+	
+	// 인덱스 페이지
+	@RequestMapping("/")
+	public String productListindex(ProductVO vo, Model model) {
+
+		model.addAttribute("productList2", productService.productListIndex1(vo));
+		model.addAttribute("productList1", productService.productListIndex2(vo));
+
+		
+		return "/index";
+
+	}
+	
 
 }

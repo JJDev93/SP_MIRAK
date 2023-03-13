@@ -60,7 +60,7 @@
 					<p>
 							<input type="submit" formaction="/cartClientList" value="장바구니" class="btn btn-black py-3 px-5"> 
 <!--                   <input type="submit" formaction="/cartList" value="장바구니" class="btn btn-black py-3 px-5">  -->
-                			<input type="submit" formaction="/pay/${product.pro_code }/" value="즉시 구매" class="btn btn-black py-3 px-5">
+<%--                 			<input type="submit" formaction="/pay/${product.pro_code }/" value="즉시 구매" class="btn btn-black py-3 px-5"> --%>
                 			<a href="/pay/${product.pro_code }/1" id="payBtn" class="btn btn-black py-3 px-5">즉시 구매</a>
 					</p>
 					

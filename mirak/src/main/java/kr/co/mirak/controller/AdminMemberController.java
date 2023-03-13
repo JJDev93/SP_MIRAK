@@ -45,7 +45,7 @@ public class AdminMemberController {
 
 		model.addAttribute("pageMaker", pageMake);
 		
-		//여기까지 (매개변수에 Criteria 부분 추가했음-> 오류발생시 제거해야함!)
+		//여기까지 (매개변수에 CriteriaM 부분 추가했음-> 오류발생시 제거해야함!)
 		
 		
 		return "member/admin_member_list";
@@ -61,7 +61,7 @@ public class AdminMemberController {
 //		return "member/admin_member_detail";
 //	}
 	
-	@RequestMapping(value="/adminMember/{mem_id}", method=RequestMethod.GET)	
+	@RequestMapping(value="/adminMember/{mem_name}", method=RequestMethod.GET)	
 	public String getMemberDetail(MemberVO mvo, Model model) {
 		System.out.println("====== 어드민 상세페이지 ======");
 				
