@@ -5,7 +5,8 @@
  <mapper namespace="kr.co.mirak.member.MemberMapper">
   	<select id="login" parameterType="member" resultType="member">
   		<![CDATA[
- 			SELECT MEM_ID FROM MEMBER WHERE MEM_ID=#{mem_id} AND MEM_PW=#{mem_pw}
+  		
+ 			 SELECT MEM_ID FROM MEMBER WHERE MEM_ID=#{mem_id} AND MEM_PW=#{mem_pw} 
  		]]>	
 	</select>
  	<insert id="createUser" parameterType="member">
