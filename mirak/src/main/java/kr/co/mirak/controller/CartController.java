@@ -37,7 +37,7 @@ public class CartController {
 	}
 
 
-	@RequestMapping(value = "/cartAdminList", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/carts", method = RequestMethod.GET)
 	public String cartList2(Model model) {
 		List<CartVO> list = cartService.cartAdminList();
 		model.addAttribute("cartList", list);
