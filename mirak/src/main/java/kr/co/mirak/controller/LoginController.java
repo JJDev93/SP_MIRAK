@@ -24,8 +24,10 @@ public class LoginController {
 
 	// 로그인페이지
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginView(Model model) {
+	public String loginView(HttpSession session) {
 		System.out.println("로그인 화면으로 이동...");
+		String preUrl = (String)session.getAttribute("pre_url");
+		System.out.println("preUrl : " + preUrl);
 		return "member/login";
 	}
 
@@ -36,7 +38,7 @@ public class LoginController {
 
 		System.out.println("로그인을 시도합니다.");
 		String returnURL = "";
-		String preUrl = (String) session.getAttribute("pre_url");
+		String preUrl = (String)session.getAttribute("pre_url");
 		System.out.println("preUrl : " + preUrl);
 
 		try {

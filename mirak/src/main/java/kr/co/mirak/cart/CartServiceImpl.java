@@ -40,13 +40,11 @@ public class CartServiceImpl implements CartService {
 	public int insert(CartVO vo, HttpSession session) {
 		String mem_id = (String)session.getAttribute("mem_id");
 		int cart_cnt = vo.getCart_cnt();
-		
 		CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
 		vo = mapper.productToCart(vo);
 		vo.setMem_id(mem_id);
 		vo.setCart_cnt(cart_cnt);
 		int result = mapper.insert(vo);
-
 		return result;
 	}
 

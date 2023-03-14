@@ -10,7 +10,7 @@
 				<p>상품 등록페이지 입니다.</p>
 			</div>
 		</div>
-		<form action="productregister" method="post" enctype="multipart/form-data" class="p-5 bg-light mb-4">
+		<form action="/admin/productRegister" method="post" enctype="multipart/form-data" class="p-5 bg-light mb-4">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group">
@@ -56,7 +56,7 @@
 				
 			</div>
 		</form>		
-		<a href="ProductAdminList" class="btn btn-secondary">목록</a>
+		<a href="/admin/products" class="btn btn-secondary">목록</a>
 
 	</div>
 </div>
