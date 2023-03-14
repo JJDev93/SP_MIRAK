@@ -36,7 +36,6 @@ public class LoginController {
 	}
 
 	// 로그인
-
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(MemberVO memberVO, Model model, HttpServletRequest request,
 			RedirectAttributes rttr) throws Exception {
@@ -138,5 +137,43 @@ public class LoginController {
 
 		System.out.println("로그아웃 성공!!");
 		return "redirect:/";
+	}
+	
+	// 아이디찾기 
+	@RequestMapping(value = "/idfind", method = RequestMethod.GET)
+	public String idfindform() {
+		System.out.println("아이디 찾기이동..");
+		return "member/idfind";
+	}
+	
+	// 아이디 찾기
+	@RequestMapping(value = "/idfind", method = RequestMethod.POST)
+	public String idfind(MemberVO vo, HttpSession session, Model model) {
+		String returnURL = "member/idfind";
+		String preUrl = (String) session.getAttribute("pre_url");
+		System.out.println("preUrl : " + preUrl);
+		
+		try {
+		MemberVO member = memberService.idfind(vo);
+		model.addAttribute("member", member);
+		System.out.println(member);
+		
+			if (member.getMem_id() != null) {
+				model.addAttribute("mem_id", member.getMem_id());
+				System.out.println(member.getMem_id());
+				if (preUrl != null) {
+					System.out.println("이전 페이지로 이동");
+					returnURL = "member/idfind" + preUrl;
+					session.removeAttribute("pre_url");
+				} else {
+					returnURL = "member/idfind";
+				}
+			} 
+		}catch (Exception e) {
+			e.printStackTrace();
+			returnURL = "member/idfind";
+			model.addAttribute("message", "정보를 다시 입력해주세요....");
+		}
+		return returnURL;
 	}
 }

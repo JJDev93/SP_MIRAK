@@ -16,9 +16,7 @@ import kr.co.mirak.member.MemberVO;
 public class mypageController {
 	@Autowired
 	private MemberService memberService;
-
-	private static final String MemberVO = null;
-
+	
 	// 마이페이지 이동
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public String mypageview(Model model, HttpSession session) {
@@ -40,30 +38,11 @@ public class mypageController {
 	}
 
 	// 회원탈퇴
-//	@RequestMapping(value="/memdelete", method = RequestMethod.POST)
-//	public String memdelete(MemberVO vo, Model model, HttpSession session) {
-//		try {
-//			vo.setMem_id((String) session.getAttribute("mem_id"));
-//			int success = memberService.memdelete(vo);
-//			if (success == 0) {
-//				model.addAttribute("message", "비밀번호 확인해주세요......");
-//				return "redirect:mypage";
-//			} else if (success == 1) {
-//				return "redirect:/logout";
-//			}
-//		} catch (Exception e) {
-//			model.addAttribute("message", "비밀번호 확인해주세요......");
-//		}
-//		return "redirect:mypage";
-//	}
-
-	// 멤버 체크
-	@RequestMapping(value = "/memberCheck", method = RequestMethod.POST)
+	@RequestMapping(value="/memdelete", method = RequestMethod.POST)
 	@ResponseBody
-	public int memberCheck(MemberVO vo)throws Exception{
-		int result = memberService.memberCheck(vo);
-		return result;
+	public int memdelete(MemberVO vo, HttpSession session) {
+		System.out.println("memberVO :" + vo);
+		int success = memberService.memdelete(vo);
+		return success;
 	}
-
-
 }

@@ -48,13 +48,13 @@
                               
                               <div class="form-group">
                                  <label for="pw">비밀번호</label> 
-                                 <input type="password" name="mem_pw" class="form-control" id="pw" onchange="check_pw()" placeholder="비밀번호" required="required"  value="123456789">
+                                 <input type="password" name="mem_pw" class="form-control" id="pw" onchange="check_pw()" placeholder="수정할 비밀번호 입력" required="required">
                               </div>
                               
                               <div class="form-group">
                                  <label for="pw2">비밀번호 확인</label> 
-                                 <input type="password" class="form-control" id="pw2" onchange="check_pw()" placeholder="비밀번호 확인" required="required" value="123456789">
-                                 <span id="check"></span>
+                                 <input type="password" class="form-control" id="pw2" onchange="check_pw()" placeholder="비밀번호 확인" required="required">
+                                 <span id="check"></span> 
                               </div>
                            </div>
                         </div>
@@ -158,60 +158,46 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">비밀번호를 입력해 주세요.
-						<input type="password" name="mem_pw" class="form-control" id="pw" required="required">
+					<div class="modal-body">회원탈퇴시 모든 정보가 삭제됩니다. 비밀번호를 입력해 주세요.
+						<input type="password"class="form-control" id="pw_1" required="required">
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary" id="memberCheck" onclick="fn_memberCheck();" >탈퇴하기</button>
+						<button type="button" class="btn btn-primary" id="memberCheck" onclick="fn_memberCheck();">탈퇴하기</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</form>
-	
-
-	
-	
-	
 </section>
 
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
 <script>
-function fn_memberCheck() {
-    $.ajax({
-        url : "/memberCheck",
-        type : "POST",
-        dataType :"JSON",
-        data : {"id" : $("#id").val(), 
-        	    "pw" : $("#pw").val()},
-        success : function (data) {
-        	console.log(pw.value);
-            if(pw.value == ""){
-            	alert("비밀번호를 입력해주세요");
-            }
-            
-            if(data == 0) {
-                alert("비밀번호가 틀렸습니다.");
-            } else if(data == 1) {
-            	$("#memberCheck").attr("value", "Y");
-            	alert("회원탈퇴가 완료되었습니다.");
-            } 
-            
-            	
-        }
-    })
-}
- </script>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+
+	function fn_memberCheck() {
+		if (pw_1.value == "") {
+			alert("비밀번호를 입력해주세요");
+		} else {
+			$.ajax({
+				url : "/memdelete",
+				type : "POST",
+				dataType : "JSON",
+				data : {
+					"mem_id" : $("#id").val(),
+					"mem_pw" : $("#pw_1").val()
+				},
+				success : function(data) {
+					if (data == "0") {
+						alert("비밀번호가 틀렸습니다.");
+						document.getElementById('pw_1').value = '';
+					} else if(data == "1"){
+						alert("회원탈퇴 되었습니다.");
+						location.href="logout";
+					}
+				}
+			});
+		}
+	}
+</script>
 </body>
 </html>
