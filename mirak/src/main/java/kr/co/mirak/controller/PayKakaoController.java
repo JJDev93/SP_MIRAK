@@ -2,6 +2,7 @@ package kr.co.mirak.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -68,11 +69,12 @@ public class PayKakaoController {
 
 	// 결제 취소시 실행 url
 	@RequestMapping("/order/pay/cancel")
-	public String payCancel(HttpSession session) {
+	public String payCancel(HttpServletRequest request, HttpSession session) {
 		kakaoPayService.payCancel(session);
 		
 		
-		return "pay/payCancel";
+		
+	    return "pay/payCancel";
 	}
 	
 	
