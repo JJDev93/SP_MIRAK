@@ -10,7 +10,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +30,8 @@ public class JoinController {
 
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder;
+	
+
 
 	// 회원 가입 페이이지 이동
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
@@ -39,6 +40,7 @@ public class JoinController {
 		return "member/join";
 	}
 	
+	//api 회원가입 페이지 이동
 	@RequestMapping(value = "/apiJoin", method = RequestMethod.GET)
 	public String joinview(MemberVO vo) {
 		System.out.println("API 회원가입 화면으로 이동!");
@@ -54,12 +56,13 @@ public class JoinController {
 		return result;
 	}
 
-	// 회원가입
+	// 회원가입 기능
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String joincuccess(MemberVO vo, String id) throws Exception {
 
-		//암호화
-/*		
+		
+		//암호화 1
+	
 		String rawPw = ""; // 인코딩 전 비밀번호
 		String encodePw = ""; // 인코딩 후 비밀번호
 		
@@ -70,9 +73,10 @@ public class JoinController {
 		//회원 가입 쿼리 실행
 		memberService.createUser(vo);
 		System.out.println("가입성공");
-*/	
-		
 
+		
+		
+/*
 		int idResult = memberService.idCheck(id);
 
 		try {
@@ -86,7 +90,7 @@ public class JoinController {
 		} catch (Exception e) {
 			throw new RuntimeException();
 		}
-		
+*/		
 		return "member/login";
 	}
 	

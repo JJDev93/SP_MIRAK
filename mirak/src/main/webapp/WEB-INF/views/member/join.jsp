@@ -35,7 +35,7 @@
 										<label for="id">이메일(ID)</label>
 										<div class="row mb-4">
 											<div class="col-sm-6">
-												<input type="email" path="memMail" name="mem_id" id="id" class="form-control" placeholder="이메일(ID)" value="${member.mem_id }" required="required">
+												<input type="email" path="memMail" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required="required">
 											</div>
 
 											<div class="col-sm-3">

@@ -3,12 +3,14 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="kr.co.mirak.member.MemberMapper">
+ 
   	<select id="login" parameterType="member" resultType="member">
   		<![CDATA[
-  		
- 			 SELECT MEM_ID FROM MEMBER WHERE MEM_ID=#{mem_id} AND MEM_PW=#{mem_pw} 
+ 			 SELECT MEM_ID, MEM_PW , MEM_NAME, MEM_AGE, MEM_GENDER ,MEM_PHONE, MEM_ADD1, MEM_ADD2, MEM_ZIPCODE FROM MEMBER 
+ 			 	WHERE MEM_ID=#{mem_id}  
  		]]>	
 	</select>
+	
  	<insert id="createUser" parameterType="member">
  		<![CDATA[
 	 		INSERT INTO MEMBER (MEM_ID, MEM_PW , MEM_NAME, MEM_AGE, MEM_GENDER ,MEM_PHONE, MEM_ADD1, MEM_ADD2, MEM_ZIPCODE)
@@ -29,10 +31,7 @@
 				MEM_NAME = #{mem_name},
 				MEM_AGE = #{mem_age},
 				MEM_GENDER = #{mem_gender},
-				MEM_PHONE = #{mem_phone},
-				MEM_ADD1 = #{mem_add1},
-				MEM_ADD2 = #{mem_add2},
-				MEM_ZIPCODE= #{mem_zipcode}
+				MEM_PHONE = #{mem_phone}
 			WHERE MEM_ID = #{mem_id}
 		]]>
 	</update>
@@ -48,7 +47,7 @@
 	
  	<select id="getMemberInfo" parameterType="String" resultType="member" >
 		<![CDATA[
-			SELECT MEM_ID, MEM_NAME, MEM_AGE, MEM_GENDER, MEM_PHONE, MEM_REGDATE, MEM_ADD1, MEM_ADD2, MEM_ZIPCODE FROM MEMBER
+			SELECT MEM_ID, MEM_NAME, MEM_AGE, MEM_GENDER, MEM_PHONE, MEM_REGDATE FROM MEMBER
 			WHERE MEM_ID=#{myid}
 		]]>	
 	</select>
@@ -105,7 +104,7 @@
 	<select id="getMemberDetail"
 		resultType="member">
 		<![CDATA[
-			select * from member where mem_name = #{mem_name}		
+			select * from member where mem_id = #{mem_id}		
 		]]>
 	</select>
 

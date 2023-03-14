@@ -3,6 +3,8 @@ package kr.co.mirak.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -21,24 +23,80 @@ public class LoginController {
 
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder;
+	
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+	
+	
 
 	// 로그인페이지
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginView(HttpSession session) {
+	public String loginView(Model model) {
 		System.out.println("로그인 화면으로 이동...");
-		String preUrl = (String)session.getAttribute("pre_url");
-		System.out.println("preUrl : " + preUrl);
 		return "member/login";
 	}
 
 	// 로그인
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(MemberVO memberVO, HttpSession session, Model model) {
+	public String login(MemberVO memberVO, Model model, HttpServletRequest request,
+			RedirectAttributes rttr) throws Exception {
 
+		System.out.println("login 메서드 진입");
+		System.out.println("전달된 데이터 : " + "[" + memberVO.getMem_id() + " , " + memberVO.getMem_pw()+ "]");
+		
+		
+		/* 암호화부분 */
+
+		HttpSession session = request.getSession();
+		
+		String rawPw = "";
+		String encodePw = "";
+
+		MemberVO lvo = memberService.login(memberVO); // 제출한아이디와 일치하는 아이디있는지
+
+		
+		if (lvo != null) { // 일치하는 아이디 존재시
+
+			rawPw = memberVO.getMem_pw(); // 사용자가 제출한 비번
+			encodePw = lvo.getMem_pw(); // db에 저장한 인코딩된 비번
+			
+			System.out.println("제출한비번:" + rawPw);
+			System.out.println("인코딩된비번:" + lvo.getMem_pw());
+			
+			String mem_id;
+			
+			if (true == pwEncoder.matches(rawPw, encodePw)) {  // 비번 일치 여부 판단
+//				logger.info("일로오나");
+				memberVO.setMem_pw("");   //인코딩된 비번 정보 지움
+				mem_id = memberVO.getMem_id();
+				
+			
+				
+				session.setAttribute("mem_id", mem_id); //세션에 사용자정보 저장 
+				logger.info("로그인 성공");
+				return "redirect:/";  //메인페이지로 이동
+
+			} else { // 일치하는 아이디가 존재하지 않을 시 (로그인 실패)
+
+				rttr.addFlashAttribute("result", 0);
+				logger.info("일치하는 아이디가 없습니다");
+				return "member/login"; // 로그인 페이지로 이동
+			}
+		} else {   //일치하는 아이디가 존재하지 않을시 (로그인 실패)
+			
+			rttr.addFlashAttribute("result" , 0);
+			logger.info("로그인 실패");
+			return "member/login";  //로그인페이지로 이동
+		}
+	
+	}
+	
+		
+		
+/*
 		System.out.println("로그인을 시도합니다.");
 		String returnURL = "";
-		String preUrl = (String)session.getAttribute("pre_url");
+		String preUrl = (String) session.getAttribute("pre_url");
 		System.out.println("preUrl : " + preUrl);
 
 		try {
@@ -68,46 +126,10 @@ public class LoginController {
 		}
 		session.removeAttribute("pre_url");
 		return returnURL;
+		
 	}
 
-	/*
-	 * @RequestMapping(value = "/login", method = RequestMethod.POST) public String
-	 * login(HttpServletRequest request, MemberVO member, RedirectAttributes rttr)
-	 * throws Exception{
-	 * 
-	 * 
-	 * 
-	 * HttpSession session = request.getSession(); String rawPw = ""; String
-	 * encodePw = "";
-	 * 
-	 * MemberVO lvo = memberService.login(member); // 제출한아이디와 일치하는 아이디 있는지
-	 * 
-	 * if(lvo != null) { // 일치하는 아이디 존재시
-	 * 
-	 * rawPw = member.getMem_pw(); // 사용자가 제출한 비밀번호 encodePw = lvo.getMem_pw(); //
-	 * 데이터베이스에 저장한 인코딩된 비밀번호
-	 * 
-	 * if(true == pwEncoder.matches(rawPw, encodePw)) { // 비밀번호 일치여부 판단
-	 * 
-	 * lvo.setMem_pw(""); // 인코딩된 비밀번호 정보 지움 session.setAttribute("member", lvo); //
-	 * session에 사용자의 정보 저장 return "redirect:/"; // 메인페이지 이동
-	 * 
-	 * 
-	 * } else {
-	 * 
-	 * rttr.addFlashAttribute("result", 0); return "redirect:member/login"; // 로그인
-	 * 페이지로 이동
-	 * 
-	 * }
-	 * 
-	 * } else { // 일치하는 아이디가 존재하지 않을 시 (로그인 실패)
-	 * 
-	 * rttr.addFlashAttribute("result", 0); return "redirect:member/login"; // 로그인
-	 * 페이지로 이동
-	 * 
-	 * } }
-	 * 
-	 */
+*/
 
 	// 로그아웃
 	@RequestMapping("/logout")
