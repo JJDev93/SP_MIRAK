@@ -44,27 +44,26 @@
 							<input type="text" id="result" name="cart_cnt" class="form-control input-number" min="1" max="100" value="1" placeholder="수량을 입력하세요" onchange="payBtnCnt()">
 						</div>
 					</div>
-					배송일<input type="date" name="cart_start" class="form-control input-number" style="width:240px;">
-<!-- 					<input type="text" name="daterange" value="01/01/2018 - 01/15/2018" /> -->
 
+					<label for="start">배송일<input type="date" name="cart_start" class="form-control input-number" style="width:240px;" id="start" min=""></label>
 
 					<br>
 					
 					요일 선택<br>
-					<label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform : scale(2);">&nbsp;&nbsp;월</label> &nbsp;&nbsp;
-					<label for="tue"><input type="checkbox" name="cart_day" id="tue" style="transform : scale(2);">&nbsp;&nbsp;화</label> &nbsp;&nbsp;
-					<label for="wed"><input type="checkbox" name="cart_day" id="wed" style="transform : scale(2);">&nbsp;&nbsp;수</label> &nbsp;&nbsp;
-					<label for="thu"><input type="checkbox" name="cart_day" id="thu" style="transform : scale(2);">&nbsp;&nbsp;목</label> &nbsp;&nbsp;
-					<label for="fri"><input type="checkbox" name="cart_day" id="fri" style="transform : scale(2);">&nbsp;&nbsp;금</label> &nbsp;&nbsp;
-					<label for="sat"><input type="checkbox" name="cart_day" id="sat" style="transform : scale(2);">&nbsp;&nbsp;토</label> &nbsp;&nbsp;
-					<label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform : scale(2);">&nbsp;&nbsp;일</label>
+					<label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform : scale(2);" value="월">&nbsp;&nbsp;월</label> &nbsp;&nbsp;
+					<label for="tue"><input type="checkbox" name="cart_day" id="tue" style="transform : scale(2);" value="화">&nbsp;&nbsp;화</label> &nbsp;&nbsp;
+					<label for="wed"><input type="checkbox" name="cart_day" id="wed" style="transform : scale(2);" value="수">&nbsp;&nbsp;수</label> &nbsp;&nbsp;
+					<label for="thu"><input type="checkbox" name="cart_day" id="thu" style="transform : scale(2);" value="목">&nbsp;&nbsp;목</label> &nbsp;&nbsp;
+					<label for="fri"><input type="checkbox" name="cart_day" id="fri" style="transform : scale(2);" value="금">&nbsp;&nbsp;금</label> &nbsp;&nbsp;
+					<label for="sat"><input type="checkbox" name="cart_day" id="sat" style="transform : scale(2);" value="토">&nbsp;&nbsp;토</label> &nbsp;&nbsp;
+					<label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform : scale(2);" value="일">&nbsp;&nbsp;일</label>
 					
 					<br>
 					<br>
 					<p>
 
-						<a href="/cart/${product.pro_code }/1" id="cartBtn" class="btn btn-black py-3 px-5">장바구니</a>
-		             	<a href="/pay/${product.pro_code }/1" id="payBtn" class="btn btn-black py-3 px-5">즉시 구매</a>
+						<a href="/cart/${product.pro_code }/1" id="cartBtn" class="btn btn-black py-3 px-5" onclick="payBtnCnt()">장바구니</a>
+		             	<a href="/pay/${product.pro_code }/1" id="payBtn" class="btn btn-black py-3 px-5" onclick="payBtnCnt()">즉시 구매</a>
 
 					</p>
 				</div>
@@ -75,9 +74,19 @@
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
 <script>
 	const payBtnCnt = function() {
-		let cnt = document.getElementById("result").value;
-		document.getElementById("payBtn").href = "/pay/${product.pro_code}/"  + cnt;
-		document.getElementById("cartBtn").href = "/cart/${product.pro_code}/" + cnt;
+	 let cnt = document.getElementById("result").value;
+		
+	 let start = document.getElementById("start").value;
+ 	 let mon = document.getElementById("mon").checked ? "월" : "";
+ 	 let tue = document.getElementById("tue").checked ? "화" : "";
+ 	 let wed = document.getElementById("wed").checked ? "수" : "";
+	 let thu = document.getElementById("thu").checked ? "목" : "";
+	 let fri = document.getElementById("fri").checked ? "금" : "";
+ 	 let sat = document.getElementById("sat").checked ? "토" : "";
+ 	 let sun = document.getElementById("sun").checked ? "일" : "";
+		
+		document.getElementById("payBtn").href = "/pay/${product.pro_code}/"  + cnt + "/" + start + "/" + mon + tue + wed + thu + fri + sat + sun;
+		document.getElementById("cartBtn").href = "/cart/${product.pro_code}/" + cnt + "/" + start + "/" + mon + tue + wed + thu + fri + sat + sun;
 	}
 	
 	$(function() {
@@ -87,6 +96,10 @@
 		    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
 		  });
 		});
+	
+	
+	let today = new Date().toISOString().substr(0, 10);
+	document.getElementById("start").min = today;	
 </script>
 </body>
 </html>

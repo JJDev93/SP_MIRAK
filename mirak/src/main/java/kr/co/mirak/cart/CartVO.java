@@ -8,8 +8,7 @@ public class CartVO {
 	private Date cart_start;
 	private String cart_day;
 	private int cart_cnt;
-	private int cart_show;
-	private int cart_totprice;
+	private int totalPrice;
 	private int cart_check;
 	private String mem_id;
 	private String pro_code;
@@ -42,17 +41,11 @@ public class CartVO {
 	public void setCart_cnt(int cart_cnt) {
 		this.cart_cnt = cart_cnt;
 	}
-	public int getCart_show() {
-		return cart_show;
+	public int getTotalPrice() {
+		return totalPrice;
 	}
-	public void setCart_show(int cart_show) {
-		this.cart_show = cart_show;
-	}
-	public int getCart_totprice() {
-		return cart_totprice;
-	}
-	public void setCart_totprice(int cart_totprice) {
-		this.cart_totprice = cart_totprice;
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 	public int getCart_check() {
 		return cart_check;
@@ -100,9 +93,10 @@ public class CartVO {
 	@Override
 	public String toString() {
 		return "CartVO [cart_code=" + cart_code + ", cart_start=" + cart_start + ", cart_day=" + cart_day
-				+ ", cart_cnt=" + cart_cnt + ", cart_show=" + cart_show + ", cart_totprice=" + cart_totprice
-				+ ", cart_check=" + cart_check + ", mem_id=" + mem_id + ", pro_code=" + pro_code + ", pro_name="
-				+ pro_name + ", pro_price=" + pro_price + ", pro_desc=" + pro_desc + ", pro_image=" + pro_image + "]";
+				+ ", cart_cnt=" + cart_cnt + ", totalPrice=" + totalPrice + ", cart_check=" + cart_check + ", mem_id="
+				+ mem_id + ", pro_code=" + pro_code + ", pro_name=" + pro_name + ", pro_price=" + pro_price
+				+ ", pro_desc=" + pro_desc + ", pro_image=" + pro_image + "]";
 	}
+	
 	
 }

@@ -7,9 +7,9 @@ public interface CartMapper {
 	List<CartVO> cartAdminList();
 	
 	CartVO info(int id);
-	int insert(CartVO vo);
-	int update(CartVO vo);
-	int delete(int id);
+	int cartInsert(CartVO vo);
+	int cartUpdate(CartVO vo);
+	int cartDelete(CartVO vo);
 	
 	CartVO productToCart(CartVO vo);
 	
