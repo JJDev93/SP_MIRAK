@@ -16,6 +16,12 @@
  		]]>	
 	</select>
 	
+	<select id="idfind_pw" parameterType="member" resultType="member">
+  		<![CDATA[
+ 			 SELECT MEM_ID FROM MEMBER WHERE MEM_NAME=#{mem_name} AND MEM_PHONE=#{mem_phone} AND MEM_ID=#{mem_id} 
+ 		]]>	
+	</select>
+	
  	<insert id="createUser" parameterType="member">
  		<![CDATA[
 	 		INSERT INTO MEMBER (MEM_ID, MEM_PW , MEM_NAME, MEM_AGE, MEM_GENDER ,MEM_PHONE, MEM_ADD1, MEM_ADD2, MEM_ZIPCODE)

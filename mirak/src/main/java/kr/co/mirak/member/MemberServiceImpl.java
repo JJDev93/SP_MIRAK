@@ -33,6 +33,14 @@ public class MemberServiceImpl implements MemberService {
 		MemberVO memVO  = mapper.idfind(vo);
 		return memVO;
 	}
+	
+	//아이디 찾기(비번 리셋용)
+	public MemberVO idfind_pw(MemberVO vo) {
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		MemberVO memVO  = mapper.idfind(vo);
+		return memVO;
+	}
+	
 	//회원가입
 	@Override
 	public int createUser(MemberVO vo) {
