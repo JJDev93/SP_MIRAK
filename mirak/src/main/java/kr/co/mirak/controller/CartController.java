@@ -39,9 +39,7 @@ public class CartController {
    // delete
    @RequestMapping(value = "/cart/{cart_code}")
    public String cartDelete(CartVO vo, HttpSession session, Model model, @PathVariable("cart_code") int cart_code) {
-      System.out.println("delete");
-	   vo.setCart_code(cart_code);
-	   System.out.println("cart_code : " + cart_code);
+	  vo.setCart_code(cart_code);
       cartService.cartDelete(vo, session);
       return "redirect:/cart";
    }
@@ -49,10 +47,10 @@ public class CartController {
    // update
    @RequestMapping(value = "/cart/{cart_day}/{cart_cnt}")
    public String cartUpdate(CartVO vo, HttpSession session, Model model, @PathVariable("cart_day") String cart_day, @PathVariable("cart_cnt") String cart_cnt) {
-	      vo.setCart_day(cart_day);
-	      cartService.cartUpdate(vo, session);
-	      return "redirect:/cart";
-	   }
+	  vo.setCart_day(cart_day);
+	  cartService.cartUpdate(vo, session);
+	  return "redirect:/cart";
+   }
    
    // admin list select
    @RequestMapping(value = "/cartAdminList", method = RequestMethod.GET)

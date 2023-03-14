@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 <div class="hero-wrap hero-bread"
@@ -40,14 +44,28 @@
 							<input type="text" id="result" name="cart_cnt" class="form-control input-number" min="1" max="100" value="1" placeholder="수량을 입력하세요" onchange="payBtnCnt()">
 						</div>
 					</div>
+					배송일<input type="date" name="cart_start" class="form-control input-number" style="width:240px;">
+<!-- 					<input type="text" name="daterange" value="01/01/2018 - 01/15/2018" /> -->
+
+
+					<br>
+					
+					요일 선택<br>
+					<label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform : scale(2);">&nbsp;&nbsp;월</label> &nbsp;&nbsp;
+					<label for="tue"><input type="checkbox" name="cart_day" id="tue" style="transform : scale(2);">&nbsp;&nbsp;화</label> &nbsp;&nbsp;
+					<label for="wed"><input type="checkbox" name="cart_day" id="wed" style="transform : scale(2);">&nbsp;&nbsp;수</label> &nbsp;&nbsp;
+					<label for="thu"><input type="checkbox" name="cart_day" id="thu" style="transform : scale(2);">&nbsp;&nbsp;목</label> &nbsp;&nbsp;
+					<label for="fri"><input type="checkbox" name="cart_day" id="fri" style="transform : scale(2);">&nbsp;&nbsp;금</label> &nbsp;&nbsp;
+					<label for="sat"><input type="checkbox" name="cart_day" id="sat" style="transform : scale(2);">&nbsp;&nbsp;토</label> &nbsp;&nbsp;
+					<label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform : scale(2);">&nbsp;&nbsp;일</label>
+					
 					<br>
 					<br>
 					<p>
-						<%-- <input type="submit" formaction="/cart/${product.pro_code }" id="cartBtn" value="장바구니" class="btn btn-black py-3 px-5">  --%>
+
 						<a href="/cart/${product.pro_code }/1" id="cartBtn" class="btn btn-black py-3 px-5">장바구니</a>
-						<!-- <input type="submit" formaction="/cartList" value="장바구니" class="btn btn-black py-3 px-5">  -->
-		             	<%-- <input type="submit" formaction="/pay/${product.pro_code }/" value="즉시 구매" class="btn btn-black py-3 px-5"> --%>
 		             	<a href="/pay/${product.pro_code }/1" id="payBtn" class="btn btn-black py-3 px-5">즉시 구매</a>
+
 					</p>
 				</div>
 			</div>
@@ -61,6 +79,14 @@
 		document.getElementById("payBtn").href = "/pay/${product.pro_code}/"  + cnt;
 		document.getElementById("cartBtn").href = "/cart/${product.pro_code}/" + cnt;
 	}
+	
+	$(function() {
+		  $('input[name="daterange"]').daterangepicker({
+		    opens: 'left'
+		  }, function(start, end, label) {
+		    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+		  });
+		});
 </script>
 </body>
 </html>

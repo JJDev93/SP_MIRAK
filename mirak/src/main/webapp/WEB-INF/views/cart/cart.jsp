@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 <div class="hero-wrap hero-bread"
@@ -43,6 +44,7 @@ session = request.getSession();
 								<th>이미지</th>
 								<th>상품명</th>
 								<th>가격</th>
+								<th>배송일</th>
 								<th>요일선택</th>
 								<th>갯수</th>
 								<th>총가격</th>							
@@ -72,12 +74,11 @@ session = request.getSession();
 										<p>${c.pro_desc }</p>
 									</td>
 									<td>${c.pro_price }</td>
-									<td>${c.cart_day }</td>
 									<td>
-										<div class="quantity_div">
-											<input type="text" readonly="readonly" value="${c.cart_cnt}"
-												class="quantity_input">
-										</div>										
+									<fmt:formatDate value="${c.cart_start }" pattern="yy-MM-dd" />
+									</td>
+									<td>${c.cart_day }</td>
+									<td>${c.cart_cnt }									
 										<!--
 										<div class="quantity_div">
 											<input type="text" value="${c.cart_cnt}" class="quantity_input">
@@ -90,8 +91,8 @@ session = request.getSession();
 									<td>${c.totalPrice }</td>
 									
 									<td>
-									<button type="button" class="btn btn-primary py-3 px-5"
-								data-toggle="modal" data-target="#exampleModal">변경</button>
+									<input type="button" value="변경" class="btn btn-primary py-3 px-5"
+								data-toggle="modal" data-target="#exampleModal">
 									</td>
 									<td>
 									<input type="submit" value="삭제" formaction="/cart/{cart_code}"
@@ -135,7 +136,7 @@ session = request.getSession();
 	</div>
 
 	<!-- Modal -->
-	<form action="/cartClientList">
+	<form action="/cart/{cart_day}/{cart_cnt}">
 		<div class="modal fade" id="exampleModal" tabindex="9999"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
@@ -151,16 +152,19 @@ session = request.getSession();
 					<c:forEach var="c" items="${cartList }">	
 						<img src="${path}/resources/images/product/${c.pro_image}"
 						style="width: 100px; height: 50px;" />
-						${c.pro_name }
+						${c.pro_name }<br>
 						${c.pro_price }원<br>
+						<br>배송 시작일 선택<br>
+						<input type="date" name="cart_start" class="form-control input-number" style="width:240px;">
 						<br>배송 요일 선택 <br>
-						<input type="checkbox" name="day[]" value="0">월
-						<input type="checkbox" name="day[]" value="1">화
-						<input type="checkbox" name="day[]" value="2">수
-						<input type="checkbox" name="day[]" value="3">목
-						<input type="checkbox" name="day[]" value="4">금
-						<input type="checkbox" name="day[]" value="5">토
-						<input type="checkbox" name="day[]" value="6">일
+						${c.cart_day }<br>
+						<input type="checkbox" name="cart_day" value="월">월
+						<input type="checkbox" name="cart_day" value="화">화
+						<input type="checkbox" name="cart_day" value="수">수
+						<input type="checkbox" name="cart_day" value="목">목
+						<input type="checkbox" name="cart_day" value="금">금
+						<input type="checkbox" name="cart_day" value="토">토
+						<input type="checkbox" name="cart_day" value="일">일
 						<br><br>
 						배송 횟수 선택 <br>
 						<input type="number" value="${c.cart_cnt}" class="quantity_input">
@@ -169,7 +173,7 @@ session = request.getSession();
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary" id="cartUpdate" onclick="cartUpdate();" >변경</button>
+						<button type="submit" class="btn btn-primary">변경</button>
 					</div>
 				</div>
 			</div>
@@ -184,6 +188,22 @@ session = request.getSession();
 
 <script>
 
+
+
+$(function() {
+	  $('input[name="daterange"]').daterangepicker({
+	    opens: 'left'
+	  }, function(start, end, label) {
+	    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+	  });
+	});
+	
+function del(){
+    alert('삭제 하시겠습니까');
+}
+
+
+/*
 function fn_memberCheck() {
     $.ajax({
         url : "/cart/{cart_day}/{cart_cnt}",
@@ -207,12 +227,8 @@ function fn_memberCheck() {
         }
     })
 }
+*/
 	
-	
-function del(){
-    alert('삭제 하시겠습니까');
-}
-
 	
 	$(document).ready(function() {
 		// 종합 정보 삽입
@@ -312,7 +328,8 @@ function del(){
 	});
 	 */
 
-	// 결제 페이지 이동 
+	/*
+	 결제 페이지 이동 
 	$(".pay_btn")
 			.on(
 					"click",
@@ -351,4 +368,5 @@ function del(){
 						$(".pay_form").submit();
 
 					});
+	 */
 </script>

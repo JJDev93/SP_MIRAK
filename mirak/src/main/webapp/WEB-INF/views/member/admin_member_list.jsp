@@ -12,120 +12,111 @@ margin-right:10px;
 </style>
 
 <div id="test">  <!-- 이 부분 필요하면 삭제! -->
-<jsp:include page="/common/admin_hd.jsp"></jsp:include>
-<div class="ftco-section">
-	<div class="container">
-		<div class="justify-content-center mb-3 pb-3">
-			<div class="heading-section text-center">
-				<h2>회원관리</h2>
-				<p>회원관리 리스트 페이지 입니다.</p>
+	<jsp:include page="/common/admin_hd.jsp"></jsp:include>
+	<div class="ftco-section">
+		<div class="container">
+			<div class="justify-content-center mb-3 pb-3">
+				<div class="heading-section text-center">
+					<h2>회원관리</h2>
+					<p>회원관리 리스트 페이지 입니다.</p>
+				</div>
 			</div>
-		</div>
-		<form action="#" class="p-5 bg-light mb-4">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="form-group">
-						<label for="name">Name *</label> <input type="text"
-							class="form-control" id="name">
+			<form action="#" class="p-5 bg-light mb-4">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="name">Name *</label> <input type="text"
+								class="form-control" id="name">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="email">Email *</label> <input type="email"
+								class="form-control" id="email">
+						</div>
+					</div>
+					<div class="col-md-12">
+						<input type="submit" value="검색" class="btn btn-primary">
 					</div>
 				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label for="email">Email *</label> <input type="email"
-							class="form-control" id="email">
+			</form>
+			<div class="bd-example-snippet bd-code-snippet">
+				<div class="bd-example">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">이름</th>
+								<th scope="col">나이</th>
+								<th scope="col">성별</th>
+								<th scope="col">연락처</th>
+								<th scope="col">가입일자</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${memberList}" var="member">
+							<tr>
+								<td scope="row"><a href="/admin/member/${member.mem_name}">${member.mem_id }</a></td>
+								<td>${member.mem_name }</td>
+								<td>${member.mem_age }</td>
+								<td>
+									<c:choose>
+										<c:when test="${member.mem_gender == '1'}">
+											남	
+										</c:when>
+										<c:when test="${member.mem_gender == '0' }">
+											여
+										</c:when>
+									</c:choose>
+								</td>
+								<td>${member.mem_phone }</td>
+								<td><fmt:formatDate value="${member.mem_regdate }"/></td>
+							</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!--  김원중이 건드린 부분 -->
+			<div class="row mt-5">
+				<div class="col text-center">
+					<div class="block-27">
+						<!-- 각 번호 페이지 버튼 -->
+						<table>
+							<tr>
+								<!-- 이전페이지 버튼 -->
+								<c:if test="${pageMaker.prev}">
+									<ul>
+										<li class="pageInfo_btn previous"><a
+											href="javascript:acyncMovePage('adminMembers?pageNum= ${pageMaker.startPage-1}');">&lt;</a></li>
+									</ul>
+								</c:if>
+								<c:forEach var="num" begin="${pageMaker.startPage}"
+									end="${pageMaker.endPage}">
+									<ul style="text-align: center;">
+										<li class="pageInfo_btn"><a
+											href="javascript:acyncMovePage('adminMembers?pageNum=${num}');">${num}</a></li>
+									</ul>
+								</c:forEach>
+								<!-- 다음페이지 버튼 -->
+								<c:if test="${pageMaker.next}">
+									<ul>
+										<li class="pageInfo_btn next"><a
+											href="javascript:acyncMovePage('adminMembers?pageNum=${pageMaker.endPage + 1 }');">&gt;</a></li>
+									</ul>
+								</c:if>
+							</tr>
+						</table>
 					</div>
 				</div>
-				<div class="col-md-12">
-					<input type="submit" value="검색" class="btn btn-primary">
-				</div>
 			</div>
-		</form>
-		<div class="bd-example-snippet bd-code-snippet">
-			<div class="bd-example">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th scope="col">ID</th>
-							<th scope="col">이름</th>
-							<th scope="col">나이</th>
-							<th scope="col">성별</th>
-							<th scope="col">연락처</th>
-							<th scope="col">가입일자</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${memberList}" var="member">
-						<tr>
-							<td scope="row"><a href="adminMember/${member.mem_id}">${member.mem_id }</a></td>
-							<td>${member.mem_name }</td>
-							<td>${member.mem_age }</td>
-							<td>
-								<c:choose>
-									<c:when test="${member.mem_gender == '1'}">
-										남	
-									</c:when>
-									<c:when test="${member.mem_gender == '0' }">
-										여
-									</c:when>
-								</c:choose>
-							</td>
-							<td>${member.mem_phone }</td>
-							<td><fmt:formatDate value="${member.mem_regdate }"/></td>
-						</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
+			<!--  여기까지!  -->
 		</div>
-<!-- 		<div class="row mt-5"> -->
-<!-- 			<div class="col text-center"> -->
-<!-- 				<div class="block-27"> -->
-<!-- 					<ul> -->
-<!-- 						<li><a href="#">&lt;</a></li> -->
-<!-- 						<li class="active"><span>1</span></li> -->
-<!-- 						<li><a href="#">2</a></li> -->
-<!-- 						<li><a href="#">3</a></li> -->
-<!-- 						<li><a href="#">4</a></li> -->
-<!-- 						<li><a href="#">5</a></li> -->
-<!-- 						<li><a href="#">&gt;</a></li> -->
-<!-- 					</ul> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-
-
-<!--  김원중이 건드린 부분 -->
-		 <div class="row mt-5" >
-        <div class="col text-center">
-        	<div class="block-27">
- 			<!-- 각 번호 페이지 버튼 -->
- 				<table>
- 				<tr>
-                <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-               		 <ul style="text-align:center;">
-						<li class="pageInfo_btn"><a href="javascript:acyncMovePage('adminMembers?pageNum=${num}');">${num}</a></li>
-                    </ul>                
-                </c:forEach>
-                </tr>
-                </table>
-                </div>
-        </div>
-    </div>
-<!--  여기까지!  -->
-
-
-
 	</div>
-</div>
-<jsp:include page="/common/admin_ft.jsp"></jsp:include>
-
+	<jsp:include page="/common/admin_ft.jsp"></jsp:include>
 </div> <!-- 이 부분 필요하면 삭제! -->
-
-
 <!-- 이 부분 필요하면 삭제! -->
 <script>
-
-
  function acyncMovePage(url){
     // ajax option
     var ajaxOption = {
@@ -143,6 +134,5 @@ margin-right:10px;
         $('#test').html(data);
     });
 }
-
 </script>
 <!-- 여기까지! -->
