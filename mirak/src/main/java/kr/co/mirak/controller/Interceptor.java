@@ -12,7 +12,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 public class Interceptor extends HandlerInterceptorAdapter{
 
    private static final Logger logger = LoggerFactory.getLogger(Interceptor.class);
-   static final String[] EXCLUDE_URL_LIST = {"/admin", "/join", "/idCheck", "/login", "/ProductClientList", "/ProductClientListP", "/ProductClientListT", "/ProductClientListQ", "/ProductClientDetail" , "/naverSave","/apiJoin", "/mailCheck"};
+   static final String[] EXCLUDE_URL_LIST = {"/admin", "/join", "/idCheck", "/login", "/ProductClientList", "/ProductClientListP", "/ProductClientListT", "/ProductClientListQ", "/ProductClientDetail" , "/naverSave","/apiJoin", "/mailCheck", "/memupdate","/idfind"};
 
 	//	private void getDestination(HttpServletRequest request) {
 	//        String uri = request.getRequestURI();

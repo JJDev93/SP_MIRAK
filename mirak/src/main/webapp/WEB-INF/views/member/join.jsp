@@ -103,9 +103,9 @@
 							<div class="form-group">
 								<label for="gender">성별</label>
 								<div>
-									<input type="radio" name="mem_gender" value="1">남
+									<input type="radio" name="mem_gender" value="1" checked>남
 									&nbsp;&nbsp;&nbsp; <input
-										type="radio" name="mem_gender" value="2" checked>여
+										type="radio" name="mem_gender" value="2">여
 								</div>
 							</div>
 						</div>
@@ -153,7 +153,7 @@
 						</div>
 
 						<div class="col-md-6">
-							<a href="index.jsp" class="btn btn-secondary py-3 px-5 w-100">가입취소</a>
+							<a href="/" class="btn btn-secondary py-3 px-5 w-100">가입취소</a>
 						</div>
 					</div>
 				</form>

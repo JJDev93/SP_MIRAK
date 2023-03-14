@@ -9,6 +9,11 @@
  			 SELECT MEM_ID FROM MEMBER WHERE MEM_ID=#{mem_id} AND MEM_PW=#{mem_pw} 
  		]]>	
 	</select>
+	<select id="idfind" parameterType="member" resultType="member">
+  		<![CDATA[
+ 			 SELECT MEM_ID FROM MEMBER WHERE MEM_NAME=#{mem_name} AND MEM_PHONE=#{mem_phone} 
+ 		]]>	
+	</select>
  	<insert id="createUser" parameterType="member">
  		<![CDATA[
 	 		INSERT INTO MEMBER (MEM_ID, MEM_PW , MEM_NAME, MEM_AGE, MEM_GENDER ,MEM_PHONE, MEM_ADD1, MEM_ADD2, MEM_ZIPCODE)
@@ -26,6 +31,7 @@
 	<update id="memupdate" parameterType="kr.co.mirak.member.MemberVO">
 		<![CDATA[
 			UPDATE MEMBER SET
+				MEM_PW = #{mem_pw},
 				MEM_NAME = #{mem_name},
 				MEM_AGE = #{mem_age},
 				MEM_GENDER = #{mem_gender},
@@ -69,18 +75,6 @@
 			WHERE MEM_ID = #{mem_id} and MEM_PW = #{mem_pw}
 		]]>
 	</delete>
-	
-	
-	
-	<!-- 아이디, 비번 확인 -->
-	<select id="memberCheck" parameterType="kr.co.mirak.member.MemberVO" resultType="int">
-		SELECT count(*) FROM MEMBER 
-		WHERE mem_id= #{mem_id} 
-		and mem_pw=#{mem_pw}
-	</select>
-
-	
-	
 	
 	
 	<!-- 김원중이 건드린 부분 -->

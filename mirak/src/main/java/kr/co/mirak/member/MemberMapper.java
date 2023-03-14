@@ -7,6 +7,7 @@ import kr.co.mirak.product.Criteria;
 
 public interface MemberMapper {
 	MemberVO login(MemberVO vo);
+	MemberVO idfind(MemberVO vo);
 	int createUser(MemberVO vo);
 	int naverinsert(MemberVO vo);
 	int memupdate(MemberVO vo);
@@ -14,8 +15,6 @@ public interface MemberMapper {
 //	List<MemberVO> getMemberList(Integer page);
 	MemberVO getMemberInfo(String memId);
 	int idCheck(String id);
-	
-	int memberCheck(MemberVO vo);
 	
 
 	// 김원중이 건드린 부분
