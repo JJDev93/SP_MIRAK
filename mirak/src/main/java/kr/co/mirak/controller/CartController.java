@@ -24,8 +24,7 @@ public class CartController {
 	public String getCartList(CartVO vo, Model model, HttpSession session) {
 		String mem_id = (String)session.getAttribute("mem_id");
 		if(mem_id == null) {
-			return "redirect:/login";
-			
+			return "/login";
 		}else {
 		    vo.setMem_id(mem_id);
 			model.addAttribute("cartList", cartService.cartClientList(vo));
@@ -35,7 +34,12 @@ public class CartController {
 
 	@RequestMapping(value = "/cart/{pro_code}/{cart_cnt}", method = RequestMethod.GET)
 	public String cartList(CartVO vo, HttpSession session, Model model, @PathVariable("pro_code") String pro_code, @PathVariable("cart_cnt") String cart_cnt) {
-		vo.setPro_code(pro_code);
+		String mem_id = (String)session.getAttribute("mem_id");
+		if(mem_id == null) {
+			String preUrl = "/cart/" + pro_code + "/" + cart_cnt;
+			session.setAttribute("pre_url", preUrl);
+			return "redirect:/login";
+		}
 		vo.setPro_code(pro_code);
 		cartService.insert(vo, session);
 		return "redirect:/cart";
