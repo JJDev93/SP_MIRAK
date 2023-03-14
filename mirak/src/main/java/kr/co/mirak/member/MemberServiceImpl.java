@@ -27,6 +27,12 @@ public class MemberServiceImpl implements MemberService {
 		return memVO;
 	}
 	
+	//아이디 찾기
+	public MemberVO idfind(MemberVO vo) {
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		MemberVO memVO  = mapper.idfind(vo);
+		return memVO;
+	}
 	//회원가입
 	@Override
 	public int createUser(MemberVO vo) {
@@ -94,19 +100,6 @@ public class MemberServiceImpl implements MemberService {
 		MemberVO memVO  = mapper.getMemberInfo(memId);
 		return memVO;
 	}
-	
-	
-	
-	//멤버 체크
-	@Override
-	public int memberCheck(MemberVO vo) {
-	MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-	int result = mapper.memberCheck(vo);
-	return result;
-	}
-
-
-	
 	
 	//김원중이 건드린 부분
 	

@@ -10,6 +10,7 @@ import kr.co.mirak.product.Criteria;
 
 public interface MemberService {
 	MemberVO login(MemberVO vo);
+	MemberVO idfind(MemberVO vo);
 	int createUser(MemberVO vo);
 	int naverinsert(MemberVO vo);
 	MemberVO getMemberInfo(HttpSession session);
@@ -18,7 +19,6 @@ public interface MemberService {
 //	List<MemberVO> getMemberList(Optional<Integer> pageStart);
 	MemberVO getMemberDetail(String memId);
 	int idCheck(String id) throws Exception;
-	int memberCheck(MemberVO vo);;
 
 	//김원중이 건드린 부분
 	

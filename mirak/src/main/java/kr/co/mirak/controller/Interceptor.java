@@ -10,8 +10,25 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 
 public class Interceptor extends HandlerInterceptorAdapter{
-	private static final Logger logger = LoggerFactory.getLogger(Interceptor.class);
-	static final String[] EXCLUDE_URL_LIST = {};
+
+   private static final Logger logger = LoggerFactory.getLogger(Interceptor.class);
+   static final String[] EXCLUDE_URL_LIST = {"/admin", "/join", "/idCheck", "/login", "/ProductClientList", "/ProductClientListP", "/ProductClientListT", "/ProductClientListQ", "/ProductClientDetail" , "/naverSave","/apiJoin", "/mailCheck", "/memupdate","/idfind"};
+
+	//	private void getDestination(HttpServletRequest request) {
+	//        String uri = request.getRequestURI();
+	//        String query = request.getQueryString();
+	//        
+	//        if (query == null || query.equals("null")) {
+	//            query = "";
+	//        } else {
+	//            query = "?" + query;
+	//        }
+	//
+	//        if (request.getMethod().equals("GET")) {
+	//            logger.info("destination : " + (uri + query));
+	//            request.getSession().setAttribute("destination", uri + query);
+	//        }
+	//    }
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
