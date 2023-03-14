@@ -5,7 +5,6 @@
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 <!-- 네아로 SDK -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2-nopolyfill.js" charset="utf-8"></script>
-
 <style>
 
       .hr-sect {
@@ -42,7 +41,6 @@
 		</div>
 	</div>
 </div>
-
 <section class="ftco-section">
 	<div class="container">
 	
@@ -86,7 +84,7 @@
 							<div class="g-signin2" data-onsuccess="onSignIn"></div>
 						</div>
 					</div>
-<!-- 					네이버로그인 -->
+					<!-- 네이버로그인 -->
 					<div class="col-sm-4 text-center ftco-animate" id="naverIdLogin" onclick="naverLoginclick()"></div>
 					
 					<div class="col-sm-4 text-center ftco-animate">
