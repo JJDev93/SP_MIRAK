@@ -17,7 +17,6 @@ public class apiController {
 	private MemberService memberService;
     
 	@RequestMapping(value="/naverSave", method=RequestMethod.POST)
-	
 //	@ResponseBody // 네이버 강제로그인 되서 일단 주석함 ㅠㅠ... 페이지 이동 안되요.
 	public @ResponseBody String naverSave(MemberVO vo, HttpSession session) {
 		System.out.println(vo);
