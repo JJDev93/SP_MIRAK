@@ -70,6 +70,17 @@
                      <a href="join" class="btn btn-secondary py-3 px-5 w-100">회원가입</a>
                   </div>
                </div>
+               
+               
+               			<!-- 카카오 -->
+						<div class="wrap">
+
+							<a class="kakao"
+								href="https://kauth.kakao.com/oauth/authorize?client_id=44ffa4c7ab045c88d80a8753394940d6&redirect_uri=http://localhost:8080&response_type=code">
+								<span>카카오톡으로 간편로그인</span>
+							</a>
+						</div>
+               
 
                <div class="form-group row" style="text-align: right;">
                   <div class="col-md-12">
