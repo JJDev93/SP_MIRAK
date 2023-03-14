@@ -11,7 +11,7 @@
 				<p>상품 상세페이지 입니다.</p>
 			</div>
 		</div>
-		<form action="/productupdate" method="post" enctype="multipart/form-data" class="p-5 bg-light mb-4">
+		<form action="/admin/productUpdate" method="post" enctype="multipart/form-data" class="p-5 bg-light mb-4">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group">
@@ -66,8 +66,21 @@
 				
 			</div>
 		</form>		
-		<a href="/ProductAdminList" class="btn btn-secondary">목록</a>
-		<a href="/deleteproduct?pro_code=${product.pro_code}" class="btn btn-danger">삭제</a>
+		<a href="/admin/products" class="btn btn-secondary">목록</a>
+		<input type="button" class="btn btn-danger" onclick="deleteBtn();" value="삭제">
 	</div>
 </div>
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>clude>
+
+<script>
+
+function deleteBtn(){
+	if(!confirm("삭제하시겠습니까?")){
+		return false;	
+	}else{
+		location.replace("/admin/productDelete?pro_code=${product.pro_code}")
+	}
+}
+
+
+</script>

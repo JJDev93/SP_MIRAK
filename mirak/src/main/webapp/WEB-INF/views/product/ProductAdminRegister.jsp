@@ -10,7 +10,7 @@
 				<p>상품 등록페이지 입니다.</p>
 			</div>
 		</div>
-		<form action="productregister" method="post" enctype="multipart/form-data" class="p-5 bg-light mb-4">
+		<form action="/admin/productRegister" method="post" enctype="multipart/form-data" class="p-5 bg-light mb-4">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group">
@@ -50,14 +50,30 @@
 				
 				<div class="col-md-12">
 					<div class="form-group">
-						<input type="submit" class="form-control" value="상품 등록">
+						<input type="button" class="form-control" value="상품 등록" onclick="registerBtn();">
 					</div>
 				</div>
 				
 			</div>
 		</form>		
-		<a href="ProductAdminList" class="btn btn-secondary">목록</a>
+		<a href="products" class="btn btn-secondary">목록</a>
 
 	</div>
 </div>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
+
+<script>
+
+function registerBtn(){
+	if(!confirm("상품을 등록 하시겠습니까?")){
+		return false;	
+	}else{
+		location.replace("/admin/products")
+		theForm.method = "post";
+        
+        theForm.action = "/admin/productRegister";
+	}
+}
+
+
+</script>

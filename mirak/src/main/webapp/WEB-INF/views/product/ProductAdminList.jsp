@@ -22,7 +22,7 @@ margin-right:10px;
 				<p>상품 목록 페이지 입니다.</p>
 			</div>
 		</div>
-		<a href="ProductAdminRegister" class="btn btn-primary mb-4">상품 추가</a>
+		<a href="productRegister" class="btn btn-primary mb-4">상품 추가</a>
 
 		<div class="bd-example-snippet bd-code-snippet">
 			<div class="bd-example">
@@ -44,13 +44,13 @@ margin-right:10px;
 
 							<tr>
 								<td><a
-									href="ProductAdminDetail/${product.pro_code}"> <img
+									href="product/${product.pro_code}"> <img
 										alt="1"
 										src="${path}/resources/images/product/${product.pro_image}"
 										style="width: 100px; height: 100px;"></a></td>
 								<td>${product.pro_code }</td>
 								<td><a
-									href="ProductAdminDetail/${product.pro_code}">${product.pro_name }</a></td>
+									href="product/${product.pro_code}">${product.pro_name }</a></td>
 
 								<td>${product.pro_price }</td>
 								<td>${product.pro_desc }</td>
@@ -71,18 +71,18 @@ margin-right:10px;
  				 <!-- 이전페이지 버튼 -->
                 <c:if test="${pageMaker.prev}">
                		 <ul>
-                    <li class="pageInfo_btn previous"><a href="javascript:acyncMovePage('ProductAdminList?pageNum= ${pageMaker.startPage-1}');">&lt;</a></li>
+                    <li class="pageInfo_btn previous"><a href="javascript:acyncMovePage('/admin/products?pageNum= ${pageMaker.startPage-1}');">&lt;</a></li>
                     </ul>
                 </c:if>
                 <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
                		 <ul style="text-align:center;">
-						<li class="pageInfo_btn"><a href="javascript:acyncMovePage('ProductAdminList?pageNum=${num}');">${num}</a></li>
+						<li class="pageInfo_btn"><a href="javascript:acyncMovePage('/admin/products?pageNum=${num}');">${num}</a></li>
                     </ul>
                 </c:forEach>
                 <!-- 다음페이지 버튼 -->
                 <c:if test="${pageMaker.next}">
                 	<ul>
-                    <li class="pageInfo_btn next"><a href="javascript:acyncMovePage('ProductAdminList?pageNum=${pageMaker.endPage + 1 }');">&gt;</a></li>
+                    <li class="pageInfo_btn next"><a href="javascript:acyncMovePage('/admin/products?pageNum=${pageMaker.endPage + 1 }');">&gt;</a></li>
                     </ul>
                 </c:if>    
                 </tr>
