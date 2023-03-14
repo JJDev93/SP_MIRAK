@@ -103,21 +103,9 @@
 							<div class="form-group">
 								<label for="gender">성별</label>
 								<div>
-									<c:choose>
-										<c:when test="${member.mem_gender == '1'}">
-											<input type="radio" name="gender" value="man"
-												name="mem_gender" checked>남 
-											&nbsp;&nbsp;&nbsp; 
-										<input type="radio" name="gender" value="woman"
-												name="mem_gender">여
-										</c:when>
-										<c:when test="${member.mem_gender == '0' }">
-											<input type="radio" name="mem_gender" value="1">남
-                                          &nbsp;&nbsp;&nbsp; 
-                                          <input type="radio"
-												name="mem_gender" value="0" checked>여
-                             	 </c:when>
-									</c:choose>
+									<input type="radio" name="mem_gender" value="1">남
+									&nbsp;&nbsp;&nbsp; <input
+										type="radio" name="mem_gender" value="2" checked>여
 								</div>
 							</div>
 						</div>
