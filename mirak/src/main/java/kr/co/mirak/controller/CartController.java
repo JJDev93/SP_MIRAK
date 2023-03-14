@@ -23,9 +23,14 @@ public class CartController {
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)   
 	public String getCartList(CartVO vo, Model model, HttpSession session) {
 		String mem_id = (String)session.getAttribute("mem_id");
-	    vo.setMem_id(mem_id);
-		model.addAttribute("cartList", cartService.cartClientList(vo));
-		return "cart/cart";
+		if(mem_id == null) {
+			return "redirect:/login";
+			
+		}else {
+		    vo.setMem_id(mem_id);
+			model.addAttribute("cartList", cartService.cartClientList(vo));
+			return "cart/cart";
+		}
 	}
 
 	@RequestMapping(value = "/cart/{pro_code}/{cart_cnt}", method = RequestMethod.GET)
