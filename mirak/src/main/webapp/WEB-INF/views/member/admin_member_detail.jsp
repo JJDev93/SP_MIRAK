@@ -14,19 +14,19 @@
 				<div class="col-md-12">
 					<div class="form-group">
 						<label for="ID">아이디</label> 
-						<input type="text" class="form-control" id="ID" value="${member.mem_id }" readonly>
+						<input type="text" class="form-control" id="ID" name="mem_id" value="${member.mem_id}" readonly>
 					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="form-group">
 						<label for="name">이름</label> 
-						<input type="text" class="form-control" id="name" value="${member.mem_name }" readonly>
+						<input type="text" class="form-control" id="name" name="mem_name" value="${member.mem_name }" readonly>
 					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="form-group">
 						<label for="age">나이</label> 
-						<input type="text" class="form-control" id="age" value="${member.mem_age }" readonly>
+						<input type="text" class="form-control" id="age" name="mem_age" value="${member.mem_age }" readonly>
 					</div>
 				</div>
 				<div class="col-md-12">
@@ -34,10 +34,10 @@
 						<label for="gender">성별</label> 
 						<c:choose>
 							<c:when test="${member.mem_gender == '1'}">
-								<input type="text" class="form-control" id="gender" value="남" readonly>
+								<input type="text" class="form-control" id="gender" name="mem_gender" value="남" readonly>
 	                        </c:when>
 							<c:when test="${member.mem_gender == '0' }">
-								<input type="text" class="form-control" id="gender" value="여" readonly>
+								<input type="text" class="form-control" id="gender" name="mem_gender" value="여" readonly>
 							</c:when>
 						</c:choose>
 					</div>
@@ -45,7 +45,7 @@
 				<div class="col-md-12">
 					<div class="form-group">
 						<label for="phone">연락처</label> 
-						<input type="text" class="form-control" id="phone" value="${member.mem_phone }" readonly>
+						<input type="text" class="form-control" id="phone" name="mem_phone" value="${member.mem_phone }" readonly>
 					</div>
 				</div>
 			</div>

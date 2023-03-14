@@ -52,15 +52,6 @@ public class ProductController {
 
 	}
 
-//	 상품 Client 리스트
-//	@RequestMapping("/ProductClientList")
-//	public String productclientList(ProductVO vo, Model model) {
-//
-//		model.addAttribute("productList", productService.productList(vo));
-//
-//		return "/product/ProductClientList";
-//
-//	}
 
 //	 상품 Client 프리미엄 리스트
 	@RequestMapping("/ProductClientListP")
@@ -74,7 +65,7 @@ public class ProductController {
 
 		model.addAttribute("pageMaker", pageMake);
 
-		return "/product/ProductClientList";
+		return "/product/ProductClientListP";
 	}
 
 //	 상품 Client 2,3인 리스트
@@ -89,7 +80,7 @@ public class ProductController {
 
 		model.addAttribute("pageMaker", pageMake);
 
-		return "/product/ProductClientList";
+		return "/product/ProductClientListT";
 	}
 
 //	 상품 Client 1인 리스트
@@ -104,7 +95,7 @@ public class ProductController {
 
 		model.addAttribute("pageMaker", pageMake);
 
-		return "/product/ProductClientList";
+		return "/product/ProductClientListO";
 	}
 
 	// 상품 등록 페이지 이동

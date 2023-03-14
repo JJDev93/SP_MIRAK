@@ -24,9 +24,9 @@ session = request.getSession();
 %>
 
 
-
+ 
 <section class="ftco-section ftco-cart">
- <form action="/cartpay" method="post">
+	<form action="/pay" method="post">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 ftco-animate">
@@ -87,20 +87,19 @@ session = request.getSession();
 										<a class="quantity_update_btn" data-cartId="${c.cart_code}">변경</a>
 										 -->
 									</td>
-									<td>${c.pro_price * c.cart_cnt }</td>
+									<td>${c.totalPrice }</td>
 									
 									<td>
-									<button type="button" id="submit" class="btn btn-primary py-3 px-5"
+									<button type="button" class="btn btn-primary py-3 px-5"
 								data-toggle="modal" data-target="#exampleModal">변경</button>
 									</td>
 									<td>
-									<button type="button" id="submit" onclick="javascript:del()">
-									<a href="/cartClientList">삭제</a>
-									</button>
+									<input type="submit" value="삭제" formaction="/cart/{cart_code}"
+									class="btn btn-primary py-3 px-5" onclick="javascript:del()" />
 									</td>
 								</tr>
 							</c:forEach>
-
+</form>	
 
 							
 
@@ -134,9 +133,9 @@ session = request.getSession();
 			</p>
 		</div>
 	</div>
-	</form>
+
 	<!-- Modal -->
-	<form action="/cartClientList", method="post">
+	<form action="/cartClientList">
 		<div class="modal fade" id="exampleModal" tabindex="9999"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
@@ -185,27 +184,26 @@ session = request.getSession();
 
 <script>
 
-function cartUpdate() {
+function fn_memberCheck() {
     $.ajax({
-        url : "/cartUpdate",
+        url : "/cart/{cart_day}/{cart_cnt}",
         type : "POST",
         dataType :"JSON",
         data : {"cart_code" : $("#cart_code").val(), 
+        	    "cart_day" : $("#cart_day").val(),
         	    "cart_cnt" : $("#cart_cnt").val()},
         success : function (data) {
         	console.log(cart_cnt.value);
             if(cart_cnt.value == ""){
-            	alert("수량을 입력해주세요");
+            	alert("수량 선택해주세요");
             }
             
             if(data == 0) {
-                alert("비밀번호가 틀렸습니다.");
+                alert("?");
             } else if(data == 1) {
             	$("#cartUpdate").attr("value", "Y");
-            	alert("수량 변경 완료되었습니다.");
-            } 
-            
-            	
+            	alert("옵션 변경 완료");
+            } 	
         }
     })
 }

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import kr.co.mirak.product.Criteria;
+
 public class MemberServiceImpl implements MemberService {
 
 	private SqlSessionTemplate sqlSessionTemplate;
@@ -65,19 +67,21 @@ public class MemberServiceImpl implements MemberService {
 
 	
 	//ADMIN 리스트
-	public List<MemberVO> getMemberList(Optional<Integer> pageStart) {
-		int page;
-		if (pageStart.isPresent()) {
-			page = pageStart.get();
-	    }else {
-	    	page = 0;
-	    }
-		page=page*10;
-		MemberMapper mamberDAO = sqlSessionTemplate.getMapper(MemberMapper.class);
-		List<MemberVO> memberList = mamberDAO.getMemberList(page);
-		System.out.println(page+"페이지로 이동");
-		return memberList;
-	}
+//	public List<MemberVO> getMemberList(Optional<Integer> pageStart) {
+//		int page;
+//		if (pageStart.isPresent()) {
+//			page = pageStart.get();
+//	    }else {
+//	    	page = 0;
+//	    }
+//		page=page*10;
+//		MemberMapper mamberDAO = sqlSessionTemplate.getMapper(MemberMapper.class);
+//		List<MemberVO> memberList = mamberDAO.getMemberList(page);
+//		System.out.println(page+"페이지로 이동");
+//		return memberList;
+//	}
+	
+	
 	
 	//ADMIN ID값으로 회원 정보 확인
 	public MemberVO getMemberDetail(String memId){
@@ -96,5 +100,32 @@ public class MemberServiceImpl implements MemberService {
 	return result;
 	}
 
+
+	
+	
+	//김원중이 건드린 부분
+	
+	public int getTotal() {
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		return mapper.getTotal();
+	}
+	
+	public List<MemberVO> getListPaging(CriteriaM cri) {
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		return mapper.getListPaging(cri);
+	}
+	
+	public MemberVO getMemberDetail(MemberVO mvo) {
+		
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		return mapper.getMemberDetail(mvo);
+		
+	}
+	
+	
+
+	//여기까지
+	
+	
 
 }

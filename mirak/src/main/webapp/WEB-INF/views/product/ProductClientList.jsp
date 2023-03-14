@@ -12,9 +12,10 @@ margin-right:10px;
 
 
 </style>
+<div id="test">
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
-<div id="test">
+
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 
 <div class="hero-wrap hero-bread"
