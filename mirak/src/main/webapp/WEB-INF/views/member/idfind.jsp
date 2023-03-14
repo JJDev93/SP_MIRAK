@@ -45,31 +45,44 @@
 
 <section class="ftco-section">
 	<div class="container">
-	
+		<div class="row justify-content-center">
+			<div class="col-md-8 mb-5 text-center">
+				<ul class="nav nav-tabs">
+					<li class="nav-item"><a class="nav-link active" href="idfind">아이디찾기</a></li>
+					<li class="nav-item"><a class="nav-link" href="pwreset">비밀번호 재설정</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-5 ftco-animate">
 				<form action="idfind" method="post" class="contact-form">
-				<h3 class="mb-4 billing-heading" style="text-align: center;">아이디 찾기</h3>
+					<h3 class="mb-4 billing-heading" style="text-align: center;">아이디
+						찾기</h3>
 					<div class="form-group">
-					<label for="ID">이름</label>
-						<input type="text" class="form-control" name="mem_name" placeholder="이름을 입력해주세요.." required="required">
+						<label for="ID">이름</label> <input type="text" class="form-control"
+							name="mem_name" placeholder="이름을 입력해주세요.." required="required">
 					</div>
-					
+
 					<div class="form-group">
-					<label for="PW">핸드폰번호</label>
-						<input type="text" class="form-control" name="mem_phone" placeholder="핸드폰번호를 입력해주세요.." required="required">
+						<label for="PW">핸드폰번호</label> <input type="text"
+							class="form-control" name="mem_phone"
+							placeholder="핸드폰번호를 입력해주세요.." required="required">
 					</div>
 					<div>
-						<label style="color:red">${message } ${mem_id }</label>
+						<label style="color: red">${message }</label>
+						<label style="color: blue">${mem_id }</label>
 					</div>
 					<div class="form-group row">
 						<div class="col-md-12 text-center">
-							<input type="submit" value="아이디 찾기" onclick="fn_idfind();" class="btn btn-primary py-3 px-5 w-100">
+							<input type="submit" value="아이디 찾기" onclick="fn_idfind();"
+								class="btn btn-primary py-3 px-5 w-50">
 						</div>
 					</div>
 					<div class="form-group row">
 						<div class="col-md-12" style="text-align: right;">
-							<a href="#">비밀번호를 잃어버렸습니다.......</a>
+							<a href="pwreset">비밀번호를 잃어버렸습니다.......</a>
 						</div>
 					</div>
 				</form>
@@ -79,16 +92,17 @@
 </section>
 <script src="${path}/resources/js/naverapi.js"></script>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
+<script>
 
-<!-- <script> -->
-// 	window.addEventListener('load', function() {
-// 		function fn_idfind() {
-// 			var mem_id = $('#mem_id').val();
-// 			console.log(mem_id);
-// 			if (!mem_id) {
-// 				alert("아이디는" + mem_id + "입니다.");
-// 			}
-// 		}
-// 	});
-<!-- </script> -->
+ 	window.addEventListener('load', function() {
+ 		function fn_idfind() {
+ 			
+ 			var mem_id = $('#mem_id').val();
+ 			console.log(mem_id);
+ 			if (!mem_id) {
+ 				alert("아이디는" + mem_id + "입니다.");
+ 			}
+ 		}
+ 	});
+</script>
 

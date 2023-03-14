@@ -170,10 +170,46 @@ public class LoginController {
 				}
 			} 
 		}catch (Exception e) {
-			e.printStackTrace();
 			returnURL = "member/idfind";
 			model.addAttribute("message", "정보를 다시 입력해주세요....");
 		}
 		return returnURL;
 	}
+	
+	// 비번재설정
+		@RequestMapping(value = "/pwreset", method = RequestMethod.GET)
+		public String pwresetform() {
+			System.out.println("비번 재설정기이동..");
+			return "member/pwreset";
+		}
+
+		// 비번재설정
+		@RequestMapping(value = "/pwreset", method = RequestMethod.POST)
+		public String pwreset(MemberVO vo, HttpSession session, Model model) {
+			String returnURL = "member/idfind";
+			String preUrl = (String) session.getAttribute("pre_url");
+			System.out.println("preUrl : " + preUrl);
+			
+			try {
+			String mem_id = memberService.idfind_pw(vo).getMem_id();
+			System.out.println(vo);
+			System.out.println(mem_id);
+			
+			if (mem_id != null) {
+				model.addAttribute("mem_id", mem_id);
+				if (preUrl != null) {
+					System.out.println("이전 페이지로 이동");
+					returnURL = "member/pwreset" + preUrl;
+					session.removeAttribute("pre_url");
+				} else {
+					returnURL = "member/pwreset";
+				}
+			}
+		} catch (Exception e) {
+			returnURL = "member/pwreset";
+			model.addAttribute("message", "정보를 다시 입력해주세요....");
+		}
+			return returnURL;
+		}
+		
 }

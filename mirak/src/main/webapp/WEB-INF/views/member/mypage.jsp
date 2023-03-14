@@ -131,9 +131,6 @@
                      <div class="col-md-6 text-center">
                         <input type="submit" value="수정하기" class="btn btn-primary py-3 px-5">
                      </div>
-                     <div class="col-md-6 text-center">
-								<button type="button" id="submit" class="btn btn-secondary py-3 px-5 l-100" data-toggle="modal" data-target="#exampleModal">회원탈퇴</button>
-							</div>
                   </div>
             </form>
             
