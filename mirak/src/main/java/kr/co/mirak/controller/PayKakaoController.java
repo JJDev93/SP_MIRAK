@@ -33,11 +33,11 @@ public class PayKakaoController {
 	// 카카오페이결제 요청
 	@RequestMapping(value = "/order/pay", method = RequestMethod.GET)
 	public @ResponseBody ReadyResponse payReady(Model model, PayKakaoOrderVO payKakaoOrderVO, HttpSession session) {
-		
+
 		System.out.println("ajax 페이지 넘어감");
 		System.out.println(payKakaoOrderVO);
 		List<PayKakaoVO> list = kakaoPayService.productToOrder(payKakaoOrderVO, session);
-		
+
 		// 카카오 결제 준비하기 - 결제요청 service 실행.
 		ReadyResponse readyResponse = kakaoPayService.payReady(list, session);
 		System.out.println("처리됨?");
@@ -55,29 +55,26 @@ public class PayKakaoController {
 
 		PayKakaoVO payKakaoVO = kakaoPayService.selectTid(session);
 
-
 		// 카카오 결재 요청하기
 		ApproveResponse approveResponse = kakaoPayService.payApprove(payKakaoVO, pg_token);
+
+		kakaoPayService.updateAndInsertPay(session);
 
 		// 5. payment 저장
 		// orderNo, payMathod, 주문명.
 		// - 카카오 페이로 넘겨받은 결재정보값을 저장.
 		System.out.println(approveResponse);
 
-		return "pay/payApproval";
+		return "redirect:/";
 	}
 
 	// 결제 취소시 실행 url
 	@RequestMapping("/order/pay/cancel")
 	public String payCancel(HttpServletRequest request, HttpSession session) {
 		kakaoPayService.payCancel(session);
-		
-		
-		
-	    return "pay/payCancel";
+
+		return "pay/payCancel";
 	}
-	
-	
 
 	// 결제 실패시 실행 url
 	@RequestMapping("/order/pay/fail")
