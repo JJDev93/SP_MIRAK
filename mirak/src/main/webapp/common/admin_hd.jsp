@@ -13,7 +13,7 @@
 	<header>
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 			<div class="container ">
-			  <a class="navbar-brand" href="/adminMembers">MiRakr</a>
+			  <a class="navbar-brand" href="/adminCharts">MiRak</a>
 			  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 			    <span class="navbar-toggler-icon"></span>
 			  </button>
@@ -29,7 +29,7 @@
 			        <a class="nav-link" href="/cartAdminList">장바구니</a>
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link" href="#">결재관리</a>
+			        <a class="nav-link" href="/adminPayments">결제관리</a>
 			      </li>
 			    </ul>
 			    <div class="form-inline my-2 my-lg-0">

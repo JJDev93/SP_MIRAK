@@ -9,18 +9,23 @@
 		select * from test
 	</select>
 
-
-
+	<select id="getAdminPayList" resultType="kr.co.mirak.pay.PayVO">
+		select group_id,
+		pro_name, count(group_id) as cart_cnt, sum(totalPrice) as totalPrice
+		from pay group by group_id order by pay_code desc;
+	</select>
 
 	<insert id="insert" parameterType="kr.co.mirak.pay.PayVO">
 		insert into test (name)
-		values (#{name})
+		values
+		(#{name})
 	</insert>
 
 	<!-- 카트 목록 -->
 	<select id="cartCheckList" resultType="kr.co.mirak.cart.CartVO">
 
-		select * from cart where mem_id=#{myid} and cart_check=1 and cart_show = 1
+		select * from cart where
+		mem_id=#{myid} and cart_check=1 and cart_show = 1
 
 	</select>
 
