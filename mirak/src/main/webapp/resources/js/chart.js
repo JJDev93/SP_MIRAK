@@ -1,6 +1,6 @@
 $(function () {
     $.ajax({
-        url: "/adminCharts",
+        url: "/admin/charts",
         async: true,
         type: "POST",
         dataType: "json",
