@@ -130,7 +130,7 @@ public class PayController {
 		return "redirect:/mypage";
 	}
 
-	@RequestMapping("/adminPayments")
+	@RequestMapping("/admin/pays")
 	public String getAdminPayList(Model model) {
 
 		List<PayVO> payList = payService.getAdminPayList();
@@ -140,7 +140,7 @@ public class PayController {
 		return "pay/adminPayments";
 	}
 
-	@RequestMapping(value = "/adminPayments/{group_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/pays/{group_id}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<PayVO> getAdminPayListDetail(Model model, @PathVariable("group_id") String group_id) {
 
@@ -149,14 +149,14 @@ public class PayController {
 		return payListDetail;
 	}
 
-	@RequestMapping(value = "/adminCharts", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/charts", method = RequestMethod.GET)
 	public String chartList(Model model) throws Exception {
 
 		return "pay/adminChartList";
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/adminCharts", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/charts", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
 	public String chartList(ChartData chartData, TotalByMenuVO mvo, TotalByDayVO dvo) throws Exception {
 
 		ObjectMapper objectMapper = new ObjectMapper();
