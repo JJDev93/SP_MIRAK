@@ -94,7 +94,7 @@
 	<select id="getMemberDetail"
 		resultType="member">
 		<![CDATA[
-			select * from member where mem_id = #{mem_id}		
+			select * from member where mem_name = #{mem_name}		
 		]]>
 	</select>
 

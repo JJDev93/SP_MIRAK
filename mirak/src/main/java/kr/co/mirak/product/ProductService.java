@@ -42,4 +42,10 @@ public interface ProductService {
 
 	List<ProductVO> getListPaging(Criteria cri);
 
+	//인덱스 처리
+
+	List<ProductVO> productListIndex1(ProductVO vo);
+
+	List<ProductVO> productListIndex2(ProductVO vo);
+
 }
