@@ -30,7 +30,9 @@
 								<td>${payList.cart_cnt}</td>
 								<td>${payList.totalPrice}</td>
 								<td><button id="adminPayListDetail"
-										class="btn btn-primary mb-12" data-group-id="${pay.group_id}">상세▼</button></td>
+										class="btn btn-primary mb-12" data-group-id="${pay.group_id}">상세▼</button>
+									<div class="accordion" id="accordion-${payList.group_id}"></div>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -58,35 +60,45 @@
 <!-- 	</div> -->
 <!-- </div> -->
 <script>
-	$(document).on(
-			"click",
-			"#adminPayListDetail",
-			function() {
-				var groupId = $(this).data("group-id");
-
-				$.ajax({
-					type : "GET",
-					url : "/adminPayments/" + groupId,
-					success : function(data) {
-						// 가져온 데이터를 아코디언의 body에 추가
-						var accordionBody = $("#accordionBody");
-						accordionBody.empty();
-
-						$.each(data, function(i, item) {
-							var row = "<tr><td>" + item.pay_code + "</td><td>"
-									+ item.pro_name + "</td><td>"
-									+ item.cart_cnt + "</td><td>"
-									+ item.totalPrice + "</td></tr>";
-							accordionBody.append(row);
-						});
-
-						// 아코디언 펼치기
-						$("#accordion").collapse("show");
-					},
-					error : function() {
-						alert("데이터를 가져오는 데 실패했습니다.");
-					}
-				});
-			});
+$(document).ready(function() {
+	$(document).on("click", "#adminPayListDetail", function() {
+	    var groupId = $(this).data("group-id");
+	    var accordionId = "accordion-" + groupId;
+	    var accordionContainer = $("<div>", {class: "accordion", id: accordionId});
+	    
+	    $.ajax({
+	        url: "/admin/pays/" + groupId,
+	        type: "GET",
+	        dataType: "json",
+	        success: function(data) {
+	            $.each(data, function(index, pay) {
+	                var cardId = "card-" + pay.id;
+	                var cardHeader = $("<div>", {class: "card-header", id: cardId + "-heading"});
+	                var cardTitle = $("<h5>", {class: "mb-0"});
+	                var cardButton = $("<button>", {class: "btn btn-link", "data-toggle": "collapse", "data-target": "#" + cardId, "aria-expanded": "false", "aria-controls": cardId});
+	                var cardBody = $("<div>", {class: "collapse", id: cardId, "aria-labelledby": cardId + "-heading", "data-parent": "#" + accordionId});
+	                var cardContent = $("<div>", {class: "card-body"});
+	                
+	                cardButton.append(pay.pro_name);
+	                cardTitle.append(cardButton);
+	                cardHeader.append(cardTitle);
+	                
+	                cardContent.append("도시락 개수: " + pay.cart_cnt);
+	                cardContent.append("<br>");
+	                cardContent.append("가격: " + pay.totalPrice);
+	                cardBody.append(cardContent);
+	                
+	                accordionContainer.append($("<div>", {class: "card"}).append(cardHeader, cardBody));
+	            });
+	            
+	            $("#accordion-container").html(accordionContainer);
+	            $("#" + accordionId).accordion();
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	            console.log(textStatus, errorThrown);
+	        }
+	    });
+	});
 </script>
+
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>

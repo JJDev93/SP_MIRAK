@@ -1,5 +1,6 @@
 package kr.co.mirak.pay.chart;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,19 +46,19 @@ public class ChartServiceImpl implements ChartService {
 	public Map<String, List<Object>> getTotalByMenuList(TotalByMenuVO vo) {
 	    ChartMapper mapper = sqlSessionTemplate.getMapper(ChartMapper.class);
 
-	    List<Double> total = new ArrayList<>();
-	    List<String> menu = new ArrayList<>();
+	    List<Double> totalPrice = new ArrayList<>();
+	    List<String> pro_name = new ArrayList<>();
 
 	    List<TotalByMenuVO> totalByMenuList = mapper.getTotalByMenuList(vo);
 	    System.out.println(totalByMenuList);
 	    for (TotalByMenuVO item : totalByMenuList) {
-	        total.add((double) item.getTotal());
-	        menu.add(item.getMenu());
+	    	totalPrice.add((double) item.getTotalPrice());
+	        pro_name.add(item.getPro_name());
 	    }
 	    
 	    Map<String, List<Object>> map = new HashMap<>();
-	    map.put("menu", new ArrayList<Object>(menu));
-	    map.put("total", new ArrayList<Object>(total));
+	    map.put("totalPrice", new ArrayList<Object>(totalPrice));
+	    map.put("pro_name", new ArrayList<Object>(pro_name));
 
 	    return map;
 	}
@@ -66,19 +67,19 @@ public class ChartServiceImpl implements ChartService {
 	public Map<String, List<Object>> getTotalByDayList(TotalByDayVO vo) {
 	    ChartMapper mapper = sqlSessionTemplate.getMapper(ChartMapper.class);
 		
-	    List<Double> total = new ArrayList<>();
-	    List<String> day = new ArrayList<>();
+	    List<Double> totalPrice = new ArrayList<>();
+	    List<String> pay_date = new ArrayList<>();
 
 	    List<TotalByDayVO> totalByDayList = mapper.getTotalByDayList(vo);
 	    System.out.println(totalByDayList);
 	    for (TotalByDayVO item : totalByDayList) {
-	        total.add((double) item.getTotal());
-	        day.add(item.getOrder_date());
+	    	totalPrice.add((double) item.getTotalPrice());
+	        pay_date.add(item.getPay_date());
 	    }
 	    
 	    Map<String, List<Object>> map = new HashMap<>();
-	    map.put("day", new ArrayList<Object>(day));
-	    map.put("total", new ArrayList<Object>(total));
+	    map.put("totalPrice", new ArrayList<Object>(totalPrice));
+	    map.put("pay_date", new ArrayList<Object>(pay_date));
 
 	    return map;
 		

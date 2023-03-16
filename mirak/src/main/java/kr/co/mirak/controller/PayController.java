@@ -56,24 +56,29 @@ public class PayController {
 	}
 
 	@RequestMapping(value = "/pay/{pro_code}/{cart_cnt}/{cart_start}/{cart_day}", method = RequestMethod.GET)
-	public String getPayFromProduct(Model model, ProductVO productVO, HttpSession session, @PathVariable("pro_code") String pro_code, @PathVariable("cart_cnt") String cart_cnt,
+	public String getPayFromProduct(Model model, ProductVO productVO, HttpSession session,
+			@PathVariable("pro_code") String pro_code, @PathVariable("cart_cnt") String cart_cnt,
 			@PathVariable("cart_start") Date cart_start, @PathVariable("cart_day") String cart_day) {
-		
+		String mem_id = (String) session.getAttribute("mem_id");
+		if (mem_id == null) {
+			String preUrl = "/product/" + pro_code;
+			session.setAttribute("pre_url", preUrl);
+			return "redirect:/login";
+		}
 //		productVO.setCart_start(Date.valueOf(cart_start));
 //		productVO.setCart_day(cart_day);
 		System.out.println("확인 : " + productVO);
-		
-		//회원
-	    model.addAttribute("memberVO", memberService.getMemberInfo(session));
-	    
-	    //pro or cart
-	    model.addAttribute("codecheck", 0);
-	    
-	    //품목
-	    productVO = productService.productDetail(productVO);	    
-	    model.addAttribute("productList", payService.payFromProduct(productVO, cart_cnt, cart_start, cart_day));
-	    
-	    
+
+		// 회원
+		model.addAttribute("memberVO", memberService.getMemberInfo(session));
+
+		// pro or cart
+		model.addAttribute("codecheck", 0);
+
+		// 품목
+		productVO = productService.productDetail(productVO);
+		model.addAttribute("productList", payService.payFromProduct(productVO, cart_cnt, cart_start, cart_day));
+
 		return "pay/pay";
 	}
 
@@ -95,9 +100,9 @@ public class PayController {
 
 	@RequestMapping(value = "/payInfo", method = RequestMethod.GET)
 	public String payApproval(Model model, HttpSession session) {
-		
+
 		model.addAttribute("payVOList", payService.getClientPayList(session));
-		
+
 		return "pay/payInfo";
 	}
 

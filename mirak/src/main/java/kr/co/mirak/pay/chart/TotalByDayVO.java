@@ -1,23 +1,23 @@
 package kr.co.mirak.pay.chart;
 
 public class TotalByDayVO {
-	private String order_date;
-	private int total;
-	public String getOrder_date() {
-		return order_date;
+	private String pay_date;
+	private int totalPrice;
+	public String getPay_date() {
+		return pay_date;
 	}
-	public void setOrder_date(String order_date) {
-		this.order_date = order_date;
+	public void setPay_date(String pay_date) {
+		this.pay_date = pay_date;
 	}
-	public int getTotal() {
-		return total;
+	public int getTotalPrice() {
+		return totalPrice;
 	}
-	public void setTotal(int total) {
-		this.total = total;
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 	@Override
 	public String toString() {
-		return "TotalByDayVO [order_date=" + order_date + ", total=" + total + "]";
+		return "TotalByDayVO [pay_date=" + pay_date + ", totalPrice=" + totalPrice + "]";
 	}
 	
 }

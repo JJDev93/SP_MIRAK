@@ -7,23 +7,22 @@ $(function () {
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             var totalByMenuList = data["totalByMenuList"];
-            var Mtotal = totalByMenuList["totalPrice"];
-            var menu = totalByMenuList["pro_name"];
+            var ByMenuTotalPrice = totalByMenuList["totalPrice"];
+            var pro_name = totalByMenuList["pro_name"];
             
             var totalByDayList = data["totalByDayList"];
-            var Dtotal = totalByDayList["totalPrice"];
-            var day = totalByDayList["pay_date"];
+            var ByDayTotalPrice = totalByDayList["totalPrice"];
+            var pay_date = totalByDayList["pay_date"];
             
-            console.log(totalByMenuList)
 
             const ctx = document.getElementById('myChart1').getContext('2d');
             const myChart1 = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: menu,
+                    labels: pro_name,
                     datasets: [{
                         label: '메뉴 별 총 판매',
-                        data: Mtotal,
+                        data: ByMenuTotalPrice,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(255, 159, 64, 0.2)',
@@ -60,10 +59,10 @@ $(function () {
             const myChart2 = new Chart(ctx2, {
                 type: 'line',
                 data: {
-                    labels: day,
+                    labels: pay_date,
                     datasets: [{
                         label: '일자 별 총 판매',
-                        data: Dtotal,
+                        data: ByDayTotalPrice,
                         tension: 0.1
                     }]
                 },
