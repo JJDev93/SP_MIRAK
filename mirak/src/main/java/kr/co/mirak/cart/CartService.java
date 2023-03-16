@@ -10,6 +10,8 @@ public interface CartService {
 	CartVO info(int id);
 	int cartInsert(CartVO vo, HttpSession session);
 	
+	// int cartUpdate(CartVO vo, HttpSession session);
 	void cartUpdate(CartVO vo);
+	
 	void cartDelete(CartVO vo);
 }

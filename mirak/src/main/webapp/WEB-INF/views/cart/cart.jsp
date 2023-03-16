@@ -91,9 +91,9 @@ session = request.getSession();
 									<td>${c.cart_totprice }</td>
 									
 									<td>
-									<!-- <input type="button" value="변경" class="btn btn-primary py-3 px-5"
-								data-toggle="modal" data-target="#exampleModal"> -->
-									<a data-toggle="modal" data-target="#exampleModal" class="btn btn-primary py-3 px-5">변경</a>
+									<input type="button" value="변경" class="btn btn-primary py-3 px-5"
+								data-toggle="modal" data-target="#exampleModal">
+									<!-- <a href="/cart/cartUpdate/${c.cart_code }" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary py-3 px-5">변경</a> -->
 									</td>
 									<td>
 <!-- 									<button type="button" class="btn btn-primary py-3 px-5" onclick="javascript:del()"> -->
@@ -137,8 +137,8 @@ session = request.getSession();
 	</div>
 
 	<!-- Modal -->
-	<c:forEach var="c" items="${cartList }">
-	<form action="/cart/cartUpdate/${c.cart_code }">
+	
+	<form action="/cart/cartUpdate/${cart_code }">
 		<div class="modal fade" id="exampleModal" tabindex="9999"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
@@ -157,6 +157,7 @@ session = request.getSession();
 						${c.pro_name }<br>
 						${c.pro_price }원<br>
 						<br>배송 시작일 선택<br>
+						${c.cart_start }<br>
 						<input type="date" name="cart_start" class="form-control input-number" style="width:240px;">
 						<br>배송 요일 선택 <br>
 						${c.cart_day }<br>
@@ -169,7 +170,7 @@ session = request.getSession();
 						<input type="checkbox" name="cart_day" value="일">일
 						<br><br>
 						배송 횟수 선택 <br>
-						<input type="number" value="${c.cart_cnt}" class="quantity_input">
+						<input type="number" name="cart_cnt" value="${c.cart_cnt}" class="quantity_input">
 						<br><br>
 					</c:forEach>
 					</div>
@@ -181,7 +182,6 @@ session = request.getSession();
 			</div>
 		</div>
 	</form>
-	</c:forEach>
 	
 </section>
 

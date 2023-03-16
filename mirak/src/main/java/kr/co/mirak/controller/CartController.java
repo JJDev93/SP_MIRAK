@@ -39,17 +39,26 @@ public class CartController {
    
    // delete (실제로는 check만 0으로 바꿈)
    @RequestMapping(value = "/cart/cartDelete/{cart_code}")
-   public String cartDelete(CartVO vo, @PathVariable("cart_code") String cart_code) {
+   public String cartDelete(CartVO vo, @PathVariable("cart_code") int cart_code) {
       cartService.cartDelete(vo);
       return "redirect:/cart";
    }
    
+//   // update
+//   @RequestMapping(value = "/cart/cartUpdate/{cart_code}/{cart_cnt}/{cart_start}/{cart_day}")
+//   public String cartInsert(CartVO vo, HttpSession session, Model model, @PathVariable("cart_code") int cart_code, @PathVariable("cart_cnt") int cart_cnt, @PathVariable("cart_start") Date cart_start, @PathVariable("cart_day") String cart_day) {
+//      vo.setCart_code(cart_code);
+//      cartService.cartUpdate(vo, session);
+//      return "redirect:/cart";
+//   }
+   
    // update
    @RequestMapping(value = "/cart/cartUpdate/{cart_code}")
-   public String cartUpdate(CartVO vo, @PathVariable("cart_code") String cart_code) {
+   public String cartUpdate(CartVO vo, @PathVariable("cart_code") int cart_code) {
       cartService.cartUpdate(vo);
       return "redirect:/cart";
    }
+   
    
    // admin list select
    @RequestMapping(value = "/admin/carts", method = RequestMethod.GET)

@@ -11,6 +11,7 @@ public interface CartMapper {
 	CartVO info(int id);
 	int cartInsert(CartVO vo);
 	
+	// int cartUpdate(CartVO vo);
 	void cartUpdate(CartVO vo);
 
 	void cartDelete(CartVO vo);
