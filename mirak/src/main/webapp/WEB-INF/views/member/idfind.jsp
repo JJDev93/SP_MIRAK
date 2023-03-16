@@ -89,20 +89,48 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- Modal -->
+	<form action="pwreset" method="get">
+		<div class="modal fade" id="pwcheckform" tabindex="9999"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">아이디 확인</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label >아이디는 ${mem_id } 입니다.</label>
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">비밀번호 찾기</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
 </section>
 <script src="${path}/resources/js/naverapi.js"></script>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
 <script>
-
- 	window.addEventListener('load', function() {
- 		function fn_idfind() {
- 			
- 			var mem_id = $('#mem_id').val();
- 			console.log(mem_id);
- 			if (!mem_id) {
- 				alert("아이디는" + mem_id + "입니다.");
- 			}
- 		}
- 	});
+$(document).ready(function() {
+	console.log("message : "+"${message}");
+	console.log("mem_id : "+"${mem_id}");
+	if("${message}" !=""){
+		alert("${message}");
+	}
+	if("${mem_id}" != ""){
+		$("#pwcheckform").modal("show");
+	}
+});
 </script>
 

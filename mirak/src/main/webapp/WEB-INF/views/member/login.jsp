@@ -85,10 +85,10 @@
                <div class="form-group row" style="text-align: right;">
                   <div class="col-md-12">
                      <a href="idfind">아이디 찾기</a>&nbsp;&nbsp;&nbsp; 
-                     <a href="">비밀번호 재설정</a>
+                     <a href="pwreset">비밀번호 재설정</a>
                   </div>
                </div>
-               <!-- 네이버로그인 -->
+               
             </form>
          </div>
       </div>
@@ -109,6 +109,7 @@
                      </div>
                   </div>
                </div>
+               <!-- 네이버로그인 -->
                <div class="col-sm-4 text-center ftco-animate" id="naverIdLogin" onclick="naverLoginclick()"></div>
                <div class="col-sm-4 text-center ftco-animate">
                   <div class="media block-6 services mb-md-0 mb-4">
