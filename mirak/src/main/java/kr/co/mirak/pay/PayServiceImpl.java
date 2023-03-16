@@ -75,6 +75,10 @@ public class PayServiceImpl implements PayService {
 	
 	public List<ProductVO> payFromProduct(ProductVO productVO, String cart_cnt, Date cart_start, String cart_day) {
 		
+		productVO.setCart_cnt(Integer.parseInt(cart_cnt));
+		productVO.setCart_day(cart_day);
+		productVO.setCart_start(cart_start);
+		
 		List<ProductVO> list = new ArrayList<ProductVO>();
 		list.add(productVO);
 

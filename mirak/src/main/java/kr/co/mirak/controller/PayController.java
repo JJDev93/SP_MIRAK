@@ -95,7 +95,7 @@ public class PayController {
 
 	@RequestMapping(value = "/payApproval", method = RequestMethod.GET)
 	public String payApproval(Model model) {
-		return "pay/payApproval";
+		return "pay/payInfo";
 	}
 
 	@RequestMapping(value = "/payCancel", method = RequestMethod.GET)

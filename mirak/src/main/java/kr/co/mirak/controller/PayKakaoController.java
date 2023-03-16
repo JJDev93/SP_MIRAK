@@ -65,7 +65,7 @@ public class PayKakaoController {
 		// - 카카오 페이로 넘겨받은 결재정보값을 저장.
 		System.out.println(approveResponse);
 
-		return "pay/payInfo";
+		return "redirect:/payApproval";
 	}
 
 	// 결제 취소시 실행 url
