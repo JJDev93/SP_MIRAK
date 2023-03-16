@@ -142,7 +142,7 @@ public class LoginController {
 	// 아이디찾기 
 	@RequestMapping(value = "/idfind", method = RequestMethod.GET)
 	public String idfindform() {
-		System.out.println("아이디 찾기이동..");
+		System.out.println("아이디 찾기 이동..");
 		return "member/idfind";
 	}
 	
@@ -151,7 +151,7 @@ public class LoginController {
 	public String idfind(MemberVO vo, HttpSession session, Model model) {
 		String returnURL = "member/idfind";
 		String preUrl = (String) session.getAttribute("pre_url");
-		System.out.println("preUrl : " + preUrl);
+		System.out.println("아이디찾기중... , preUrl : " + preUrl);
 		
 		try {
 		MemberVO member = memberService.idfind(vo);
@@ -174,42 +174,37 @@ public class LoginController {
 			model.addAttribute("message", "정보를 다시 입력해주세요....");
 		}
 		return returnURL;
-	}
+	}	
 	
 	// 비번재설정
 		@RequestMapping(value = "/pwreset", method = RequestMethod.GET)
 		public String pwresetform() {
-			System.out.println("비번 재설정기이동..");
+			System.out.println("비번 재설정 이동..");
 			return "member/pwreset";
 		}
 
 		// 비번재설정
 		@RequestMapping(value = "/pwreset", method = RequestMethod.POST)
-		public String pwreset(MemberVO vo, HttpSession session, Model model) {
-			String returnURL = "member/idfind";
-			String preUrl = (String) session.getAttribute("pre_url");
-			System.out.println("preUrl : " + preUrl);
+		public String pwreset(MemberVO vo, Model model, RedirectAttributes rttr) {
+			System.out.println("비밀번호 재설정중....");
+			System.out.println(vo);
 			
 			try {
-			String mem_id = memberService.idfind_pw(vo).getMem_id();
-			System.out.println(vo);
-			System.out.println(mem_id);
-			
-			if (mem_id != null) {
-				model.addAttribute("mem_id", mem_id);
-				if (preUrl != null) {
-					System.out.println("이전 페이지로 이동");
-					returnURL = "member/pwreset" + preUrl;
-					session.removeAttribute("pre_url");
-				} else {
-					returnURL = "member/pwreset";
+				if(vo.getMem_id() == null) {
+					memberService.idfind_pw(vo).getMem_id();
 				}
+				if (vo.getMem_id() != null && vo.getMem_pw() != null) {
+					memberService.pwreset(vo);
+					rttr.addFlashAttribute("message","비밀번호가 변경되었습니다.");
+					return "redirect:/";
+				}
+				model.addAttribute("mem_id", vo.getMem_id());
+				return "member/pwreset";
+			} catch (Exception e) {
+				e.printStackTrace();
+				model.addAttribute("message", "정보를 다시 입력해주세요....");
 			}
-		} catch (Exception e) {
-			returnURL = "member/pwreset";
-			model.addAttribute("message", "정보를 다시 입력해주세요....");
-		}
-			return returnURL;
+			return "member/pwreset";
 		}
 		
 }

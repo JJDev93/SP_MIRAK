@@ -112,28 +112,27 @@
 								href="https://kauth.kakao.com/oauth/authorize?client_id=e481c91b1136f51f927a619fc062146d&redirect_uri=http://localhost:8080/kakaoLogin&response_type=code">
 								<img alt="" src="resources/images/kakao_login_large.png"
 								style="height: 60px;">
-							</a>
-							<a href="http://developers.kakao.com/logout">Logout</a>
-							</div>
+							</a> <a href="http://developers.kakao.com/logout">Logout</a>
 						</div>
 					</div>
-
 				</div>
+
+
 			</div>
+	
+
 		</div>
 	</div>
+
+
 </section>
 <script src="${path}/resources/js/naverapi.js"></script>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
 
 <!-- 카카오로그인 -->
- <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
- <script type='text/javascript'>
-       
-        // 초기화
-        Kakao.init('75d254d7afd4c5c53865df8e3f4d0cb8');
-       
-
-    
-    </script>
+<script type='text/javascript'>
+	// 초기화
+	Kakao.init('75d254d7afd4c5c53865df8e3f4d0cb8');
+</script>

@@ -9,6 +9,7 @@ public interface MemberMapper {
 	MemberVO login(MemberVO vo);
 	MemberVO idfind(MemberVO vo);
 	MemberVO idfind_pw(MemberVO vo);
+	int pwreset(MemberVO vo);
 	int createUser(MemberVO vo);
 	int naverinsert(MemberVO vo);
 	int memupdate(MemberVO vo);

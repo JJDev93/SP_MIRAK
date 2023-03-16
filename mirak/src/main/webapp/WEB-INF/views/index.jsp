@@ -121,3 +121,12 @@
 </body>
 
 </html>
+<script>
+$(document).ready(function() {
+	console.log("message : "+"${message}");
+	console.log("mem_id : "+"${mem_id}");
+	if("${message}" !=""){
+		alert("${message}");
+	}
+})
+</script>

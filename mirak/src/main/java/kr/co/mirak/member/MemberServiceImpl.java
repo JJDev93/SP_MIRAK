@@ -50,8 +50,15 @@ public class MemberServiceImpl implements MemberService {
 		MemberVO memVO = mapper.idfind(vo);
 		return memVO;
 	}
-
-	// 회원가입
+	
+	//비번 리셋
+	public int pwreset(MemberVO vo) {
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		int success  = mapper.pwreset(vo);
+		return success;
+	}
+	
+	//회원가입
 	@Override
 	public int createUser(MemberVO vo) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);

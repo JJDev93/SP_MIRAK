@@ -57,28 +57,27 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-5 ftco-animate">
-				<form action="pwcheck_reset()" method="post" class="contact-form">
+				<form action="pwreset" method="post" class="contact-form">
 					<h3 class="mb-4 billing-heading" style="text-align: center;">비밀번호재설정</h3>
 					<div class="form-group">
 						<label for="ID">아이디</label>
-						<input type="text"class="form-control" name="mem_id" placeholder="아이디를 입력해주세요.."required="required">
+						<input type="text"class="form-control" id="id" name="mem_id" placeholder="아이디를 입력해주세요.."required="required" onchange="pwcheck_reset()">
 					</div>
 					<div class="form-group">
 						<label for="ID">이름</label>
-						<input type="text" id="name"class="form-control" name="mem_name" placeholder="이름을 입력해주세요.."required="required">
+						<input type="text" class="form-control" id="name" name="mem_name" placeholder="이름을 입력해주세요.."required="required" onchange="pwcheck_reset()">
 					</div>
 					<div class="form-group">
 						<label for="PW">핸드폰번호</label>
-						<input type="text"class="form-control" id="phone" name="mem_phone" placeholder="핸드폰번호를 입력해주세요.." required="required">
+						<input type="text"class="form-control" id="phone" name="mem_phone" placeholder="핸드폰번호를 입력해주세요.." required="required" onchange="pwcheck_reset()">
 					</div>
 					<div>
-						<span id="check"></span> 
-						<label style="color: red">${message }</label>
+						<span id="check2"></span> 
+						<label style="color: red"></label>
 					</div>
 					<div class="form-group row">
 						<div class="col-md-12 text-center">
-							<input type="submit" value="비밀번호 재설정"class="btn btn-primary py-3 px-5 w-50" data-toggle="modal"
-								data-target="#exampleModal" />
+							<input type="submit" id="myBtn" value="비밀번호 재설정" class="btn btn-primary py-3 px-5 w-50"/>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -92,14 +91,13 @@
 	</div>
 
 	<!-- Modal -->
-	<form action="fn_pwreset()" method="post">
-		<div class="modal fade" id="exampleModal" tabindex="9999"
+	<form action="pwreset" method="post">
+		<div class="modal fade" id="pwcheckform" tabindex="9999"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">비밀번호를 재설정
-							해주세요.</h5>
+						<h5 class="modal-title" id="exampleModalLabel">비밀번호를 재설정 해주세요.</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -107,23 +105,23 @@
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<label for="pw">비밀번호</label> <input type="password" name="mem_pw"
-								class="form-control" id="pw" onchange="check_pw()"
+							<input type="hidden" name="mem_id" value=${mem_id }>
+							<label for="pw">비밀번호</label>
+							<input type="password" name="mem_pw" class="form-control" id="pw" onchange="check_pw()"
 								placeholder="수정할 비밀번호 입력" required="required">
 						</div>
 
 						<div class="form-group">
-							<label for="pw2">비밀번호 확인</label> <input type="password"
-								class="form-control" id="pw2" onchange="check_pw()"
-								placeholder="비밀번호 확인" required="required"> <span
-								id="check"></span>
+							<label for="pw2">비밀번호 확인</label>
+							<input type="password" class="form-control" id="pw2" onchange="check_pw()"
+								placeholder="비밀번호 확인" required="required">
+								<span id="check"></span>
 						</div>
 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary" id="pwreset"
-								onclick="fn_pwreset();">재설정하기</button>
+							<button type="submit" class="btn btn-primary">재설정하기</button>
 						</div>
 					</div>
 				</div>
@@ -132,26 +130,57 @@
 	</form>
 
 </section>
+<script src="${path}/resources/js/pwcheck.js"></script>
 <script src="${path}/resources/js/naverapi.js"></script>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
+
 <script>
+$(document).ready(function() {
+	console.log("message : "+"${message}");
+	console.log("mem_id : "+"${mem_id}");
+	if("${message}" !=""){
+		alert("${message}");
+	}
+	if("${mem_id}" != ""){
+		$("#pwcheckform").modal("show");
+	}
+});
+
 function pwcheck_reset() {
-	$.ajax({
-		if($("#id").val()==""){
-			document.getElementById('check').innerHTML='아이디(이메일)를 입력해주세요.';
-            document.getElementById('check').;
-            return false;
-		}else if($("#name").val()==""){
-			document.getElementById('check').innerHTML='이름을 입력해주세요.';
-			document.getElementById('check').;
-			return false;
-		}else if($("#phone").val()==""){
-			document.getElementById('check').inne
-			rHTML='핸드폰번호를 입력해주세요.';
-			document.getElementById('check').;
-			return false;
-		}
-	})
+    // 입력된 값 검사
+    var id = $("#id").val();
+    var name = $("#name").val();
+    var phone = $("#phone").val();
+
+    if (id.trim() == "") {
+        $("#check2").html("아이디(이메일)를 입력해주세요.");
+        $("#check2").css("color", "red");
+        return false;
+    }
+    else if (!validateEmail(id)) {
+        $("#check2").html("유효한 이메일을 입력해주세요.");
+        $("#check2").css("color", "red");
+        return false;
+    }
+    else if (name.trim() == "") {
+        $("#check2").html("이름을 입력해주세요.");
+        $("#check2").css("color", "red");
+        return false;
+    }
+    else if (phone.trim() == "") {
+        $("#check2").html("핸드폰번호를 입력해주세요.");
+        $("#check2").css("color", "red");
+        return false;
+    }
+    $("#check2").html("");
+    // validation success
+    return true;
+}
+
+function validateEmail(email) {
+    // 이메일 형식 검사
+    var regex = /\S+@\S+\.\S+/;
+    return regex.test(email);
 }
 </script>
 
