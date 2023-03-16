@@ -1,14 +1,15 @@
 package kr.co.mirak.cart;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class CartVO {
 	
 	private int cart_code;
-	private Date cart_start;
 	private String cart_day;
+	private Date cart_start;
 	private int cart_cnt;
-	private int totalPrice;
+	private int cart_totprice;
+	private int cart_show;
 	private int cart_check;
 	private String mem_id;
 	private String pro_code;
@@ -23,17 +24,17 @@ public class CartVO {
 	public void setCart_code(int cart_code) {
 		this.cart_code = cart_code;
 	}
-	public Date getCart_start() {
-		return cart_start;
-	}
-	public void setCart_start(Date cart_start) {
-		this.cart_start = cart_start;
-	}
 	public String getCart_day() {
 		return cart_day;
 	}
 	public void setCart_day(String cart_day) {
 		this.cart_day = cart_day;
+	}
+	public Date getCart_start() {
+		return cart_start;
+	}
+	public void setCart_start(Date cart_start) {
+		this.cart_start = cart_start;
 	}
 	public int getCart_cnt() {
 		return cart_cnt;
@@ -41,11 +42,17 @@ public class CartVO {
 	public void setCart_cnt(int cart_cnt) {
 		this.cart_cnt = cart_cnt;
 	}
-	public int getTotalPrice() {
-		return totalPrice;
+	public int getCart_totprice() {
+		return cart_totprice;
 	}
-	public void setTotalPrice(int totalPrice) {
-		this.totalPrice = totalPrice;
+	public void setCart_totprice(int cart_totprice) {
+		this.cart_totprice = cart_totprice;
+	}
+	public int getCart_show() {
+		return cart_show;
+	}
+	public void setCart_show(int cart_show) {
+		this.cart_show = cart_show;
 	}
 	public int getCart_check() {
 		return cart_check;
@@ -92,11 +99,10 @@ public class CartVO {
 	
 	@Override
 	public String toString() {
-		return "CartVO [cart_code=" + cart_code + ", cart_start=" + cart_start + ", cart_day=" + cart_day
-				+ ", cart_cnt=" + cart_cnt + ", totalPrice=" + totalPrice + ", cart_check=" + cart_check + ", mem_id="
-				+ mem_id + ", pro_code=" + pro_code + ", pro_name=" + pro_name + ", pro_price=" + pro_price
-				+ ", pro_desc=" + pro_desc + ", pro_image=" + pro_image + "]";
+		return "CartVO [cart_code=" + cart_code + ", cart_day=" + cart_day + ", cart_start=" + cart_start
+				+ ", cart_cnt=" + cart_cnt + ", cart_totprice=" + cart_totprice + ", cart_show=" + cart_show
+				+ ", cart_check=" + cart_check + ", mem_id=" + mem_id + ", pro_code=" + pro_code + ", pro_name="
+				+ pro_name + ", pro_price=" + pro_price + ", pro_desc=" + pro_desc + ", pro_image=" + pro_image + "]";
 	}
-	
 	
 }
