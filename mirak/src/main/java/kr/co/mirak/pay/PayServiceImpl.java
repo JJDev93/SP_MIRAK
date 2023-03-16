@@ -16,18 +16,28 @@ public class PayServiceImpl implements PayService {
 
 	private SqlSessionTemplate sqlSessionTemplate;
 
-	public PayServiceImpl() {}
-	
+	public PayServiceImpl() {
+	}
+
 	public PayServiceImpl(SqlSessionTemplate sqlSessionTemplate) {
 		this.sqlSessionTemplate = sqlSessionTemplate;
-	}	
+	}
 
-	public List<PayVO> list() {
+	public List<PayVO> getAdminPayList() {
 
-		PayMapper dao = sqlSessionTemplate.getMapper(PayMapper.class);
-		List<PayVO> list = dao.list();
+		PayMapper payMapper = sqlSessionTemplate.getMapper(PayMapper.class);
+		List<PayVO> adminPayList = payMapper.getAdminPayList();
 
-		return list;
+		return adminPayList;
+	}
+
+	@Override
+	public List<PayVO> getPayListDetail(String group_id) {
+
+		PayMapper payMapper = sqlSessionTemplate.getMapper(PayMapper.class);
+		List<PayVO> payListDetail = payMapper.getPayListDetail(group_id);
+
+		return payListDetail;
 	}
 
 	public PayVO info(int id) {
@@ -50,47 +60,31 @@ public class PayServiceImpl implements PayService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	public ProductVO productDetail(ProductVO vo) {
 		ProductMapper mapper = sqlSessionTemplate.getMapper(ProductMapper.class);
 		return mapper.productDetail(vo);
 	}
-	
+
 	public List<CartVO> cartCheckList(HttpSession session) {
-		String myid = (String)session.getAttribute("mem_id");
+		String myid = (String) session.getAttribute("mem_id");
 		PayMapper mapper = sqlSessionTemplate.getMapper(PayMapper.class);
-		List<CartVO> list  = mapper.cartCheckList(myid);
+		List<CartVO> list = mapper.cartCheckList(myid);
 		return list;
 	}
-	
+
 	public List<ProductVO> payFromProduct(ProductVO productVO, String cart_cnt) {
-		
+
 		productVO.setCart_cnt(Integer.parseInt(cart_cnt));
-	    List<ProductVO> list = new ArrayList<ProductVO>();
-	    list.add(productVO);
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		list.add(productVO);
 
-		
-		return list;		
+		return list;
 	}
-	
-	
-	
+
+	@Override
 	public List<PayVO> adaptPayVO(PayStringVO payStringVO, HttpSession session) {
-		String myid = (String)session.getAttribute("mem_id");
-		//pro_code, cart_cnt, pay_req 
-				
-		String[] proCode = payStringVO.getPro_code().split(",");
-		String[] cartCnt = payStringVO.getCart_cnt().split(",");
-		String[] payReq = payStringVO.getPay_req().split(",");
-		
-		
-		
-
-		
-		return null;		
+		return null;
 	}
-	
-	
-
 
 }

@@ -15,6 +15,11 @@
 		from pay group by group_id order by pay_code desc;
 	</select>
 
+	<select id="getPayListDetail" resultType="kr.co.mirak.pay.PayVO">
+		select pay_code, group_id, pro_name, cart_cnt, totalPrice
+ 		from pay where group_id = #{group_id};
+	</select>
+
 	<insert id="insert" parameterType="kr.co.mirak.pay.PayVO">
 		insert into test (name)
 		values
