@@ -39,6 +39,16 @@ public class PayServiceImpl implements PayService {
 
 		return payListDetail;
 	}
+	
+	public List<PayVO> getClientPayList(HttpSession session) {
+
+		String mem_id = (String) session.getAttribute("mem_id");
+		
+		PayMapper payMapper = sqlSessionTemplate.getMapper(PayMapper.class);
+		List<PayVO> list = payMapper.getClientPayList(mem_id);
+		System.out.println(list.get(0));
+		return list;
+	}
 
 	public PayVO info(int id) {
 		// TODO Auto-generated method stub
@@ -67,9 +77,9 @@ public class PayServiceImpl implements PayService {
 	}
 
 	public List<CartVO> cartCheckList(HttpSession session) {
-		String myid = (String) session.getAttribute("mem_id");
+		String mem_id = (String) session.getAttribute("mem_id");
 		PayMapper mapper = sqlSessionTemplate.getMapper(PayMapper.class);
-		List<CartVO> list = mapper.cartCheckList(myid);
+		List<CartVO> list = mapper.cartCheckList(mem_id);
 		return list;
 	}
 	

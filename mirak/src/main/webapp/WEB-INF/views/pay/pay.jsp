@@ -4,16 +4,19 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp" />
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script type="text/javascript">
 
 
 
 $(function(){
-	$("#btn-kakao-pay").click(function(){
+	
 
+	
+	$("#btn-kakao-pay").click(function(){
+		
+		
 		let proCode = document.querySelectorAll('.pro_code')
 		let cartCode = document.querySelectorAll('.cart_code')
 		let cartCnt = document.querySelectorAll('.cart_cnt')
@@ -90,13 +93,12 @@ $(function(){
 
 
 </script>
-
 <script>
 
 document.addEventListener('DOMContentLoaded', function(){
 	
 	let totalPrice = 0;
-	document.querySelectorAll('.productprice').forEach(function(item){
+	document.querySelectorAll('.totalPrice').forEach(function(item){
 		totalPrice = totalPrice + Number(item.value)
 	})
 	
@@ -110,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 </script>
+
 
 <div class="hero-wrap hero-bread"
 	style="background-image: url('${path}/resources/images/bg_1.jpg');">

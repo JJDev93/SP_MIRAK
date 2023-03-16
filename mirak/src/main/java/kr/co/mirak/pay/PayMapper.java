@@ -7,6 +7,8 @@ import kr.co.mirak.cart.CartVO;
 public interface PayMapper {
 	List<PayVO> getAdminPayList();
 
+	List<PayVO> getClientPayList(String mem_id);
+	
 	List<PayVO> getPayListDetail(String group_id);
 
 	PayVO info(int id);
@@ -17,5 +19,5 @@ public interface PayMapper {
 
 	int delete(int id);
 
-	List<CartVO> cartCheckList(String myid);
+	List<CartVO> cartCheckList(String mem_id);
 }

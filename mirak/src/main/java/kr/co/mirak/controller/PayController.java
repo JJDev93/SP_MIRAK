@@ -93,8 +93,11 @@ public class PayController {
 		return "pay/pay";
 	}
 
-	@RequestMapping(value = "/payApproval", method = RequestMethod.GET)
-	public String payApproval(Model model) {
+	@RequestMapping(value = "/payInfo", method = RequestMethod.GET)
+	public String payApproval(Model model, HttpSession session) {
+		
+		model.addAttribute("payVOList", payService.getClientPayList(session));
+		
 		return "pay/payInfo";
 	}
 
