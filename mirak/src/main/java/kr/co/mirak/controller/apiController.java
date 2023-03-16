@@ -1,11 +1,19 @@
 package kr.co.mirak.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -38,10 +46,29 @@ public class apiController {
 					 result="loginsuccess";
 				 }
 			 }
-				 
-		}catch(Exception e) {
+		} catch (Exception e) {
 			throw new RuntimeException();
 		}
-	    return result;
+		return result;
 	}
+
+	// 카카오 로그인
+	@RequestMapping(value = "/kakaoLogin")
+
+	public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
+		System.out.println("#########" + code);
+		String access_Token = memberService.getAccessToken(code);
+		
+		
+		// 위에서 만든 코드 아래에 코드 추가
+		HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
+		System.out.println("###access_Token#### : " + access_Token);
+		System.out.println("###nickname#### : " + userInfo.get("nickname"));
+		System.out.println("###email#### : " + userInfo.get("email"));
+		
+		
+		return "member/join";
+	}
+	
+
 }
