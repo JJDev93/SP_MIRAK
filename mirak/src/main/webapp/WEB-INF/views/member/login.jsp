@@ -46,13 +46,11 @@
 		<div class="row justify-content-center">
 			<div class="col-md-5 ftco-animate">
 				<form action="login" method="post" class="contact-form">
-
 					<div class="form-group">
 						<label for="ID">아이디</label> <input type="text"
 							class="form-control" id="ID" name="mem_id" placeholder="이메일(ID)"
 							required="required">
 					</div>
-
 					<div class="form-group">
 						<label for="PW">비밀번호</label> <input type="password" id="PW"
 							class="form-control" name="mem_pw" placeholder="비밀번호"
@@ -70,10 +68,6 @@
 							<a href="join" class="btn btn-secondary py-3 px-5 w-100">회원가입</a>
 						</div>
 					</div>
-
-
-
-
 					<div class="form-group row" style="text-align: right;">
 						<div class="col-md-12">
 							<a href="idfind">아이디 찾기</a>&nbsp;&nbsp;&nbsp; <a href="">비밀번호
@@ -90,6 +84,11 @@
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-6">
 				<div class="row justify-content-center ftco-services">
+					<div class="col-sm-4 text-center ftco-animate">
+						<a id="custom-login-btn" href="javascript:void(0);" onclick="window.open('${googleUrl}','googleLogin','width=430,height=500,location=no,status=no,scrollbars=yes');"">
+							구글로그인
+						</a>
+					</div>
 					<div class="col-sm-4 text-center ftco-animate">
 						<div class="media block-6 services mb-md-0 mb-4">
 							<a href=""> <img alt="" src="" style="height: 200px;">

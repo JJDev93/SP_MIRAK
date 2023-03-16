@@ -41,9 +41,19 @@
 	<beans:bean class="kr.co.mirak.cart.CartServiceImpl">		
 		<beans:constructor-arg ref="sqlSessionTemplate" />
 	</beans:bean>
-
-
-<!-- 	<resources mapping="/images/**" location="/WEB-INF/views/images/pro_images" /> -->
+	
+	<!-- OAuth -->
+	<beans:bean class="kr.co.mirak.member.login.google.SnsLoginServiceImpl">		
+		<beans:constructor-arg ref="sqlSessionTemplate" />
+	</beans:bean>
+	<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <beans:property name="locations">
+            <beans:list>    
+                <beans:value>classpath:/config/application-oauth.properties</beans:value>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+	<!-- <resources mapping="/images/**" location="/WEB-INF/views/images/pro_images" /> -->
 
 	<interceptors>
 		<interceptor>
