@@ -3,16 +3,13 @@
 			clientId: "zkOzac5hPC_Qw6v8eOzQ",
 			callbackUrl: "http://localhost:8080/",
 			isPopup: false,
-			loginButton: {color: "green", type: 1, height: 60}
-// 			callbackHandle: true
+			loginButton: {color: "green", type: 1, height: 60},
+ 			callbackHandle: true
 		}
 	);
 	naverLogin.init();
 
-
 function naverLoginclick() {
-
-	//	window.addEventListener('load', function () {
 		naverLogin.getLoginStatus(function (status) {
 			if (status) {
 			    var mem_id = naverLogin.user.getEmail();
@@ -23,8 +20,6 @@ function naverLoginclick() {
 			    }
 			    var mem_pw = naverLogin.user.getId();
 			    var mem_name = naverLogin.user.getName();
-			    
-			    console.log(naverLogin.user);
 			    $.ajax({
 			        type: 'post',
 			        url: 'naverSave',
@@ -32,7 +27,6 @@ function naverLoginclick() {
 			        dataType: "text",
 					success: function(responseData) {
 						if(responseData=='loginsuccess') {
-							alert("로그인 성공하였습니다.");
 							console.log('성공');
 							location.href="/";
 						} else if(responseData=='no') {
@@ -43,7 +37,6 @@ function naverLoginclick() {
 						console.log('오류 발생')
 					}
 				})
-
 			} else {
 				console.log("callback 처리에 실패하였습니다.");
 			}
