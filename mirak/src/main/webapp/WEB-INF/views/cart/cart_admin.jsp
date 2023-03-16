@@ -53,7 +53,7 @@
 							<td><fmt:formatDate pattern="yy-MM-dd" value="${c.cart_start}"/> </td>
 							<td>${c.cart_day }</td>
 							<td>${c.cart_cnt }</td>
-							<td>${c.pro_price * c.cart_cnt }</td>
+							<td>${c.totalPrice }</td>
 							<td>${c.cart_show }</td>
 						</tr>
 						</c:forEach>

@@ -8,7 +8,7 @@ public interface CartService {
 	List<CartVO> cartClientList(CartVO vo);
 	List<CartVO> cartAdminList();
 	CartVO info(int id);
-	int insert(CartVO vo, HttpSession session);
-	int update(CartVO vo);
-	int delete(int id);
+	int cartInsert(CartVO vo, HttpSession session);
+	int cartUpdate(CartVO vo, HttpSession session);
+	int cartDelete(CartVO vo, HttpSession session);
 }

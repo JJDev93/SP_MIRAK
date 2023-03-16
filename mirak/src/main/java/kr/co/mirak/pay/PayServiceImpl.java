@@ -1,12 +1,12 @@
 package kr.co.mirak.pay;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import kr.co.mirak.cart.CartVO;
 import kr.co.mirak.product.ProductMapper;
@@ -72,10 +72,9 @@ public class PayServiceImpl implements PayService {
 		List<CartVO> list = mapper.cartCheckList(myid);
 		return list;
 	}
-
-	public List<ProductVO> payFromProduct(ProductVO productVO, String cart_cnt) {
-
-		productVO.setCart_cnt(Integer.parseInt(cart_cnt));
+	
+	public List<ProductVO> payFromProduct(ProductVO productVO, String cart_cnt, Date cart_start, String cart_day) {
+		
 		List<ProductVO> list = new ArrayList<ProductVO>();
 		list.add(productVO);
 

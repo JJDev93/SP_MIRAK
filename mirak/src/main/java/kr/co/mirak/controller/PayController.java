@@ -1,6 +1,6 @@
 package kr.co.mirak.controller;
 
-import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -55,20 +55,25 @@ public class PayController {
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = "/pay/{pro_code}/{cart_cnt}", method = RequestMethod.GET)
-	public String getPayFromProduct(Model model, ProductVO productVO, HttpSession session,
-			@PathVariable("pro_code") String pro_code, @PathVariable("cart_cnt") String cart_cnt) {
-
-		// 회원
-		model.addAttribute("memberVO", memberService.getMemberInfo(session));
-
-		// pro or cart
-		model.addAttribute("codecheck", 0);
-
-		// 품목
-		productVO = productService.productDetail(productVO);
-		model.addAttribute("productList", payService.payFromProduct(productVO, cart_cnt));
-
+	@RequestMapping(value = "/pay/{pro_code}/{cart_cnt}/{cart_start}/{cart_day}", method = RequestMethod.GET)
+	public String getPayFromProduct(Model model, ProductVO productVO, HttpSession session, @PathVariable("pro_code") String pro_code, @PathVariable("cart_cnt") String cart_cnt,
+			@PathVariable("cart_start") Date cart_start, @PathVariable("cart_day") String cart_day) {
+		
+//		productVO.setCart_start(Date.valueOf(cart_start));
+//		productVO.setCart_day(cart_day);
+		System.out.println("확인 : " + productVO);
+		
+		//회원
+	    model.addAttribute("memberVO", memberService.getMemberInfo(session));
+	    
+	    //pro or cart
+	    model.addAttribute("codecheck", 0);
+	    
+	    //품목
+	    productVO = productService.productDetail(productVO);	    
+	    model.addAttribute("productList", payService.payFromProduct(productVO, cart_cnt, cart_start, cart_day));
+	    
+	    
 		return "pay/pay";
 	}
 

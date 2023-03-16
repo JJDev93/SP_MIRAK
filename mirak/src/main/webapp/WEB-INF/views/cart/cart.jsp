@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 <div class="hero-wrap hero-bread"
@@ -25,7 +26,10 @@ session = request.getSession();
 
 
 <form action="/pay" method="post">
+
+ 
 <section class="ftco-section ftco-cart">
+	<form action="/pay" method="post">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 ftco-animate">
@@ -33,23 +37,35 @@ session = request.getSession();
 					<table class="table">
 						<thead class="thead-primary">
 							<tr class="text-center">
-								<th>이미지</th>
-								<th>상품명</th>
-								<th>가격</th>
-								<th>요일선택</th>
-								<th>갯수</th>
-								<th>총가격</th>
 								<th>
 									<div class="all_check_input_div">
 										<input type="checkbox" class="all_check" checked="checked">
 										<span class="all_chcek_span">전체선택</span>
 									</div>
 								</th>
+								<th>이미지</th>
+								<th>상품명</th>
+								<th>가격</th>
+								<th>배송일</th>
+								<th>요일선택</th>
+								<th>갯수</th>
+								<th>총가격</th>							
+								<th></th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="c" items="${cartList }">
 								<tr class="text-center">
+									<td class="cart_info">${c.cart_check }<input
+										type="checkbox" class="cart_checkbox" checked="checked">
+										<input type="hidden" class="price_input"
+										value="${c.pro_price }"> <input type="hidden"
+										class="count_input" value="${c.cart_cnt }"> <input
+										type="hidden" class="totalPrice_input"
+										value="${c.pro_price * c.cart_cnt }"> <input
+										type="hidden" class="_input" value="${c.pro_code }">
+									</td>
 									<td class="image-prod"><div>
 											<img alt="1"
 												src="${path}/resources/images/product/${c.pro_image}"
@@ -60,27 +76,12 @@ session = request.getSession();
 										<p>${c.pro_desc }</p>
 									</td>
 									<td>${c.pro_price }</td>
-									<td>${c.cart_day }</td>
 									<td>
-										<div class="quantity_div">
-											<input type="text" value="${c.cart_cnt}"
-												class="quantity_input">
-
-
-<button type="button">모달창</button>
-
-<div class="modal">
-  <div class="modal_content" 
-       title="클릭하면 창이 닫힙니다.">
-    여기에 모달창 내용을 적어줍니다.<br>
-    이미지여도 좋고 글이어도 좋습니다.
-  </div>
-</div>
-											
-
-
-
-										</div> <!--
+									<fmt:formatDate value="${c.cart_start }" pattern="yy-MM-dd" />
+									</td>
+									<td>${c.cart_day }</td>
+									<td>${c.cart_cnt }									
+										<!--
 										<div class="quantity_div">
 											<input type="text" value="${c.cart_cnt}" class="quantity_input">
 											<button class="quantity_btn plus_btn">+</button>
@@ -89,38 +90,26 @@ session = request.getSession();
 										<a class="quantity_update_btn" data-cartId="${c.cart_code}">변경</a>
 										 -->
 									</td>
-									<td>${c.pro_price * c.cart_cnt }</td>
-									<td class="cart_info">${c.cart_check }<input
-										type="checkbox" class="cart_checkbox" checked="checked">
-										<input type="hidden" class="price_input"
-										value="${c.pro_price }"> <input type="hidden"
-										class="count_input" value="${c.cart_cnt }"> <input
-										type="hidden" class="totalPrice_input"
-										value="${c.pro_price * c.cart_cnt }"> <input
-										type="hidden" class="_input" value="${c.pro_code }">
+									<td>${c.totalPrice }</td>
+									
+									<td>
+									<button type="button" class="btn btn-primary py-3 px-5"
+								data-toggle="modal" data-target="#exampleModal">변경</button>
+									</td>
+									<td>
+									<input type="submit" value="삭제" formaction="/cart/{cart_code}"
+									class="btn btn-primary py-3 px-5" onclick="javascript:del()" />
 									</td>
 								</tr>
 							</c:forEach>
-</form>
-
-							<!-- 수량 조정 form -->
-							<form action="/cart/update" method="post"
-								class="quantity_update_form">
-								<input type="hidden" name="cartId" class="update_cartId">
-								<input type="hidden" name="count" class="update_count">
-								<input type="hidden" name="mem_id" value="${c.mem_id}">
-							</form>
-
-							<!-- 주문 form -->
-							<form action="/pay/${c.mem_id}" method="post" class="pay_form">
-
-							</form>
+</form>	
 
 							
 
 							<!-- END TR-->
 						</tbody>
 					</table>
+					
 				</div>
 			</div>
 		</div>
@@ -147,24 +136,98 @@ session = request.getSession();
 			</p>
 		</div>
 	</div>
+
+	<!-- Modal -->
+	<form action="/cart/{cart_day}/{cart_cnt}">
+		<div class="modal fade" id="exampleModal" tabindex="9999"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">구매 옵션 변경</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+					<c:forEach var="c" items="${cartList }">	
+						<img src="${path}/resources/images/product/${c.pro_image}"
+						style="width: 100px; height: 50px;" />
+						${c.pro_name }<br>
+						${c.pro_price }원<br>
+						<br>배송 시작일 선택<br>
+						<input type="date" name="cart_start" class="form-control input-number" style="width:240px;">
+						<br>배송 요일 선택 <br>
+						<input type="checkbox" name="cart_day" value="월">월
+						<input type="checkbox" name="cart_day" value="화">화
+						<input type="checkbox" name="cart_day" value="수">수
+						<input type="checkbox" name="cart_day" value="목">목
+						<input type="checkbox" name="cart_day" value="금">금
+						<input type="checkbox" name="cart_day" value="토">토
+						<input type="checkbox" name="cart_day" value="일">일
+						<br><br>
+						배송 횟수 선택 <br>
+						<input type="number" value="${c.cart_cnt}" class="quantity_input">
+						<br><br>
+					</c:forEach>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">변경</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	
 </section>
+
+
 
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
 
 <script>
 
-$(function(){ 
-
-	  $("button").click(function(){
-	    $(".modal").fadeIn();
+$(function() {
+	  $('input[name="daterange"]').daterangepicker({
+	    opens: 'left'
+	  }, function(start, end, label) {
+	    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
 	  });
-	  
-	  $(".modal_content").click(function(){
-	    $(".modal").fadeOut();
-	  });
-	  
 	});
+	
+function del(){
+    alert('삭제 하시겠습니까');
+}
 
+
+/*
+function fn_memberCheck() {
+    $.ajax({
+        url : "/cart/{cart_day}/{cart_cnt}",
+        type : "POST",
+        dataType :"JSON",
+        data : {"cart_code" : $("#cart_code").val(), 
+        	    "cart_day" : $("#cart_day").val(),
+        	    "cart_cnt" : $("#cart_cnt").val()},
+        success : function (data) {
+        	console.log(cart_cnt.value);
+            if(cart_cnt.value == ""){
+            	alert("수량 선택해주세요");
+            }
+            
+            if(data == 0) {
+                alert("?");
+            } else if(data == 1) {
+            	$("#cartUpdate").attr("value", "Y");
+            	alert("옵션 변경 완료");
+            } 	
+        }
+    })
+}
+*/
+	
 	
 	$(document).ready(function() {
 		// 종합 정보 삽입
@@ -264,7 +327,8 @@ $(function(){
 	});
 	 */
 
-	// 결제 페이지 이동 
+	/*
+	 결제 페이지 이동 
 	$(".pay_btn")
 			.on(
 					"click",
@@ -303,4 +367,5 @@ $(function(){
 						$(".pay_form").submit();
 
 					});
+	 */
 </script>

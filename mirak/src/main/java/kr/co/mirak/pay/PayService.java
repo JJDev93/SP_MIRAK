@@ -1,5 +1,6 @@
 package kr.co.mirak.pay;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,5 +17,5 @@ public interface PayService {
 	int delete(int id);
 	List<CartVO> cartCheckList(HttpSession session);
 	List<PayVO> adaptPayVO(PayStringVO payStringVO, HttpSession session);
-	List<ProductVO> payFromProduct(ProductVO productVO, String cart_cnt);
+	List<ProductVO> payFromProduct(ProductVO productVO, String cart_cnt, Date cart_start, String cart_day);
 }

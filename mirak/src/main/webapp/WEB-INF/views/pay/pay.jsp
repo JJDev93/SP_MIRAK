@@ -144,14 +144,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 					<c:forEach items="${productList}" var="productVO">
-<!-- ------------추가 컬럼 임시---------------- -->
-
-						<input type="hidden" class="cart_day" value="월화수">
-						<input type="hidden" class="cart_start" value="2023-03-14">
-
-
-<!-- ------------추가 컬럼 임시---------------- -->
-
 
 						<div>
 							상품 코드 <input type="hidden" class="pro_code" name="pro_code"
@@ -179,6 +171,12 @@ document.addEventListener('DOMContentLoaded', function(){
 						<div>
 							상품이미지 <input type="hidden" class="pro_image" name="pro_image"
 								value="${productVO.pro_image }">${productVO.pro_image }</div>
+						<div>
+							배송요일 <input type="hidden" class="cart_day" name="cart_day"
+								value="${productVO.cart_day }">${productVO.cart_day }</div>
+						<div>
+							배송시작일 <input type="hidden" class="cart_start" name="cart_start"
+								value="${productVO.cart_start }">${productVO.cart_start }</div>
 						<div>
 							상품 가격 <input type="hidden" class="pro_price" name="pro_price"
 								value="${productVO.pro_price }">${productVO.pro_price }</div>

@@ -93,5 +93,24 @@ public class ProductServiceImpl implements ProductService {
 		ProductMapper mapper = sqlSessionTemplate.getMapper(ProductMapper.class);
 		return mapper.getTotalO();
 	}
+	
+	
+	public List<ProductVO> productListIndex1(ProductVO vo) {
+
+		ProductMapper mapper = sqlSessionTemplate.getMapper(ProductMapper.class);
+		List<ProductVO> productList = mapper.productListIndex1(vo);
+
+		return productList;
+
+	}
+	
+	public List<ProductVO> productListIndex2(ProductVO vo) {
+
+		ProductMapper mapper = sqlSessionTemplate.getMapper(ProductMapper.class);
+		List<ProductVO> productList = mapper.productListIndex2(vo);
+
+		return productList;
+
+	}
 
 }
