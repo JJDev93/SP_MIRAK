@@ -3,6 +3,7 @@ package kr.co.mirak.pay.paymethod;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -30,8 +31,11 @@ public class KakaoPayService {
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	public ReadyResponse payReady(List<PayKakaoVO> list, HttpSession session) {
-		UUID groupId1 = UUID.randomUUID();
-		String groupId = groupId1.toString().replaceAll("-", "");
+		long currentTimeMillis = System.currentTimeMillis();
+		Random random = new Random();
+		int randomInt = random.nextInt(1000);
+		String groupId = Long.toString(currentTimeMillis) + Long.toString(randomInt);
+		
 		String mem_id = (String) session.getAttribute("mem_id");
 		System.out.println("mem_id : " + mem_id);
 		String item_name = "";
