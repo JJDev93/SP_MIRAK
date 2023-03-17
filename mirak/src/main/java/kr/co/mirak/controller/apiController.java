@@ -99,6 +99,10 @@ public class apiController {
 			return "member/join";
 		}else {
 			session.setAttribute("mem_id", user_id);
+			String url = (String) session.getAttribute("pre_url");
+			if(url != null) {
+				return "redirect:" + url;
+			}
 			return "redirect:/";
 		}
 	}   
