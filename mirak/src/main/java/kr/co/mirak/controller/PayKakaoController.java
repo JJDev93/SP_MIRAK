@@ -86,7 +86,7 @@ public class PayKakaoController {
 	@RequestMapping("/pay/kakao/cancel")
 	public String kakaoCancel(HttpSession session, String group_id, String totalPrice) {
 		System.out.println("group_id : " + group_id + ", totalPrice : " + totalPrice);
-		kakaoPayService.payCancel(session);
+		kakaoPayService.payCancel(session, group_id, totalPrice);
 
 		return "pay/payCancel";
 	}

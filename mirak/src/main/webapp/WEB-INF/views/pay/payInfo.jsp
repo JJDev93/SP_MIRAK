@@ -12,26 +12,32 @@
 
 $(function(){
 	
-
+	
 	
 	$(".payCancel").click(function(){
 		
+		const totalPrice = $(this).data('total_price');
 		const group_id = $(this).data('group_id');
-		const totalPrice = $(this).data('totalPrice');
-		alert(group_id, totalPrice)
-		// 카카오페이 결제 취소 전송
-		$.ajax({
-			type:"get"
-			,url:"/pay/kakao/cancel"
-			,data:{
-				group_id:group_id,
-				totalPrice:totalPrice,
-			},
-			success:function(response){
-				
-				location.href = "/payInfo"
-			}
-		})
+		
+		let result = confirm("선택하신 주문번호는 " + group_id + "입니다. \n 주문을 취소하시겠습니까?")
+		
+		if(result) {
+			// 카카오페이 결제 취소 전송
+			$.ajax({
+				type:"get"
+				,url:"/pay/kakao/cancel"
+				,data:{
+					group_id:group_id,
+					totalPrice:totalPrice,
+				},
+				success:function(response){
+					
+					location.href = "/payInfo"
+				}
+			})
+		}
+		
+		
 	})
 })
 
@@ -97,15 +103,19 @@ $(function(){
 												<p>${payVO.status } (구매 확정을 하거나 배송이 시작되면 주문을 취소 할 수 없습니다.)</p>
 												<p></p>
 												<p>
-													<button href="" class="btn btn-primary py-2 px-3 detail" value="">상세보기</button>
-													<button href="" class="btn btn-primary py-2 px-3 detail" value="">구매확정</button>
-													<button href="" class="btn btn-primary py-2 px-3 payCancel" data-group_id="${payVO.group_id }" data-totalPrice="${payVO.totalPrice }">주문취소</button>
+													<button class="btn btn-primary py-2 px-3 detail" value="">상세보기</button>&#09;
+													<button class="btn btn-primary py-2 px-3 detail" value="">구매확정</button>&#09;
+													<button class="btn btn-primary py-2 px-3 payCancel" data-total_price="${payVO.totalPrice }" data-group_id="${payVO.group_id }">주문취소</button>
 												</p>
 											</div>
 										</div>
 									</div>
 									
 									</c:forEach>
+									
+									<c:if test="${payVOList.size() == 0}">
+									주문 내역이 없습니다.
+									</c:if>
 
 								</div>
 							</div>

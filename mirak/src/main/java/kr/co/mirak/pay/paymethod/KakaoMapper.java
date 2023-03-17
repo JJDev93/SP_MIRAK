@@ -10,6 +10,10 @@ public interface KakaoMapper {
 	int insertOrder(PayKakaoVO payKakaoVO);
 
 	PayKakaoVO selectTid(String mem_id);
+	
+	PayKakaoVO getTid(String group_id);
+	
+	int cancelStatus(String group_id);
 
 	List<PayVO> selectOrderList(String mem_id);
 

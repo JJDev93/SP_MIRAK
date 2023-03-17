@@ -18,7 +18,7 @@
 	<select id="getClientPayList" resultType="kr.co.mirak.pay.PayVO">
 		select group_id, pro_image, pay_date, status, sum(cart_cnt) as pro_price,
 		pro_name, count(group_id) as cart_cnt, sum(totalPrice) as totalPrice
-		from pay where mem_id=#{mem_id} and status not in ('주문 취소') and pay_date BETWEEN DATE_ADD (NOW(), INTERVAL -3 MONTH) AND NOW() group by group_id order by pay_code desc
+		from pay where mem_id=#{mem_id} and status not in ('주문취소') and pay_date BETWEEN DATE_ADD (NOW(), INTERVAL -3 MONTH) AND NOW() group by group_id order by pay_code desc
 	</select>
 
 	<select id="getPayListDetail" resultType="kr.co.mirak.pay.PayVO">

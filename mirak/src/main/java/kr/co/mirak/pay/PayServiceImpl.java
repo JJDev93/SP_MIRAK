@@ -46,7 +46,7 @@ public class PayServiceImpl implements PayService {
 		
 		PayMapper payMapper = sqlSessionTemplate.getMapper(PayMapper.class);
 		List<PayVO> list = payMapper.getClientPayList(mem_id);
-		System.out.println(list.get(0));
+		System.out.println(list.size());
 		return list;
 	}
 
