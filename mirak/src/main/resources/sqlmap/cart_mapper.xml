@@ -8,9 +8,10 @@
 	<!-- 카트 목록 -->
 	<select id="cartClientList" resultType="kr.co.mirak.cart.CartVO">
 	
-		SELECT * FROM CART WHERE MEM_Id = #{mem_id} and CART_SHOW =1
+		SELECT * FROM CART WHERE MEM_ID = #{mem_id} and CART_SHOW =1
 	
 	</select>
+	
 	
 	<!-- 어드민용 카트 전체 목록 -->
 	<select id="cartAdminList" resultType="kr.co.mirak.cart.CartVO">

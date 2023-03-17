@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 <div class="hero-wrap hero-bread"
@@ -55,14 +56,12 @@ session = request.getSession();
 						<tbody>
 							<c:forEach var="c" items="${cartList }">
 								<tr class="text-center">
-									<td class="cart_info"><input
-										type="checkbox" class="cart_checkbox" checked="checked">
-										<input type="hidden" class="price_input"
-										value="${c.pro_price }"> <input type="hidden"
-										class="count_input" value="${c.cart_cnt }"> <input
-										type="hidden" class="totalPrice_input"
-										value="${c.pro_price * c.cart_cnt }"> <input
-										type="hidden" class="_input" value="${c.pro_code }">
+									<td class="cart_info">
+										<input type="checkbox" class="cart_checkbox" checked="checked">
+										<input type="hidden" class="price_input" value="${c.pro_price }">
+										<input type="hidden" class="count_input" value="${c.cart_cnt }">
+										<input type="hidden" class="totalPrice_input" value="${c.pro_price * c.cart_cnt }">
+										<input type="hidden" class="_input" value="${c.pro_code }">
 									</td>
 									<td class="image-prod"><div>
 											<img alt="1"
@@ -97,13 +96,11 @@ session = request.getSession();
 									</td>
 									<td>
 <!-- 									<button type="button" class="btn btn-primary py-3 px-5" onclick="javascript:del()"> -->
-									<a href="/cart/cartDelete/${c.cart_code }" onclick="javascript:del()" class="btn btn-primary py-3 px-5">삭제</a>
+									<a href="/cart/cartDelete/${c.cart_code }" onclick="return confirm('삭제하시겠습니까?');" class="btn btn-primary py-3 px-5">삭제</a>
 									</td>
 								</tr>
 							</c:forEach>
 </form>	
-
-							
 
 							<!-- END TR-->
 						</tbody>
@@ -145,20 +142,18 @@ session = request.getSession();
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">구매 옵션 변경</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
 					<div class="modal-body">
 					<c:forEach var="c" items="${cartList }">
-						<img src="${path}/resources/images/product/${c.pro_image}"
-						style="width: 100px; height: 50px;" />
+					<img src="${path}/resources/images/product/${c.pro_image}" style="width: 100px; height: 50px;" />
 						${c.pro_name }<br>
 						${c.pro_price }원<br>
 						<br>배송 시작일 선택<br>
-						${c.cart_start }<br>
-						<input type="date" name="cart_start" class="form-control input-number" style="width:240px;">
+						<input type="date" name="cart_start" class="form-control input-number" style="width:240px;"
+						value="${c.cart_start }">
 						<br>배송 요일 선택 <br>
 						${c.cart_day }<br>
 						<input type="checkbox" name="cart_day" value="월">월
@@ -176,7 +171,7 @@ session = request.getSession();
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary">변경</button>
+						<input type="submit" class="btn btn-primary" value="변경">
 					</div>
 				</div>
 			</div>
@@ -191,6 +186,9 @@ session = request.getSession();
 
 <script>
 
+const str = "월화수목금토일";
+const arr = str.split("");
+
 
 
 $(function() {
@@ -200,16 +198,6 @@ $(function() {
 	    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
 	  });
 	});
-	
-function del(){
-    alert('삭제 하시겠습니까');
-}
-
-
-
-
-
-
 	
 	
 	$(document).ready(function() {

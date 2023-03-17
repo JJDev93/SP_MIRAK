@@ -32,7 +32,13 @@ public class CartController {
    // insert
    @RequestMapping(value = "/cart/{pro_code}/{cart_cnt}/{cart_start}/{cart_day}")
    public String cartInsert(CartVO vo, HttpSession session, Model model, @PathVariable("pro_code") String pro_code, @PathVariable("cart_cnt") int cart_cnt, @PathVariable("cart_start") Date cart_start, @PathVariable("cart_day") String cart_day) {
-      vo.setPro_code(pro_code);
+	   String mem_id = (String) session.getAttribute("mem_id");
+	   if (mem_id == null) {
+		   String preUrl = "/cart/" + pro_code;
+			session.setAttribute("pre_url", preUrl);
+			return "redirect:/login";
+	   }
+	   vo.setPro_code(pro_code);
       cartService.cartInsert(vo, session);
       return "redirect:/cart";
    }
