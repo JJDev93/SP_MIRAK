@@ -84,7 +84,8 @@ public class PayKakaoController {
 	
 	// 결제 후 취소 url
 	@RequestMapping("/pay/kakao/cancel")
-	public String kakaoCancel(HttpSession session) {
+	public String kakaoCancel(HttpSession session, String group_id, String totalPrice) {
+		System.out.println("group_id : " + group_id + ", totalPrice : " + totalPrice);
 		kakaoPayService.payCancel(session);
 
 		return "pay/payCancel";

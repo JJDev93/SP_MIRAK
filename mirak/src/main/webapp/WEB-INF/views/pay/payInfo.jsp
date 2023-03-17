@@ -16,21 +16,20 @@ $(function(){
 	
 	$(".payCancel").click(function(){
 		
-		alert('asdf')
-		
-		
+		const group_id = $(this).data('group_id');
+		const totalPrice = $(this).data('totalPrice');
+		alert(group_id, totalPrice)
 		// 카카오페이 결제 취소 전송
 		$.ajax({
 			type:"get"
 			,url:"/pay/kakao/cancel"
 			,data:{
-				
-				
+				group_id:group_id,
+				totalPrice:totalPrice,
 			},
 			success:function(response){
 				
-				
-				location.href = response.next_redirect_pc_url			
+				location.href = "/payInfo"
 			}
 		})
 	})
@@ -83,6 +82,7 @@ $(function(){
 											<div class="text d-block pl-md-4">
 												<div class="meta mb-3">
 													<div>
+														주문번호 : ${payVO.group_id }<br>
 														주문일 : ${payVO.pay_date}
 													</div>
 													
@@ -90,14 +90,16 @@ $(function(){
 												</div>
 												<h3 class="heading">
 									 				<a href="#">${payVO.pro_name}
-									 					<c:if test="${cart_cnt > 1 }"> 외 ${cart_cnt - 1 }개 품목</c:if>
+									 					<c:if test="${payVO.cart_cnt > 1 }"> 외 ${payVO.cart_cnt - 1 }개 품목</c:if>
 									 				 </a>
 												</h3>
-												<p>Far far away, behind the word mountains, far from the
-													countries Vokalia and Consonantia, there live the blind
-													texts.</p>
+												<p>총 수량 ${payVO.pro_price }개 &nbsp;&nbsp;&nbsp; 합계 ${payVO.totalPrice } 원 </p>
+												<p>${payVO.status } (구매 확정을 하거나 배송이 시작되면 주문을 취소 할 수 없습니다.)</p>
+												<p></p>
 												<p>
-													<button href="" class="btn btn-primary py-2 px-3 payCancel" value="">주문취소</button>
+													<button href="" class="btn btn-primary py-2 px-3 detail" value="">상세보기</button>
+													<button href="" class="btn btn-primary py-2 px-3 detail" value="">구매확정</button>
+													<button href="" class="btn btn-primary py-2 px-3 payCancel" data-group_id="${payVO.group_id }" data-totalPrice="${payVO.totalPrice }">주문취소</button>
 												</p>
 											</div>
 										</div>
