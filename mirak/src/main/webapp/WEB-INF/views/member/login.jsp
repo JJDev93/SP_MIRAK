@@ -114,12 +114,9 @@
 							</a> <a href="http://developers.kakao.com/logout">Logout</a>
 						</div>
 					</div>
+					
 				</div>
-
-
 			</div>
-	
-
 		</div>
 	</div>
 

@@ -65,7 +65,7 @@ public class apiController {
 		HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
 		System.out.println("###access_Token#### : " + access_Token);
 		System.out.println("###nickname#### : " + userInfo.get("nickname"));
-		System.out.println("###email#### : " + userInfo.get("ema9il"));
+		System.out.println("###email#### : " + userInfo.get("email"));
 
 
 		return "member/join";
