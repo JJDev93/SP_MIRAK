@@ -161,7 +161,9 @@ public class PayController {
 	@RequestMapping(value = "/admin/pays/{group_id}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<PayVO> getAdminPayListDetail(Model model, @PathVariable("group_id") String group_id) {
-
+		
+		System.out.println("button ajax~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
 		List<PayVO> payListDetail = payService.getPayListDetail(group_id);
 
 		return payListDetail;

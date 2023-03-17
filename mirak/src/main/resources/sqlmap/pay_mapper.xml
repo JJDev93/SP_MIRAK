@@ -22,7 +22,7 @@
 	</select>
 
 	<select id="getPayListDetail" resultType="kr.co.mirak.pay.PayVO">
-		select pay_code, group_id, pro_name, cart_cnt, totalPrice
+		select pro_name, cart_cnt, sum(totalPrice) as totalPrice, cart_day, cart_start, status
  		from pay where group_id = #{group_id};
 	</select>
 	

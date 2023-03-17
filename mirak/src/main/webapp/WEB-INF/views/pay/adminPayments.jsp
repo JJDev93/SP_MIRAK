@@ -2,6 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<style>
+.detail-row .hidden-row {
+	display: none;
+}
+</style>
 <h3>관리자 결제내역 리스트</h3>
 <div class="ftco-section">
 	<div class="container-fluid">
@@ -14,6 +23,11 @@
 							<th scope="col">상품명</th>
 							<th scope="col">도시락 총개수</th>
 							<th scope="col">가격</th>
+							<th scope="col">주문자이름</th>
+							<th scope="col">전화번호</th>
+							<th scope="col">요청사항</th>
+							<th scope="col">결제일</th>
+							<th scope="col">주문상태</th>
 							<th scope="col">상세정보</th>
 						</tr>
 					</thead>
@@ -23,15 +37,49 @@
 								<td>${payList.group_id}</td>
 								<td><c:choose>
 										<c:when test="${payList.cart_cnt == 1}">
-									${payList.pro_name}
-									</c:when>
-										<c:otherwise>${payList.pro_name}외 ${payList.cart_cnt-1}종</c:otherwise>
+                        ${payList.pro_name}
+                    </c:when>
+										<c:otherwise>
+                        ${payList.pro_name}외 ${payList.cart_cnt-1}종
+                    </c:otherwise>
 									</c:choose></td>
 								<td>${payList.cart_cnt}</td>
 								<td>${payList.totalPrice}</td>
-								<td><button id="adminPayListDetail"
-										class="btn btn-primary mb-12" data-group-id="${pay.group_id}">상세▼</button>
-									<div class="accordion" id="accordion-${payList.group_id}"></div>
+								<td>${payList.mem_name}</td>
+								<td>${payList.mem_phone}</td>
+								<td>${payList.pay_req}</td>
+								<td>${payList.pay_date}</td>
+								<td>${payList.status}</td>
+								<td>
+									<div class="accordion">
+										<button class="btn btn-dark" type="button"
+											data-toggle="collapse"
+											data-target="#collapse-${payList.group_id}"
+											aria-expanded="false"
+											aria-controls="collapse-${payList.group_id}"
+											data-group_id="${payList.group_id}">상세보기▼</button>
+									</div>
+								</td>
+							</tr>
+							<tr class="detail-row">
+								<td style="padding: 2px;" colspan="10">
+									<div class="collapse" id="collapse-${payList.group_id}">
+										<div class="table-responsive">
+											<table class="table table-hover table-striped">
+												<thead>
+													<tr>
+														<th>상품명</th>
+														<th>수량</th>
+														<th>가격</th>
+														<th>희망요일</th>
+														<th>배송시작일</th>
+														<th>주문상태</th>
+													</tr>
+												</thead>
+												<tbody id="accordianBody-${payList.group_id}"></tbody>
+											</table>
+										</div>
+									</div>
 								</td>
 							</tr>
 						</c:forEach>
@@ -41,7 +89,6 @@
 		</div>
 	</div>
 </div>
-
 <!-- 		<div class="row mt-5"> -->
 <!-- 			<div class="col text-center"> -->
 <!-- 				<div class="block-27"> -->
@@ -61,43 +108,35 @@
 <!-- </div> -->
 <script>
 $(document).ready(function() {
-	$(document).on("click", "#adminPayListDetail", function() {
-	    var groupId = $(this).data("group-id");
-	    var accordionId = "accordion-" + groupId;
-	    var accordionContainer = $("<div>", {class: "accordion", id: accordionId});
+	  $(document).on("click", ".btn-dark", function() {
+	    var group_id = $(this).data("group_id");
+	    var tbody = $("#accordianBody-" + group_id);
 	    
+	    // AJAX 요청을 보내고 테이블을 업데이트합니다.
 	    $.ajax({
-	        url: "/admin/pays/" + groupId,
-	        type: "GET",
-	        dataType: "json",
-	        success: function(data) {
-	            $.each(data, function(index, pay) {
-	                var cardId = "card-" + pay.id;
-	                var cardHeader = $("<div>", {class: "card-header", id: cardId + "-heading"});
-	                var cardTitle = $("<h5>", {class: "mb-0"});
-	                var cardButton = $("<button>", {class: "btn btn-link", "data-toggle": "collapse", "data-target": "#" + cardId, "aria-expanded": "false", "aria-controls": cardId});
-	                var cardBody = $("<div>", {class: "collapse", id: cardId, "aria-labelledby": cardId + "-heading", "data-parent": "#" + accordionId});
-	                var cardContent = $("<div>", {class: "card-body"});
-	                
-	                cardButton.append(pay.pro_name);
-	                cardTitle.append(cardButton);
-	                cardHeader.append(cardTitle);
-	                
-	                cardContent.append("도시락 개수: " + pay.cart_cnt);
-	                cardContent.append("<br>");
-	                cardContent.append("가격: " + pay.totalPrice);
-	                cardBody.append(cardContent);
-	                
-	                accordionContainer.append($("<div>", {class: "card"}).append(cardHeader, cardBody));
-	            });
-	            
-	            $("#accordion-container").html(accordionContainer);
-	            $("#" + accordionId).accordion();
-	        },
-	        error: function(jqXHR, textStatus, errorThrown) {
-	            console.log(textStatus, errorThrown);
-	        }
+	      url: "/admin/pays/" + group_id,
+	      method: "GET",
+	      success: function(data) {
+	        tbody.empty(); // tbody 내용 지우기
+	        data.forEach(function(item) {
+	        	console.log(data);
+	          // 데이터를 행으로 변환하여 tbody에 추가합니다.
+	          tbody.append("<tr>" +
+	            "<td>" + item.pro_name + "</td>" +
+	            "<td>" + item.cart_cnt + "</td>" +
+	            "<td>" + item.totalPrice + "</td>" +
+	            "<td>" + item.cart_day + "</td>" +
+	            "<td>" + item.cart_start + "</td>" +
+	            "<td>" + item.status + "</td>" +
+	          "</tr>");
+	          console.log("sdfsfsdfsd");
+	        });
+	      },
+	      error: function() {
+	        alert("데이터를 가져올 수 없습니다.");
+	      }
 	    });
+	  });
 	});
 </script>
 
