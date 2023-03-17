@@ -3,10 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
-<!-- 네아로 SDK -->
-<script type="text/javascript"
-	src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2-nopolyfill.js"
-	charset="utf-8"></script>
 <style>
 .hr-sect {
 	display: flex;
@@ -60,18 +56,16 @@
 						<label style="color: red">${message }</label>
 					</div>
 					<div class="form-group row">
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<input type="submit" value="로그인"
 								class="btn btn-primary py-3 px-5 w-100">
 						</div>
-						<div class="col-md-6">
-							<a href="join" class="btn btn-secondary py-3 px-5 w-100">회원가입</a>
-						</div>
 					</div>
 					<div class="form-group row" style="text-align: right;">
-						<div class="col-md-12">
-							<a href="idfind">아이디 찾기</a>&nbsp;&nbsp;&nbsp; <a href="">비밀번호
-								재설정</a>
+						<div class="col-md-12 text-center">
+							<a href="join">회원가입</a>&nbsp;|&nbsp; 
+							<a href="idfind">아이디 찾기</a>&nbsp;|&nbsp; 
+							<a href="pwreset">비밀번호재설정</a>
 						</div>
 					</div>
 				</form>
@@ -86,18 +80,22 @@
 				<div class="row justify-content-center ftco-services">
 				
 					<!-- 구글 -->
-					<div class="col-sm-2 text-center ftco-animate">
+					<div class="col-sm-2 ftco-animate">
 						<a id="custom-login-btn" href="javascript:void(0);"
 							onclick="window.open('${googleUrl}','googleLogin','width=430,height=500,location=no,status=no,scrollbars=yes');">
 							<img alt="" src="resources/images/ico_member_google.png"></a>
 					</div>
+					
+					
 					<!-- 네이버 -->
-					<div class="col-sm-2 text-center ftco-animate" id="naverIdLogin"
-						onclick="naverLoginclick()">
-						<img alt="" src="resources/images/ico_member_naver.png">
+					<div class="col-sm-4 text-center ftco-animate" >
+						<a id="naverIdLogin" onclick="naverLoginclick()">
+							<img alt="" src="resources/images/ico_member_naver.png" style="cursor:pointer" >
+						</a>
 					</div>
+						
 					<!-- 카카오 -->
-					<div class="col-sm-2 text-center ftco-animate">
+					<div class="col-sm-2 ftco-animate">
 						<div class="media block-6 services mb-md-0 mb-4 kakao">
 							<a id="btn"
 								href="https://kauth.kakao.com/oauth/authorize?client_id=e481c91b1136f51f927a619fc062146d&redirect_uri=http://localhost:8080/kakaoLogin&response_type=code">
@@ -114,9 +112,9 @@
 
 
 </section>
-<script src="${path}/resources/js/naverapi.js"></script>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
-
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+<script src="${path}/resources/js/naverapi.js"></script>
 <!-- 카카오로그인 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 

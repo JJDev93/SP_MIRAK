@@ -35,8 +35,9 @@ public class LoginController {
 	// 로그인페이지
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginView(Model model) {
-		System.out.println("로그인 화면으로 이동...");
+		System.out.println("=== 로그인 화면으로 이동 중 ===");
 		String googleUrl = googleUtils.googleInitUrl();
+		System.out.println("googleUrl : " + googleUrl);
 		model.addAttribute( "googleUrl", googleUrl );
 		return "member/login";
 	}
@@ -90,6 +91,7 @@ public class LoginController {
 		} else {   //일치하는 아이디가 존재하지 않을시 (로그인 실패)
 
 			rttr.addFlashAttribute("result" , 0);
+			rttr.addFlashAttribute("message" , "일치하는 아이디가 없습니다.");
 			logger.info("로그인 실패");
 			return "member/login";  //로그인페이지로 이동
 		}
@@ -189,6 +191,7 @@ public class LoginController {
 		return "member/pwreset";
 	}
 
+	
 	// 비번재설정
 	@RequestMapping(value = "/pwreset", method = RequestMethod.POST)
 	public String pwreset(MemberVO vo, Model model, RedirectAttributes rttr) {
@@ -200,6 +203,15 @@ public class LoginController {
 				memberService.idfind_pw(vo).getMem_id();
 			}
 			if (vo.getMem_id() != null && vo.getMem_pw() != null) {
+				//암호화 1
+				
+				String rawPw = ""; // 인코딩 전 비밀번호
+				String encodePw = ""; // 인코딩 후 비밀번호
+				
+				rawPw = vo.getMem_pw(); //비밀번호 데이터 얻음
+				encodePw = pwEncoder.encode(rawPw); //비밀번호 인코딩
+				vo.setMem_pw(encodePw); //인코딩된 비밀번호 vo객체에 다시 저장
+				
 				memberService.pwreset(vo);
 				rttr.addFlashAttribute("message","비밀번호가 변경되었습니다.");
 				return "redirect:/";
