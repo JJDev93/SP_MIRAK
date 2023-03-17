@@ -1,5 +1,6 @@
 package kr.co.mirak.pay;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,9 +64,11 @@ public class PayServiceImpl implements PayService {
 		return list;
 	}
 	
-	public List<ProductVO> payFromProduct(ProductVO productVO, String cart_cnt) {
+	public List<ProductVO> payFromProduct(ProductVO productVO, String cart_cnt, Date cart_start, String cart_day) {
 		
 		productVO.setCart_cnt(Integer.parseInt(cart_cnt));
+		productVO.setCart_start(cart_start);
+		productVO.setCart_day(cart_day);
 	    List<ProductVO> list = new ArrayList<ProductVO>();
 	    list.add(productVO);
 

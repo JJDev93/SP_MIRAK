@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mirak.pay.paymethod.KakaoMapper">
+
+	<insert id="insertOrder">
+		<![CDATA[
+		insert into order_table (mem_id, pro_code, pro_name, pro_price, pro_desc, pro_image, cart_cnt, totalPrice, group_id, cart_day, cart_start, pay_req, tid, pay_type, cart_code)
+		values(#{mem_id}, #{pro_code}, #{pro_name}, #{pro_price}, #{pro_desc}, #{pro_image}, #{cart_cnt}, #{totalPrice}, #{group_id}, #{cart_day}, #{cart_start}, #{pay_req}, #{tid}, #{pay_type}, #{cart_code})
+		
+		
+		]]>
+	</insert>
+
+
+	<select id="selectTid" resultType="kr.co.mirak.pay.paymethod.PayKakaoVO">
+		
+		<![CDATA[
+ 		select tid, group_id, mem_id from order_table where order_id= (select max(order_id) from order_table where mem_id=#{mem_id});
+		
+ 		]]>
+
+	</select>
+	
+	
+	<resultMap id="orderListMap" type="kr.co.mirak.pay.PayVO">
+		<id property="order_id" column="order_id" />
+		<result property="mem_id" column="mem_id" />
+		<result property="pro_code" column="pro_code" />
+		<result property="pro_name" column="pro_name" />
+		<result property="pro_price" column="pro_price" />
+		<result property="pro_desc" column="pro_desc" />
+		<result property="pro_image" column="pro_image" />
+		<result property="cart_cnt" column="cart_cnt" />
+		<result property="totalPrice" column="totalPrice" />
+		<result property="mem_name" column="mem_name" />
+		<result property="mem_phone" column="mem_phone" />
+		<result property="mem_gender" column="mem_gender" />
+		<result property="mem_age" column="mem_age" />
+		<result property="mem_add1" column="mem_add1" />
+		<result property="mem_add2" column="mem_add2" />
+		<result property="mem_zipcode" column="mem_zipcode" />
+		<result property="pay_req" column="pay_req" />
+		<result property="cart_day" column="cart_day" />
+		<result property="cart_start" column="cart_start" />
+		<result property="status" column="status" />
+		<result property="group_id" column="group_id"
+			jdbcType="VARCHAR"
+			typeHandler="org.apache.ibatis.type.StringTypeHandler" />
+	</resultMap>
+
+	<select id="selectOrderList" resultMap="orderListMap">
+		<![CDATA[
+		
+		SELECT m.MEM_ID, o.PRO_CODE, o.PRO_NAME, o.PRO_PRICE, o.PRO_DESC, o.PRO_IMAGE, o.CART_CNT, o.totalPrice,
+		m.MEM_NAME, m.MEM_PHONE, m.MEM_GENDER, m.MEM_AGE, m.MEM_ADD1, m.MEM_ADD2, m.MEM_ZIPCODE,
+		o.CART_DAY, o.CART_START, o.PAY_REQ,  o.STATUS, o.group_id
+		FROM order_table o
+		JOIN member m ON o.MEM_ID = m.MEM_ID
+		WHERE o.MEM_ID = #{mem_id} AND o.STATUS = '주문 완료'
+		AND o.group_id = (select group_id from order_table where order_id= 
+		(select max(order_id) from order_table where mem_id=  #{mem_id}));
+	
+ 		]]>
+	</select>
+
+	<update id="updateOrderList">
+		UPDATE cart	SET cart_show = 0 WHERE cart_code IN (
+		SELECT o.cart_code FROM order_table o
+		WHERE o.MEM_ID = #{mem_id} AND o.STATUS = '주문 완료'
+		AND o.group_id = (
+		SELECT group_id	FROM order_table WHERE order_id = (
+		SELECT MAX(order_id) FROM order_table WHERE mem_id = #{mem_id})) );
+
+		UPDATE order_table SET status = '결제 완료' WHERE MEM_ID = #{mem_id}
+		AND STATUS = '주문 완료' AND group_id = (
+		SELECT group_id FROM order_table
+		WHERE order_id = ( SELECT MAX(order_id) FROM order_table
+		WHERE mem_id = #{mem_id} ) );
+	</update>
+
+	<insert id="insertPayList" parameterType="java.util.List">
+		INSERT INTO pay (
+		mem_id, pro_code, pro_name, pro_price, pro_desc,
+		pro_image, cart_cnt, totalPrice, mem_name, mem_phone, mem_gender,
+		mem_age, mem_add1, mem_add2, mem_zipcode, pay_req, cart_day,
+		cart_start,
+		pay_date, status, group_id)
+		VALUES
+		<foreach collection="list" item="item" separator=",">
+			(
+			#{item.mem_id}, #{item.pro_code}, #{item.pro_name},
+			#{item.pro_price}, #{item.pro_desc}, #{item.pro_image},
+			#{item.cart_cnt}, #{item.totalPrice}, #{item.mem_name},
+			#{item.mem_phone}, #{item.mem_gender},
+			#{item.mem_age},
+			#{item.mem_add1}, #{item.mem_add2}, #{item.mem_zipcode},
+			#{item.pay_req}, #{item.cart_day}, #{item.cart_start},
+			now(),
+			#{item.status}, #{item.group_id})
+		</foreach>
+	</insert>
+	
+	<delete id="kakaoCancel">
+		
+		<![CDATA[
+ 		delete from order_table where group_id= 
+ 		(select group_id from order_table where order_id= (select max(order_id) from order_table where mem_id=#{mem_id}))
+		
+ 		]]>
+
+	</delete>
+
+
+
+</mapper>
