@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,8 @@ public class apiController {
 	private MemberService memberService;
 	@Autowired
 	private SnsLoginService snsLoginService;
+	@Autowired
+	private BCryptPasswordEncoder pwEncoder;
 
 	@RequestMapping(value="/naverSave", method=RequestMethod.POST)
 	@ResponseBody
@@ -59,13 +62,11 @@ public class apiController {
 		System.out.println("#########" + code);
 		String access_Token = memberService.getAccessToken(code);
 
-
 		// 위에서 만든 코드 아래에 코드 추가
 		HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
 		System.out.println("###access_Token#### : " + access_Token);
 		System.out.println("###nickname#### : " + userInfo.get("nickname"));
 		System.out.println("###email#### : " + userInfo.get("ema9il"));
-
 
 		return "member/join";
 	}
@@ -79,33 +80,37 @@ public class apiController {
 		//Google OAuth Access Token 요청을 위한 파라미터 세팅
 		System.out.println("=== 구글 Access Token 요청 중 ===");
 		System.out.println("authorize_code : " + code);
-		HashMap<String, String> token = snsLoginService.getGoogleAccessToken(code);
-		String access_token = token.get("access_token");
-		String refresh_token = token.get("refresh_token");
+		HashMap<String, Object> token = snsLoginService.getGoogleAccessToken(code);
+		String access_token = (String)token.get("access_token");
+		String refresh_token = (String)token.get("refresh_token");
 		System.out.println("###access_Token#### : " + access_token);
 		System.out.println("###refresh_token#### : " + refresh_token);
-		
-		System.out.println("=== 구글 googleUserInfo 가져오는 중 중 ===");
+
 		HashMap<String, Object> googleUserInfo = snsLoginService.getGoogleUserInfo(access_token);
+		System.out.println("=== 구글 googleUserInfo 가져오는 중 중 ===");
 		System.out.println("###id#### : " + googleUserInfo.get("id"));
 		System.out.println("###email#### : " + googleUserInfo.get("email"));
 		System.out.println("###name#### : " + googleUserInfo.get("name"));		
 		
+		String user_pw = (String)googleUserInfo.get("id");
 		String user_id = (String)googleUserInfo.get("email");
 		String user_name = (String)googleUserInfo.get("name");
 		MemberVO memberVO = new MemberVO();
 		memberVO.setMem_id(user_id);
 		memberVO.setMem_name(user_name);
-		memberVO.setMem_pw(access_token);
+		memberVO.setMem_pw(user_pw);
 		memberVO.setMem_reset(refresh_token);
 		
-		//회원가입
-		memberService.createUser(memberVO);
-		memberService.login(memberVO);
+		MemberVO lvo = memberService.login(memberVO);
+		if(lvo == null) {
+			//회원가입
+			memberService.createUser(memberVO);
+		}
 		session.setAttribute("mem_id", user_id);
-
+		memberService.login(memberVO);
+		
 		PrintWriter out = response.getWriter();
-		out.println("<script>window.close(); opener.parent.location="+"'/'"+";</script>");
+		out.println("<script>window.close(); opener.parent.location="+"'/join'"+";</script>");
 		out.flush();
 
 		return "member/join";
