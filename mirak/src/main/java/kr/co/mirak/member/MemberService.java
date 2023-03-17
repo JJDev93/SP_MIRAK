@@ -37,6 +37,7 @@ public interface MemberService {
 	
 	String getAccessToken(String code);
 	HashMap<String, Object> getUserInfo(String access_Token);
+	void kakaoLogout(String access_Token);
 
 	// 여기까지
 

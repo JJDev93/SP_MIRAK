@@ -31,7 +31,6 @@
 	</update>
 	<insert id="createUser" parameterType="member">
  		<![CDATA[
-<<<<<<< HEAD
 	 		INSERT INTO MEMBER (MEM_ID, MEM_PW , MEM_NAME, MEM_AGE, MEM_GENDER ,MEM_PHONE, MEM_ADD1, MEM_ADD2, MEM_ZIPCODE)
 	 		VALUES(#{mem_id}, #{mem_pw}, #{mem_name} , #{mem_age} , #{mem_gender} , #{mem_phone} , #{mem_add1} , #{mem_add2} , #{mem_zipcode})
  		]]>

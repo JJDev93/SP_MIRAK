@@ -2,6 +2,7 @@ package kr.co.mirak.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,6 +22,9 @@ import kr.co.mirak.member.login.google.SnsLoginService;
 
 @Controller
 public class apiController {
+	
+	
+	
    @Autowired
    private MemberService memberService;
    @Autowired
@@ -55,7 +59,7 @@ public class apiController {
 
    // 카카오 로그인
    @RequestMapping(value = "/kakaoLogin")
-   public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
+   public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
       System.out.println("#########" + code);
       String access_Token = memberService.getAccessToken(code);
 
@@ -63,8 +67,24 @@ public class apiController {
       HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
       System.out.println("###access_Token#### : " + access_Token);
       System.out.println("###nickname#### : " + userInfo.get("nickname"));
-      System.out.println("###email#### : " + userInfo.get("ema9il"));
+      System.out.println("###email#### : " + userInfo.get("email"));
 
+      String user_pw = (String)userInfo.get("id");
+      String user_id = (String)userInfo.get("email");
+      String user_name = (String)userInfo.get("nickname");
+      MemberVO memberVO = new MemberVO();
+      memberVO.setMem_id(user_id);
+      memberVO.setMem_name(user_name);
+      memberVO.setMem_pw(user_pw);
+      
+      MemberVO lvo = memberService.login(memberVO);
+      if(lvo == null) {
+         
+         memberService.createUser(memberVO);
+      }
+      session.setAttribute("mem_id", user_id);
+      memberService.login(memberVO);
+      
       return "member/join";
    }
 
@@ -111,5 +131,6 @@ public class apiController {
       //out.flush();
 
       return "member/join";
-   }   
+   } 
+   
 }

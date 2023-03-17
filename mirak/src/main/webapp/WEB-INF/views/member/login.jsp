@@ -80,7 +80,7 @@
 				<div class="row justify-content-center ftco-services">
 				
 					<!-- 구글 -->
-					<div class="col-sm-2 ftco-animate">
+					<div class="col-sm-2 text-center ftco-animate">
 						<a id="custom-login-btn" href="javascript:void(0);"
 							onclick="window.open('${googleUrl}','googleLogin','width=430,height=500,location=no,status=no,scrollbars=yes');">
 							<img alt="" src="resources/images/ico_member_google.png"></a>
@@ -95,14 +95,13 @@
 					</div>
 						
 					<!-- 카카오 -->
-					<div class="col-sm-2 ftco-animate">
+					<div class="col-sm-2 text-center ftco-animate">
 						<div class="media block-6 services mb-md-0 mb-4 kakao">
 							<a id="btn"
 								href="https://kauth.kakao.com/oauth/authorize?client_id=e481c91b1136f51f927a619fc062146d&redirect_uri=http://localhost:8080/kakaoLogin&response_type=code">
 								<img alt="" src="resources/images/ico_member_kakao.png">
 							</a>
 						</div>
-						<a href="http://developers.kakao.com/logout">Logout</a>
 					</div>
 					
 				</div>
@@ -118,7 +117,3 @@
 <!-- 카카오로그인 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
-<script type='text/javascript'>
-	// 초기화
-	Kakao.init('75d254d7afd4c5c53865df8e3f4d0cb8');
-</script>
