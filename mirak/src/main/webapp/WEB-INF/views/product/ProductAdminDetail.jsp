@@ -65,7 +65,20 @@
          </div>
       </form>      
       <a href="/admin/products" class="btn btn-secondary">목록</a>
-      <a href="/admin/productDelete?pro_code=${product.pro_code}" class="btn btn-danger">삭제</a>
+      <input type="button" class="btn btn-danger" value="삭제" onclick="deleteBtn()">
    </div>
 </div>
-<jsp:include page="/common/admin_ft.jsp"></jsp:include>clude>
+<jsp:include page="/common/admin_ft.jsp"></jsp:include>
+<script>
+
+function deleteBtn(){
+	
+	if(confirm('삭제 하시겠습니까?')){	
+	location.replace("/admin/productDelete?pro_code=${product.pro_code}");
+		}
+	else{
+		return false;
+		}
+	
+	}
+</script>

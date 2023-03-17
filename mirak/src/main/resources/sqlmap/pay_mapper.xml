@@ -2,40 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
- <mapper namespace="kr.co.mirak.pay.PayMapper">
- 	
- 
- 	<select id="list" resultType="kr.co.mirak.pay.PayVO">
- 		select * from test
- 	</select>
- 	
- 	
- 	
-  	
-  	<insert id="insert" parameterType="kr.co.mirak.pay.PayVO">
- 		insert into test (name)
- 		values (#{name})
- 	</insert>
- 	
- 	<!-- 카트 목록 -->
-	<select id="cartCheckList" resultType="kr.co.mirak.cart.CartVO">
-	
-		select * from cart where mem_id=#{myid} and cart_check=1
-	
+<mapper namespace="kr.co.mirak.pay.PayMapper">
+
+
+	<select id="list" resultType="kr.co.mirak.pay.PayVO">
+		select * from test
 	</select>
- 	
- 	<!-- 
- 	<select id="info" resultType="kr.co.mirak.pay.PayVO">
- 		select * from emp2 where empno=#{empno}
-  	</select>
- 	
- 	<update id="update" parameterType="org.sp.mybatis.Emp">
- 		update emp2 set deptno=#{deptno}, sal=#{sal}
- 		where empno=#{empno}
- 	</update>
- 	
- 	<delete id="delete">
- 		delete from emp2 where empno=#{empno}
- 	</delete>
- 	 -->
- </mapper>
+
+	<select id="getAdminPayList" resultType="kr.co.mirak.pay.PayVO">
+		select group_id,
+		pro_name, count(group_id) as cart_cnt, sum(totalPrice) as totalPrice
+		from pay group by group_id order by pay_code desc;
+	</select>
+	
+	<select id="getClientPayList" resultType="kr.co.mirak.pay.PayVO">
+		select group_id, pro_image, pay_date, status,
+		pro_name, count(group_id) as cart_cnt, sum(totalPrice) as totalPrice
+		from pay where mem_id=#{mem_id} group by group_id order by pay_code desc;
+	</select>
+
+	<select id="getPayListDetail" resultType="kr.co.mirak.pay.PayVO">
+		select pay_code, group_id, pro_name, cart_cnt, totalPrice
+ 		from pay where group_id = #{group_id};
+	</select>
+
+	<insert id="insert" parameterType="kr.co.mirak.pay.PayVO">
+		insert into test (name)
+		values
+		(#{name})
+	</insert>
+
+	<!-- 카트 목록 -->
+	<select id="cartCheckList" resultType="kr.co.mirak.cart.CartVO">
+
+		select * from cart where
+		mem_id=#{mem_id} and cart_check=1 and cart_show = 1
+
+	</select>
+
+	<!-- <select id="info" resultType="kr.co.mirak.pay.PayVO"> select * from 
+		emp2 where empno=#{empno} </select> <update id="update" parameterType="org.sp.mybatis.Emp"> 
+		update emp2 set deptno=#{deptno}, sal=#{sal} where empno=#{empno} </update> 
+		<delete id="delete"> delete from emp2 where empno=#{empno} </delete> -->
+</mapper>

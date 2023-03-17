@@ -53,8 +53,13 @@
 							<td><fmt:formatDate pattern="yy-MM-dd" value="${c.cart_start}"/> </td>
 							<td>${c.cart_day }</td>
 							<td>${c.cart_cnt }</td>
+<<<<<<< HEAD
 							<td>${c.cart_totprice }</td>
 							<td>${c.cart_check }</td>
+=======
+							<td>${c.totalPrice }</td>
+							<td>${c.cart_show }</td>
+>>>>>>> refs/remotes/origin/Dev
 						</tr>
 						</c:forEach>
 					</tbody>

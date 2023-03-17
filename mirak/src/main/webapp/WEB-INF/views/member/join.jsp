@@ -4,6 +4,7 @@
 
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
+
 <div class="hero-wrap hero-bread"
 	style="background-image: url('${path}/resources/images/bg_1.jpg');">
 	<div class="container">
@@ -34,14 +35,11 @@
 										<label for="id">이메일(ID)</label>
 										<div class="row mb-4">
 											<div class="col-sm-6">
-												<input type="email" name="mem_id" id="id"
-													class="form-control emaill mail_input" placeholder="이메일(ID)"
-													required="required">
+												<input type="email" path="memMail" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required="required">
 											</div>
 
 											<div class="col-sm-3">
-												<button type="button" class="form-control mb-3" value="N"
-													id="idCheck" onclick="fn_idCheck();">중복확인</button>
+												<button type="button" class="form-control mb-3" value="N" id="idCheck" onclick="fn_idCheck();">중복확인</button>
 											</div>
 
 											<div class="col-sm-6 mail_check_wrap">
@@ -70,7 +68,7 @@
 									<div class="form-group">
 										<label for="pw">비밀번호</label> <input type="password"
 											name="mem_pw" class="form-control" id="pw"
-											onchange="check_pw()" placeholder="비밀번호" required="required">
+											onchange="check_pw()" placeholder="비밀번호" required="required" value="${member.mem_pw }">
 									</div>
 
 									<div class="form-group">
@@ -88,7 +86,7 @@
 							<div class="form-group">
 								<label for="firstname">이름</label> <input type="text"
 									name="mem_name" class="form-control" placeholder="이름을 입력해주세요"
-									required="required">
+									required="required" value="${member.mem_name }">
 							</div>
 						</div>
 						<div class="w-100"></div>
@@ -96,7 +94,7 @@
 							<div class="form-group">
 								<label for="age">나이</label> <input type="text" name="mem_age"
 									id="age" class="form-control" placeholder="나이를 입력해주세요"
-									required="required">
+									required="required" value="${member.mem_age }">
 							</div>
 						</div>
 
@@ -105,9 +103,9 @@
 							<div class="form-group">
 								<label for="gender">성별</label>
 								<div>
-									<input type="radio" name="gender" value="man" name="mem_gender"
-										checked>남 &nbsp;&nbsp;&nbsp; <input type="radio"
-										name="gender" value="woman" name="mem_gender">여
+									<input type="radio" name="mem_gender" value="1" checked>남
+									&nbsp;&nbsp;&nbsp; <input
+										type="radio" name="mem_gender" value="2">여
 								</div>
 							</div>
 						</div>
@@ -116,7 +114,7 @@
 							<div class="form-group">
 								<label for="phone">Phone</label> <input type="text"
 									name="mem_phone" class="form-control"
-									placeholder=" ' - ' 빼고 입력해주세요 " required="required">
+									placeholder=" ' - ' 빼고 입력해주세요 " required="required" value="${member.mem_phone }">
 								<!--  <input type="tel" name="mem_phone" class="form-control" maxlength="11" pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                       placeholder="' - ' 빼고 숫자만 입력해 주세요">  -->
 							</div>
@@ -155,7 +153,7 @@
 						</div>
 
 						<div class="col-md-6">
-							<a href="index.jsp" class="btn btn-secondary py-3 px-5 w-100">가입취소</a>
+							<a href="/" class="btn btn-secondary py-3 px-5 w-100">가입취소</a>
 						</div>
 					</div>
 				</form>

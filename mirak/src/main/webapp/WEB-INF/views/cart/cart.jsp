@@ -152,11 +152,10 @@ session = request.getSession();
 					</div>
 					<div class="modal-body">
 					<c:forEach var="c" items="${cartList }">
-						<input type="hidden" name="cart_code" value="${c.cart_code }">
 						<img src="${path}/resources/images/product/${c.pro_image}"
 						style="width: 100px; height: 50px;" />
-						${c.pro_name }<br><br>
-						${c.pro_price }원<br><br>
+						${c.pro_name }<br>
+						${c.pro_price }원<br>
 						<br>배송 시작일 선택<br>
 						${c.cart_start }<br>
 						<input type="date" name="cart_start" class="form-control input-number" style="width:240px;">

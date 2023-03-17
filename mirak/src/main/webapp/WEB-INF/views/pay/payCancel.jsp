@@ -5,8 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	window.onload = function(){
+		history.back();
+    }
+</script>
 </head>
 <body>
-<h2>결제 취소</h2>
 </body>
 </html>

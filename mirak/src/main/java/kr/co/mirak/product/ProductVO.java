@@ -1,5 +1,7 @@
 package kr.co.mirak.product;
 
+import java.sql.Date;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class ProductVO {
@@ -13,7 +15,9 @@ public class ProductVO {
 
 	private int cart_cnt;
 	
-	private int cart_start, cart_day;
+	private Date cart_start;
+	
+	private String cart_day;
 
 	public String getPro_code() {
 		return pro_code;
@@ -29,22 +33,6 @@ public class ProductVO {
 
 	public void setPro_name(String pro_name) {
 		this.pro_name = pro_name;
-	}
-
-	public int getCart_start() {
-		return cart_start;
-	}
-
-	public void setCart_start(int cart_start) {
-		this.cart_start = cart_start;
-	}
-
-	public int getCart_day() {
-		return cart_day;
-	}
-
-	public void setCart_day(int cart_day) {
-		this.cart_day = cart_day;
 	}
 
 	public String getPro_desc() {
@@ -95,12 +83,30 @@ public class ProductVO {
 		this.cart_cnt = cart_cnt;
 	}
 
+	public Date getCart_start() {
+		return cart_start;
+	}
+
+	public void setCart_start(Date cart_start) {
+		this.cart_start = cart_start;
+	}
+
+	public String getCart_day() {
+		return cart_day;
+	}
+
+	public void setCart_day(String cart_day) {
+		this.cart_day = cart_day;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductVO [pro_code=" + pro_code + ", pro_name=" + pro_name + ", pro_desc=" + pro_desc + ", pro_image="
 				+ pro_image + ", pro_price=" + pro_price + ", uploadFile=" + uploadFile + ", pro_cnt=" + pro_cnt
 				+ ", cart_cnt=" + cart_cnt + ", cart_start=" + cart_start + ", cart_day=" + cart_day + "]";
 	}
+
+	
 
 	
 }

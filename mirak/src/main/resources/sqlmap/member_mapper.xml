@@ -3,25 +3,56 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="kr.co.mirak.member.MemberMapper">
+ 
   	<select id="login" parameterType="member" resultType="member">
   		<![CDATA[
- 			SELECT MEM_ID FROM MEMBER WHERE MEM_ID=#{mem_id} AND MEM_PW=#{mem_pw}
+ 			 SELECT MEM_ID, MEM_PW , MEM_NAME, MEM_AGE, MEM_GENDER ,MEM_PHONE, MEM_ADD1, MEM_ADD2, MEM_ZIPCODE FROM MEMBER 
+ 			 	WHERE MEM_ID=#{mem_id}  
  		]]>	
 	</select>
+	<select id="idfind" parameterType="member" resultType="member">
+  		<![CDATA[
+ 			 SELECT MEM_ID FROM MEMBER WHERE MEM_NAME=#{mem_name} AND MEM_PHONE=#{mem_phone} 
+ 		]]>	
+	</select>
+	
+	<select id="idfind_pw" parameterType="member" resultType="member">
+  		<![CDATA[
+ 			 SELECT MEM_ID FROM MEMBER WHERE MEM_NAME=#{mem_name} AND MEM_PHONE=#{mem_phone} AND MEM_ID=#{mem_id} 
+ 		]]>	
+	</select>
+	<update id="pwreset" parameterType="kr.co.mirak.member.MemberVO">
+		<![CDATA[
+			UPDATE MEMBER SET
+				MEM_PW = #{mem_pw}
+			WHERE MEM_ID = #{mem_id}
+		]]>
+	</update>
  	<insert id="createUser" parameterType="member">
  		<![CDATA[
 	 		INSERT INTO MEMBER (MEM_ID, MEM_PW , MEM_NAME, MEM_AGE, MEM_GENDER ,MEM_PHONE, MEM_ADD1, MEM_ADD2, MEM_ZIPCODE)
 	 		VALUES(#{mem_id}, #{mem_pw}, #{mem_name} , #{mem_age} , #{mem_gender} , #{mem_phone} , #{mem_add1} , #{mem_add2} , #{mem_zipcode})
  		]]>	
  	</insert>
+
+	<insert id="naverinsert" parameterType="member">
+ 		<![CDATA[
+	 		INSERT INTO MEMBER (MEM_ID, MEM_PW , MEM_NAME, MEM_GENDER)
+	 		VALUES(#{mem_id}, #{mem_pw}, #{mem_name} , #{mem_gender})
+ 		]]>
+	</insert>
 	
 	<update id="memupdate" parameterType="kr.co.mirak.member.MemberVO">
 		<![CDATA[
 			UPDATE MEMBER SET
+				MEM_PW = #{mem_pw},
 				MEM_NAME = #{mem_name},
 				MEM_AGE = #{mem_age},
 				MEM_GENDER = #{mem_gender},
-				MEM_PHONE = #{mem_phone}
+				MEM_PHONE = #{mem_phone},
+				MEM_ADD1 =#{mem_add1},
+				MEM_ADD2 =#{mem_add2},
+				MEM_ZIPCODE =#{mem_zipcode}
 			WHERE MEM_ID = #{mem_id}
 		]]>
 	</update>
@@ -37,7 +68,13 @@
 	
  	<select id="getMemberInfo" parameterType="String" resultType="member" >
 		<![CDATA[
-			SELECT MEM_ID, MEM_NAME, MEM_AGE, MEM_GENDER, MEM_PHONE, MEM_REGDATE FROM MEMBER
+			SELECT MEM_ID, 
+				MEM_NAME, MEM_AGE, 
+				MEM_GENDER, MEM_PHONE, 
+				MEM_REGDATE, 
+				MEM_ADD1,
+				MEM_ADD2,
+				MEM_ZIPCODE FROM MEMBER
 			WHERE MEM_ID=#{myid}
 		]]>	
 	</select>
@@ -58,18 +95,6 @@
 			WHERE MEM_ID = #{mem_id} and MEM_PW = #{mem_pw}
 		]]>
 	</delete>
-	
-	
-	
-	<!-- 아이디, 비번 확인 -->
-	<select id="memberCheck" parameterType="kr.co.mirak.member.MemberVO" resultType="int">
-		SELECT count(*) FROM MEMBER 
-		WHERE mem_id= #{mem_id} 
-		and mem_pw=#{mem_pw}
-	</select>
-
-	
-	
 	
 	
 	<!-- 김원중이 건드린 부분 -->
@@ -94,7 +119,7 @@
 	<select id="getMemberDetail"
 		resultType="member">
 		<![CDATA[
-			select * from member where mem_name = #{mem_name}		
+			select * from member where mem_id = #{mem_id}		
 		]]>
 	</select>
 
