@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.mirak.member.MemberService;
 import kr.co.mirak.member.MemberVO;
@@ -28,7 +29,7 @@ public class apiController {
 
 	@RequestMapping(value="/naverSave", method=RequestMethod.POST)
 	@ResponseBody
-	public String naverSave(MemberVO vo, HttpSession session) {
+	public String naverSave(MemberVO vo, HttpSession session, RedirectAttributes rttr) {
 		System.out.println(vo);
 		String result = null;
 		try {
@@ -37,12 +38,12 @@ public class apiController {
 				if (idCheck == 0){
 					memberService.createUser(vo);
 					session.setAttribute("mem_id", vo.getMem_id());
-					session.setAttribute("message","회원가입 성공하였습니다.");
+					rttr.addFlashAttribute("message", "회원가입 성공하였습니다.");
 					System.out.println("naverapi 회원가입 성공");
 				}else if (idCheck == 1) {
 					String mem_id = memberService.login(vo).getMem_id();
 					session.setAttribute("mem_id", mem_id);
-					session.setAttribute("message","로그인에 성공하였습니다.");
+					rttr.addFlashAttribute("message", "로그인에 성공하였습니다.");
 					System.out.println("naverapi 로그인 완료!");
 					result="loginsuccess";
 				}
