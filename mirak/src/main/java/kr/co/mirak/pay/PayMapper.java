@@ -11,6 +11,8 @@ public interface PayMapper {
 	
 	List<PayVO> getPayListDetail(String group_id);
 
+	List<PayVO> getProductInfo(String group_id);
+	
 	PayVO info(int id);
 
 	int insert(PayVO vo);

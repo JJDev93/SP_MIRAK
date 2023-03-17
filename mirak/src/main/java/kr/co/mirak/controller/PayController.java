@@ -95,12 +95,27 @@ public class PayController {
 	}
 
 	@RequestMapping(value = "/payInfo", method = RequestMethod.GET)
-	public String payApproval(Model model, HttpSession session) {
+	public String payInfo(Model model, HttpSession session) {
 
 		model.addAttribute("payVOList", payService.getClientPayList(session));
 
 		return "pay/payInfo";
 	}
+	
+	@RequestMapping(value = "/payDetailInfo/{group_id}", method = RequestMethod.GET)
+	public String payDetailInfo(Model model, HttpSession session, @PathVariable String group_id) {
+		System.out.println("group_id : " + group_id);
+		List<PayVO> list = payService.getProductInfo(group_id);
+		
+		for(int i=0; i<list.size(); i++) {
+			System.out.println(list.get(i));
+		}
+		
+		model.addAttribute("payVOList", payService.getProductInfo(group_id));
+
+		return "pay/payDetailInfo";
+	}
+	
 
 	@RequestMapping(value = "/payCancel", method = RequestMethod.GET)
 	public String payCancel(Model model) {
@@ -125,7 +140,6 @@ public class PayController {
 
 		// 결제 DB 추가
 
-		System.out.println(payStringVO);
 		List<PayVO> list = payService.adaptPayVO(payStringVO, session);
 
 		// 실제 결제

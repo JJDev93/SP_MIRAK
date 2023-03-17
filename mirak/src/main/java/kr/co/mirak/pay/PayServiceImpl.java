@@ -49,6 +49,16 @@ public class PayServiceImpl implements PayService {
 		System.out.println(list.size());
 		return list;
 	}
+	
+	public List<PayVO> getProductInfo(String group_id) {
+
+		PayMapper payMapper = sqlSessionTemplate.getMapper(PayMapper.class);
+		List<PayVO> list = payMapper.getProductInfo(group_id);
+		for(int i=0; i<list.size(); i++) {
+			System.out.println(list.indexOf(i));
+		}
+		return list;
+	}
 
 	public PayVO info(int id) {
 		// TODO Auto-generated method stub
