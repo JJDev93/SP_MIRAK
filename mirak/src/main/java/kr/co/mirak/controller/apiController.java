@@ -1,14 +1,12 @@
 package kr.co.mirak.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +25,6 @@ public class apiController {
 	private MemberService memberService;
 	@Autowired
 	private SnsLoginService snsLoginService;
-	@Autowired
-	private BCryptPasswordEncoder pwEncoder;
 
 	@RequestMapping(value="/naverSave", method=RequestMethod.POST)
 	@ResponseBody
@@ -75,7 +71,7 @@ public class apiController {
 	/**
 	 * 구글 로그인~!
 	 * Authentication Code를 전달 받는 엔드포인트
-	 **/
+	 **/	
 	@RequestMapping(value="/login/google/auth", method=RequestMethod.GET)
 	public String googleAuth(Model model, @RequestParam(value = "code", required = false) String code, HttpServletResponse response, HttpSession session) throws IOException {
 		//Google OAuth Access Token 요청을 위한 파라미터 세팅
@@ -110,9 +106,9 @@ public class apiController {
 		session.setAttribute("mem_id", user_id);
 		memberService.login(memberVO);
 		
-		PrintWriter out = response.getWriter();
-		out.println("<script>window.close(); opener.parent.location="+"'/join'"+";</script>");
-		out.flush();
+		//PrintWriter out = response.getWriter();
+		//out.println("<script>window.close(); opener.parent.location="+"'/join'"+";</script>");
+		//out.flush();
 
 		return "member/join";
 	}	

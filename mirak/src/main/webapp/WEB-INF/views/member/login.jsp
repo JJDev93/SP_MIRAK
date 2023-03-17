@@ -81,9 +81,10 @@
 				
 					<!-- 구글 -->
 					<div class="col-sm-2 ftco-animate">
-						<a id="custom-login-btn" href="javascript:void(0);"
+						<a id="custom-login-btn" href="${googleUrl}"><img alt="" src="resources/images/ico_member_google.png"></a>
+						<%-- <a id="custom-login-btn" href="javascript:void(0);"
 							onclick="window.open('${googleUrl}','googleLogin','width=430,height=500,location=no,status=no,scrollbars=yes');">
-							<img alt="" src="resources/images/ico_member_google.png"></a>
+							<img alt="" src="resources/images/ico_member_google.png"></a> --%>
 					</div>
 					
 					
