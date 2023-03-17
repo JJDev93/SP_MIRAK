@@ -7,6 +7,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -61,20 +62,25 @@ public class JoinController {
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String joincuccess(MemberVO vo, String id, HttpSession session) throws Exception {
 
+		try {
+			//암호화 1
+			
+			String rawPw = ""; // 인코딩 전 비밀번호
+			String encodePw = ""; // 인코딩 후 비밀번호
+			
+			rawPw = vo.getMem_pw(); //비밀번호 데이터 얻음
+			encodePw = pwEncoder.encode(rawPw); //비밀번호 인코딩
+			vo.setMem_pw(encodePw); //인코딩된 비밀번호 vo객체에 다시 저장
+			
+			//회원 가입 쿼리 실행
+			memberService.createUser(vo);
+			session.setAttribute("message2", "회원가입 성공하였습니다!");
+			System.out.println("가입성공");
+		}catch(DuplicateKeyException e){
+			session.setAttribute("message", "중복된 아이디 입니다.");
+			return "member/join";
+		}
 		
-		//암호화 1
-	
-		String rawPw = ""; // 인코딩 전 비밀번호
-		String encodePw = ""; // 인코딩 후 비밀번호
-		
-		rawPw = vo.getMem_pw(); //비밀번호 데이터 얻음
-		encodePw = pwEncoder.encode(rawPw); //비밀번호 인코딩
-		vo.setMem_pw(encodePw); //인코딩된 비밀번호 vo객체에 다시 저장
-		
-		//회원 가입 쿼리 실행
-		memberService.createUser(vo);
-		session.setAttribute("message2", "회원가입 성공하였습니다!");
-		System.out.println("가입성공");
 		
 
 		

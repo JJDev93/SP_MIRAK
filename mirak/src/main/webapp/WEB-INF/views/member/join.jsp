@@ -24,7 +24,7 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-xl-7 ftco-animate">
-				<form action="join" method="post" class="billing-form">
+				<form action="join" method="post" onsubmit="return Duplicate()" class="billing-form">
 					<h3 class="mb-4 billing-heading">회원가입</h3>
 					<div class="row align-items-end">
 						<div class="container">
@@ -39,7 +39,8 @@
 											</div>
 
 											<div class="col-sm-3">
-												<button type="button" class="form-control mb-3" value="N" id="idCheck" onclick="fn_idCheck();">중복확인</button>
+												<button type="button" class="form-control mb-3" id="idCheck" value="N" onclick="fn_idCheck();">중복확인</button>
+												<span id="idCheckmsg"></span>
 											</div>
 
 											<div class="col-sm-6 mail_check_wrap">
@@ -148,8 +149,7 @@
 
 						<div class="w-100"></div>
 						<div class="col-md-6">
-							<input type="submit" value="회원가입" id="joinSubmit"
-								class="btn btn-primary py-3 px-5 w-100">
+							<input type="submit" value="회원가입" class="btn btn-primary py-3 px-5 w-100">
 						</div>
 
 						<div class="col-md-6">
@@ -163,6 +163,26 @@
 	</div>
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
+<script>
+$(document).ready(function() {
+	console.log($("button[id='idCheck']").val()=="N");
+	console.log("message : "+${message});
+	console.log("mem_id : "+${mem_id});
+	if("${message}" !=""){
+		alert("${message}");
+		 <%session.setAttribute("message","");%>
+	}
+})
+
+function Duplicate(){
+	if ($("button[id='idCheck']").val()=="N") {
+		  alert('아이디 중복 확인을 해주세요.');
+		  $("input[name='checked_id']").eq(0).focus();
+		  return false;
+		}
+	return true;
+}
+</script>
 
 
 
