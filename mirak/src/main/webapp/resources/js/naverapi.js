@@ -1,9 +1,9 @@
+
 	var naverLogin = new naver.LoginWithNaverId(
 		{
 			clientId: "zkOzac5hPC_Qw6v8eOzQ",
 			callbackUrl: "http://localhost:8080/",
 			isPopup: false,
-			loginButton: {color: "green", type: 1, height: 60},
  			callbackHandle: true
 		}
 	);

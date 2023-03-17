@@ -74,7 +74,6 @@
 								재설정</a>
 						</div>
 					</div>
-					<!-- 네이버로그인 -->
 				</form>
 			</div>
 		</div>
@@ -82,44 +81,33 @@
 		<div class="hr-sect">or</div>
 
 		<div class="row justify-content-center mt-5">
+
 			<div class="col-md-6">
 				<div class="row justify-content-center ftco-services">
-					<div class="col-sm-4 text-center ftco-animate">
-						<a id="custom-login-btn" href="javascript:void(0);" onclick="window.open('${googleUrl}','googleLogin','width=430,height=500,location=no,status=no,scrollbars=yes');"">
-							구글로그인
-						</a>
+				
+					<!-- 구글 -->
+					<div class="col-sm-2 text-center ftco-animate">
+						<a id="custom-login-btn" href="javascript:void(0);"
+							onclick="window.open('${googleUrl}','googleLogin','width=430,height=500,location=no,status=no,scrollbars=yes');">
+							<img alt="" src="resources/images/ico_member_google.png"></a>
 					</div>
-					<div class="col-sm-4 text-center ftco-animate">
-						<div class="media block-6 services mb-md-0 mb-4">
-							<a href=""> <img alt="" src="" style="height: 200px;">
-								<span class="flaticon-shipped"></span>
-							</a>
-							<div class="media-body">
-								<h3 class="heading"></h3>
-							</div>
-						</div>
+					<!-- 네이버 -->
+					<div class="col-sm-2 text-center ftco-animate" id="naverIdLogin"
+						onclick="naverLoginclick()">
+						<img alt="" src="resources/images/ico_member_naver.png">
 					</div>
-					<div class="col-sm-4 text-center ftco-animate" id="naverIdLogin"
-						onclick="naverLoginclick()"></div>
-
-
-
 					<!-- 카카오 -->
-					<div class="col-sm-4 text-center ftco-animate">
+					<div class="col-sm-2 text-center ftco-animate">
 						<div class="media block-6 services mb-md-0 mb-4 kakao">
 							<a id="btn"
 								href="https://kauth.kakao.com/oauth/authorize?client_id=e481c91b1136f51f927a619fc062146d&redirect_uri=http://localhost:8080/kakaoLogin&response_type=code">
-								<img alt="" src="resources/images/kakao_login_large.png"
-								style="height: 60px;">
-							</a> <a href="http://developers.kakao.com/logout">Logout</a>
+								<img alt="" src="resources/images/ico_member_kakao.png">
+							</a>
 						</div>
+						<a href="http://developers.kakao.com/logout">Logout</a>
 					</div>
 				</div>
-
-
 			</div>
-	
-
 		</div>
 	</div>
 
