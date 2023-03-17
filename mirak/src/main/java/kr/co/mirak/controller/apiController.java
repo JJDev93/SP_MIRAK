@@ -71,7 +71,7 @@ public class apiController {
 	/**
 	 * 구글 로그인~!
 	 * Authentication Code를 전달 받는 엔드포인트
-	 **/	
+	 **/
 	@RequestMapping(value="/login/google/auth", method=RequestMethod.GET)
 	public String googleAuth(Model model, @RequestParam(value = "code", required = false) String code, HttpServletResponse response, HttpSession session) throws IOException {
 		//Google OAuth Access Token 요청을 위한 파라미터 세팅
@@ -87,8 +87,8 @@ public class apiController {
 		System.out.println("=== 구글 googleUserInfo 가져오는 중 중 ===");
 		System.out.println("###id#### : " + googleUserInfo.get("id"));
 		System.out.println("###email#### : " + googleUserInfo.get("email"));
-		System.out.println("###name#### : " + googleUserInfo.get("name"));		
-		
+		System.out.println("###name#### : " + googleUserInfo.get("name"));      
+
 		String user_pw = (String)googleUserInfo.get("id");
 		String user_id = (String)googleUserInfo.get("email");
 		String user_name = (String)googleUserInfo.get("name");
@@ -97,7 +97,7 @@ public class apiController {
 		memberVO.setMem_name(user_name);
 		memberVO.setMem_pw(user_pw);
 		memberVO.setMem_reset(refresh_token);
-		
+
 		MemberVO lvo = memberService.login(memberVO);
 		if(lvo == null) {
 			//회원가입
@@ -105,11 +105,12 @@ public class apiController {
 		}
 		session.setAttribute("mem_id", user_id);
 		memberService.login(memberVO);
-		
+
 		//PrintWriter out = response.getWriter();
 		//out.println("<script>window.close(); opener.parent.location="+"'/join'"+";</script>");
 		//out.flush();
 
 		return "member/join";
-	}	
+	}   
+
 }

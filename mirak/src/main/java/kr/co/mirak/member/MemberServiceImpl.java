@@ -237,21 +237,8 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
+
 	// 여기까지
 
-	// ADMIN 리스트
-//	public List<MemberVO> getMemberList(Optional<Integer> pageStart) {
-//		int page;
-//		if (pageStart.isPresent()) {
-//			page = pageStart.get();
-//	    }else {
-//	    	page = 0;
-//	    }
-//		page=page*10;
-//		MemberMapper mamberDAO = sqlSessionTemplate.getMapper(MemberMapper.class);
-//		List<MemberVO> memberList = mamberDAO.getMemberList(page);
-//		System.out.println(page+"페이지로 이동");
-//		return memberList;
-//	}
 
 }

@@ -1,5 +1,6 @@
 package kr.co.mirak.member;
 
+import java.util.HashMap;
 import java.util.List;
 
 import kr.co.mirak.product.Criteria;
@@ -18,6 +19,10 @@ public interface MemberMapper {
 	MemberVO getMemberInfo(String memId);
 	int idCheck(String id);
 	
+	
+	//카카오 로그인
+	//MemberVO findkakao(HashMap<String, Object> userInfo);
+	//void kakaoinsert(HashMap<String, Object> userInfo);
 
 	// 김원중이 건드린 부분
 	
@@ -28,6 +33,10 @@ public interface MemberMapper {
     public List<MemberVO> getListPaging(CriteriaM cri);
     
     MemberVO getMemberDetail(MemberVO mvo);
+	
+    
+    
+
     
     
     
