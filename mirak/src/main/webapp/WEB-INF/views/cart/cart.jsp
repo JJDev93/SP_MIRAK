@@ -25,8 +25,6 @@ session = request.getSession();
 %>
 
 
-<form action="/pay" method="post">
-
  
 <section class="ftco-section ftco-cart">
 	<form action="/pay" method="post">
@@ -57,7 +55,7 @@ session = request.getSession();
 						<tbody>
 							<c:forEach var="c" items="${cartList }">
 								<tr class="text-center">
-									<td class="cart_info">${c.cart_check }<input
+									<td class="cart_info"><input
 										type="checkbox" class="cart_checkbox" checked="checked">
 										<input type="hidden" class="price_input"
 										value="${c.pro_price }"> <input type="hidden"
@@ -77,7 +75,7 @@ session = request.getSession();
 									</td>
 									<td>${c.pro_price }</td>
 									<td>
-									<fmt:formatDate value="${c.cart_start }" pattern="yy-MM-dd" />
+									<fmt:formatDate value="${c.cart_start }" pattern="yyyy-MM-dd" />
 									</td>
 									<td>${c.cart_day }</td>
 									<td>${c.cart_cnt }									
@@ -90,15 +88,16 @@ session = request.getSession();
 										<a class="quantity_update_btn" data-cartId="${c.cart_code}">변경</a>
 										 -->
 									</td>
-									<td>${c.totalPrice }</td>
+									<td>${c.cart_totprice }</td>
 									
 									<td>
-									<button type="button" class="btn btn-primary py-3 px-5"
-								data-toggle="modal" data-target="#exampleModal">변경</button>
+									<input type="button" value="변경" class="btn btn-primary py-3 px-5"
+								data-toggle="modal" data-target="#exampleModal">
+									<!-- <a href="/cart/cartUpdate/${c.cart_code }" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary py-3 px-5">변경</a> -->
 									</td>
 									<td>
-									<input type="submit" value="삭제" formaction="/cart/{cart_code}"
-									class="btn btn-primary py-3 px-5" onclick="javascript:del()" />
+<!-- 									<button type="button" class="btn btn-primary py-3 px-5" onclick="javascript:del()"> -->
+									<a href="/cart/cartDelete/${c.cart_code }" onclick="javascript:del()" class="btn btn-primary py-3 px-5">삭제</a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -138,7 +137,8 @@ session = request.getSession();
 	</div>
 
 	<!-- Modal -->
-	<form action="/cart/{cart_day}/{cart_cnt}">
+	
+	<form action="/cart/cartUpdate/${cart_code }">
 		<div class="modal fade" id="exampleModal" tabindex="9999"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
@@ -151,14 +151,16 @@ session = request.getSession();
 						</button>
 					</div>
 					<div class="modal-body">
-					<c:forEach var="c" items="${cartList }">	
+					<c:forEach var="c" items="${cartList }">
 						<img src="${path}/resources/images/product/${c.pro_image}"
 						style="width: 100px; height: 50px;" />
 						${c.pro_name }<br>
 						${c.pro_price }원<br>
 						<br>배송 시작일 선택<br>
+						${c.cart_start }<br>
 						<input type="date" name="cart_start" class="form-control input-number" style="width:240px;">
 						<br>배송 요일 선택 <br>
+						${c.cart_day }<br>
 						<input type="checkbox" name="cart_day" value="월">월
 						<input type="checkbox" name="cart_day" value="화">화
 						<input type="checkbox" name="cart_day" value="수">수
@@ -168,7 +170,7 @@ session = request.getSession();
 						<input type="checkbox" name="cart_day" value="일">일
 						<br><br>
 						배송 횟수 선택 <br>
-						<input type="number" value="${c.cart_cnt}" class="quantity_input">
+						<input type="number" name="cart_cnt" value="${c.cart_cnt}" class="quantity_input">
 						<br><br>
 					</c:forEach>
 					</div>
@@ -189,6 +191,8 @@ session = request.getSession();
 
 <script>
 
+
+
 $(function() {
 	  $('input[name="daterange"]').daterangepicker({
 	    opens: 'left'
@@ -202,31 +206,10 @@ function del(){
 }
 
 
-/*
-function fn_memberCheck() {
-    $.ajax({
-        url : "/cart/{cart_day}/{cart_cnt}",
-        type : "POST",
-        dataType :"JSON",
-        data : {"cart_code" : $("#cart_code").val(), 
-        	    "cart_day" : $("#cart_day").val(),
-        	    "cart_cnt" : $("#cart_cnt").val()},
-        success : function (data) {
-        	console.log(cart_cnt.value);
-            if(cart_cnt.value == ""){
-            	alert("수량 선택해주세요");
-            }
-            
-            if(data == 0) {
-                alert("?");
-            } else if(data == 1) {
-            	$("#cartUpdate").attr("value", "Y");
-            	alert("옵션 변경 완료");
-            } 	
-        }
-    })
-}
-*/
+
+
+
+
 	
 	
 	$(document).ready(function() {
