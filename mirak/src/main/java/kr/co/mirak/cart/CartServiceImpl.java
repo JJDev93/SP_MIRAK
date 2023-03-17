@@ -1,5 +1,6 @@
 package kr.co.mirak.cart;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -44,44 +45,50 @@ public class CartServiceImpl implements CartService {
 	public int cartInsert(CartVO vo, HttpSession session) {
 		String mem_id = (String)session.getAttribute("mem_id");
 	      int cart_cnt = vo.getCart_cnt();
-	      
+	      Date cart_start = vo.getCart_start();
+	      String cart_day = vo.getCart_day();
+	      	      
 	      CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
 	      vo = mapper.productToCart(vo);
 	      vo.setMem_id(mem_id);
 	      vo.setCart_cnt(cart_cnt);
+	      vo.setCart_start(cart_start);
+	      vo.setCart_day(cart_day);
 	      int result = mapper.cartInsert(vo);
 
 	      return result;
 	}
 	
+//	@Override
+//	public int cartUpdate(CartVO vo, HttpSession session) {
+//		String mem_id = (String)session.getAttribute("mem_id");
+//		  int cart_code = vo.getCart_code();
+//	      int cart_cnt = vo.getCart_cnt();
+//	      Date cart_start = vo.getCart_start();
+//	      String cart_day = vo.getCart_day();
+//	      	      
+//	      CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
+//	      vo = mapper.productToCart(vo);
+//	      vo.setMem_id(mem_id);
+//	      vo.setCart_code(cart_code);
+//	      vo.setCart_cnt(cart_cnt);
+//	      vo.setCart_start(cart_start);
+//	      vo.setCart_day(cart_day);
+//	      int result = mapper.cartUpdate(vo);
+//
+//	      return result;
+//	}
+	
 	@Override
-	public int cartUpdate(CartVO vo, HttpSession session) {
-		String mem_id = (String)session.getAttribute("mem_id");
-	      int cart_cnt = vo.getCart_cnt();
-	      String cart_day = vo.getCart_day();
-	      
-	      CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
-	      vo = mapper.productToCart(vo);
-	      vo.setMem_id(mem_id);
-	      vo.setCart_cnt(cart_cnt);
-	      vo.setCart_day(cart_day);
-	      int result = mapper.cartUpdate(vo);
-
-	      return result;
+	public void cartUpdate(CartVO vo) {
+		CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
+		mapper.cartUpdate(vo);
 	}
 	
 	@Override
-	public int cartDelete(CartVO vo, HttpSession session) {
-		String mem_id = (String)session.getAttribute("mem_id");
-	      int cart_code = vo.getCart_code();
-	      System.out.println("delete");
-	      CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
-	      vo = mapper.productToCart(vo);
-	      vo.setMem_id(mem_id);
-	      vo.setCart_code(cart_code);
-	      int result = mapper.cartDelete(vo);
-
-	      return result;
+	public void cartDelete(CartVO vo) {
+		CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
+		mapper.cartDelete(vo);
 	}
 
 }
