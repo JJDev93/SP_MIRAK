@@ -122,4 +122,13 @@
 <script type='text/javascript'>
 	// 초기화
 	Kakao.init('75d254d7afd4c5c53865df8e3f4d0cb8');
+	
+	$(document).ready(function() {
+		console.log("message : "+"${message}");
+		console.log("mem_id : "+"${mem_id}");
+		if("${message}" !=""){
+			alert("${message}");
+			 <%session.setAttribute("message","");%>
+		}
+	})
 </script>
