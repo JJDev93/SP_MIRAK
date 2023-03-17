@@ -101,25 +101,32 @@
 	
 	<select id="getTotal" resultType="int">
 	
-	<![CDATA[
-		select count(*) from member
-		]]>
+	
+		select count(*) from member  
+		<if test="keyword != null">
+
+           where mem_name like CONCAT('%',#{keyword},'%')
+        
+        </if>
+		
 	
 	</select>
 	
 	<select id="getListPaging"
 		resultType="member">
 		
-		<![CDATA[  		 
-		select * from (select * from member) as T1 ORDER BY MEM_REGDATE limit #{skip},#{amount}
- 		]]>
+				 
+		select * from (select * from member <if test="keyword != null">
+                    where mem_name like CONCAT('%',#{keyword},'%' )
+                </if>) as T1 ORDER BY MEM_REGDATE limit #{skip},#{amount}
+ 		
 
 	</select>
 	
 	<select id="getMemberDetail"
 		resultType="member">
 		<![CDATA[
-			select * from member where mem_id = #{mem_id}		
+			select * from member where mem_name = #{mem_name}		
 		]]>
 	</select>
 
