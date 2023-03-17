@@ -35,8 +35,9 @@ public class LoginController {
 	// 로그인페이지
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginView(Model model) {
-		System.out.println("로그인 화면으로 이동...");
+		System.out.println("=== 로그인 화면으로 이동 중 ===");
 		String googleUrl = googleUtils.googleInitUrl();
+		System.out.println("googleUrl : " + googleUrl);
 		model.addAttribute( "googleUrl", googleUrl );
 		return "member/login";
 	}

@@ -55,7 +55,6 @@ public class apiController {
 
 	// 카카오 로그인
 	@RequestMapping(value = "/kakaoLogin")
-
 	public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
 		System.out.println("#########" + code);
 		String access_Token = memberService.getAccessToken(code);
@@ -71,29 +70,44 @@ public class apiController {
 		return "member/join";
 	}
 
-
-
 	/**
 	 * 구글 로그인~!
 	 * Authentication Code를 전달 받는 엔드포인트
 	 **/
 	@RequestMapping(value="/login/google/auth", method=RequestMethod.GET)
-	public String googleAuth(Model model, @RequestParam(value = "code", required = false) String code, HttpServletResponse response) throws IOException {
+	public String googleAuth(Model model, @RequestParam(value = "code", required = false) String code, HttpServletResponse response, HttpSession session) throws IOException {
 		//Google OAuth Access Token 요청을 위한 파라미터 세팅
+		System.out.println("=== 구글 Access Token 요청 중 ===");
 		System.out.println("authorize_code : " + code);
-		String access_Token = snsLoginService.getGoogleAccessToken(code);
-
-		HashMap<String, Object> googleUserInfo = snsLoginService.getGoogleUserInfo(access_Token);
-		System.out.println("###access_Token#### : " + access_Token);
-		System.out.println("###nickname#### : " + googleUserInfo.get("nickname"));
+		HashMap<String, String> token = snsLoginService.getGoogleAccessToken(code);
+		String access_token = token.get("access_token");
+		String refresh_token = token.get("refresh_token");
+		System.out.println("###access_Token#### : " + access_token);
+		System.out.println("###refresh_token#### : " + refresh_token);
+		
+		System.out.println("=== 구글 googleUserInfo 가져오는 중 중 ===");
+		HashMap<String, Object> googleUserInfo = snsLoginService.getGoogleUserInfo(access_token);
+		System.out.println("###id#### : " + googleUserInfo.get("id"));
 		System.out.println("###email#### : " + googleUserInfo.get("email"));
+		System.out.println("###name#### : " + googleUserInfo.get("name"));		
+		
+		String user_id = (String)googleUserInfo.get("email");
+		String user_name = (String)googleUserInfo.get("name");
+		MemberVO memberVO = new MemberVO();
+		memberVO.setMem_id(user_id);
+		memberVO.setMem_name(user_name);
+		memberVO.setMem_pw(access_token);
+		memberVO.setMem_reset(refresh_token);
+		
+		//회원가입
+		memberService.createUser(memberVO);
+		memberService.login(memberVO);
+		session.setAttribute("mem_id", user_id);
 
 		PrintWriter out = response.getWriter();
-		out.println("<script>window.close(); opener.parent.location="+"'/join'"+";</script>");
+		out.println("<script>window.close(); opener.parent.location="+"'/'"+";</script>");
 		out.flush();
 
 		return "member/join";
 	}	
-
-
 }

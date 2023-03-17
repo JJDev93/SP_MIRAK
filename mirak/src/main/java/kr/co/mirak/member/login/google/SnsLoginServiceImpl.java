@@ -31,7 +31,8 @@ public class SnsLoginServiceImpl implements SnsLoginService {
 	 * GOOGLE AccessToken 처리
 	 */
 	@Override
-	public String getGoogleAccessToken(String authorize_code) {
+	public HashMap<String, String> getGoogleAccessToken(String authorize_code) {
+		HashMap<String, String> token = new HashMap<String, String>();
 		String access_Token = "";
 		String refresh_Token = "";
 		String reqURL = "https://www.googleapis.com/oauth2/v4/token";
@@ -51,7 +52,7 @@ public class SnsLoginServiceImpl implements SnsLoginService {
 	        sb.append("&client_secret=" + googleUtils.getGoogleSecret());
 	        sb.append("&redirect_uri=http://localhost:8080/login/google/auth");
 	        sb.append("&code="+authorize_code);
-	        //sb.append("&state=url_parameter");
+	        sb.append("&approval_prompt=force");
 	        bw.write(sb.toString());
 	        bw.flush();
 	        
@@ -80,6 +81,10 @@ public class SnsLoginServiceImpl implements SnsLoginService {
 	            refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
 	            System.out.println("access_token : " + access_Token);
 				System.out.println("refresh_token : " + refresh_Token);
+				
+				token.put("access_token", access_Token);
+				token.put("refresh_token", refresh_Token);
+				
 	            br.close();
 	            bw.close();
 	        }
@@ -87,7 +92,7 @@ public class SnsLoginServiceImpl implements SnsLoginService {
 			e.printStackTrace();
 		}
 		
-		return access_Token;
+		return token;
 	}
 
 	@Override
