@@ -4,6 +4,7 @@ package kr.co.mirak.controller;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -58,7 +59,7 @@ public class JoinController {
 
 	// 회원가입 기능
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String joincuccess(MemberVO vo, String id) throws Exception {
+	public String joincuccess(MemberVO vo, String id, HttpSession session) throws Exception {
 
 		
 		//암호화 1
@@ -72,7 +73,9 @@ public class JoinController {
 		
 		//회원 가입 쿼리 실행
 		memberService.createUser(vo);
+		session.setAttribute("message2", "회원가입 성공하였습니다!");
 		System.out.println("가입성공");
+		
 
 		
 		
