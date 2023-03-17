@@ -116,7 +116,7 @@ public class apiController {
       memberVO.setMem_id(user_id);
       memberVO.setMem_name(user_name);
       memberVO.setMem_pw(user_pw);
-      memberVO.setMem_reset(refresh_token);
+    //  memberVO.setMem_reset(refresh_token);
       
       MemberVO lvo = memberService.login(memberVO);
       if(lvo == null) {

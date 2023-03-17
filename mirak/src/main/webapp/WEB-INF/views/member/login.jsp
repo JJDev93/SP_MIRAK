@@ -80,10 +80,16 @@
 				<div class="row justify-content-center ftco-services">
 				
 					<!-- 구글 -->
+<<<<<<< HEAD
 					<div class="col-sm-2 text-center ftco-animate">
 						<a id="custom-login-btn" href="javascript:void(0);"
+=======
+					<div class="col-sm-2 ftco-animate">
+						<a id="custom-login-btn" href="${googleUrl}"><img alt="" src="resources/images/ico_member_google.png"></a>
+						<%-- <a id="custom-login-btn" href="javascript:void(0);"
+>>>>>>> branch 'member' of https://github.com/ywshin0112/mirak.git
 							onclick="window.open('${googleUrl}','googleLogin','width=430,height=500,location=no,status=no,scrollbars=yes');">
-							<img alt="" src="resources/images/ico_member_google.png"></a>
+							<img alt="" src="resources/images/ico_member_google.png"></a> --%>
 					</div>
 					
 					
@@ -117,3 +123,19 @@
 <!-- 카카오로그인 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
+<<<<<<< HEAD
+=======
+<script type='text/javascript'>
+	// 초기화
+	Kakao.init('75d254d7afd4c5c53865df8e3f4d0cb8');
+	
+	$(document).ready(function() {
+		console.log("message : "+"${message}");
+		console.log("mem_id : "+"${mem_id}");
+		if("${message}" !=""){
+			alert("${message}");
+			 <%session.setAttribute("message","");%>
+		}
+	})
+</script>
+>>>>>>> branch 'member' of https://github.com/ywshin0112/mirak.git

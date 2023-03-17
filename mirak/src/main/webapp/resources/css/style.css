@@ -9978,6 +9978,15 @@ textarea.form-control {
   -webkit-animation: loader-dash 1.5s ease-in-out infinite;
   animation: loader-dash 1.5s ease-in-out infinite;
   stroke-linecap: round; }
+  
+.joinBtn{
+	border: 1px solid rgba(0, 0, 0, 0.1) !important;
+	height: 58px !important;  
+	padding-left: 15px;
+	padding-right: 15px;
+	border-radius: 0px;
+	width:100%;
+}
 
 @-webkit-keyframes loader-rotate {
   100% {
