@@ -63,8 +63,7 @@ $(function(){
 					<ul class="nav nav-tabs w-100">
 						<li class="nav-item"><a class="nav-link" href="/mypage">마이페이지</a></li>
 						<li class="nav-item"><a class="nav-link" href="/cart">장바구니</a></li>
-						<li class="nav-item"><a class="nav-link active"
-							href="/payInfo">결제내역</a></li>
+						<li class="nav-item"><a class="nav-link active" href="/payInfo">결제내역</a></li>
 					</ul>
 				</div>
 
@@ -80,7 +79,7 @@ $(function(){
 									<div class="col-md-12 d-flex ftco-animate">
 										<div class="blog-entry align-self-stretch d-md-flex">
 <!-- 											<a href="blog-single.html" class="block-20"> </a> -->
-											<div class="block-20"style="background-image: url(${path}/resources/images/product/${payVO.pro_image })"> ${payVO.pro_image }</div>
+											<div class="block-20"style="background-image: url(${path}/resources/images/product/${payVO.pro_image })"></div>
 											<div class="text d-block pl-md-4">
 												<div class="meta mb-3">
 													<div>
@@ -90,7 +89,9 @@ $(function(){
 													
 												</div>
 												<h3 class="heading">
-									 				<a href="#">${payVO.pro_name} </a>
+									 				<a href="#">${payVO.pro_name}
+									 					<c:if test="${cart_cnt > 1 }"> 외 ${cart_cnt - 1 }개 품목</c:if>
+									 				 </a>
 												</h3>
 												<p>Far far away, behind the word mountains, far from the
 													countries Vokalia and Consonantia, there live the blind
