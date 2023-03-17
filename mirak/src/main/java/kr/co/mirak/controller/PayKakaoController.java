@@ -65,13 +65,13 @@ public class PayKakaoController {
 		// - 카카오 페이로 넘겨받은 결재정보값을 저장.
 		System.out.println(approveResponse);
 
-		return "pay/payInfo";
+		return "redirect:/payInfo";
 	}
 
 	// 결제 취소시 실행 url
 	@RequestMapping("/order/pay/cancel")
 	public String payCancel(HttpServletRequest request, HttpSession session) {
-		kakaoPayService.payCancel(session);
+//		kakaoPayService.payCancel(session);
 
 		return "pay/payCancel";
 	}
@@ -80,5 +80,13 @@ public class PayKakaoController {
 	@RequestMapping("/order/pay/fail")
 	public String payFail() {
 		return "redirect:/carts";
+	}
+	
+	// 결제 후 취소 url
+	@RequestMapping("/pay/kakao/cancel")
+	public String kakaoCancel(HttpSession session) {
+		kakaoPayService.payCancel(session);
+
+		return "pay/payCancel";
 	}
 }

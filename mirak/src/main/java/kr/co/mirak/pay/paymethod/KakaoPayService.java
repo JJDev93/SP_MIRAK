@@ -35,7 +35,7 @@ public class KakaoPayService {
 		Random random = new Random();
 		int randomInt = random.nextInt(1000);
 		String groupId = Long.toString(currentTimeMillis) + Long.toString(randomInt);
-		
+
 		String mem_id = (String) session.getAttribute("mem_id");
 		System.out.println("mem_id : " + mem_id);
 		String item_name = "";
@@ -214,20 +214,39 @@ public class KakaoPayService {
 			order.setMem_add2(kakaoOrder.getMem_add2());
 			order.setMem_zipcode(kakaoOrder.getMem_zipcode());
 			order.setCart_day(kakaoOrder.getCart_day());
-			order.setCart_start(kakaoOrder.getCart_start());
+			order.setCart_start((Date) kakaoOrder.getCart_start());
 			order.setPay_req(kakaoOrder.getPay_req());
 			order.setStatus("결제 완료");
 			order.setGroup_id(kakaoOrder.getGroup_id());
 			payList.add(order);
 		}
 		System.out.println("payList는 ~~~~~~~~~~~~~~:::::" + payList);
-		int result = kakaoMapper.updateOrderList(mem_id);
-		if (result > 0) {
-			kakaoMapper.insertPayList(payList);
-		}
+		kakaoMapper.updateOrderList(mem_id);
+		kakaoMapper.insertPayList(payList);
 	}
 
 	public void payCancel(HttpSession session) {
+		// 카카오가 요구한 결제요청request값을 담아줍니다.
+		String groupId = "T412c7f45b8c2c02b207";
+		System.out.println("groupId : " + groupId);
+		int total_amount = 10000;
+			MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+			parameters.add("cid", "TC0ONETIME");
+			parameters.add("tid", groupId);
+			parameters.add("cancel_amount", Integer.toString(total_amount));
+			parameters.add("cancel_tax_free_amount", "0");
+			
+			// 하나의 map안에 header와 parameter값을 담아줌.
+			HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(
+					parameters, this.getHeaders());
 
+			// 외부url 통신
+
+			RestTemplate template = new RestTemplate();
+			String url = "https://kapi.kakao.com//v1/payment/cancel";
+			// 보낼 외부 url, 요청 메시지(header,parameter), 처리후 값을 받아올 클래스.
+			KakaoCancelVO kakaoCancelVO = template.postForObject(url, requestEntity, KakaoCancelVO.class);
+			System.out.println(kakaoCancelVO);
+			
 	}
 }

@@ -7,7 +7,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import kr.co.mirak.cart.CartVO;
 import kr.co.mirak.product.ProductMapper;
@@ -17,17 +16,37 @@ public class PayServiceImpl implements PayService {
 
 	private SqlSessionTemplate sqlSessionTemplate;
 
-	public PayServiceImpl() {}
-	
+	public PayServiceImpl() {
+	}
+
 	public PayServiceImpl(SqlSessionTemplate sqlSessionTemplate) {
 		this.sqlSessionTemplate = sqlSessionTemplate;
-	}	
+	}
 
-	public List<PayVO> list() {
+	public List<PayVO> getAdminPayList() {
 
-		PayMapper dao = sqlSessionTemplate.getMapper(PayMapper.class);
-		List<PayVO> list = dao.list();
+		PayMapper payMapper = sqlSessionTemplate.getMapper(PayMapper.class);
+		List<PayVO> adminPayList = payMapper.getAdminPayList();
 
+		return adminPayList;
+	}
+
+	@Override
+	public List<PayVO> getPayListDetail(String group_id) {
+
+		PayMapper payMapper = sqlSessionTemplate.getMapper(PayMapper.class);
+		List<PayVO> payListDetail = payMapper.getPayListDetail(group_id);
+
+		return payListDetail;
+	}
+	
+	public List<PayVO> getClientPayList(HttpSession session) {
+
+		String mem_id = (String) session.getAttribute("mem_id");
+		
+		PayMapper payMapper = sqlSessionTemplate.getMapper(PayMapper.class);
+		List<PayVO> list = payMapper.getClientPayList(mem_id);
+		System.out.println(list.get(0));
 		return list;
 	}
 
@@ -51,49 +70,35 @@ public class PayServiceImpl implements PayService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	public ProductVO productDetail(ProductVO vo) {
 		ProductMapper mapper = sqlSessionTemplate.getMapper(ProductMapper.class);
 		return mapper.productDetail(vo);
 	}
-	
+
 	public List<CartVO> cartCheckList(HttpSession session) {
-		String myid = (String)session.getAttribute("mem_id");
+		String mem_id = (String) session.getAttribute("mem_id");
 		PayMapper mapper = sqlSessionTemplate.getMapper(PayMapper.class);
-		List<CartVO> list  = mapper.cartCheckList(myid);
+		List<CartVO> list = mapper.cartCheckList(mem_id);
 		return list;
 	}
 	
 	public List<ProductVO> payFromProduct(ProductVO productVO, String cart_cnt, Date cart_start, String cart_day) {
 		
 		productVO.setCart_cnt(Integer.parseInt(cart_cnt));
-		productVO.setCart_start(cart_start);
 		productVO.setCart_day(cart_day);
-	    List<ProductVO> list = new ArrayList<ProductVO>();
-	    list.add(productVO);
+		productVO.setCart_start(cart_start);
+		
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		list.add(productVO);
 
 		
-		return list;		
+		return list;
 	}
-	
-	
-	
+
+	@Override
 	public List<PayVO> adaptPayVO(PayStringVO payStringVO, HttpSession session) {
-		String myid = (String)session.getAttribute("mem_id");
-		//pro_code, cart_cnt, pay_req 
-				
-		String[] proCode = payStringVO.getPro_code().split(",");
-		String[] cartCnt = payStringVO.getCart_cnt().split(",");
-		String[] payReq = payStringVO.getPay_req().split(",");
-		
-		
-		
-
-		
-		return null;		
+		return null;
 	}
-	
-	
-
 
 }

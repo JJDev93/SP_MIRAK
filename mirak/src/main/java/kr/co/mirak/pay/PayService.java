@@ -9,7 +9,9 @@ import kr.co.mirak.cart.CartVO;
 import kr.co.mirak.product.ProductVO;
 
 public interface PayService {	
-	List<PayVO> list();
+	List<PayVO> getAdminPayList();
+	List<PayVO> getPayListDetail(String group_id);
+	List<PayVO> getClientPayList(HttpSession session);
 	PayVO info(int id);
 	int insert(PayVO vo);
 	int update(PayVO vo);

@@ -14,6 +14,17 @@
 		pro_name, count(group_id) as cart_cnt, sum(totalPrice) as totalPrice
 		from pay group by group_id order by pay_code desc;
 	</select>
+	
+	<select id="getClientPayList" resultType="kr.co.mirak.pay.PayVO">
+		select group_id, pro_image, pay_date, status,
+		pro_name, count(group_id) as cart_cnt, sum(totalPrice) as totalPrice
+		from pay where mem_id=#{mem_id} group by group_id order by pay_code desc;
+	</select>
+
+	<select id="getPayListDetail" resultType="kr.co.mirak.pay.PayVO">
+		select pay_code, group_id, pro_name, cart_cnt, totalPrice
+ 		from pay where group_id = #{group_id};
+	</select>
 
 	<insert id="insert" parameterType="kr.co.mirak.pay.PayVO">
 		insert into test (name)
@@ -25,7 +36,7 @@
 	<select id="cartCheckList" resultType="kr.co.mirak.cart.CartVO">
 
 		select * from cart where
-		mem_id=#{myid} and cart_check=1 and cart_show = 1
+		mem_id=#{mem_id} and cart_check=1 and cart_show = 1
 
 	</select>
 
