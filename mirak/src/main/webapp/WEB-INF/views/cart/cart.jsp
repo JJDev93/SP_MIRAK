@@ -155,14 +155,13 @@ session = request.getSession();
 						<input type="date" name="cart_start" class="form-control input-number" style="width:240px;"
 						value="${c.cart_start }">
 						<br>배송 요일 선택 <br>
-						${c.cart_day }<br>
-						<input type="checkbox" name="cart_day" value="월">월
-						<input type="checkbox" name="cart_day" value="화">화
-						<input type="checkbox" name="cart_day" value="수">수
-						<input type="checkbox" name="cart_day" value="목">목
-						<input type="checkbox" name="cart_day" value="금">금
-						<input type="checkbox" name="cart_day" value="토">토
-						<input type="checkbox" name="cart_day" value="일">일
+					<label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform : scale(2);" value="월">&nbsp;&nbsp;월</label> &nbsp;&nbsp;
+					<label for="tue"><input type="checkbox" name="cart_day" id="tue" style="transform : scale(2);" value="화">&nbsp;&nbsp;화</label> &nbsp;&nbsp;
+					<label for="wed"><input type="checkbox" name="cart_day" id="wed" style="transform : scale(2);" value="수">&nbsp;&nbsp;수</label> &nbsp;&nbsp;
+					<label for="thu"><input type="checkbox" name="cart_day" id="thu" style="transform : scale(2);" value="목">&nbsp;&nbsp;목</label> &nbsp;&nbsp;
+					<label for="fri"><input type="checkbox" name="cart_day" id="fri" style="transform : scale(2);" value="금">&nbsp;&nbsp;금</label> &nbsp;&nbsp;
+					<label for="sat"><input type="checkbox" name="cart_day" id="sat" style="transform : scale(2);" value="토">&nbsp;&nbsp;토</label> &nbsp;&nbsp;
+					<label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform : scale(2);" value="일">&nbsp;&nbsp;일</label>
 						<br><br>
 						배송 횟수 선택 <br>
 						<input type="number" name="cart_cnt" value="${c.cart_cnt}" class="quantity_input">
