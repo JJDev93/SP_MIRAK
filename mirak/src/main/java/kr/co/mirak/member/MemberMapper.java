@@ -22,7 +22,7 @@ public interface MemberMapper {
 	// 김원중이 건드린 부분
 	
 	/* 게시판 총 갯수 */
-    public int getTotal();
+    public int getTotal(CriteriaM cri);
     
     /* 게시판 목록(페이징 적용) */
     public List<MemberVO> getListPaging(CriteriaM cri);

@@ -11,6 +11,8 @@ public class CriteriaM {
     /* 스킵 할 게시물 수( (pageNum-1) * amount ) */
     private int skip;
     
+    private String keyword;
+    
     /* 기본 생성자 -> 기봅 세팅 : pageNum = 1, amount = 10 */
     public CriteriaM() {
         this(1,10);
@@ -44,6 +46,14 @@ public class CriteriaM {
 
 	public int getSkip() {
 		return skip;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 
 	public void setSkip(int skip) {

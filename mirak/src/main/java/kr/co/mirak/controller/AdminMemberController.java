@@ -22,7 +22,7 @@ public class AdminMemberController {
 		
 		//김원중이 건드린 부분
 		model.addAttribute("memberList", memberService.getListPaging(cri));
-		int total = memberService.getTotal();
+		int total = memberService.getTotal(cri);
 		PageMakerDTOM pageMake = new PageMakerDTOM(cri, total);
 		model.addAttribute("pageMaker", pageMake);
 		//여기까지 (매개변수에 CriteriaM 부분 추가했음-> 오류발생시 제거해야함!)
