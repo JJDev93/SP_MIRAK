@@ -21,10 +21,9 @@ public interface MemberService {
 	int idCheck(String id) throws Exception;
 
 	
-	// kakao
-	String getAccessToken(String code);
-
-	HashMap<String, Object> getUserInfo(String access_Token);
+	// 카카오 로그인
+//	String getAccessToken(String code);
+//	MemberVO getUserInfo(String access_Token);
 
 	// 김원중이 건드린 부분
 
@@ -34,6 +33,11 @@ public interface MemberService {
 	List<MemberVO> getListPaging(CriteriaM cri);
 
 	MemberVO getMemberDetail(MemberVO mvo);
+	
+	
+	String getAccessToken(String code);
+	HashMap<String, Object> getUserInfo(String access_Token);
+	void kakaoLogout(String access_Token);
 
 	// 여기까지
 

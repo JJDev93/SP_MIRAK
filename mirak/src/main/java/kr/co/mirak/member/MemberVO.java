@@ -3,9 +3,10 @@ package kr.co.mirak.member;
 import java.util.Date;
 
 public class MemberVO {
-	private String mem_id, mem_pw, mem_name, mem_phone, mem_add1, mem_add2, mem_zipcode;
+	private String mem_id, mem_pw, mem_name, mem_phone, mem_zipcode, mem_add1, mem_add2;
 	private int mem_age, mem_gender;
 	private Date mem_regdate;
+	private Boolean mem_isapi;
 	public String getMem_id() {
 		return mem_id;
 	}
@@ -30,6 +31,12 @@ public class MemberVO {
 	public void setMem_phone(String mem_phone) {
 		this.mem_phone = mem_phone;
 	}
+	public String getMem_zipcode() {
+		return mem_zipcode;
+	}
+	public void setMem_zipcode(String mem_zipcode) {
+		this.mem_zipcode = mem_zipcode;
+	}
 	public String getMem_add1() {
 		return mem_add1;
 	}
@@ -41,12 +48,6 @@ public class MemberVO {
 	}
 	public void setMem_add2(String mem_add2) {
 		this.mem_add2 = mem_add2;
-	}
-	public String getMem_zipcode() {
-		return mem_zipcode;
-	}
-	public void setMem_zipcode(String mem_zipcode) {
-		this.mem_zipcode = mem_zipcode;
 	}
 	public int getMem_age() {
 		return mem_age;
@@ -66,13 +67,22 @@ public class MemberVO {
 	public void setMem_regdate(Date mem_regdate) {
 		this.mem_regdate = mem_regdate;
 	}
+	public Boolean getMem_isapi() {
+		return mem_isapi;
+	}
+	public void setMem_isapi(Boolean mem_isapi) {
+		this.mem_isapi = mem_isapi;
+	}
 	@Override
 	public String toString() {
 		return "MemberVO [mem_id=" + mem_id + ", mem_pw=" + mem_pw + ", mem_name=" + mem_name + ", mem_phone="
-				+ mem_phone + ", mem_add1=" + mem_add1 + ", mem_add2=" + mem_add2 + ", mem_zipcode=" + mem_zipcode
-				+ ", mem_age=" + mem_age + ", mem_gender=" + mem_gender + ", mem_regdate=" + mem_regdate + "]";
+				+ mem_phone + ", mem_zipcode=" + mem_zipcode + ", mem_add1=" + mem_add1 + ", mem_add2=" + mem_add2
+				+ ", mem_age=" + mem_age + ", mem_gender=" + mem_gender + ", mem_regdate=" + mem_regdate
+				+ ", mem_isapi=" + mem_isapi + ", getMem_id()=" + getMem_id() + ", getMem_pw()=" + getMem_pw()
+				+ ", getMem_name()=" + getMem_name() + ", getMem_phone()=" + getMem_phone() + ", getMem_zipcode()="
+				+ getMem_zipcode() + ", getMem_add1()=" + getMem_add1() + ", getMem_add2()=" + getMem_add2()
+				+ ", getMem_age()=" + getMem_age() + ", getMem_gender()=" + getMem_gender() + ", getMem_regdate()="
+				+ getMem_regdate() + ", getMem_isapi()=" + getMem_isapi() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
-	
-	
-	
 }
