@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kr.co.mirak.member.MemberService;
+import kr.co.mirak.member.MemberVO;
 import kr.co.mirak.pay.CriteriaP;
 import kr.co.mirak.pay.PageMakerDTOP;
 import kr.co.mirak.pay.PayService;
@@ -88,8 +89,6 @@ public class PayController {
 		}
 		
 		
-//		productVO.setCart_start(Date.valueOf(cart_start));
-//		productVO.setCart_day(cart_day);
 		System.out.println("확인 : " + productVO);
 
 		// 회원
@@ -123,8 +122,10 @@ public class PayController {
 
 	@RequestMapping(value = "/payInfo", method = RequestMethod.GET)
 	public String payInfo(Model model, HttpSession session) {
-
-		model.addAttribute("payVOList", payService.getClientPayList(session));
+		
+		List<PayVO> list = payService.getClientPayList(session);
+		System.out.println("현재상태 " + list.get(0).getStatus());
+		model.addAttribute("payVOList", list);
 
 		return "pay/payInfo";
 	}
@@ -134,11 +135,10 @@ public class PayController {
 		System.out.println("group_id : " + group_id);
 		List<PayVO> list = payService.getProductInfo(group_id);
 
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i));
-		}
-
+		
 		model.addAttribute("payVOList", payService.getProductInfo(group_id));
+		
+		model.addAttribute("member", memberService.getMemberInfo(session));
 
 		return "pay/payDetailInfo";
 	}

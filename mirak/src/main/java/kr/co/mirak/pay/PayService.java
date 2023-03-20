@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
-
 import kr.co.mirak.cart.CartVO;
 import kr.co.mirak.product.ProductVO;
 
