@@ -150,10 +150,7 @@ public class LoginController {
 			session.removeAttribute("userId");
 		} else {
 			System.out.println("access_Token is null");
-			// return "redirect:/";
 		}
-		// return "index";
-
 		session.invalidate();
 		return "redirect:/";
 	}
