@@ -109,6 +109,7 @@ public class LoginController {
 
 	}
 
+	//로그아웃
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) throws Exception {
 		String mem_id = (String) session.getAttribute("mem_id");
@@ -122,7 +123,7 @@ public class LoginController {
 				int result = snslogin.googleLogout(access_Token);
 				System.out.println("구글로그아웃 : " + result);
 			}else if(user_api.equals("kakao")){
-				
+				return "redirect:/kakaounlink";
 			}else if(user_api.equals("naver")){
 				
 			}
