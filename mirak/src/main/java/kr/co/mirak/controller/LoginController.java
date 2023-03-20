@@ -113,7 +113,6 @@ public class LoginController {
 	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) throws Exception {
 
-//		memberService.kakaoLogout((String)session.getAttribute("access_Token"));
 
 		String access_Token = (String) session.getAttribute("access_Token");
 
@@ -127,9 +126,20 @@ public class LoginController {
 		}
 		// return "index";
 
+		memberService.kakaoLogout((String)session.getAttribute("access_Token"));
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+	//연결끊기
+	@RequestMapping(value = "/kakaounlink")
+	public String unlink(HttpSession session) {
+		memberService.unlink((String)session.getAttribute("access_Token"));
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	
 
 	// 아이디찾기
 	@RequestMapping(value = "/idfind", method = RequestMethod.GET)

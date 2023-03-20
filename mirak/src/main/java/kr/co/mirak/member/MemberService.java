@@ -38,8 +38,10 @@ public interface MemberService {
 	HashMap<String, Object> getUserInfo(String access_Token);
 
 	void kakaoLogout(String access_Token);
+	
+	void unlink(String attribute);
 
-//	void unlink(String access_Token);
+
 
 	// 김원중이 건드린 부분
 	/* 게시판 총 갯수 */
@@ -48,6 +50,8 @@ public interface MemberService {
 	List<MemberVO> getListPaging(CriteriaM cri);
 
 	MemberVO getMemberDetail(MemberVO mvo);
+
+
 
 	// 여기까지
 }
