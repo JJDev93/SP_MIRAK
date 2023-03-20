@@ -2,7 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<style>
 
+h3 a{
+
+font-size:18px;
+
+}
+
+</style>
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 <!-- START 슬라이더 -->
 <section id="home-section" class="hero">

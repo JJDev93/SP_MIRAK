@@ -1,7 +1,6 @@
 package kr.co.mirak.controller;
 
 import java.sql.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.mirak.cart.CartService;
 import kr.co.mirak.cart.CartVO;
+import kr.co.mirak.cart.CriteriaC;
+import kr.co.mirak.cart.PageMakerDTOC;
 
 @Controller
 public class CartController {
@@ -62,9 +63,13 @@ public class CartController {
    
    // admin list select
    @RequestMapping(value = "/admin/carts", method = RequestMethod.GET)
-   public String cartList2(Model model) {
-      List<CartVO> list = cartService.cartAdminList();
-      model.addAttribute("cartList", list);
+   public String cartList2(Model model,CriteriaC cri) {
+	  model.addAttribute("cartList", cartService.getListPaging(cri));
+	  
+      int total = cartService.getTotal();
+      PageMakerDTOC pageMake = new PageMakerDTOC(cri, total);
+      model.addAttribute("pageMaker", pageMake);
+
       return "cart/cart_admin";
    }
 

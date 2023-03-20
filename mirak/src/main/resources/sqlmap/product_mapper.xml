@@ -32,13 +32,13 @@
 	<!-- 인덱스 페이지 이미지 -->
 	<select id="productListIndex1" resultType="product">
 
-		select * from (select * from product)  as T1  where pro_code like '%P%' limit 4
+		select * from (select * from product order by rand())  as T1  where pro_code like '%P%' limit 4;
 
 	</select>
 	
 	<select id="productListIndex2" resultType="product">
 
-		select * from (select * from product)  as T1  where pro_code like '%T%' limit 4
+		select * from (select * from product order by rand())  as T1  where pro_code like '%T%' limit 4;
 
 	</select>
 	

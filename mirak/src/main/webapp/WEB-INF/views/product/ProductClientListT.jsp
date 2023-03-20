@@ -4,7 +4,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
-li {
+#abc{
 	float: left;
 	margin-right: 10px;
 }
@@ -91,8 +91,8 @@ li {
 							<!-- 이전페이지 버튼 -->
 							<c:if test="${pageMaker.prev}">
 								<ul>
-									<li class="pageInfo_btn previous"><a
-										href="javascript:acyncMovePage('ProductClientList?pageNum= ${pageMaker.startPage-1}');">&lt;</a></li>
+									<li class="pageInfo_btn previous" id="abc"><a
+										href="javascript:acyncMovePage('ProductClientListT?pageNum= ${pageMaker.startPage-1}');">&lt;</a></li>
 								</ul>
 							</c:if>
 							<c:forEach var="num" begin="${pageMaker.startPage}"
@@ -100,15 +100,15 @@ li {
 
 								<ul style="text-align: center;">
 
-									<li class="pageInfo_btn"><a
-										href="javascript:acyncMovePage('/ProductClientList?pageNum=${num}');">${num}</a></li>
+									<li class="pageInfo_btn" id="abc"><a
+										href="javascript:acyncMovePage('/ProductClientListT?pageNum=${num}');">${num}</a></li>
 								</ul>
 							</c:forEach>
 							<!-- 다음페이지 버튼 -->
 							<c:if test="${pageMaker.next}">
 								<ul>
-									<li class="pageInfo_btn next"><a
-										href="javascript:acyncMovePage('ProductClientList?pageNum=${pageMaker.endPage + 1 }');">&gt;</a></li>
+									<li class="pageInfo_btn next" id="abc"><a
+										href="javascript:acyncMovePage('ProductClientListT?pageNum=${pageMaker.endPage + 1 }');">&gt;</a></li>
 								</ul>
 							</c:if>
 						</tr>

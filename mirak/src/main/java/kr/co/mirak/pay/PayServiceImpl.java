@@ -23,10 +23,10 @@ public class PayServiceImpl implements PayService {
 		this.sqlSessionTemplate = sqlSessionTemplate;
 	}
 
-	public List<PayVO> getAdminPayList() {
+	public List<PayVO> getAdminPayList(CriteriaP criP) {
 
 		PayMapper payMapper = sqlSessionTemplate.getMapper(PayMapper.class);
-		List<PayVO> adminPayList = payMapper.getAdminPayList();
+		List<PayVO> adminPayList = payMapper.getAdminPayList(criP);
 
 		return adminPayList;
 	}
@@ -40,13 +40,37 @@ public class PayServiceImpl implements PayService {
 		return payListDetail;
 	}
 	
+	@Override
+	public int updateStatus(int pay_code, String group_id) {
+		int result = 0;
+		PayMapper payMapper = sqlSessionTemplate.getMapper(PayMapper.class);
+		result = payMapper.updateStatus(pay_code, group_id);
+		
+		return result;
+	}
+	
+	public int getTotal(CriteriaP criP) {
+		PayMapper mapper = sqlSessionTemplate.getMapper(PayMapper.class);
+		return mapper.getTotal(criP);
+	}
+	
 	public List<PayVO> getClientPayList(HttpSession session) {
 
 		String mem_id = (String) session.getAttribute("mem_id");
 		
 		PayMapper payMapper = sqlSessionTemplate.getMapper(PayMapper.class);
 		List<PayVO> list = payMapper.getClientPayList(mem_id);
-		System.out.println(list.get(0));
+		System.out.println(list.size());
+		return list;
+	}
+	
+	public List<PayVO> getProductInfo(String group_id) {
+
+		PayMapper payMapper = sqlSessionTemplate.getMapper(PayMapper.class);
+		List<PayVO> list = payMapper.getProductInfo(group_id);
+		for(int i=0; i<list.size(); i++) {
+			System.out.println(list.indexOf(i));
+		}
 		return list;
 	}
 
@@ -100,5 +124,7 @@ public class PayServiceImpl implements PayService {
 	public List<PayVO> adaptPayVO(PayStringVO payStringVO, HttpSession session) {
 		return null;
 	}
+
+
 
 }

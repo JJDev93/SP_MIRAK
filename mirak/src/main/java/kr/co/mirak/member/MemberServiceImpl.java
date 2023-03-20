@@ -244,9 +244,9 @@ public class MemberServiceImpl implements MemberService {
 
 	// 김원중이 건드린 부분
 
-	public int getTotal() {
+	public int getTotal(CriteriaM cri) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		return mapper.getTotal();
+		return mapper.getTotal(cri);
 	}
 
 	public List<MemberVO> getListPaging(CriteriaM cri) {

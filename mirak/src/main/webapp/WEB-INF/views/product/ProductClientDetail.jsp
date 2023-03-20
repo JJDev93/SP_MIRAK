@@ -41,22 +41,22 @@
 					<p>${product.pro_desc}</p>
 					<div class="row mt-4">
 						<div class="input-group col-md-6 d-flex mb-3">
-							<input type="text" id="result" name="cart_cnt" class="form-control input-number" min="1" max="100" value="1" placeholder="수량을 입력하세요" onchange="payBtnCnt()">
+							<p style="margin-top:5px;">수량 : &nbsp;&nbsp; </p><input type="text" id="result" name="cart_cnt" class="form-control input-number" min="1" max="100" value="1" onchange="payBtnCnt()">
 						</div>
 					</div>
 
-					<label for="start">배송일<input type="date" name="cart_start" class="form-control input-number" style="width:240px;" id="start" min=""></label>
+					<label for="start">배송 시작일<input type="date" name="cart_start" class="form-control input-number" style="width:240px;" id="start" min=""></label>
 
 					<br>
 					
 					요일 선택<br>
-					<label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform : scale(2);" value="월">&nbsp;&nbsp;월</label> &nbsp;&nbsp;
-					<label for="tue"><input type="checkbox" name="cart_day" id="tue" style="transform : scale(2);" value="화">&nbsp;&nbsp;화</label> &nbsp;&nbsp;
-					<label for="wed"><input type="checkbox" name="cart_day" id="wed" style="transform : scale(2);" value="수">&nbsp;&nbsp;수</label> &nbsp;&nbsp;
-					<label for="thu"><input type="checkbox" name="cart_day" id="thu" style="transform : scale(2);" value="목">&nbsp;&nbsp;목</label> &nbsp;&nbsp;
-					<label for="fri"><input type="checkbox" name="cart_day" id="fri" style="transform : scale(2);" value="금">&nbsp;&nbsp;금</label> &nbsp;&nbsp;
-					<label for="sat"><input type="checkbox" name="cart_day" id="sat" style="transform : scale(2);" value="토">&nbsp;&nbsp;토</label> &nbsp;&nbsp;
-					<label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform : scale(2);" value="일">&nbsp;&nbsp;일</label>
+					<label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform : scale(2);" value="월" checked>&nbsp;&nbsp;월</label> &nbsp;&nbsp;
+					<label for="tue"><input type="checkbox" name="cart_day" id="tue" style="transform : scale(2);" value="화" checked>&nbsp;&nbsp;화</label> &nbsp;&nbsp;
+					<label for="wed"><input type="checkbox" name="cart_day" id="wed" style="transform : scale(2);" value="수" checked>&nbsp;&nbsp;수</label> &nbsp;&nbsp;
+					<label for="thu"><input type="checkbox" name="cart_day" id="thu" style="transform : scale(2);" value="목" checked>&nbsp;&nbsp;목</label> &nbsp;&nbsp;
+					<label for="fri"><input type="checkbox" name="cart_day" id="fri" style="transform : scale(2);" value="금" checked>&nbsp;&nbsp;금</label> &nbsp;&nbsp;
+					<label for="sat"><input type="checkbox" name="cart_day" id="sat" style="transform : scale(2);" value="토" checked>&nbsp;&nbsp;토</label> &nbsp;&nbsp;
+					<label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform : scale(2);" value="일" checked>&nbsp;&nbsp;일</label>
 					
 					<br>
 					<br>
@@ -99,7 +99,9 @@
 	
 	
 	let today = new Date().toISOString().substr(0, 10);
+	
 	document.getElementById("start").min = today;	
+	document.getElementById('start').valueAsDate = new Date();
 </script>
 </body>
 </html>

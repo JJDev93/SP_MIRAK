@@ -1,9 +1,6 @@
 package kr.co.mirak.member;
 
-import java.util.HashMap;
 import java.util.List;
-
-import kr.co.mirak.product.Criteria;
 
 
 public interface MemberMapper {
@@ -15,32 +12,20 @@ public interface MemberMapper {
 	int naverinsert(MemberVO vo);
 	int memupdate(MemberVO vo);
 	int memdelete(MemberVO vo);
-//	List<MemberVO> getMemberList(Integer page);
+	//	List<MemberVO> getMemberList(Integer page);
 	MemberVO getMemberInfo(String memId);
 	int idCheck(String id);
-	
 	
 	//카카오 로그인
 	//MemberVO findkakao(HashMap<String, Object> userInfo);
 	//void kakaoinsert(HashMap<String, Object> userInfo);
 
 	// 김원중이 건드린 부분
-	
 	/* 게시판 총 갯수 */
-    public int getTotal();
+    public int getTotal(CriteriaM cri);
     
     /* 게시판 목록(페이징 적용) */
     public List<MemberVO> getListPaging(CriteriaM cri);
-    
     MemberVO getMemberDetail(MemberVO mvo);
-	
-    
-    
-
-    
-    
-    
-    // 여기까지!
-    
-    
+    // 여기까지!    
 }

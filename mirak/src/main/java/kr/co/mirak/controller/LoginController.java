@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.co.mirak.member.MemberService;
 import kr.co.mirak.member.MemberVO;
 import kr.co.mirak.member.login.google.GoogleOAuthConfigUtils;
+import kr.co.mirak.member.login.google.SnsLoginService;
 
 @Controller
 public class LoginController {
@@ -26,15 +27,14 @@ public class LoginController {
 	final static String GOOGLE_TOKEN_BASE_URL = "https://oauth2.googleapis.com/token";
 	final static String GOOGLE_REVOKE_TOKEN_BASE_URL = "https://oauth2.googleapis.com/revoke";
 
-	
-
-
 	@Autowired
 	private MemberService memberService;
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder;
 	@Autowired
 	private GoogleOAuthConfigUtils googleUtils;
+	@Autowired
+	private SnsLoginService snslogin;
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
@@ -82,7 +82,19 @@ public class LoginController {
 
 				session.setAttribute("mem_id", mem_id); // 세션에 사용자정보 저장
 				logger.info("로그인 성공");
-				return "redirect:/"; // 메인페이지로 이동
+
+				String preUrl = (String) session.getAttribute("pre_url");
+				String returnURL = "";
+				System.out.println("preUrl : " + preUrl);
+				if (preUrl != null) {
+					System.out.println("이전 페이지로 이동");
+					returnURL = "redirect:" + preUrl;
+					session.removeAttribute("pre_url");
+				} else {
+					System.out.println("메인으로 이동");
+					returnURL = "redirect:/";
+				}
+				return returnURL;
 
 			} else { // 일치하는 아이디가 존재하지 않을 시 (로그인 실패)
 
@@ -125,41 +137,26 @@ public class LoginController {
 	 */
 
 	// 로그아웃
-	@RequestMapping(value="/logout")
+	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) throws Exception {
 
-		
 //		memberService.kakaoLogout((String)session.getAttribute("access_Token"));
-       
-		String access_Token = (String)session.getAttribute("access_Token");
 
-        if(access_Token != null && !"".equals(access_Token)){
-            memberService.kakaoLogout(access_Token);
-            session.removeAttribute("access_Token");
-            session.removeAttribute("userId");
-        }else{
-            System.out.println("access_Token is null");
-            //return "redirect:/";
-        }
-        //return "index";
-        
-        session.invalidate();
-        return "redirect:/";
-    }
-	
-	/*
-	//카카오 로그아웃
-	@RequestMapping(value="/kakaounlink")
-	public String unlink(HttpSession session) {
-		memberService.unlink((String)session.getAttribute("access_token"));
+		String access_Token = (String) session.getAttribute("access_Token");
+
+		if (access_Token != null && !"".equals(access_Token)) {
+			memberService.kakaoLogout(access_Token);
+			session.removeAttribute("access_Token");
+			session.removeAttribute("userId");
+		} else {
+			System.out.println("access_Token is null");
+			// return "redirect:/";
+		}
+		// return "index";
+
 		session.invalidate();
 		return "redirect:/";
 	}
-	*/
-	
-	
-	
-	
 
 	// 아이디찾기
 	@RequestMapping(value = "/idfind", method = RequestMethod.GET)
