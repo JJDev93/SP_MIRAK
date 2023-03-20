@@ -1,5 +1,7 @@
 package kr.co.mirak.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
@@ -58,10 +60,10 @@ public class PayController {
 	@RequestMapping(value = "/pay/{pro_code}/{cart_cnt}/{cart_start}/{cart_day}", method = RequestMethod.GET)
 	public String getPayFromProduct(Model model, ProductVO productVO, HttpSession session,
 			@PathVariable("pro_code") String pro_code, @PathVariable("cart_cnt") String cart_cnt,
-			@PathVariable("cart_start") String cart_start, @PathVariable("cart_day") String cart_day) {
+			@PathVariable("cart_start") String cart_start, @PathVariable("cart_day") String cart_day) throws UnsupportedEncodingException {
 		String mem_id = (String) session.getAttribute("mem_id");
 		if (mem_id == null) {
-			String preUrl = "/pay/" + pro_code + "/" + cart_cnt + "/" + cart_start + "/" + cart_day;
+			String preUrl = "/pay/" + pro_code + "/" + cart_cnt + "/" + cart_start + "/" + URLEncoder.encode(cart_day, "UTF-8");
 			session.setAttribute("pre_url", preUrl);
 			return "redirect:/login";
 		}
