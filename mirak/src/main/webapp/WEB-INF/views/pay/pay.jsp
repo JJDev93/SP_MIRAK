@@ -6,9 +6,6 @@
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 
-
-
-
 <div class="hero-wrap hero-bread"
 	style="background-image: url('${path}/resources/images/bg_1.jpg');">
 	<div class="container">
@@ -23,86 +20,66 @@
 		</div>
 	</div>
 </div>
-
 <section class="ftco-section">
-
-
-
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-xl-7 ftco-animate">
-
-				<form id="orderForm" class="billing-form" action="/paySubmit"
-					method="post">
-
+				<form id="orderForm" class="billing-form" action="/paySubmit" method="post">
 					<input type="hidden" id="mem_id" name="mem_id" value="${mem_id }">
-
 					<h3 class="mb-4 billing-heading">주문 확인</h3>
-					
-					
-					
-					
-
-
 					<c:forEach items="${productList}" var="productVO">
-					
-					<div class="col-md-12 d-flex mb-5">
-						<div class="cart-detail cart-total p-3 p-md-4">
-							<p class="d-flex">
-								<span>상품명</span> <span class="font-weight-bold text-dark">${productVO.pro_name }</span>
-								<input type="hidden" class="pro_name" name="pro_name" value="${productVO.pro_name }">
-								
-								<span>상품 코드</span><span>${productVO.pro_code }</span>
-								<input type="hidden" class="pro_code" name="pro_code" value="${productVO.pro_code }">
-								<c:choose>
-								  <c:when test="${codecheck == 1}">
-									<input type="hidden" class="cart_code" name="cart_code" value="${productVO.cart_code }">
-								  </c:when>
-								  <c:otherwise>
-								  	<input type="hidden" class="cart_code" name="cart_code" value="0">
-								  </c:otherwise>
-								</c:choose>
-							</p>
-							<div>
-							상품 상세 <input type="hidden" class="pro_desc" name="pro_desc"
-								value="${productVO.pro_desc }">${productVO.pro_desc }</div>
-							<p class="d-flex">
-								<span>배송 시작일</span> <span class="font-weight-bold text-dark">${productVO.cart_start }</span>	
-								<input type="hidden" class="cart_start" name="cart_start" value="${productVO.cart_start }">		
-								<span>상품 가격</span><span class="font-weight-bold text-dark">${productVO.pro_price }원</span>
-								<input type="hidden" class="pro_price" name="pro_price" value="${productVO.pro_price }">
-							</p>
-							<p class="d-flex">
-								<span>배송 요일</span><span class="font-weight-bold text-dark">${productVO.cart_day }</span>
-								<input type="hidden" class="cart_day" name="cart_day" value="${productVO.cart_day }">
-								<span>상품 개수</span><span class="font-weight-bold text-dark">${productVO.cart_cnt }</span>
-								<input type="hidden" class="cart_cnt" name="cart_cnt" value="${productVO.cart_cnt }">
-							</p>
-							<hr>
-							<p class="d-flex total-price">
-								<span>상품별 합계</span><span></span><span></span><span>${productVO.cart_cnt * productVO.pro_price}원</span>
-								<input type="hidden" class="totalPrice" name="cart_totprice" value="${productVO.cart_cnt * productVO.pro_price}">								
-								
-							</p>
+						<div class="cart-detail p-3 p-md-4 mb-5">
+							<div class="ftco-animate fadeInUp ftco-animated">
+								<div class="blog-entry align-self-stretch d-md-flex">
+									<a href="blog-single.html" class="block-20" style="background-image: url('images/${productVO.pro_image }.jpg');"> </a>
+									<div class="text d-block pl-md-4">
+										<h3 class="heading">
+											<a href="#">${productVO.pro_name }</a>
+										</h3>
+										<input type="hidden" class="pro_name" name="pro_name" value="${productVO.pro_name }">
+										<input type="hidden" class="pro_code" name="pro_code" value="${productVO.pro_code }">
+										<input type="hidden" class="pro_desc" name="pro_desc" value="${productVO.pro_desc }">
+										<c:choose>
+											<c:when test="${codecheck == 1}">
+												<input type="hidden" class="cart_code" name="cart_code" value="${productVO.cart_code }">
+											</c:when>
+											<c:otherwise>
+												<input type="hidden" class="cart_code" name="cart_code" value="0">
+											</c:otherwise>
+										</c:choose>
+										<input type="hidden" class="cart_start" name="cart_start" value="${productVO.cart_start }">
+										<input type="hidden" class="pro_price" name="pro_price" value="${productVO.pro_price }">
+										<input type="hidden" class="cart_cnt" name="cart_cnt" value="${productVO.cart_cnt }">
+										<input type="hidden" class="totalPrice" name="cart_totprice" value="${productVO.cart_cnt * productVO.pro_price}">
+										
+										<p>
+											<span class="font-weight-bold text-dark">상품 상세</span> ${productVO.pro_desc} <br>
+											<span class="font-weight-bold text-dark">상품 코드</span> ${productVO.pro_code } <br>
+											<span class="font-weight-bold text-dark">배송 시작일</span> ${productVO.cart_start } <br>
+											<span class="font-weight-bold text-dark">상품 가격</span> ${productVO.pro_price }원 <br>
+											<span  class="font-weight-bold text-dark">배송 요일</span> ${productVO.cart_day } <br>
+											<span  class="font-weight-bold text-dark">상품 개수</span> ${productVO.cart_cnt }
+										</p>
+										<hr>
+										<p><span  class="font-weight-bold text-dark">상품별 합계</span> ${productVO.cart_cnt * productVO.pro_price}원</p>
+										<p>
+											<a href="blog-single.html" class="btn btn-primary py-2 px-3">삭제</a>
+										</p>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
-	
-						<div>
-							상품명 ${productVO.pro_name }</div>
-						
+
+						<div>상품명 ${productVO.pro_name }</div>
+
 						<div>
 							상품이미지 <input type="hidden" class="pro_image" name="pro_image"
 								value="${productVO.pro_image }">${productVO.pro_image }</div>
-						<div>
-							배송요일 ${productVO.cart_day }</div>
-						<div>
-							배송시작일 ${productVO.cart_start }</div>
-						<div>
-							상품 가격 ${productVO.pro_price }</div>
-						<div>
-							상품 개수 ${productVO.cart_cnt }</div>
-						<div>
-							상품별 합계 ${productVO.cart_cnt * productVO.pro_price}</div>
+						<div>배송요일 ${productVO.cart_day }</div>
+						<div>배송시작일 ${productVO.cart_start }</div>
+						<div>상품 가격 ${productVO.pro_price }</div>
+						<div>상품 개수 ${productVO.cart_cnt }</div>
+						<div>상품별 합계 ${productVO.cart_cnt * productVO.pro_price}</div>
 						<br>
 					</c:forEach>
 
@@ -120,8 +97,10 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="address">주소</label> <input type="text"
-									name="mem_address" class="form-control" id="address" style="cursor:default"
-									value="${memberVO.mem_zipcode} ${memberVO.mem_add1} ${memberVO.mem_add2}" readonly>
+									name="mem_address" class="form-control" id="address"
+									style="cursor: default"
+									value="${memberVO.mem_zipcode} ${memberVO.mem_add1} ${memberVO.mem_add2}"
+									readonly>
 							</div>
 						</div>
 
@@ -129,18 +108,19 @@
 						<div class="w-100"></div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label for="receiverName">받는 사람</label> <input type="text" style="cursor:default" 
-									name="mem_name" class="form-control" placeholder="이름"
-									id="receiverName" value="${memberVO.mem_name}" readonly>
+								<label for="receiverName">받는 사람</label> <input type="text"
+									style="cursor: default" name="mem_name" class="form-control"
+									placeholder="이름" id="receiverName" value="${memberVO.mem_name}"
+									readonly>
 							</div>
 						</div>
 
 						<div class="w-100"></div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label for="phone">휴대폰 번호</label> <input type="tel" style="cursor:default" 
-									name="mem_phone" class="form-control" maxlength="11"
-									pattern="[0-9]{11}" placeholder="" id="phone"
+								<label for="phone">휴대폰 번호</label> <input type="tel"
+									style="cursor: default" name="mem_phone" class="form-control"
+									maxlength="11" pattern="[0-9]{11}" placeholder="" id="phone"
 									value="${memberVO.mem_phone}" readonly>
 							</div>
 						</div>
@@ -153,18 +133,8 @@
 									placeholder="50자 이내로 적어주세요." id="req" autofocus>
 							</div>
 						</div>
-
-
-
 					</div>
-
 					<!-- 카카오페이 관련 -->
-
-
-
-
-
-
 				</form>
 				<!-- END -->
 			</div>
@@ -173,7 +143,7 @@
 					<div class="col-md-12 d-flex mb-5">
 						<div class="cart-detail cart-total p-3 p-md-4">
 							<h3 class="billing-heading mb-4">Cart Total</h3>
-							
+
 							<hr>
 							<p class="d-flex total-price">
 								<span>총 결제금액</span> <span id="totalPrice"></span><span>원</span>
@@ -186,19 +156,13 @@
 							<div class="form-group">
 								<div class="col-md-12">
 									<div class="radio">
-										<label><input type="radio" name="optradio" checked="on"
-											class="mr-2">Kakao Pay</label>
+										<label><input type="radio" name="optradio" checked="on" class="mr-2">Kakao Pay</label>
 									</div>
 								</div>
 							</div>
-							
 							<p>
-
-								<input type="button" id="btn-kakao-pay"
-									class="btn btn-primary py-3 px-5 l-100" value="주문하기"><br>
+								<input type="button" id="btn-kakao-pay" class="btn btn-primary py-3 px-5 l-100" value="주문하기"><br>
 								<a href="/" class="btn btn-black py-3 px-5 l-100">취소</a><br>
-								
-
 							</p>
 						</div>
 					</div>
@@ -213,111 +177,86 @@
 <jsp:include page="/common/client_ft.jsp" />
 
 <script type="text/javascript">
+	$(function() {
+		$("#btn-kakao-pay").click(function() {
+			let proCode = document.querySelectorAll('.pro_code')
+			let cartCode = document.querySelectorAll('.cart_code')
+			let cartCnt = document.querySelectorAll('.cart_cnt')
+			let proPrice = document.querySelectorAll('.pro_price')
+			let proName = document.querySelectorAll('.pro_name')
+			let cartTotal = document.querySelectorAll('.totalPrice')
+			let proDesc = document.querySelectorAll('.pro_desc')
+			let proImage = document.querySelectorAll('.pro_image')
+			let cartDay = document.querySelectorAll('.cart_day')
+			let cartStart = document.querySelectorAll('.cart_start')
 
+			let pro_code = ""
+			let cart_code = ""
+			let cart_cnt = ""
+			let pro_price = ""
+			let pro_name = ""
+			let totalPrice = ""
+			let pro_desc = ""
+			let pro_image = ""
+			let cart_day = ""
+			let cart_start = ""
 
+			let mem_id = document.querySelector('#mem_id').value
 
-$(function(){
-	
-
-	
-	$("#btn-kakao-pay").click(function(){
-		
-		
-		let proCode = document.querySelectorAll('.pro_code')
-		let cartCode = document.querySelectorAll('.cart_code')
-		let cartCnt = document.querySelectorAll('.cart_cnt')
-		let proPrice = document.querySelectorAll('.pro_price')
-		let proName = document.querySelectorAll('.pro_name')
-		let cartTotal = document.querySelectorAll('.totalPrice')
-		let proDesc = document.querySelectorAll('.pro_desc')
-		let proImage = document.querySelectorAll('.pro_image')
-		let cartDay = document.querySelectorAll('.cart_day')
-		let cartStart = document.querySelectorAll('.cart_start')
-		
-		let pro_code = ""
-		let cart_code = ""
-		let cart_cnt = ""
-		let pro_price = ""
-		let pro_name = ""
-		let totalPrice = ""
-		let pro_desc = ""
-		let pro_image = ""
-		let cart_day = ""
-		let cart_start = ""
-		
-		
-		let mem_id = document.querySelector('#mem_id').value
-		
-		for (var i = 0; i < proCode.length; i++) {
-			pro_code = pro_code + proCode[i].value + ","
-			cart_code = cart_code + cartCode[i].value + ","
-			cart_cnt = cart_cnt + cartCnt[i].value + ","
-			pro_price = pro_price + proPrice[i].value + ","
-			pro_name = pro_name + proName[i].value + ","
-			totalPrice = totalPrice + cartTotal[i].value + ","
-			pro_desc = pro_desc + proDesc[i].value + ","
-			pro_image = pro_image + proImage[i].value + ","
-			cart_day = cart_day + cartDay[i].value + ","
-			cart_start = cart_start + cartStart[i].value + ","
-		}
-		
-		let mem_add = document.querySelector('#address').value
-		let mem_name = document.querySelector('#receiverName').value
-		let mem_phone = document.querySelector('#phone').value
-		let pay_req = document.querySelector('#req').value
-		
-		
-		// 카카오페이 결제전송
-		$.ajax({
-			type:"get"
-			,url:"/order/pay"
-			,data:{
-				pro_code: pro_code,
-				cart_code : cart_code,
-				cart_cnt : cart_cnt,
-				pro_price : pro_price,
-				pro_name : pro_name,
-				totalPrice : totalPrice,
-				pro_desc : pro_desc,
-				pro_image : pro_image,
-				mem_add : mem_add,
-				mem_name : mem_name,
-				mem_phone : mem_phone,
-				pay_req : pay_req,
-				cart_day : cart_day,
-				cart_start : cart_start,
-				
-			},
-			success:function(response){
-				
-				
-				location.href = response.next_redirect_pc_url			
+			for (var i = 0; i < proCode.length; i++) {
+				pro_code = pro_code + proCode[i].value + ","
+				cart_code = cart_code + cartCode[i].value + ","
+				cart_cnt = cart_cnt + cartCnt[i].value + ","
+				pro_price = pro_price + proPrice[i].value + ","
+				pro_name = pro_name + proName[i].value + ","
+				totalPrice = totalPrice + cartTotal[i].value + ","
+				pro_desc = pro_desc + proDesc[i].value + ","
+				pro_image = pro_image + proImage[i].value + ","
+				cart_day = cart_day + cartDay[i].value + ","
+				cart_start = cart_start + cartStart[i].value + ","
 			}
+
+			let mem_add = document.querySelector('#address').value
+			let mem_name = document.querySelector('#receiverName').value
+			let mem_phone = document.querySelector('#phone').value
+			let pay_req = document.querySelector('#req').value
+
+			// 카카오페이 결제전송
+			$.ajax({
+				type : "get",
+				url : "/order/pay",
+				data : {
+					pro_code : pro_code,
+					cart_code : cart_code,
+					cart_cnt : cart_cnt,
+					pro_price : pro_price,
+					pro_name : pro_name,
+					totalPrice : totalPrice,
+					pro_desc : pro_desc,
+					pro_image : pro_image,
+					mem_add : mem_add,
+					mem_name : mem_name,
+					mem_phone : mem_phone,
+					pay_req : pay_req,
+					cart_day : cart_day,
+					cart_start : cart_start,
+
+				},
+				success : function(response) {
+
+					location.href = response.next_redirect_pc_url
+				}
+			})
 		})
 	})
-})
-
-
 </script>
 <script>
-
-document.addEventListener('DOMContentLoaded', function(){
-	
-	let totalPrice = 0;
-	document.querySelectorAll('.totalPrice').forEach(function(item){
-		totalPrice = totalPrice + Number(item.value)
+	document.addEventListener('DOMContentLoaded', function() {
+		let totalPrice = 0;
+		document.querySelectorAll('.totalPrice').forEach(function(item) {
+			totalPrice = totalPrice + Number(item.value)
+		})
+		document.querySelector('#totalPrice').innerText = totalPrice
+		document.querySelector('#payPrice').value = totalPrice
 	})
-	
-	document.querySelector('#totalPrice').innerText = totalPrice
-	document.querySelector('#payPrice').value = totalPrice
-	
-	
-})
-
-
-
-
 </script>
-
-</body>
-</html>
