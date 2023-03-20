@@ -1,6 +1,5 @@
 package kr.co.mirak.pay.chart;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,37 +9,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.mirak.pay.PayVO;
-
 @Service
 public class ChartServiceImpl implements ChartService {
 
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-
-	public ChartServiceImpl() {
-	}
-
-	public ChartServiceImpl(SqlSessionTemplate sqlSessionTemplate) {
-		this.sqlSessionTemplate = sqlSessionTemplate;
-	}
-
-	@Override
-	public List<PayVO> list() {
-
-		ChartMapper mapper = sqlSessionTemplate.getMapper(ChartMapper.class);
-		List<PayVO> list = mapper.list();
-
-		return list;
-	}
-
-	@Override
-	public int statUpdate(PayVO vo) {
-		ChartMapper mapper = sqlSessionTemplate.getMapper(ChartMapper.class);
-		int result = mapper.statUpdate(vo);
-
-		return result;
-	}
 
 	@Override
 	public Map<String, List<Object>> getTotalByMenuList(TotalByMenuVO vo) {
