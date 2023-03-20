@@ -21,8 +21,7 @@ public interface CartMapper {
     public int getTotal();
     
     /* 게시판 목록(페이징 적용) */
-    public List<CartVO> getListPaging(CriteriaC cri);
-	
+    public List<CartVO> getListPaging(CriteriaC cri);	
 	
 	
 }

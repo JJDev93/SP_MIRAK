@@ -1,7 +1,6 @@
 package kr.co.mirak.controller;
 
 import java.sql.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,7 +15,6 @@ import kr.co.mirak.cart.CartService;
 import kr.co.mirak.cart.CartVO;
 import kr.co.mirak.cart.CriteriaC;
 import kr.co.mirak.cart.PageMakerDTOC;
-import kr.co.mirak.product.PageMakerDTO;
 
 @Controller
 public class CartController {

@@ -6,10 +6,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kr.co.mirak.member.MemberService;
+import kr.co.mirak.pay.CriteriaP;
+import kr.co.mirak.pay.PageMakerDTOP;
 import kr.co.mirak.pay.PayService;
 import kr.co.mirak.pay.PayStringVO;
 import kr.co.mirak.pay.PayVO;
@@ -40,7 +45,6 @@ public class PayController {
 	private ProductService productService;
 	@Autowired
 	private ChartService chartService;
-
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -101,21 +105,20 @@ public class PayController {
 
 		return "pay/payInfo";
 	}
-	
+
 	@RequestMapping(value = "/payDetailInfo/{group_id}", method = RequestMethod.GET)
 	public String payDetailInfo(Model model, HttpSession session, @PathVariable String group_id) {
 		System.out.println("group_id : " + group_id);
 		List<PayVO> list = payService.getProductInfo(group_id);
-		
-		for(int i=0; i<list.size(); i++) {
+
+		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i));
 		}
-		
+
 		model.addAttribute("payVOList", payService.getProductInfo(group_id));
 
 		return "pay/payDetailInfo";
 	}
-	
 
 	@RequestMapping(value = "/payCancel", method = RequestMethod.GET)
 	public String payCancel(Model model) {
@@ -149,11 +152,13 @@ public class PayController {
 	}
 
 	@RequestMapping("/admin/pays")
-	public String getAdminPayList(Model model) {
+	public String getAdminPayList(PayVO payVO, Model model, CriteriaP criP) {
 
-		List<PayVO> payList = payService.getAdminPayList();
-
-		model.addAttribute("payList", payList);
+		model.addAttribute("payList", payService.getAdminPayList(criP));
+		int total = payService.getTotal(criP);
+		PageMakerDTOP pageMake = new PageMakerDTOP(criP, total);
+		
+		model.addAttribute("pageMake", pageMake);
 
 		return "pay/adminPayments";
 	}
@@ -161,13 +166,26 @@ public class PayController {
 	@RequestMapping(value = "/admin/pays/{group_id}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<PayVO> getAdminPayListDetail(Model model, @PathVariable("group_id") String group_id) {
-		
-		System.out.println("button ajax~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		
-		List<PayVO> payListDetail = payService.getPayListDetail(group_id);
 
+		List<PayVO> payListDetail = payService.getPayListDetail(group_id);
 		return payListDetail;
 	}
+	
+	@RequestMapping(value = "/admin/pays/{pay_code}/{group_id}/updateStatus", produces = "application/json;charset=UTF-8", method = RequestMethod.PUT)
+	@ResponseBody
+	public List<PayVO> updateStatus(@PathVariable("pay_code") int pay_code, @PathVariable("group_id") String group_id) {
+	    int result = payService.updateStatus(pay_code, group_id);
+
+	    if (result > 0) {
+	        System.out.println("배송시작 완료");
+	        List<PayVO> payListDetail = payService.getPayListDetail(group_id);
+	        return payListDetail;
+	    } else {
+	        System.out.println("결제 상태 변경에 실패했습니다.");
+	        throw new RuntimeException("결제 상태 변경에 실패했습니다.");
+	    }
+	}
+
 
 	@RequestMapping(value = "/admin/charts", method = RequestMethod.GET)
 	public String chartList(Model model) throws Exception {
@@ -177,9 +195,13 @@ public class PayController {
 
 	@ResponseBody
 	@RequestMapping(value = "/admin/charts", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
-	public String chartList(ChartData chartData, TotalByMenuVO mvo, TotalByDayVO dvo) throws Exception {
+	public String chartList() throws Exception {
 
-		ObjectMapper objectMapper = new ObjectMapper();
+		ChartData chartData = new ChartData();
+	    ObjectMapper objectMapper = new ObjectMapper();
+
+	    TotalByMenuVO mvo = new TotalByMenuVO();
+	    TotalByDayVO dvo = new TotalByDayVO();
 
 		Map<String, List<Object>> totalBymenulist = chartService.getTotalByMenuList(mvo);
 		Map<String, List<Object>> totalByDayList = chartService.getTotalByDayList(dvo);
