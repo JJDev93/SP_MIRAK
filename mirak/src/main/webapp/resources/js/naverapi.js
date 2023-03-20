@@ -1,15 +1,18 @@
 function naverLoginclick() {
+		var accessToken
 		var naverLogin = new naver.LoginWithNaverId({
 			clientId : "zkOzac5hPC_Qw6v8eOzQ",
-			callbackUrl : "http://localhost:8080/",
+			callbackUrl : "http://localhost:8080/login",
 			isPopup : false,
 			loginButton: {color: "green", type: 1, height: 60},
-			callbackHandle : false
+			callbackHandle : true
 		});
 		naverLogin.init();
 		naverLogin.getLoginStatus(function(status) {
+			console.log("naverLogin : "+naverLogin);
+			console.log("accessToken : "+accessToken);
+			console.log("status : "+status);
 			if (status) {
-				console.log(naverLogin);
 				var accessToken = naverLogin.accessToken.accessToken;
 				var mem_id = naverLogin.user.getEmail();
 				if (naverLogin.user.getGender() == 'F') {
@@ -31,13 +34,16 @@ function naverLoginclick() {
 					dataType : "text",
 					success : function(responseData) {
 						if (responseData == 'loginsuccess') {
+							alert('로그인성공');
 							console.log('성공');
 							location.href = "/";
 						} else if (responseData == 'no') {
+							alert('로그인실패');
 							console.log('실패')
 						}
 					},
 					error : function(responseData) {
+						alert('오류발생');
 						console.log('오류 발생')
 					}
 				})
