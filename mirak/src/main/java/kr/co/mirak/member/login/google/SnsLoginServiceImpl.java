@@ -31,7 +31,8 @@ public class SnsLoginServiceImpl implements SnsLoginService {
 	 * GOOGLE AccessToken 처리
 	 */
 	@Override
-	public String getGoogleAccessToken(String authorize_code) {
+	public HashMap<String, Object> getGoogleAccessToken(String authorize_code) {
+		HashMap<String, Object> token = new HashMap<String, Object>();
 		String access_Token = "";
 		String refresh_Token = "";
 		String reqURL = "https://www.googleapis.com/oauth2/v4/token";
@@ -51,7 +52,7 @@ public class SnsLoginServiceImpl implements SnsLoginService {
 	        sb.append("&client_secret=" + googleUtils.getGoogleSecret());
 	        sb.append("&redirect_uri=http://localhost:8080/login/google/auth");
 	        sb.append("&code="+authorize_code);
-	        //sb.append("&state=url_parameter");
+	        sb.append("&approval_prompt=force");
 	        bw.write(sb.toString());
 	        bw.flush();
 	        
@@ -77,9 +78,13 @@ public class SnsLoginServiceImpl implements SnsLoginService {
 	            JsonParser parser = new JsonParser();
 				JsonElement element = parser.parse(result);
 	            access_Token = element.getAsJsonObject().get("access_token").getAsString();
-	            refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
+	            refresh_Token = element.getAsJsonObject().get("id_token").getAsString();
 	            System.out.println("access_token : " + access_Token);
 				System.out.println("refresh_token : " + refresh_Token);
+				
+				token.put("access_token", access_Token);
+				token.put("refresh_token", access_Token);
+				
 	            br.close();
 	            bw.close();
 	        }
@@ -87,7 +92,7 @@ public class SnsLoginServiceImpl implements SnsLoginService {
 			e.printStackTrace();
 		}
 		
-		return access_Token;
+		return token;
 	}
 
 	@Override
@@ -121,7 +126,7 @@ public class SnsLoginServiceImpl implements SnsLoginService {
 		        
 		        String name = element.getAsJsonObject().get("name").getAsString();
 		        String email = element.getAsJsonObject().get("email").getAsString();
-		        String id = "GOOGLE_"+element.getAsJsonObject().get("id").getAsString();
+		        String id = element.getAsJsonObject().get("id").getAsString();
 		        
 		        googleUserInfo.put("name", name);
 		        googleUserInfo.put("email", email);

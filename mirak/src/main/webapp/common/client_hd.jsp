@@ -43,7 +43,7 @@
 							<li class="nav-item"><a href="/logout" class="nav-link">로그아웃</a></li>
 							<li class="nav-item"><a href="/admin/charts" class="nav-link">Admin</a></li>
 						<%} else {%>
-						<li class="nav-item"><a href="/logout" class="nav-link">로그아웃</a></li>
+						<li class="nav-item"><a href="/logout" class="nav-link" >로그아웃</a></li>
 						<li class="nav-item"><a href="/mypage" class="nav-link">마이페이지</a></li>
 						<%}%>
 					</ul>

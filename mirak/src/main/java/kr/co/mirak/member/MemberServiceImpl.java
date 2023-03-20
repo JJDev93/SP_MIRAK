@@ -198,7 +198,9 @@ public class MemberServiceImpl implements MemberService {
 
 			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
 			String email = kakao_account.getAsJsonObject().get("email").getAsString();
+			String id = element.getAsJsonObject().get("id").getAsString();
 
+			userInfo.put("id", id);
 			userInfo.put("nickname", nickname);
 			userInfo.put("email", email);
 
@@ -207,6 +209,36 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return userInfo;
 	}
+	
+	
+	public void kakaoLogout(String access_Token) {
+        String reqURL = "https://kapi.kakao.com/v2/user/logout";
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+
+            int responseCode = conn.getResponseCode();
+            System.out.println("responseCode : " + responseCode);
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+            String result = "";
+            String line = "";
+
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+            System.out.println(result);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
+	
+	
+	
 
 	
 	
@@ -237,21 +269,8 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
+
 	// 여기까지
 
-	// ADMIN 리스트
-//	public List<MemberVO> getMemberList(Optional<Integer> pageStart) {
-//		int page;
-//		if (pageStart.isPresent()) {
-//			page = pageStart.get();
-//	    }else {
-//	    	page = 0;
-//	    }
-//		page=page*10;
-//		MemberMapper mamberDAO = sqlSessionTemplate.getMapper(MemberMapper.class);
-//		List<MemberVO> memberList = mamberDAO.getMemberList(page);
-//		System.out.println(page+"페이지로 이동");
-//		return memberList;
-//	}
 
 }

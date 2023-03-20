@@ -61,7 +61,7 @@ public class PayController {
 			@PathVariable("cart_start") Date cart_start, @PathVariable("cart_day") String cart_day) {
 		String mem_id = (String) session.getAttribute("mem_id");
 		if (mem_id == null) {
-			String preUrl = "/product/" + pro_code;
+			String preUrl = "/product/" + pro_code + "/" + cart_cnt + "/" + cart_start + "/" + cart_day;
 			session.setAttribute("pre_url", preUrl);
 			return "redirect:/login";
 		}

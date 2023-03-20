@@ -16,10 +16,8 @@
             } else if (data == 0) {
                 $("#idCheck").attr("value", "Y");
                 alert("사용 가능한 이메일입니다.")
-            };
-
+            }
         }
-
     })
 }
  
