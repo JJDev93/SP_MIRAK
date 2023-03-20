@@ -130,6 +130,7 @@ public class LoginController {
 			session.invalidate();
 			System.out.println(user_api + "로그아웃 성공!!");
 		} else {
+			session.invalidate();
 			System.out.println("access_Token is null");
 		}
 		return "redirect:/";

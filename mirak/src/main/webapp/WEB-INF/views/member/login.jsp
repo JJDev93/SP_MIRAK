@@ -123,21 +123,19 @@
 			 <%session.setAttribute("message", "");%>
 		}
 	})
-	
-	$(document).ready(function() {
-		var naverLogin = new naver.LoginWithNaverId({
-			clientId : "zkOzac5hPC_Qw6v8eOzQ",
-			callbackUrl : "http://localhost:8080/login",
-			isPopup : false,
-			loginButton: {color: "green", type: 1, height: 60},
-			callbackHandle : true
-		})
-		naverLogin.init();
-		console.log(naverLogin.user);
-		console.log("accessToken : " + naverLogin.accessToken);
-		
 		function naverLoginclick(){
+			var naverLogin = new naver.LoginWithNaverId({
+				clientId : "zkOzac5hPC_Qw6v8eOzQ",
+				callbackUrl : "http://localhost:8080/login",
+				isPopup : false,
+				loginButton: {color: "green", type: 1, height: 60},
+				callbackHandle : false
+			})
+			naverLogin.init();
+			
 			naverLogin.getLoginStatus(function(status) {
+				console.log(naverLogin.user);
+				console.log("accessToken : " + naverLogin.accessToken);
 				console.log("status : " + status);
 				if (status) {
 					var accessToken = naverLogin.accessToken.accessToken;
@@ -185,5 +183,4 @@
 				}
 			})
 		}
-	})
 </script>
