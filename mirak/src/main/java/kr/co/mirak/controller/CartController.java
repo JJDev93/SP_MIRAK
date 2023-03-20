@@ -52,8 +52,8 @@ public class CartController {
    
 //   // update
 //   @RequestMapping(value = "/cart/cartUpdate/{cart_code}/{cart_cnt}/{cart_start}/{cart_day}")
-//   public String cartInsert(CartVO vo, HttpSession session, Model model, @PathVariable("cart_code") int cart_code, @PathVariable("cart_cnt") int cart_cnt, @PathVariable("cart_start") Date cart_start, @PathVariable("cart_day") String cart_day) {
-//      vo.setCart_code(cart_code);
+//   public String cartUpdate(CartVO vo, HttpSession session, Model model, @PathVariable("cart_code") int cart_code, @PathVariable("cart_cnt") int cart_cnt, @PathVariable("cart_start") Date cart_start, @PathVariable("cart_day") String cart_day) {
+//	   vo.setCart_code(cart_code);
 //      cartService.cartUpdate(vo, session);
 //      return "redirect:/cart";
 //   }

@@ -26,9 +26,8 @@ session = request.getSession();
 %>
 
 
- 
+<form method="post">
 <section class="ftco-section ftco-cart">
-	<form action="/pay" method="post">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 ftco-animate">
@@ -61,7 +60,7 @@ session = request.getSession();
 										<input type="hidden" class="price_input" value="${c.pro_price }">
 										<input type="hidden" class="count_input" value="${c.cart_cnt }">
 										<input type="hidden" class="totalPrice_input" value="${c.pro_price * c.cart_cnt }">
-										<input type="hidden" class="_input" value="${c.pro_code }">
+										<input type="hidden" class="pro_code" value="${c.pro_code }">
 									</td>
 									<td class="image-prod"><div>
 											<img alt="1"
@@ -96,11 +95,12 @@ session = request.getSession();
 									</td>
 									<td>
 <!-- 									<button type="button" class="btn btn-primary py-3 px-5" onclick="javascript:del()"> -->
+<!-- 									<input type="button" value="삭제" class="btn btn-primary py-3 px-5" onclick="location.href='/cart/cartDelete/${c.cart_code }'; return confirm('삭제하시겠습니까?');"> -->
 									<a href="/cart/cartDelete/${c.cart_code }" onclick="return confirm('삭제하시겠습니까?');" class="btn btn-primary py-3 px-5">삭제</a>
 									</td>
 								</tr>
 							</c:forEach>
-</form>	
+	
 
 							<!-- END TR-->
 						</tbody>
@@ -127,15 +127,14 @@ session = request.getSession();
 				</p>
 			</div>
 			<p>
-				<input class="pay_btn btn-primary py-3 px-4" type="submit"
-					value="결제하기">
+				
+				<input type="submit" value="결제하기" formaction="/pay" class="btn btn-primary py-3 px-5">
 			</p>
 		</div>
 	</div>
-
+	
 	<!-- Modal -->
 	
-	<form action="/cart/cartUpdate/${cart_code }">
 		<div class="modal fade" id="exampleModal" tabindex="9999"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
@@ -148,9 +147,9 @@ session = request.getSession();
 					</div>
 					<div class="modal-body">
 					<c:forEach var="c" items="${cartList }">
+					<input type="hidden" class="cart_code" value="${c.cart_code }">
 					<img src="${path}/resources/images/product/${c.pro_image}" style="width: 100px; height: 50px;" />
-						${c.pro_name }<br>
-						${c.pro_price }원<br>
+					&nbsp;&nbsp;&nbsp; ${c.pro_name }  &nbsp;&nbsp;&nbsp; ${c.pro_price }원<br>
 						<br>배송 시작일 선택<br>
 						<input type="date" name="cart_start" class="form-control input-number" style="width:240px;"
 						value="${c.cart_start }">
@@ -165,30 +164,44 @@ session = request.getSession();
 						<br><br>
 						배송 횟수 선택 <br>
 						<input type="number" name="cart_cnt" value="${c.cart_cnt}" class="quantity_input">
+						
+						<a href="/cart/cartUpdate/${c.cart_code}" class="btn btn-primary py-3 px-5">변경</a>
 						<br><br>
 					</c:forEach>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<input type="submit" class="btn btn-primary" value="변경">
+						
+						
 					</div>
+					
 				</div>
 			</div>
 		</div>
-	</form>
-	
 </section>
-
+</form>
 
 
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
 
 <script>
 
-const str = "월화수목금토일";
-const arr = str.split("");
 
+const payBtnCnt = function() {
+	 let cnt = document.getElementById("result").value;
+		
+	 let start = document.getElementById("start").value;
+	 let mon = document.getElementById("mon").checked ? "월" : "";
+	 let tue = document.getElementById("tue").checked ? "화" : "";
+	 let wed = document.getElementById("wed").checked ? "수" : "";
+	 let thu = document.getElementById("thu").checked ? "목" : "";
+	 let fri = document.getElementById("fri").checked ? "금" : "";
+	 let sat = document.getElementById("sat").checked ? "토" : "";
+	 let sun = document.getElementById("sun").checked ? "일" : "";
+	 
+	 document.getElementById("updateBtn").href = "/cart/cartUpdate/${cart_code}/"  + cnt + "/" + start + "/" + mon + tue + wed + thu + fri + sat + sun;
 
+}
 
 $(function() {
 	  $('input[name="daterange"]').daterangepicker({

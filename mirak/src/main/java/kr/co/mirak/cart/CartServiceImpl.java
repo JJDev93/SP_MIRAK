@@ -62,7 +62,6 @@ public class CartServiceImpl implements CartService {
 //	@Override
 //	public int cartUpdate(CartVO vo, HttpSession session) {
 //		String mem_id = (String)session.getAttribute("mem_id");
-//		  int cart_code = vo.getCart_code();
 //	      int cart_cnt = vo.getCart_cnt();
 //	      Date cart_start = vo.getCart_start();
 //	      String cart_day = vo.getCart_day();
@@ -70,7 +69,6 @@ public class CartServiceImpl implements CartService {
 //	      CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
 //	      vo = mapper.productToCart(vo);
 //	      vo.setMem_id(mem_id);
-//	      vo.setCart_code(cart_code);
 //	      vo.setCart_cnt(cart_cnt);
 //	      vo.setCart_start(cart_start);
 //	      vo.setCart_day(cart_day);

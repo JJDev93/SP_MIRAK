@@ -12,6 +12,7 @@ public interface CartMapper {
 	int cartInsert(CartVO vo);
 	
 	// int cartUpdate(CartVO vo);
+	
 	void cartUpdate(CartVO vo);
 
 	void cartDelete(CartVO vo);
