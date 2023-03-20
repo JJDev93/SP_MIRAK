@@ -1,6 +1,5 @@
 package kr.co.mirak.controller;
 
-import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,9 +26,9 @@ public class LoginController {
 	final static String GOOGLE_TOKEN_BASE_URL = "https://oauth2.googleapis.com/token";
 	final static String GOOGLE_REVOKE_TOKEN_BASE_URL = "https://oauth2.googleapis.com/revoke";
 
- 
-
 	
+
+
 	@Autowired
 	private MemberService memberService;
 	@Autowired
@@ -126,29 +125,41 @@ public class LoginController {
 	 */
 
 	// 로그아웃
-	@RequestMapping("/logout")
+	@RequestMapping(value="/logout")
 	public String logout(HttpSession session) throws Exception {
 
 		
-		String access_Token = (String) session.getAttribute("access_Token");
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("Authorization", "Bearer "+ access_Token);
-		
-		
-		if (access_Token != null && !"".equals(access_Token)) {
-			memberService.kakaoLogout(access_Token);
-			session.removeAttribute("access_Token");
-			session.removeAttribute("userId");
-		} else {
-			System.out.println("access_Token is null");
-		}
+//		memberService.kakaoLogout((String)session.getAttribute("access_Token"));
+       
+		String access_Token = (String)session.getAttribute("access_Token");
 
+        if(access_Token != null && !"".equals(access_Token)){
+            memberService.kakaoLogout(access_Token);
+            session.removeAttribute("access_Token");
+            session.removeAttribute("userId");
+        }else{
+            System.out.println("access_Token is null");
+            //return "redirect:/";
+        }
+        //return "index";
+        
+        session.invalidate();
+        return "redirect:/";
+    }
+	
+	/*
+	//카카오 로그아웃
+	@RequestMapping(value="/kakaounlink")
+	public String unlink(HttpSession session) {
+		memberService.unlink((String)session.getAttribute("access_token"));
 		session.invalidate();
-
-		System.out.println("로그아웃 성공!!");
 		return "redirect:/";
 	}
+	*/
+	
+	
+	
+	
 
 	// 아이디찾기
 	@RequestMapping(value = "/idfind", method = RequestMethod.GET)

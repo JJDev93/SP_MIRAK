@@ -61,12 +61,17 @@ public class apiController {
    public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
       System.out.println("#########" + code);
       String access_Token = memberService.getAccessToken(code);
-
+      System.out.println("###access_Token#### : " + access_Token);
+      
+      
       // 위에서 만든 코드 아래에 코드 추가
       HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
-      System.out.println("###access_Token#### : " + access_Token);
-      System.out.println("###nickname#### : " + userInfo.get("nickname"));
-      System.out.println("###email#### : " + userInfo.get("email"));
+      System.out.println("login controller :" + userInfo);
+      
+
+      
+   //   System.out.println("###nickname#### : " + userInfo.get("nickname"));
+    //  System.out.println("###email#### : " + userInfo.get("email"));
 
       String user_pw = (String)userInfo.get("id");
       String user_id = (String)userInfo.get("email");
@@ -82,6 +87,7 @@ public class apiController {
          memberService.createUser(memberVO);
       }
       session.setAttribute("mem_id", user_id);
+      session.setAttribute("access_Token", access_Token);
       memberService.login(memberVO);
       
       return "member/join";

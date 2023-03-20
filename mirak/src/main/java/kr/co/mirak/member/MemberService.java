@@ -24,6 +24,16 @@ public interface MemberService {
 	// 카카오 로그인
 //	String getAccessToken(String code);
 //	MemberVO getUserInfo(String access_Token);
+	
+	String getAccessToken(String code);
+	
+	HashMap<String, Object> getUserInfo(String access_Token);
+	
+	void kakaoLogout(String access_Token);
+	
+//	void unlink(String access_Token);
+	
+	
 
 	// 김원중이 건드린 부분
 
@@ -35,9 +45,7 @@ public interface MemberService {
 	MemberVO getMemberDetail(MemberVO mvo);
 	
 	
-	String getAccessToken(String code);
-	HashMap<String, Object> getUserInfo(String access_Token);
-	void kakaoLogout(String access_Token);
+
 
 	// 여기까지
 
