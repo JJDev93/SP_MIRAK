@@ -58,13 +58,34 @@ public class PayController {
 	@RequestMapping(value = "/pay/{pro_code}/{cart_cnt}/{cart_start}/{cart_day}", method = RequestMethod.GET)
 	public String getPayFromProduct(Model model, ProductVO productVO, HttpSession session,
 			@PathVariable("pro_code") String pro_code, @PathVariable("cart_cnt") String cart_cnt,
-			@PathVariable("cart_start") Date cart_start, @PathVariable("cart_day") String cart_day) {
+			@PathVariable("cart_start") String cart_start, @PathVariable("cart_day") String cart_day) {
 		String mem_id = (String) session.getAttribute("mem_id");
 		if (mem_id == null) {
-			String preUrl = "/product/" + pro_code + "/" + cart_cnt + "/" + cart_start + "/" + cart_day;
+			String preUrl = "/pay/" + pro_code + "/" + cart_cnt + "/" + cart_start + "/" + cart_day;
 			session.setAttribute("pre_url", preUrl);
 			return "redirect:/login";
 		}
+		
+		System.out.println(pro_code + ", " + cart_cnt + ", " + cart_start + ", " + cart_day);
+		
+		String dayWeek = "월화수목금토일";
+		int j = 0;
+		for(int i=0; i<cart_day.length(); i++) {
+			if(dayWeek.indexOf(cart_day.charAt(i)) == -1) {
+				System.out.println("어디서1 cart_day.charAt(i): " + cart_day.charAt(i));
+				return "redirect:/";
+			}
+			
+			if(j < dayWeek.indexOf(cart_day.charAt(i))) {
+				System.out.println("어디서2 j: " + j + ", cart_day.charAt(i): " + cart_day.charAt(i));
+				return "redirect:/";
+			}
+			
+			j = cart_day.charAt(i);
+			
+		}
+		
+		
 //		productVO.setCart_start(Date.valueOf(cart_start));
 //		productVO.setCart_day(cart_day);
 		System.out.println("확인 : " + productVO);
@@ -77,7 +98,7 @@ public class PayController {
 
 		// 품목
 		productVO = productService.productDetail(productVO);
-		model.addAttribute("productList", payService.payFromProduct(productVO, cart_cnt, cart_start, cart_day));
+		model.addAttribute("productList", payService.payFromProduct(productVO, cart_cnt, Date.valueOf(cart_start), cart_day));
 
 		return "pay/pay";
 	}

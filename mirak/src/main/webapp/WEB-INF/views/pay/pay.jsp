@@ -4,114 +4,9 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp" />
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<script type="text/javascript">
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 
 
-
-$(function(){
-	
-
-	
-	$("#btn-kakao-pay").click(function(){
-		
-		
-		let proCode = document.querySelectorAll('.pro_code')
-		let cartCode = document.querySelectorAll('.cart_code')
-		let cartCnt = document.querySelectorAll('.cart_cnt')
-		let proPrice = document.querySelectorAll('.pro_price')
-		let proName = document.querySelectorAll('.pro_name')
-		let cartTotal = document.querySelectorAll('.totalPrice')
-		let proDesc = document.querySelectorAll('.pro_desc')
-		let proImage = document.querySelectorAll('.pro_image')
-		let cartDay = document.querySelectorAll('.cart_day')
-		let cartStart = document.querySelectorAll('.cart_start')
-		
-		let pro_code = ""
-		let cart_code = ""
-		let cart_cnt = ""
-		let pro_price = ""
-		let pro_name = ""
-		let totalPrice = ""
-		let pro_desc = ""
-		let pro_image = ""
-		let cart_day = ""
-		let cart_start = ""
-		
-		
-		let mem_id = document.querySelector('#mem_id').value
-		
-		for (var i = 0; i < proCode.length; i++) {
-			pro_code = pro_code + proCode[i].value + ","
-			cart_code = cart_code + cartCode[i].value + ","
-			cart_cnt = cart_cnt + cartCnt[i].value + ","
-			pro_price = pro_price + proPrice[i].value + ","
-			pro_name = pro_name + proName[i].value + ","
-			totalPrice = totalPrice + cartTotal[i].value + ","
-			pro_desc = pro_desc + proDesc[i].value + ","
-			pro_image = pro_image + proImage[i].value + ","
-			cart_day = cart_day + cartDay[i].value + ","
-			cart_start = cart_start + cartStart[i].value + ","
-		}
-		
-		let mem_add = document.querySelector('#address').value
-		let mem_name = document.querySelector('#receiverName').value
-		let mem_phone = document.querySelector('#phone').value
-		let pay_req = document.querySelector('#req').value
-		
-		
-		// 카카오페이 결제전송
-		$.ajax({
-			type:"get"
-			,url:"/order/pay"
-			,data:{
-				pro_code: pro_code,
-				cart_code : cart_code,
-				cart_cnt : cart_cnt,
-				pro_price : pro_price,
-				pro_name : pro_name,
-				totalPrice : totalPrice,
-				pro_desc : pro_desc,
-				pro_image : pro_image,
-				mem_add : mem_add,
-				mem_name : mem_name,
-				mem_phone : mem_phone,
-				pay_req : pay_req,
-				cart_day : cart_day,
-				cart_start : cart_start,
-				
-			},
-			success:function(response){
-				
-				
-				location.href = response.next_redirect_pc_url			
-			}
-		})
-	})
-})
-
-
-</script>
-<script>
-
-document.addEventListener('DOMContentLoaded', function(){
-	
-	let totalPrice = 0;
-	document.querySelectorAll('.totalPrice').forEach(function(item){
-		totalPrice = totalPrice + Number(item.value)
-	})
-	
-	document.querySelector('#totalPrice').innerText = totalPrice
-	document.querySelector('#payPrice').value = totalPrice
-	
-	
-})
-
-
-
-
-</script>
 
 
 <div class="hero-wrap hero-bread"
@@ -331,7 +226,112 @@ document.addEventListener('DOMContentLoaded', function(){
 
 <jsp:include page="/common/client_ft.jsp" />
 
+<script type="text/javascript">
 
+
+
+$(function(){
+	
+
+	
+	$("#btn-kakao-pay").click(function(){
+		
+		
+		let proCode = document.querySelectorAll('.pro_code')
+		let cartCode = document.querySelectorAll('.cart_code')
+		let cartCnt = document.querySelectorAll('.cart_cnt')
+		let proPrice = document.querySelectorAll('.pro_price')
+		let proName = document.querySelectorAll('.pro_name')
+		let cartTotal = document.querySelectorAll('.totalPrice')
+		let proDesc = document.querySelectorAll('.pro_desc')
+		let proImage = document.querySelectorAll('.pro_image')
+		let cartDay = document.querySelectorAll('.cart_day')
+		let cartStart = document.querySelectorAll('.cart_start')
+		
+		let pro_code = ""
+		let cart_code = ""
+		let cart_cnt = ""
+		let pro_price = ""
+		let pro_name = ""
+		let totalPrice = ""
+		let pro_desc = ""
+		let pro_image = ""
+		let cart_day = ""
+		let cart_start = ""
+		
+		
+		let mem_id = document.querySelector('#mem_id').value
+		
+		for (var i = 0; i < proCode.length; i++) {
+			pro_code = pro_code + proCode[i].value + ","
+			cart_code = cart_code + cartCode[i].value + ","
+			cart_cnt = cart_cnt + cartCnt[i].value + ","
+			pro_price = pro_price + proPrice[i].value + ","
+			pro_name = pro_name + proName[i].value + ","
+			totalPrice = totalPrice + cartTotal[i].value + ","
+			pro_desc = pro_desc + proDesc[i].value + ","
+			pro_image = pro_image + proImage[i].value + ","
+			cart_day = cart_day + cartDay[i].value + ","
+			cart_start = cart_start + cartStart[i].value + ","
+		}
+		
+		let mem_add = document.querySelector('#address').value
+		let mem_name = document.querySelector('#receiverName').value
+		let mem_phone = document.querySelector('#phone').value
+		let pay_req = document.querySelector('#req').value
+		
+		
+		// 카카오페이 결제전송
+		$.ajax({
+			type:"get"
+			,url:"/order/pay"
+			,data:{
+				pro_code: pro_code,
+				cart_code : cart_code,
+				cart_cnt : cart_cnt,
+				pro_price : pro_price,
+				pro_name : pro_name,
+				totalPrice : totalPrice,
+				pro_desc : pro_desc,
+				pro_image : pro_image,
+				mem_add : mem_add,
+				mem_name : mem_name,
+				mem_phone : mem_phone,
+				pay_req : pay_req,
+				cart_day : cart_day,
+				cart_start : cart_start,
+				
+			},
+			success:function(response){
+				
+				
+				location.href = response.next_redirect_pc_url			
+			}
+		})
+	})
+})
+
+
+</script>
+<script>
+
+document.addEventListener('DOMContentLoaded', function(){
+	
+	let totalPrice = 0;
+	document.querySelectorAll('.totalPrice').forEach(function(item){
+		totalPrice = totalPrice + Number(item.value)
+	})
+	
+	document.querySelector('#totalPrice').innerText = totalPrice
+	document.querySelector('#payPrice').value = totalPrice
+	
+	
+})
+
+
+
+
+</script>
 
 </body>
 </html>
