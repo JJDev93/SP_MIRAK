@@ -112,30 +112,6 @@ public class LoginController {
 
 	}
 
-	/*
-	 * System.out.println("로그인을 시도합니다."); String returnURL = ""; String preUrl =
-	 * (String) session.getAttribute("pre_url"); System.out.println("preUrl : " +
-	 * preUrl);
-	 * 
-	 * try { String mem_id = memberService.login(memberVO).getMem_id(); if (mem_id
-	 * != null) { session.setAttribute("mem_id", mem_id);
-	 * 
-	 * System.out.println("로그인 성공!"); if (preUrl != null) {
-	 * System.out.println("이전 페이지로 이동"); returnURL = "redirect:" + preUrl;
-	 * 
-	 * } else {
-	 * 
-	 * System.out.println("메인으로 이동"); returnURL = "redirect:/"; } } else {
-	 * System.out.println("로그인 실패ㅠ 로그인 페이지로 이동"); returnURL = "member/login"; }
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); returnURL = "member/login";
-	 * model.addAttribute("message", "아이디와 비밀번호 확인해주세요......"); }
-	 * session.removeAttribute("pre_url"); return returnURL;
-	 * 
-	 * }
-	 * 
-	 */
-
 	// 로그아웃
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) throws Exception {
