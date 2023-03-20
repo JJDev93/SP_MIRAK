@@ -152,7 +152,7 @@
 							
 							
 
-							<a href="/payInfo" class="btn btn-primary py-3 px-5 l-100">결제목록 보기</a><br>
+							<a href="/payInfo" class="btn btn-primary py-3 px-5 l-100">결제내역 보기</a><br>
 								
 							<c:if test="${payVOList[0].status eq '결제 완료'}">								
 								<button id="payCancel" class="btn btn-primary py-3 px-5 l-100" data-group_id="${payVOList[0].group_id }">결제 취소</button><br>

@@ -16,8 +16,7 @@ public interface PayService {
 	List<PayVO> getProductInfo(String group_id);
 	List<PayVO> getClientPayList(HttpSession session);
 	PayVO info(int id);
-	int insert(PayVO vo);
-	int update(PayVO vo);
+	int updateStateConfirm(String group_id);
 	int delete(int id);
 	List<CartVO> cartCheckList(HttpSession session);
 	List<PayVO> adaptPayVO(PayStringVO payStringVO, HttpSession session);

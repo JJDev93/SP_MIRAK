@@ -123,9 +123,7 @@ public class PayController {
 	@RequestMapping(value = "/payInfo", method = RequestMethod.GET)
 	public String payInfo(Model model, HttpSession session) {
 		
-		List<PayVO> list = payService.getClientPayList(session);
-		System.out.println("현재상태 " + list.get(0).getStatus());
-		model.addAttribute("payVOList", list);
+		model.addAttribute("payVOList", payService.getClientPayList(session));
 
 		return "pay/payInfo";
 	}
@@ -133,12 +131,10 @@ public class PayController {
 	@RequestMapping(value = "/payDetailInfo/{group_id}", method = RequestMethod.GET)
 	public String payDetailInfo(Model model, HttpSession session, @PathVariable String group_id) {
 		System.out.println("group_id : " + group_id);
-		List<PayVO> list = payService.getProductInfo(group_id);
 
 		
 		model.addAttribute("payVOList", payService.getProductInfo(group_id));
 		
-		model.addAttribute("member", memberService.getMemberInfo(session));
 
 		return "pay/payDetailInfo";
 	}
@@ -152,14 +148,15 @@ public class PayController {
 	public String payFail(Model model) {
 		return "pay/payFail";
 	}
-
-	@RequestMapping(value = "/pay/asdf", method = RequestMethod.POST)
-	public String home(PayVO payVO) {
-		System.out.println(payVO);
-		payService.insert(payVO);
-
-		return "redirect:payList";
+	
+	@RequestMapping(value = "/payConfirm/{group_id}", method = RequestMethod.GET)
+	public String payConfirm(Model model, @PathVariable String group_id) {
+		
+		int result = payService.updateStateConfirm(group_id);
+		
+		return "pay/payInfo";
 	}
+
 
 	@RequestMapping(value = "/paySubmit", method = RequestMethod.POST)
 	public String mypage(PayStringVO payStringVO, HttpSession session) {
