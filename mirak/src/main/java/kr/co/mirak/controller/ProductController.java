@@ -130,9 +130,15 @@ public class ProductController {
 
    // 상품 Admin 상세 페이지
    @RequestMapping(value = "/admin/product/{pro_code}")
-   public String productDetail(ProductVO vo, Model model) {
+   public String productDetail(ProductVO vo, Model model, Criteria cri) {
       model.addAttribute("product", productService.productDetail(vo));
       productService.productDetail(vo);
+      
+      
+      int total = productService.getTotal();
+      PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+      model.addAttribute("pageMaker", pageMake);
+      
       return "/product/ProductAdminDetail";
    }
 
