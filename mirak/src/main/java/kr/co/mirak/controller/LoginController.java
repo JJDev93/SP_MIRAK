@@ -26,7 +26,7 @@ public class LoginController {
 	final static String GOOGLE_AUTH_BASE_URL = "https://accounts.google.com/o/oauth2/v2/auth";
 	final static String GOOGLE_TOKEN_BASE_URL = "https://oauth2.googleapis.com/token";
 	final static String GOOGLE_REVOKE_TOKEN_BASE_URL = "https://oauth2.googleapis.com/revoke";
-	
+
 	@Autowired
 	private MemberService memberService;
 	@Autowired
@@ -82,17 +82,17 @@ public class LoginController {
 
 				session.setAttribute("mem_id", mem_id); // 세션에 사용자정보 저장
 				logger.info("로그인 성공");
-				
-				String preUrl = (String) session.getAttribute("pre_url"); 
+
+				String preUrl = (String) session.getAttribute("pre_url");
 				String returnURL = "";
 				System.out.println("preUrl : " + preUrl);
 				if (preUrl != null) {
-					System.out.println("이전 페이지로 이동"); 
+					System.out.println("이전 페이지로 이동");
 					returnURL = "redirect:" + preUrl;
 					session.removeAttribute("pre_url");
 				} else {
-					System.out.println("메인으로 이동"); 
-					returnURL = "redirect:/"; 
+					System.out.println("메인으로 이동");
+					returnURL = "redirect:/";
 				}
 				return returnURL;
 
@@ -137,30 +137,24 @@ public class LoginController {
 	 */
 
 	// 로그아웃
-	@RequestMapping("/logout")
+	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) throws Exception {
+
+//		memberService.kakaoLogout((String)session.getAttribute("access_Token"));
+
 		String access_Token = (String) session.getAttribute("access_Token");
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("Authorization", "Bearer "+ access_Token);
-		
-		if (access_Token != null) {
-			try {
-				int result = snslogin.googleLogout(access_Token);
-				System.out.println("구글로그아웃 : " + result);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+		if (access_Token != null && !"".equals(access_Token)) {
 			memberService.kakaoLogout(access_Token);
 			session.removeAttribute("access_Token");
 			session.removeAttribute("userId");
 		} else {
 			System.out.println("access_Token is null");
+			// return "redirect:/";
 		}
+		// return "index";
 
 		session.invalidate();
-		
-		System.out.println("로그아웃 성공!!");
 		return "redirect:/";
 	}
 
