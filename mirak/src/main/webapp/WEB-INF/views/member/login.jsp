@@ -123,6 +123,14 @@
 			alert("${message}");
 			 <%session.setAttribute("message", "");%>
 		}
+		var naverLogin = new naver.LoginWithNaverId({
+			clientId : "zkOzac5hPC_Qw6v8eOzQ",
+			callbackUrl : "http://localhost:8080/login",
+			isPopup : false,
+			loginButton: {color: "green", type: 1, height: 60},
+			callbackHandle : false
+		})
+		naverLogin.init();
 	})
 		
 		
@@ -134,15 +142,6 @@
 	
 	
 		function naverLoginclick(){
-			var naverLogin = new naver.LoginWithNaverId({
-				clientId : "zkOzac5hPC_Qw6v8eOzQ",
-				callbackUrl : "http://localhost:8080/login",
-				isPopup : false,
-				loginButton: {color: "green", type: 1, height: 60},
-				callbackHandle : false
-			})
-			naverLogin.init();
-			
 			naverLogin.getLoginStatus(function(status) {
 				console.log(naverLogin.user);
 				console.log("accessToken : " + naverLogin.accessToken);
@@ -172,10 +171,10 @@
 						dataType : "text",
 						success : function(responseData) {
 							if (responseData == 'loginsuccess') {
-								alert('로그인성공');
-								console.log('성공');
 								location.href = "/";
-							} else if (responseData == 'no') {
+							} else if (responseData == 'joinsuccess') {
+								location.href = "/";
+							}else {
 								alert('로그인실패');
 								console.log('실패')
 								return false;
