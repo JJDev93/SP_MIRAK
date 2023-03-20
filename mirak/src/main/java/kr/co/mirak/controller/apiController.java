@@ -122,13 +122,28 @@ public class apiController {
 		}else {
 			session.setAttribute("mem_id", user_id);
 			memberService.login(memberVO);
-
+			System.out.println("세션설정 mem_id : " + user_id);
 			//PrintWriter out = response.getWriter();
 			//out.println("<script>window.close(); opener.parent.location="+"'/join'"+";</script>");
 			//out.flush();
 
-			return "redirect:/";
+			return "redirect:/returnBefo";
 		}
+	} 
+
+	@RequestMapping(value="/returnBefo", method=RequestMethod.GET)
+	public String returnBefo(HttpSession session){
+		String preUrl = (String) session.getAttribute("pre_url"); 
+		String returnURL = "";
+		System.out.println("preUrl : " + preUrl);
+		if (preUrl != null) {
+			System.out.println("이전 페이지로 이동"); 
+			returnURL = "redirect:" + preUrl;
+		} else {
+			System.out.println("메인으로 이동"); 
+			returnURL = "redirect:/"; 
+		} 
+		return returnURL;
 	} 
 
 }

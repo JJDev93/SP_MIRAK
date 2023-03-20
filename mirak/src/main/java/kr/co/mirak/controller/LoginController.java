@@ -79,7 +79,19 @@ public class LoginController {
 
 				session.setAttribute("mem_id", mem_id); // 세션에 사용자정보 저장
 				logger.info("로그인 성공");
-				return "redirect:/"; // 메인페이지로 이동
+				
+				String preUrl = (String) session.getAttribute("pre_url"); 
+				String returnURL = "";
+				System.out.println("preUrl : " + preUrl);
+				if (preUrl != null) {
+					System.out.println("이전 페이지로 이동"); 
+					returnURL = "redirect:" + preUrl;
+					session.removeAttribute("pre_url");
+				} else {
+					System.out.println("메인으로 이동"); 
+					returnURL = "redirect:/"; 
+				}
+				return returnURL;
 
 			} else { // 일치하는 아이디가 존재하지 않을 시 (로그인 실패)
 
