@@ -139,28 +139,29 @@ public class LoginController {
 	// 로그아웃
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) throws Exception {
+		String mem_id = (String) session.getAttribute("mem_id");
 		String access_Token = (String) session.getAttribute("access_Token");
+		MemberVO member = memberService.getMemberDetail(mem_id);
+		String user_api = member.getMem_isapi();
+		System.out.println("user_api : " + user_api);
+		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("Authorization", "Bearer "+ access_Token);
 		
 		if (access_Token != null) {
-			try {
+			if(user_api.equals("google")){
 				int result = snslogin.googleLogout(access_Token);
 				System.out.println("구글로그아웃 : " + result);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			}else if(user_api.equals("kakao")){
+				memberService.kakaoLogout(access_Token);
+			}else if(user_api.equals("naver")){
+				
 			}
-			memberService.kakaoLogout(access_Token);
-			session.removeAttribute("access_Token");
-			session.removeAttribute("userId");
+			session.invalidate();
+			System.out.println(user_api + "로그아웃 성공!!");
 		} else {
 			System.out.println("access_Token is null");
 		}
-
-		session.invalidate();
-		
-		System.out.println("로그아웃 성공!!");
 		return "redirect:/";
 	}
 

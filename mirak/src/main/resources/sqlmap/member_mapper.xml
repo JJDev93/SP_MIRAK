@@ -28,10 +28,8 @@
 	</update>
 	<insert id="createUser" parameterType="member">
  		<![CDATA[
-
 	 		INSERT INTO MEMBER (MEM_ID, MEM_PW , MEM_NAME, MEM_AGE, MEM_GENDER ,MEM_PHONE, MEM_ZIPCODE, MEM_ADD1, MEM_ADD2,  MEM_ISAPI)
 	 		VALUES(#{mem_id}, #{mem_pw}, #{mem_name} , #{mem_age} , #{mem_gender} , #{mem_phone} , #{mem_zipcode}, #{mem_add1} , #{mem_add2} , #{mem_isapi})
-
  		]]>
 	</insert>
 
@@ -76,7 +74,8 @@
 				MEM_REGDATE, 
 				MEM_ADD1,
 				MEM_ADD2,
-				MEM_ZIPCODE FROM MEMBER
+				MEM_ZIPCODE,
+				MEM_ISAPI FROM MEMBER
 			WHERE MEM_ID=#{myid}
 		]]>
 	</select>
