@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
-   li{
+   #abc{
       float:left;
       margin-right:10px;
    }
@@ -57,21 +57,21 @@
                               <!-- 이전페이지 버튼 -->
                               <c:if test="${pageMaker.prev}">
                                  <ul>
-                                    <li class="pageInfo_btn previous">
+                                    <li class="pageInfo_btn previous" id="abc">
                                        <a href="javascript:acyncMovePage('/admin/products?pageNum= ${pageMaker.startPage-1}');">&lt;</a>
                                     </li>
                                  </ul>
                               </c:if>
                               <c:forEach var="num" begin="${pageMaker.startPage}"
                                  end="${pageMaker.endPage}">
-                                 <ul style="text-align: center;">
+                                 <ul style="text-align: center;" id="abc">
                                     <li class="pageInfo_btn"><a href="javascript:acyncMovePage('/admin/products?pageNum=${num}');">${num}</a></li>
                                  </ul>
                               </c:forEach>
                               <!-- 다음페이지 버튼 -->
                               <c:if test="${pageMaker.next}">
                                  <ul>
-                                    <li class="pageInfo_btn next">
+                                    <li class="pageInfo_btn next" id="abc">
                                        <a href="javascript:acyncMovePage('/admin/products?pageNum=${pageMaker.endPage + 1 }');">&gt;</a>
                                     </li>
                                  </ul>

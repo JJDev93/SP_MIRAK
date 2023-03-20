@@ -1,15 +1,20 @@
 package kr.co.mirak.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kr.co.mirak.member.MemberService;
+import kr.co.mirak.pay.CriteriaP;
+import kr.co.mirak.pay.PageMakerDTOP;
 import kr.co.mirak.pay.PayService;
 import kr.co.mirak.pay.PayStringVO;
 import kr.co.mirak.pay.PayVO;
@@ -41,7 +48,6 @@ public class PayController {
 	@Autowired
 	private ChartService chartService;
 
-
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -54,13 +60,34 @@ public class PayController {
 	@RequestMapping(value = "/pay/{pro_code}/{cart_cnt}/{cart_start}/{cart_day}", method = RequestMethod.GET)
 	public String getPayFromProduct(Model model, ProductVO productVO, HttpSession session,
 			@PathVariable("pro_code") String pro_code, @PathVariable("cart_cnt") String cart_cnt,
-			@PathVariable("cart_start") Date cart_start, @PathVariable("cart_day") String cart_day) {
+			@PathVariable("cart_start") String cart_start, @PathVariable("cart_day") String cart_day) throws UnsupportedEncodingException {
 		String mem_id = (String) session.getAttribute("mem_id");
 		if (mem_id == null) {
-			String preUrl = "/product/" + pro_code + "/" + cart_cnt + "/" + cart_start + "/" + cart_day;
+			String preUrl = "/pay/" + pro_code + "/" + cart_cnt + "/" + cart_start + "/" + URLEncoder.encode(cart_day, "UTF-8");
 			session.setAttribute("pre_url", preUrl);
 			return "redirect:/login";
 		}
+		
+		System.out.println(pro_code + ", " + cart_cnt + ", " + cart_start + ", " + cart_day);
+		
+		String dayWeek = "월화수목금토일";
+		int j = 0;
+		for(int i=0; i<cart_day.length(); i++) {
+			if(dayWeek.indexOf(cart_day.charAt(i)) == -1) {
+				System.out.println("어디서1 cart_day.charAt(i): " + cart_day.charAt(i));
+				return "redirect:/";
+			}
+			
+			if(j < dayWeek.indexOf(cart_day.charAt(i))) {
+				System.out.println("어디서2 j: " + j + ", cart_day.charAt(i): " + cart_day.charAt(i));
+				return "redirect:/";
+			}
+			
+			j = cart_day.charAt(i);
+			
+		}
+		
+		
 //		productVO.setCart_start(Date.valueOf(cart_start));
 //		productVO.setCart_day(cart_day);
 		System.out.println("확인 : " + productVO);
@@ -73,7 +100,7 @@ public class PayController {
 
 		// 품목
 		productVO = productService.productDetail(productVO);
-		model.addAttribute("productList", payService.payFromProduct(productVO, cart_cnt, cart_start, cart_day));
+		model.addAttribute("productList", payService.payFromProduct(productVO, cart_cnt, Date.valueOf(cart_start), cart_day));
 
 		return "pay/pay";
 	}
@@ -95,11 +122,25 @@ public class PayController {
 	}
 
 	@RequestMapping(value = "/payInfo", method = RequestMethod.GET)
-	public String payApproval(Model model, HttpSession session) {
+	public String payInfo(Model model, HttpSession session) {
 
 		model.addAttribute("payVOList", payService.getClientPayList(session));
 
 		return "pay/payInfo";
+	}
+
+	@RequestMapping(value = "/payDetailInfo/{group_id}", method = RequestMethod.GET)
+	public String payDetailInfo(Model model, HttpSession session, @PathVariable String group_id) {
+		System.out.println("group_id : " + group_id);
+		List<PayVO> list = payService.getProductInfo(group_id);
+
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
+		}
+
+		model.addAttribute("payVOList", payService.getProductInfo(group_id));
+
+		return "pay/payDetailInfo";
 	}
 
 	@RequestMapping(value = "/payCancel", method = RequestMethod.GET)
@@ -125,7 +166,6 @@ public class PayController {
 
 		// 결제 DB 추가
 
-		System.out.println(payStringVO);
 		List<PayVO> list = payService.adaptPayVO(payStringVO, session);
 
 		// 실제 결제
@@ -135,11 +175,13 @@ public class PayController {
 	}
 
 	@RequestMapping("/admin/pays")
-	public String getAdminPayList(Model model) {
+	public String getAdminPayList(PayVO payVO, Model model, CriteriaP criP) {
 
-		List<PayVO> payList = payService.getAdminPayList();
-
-		model.addAttribute("payList", payList);
+		model.addAttribute("payList", payService.getAdminPayList(criP));
+		int total = payService.getTotal(criP);
+		PageMakerDTOP pageMake = new PageMakerDTOP(criP, total);
+		
+		model.addAttribute("pageMake", pageMake);
 
 		return "pay/adminPayments";
 	}
@@ -149,9 +191,24 @@ public class PayController {
 	public List<PayVO> getAdminPayListDetail(Model model, @PathVariable("group_id") String group_id) {
 
 		List<PayVO> payListDetail = payService.getPayListDetail(group_id);
-
 		return payListDetail;
 	}
+	
+	@RequestMapping(value = "/admin/pays/{pay_code}/{group_id}/updateStatus", produces = "application/json;charset=UTF-8", method = RequestMethod.PUT)
+	@ResponseBody
+	public List<PayVO> updateStatus(@PathVariable("pay_code") int pay_code, @PathVariable("group_id") String group_id) {
+	    int result = payService.updateStatus(pay_code, group_id);
+
+	    if (result > 0) {
+	        System.out.println("배송시작 완료");
+	        List<PayVO> payListDetail = payService.getPayListDetail(group_id);
+	        return payListDetail;
+	    } else {
+	        System.out.println("결제 상태 변경에 실패했습니다.");
+	        throw new RuntimeException("결제 상태 변경에 실패했습니다.");
+	    }
+	}
+
 
 	@RequestMapping(value = "/admin/charts", method = RequestMethod.GET)
 	public String chartList(Model model) throws Exception {
@@ -161,9 +218,13 @@ public class PayController {
 
 	@ResponseBody
 	@RequestMapping(value = "/admin/charts", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
-	public String chartList(ChartData chartData, TotalByMenuVO mvo, TotalByDayVO dvo) throws Exception {
+	public String chartList() throws Exception {
 
-		ObjectMapper objectMapper = new ObjectMapper();
+		ChartData chartData = new ChartData();
+	    ObjectMapper objectMapper = new ObjectMapper();
+
+	    TotalByMenuVO mvo = new TotalByMenuVO();
+	    TotalByDayVO dvo = new TotalByDayVO();
 
 		Map<String, List<Object>> totalBymenulist = chartService.getTotalByMenuList(mvo);
 		Map<String, List<Object>> totalByDayList = chartService.getTotalByDayList(dvo);

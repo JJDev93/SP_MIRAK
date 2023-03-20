@@ -18,6 +18,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import kr.co.mirak.pay.PayMapper;
 import kr.co.mirak.pay.PayVO;
 
 @Service
@@ -225,28 +226,34 @@ public class KakaoPayService {
 		kakaoMapper.insertPayList(payList);
 	}
 
-	public void payCancel(HttpSession session) {
+	public void payCancel(HttpSession session, String group_id, String totalPrice) {
 		// 카카오가 요구한 결제요청request값을 담아줍니다.
-		String groupId = "T412c7f45b8c2c02b207";
+		KakaoMapper kakaoMapper = sqlSessionTemplate.getMapper(KakaoMapper.class);
+		PayKakaoVO payKakaoVO = kakaoMapper.getTid(group_id);
+		String tid = payKakaoVO.getTid();
+		
+		String groupId = group_id;
 		System.out.println("groupId : " + groupId);
-		int total_amount = 10000;
-			MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-			parameters.add("cid", "TC0ONETIME");
-			parameters.add("tid", groupId);
-			parameters.add("cancel_amount", Integer.toString(total_amount));
-			parameters.add("cancel_tax_free_amount", "0");
-			
-			// 하나의 map안에 header와 parameter값을 담아줌.
-			HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(
-					parameters, this.getHeaders());
+		System.out.println("totalPrice : " + totalPrice);
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.add("cid", "TC0ONETIME");
+		parameters.add("tid", tid);
+		parameters.add("cancel_amount", totalPrice);
+		parameters.add("cancel_tax_free_amount", "0");
+		
+		// 하나의 map안에 header와 parameter값을 담아줌.
+		HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(
+				parameters, this.getHeaders());
 
-			// 외부url 통신
+		// 외부url 통신
 
-			RestTemplate template = new RestTemplate();
-			String url = "https://kapi.kakao.com//v1/payment/cancel";
-			// 보낼 외부 url, 요청 메시지(header,parameter), 처리후 값을 받아올 클래스.
-			KakaoCancelVO kakaoCancelVO = template.postForObject(url, requestEntity, KakaoCancelVO.class);
-			System.out.println(kakaoCancelVO);
+		RestTemplate template = new RestTemplate();
+		String url = "https://kapi.kakao.com/v1/payment/cancel";
+		// 보낼 외부 url, 요청 메시지(header,parameter), 처리후 값을 받아올 클래스.
+		KakaoCancelVO kakaoCancelVO = template.postForObject(url, requestEntity, KakaoCancelVO.class);
+		
+		int a = kakaoMapper.cancelStatus(group_id);
+		System.out.println(group_id + " 번의 상품을 주문취소");
 			
 	}
 }
