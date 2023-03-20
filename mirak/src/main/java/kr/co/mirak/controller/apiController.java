@@ -40,6 +40,7 @@ public class apiController {
 					session.setAttribute("mem_id", vo.getMem_id());
 					rttr.addFlashAttribute("message", "회원가입 성공하였습니다.");
 					System.out.println("naverapi 회원가입 성공");
+					result = "joinsuccess";
 				} else if (idCheck == 1) {
 					String mem_id = memberService.login(vo).getMem_id();
 					session.setAttribute("mem_id", mem_id);
