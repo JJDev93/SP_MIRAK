@@ -43,7 +43,7 @@ public class CartController {
       return "redirect:/cart";
    }
    
-   // delete (실제로는 check만 0으로 바꿈)
+   // delete (실제로는 show만 0으로 바꿈)
    @RequestMapping(value = "/cart/cartDelete/{cart_code}")
    public String cartDelete(CartVO vo, @PathVariable("cart_code") int cart_code) {
       cartService.cartDelete(vo);

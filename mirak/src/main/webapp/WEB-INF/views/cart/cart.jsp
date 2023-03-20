@@ -186,8 +186,8 @@ session = request.getSession();
 
 <script>
 
-
-const payBtnCnt = function() {
+/*
+     const payBtnCnt = function() {
 	 let cnt = document.getElementById("result").value;
 		
 	 let start = document.getElementById("start").value;
@@ -198,10 +198,12 @@ const payBtnCnt = function() {
 	 let fri = document.getElementById("fri").checked ? "금" : "";
 	 let sat = document.getElementById("sat").checked ? "토" : "";
 	 let sun = document.getElementById("sun").checked ? "일" : "";
-	 
-	 document.getElementById("updateBtn").href = "/cart/cartUpdate/${cart_code}/"  + cnt + "/" + start + "/" + mon + tue + wed + thu + fri + sat + sun;
-
-}
+		
+		document.getElementById("payBtn").href = "/pay/${product.pro_code}/"  + cnt + "/" + start + "/" + mon + tue + wed + thu + fri + sat + sun;
+		document.getElementById("cartBtn").href = "/cart/${product.pro_code}/" + cnt + "/" + start + "/" + mon + tue + wed + thu + fri + sat + sun;
+	}
+*/
+	
 
 $(function() {
 	  $('input[name="daterange"]').daterangepicker({
