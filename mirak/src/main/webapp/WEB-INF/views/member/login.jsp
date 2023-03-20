@@ -87,10 +87,11 @@
 					
 					<!-- 네이버 -->
 					<div class="col-sm-4 text-center ftco-animate" >
-						<a id="naverIdLogin" onclick="naverLoginclick()">
-							<img alt="" src="resources/images/ico_member_naver.png" style="cursor:pointer" >
-						</a>
+						
+							<img alt="" src="resources/images/ico_member_naver.png" style="cursor:pointer" id="naverIdLoginBtn">
+						
 					</div>
+					<div id="naverIdLogin" style="display: none;" onclick="naverLoginclick()"></div>
 						
 					<!-- 카카오 -->
 					<div class="col-sm-2 text-center ftco-animate">
@@ -131,13 +132,23 @@
 		})
 		naverLogin.init();
 	})
+		
+		
+		$(document).on("click", "#naverIdLoginBtn", function(){ 
+			var btnNaverLogin = document.getElementById("naverIdLogin");
+			btnNaverLogin.click();
+		});
+		
+	
+	
 		function naverLoginclick(){
 			naverLogin.getLoginStatus(function(status) {
 				console.log(naverLogin.user);
 				console.log("accessToken : " + naverLogin.accessToken);
+				
 				console.log("status : " + status);
 				if (status) {
-					var accessToken = naverLogin.accessToken.accessToken;
+					var accessToken = naverLogin.accessToken;
 					
 					var mem_id = naverLogin.user.getEmail();
 					if (naverLogin.user.getGender() == 'F') {
@@ -150,7 +161,7 @@
 					
 					$.ajax({
 						type : 'post',
-						url : 'naverSave',
+						url : '/naverSave',
 						data : {
 							'mem_id' : mem_id,
 							'mem_gender' : mem_gender,
