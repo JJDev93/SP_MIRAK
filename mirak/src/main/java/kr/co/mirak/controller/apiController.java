@@ -35,6 +35,8 @@ public class apiController {
 			if(vo != null) {
 				int idCheck = memberService.idCheck(vo.getMem_id());
 				if (idCheck == 0){
+					System.out.println("회원가입중");
+					vo.setMem_isapi((String)"naver");
 					memberService.createUser(vo);
 					session.setAttribute("mem_id", vo.getMem_id());
 					rttr.addFlashAttribute("message", "회원가입 성공하였습니다.");
