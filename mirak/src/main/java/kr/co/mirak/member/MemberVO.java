@@ -3,10 +3,9 @@ package kr.co.mirak.member;
 import java.util.Date;
 
 public class MemberVO {
-	private String mem_id, mem_pw, mem_name, mem_phone, mem_zipcode, mem_add1, mem_add2;
+	private String mem_id, mem_pw, mem_name, mem_phone, mem_zipcode, mem_add1, mem_add2, mem_isapi;
 	private int mem_age, mem_gender;
 	private Date mem_regdate;
-	private Boolean mem_isapi;
 	public String getMem_id() {
 		return mem_id;
 	}
@@ -67,10 +66,10 @@ public class MemberVO {
 	public void setMem_regdate(Date mem_regdate) {
 		this.mem_regdate = mem_regdate;
 	}
-	public Boolean getMem_isapi() {
+	public String getMem_isapi() {
 		return mem_isapi;
 	}
-	public void setMem_isapi(Boolean mem_isapi) {
+	public void setMem_isapi(String mem_isapi) {
 		this.mem_isapi = mem_isapi;
 	}
 	@Override
