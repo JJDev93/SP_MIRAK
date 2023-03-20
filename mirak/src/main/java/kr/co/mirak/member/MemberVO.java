@@ -77,11 +77,8 @@ public class MemberVO {
 		return "MemberVO [mem_id=" + mem_id + ", mem_pw=" + mem_pw + ", mem_name=" + mem_name + ", mem_phone="
 				+ mem_phone + ", mem_zipcode=" + mem_zipcode + ", mem_add1=" + mem_add1 + ", mem_add2=" + mem_add2
 				+ ", mem_age=" + mem_age + ", mem_gender=" + mem_gender + ", mem_regdate=" + mem_regdate
-				+ ", mem_isapi=" + mem_isapi + ", getMem_id()=" + getMem_id() + ", getMem_pw()=" + getMem_pw()
-				+ ", getMem_name()=" + getMem_name() + ", getMem_phone()=" + getMem_phone() + ", getMem_zipcode()="
-				+ getMem_zipcode() + ", getMem_add1()=" + getMem_add1() + ", getMem_add2()=" + getMem_add2()
-				+ ", getMem_age()=" + getMem_age() + ", getMem_gender()=" + getMem_gender() + ", getMem_regdate()="
-				+ getMem_regdate() + ", getMem_isapi()=" + getMem_isapi() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", mem_isapi=" + mem_isapi + "]";
 	}
+
+	
 }
