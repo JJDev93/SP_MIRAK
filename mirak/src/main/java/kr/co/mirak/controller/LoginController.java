@@ -1,8 +1,5 @@
 package kr.co.mirak.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -112,48 +109,41 @@ public class LoginController {
 
 	}
 
-	/*
-	 * System.out.println("로그인을 시도합니다."); String returnURL = ""; String preUrl =
-	 * (String) session.getAttribute("pre_url"); System.out.println("preUrl : " +
-	 * preUrl);
-	 * 
-	 * try { String mem_id = memberService.login(memberVO).getMem_id(); if (mem_id
-	 * != null) { session.setAttribute("mem_id", mem_id);
-	 * 
-	 * System.out.println("로그인 성공!"); if (preUrl != null) {
-	 * System.out.println("이전 페이지로 이동"); returnURL = "redirect:" + preUrl;
-	 * 
-	 * } else {
-	 * 
-	 * System.out.println("메인으로 이동"); returnURL = "redirect:/"; } } else {
-	 * System.out.println("로그인 실패ㅠ 로그인 페이지로 이동"); returnURL = "member/login"; }
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); returnURL = "member/login";
-	 * model.addAttribute("message", "아이디와 비밀번호 확인해주세요......"); }
-	 * session.removeAttribute("pre_url"); return returnURL;
-	 * 
-	 * }
-	 * 
-	 */
-
-	// 로그아웃
-	@RequestMapping(value = "/logout")
+	//로그아웃
+	@RequestMapping("/logout")
 	public String logout(HttpSession session) throws Exception {
-
-//		memberService.kakaoLogout((String)session.getAttribute("access_Token"));
-
+		String mem_id = (String) session.getAttribute("mem_id");
 		String access_Token = (String) session.getAttribute("access_Token");
-
-		if (access_Token != null && !"".equals(access_Token)) {
-			memberService.kakaoLogout(access_Token);
-			session.removeAttribute("access_Token");
-			session.removeAttribute("userId");
+		MemberVO member = memberService.getMemberDetail(mem_id);
+		String user_api = member.getMem_isapi();
+		System.out.println("user_api : " + user_api);
+				
+		if (access_Token != null) {
+			if(user_api.equals("google")){
+				int result = snslogin.googleLogout(access_Token);
+				System.out.println("구글로그아웃 : " + result);
+			}else if(user_api.equals("kakao")){
+				return "redirect:/kakaounlink";
+			}else if(user_api.equals("naver")){
+				
+			}
+			session.invalidate();
+			System.out.println(user_api + "로그아웃 성공!!");
 		} else {
 			System.out.println("access_Token is null");
 		}
+		return "redirect:/";
+	}
+	
+	//연결끊기
+	@RequestMapping(value = "/kakaounlink")
+	public String unlink(HttpSession session) {
+		memberService.unlink((String)session.getAttribute("access_Token"));
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+	
 
 	// 아이디찾기
 	@RequestMapping(value = "/idfind", method = RequestMethod.GET)

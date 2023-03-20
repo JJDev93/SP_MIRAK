@@ -56,7 +56,7 @@ public class apiController {
 
 	// 카카오 로그인
 	@RequestMapping(value = "/kakaoLogin")
-	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session)
+	public String kakaoLogin(Model model, @RequestParam(value = "code", required = false) String code, HttpSession session)
 			throws Exception {
 		System.out.println("#########" + code);
 		String access_Token = memberService.getAccessToken(code);
@@ -74,18 +74,42 @@ public class apiController {
 		memberVO.setMem_id(user_id);
 		memberVO.setMem_name(user_name);
 		memberVO.setMem_pw(user_pw);
+		memberVO.setMem_isapi("kakao");
 
 		MemberVO lvo = memberService.login(memberVO);
-		if (lvo == null) {
-
-			memberService.createUser(memberVO);
+		if (lvo == null) { // 회원가입
+			model.addAttribute("member", memberVO);
+			return "member/join";
+		} else {
+			session.setAttribute("mem_id", user_id);
+			session.setAttribute("access_Token", access_Token);
+			memberService.login(memberVO);
+			System.out.println("세션설정 mem_id : " + user_id);
+			return "redirect:/replayBefo";
 		}
-		session.setAttribute("mem_id", user_id);
-		session.setAttribute("access_Token", access_Token);
-		memberService.login(memberVO);
-
-		return "member/join";
 	}
+	
+	
+	@RequestMapping(value = "/replayBefo", method = RequestMethod.GET)
+	public String replayBefo(HttpSession session) {
+		String preUrl = (String) session.getAttribute("pre_url");
+		String returnURL = "";
+		System.out.println("preUrl : " + preUrl);
+		if (preUrl != null) {
+			System.out.println("이전 페이지로 이동");
+			returnURL = "redirect:" + preUrl;
+		} else {
+			System.out.println("메인으로 이동");
+			returnURL = "redirect:/";
+		}
+		return returnURL;
+	}
+
+
+	
+	
+	
+	
 
 	/**
 	 * 구글 로그인~! Authentication Code를 전달 받는 엔드포인트

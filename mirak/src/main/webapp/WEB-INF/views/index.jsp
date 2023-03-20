@@ -3,13 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <style>
-
-h3 a{
-
-font-size:18px;
-
-}
-
+	h3 a{
+		font-size:18px;
+	}
 </style>
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 <!-- START 슬라이더 -->
@@ -19,13 +15,10 @@ font-size:18px;
 			style="background-image: url(${path}/resources/images/bg_1.jpg);">
 			<div class="overlay"></div>
 			<div class="container">
-				<div
-					class="row slider-text justify-content-center align-items-center"
-					data-scrollax-parent="true">
+				<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 					<div class="col-md-12 ftco-animate text-center">
 						<h1 class="mb-2">We serve Fresh Vegestables &amp; Fruits</h1>
-						<h2 class="subheading mb-4">We deliver organic vegetables
-							&amp; fruits</h2>
+						<h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
 						<p>
 							<a href="#" class="btn btn-primary">View Details</a>
 						</p>
@@ -37,13 +30,10 @@ font-size:18px;
 			style="background-image: url(${path}/resources/images/bg_2.jpg);">
 			<div class="overlay"></div>
 			<div class="container">
-				<div
-					class="row slider-text justify-content-center align-items-center"
-					data-scrollax-parent="true">
+				<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 					<div class="col-sm-12 ftco-animate text-center">
 						<h1 class="mb-2">100% Fresh &amp; Organic Foods</h1>
-						<h2 class="subheading mb-4">We deliver organic vegetables
-							&amp; fruits</h2>
+						<h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
 						<p>
 							<a href="#" class="btn btn-primary">View Details</a>
 						</p>
@@ -62,30 +52,23 @@ font-size:18px;
 			<section class="ftco-section ftco-category">
 				<div class="justify-content-center mb-3 pb-3">
 					<div class="heading-section text-center ftco-animate">
-
 						<h2 class="mb-4">인기상품</h2>
-
 					</div>
 				</div>
 				<div class="row">
 					<c:forEach items="${productList2}" var="product">
 						<div class="col-md-6">
 							<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end">
-							<a href="ProductClientDetail/${product.pro_code}"
-								class="img-prod"> <img alt="1"
-								src="${path}/resources/images/product/${product.pro_image}"
-								style="width: 255px; height: 250px;">
-							</a>
-								
+								<a href="ProductClientDetail/${product.pro_code}" class="img-prod"> 
+									<img alt="1" src="${path}/resources/images/product/${product.pro_image}"
+									style="width: 255px; height: 250px;">
+								</a>
 							</div>
-								
-								<h3 style="margin: 0 auto;">
-									<a href="ProductClientDetail/${product.pro_code}">${product.pro_name}</a>
-								</h3>
+							<h3 class="text-center">
+								<a href="ProductClientDetail/${product.pro_code}">${product.pro_name}</a>
+							</h3>
 						</div>
-						
 					</c:forEach>
-
 				</div>
 			</section>
 		</div>
@@ -93,31 +76,23 @@ font-size:18px;
 			<section class="ftco-section ftco-category">
 				<div class="justify-content-center mb-3 pb-3">
 					<div class="heading-section text-center ftco-animate">
-
 						<h2 class="mb-4">추천상품</h2>
-
 					</div>
 				</div>
 				<div class="row">
 					<c:forEach items="${productList1}" var="product">
 						<div class="col-md-6">
 							<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end">
-							<a href="ProductClientDetail/${product.pro_code}"
-								class="img-prod"> <img alt="1"
-								src="${path}/resources/images/product/${product.pro_image}"
-								style="width: 255px; height: 250px;">
-							</a>
-		
+								<a href="ProductClientDetail/${product.pro_code}" class="img-prod"> 
+									<img alt="1" src="${path}/resources/images/product/${product.pro_image}"
+									style="width: 255px; height: 250px;">
+								</a>
 							</div>
 							<h3 style="margin: 0 auto;">
-									<a href="ProductClientDetail/${product.pro_code}">${product.pro_name}</a>
-								</h3>
-								
-
+								<a href="ProductClientDetail/${product.pro_code}">${product.pro_name}</a>
+							</h3>
 						</div>
-						
 					</c:forEach>
-
 				</div>
 			</section>
 		</div>
@@ -126,16 +101,13 @@ font-size:18px;
 <!-- END 공지, 추천 -->
 
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
-</body>
-
-</html>
 <script>
-$(document).ready(function() {
-	console.log("message : "+"${message}");
-	console.log("mem_id : "+"${mem_id}");
-	if("${message}" !=""){
-		alert("${message}");
-		 <%session.setAttribute("message","");%>
-	}
-})
+	$(document).ready(function() {
+		console.log("message : "+"${message}");
+		console.log("mem_id : "+"${mem_id}");
+		if("${message}" !=""){
+			alert("${message}");
+			 <%session.setAttribute("message","");%>
+		}
+	})
 </script>
