@@ -131,13 +131,7 @@ public class LoginController {
 		return "redirect:/";
 	}
 	
-	//연결끊기
-	@RequestMapping(value = "/kakaounlink")
-	public String unlink(HttpSession session) {
-		memberService.unlink((String)session.getAttribute("access_Token"));
-		session.invalidate();
-		return "redirect:/";
-	}
+
 	
 	
 
