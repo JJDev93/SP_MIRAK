@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.co.mirak.member.MemberService;
 import kr.co.mirak.member.MemberVO;
 import kr.co.mirak.member.login.google.GoogleOAuthConfigUtils;
+import kr.co.mirak.member.login.google.SnsLoginService;
 
 @Controller
 public class LoginController {
@@ -32,6 +33,8 @@ public class LoginController {
 	private BCryptPasswordEncoder pwEncoder;
 	@Autowired
 	private GoogleOAuthConfigUtils googleUtils;
+	@Autowired
+	private SnsLoginService snslogin;
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
@@ -136,15 +139,18 @@ public class LoginController {
 	// 로그아웃
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) throws Exception {
-
-		
 		String access_Token = (String) session.getAttribute("access_Token");
-		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("Authorization", "Bearer "+ access_Token);
 		
-		
-		if (access_Token != null && !"".equals(access_Token)) {
+		if (access_Token != null) {
+			try {
+				int result = snslogin.googleLogout(access_Token);
+				System.out.println("구글로그아웃 : " + result);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			memberService.kakaoLogout(access_Token);
 			session.removeAttribute("access_Token");
 			session.removeAttribute("userId");
@@ -153,7 +159,7 @@ public class LoginController {
 		}
 
 		session.invalidate();
-
+		
 		System.out.println("로그아웃 성공!!");
 		return "redirect:/";
 	}

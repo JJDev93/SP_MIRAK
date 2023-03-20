@@ -22,9 +22,27 @@
 					<form action="/join" method="post" onsubmit="return Duplicate()" class="billing-form">
 						<h3 class="mb-4 billing-heading">회원가입</h3>
 						<div class="row align-items-end">
-							<div class="container">
-								<div class="row block-9">
-									<div class="col-md-12 order-md-last">
+							<c:choose>
+							    <c:when test="${not empty member.mem_isapi}">
+							    	<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" name="mem_pw" class="form-control" value="${member.mem_pw }">
+							    			<input type="text" name="mem_isapi" class="form-control" value="${member.mem_isapi}">
+										</div>
+									</div>
+							    	<div class="col-md-12">
+										<div class="form-group">
+											<label for="id">이메일(ID)</label>
+											<div class="row">
+												<div class="col-sm-12">
+													<input type="email" path="memMail" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required="required">
+												</div>
+											</div>
+										</div>
+									</div>
+							    </c:when>
+							    <c:otherwise>
+									<div class="col-md-12">
 										<div class="form-group">
 											<label for="id">이메일(ID)</label>
 											<div class="row mb-2">
@@ -32,16 +50,16 @@
 													<input type="email" path="memMail" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required="required">
 												</div>
 												<div class="col-sm-3">
-													<button type="button" class="form-control mb-3" id="idCheck" value="N" onclick="fn_idCheck();">중복확인</button>
+													<button type="button" class="btn btn-primary joinBtn mb-3" id="idCheck" value="N" onclick="fn_idCheck();">중복확인</button>
 				                                    <span id="idCheckmsg"></span>
 												</div>
 											</div>
-											<div class="row mb-4">
+											<div class="row">
 												<div class="col-sm-9 mail_check_wrap">
 													<div class="mail_check_input_box" id="mail_check_input_box_false">
 														<input class="form-control" id="mail_check_input" disabled="disabled" placeholder="인증번호 6자리를 입력해주세요!" maxlength="6">
 														<div class="clearfix"></div>
-	                    								<span id="mail_check_input_box_warn"></span>
+			                  								<span id="mail_check_input_box_warn"></span>
 													</div>
 												</div>
 												<div class="col-sm-3">
@@ -49,27 +67,20 @@
 												</div>
 											</div>
 										</div>
-										<c:choose>
-										    <c:when test="${member.mem_isapi eq true}">
-										    	<input type="hidden" name="mem_pw" class="form-control" value="${member.mem_pw }">
-										    	<input type="hidden" name="mem_isapi" class="form-control" value="${member.mem_isapi}">
-										    </c:when>
-										    <c:otherwise>
-										        <div class="form-group">
-													<label for="pw">비밀번호</label> 
-													<input type="password" name="mem_pw" class="form-control" id="pw" onchange="check_pw()" placeholder="비밀번호" required="required" value="${member.mem_pw }">
-												</div>
-												<div class="form-group">
-													<label for="pw2">비밀번호 확인</label> 
-													<input type="password" class="form-control" id="pw2" onchange="check_pw()" placeholder="비밀번호 확인" required="required"> 
-													<span id="check"></span>
-												</div>
-										    </c:otherwise>
-										</c:choose>
 									</div>
-								</div>
-							</div>
-	
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for="pw">비밀번호</label> 
+											<input type="password" name="mem_pw" class="form-control" id="pw" onchange="check_pw()" placeholder="비밀번호" required="required" value="${member.mem_pw }">
+										</div>
+										<div class="form-group">
+											<label for="pw2">비밀번호 확인</label> 
+											<input type="password" class="form-control" id="pw2" onchange="check_pw()" placeholder="비밀번호 확인" required="required"> 
+											<span id="check"></span>
+										</div>
+									</div>
+							    </c:otherwise>
+							</c:choose>
 							<div class="w-100"></div>
 							<div class="col-md-12">
 								<div class="form-group">

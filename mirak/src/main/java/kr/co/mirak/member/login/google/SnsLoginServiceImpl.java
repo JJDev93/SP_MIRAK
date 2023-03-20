@@ -61,7 +61,7 @@ public class SnsLoginServiceImpl implements SnsLoginService {
 	        
 	        //결과 코드가 200이라면 성공
 	        int responseCode = conn.getResponseCode();
-	        System.out.println("responseCode : " + responseCode);
+	        //System.out.println("responseCode : " + responseCode);
 	        
 	        if(responseCode==200){
 	        	//요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
@@ -72,15 +72,15 @@ public class SnsLoginServiceImpl implements SnsLoginService {
 	            while ((line = br.readLine()) != null) {
 	                result += line;
 	            }
-	            System.out.println("response body : " + result);
+	            //System.out.println("response body : " + result);
 	            
 	            //Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
 	            JsonParser parser = new JsonParser();
 				JsonElement element = parser.parse(result);
 	            access_Token = element.getAsJsonObject().get("access_token").getAsString();
 	            refresh_Token = element.getAsJsonObject().get("id_token").getAsString();
-	            System.out.println("access_token : " + access_Token);
-				System.out.println("refresh_token : " + refresh_Token);
+	            //System.out.println("access_token : " + access_Token);
+				//System.out.println("refresh_token : " + refresh_Token);
 				
 				token.put("access_token", access_Token);
 				token.put("refresh_token", access_Token);
@@ -139,5 +139,30 @@ public class SnsLoginServiceImpl implements SnsLoginService {
 			e.printStackTrace();
 		}
 		return googleUserInfo;
+	}
+
+	@Override
+	public int googleLogout(String access_Token) {
+		int responseCode = 0;
+		String reqURL = "https://oauth2.googleapis.com/revoke";
+		try {
+			URL url = new URL(reqURL);
+			System.out.println("로그아웃 링크" + reqURL);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setRequestMethod("POST");
+	        conn.setDoOutput(true);
+	        
+	        //POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
+	        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+	        StringBuilder sb = new StringBuilder();
+	        sb.append("token=" + access_Token);
+	        bw.write(sb.toString());
+	        bw.flush();
+	        
+	        responseCode = conn.getResponseCode();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return responseCode;
 	}
 }
