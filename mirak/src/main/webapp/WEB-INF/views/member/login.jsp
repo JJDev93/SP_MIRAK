@@ -110,7 +110,8 @@
 
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
-<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+<!-- 네이버 스크립트 -->
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 <script src="${path}/resources/js/naverapi.js"></script>
 <!-- 카카오로그인 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
