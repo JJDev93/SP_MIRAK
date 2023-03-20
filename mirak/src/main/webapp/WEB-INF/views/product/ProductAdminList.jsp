@@ -36,9 +36,9 @@
                      <c:forEach items="${productList}" var="product">
                         <tr>
                            <td><a href="/admin/product/${product.pro_code}">
-                                 <img alt="1"
+                                 <img alt="${product.pro_desc }"
                                  src="${path}/resources/images/product/${product.pro_image}"
-                                 style="width: 100px; height: 100px;">
+                                 style="width: 100px; height: 100px;" title="${product.pro_name}">
                            </a></td>
                            <td>${product.pro_code }</td>
                            <td><a href="/admin/product/${product.pro_code}">${product.pro_name }</a></td>
