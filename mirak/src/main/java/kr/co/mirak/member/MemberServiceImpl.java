@@ -215,7 +215,7 @@ public class MemberServiceImpl implements MemberService {
 		try {
 			URL url = new URL(reqURL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
+			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Authorization", "Bearer " + access_Token );
 			
 
@@ -233,6 +233,35 @@ public class MemberServiceImpl implements MemberService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	//연결해제
+	@Override
+	public void unlink(String access_Token) {
+	    String reqURL = "https://kapi.kakao.com/v1/user/unlink";
+	    try {
+	        URL url = new URL(reqURL);
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setRequestMethod("POST");
+	        conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+	        
+	        int responseCode = conn.getResponseCode();
+	        System.out.println("responseCode : " + responseCode);
+	        
+	        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	        
+	        String result = "";
+	        String line = "";
+	        
+	        while ((line = br.readLine()) != null) {
+	            result += line;
+	        }
+	        System.out.println(result);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
 	}
 
 	// ADMIN ID값으로 회원 정보 확인
@@ -260,6 +289,8 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.getMemberDetail(mvo);
 
 	}
+
+
 
 	// 여기까지
 
