@@ -210,6 +210,8 @@ public class MemberServiceImpl implements MemberService {
 		return userInfo;
 	}
 
+	
+	//카카오 로그아웃
 	public void kakaoLogout(String access_Token) {
 		String reqURL = "https://kapi.kakao.com/v1/user/logout";
 		try {
