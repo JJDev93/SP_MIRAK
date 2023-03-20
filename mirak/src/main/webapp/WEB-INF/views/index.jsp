@@ -59,8 +59,8 @@
 					<c:forEach items="${productList2}" var="product">
 						<div class="col-md-6 ftco-animate">
 		    				<div class="product">
-		    					<a href="ProductClientDetail/${product.pro_code}" class="img-prod"> 
-		    						<img alt="1" src="${path}/resources/images/product/${product.pro_image}" style="width: 350px; height: 250px;" title="${product.pro_name}">
+		    					<a href="ProductClientDetail/${product.pro_code}" class="img-prod" style="width: 100%; height: 250px; background: url(${path}/resources/images/product/${product.pro_image}) no-repeat 50% 50%; background-size: contain;"> 
+		    						<%-- <img alt="1" src="${path}/resources/images/product/${product.pro_image}" style="width: 350px; height: 250px;" title="${product.pro_name}"> --%>
 		    						<!-- <span class="status">30%</span> -->
 		    						<div class="overlay"></div>
 		    					</a>
@@ -104,7 +104,7 @@
 					<c:forEach items="${productList1}" var="product">						
 						<div class="col-md-6 ftco-animate">
 		    				<div class="product">
-		    					<a href="ProductClientDetail/${product.pro_code}" class="img-prod" style="background-image: url(${path}/resources/images/product/${product.pro_image});"> 
+		    					<a href="ProductClientDetail/${product.pro_code}" class="img-prod" style="width: 100%; height: 250px; background: url(${path}/resources/images/product/${product.pro_image}) no-repeat 50% 50%; background-size: contain;"> 
 		    						<!-- <span class="status">30%</span> -->
 		    						<div class="overlay"></div>
 		    					</a>
