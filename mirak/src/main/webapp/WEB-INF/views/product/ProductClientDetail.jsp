@@ -105,7 +105,6 @@
 	
 	
 	let today = new Date().toISOString().substr(0, 10);
-	
 	document.getElementById("start").min = today;	
 	document.getElementById('start').valueAsDate = new Date();
 </script>
