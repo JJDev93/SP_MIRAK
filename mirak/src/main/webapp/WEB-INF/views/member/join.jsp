@@ -59,7 +59,7 @@
 													<div class="mail_check_input_box" id="mail_check_input_box_false">
 														<input class="form-control" id="mail_check_input" disabled="disabled" placeholder="인증번호 6자리를 입력해주세요!" maxlength="6">
 														<div class="clearfix"></div>
-			                  								<span id="mail_check_input_box_warn"></span>
+			                  							<span id="mail_check_input_box_warn"></span>
 													</div>
 												</div>
 												<div class="col-sm-3">

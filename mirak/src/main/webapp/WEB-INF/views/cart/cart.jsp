@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 
@@ -135,9 +137,11 @@
 						</button>
 					</div>
 					<div class="modal-body">
-							<div class="ftco-animate fadeInUp ftco-animated">
+							<div class="ftco-animated">
 								<div class="blog-entry align-self-stretch d-md-flex">
-									<img src="${path}/resources/images/product/${c.pro_image}" title="${c.pro_name }" alt="${c.pro_desc }" style="width: 250px; height: 250px;">
+									<div>
+										<img src="${path}/resources/images/product/${c.pro_image}" title="${c.pro_name }" alt="${c.pro_desc }" style="width: 250px;">
+									</div>
 									<div class="text d-block pl-md-4">
 										<h3 class="heading">
 											${c.pro_name }
@@ -151,22 +155,23 @@
 										</p>											
 										<p>
 											<span class="font-weight-bold text-dark">상품 가격</span> ${c.pro_price }원 <br>
-											<input type="date" name="cart_start" class="form-control input-number" value="${c.cart_start }">
 										</p>						
 										<p>
 											<span class="font-weight-bold text-dark">배송 시작일</span>
 											<input type="date" name="cart_start" class="form-control input-number" value="${c.cart_start }">
-										</p>						
+										</p>		
+										
+										<input type="text" name="cart_day" value="${c.cart_day}">	
 										<p>
 											<span  class="font-weight-bold text-dark">배송 요일</span><br>
 											&nbsp;
-											<label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform: scale(1.5);" value="월">&nbsp;&nbsp;월</label>&nbsp;&nbsp; 
-											<label for="tue"><input type="checkbox" name="cart_day" id="tue" style="transform: scale(1.5);" value="화">&nbsp;&nbsp;화</label>&nbsp;&nbsp; 
-											<label for="wed"><input type="checkbox" name="cart_day" id="wed" style="transform: scale(1.5);" value="수">&nbsp;&nbsp;수</label>&nbsp;&nbsp; 
-											<label for="thu"><input type="checkbox" name="cart_day" id="thu" style="transform: scale(1.5);" value="목">&nbsp;&nbsp;목</label>&nbsp;&nbsp; 
-											<label for="fri"><input type="checkbox" name="cart_day" id="fri" style="transform: scale(1.5);" value="금">&nbsp;&nbsp;금</label>&nbsp;&nbsp; 
-											<label for="sat"><input type="checkbox" name="cart_day" id="sat" style="transform: scale(1.5);" value="토">&nbsp;&nbsp;토</label>&nbsp;&nbsp; 
-											<label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform: scale(1.5);" value="일">&nbsp;&nbsp;일</label>
+											<label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform: scale(1.5);" value="월" <c:if test = "${fn : contains(c.cart_day, '월')}">checked</c:if>>&nbsp;&nbsp;월</label>&nbsp;&nbsp; 
+											<label for="tue"><input type="checkbox" name="cart_day" id="tue" style="transform: scale(1.5);" value="화" <c:if test = "${fn : contains(c.cart_day, '화')}">checked</c:if>>&nbsp;&nbsp;화</label>&nbsp;&nbsp; 
+											<label for="wed"><input type="checkbox" name="cart_day" id="wed" style="transform: scale(1.5);" value="수" <c:if test = "${fn : contains(c.cart_day, '수')}">checked</c:if>>&nbsp;&nbsp;수</label>&nbsp;&nbsp; 
+											<label for="thu"><input type="checkbox" name="cart_day" id="thu" style="transform: scale(1.5);" value="목" <c:if test = "${fn : contains(c.cart_day, '목')}">checked</c:if>>&nbsp;&nbsp;목</label>&nbsp;&nbsp; 
+											<label for="fri"><input type="checkbox" name="cart_day" id="fri" style="transform: scale(1.5);" value="금" <c:if test = "${fn : contains(c.cart_day, '금')}">checked</c:if>>&nbsp;&nbsp;금</label>&nbsp;&nbsp; 
+											<label for="sat"><input type="checkbox" name="cart_day" id="sat" style="transform: scale(1.5);" value="토" <c:if test = "${fn : contains(c.cart_day, '토')}">checked</c:if>>&nbsp;&nbsp;토</label>&nbsp;&nbsp; 
+											<label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform: scale(1.5);" value="일" <c:if test = "${fn : contains(c.cart_day, '일')}">checked</c:if>>&nbsp;&nbsp;일</label>
 										</p>						
 										<p>
 											<span  class="font-weight-bold text-dark">상품 개수</span><br>
