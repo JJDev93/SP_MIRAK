@@ -133,8 +133,7 @@ public class ProductController {
    public String productDetail(ProductVO vo, Model model, Criteria cri) {
       model.addAttribute("product", productService.productDetail(vo));
       productService.productDetail(vo);
-      
-      
+          
       int total = productService.getTotal();
       PageMakerDTO pageMake = new PageMakerDTO(cri, total);
       model.addAttribute("pageMaker", pageMake);
