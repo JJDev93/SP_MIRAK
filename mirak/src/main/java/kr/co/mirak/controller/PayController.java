@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kr.co.mirak.member.MemberService;
+import kr.co.mirak.member.MemberVO;
 import kr.co.mirak.pay.CriteriaP;
 import kr.co.mirak.pay.PageMakerDTOP;
 import kr.co.mirak.pay.PayService;
@@ -88,8 +89,6 @@ public class PayController {
 		}
 		
 		
-//		productVO.setCart_start(Date.valueOf(cart_start));
-//		productVO.setCart_day(cart_day);
 		System.out.println("확인 : " + productVO);
 
 		// 회원
@@ -123,7 +122,7 @@ public class PayController {
 
 	@RequestMapping(value = "/payInfo", method = RequestMethod.GET)
 	public String payInfo(Model model, HttpSession session) {
-
+		
 		model.addAttribute("payVOList", payService.getClientPayList(session));
 
 		return "pay/payInfo";
@@ -132,13 +131,10 @@ public class PayController {
 	@RequestMapping(value = "/payDetailInfo/{group_id}", method = RequestMethod.GET)
 	public String payDetailInfo(Model model, HttpSession session, @PathVariable String group_id) {
 		System.out.println("group_id : " + group_id);
-		List<PayVO> list = payService.getProductInfo(group_id);
 
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i));
-		}
-
+		
 		model.addAttribute("payVOList", payService.getProductInfo(group_id));
+		
 
 		return "pay/payDetailInfo";
 	}
@@ -152,14 +148,15 @@ public class PayController {
 	public String payFail(Model model) {
 		return "pay/payFail";
 	}
-
-	@RequestMapping(value = "/pay/asdf", method = RequestMethod.POST)
-	public String home(PayVO payVO) {
-		System.out.println(payVO);
-		payService.insert(payVO);
-
-		return "redirect:payList";
+	
+	@RequestMapping(value = "/payConfirm/{group_id}", method = RequestMethod.GET)
+	public String payConfirm(Model model, @PathVariable String group_id) {
+		
+		int result = payService.updateStateConfirm(group_id);
+		
+		return "pay/payInfo";
 	}
+
 
 	@RequestMapping(value = "/paySubmit", method = RequestMethod.POST)
 	public String mypage(PayStringVO payStringVO, HttpSession session) {
