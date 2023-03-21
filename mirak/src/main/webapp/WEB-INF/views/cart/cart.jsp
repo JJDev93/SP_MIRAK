@@ -36,7 +36,7 @@ session = request.getSession();
                      <thead class="thead-primary">
                         <tr class="text-center">
                            <th>
-                              <div class="all_check_input_div"  style="width:30px;">                              
+                              <div class="all_check_input_div"  style="width:80px;">                              
                                  <span class="all_chcek_span"></span>
                                  <input type="checkbox" class="all_check" checked="checked">
                               </div>
@@ -154,8 +154,8 @@ session = request.getSession();
             </div>
             <p>
 
-               <input type="submit" value="결제하기" formaction="/pay"
-                  class="btn btn-primary py-3 px-5">
+               <button type="submit" formaction="/pay"
+                  class="btn btn-primary py-3 px-5">결제하기</button>
             </p>
          </div>
       </div>
@@ -196,10 +196,11 @@ session = request.getSession();
                    
                      <br>
                      <br>
-           
                </div>
                <div class="modal-footer">
-               <a href="/cart/cartUpdate/${c.cart_code}" class="btn btn-primary py-3 px-5">변경</a>
+               <!-- <a href="/cart/cartUpdate" class="btn btn-primary py-3 px-5">변경</a> -->
+               	  <button type="submit" formaction="/cart/cartUpdate"
+               	  class="btn btn-primary py-3 px-5">수정하기</button>
                   <button type="button" class="btn btn-secondary"
                   data-dismiss="modal" style="width:130px;">Close</button>
                </div>
