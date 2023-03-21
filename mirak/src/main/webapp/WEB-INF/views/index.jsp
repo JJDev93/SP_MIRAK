@@ -6,8 +6,7 @@
 <!-- START 슬라이더 -->
 <section id="home-section" class="hero">
 	<div class="home-slider owl-carousel">
-		<div class="slider-item"
-			style="background-image: url(${path}/resources/images/bg_1.jpg);">
+		<div class="slider-item" style="background-image: url(${path}/resources/images/bg_1.jpg);height:100%;">
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
@@ -21,6 +20,7 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="slider-item" style="background-image: url(${path}/resources/images/bg_2.jpg);">
 			<div class="overlay"></div>
 			<div class="container">
@@ -37,7 +37,6 @@
 		</div>
 	</div>
 </section>
-<!-- END 슬라이더 -->
 
 <!-- START 공지, 추천 -->
 <div class="container">

@@ -79,15 +79,13 @@ public class PayServiceImpl implements PayService {
 		return null;
 	}
 
-	public int insert(PayVO vo) {
-		PayMapper dao = sqlSessionTemplate.getMapper(PayMapper.class);
-		int a = dao.insert(vo);
-		return a;
-	}
 
-	public int update(PayVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateStateConfirm(String group_id) {
+		PayMapper mapper = sqlSessionTemplate.getMapper(PayMapper.class);
+		int result = mapper.updateStatusConfirm(group_id);
+		
+		
+		return result;
 	}
 
 	public int delete(int id) {

@@ -4,47 +4,6 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<script type="text/javascript">
-	$(function() {
-
-		$(".payCancel").click(
-			function() {
-
-				let totalPrice = $(this).data('total_price');
-				let group_id = $(this).data('group_id');
-				let pro_name = $(this).data('pro_name');
-
-				let result = confirm("선택하신 상품은 <<" + pro_name + ">>입니다. \n 주문을 취소하시겠습니까?")
-
-				if (result) {
-					// 카카오페이 결제 취소 전송
-					$.ajax({
-						type : "get",
-						url : "/pay/kakao/cancel",
-						data : {
-							group_id : group_id,
-							totalPrice : totalPrice,
-						},
-						success : function(response) {
-
-							location.href = "/payInfo"
-						}
-					})
-				}
-
-			})
-			
-			
-			
-	
-	})
-			
-			
-	
-</script>
 
 
 
@@ -106,11 +65,15 @@
 											<p></p>
 											<p>
 												<a href="/payDetailInfo/${payVO.group_id }" class="btn btn-primary py-2 px-3 detailProduct">상세보기</a>
-												<button class="btn btn-primary py-2 px-3" value="">구매확정</button>
+												<c:if test="${payVO.status eq '배송중'}">	
+													<button class="btn btn-primary py-2 px-3" value="">구매확정</button>
+												</c:if>
+												<c:if test="${payVO.status eq '결제 완료'}">
 												<button class="btn btn-primary py-2 px-3 payCancel"
 													data-total_price="${payVO.totalPrice }" data-pro_name="${payVO.pro_name} <c:if
 														test="${payVO.cart_cnt > 1 }"> 외 ${payVO.cart_cnt - 1 }개 품목</c:if>" 
 													data-group_id="${payVO.group_id }">주문취소</button>
+												</c:if>
 											</p>
 										</div>
 									</div>
@@ -144,6 +107,45 @@
 
 
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
+
+<script type="text/javascript">
+	$(function() {
+
+		$(".payCancel").click(
+			function() {
+
+				let totalPrice = $(this).data('total_price');
+				let group_id = $(this).data('group_id');
+				let pro_name = $(this).data('pro_name');
+
+				let result = confirm("선택하신 상품은 <<" + pro_name + ">>입니다. \n 주문을 취소하시겠습니까?")
+
+				if (result) {
+					// 카카오페이 결제 취소 전송
+					$.ajax({
+						type : "get",
+						url : "/pay/kakao/cancel",
+						data : {
+							group_id : group_id,
+							totalPrice : totalPrice,
+						},
+						success : function(response) {
+
+							location.href = "/payInfo"
+						}
+					})
+				}
+
+			})
+			
+			
+			
+	
+	})
+			
+			
+	
+</script>
 
 </body>
 </html>

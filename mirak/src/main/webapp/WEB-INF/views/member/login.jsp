@@ -135,20 +135,22 @@
 		
 		
 		$(document).on("click", "#naverIdLoginBtn", function(){ 
-			var btnNaverLogin = document.getElementById("naverIdLogin");
+			var btnNaverLogin = $("#naverIdLogin");
 			btnNaverLogin.click();
 		});
 		
 	
 	
 		function naverLoginclick(){
+			console.log('클릭인식')
+			
 			naverLogin.getLoginStatus(function(status) {
 				console.log(naverLogin.user);
 				console.log("accessToken : " + naverLogin.accessToken);
 				
 				console.log("status : " + status);
 				if (status) {
-					var accessToken = naverLogin.accessToken;
+					var accessToken = naverLogin.accessToken.accessToken;
 					
 					var mem_id = naverLogin.user.getEmail();
 					if (naverLogin.user.getGender() == 'F') {
