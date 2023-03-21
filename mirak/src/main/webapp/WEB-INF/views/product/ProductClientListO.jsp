@@ -106,7 +106,7 @@
 							<!-- 다음페이지 버튼 -->
 							<c:if test="${pageMaker.next}">
 								<ul>
-									<li class="pageInfo_btn next" id="abc"><a
+									<li class="_btn next" id="abc"><a
 										href="javascript:acyncMovePage('ProductClientListO?pageNum=${pageMaker.endPage + 1 }');">&gt;</a></li>
 								</ul>
 							</c:if>
@@ -129,7 +129,7 @@
 </div>
 </body>
 <script>
-$(".pageInfo a").on("click", function(e){
+$(". a").on("click", function(e){
 	 
 	 e.preventDefault();
      moveForm.find("input[name='pageNum']").val($(this).attr("href"));
