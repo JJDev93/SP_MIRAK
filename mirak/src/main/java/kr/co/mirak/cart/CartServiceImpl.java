@@ -7,6 +7,10 @@ import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import kr.co.mirak.product.Criteria;
+import kr.co.mirak.product.ProductMapper;
+import kr.co.mirak.product.ProductVO;
+
 public class CartServiceImpl implements CartService {
 
    private SqlSessionTemplate sqlSessionTemplate;
@@ -87,6 +91,16 @@ public class CartServiceImpl implements CartService {
 	public void cartDelete(CartVO vo) {
 		CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
 		mapper.cartDelete(vo);
+	}
+	
+	public int getTotal() {
+		CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
+		return mapper.getTotal();
+	}
+	
+	public List<CartVO> getListPaging(CriteriaC cri) {
+		CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
+		return mapper.getListPaging(cri);
 	}
 
 }

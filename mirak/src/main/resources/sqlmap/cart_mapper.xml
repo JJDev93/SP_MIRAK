@@ -53,6 +53,23 @@
       WHERE pro_code = #{pro_code}
       ]]>
    </select>
+   
+   <select id="getListPaging" resultType="kr.co.mirak.cart.CartVO">
+		
+		<![CDATA[
+  		 
+		select * from (select * from cart) as T1 limit #{skip},#{amount}
+ 		]]>
+
+	</select>
+	
+	<!-- 	페이징 처리 (카트 총 개수 출력) -->
+	<select id="getTotal" resultType="int">
+		<![CDATA[
+		select count(*) from cart
+		]]>
+	</select>
+	
 	
 	
   </mapper>

@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:set var="path" value="${pageContext.request.contextPath}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+   li{
+      float:left;
+      margin-right:10px;
+   }
+</style>
+<div id="test">
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <div class="ftco-section">
 	<div class="container">
@@ -48,7 +55,8 @@
 					<tbody>
 						<c:forEach var="c" items="${cartList }">
 						<tr>
-							<th scope="row"><a href="/adminMembers/${c.mem_id}">${c.mem_id }</a></th>
+<%-- 							<a href="/adminMembers/${c.mem_id}"></a> --%>
+							<th scope="row">${c.mem_id }</th>
 							<td>${c.pro_name }</td>
 							<td>${c.pro_price }</td>
 							<td><fmt:formatDate pattern="yy-MM-dd" value="${c.cart_start}"/> </td>
@@ -63,9 +71,7 @@
 			</div>
 		</div>
 		
-		
-		
-		<div class="row mt-5">
+		 <div class="row mt-5">
                   <div class="col text-center">
                      <div class="block-27">
                         <!-- 각 번호 페이지 버튼 -->
@@ -75,21 +81,21 @@
                               <c:if test="${pageMaker.prev}">
                                  <ul>
                                     <li class="pageInfo_btn previous">
-                                       <a href="javascript:acyncMovePage('/admin/products?pageNum= ${pageMaker.startPage-1}');">&lt;</a>
+                                       <a href="javascript:acyncMovePage('/admin/carts?pageNum= ${pageMaker.startPage-1}');">&lt;</a>
                                     </li>
                                  </ul>
                               </c:if>
                               <c:forEach var="num" begin="${pageMaker.startPage}"
                                  end="${pageMaker.endPage}">
                                  <ul style="text-align: center;">
-                                    <li class="pageInfo_btn"><a href="javascript:acyncMovePage('/admin/products?pageNum=${num}');">${num}</a></li>
+                                    <li class="pageInfo_btn"><a href="javascript:acyncMovePage('/admin/carts?pageNum=${num}');">${num}</a></li>
                                  </ul>
                               </c:forEach>
                               <!-- 다음페이지 버튼 -->
                               <c:if test="${pageMaker.next}">
                                  <ul>
                                     <li class="pageInfo_btn next">
-                                       <a href="javascript:acyncMovePage('/admin/products?pageNum=${pageMaker.endPage + 1 }');">&gt;</a>
+                                       <a href="javascript:acyncMovePage('/admin/carts?pageNum=${pageMaker.endPage + 1 }');">&gt;</a>
                                     </li>
                                  </ul>
                               </c:if>
@@ -98,24 +104,37 @@
                      </div>
                   </div>
                </div>
-               
-               
-               
+<!-- 		<div class="row mt-5"> -->
+<!-- 			<div class="col text-center"> -->
+<!-- 				<div class="block-27"> -->
+<!-- 					<ul> -->
+<!-- 						<li><a href="#">&lt;</a></li> -->
+<!-- 						<li class="active"><span>1</span></li> -->
+<!-- 						<li><a href="#">2</a></li> -->
+<!-- 						<li><a href="#">3</a></li> -->
+<!-- 						<li><a href="#">4</a></li> -->
+<!-- 						<li><a href="#">5</a></li> -->
+<!-- 						<li><a href="#">&gt;</a></li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+
+
 	</div>
 </div>
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>
-
+</div>
 <script>
    function acyncMovePage(url) {
       // ajax option
       var ajaxOption = {
          url : url,
          async : true,
-         type : "POST",
+         type : "GET",
          dataType : "html",
          cache : false
       };
-
       $.ajax(ajaxOption).done(function(data) {
          // Contents 영역 삭제
          $('#test').children().remove();

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.co.mirak.member.MemberService;
 import kr.co.mirak.member.MemberVO;
 import kr.co.mirak.member.login.google.GoogleOAuthConfigUtils;
+import kr.co.mirak.member.login.google.SnsLoginService;
 
 @Controller
 public class LoginController {
@@ -29,26 +30,28 @@ public class LoginController {
 	private BCryptPasswordEncoder pwEncoder;
 	@Autowired
 	private GoogleOAuthConfigUtils googleUtils;
+	@Autowired
+	private SnsLoginService snslogin;
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 	// 로그인페이지
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginView(Model model) {
-		System.out.println("로그인 화면으로 이동...");
+		System.out.println("=== 로그인 화면으로 이동 중 ===");
 		String googleUrl = googleUtils.googleInitUrl();
-		model.addAttribute( "googleUrl", googleUrl );
+		System.out.println("googleUrl : " + googleUrl);
+		model.addAttribute("googleUrl", googleUrl);
 		return "member/login";
 	}
 
 	// 로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(MemberVO memberVO, Model model, HttpServletRequest request,
-			RedirectAttributes rttr) throws Exception {
+	public String login(MemberVO memberVO, Model model, HttpServletRequest request, RedirectAttributes rttr)
+			throws Exception {
 
 		System.out.println("login 메서드 진입");
-		System.out.println("전달된 데이터 : " + "[" + memberVO.getMem_id() + " , " + memberVO.getMem_pw()+ "]");
-
+		System.out.println("전달된 데이터 : " + "[" + memberVO.getMem_id() + " , " + memberVO.getMem_pw() + "]");
 
 		/* 암호화부분 */
 
@@ -58,7 +61,6 @@ public class LoginController {
 		String encodePw = "";
 
 		MemberVO lvo = memberService.login(memberVO); // 제출한아이디와 일치하는 아이디있는지
-
 
 		if (lvo != null) { // 일치하는 아이디 존재시
 
@@ -70,16 +72,26 @@ public class LoginController {
 
 			String mem_id;
 
-			if (true == pwEncoder.matches(rawPw, encodePw)) {  // 비번 일치 여부 판단
-				//				logger.info("일로오나");
-				memberVO.setMem_pw("");   //인코딩된 비번 정보 지움
+			if (true == pwEncoder.matches(rawPw, encodePw)) { // 비번 일치 여부 판단
+				// logger.info("일로오나");
+				memberVO.setMem_pw(""); // 인코딩된 비번 정보 지움
 				mem_id = memberVO.getMem_id();
 
-
-
-				session.setAttribute("mem_id", mem_id); //세션에 사용자정보 저장 
+				session.setAttribute("mem_id", mem_id); // 세션에 사용자정보 저장
 				logger.info("로그인 성공");
-				return "redirect:/";  //메인페이지로 이동
+
+				String preUrl = (String) session.getAttribute("pre_url");
+				String returnURL = "";
+				System.out.println("preUrl : " + preUrl);
+				if (preUrl != null) {
+					System.out.println("이전 페이지로 이동");
+					returnURL = "redirect:" + preUrl;
+					session.removeAttribute("pre_url");
+				} else {
+					System.out.println("메인으로 이동");
+					returnURL = "redirect:/";
+				}
+				return returnURL;
 
 			} else { // 일치하는 아이디가 존재하지 않을 시 (로그인 실패)
 
@@ -87,65 +99,54 @@ public class LoginController {
 				logger.info("일치하는 아이디가 없습니다");
 				return "member/login"; // 로그인 페이지로 이동
 			}
-		} else {   //일치하는 아이디가 존재하지 않을시 (로그인 실패)
+		} else { // 일치하는 아이디가 존재하지 않을시 (로그인 실패)
 
-			rttr.addFlashAttribute("result" , 0);
+			rttr.addFlashAttribute("result", 0);
+			rttr.addFlashAttribute("message", "일치하는 아이디가 없습니다.");
 			logger.info("로그인 실패");
-			return "member/login";  //로그인페이지로 이동
+			return "member/login"; // 로그인페이지로 이동
 		}
 
 	}
 
-
-
-	/*
-		System.out.println("로그인을 시도합니다.");
-		String returnURL = "";
-		String preUrl = (String) session.getAttribute("pre_url");
-		System.out.println("preUrl : " + preUrl);
-
-		try {
-			String mem_id = memberService.login(memberVO).getMem_id();
-			if (mem_id != null) {
-				session.setAttribute("mem_id", mem_id);
-
-				System.out.println("로그인 성공!");
-				if (preUrl != null) {
-					System.out.println("이전 페이지로 이동");
-					returnURL = "redirect:" + preUrl;
-
-				} else {
-
-					System.out.println("메인으로 이동");
-					returnURL = "redirect:/";
-				}
-			} else {
-				System.out.println("로그인 실패ㅠ 로그인 페이지로 이동");
-				returnURL = "member/login";
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			returnURL = "member/login";
-			model.addAttribute("message", "아이디와 비밀번호 확인해주세요......");
-		}
-		session.removeAttribute("pre_url");
-		return returnURL;
-
-	}
-
-	 */
-
-	// 로그아웃
+	//로그아웃
 	@RequestMapping("/logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-
-		System.out.println("로그아웃 성공!!");
+	public String logout(HttpSession session) throws Exception {
+		String mem_id = (String) session.getAttribute("mem_id");
+		String access_Token = (String) session.getAttribute("access_Token");
+		MemberVO member = memberService.getMemberDetail(mem_id);
+		String user_api = member.getMem_isapi();
+		System.out.println("user_api : " + user_api);
+				
+		if (access_Token != null) {
+			if(user_api.equals("google")){
+				int result = snslogin.googleLogout(access_Token);
+				System.out.println("구글로그아웃 : " + result);
+			}else if(user_api.equals("kakao")){
+				return "redirect:/kakaounlink";
+			}else if(user_api.equals("naver")){
+				
+			}
+			session.invalidate();
+			System.out.println(user_api + "로그아웃 성공!!");
+		} else {
+			session.invalidate();
+			System.out.println("access_Token is null");
+		}
 		return "redirect:/";
 	}
+	
+	//연결끊기
+	@RequestMapping(value = "/kakaounlink")
+	public String unlink(HttpSession session) {
+		memberService.unlink( (String)session.getAttribute("access_Token"));
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	
 
-	// 아이디찾기 
+	// 아이디찾기
 	@RequestMapping(value = "/idfind", method = RequestMethod.GET)
 	public String idfindform() {
 		System.out.println("아이디 찾기 이동..");
@@ -174,13 +175,13 @@ public class LoginController {
 				} else {
 					returnURL = "member/idfind";
 				}
-			} 
-		}catch (Exception e) {
+			}
+		} catch (Exception e) {
 			returnURL = "member/idfind";
 			model.addAttribute("message", "정보를 다시 입력해주세요....");
 		}
 		return returnURL;
-	}	
+	}
 
 	// 비번재설정
 	@RequestMapping(value = "/pwreset", method = RequestMethod.GET)
@@ -196,12 +197,21 @@ public class LoginController {
 		System.out.println(vo);
 
 		try {
-			if(vo.getMem_id() == null) {
+			if (vo.getMem_id() == null) {
 				memberService.idfind_pw(vo).getMem_id();
 			}
 			if (vo.getMem_id() != null && vo.getMem_pw() != null) {
+				// 암호화 1
+
+				String rawPw = ""; // 인코딩 전 비밀번호
+				String encodePw = ""; // 인코딩 후 비밀번호
+
+				rawPw = vo.getMem_pw(); // 비밀번호 데이터 얻음
+				encodePw = pwEncoder.encode(rawPw); // 비밀번호 인코딩
+				vo.setMem_pw(encodePw); // 인코딩된 비밀번호 vo객체에 다시 저장
+
 				memberService.pwreset(vo);
-				rttr.addFlashAttribute("message","비밀번호가 변경되었습니다.");
+				rttr.addFlashAttribute("message", "비밀번호가 변경되었습니다.");
 				return "redirect:/";
 			}
 			model.addAttribute("mem_id", vo.getMem_id());

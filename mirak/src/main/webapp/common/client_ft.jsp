@@ -28,7 +28,6 @@
 	
 		<!-- 주소 api -->
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	
 	<script src="${path}/resources/js/jquery.min.js"></script>
 	<script src="${path}/resources/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="${path}/resources/js/bootstrap.min.js"></script>
@@ -45,15 +44,6 @@
 	<script src="${path}/resources/js/idCheck.js"></script>
 	<script src="${path}/resources/js/daumAddress.js"></script>
 	<script src="${path}/resources/js/emailCheck.js"></script>
-    
-		
-
-
-
-
-
-
-
 
 
 

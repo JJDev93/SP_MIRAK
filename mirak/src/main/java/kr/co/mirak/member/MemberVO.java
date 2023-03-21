@@ -3,7 +3,7 @@ package kr.co.mirak.member;
 import java.util.Date;
 
 public class MemberVO {
-	private String mem_id, mem_pw, mem_name, mem_phone, mem_add1, mem_add2, mem_zipcode;
+	private String mem_id, mem_pw, mem_name, mem_phone, mem_zipcode, mem_add1, mem_add2, mem_isapi;
 	private int mem_age, mem_gender;
 	private Date mem_regdate;
 	public String getMem_id() {
@@ -30,6 +30,12 @@ public class MemberVO {
 	public void setMem_phone(String mem_phone) {
 		this.mem_phone = mem_phone;
 	}
+	public String getMem_zipcode() {
+		return mem_zipcode;
+	}
+	public void setMem_zipcode(String mem_zipcode) {
+		this.mem_zipcode = mem_zipcode;
+	}
 	public String getMem_add1() {
 		return mem_add1;
 	}
@@ -41,12 +47,6 @@ public class MemberVO {
 	}
 	public void setMem_add2(String mem_add2) {
 		this.mem_add2 = mem_add2;
-	}
-	public String getMem_zipcode() {
-		return mem_zipcode;
-	}
-	public void setMem_zipcode(String mem_zipcode) {
-		this.mem_zipcode = mem_zipcode;
 	}
 	public int getMem_age() {
 		return mem_age;
@@ -66,13 +66,19 @@ public class MemberVO {
 	public void setMem_regdate(Date mem_regdate) {
 		this.mem_regdate = mem_regdate;
 	}
+	public String getMem_isapi() {
+		return mem_isapi;
+	}
+	public void setMem_isapi(String mem_isapi) {
+		this.mem_isapi = mem_isapi;
+	}
 	@Override
 	public String toString() {
 		return "MemberVO [mem_id=" + mem_id + ", mem_pw=" + mem_pw + ", mem_name=" + mem_name + ", mem_phone="
-				+ mem_phone + ", mem_add1=" + mem_add1 + ", mem_add2=" + mem_add2 + ", mem_zipcode=" + mem_zipcode
-				+ ", mem_age=" + mem_age + ", mem_gender=" + mem_gender + ", mem_regdate=" + mem_regdate + "]";
+				+ mem_phone + ", mem_zipcode=" + mem_zipcode + ", mem_add1=" + mem_add1 + ", mem_add2=" + mem_add2
+				+ ", mem_age=" + mem_age + ", mem_gender=" + mem_gender + ", mem_regdate=" + mem_regdate
+				+ ", mem_isapi=" + mem_isapi + "]";
 	}
-	
-	
+
 	
 }

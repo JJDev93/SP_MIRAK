@@ -22,6 +22,14 @@
 
 	</select>
 	
+	<select id="getTid" resultType="kr.co.mirak.pay.paymethod.PayKakaoVO">
+		select tid from order_table where group_id=#{group_id} group by group_id
+	</select>
+	
+	<update id="cancelStatus">
+		update pay set status = '주문취소' where group_id = #{group_id}  
+	</update>
+	
 	
 	<resultMap id="orderListMap" type="kr.co.mirak.pay.PayVO">
 		<id property="order_id" column="order_id" />

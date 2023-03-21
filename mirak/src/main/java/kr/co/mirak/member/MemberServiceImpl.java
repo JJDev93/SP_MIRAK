@@ -50,15 +50,15 @@ public class MemberServiceImpl implements MemberService {
 		MemberVO memVO = mapper.idfind(vo);
 		return memVO;
 	}
-	
-	//비번 리셋
+
+	// 비번 리셋
 	public int pwreset(MemberVO vo) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		int success  = mapper.pwreset(vo);
+		int success = mapper.pwreset(vo);
 		return success;
 	}
-	
-	//회원가입
+
+	// 회원가입
 	@Override
 	public int createUser(MemberVO vo) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
@@ -103,8 +103,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	// kakao
-	
-	
+
 	@Override
 	public String getAccessToken(String code) {
 		String access_Token = "";
@@ -166,13 +165,14 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public HashMap<String, Object> getUserInfo(String access_Token) {
+		
 		// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
-		HashMap<String, Object> userInfo = new HashMap<String, Object>();
+		HashMap<String, Object> userInfo = new HashMap<>();
 		String reqURL = "https://kapi.kakao.com/v2/user/me";
 		try {
 			URL url = new URL(reqURL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
+			conn.setRequestMethod("POST");
 
 			// 요청에 필요한 Header에 포함될 내용
 			conn.setRequestProperty("Authorization", "Bearer " + access_Token);
@@ -198,7 +198,9 @@ public class MemberServiceImpl implements MemberService {
 
 			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
 			String email = kakao_account.getAsJsonObject().get("email").getAsString();
+			String id = element.getAsJsonObject().get("id").getAsString();
 
+			userInfo.put("id", id);
 			userInfo.put("nickname", nickname);
 			userInfo.put("email", email);
 
@@ -209,8 +211,61 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	
+	//카카오 로그아웃
+	public void kakaoLogout(String access_Token) {
+		String reqURL = "https://kapi.kakao.com/v1/user/logout";
+		try {
+			URL url = new URL(reqURL);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Authorization", "Bearer " + access_Token );
+			
+
+			int responseCode = conn.getResponseCode();
+			System.out.println("responseCode : " + responseCode);
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+			String result = "";
+			String line = "";
+
+			while ((line = br.readLine()) != null) {
+				result += line;
+			}
+			System.out.println(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
+	//연결해제
+	@Override
+	public void unlink(String access_Token) {
+	    String reqURL = "https://kapi.kakao.com/v1/user/unlink";
+	    try {
+	        URL url = new URL(reqURL);
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setRequestMethod("POST");
+	        conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+	        
+	        int responseCode = conn.getResponseCode();
+	        System.out.println("responseCode : " + responseCode);
+	        
+	        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	        
+	        String result = "";
+	        String line = "";
+	        
+	        while ((line = br.readLine()) != null) {
+	            result += line;
+	        }
+	        System.out.println(result);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	}
+
 	// ADMIN ID값으로 회원 정보 확인
 	public MemberVO getMemberDetail(String memId) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
@@ -220,9 +275,9 @@ public class MemberServiceImpl implements MemberService {
 
 	// 김원중이 건드린 부분
 
-	public int getTotal() {
+	public int getTotal(CriteriaM cri) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		return mapper.getTotal();
+		return mapper.getTotal(cri);
 	}
 
 	public List<MemberVO> getListPaging(CriteriaM cri) {
@@ -237,21 +292,8 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
-	// 여기까지
 
-	// ADMIN 리스트
-//	public List<MemberVO> getMemberList(Optional<Integer> pageStart) {
-//		int page;
-//		if (pageStart.isPresent()) {
-//			page = pageStart.get();
-//	    }else {
-//	    	page = 0;
-//	    }
-//		page=page*10;
-//		MemberMapper mamberDAO = sqlSessionTemplate.getMapper(MemberMapper.class);
-//		List<MemberVO> memberList = mamberDAO.getMemberList(page);
-//		System.out.println(page+"페이지로 이동");
-//		return memberList;
-//	}
+
+	// 여기까지
 
 }

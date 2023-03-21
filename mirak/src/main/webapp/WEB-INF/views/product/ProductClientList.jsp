@@ -4,7 +4,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
-li {
+#abc {
 	float: left;
 	margin-right: 10px;
 	line-height: 100px;
@@ -42,9 +42,9 @@ li {
 					<div class="col-md-6 col-lg-4 ftco-animate">
 						<div class="product">
 							<a href="ProductClientDetail/${product.pro_code}"
-								class="img-prod"> <img alt="1"
+								class="img-prod"> <img alt="${product.pro_desc}"
 								src="${path}/resources/images/product/${product.pro_image}"
-								style="width: 350px; height: 250px;">
+								style="width: 350px; height: 250px;" title="${product.pro_name}">
 							</a>
 							<div class="text py-3 pb-4 px-3 text-center">
 								<h3>
@@ -95,7 +95,7 @@ li {
 							<!-- 이전페이지 버튼 -->
 							<c:if test="${pageMaker.prev}">
 								<ul>
-									<li class="pageInfo_btn previous"><a
+									<li class="pageInfo_btn previous" id="abc"><a
 										href="javascript:acyncMovePage('ProductClientList?pageNum= ${pageMaker.startPage-1}');">&lt;</a></li>
 								</ul>
 							</c:if>
@@ -103,14 +103,14 @@ li {
 								end="${pageMaker.endPage}">
 
 								<ul style="text-align: center;">							
-									<li class="pageInfo_btn"><a
+									<li class="pageInfo_btn" id="abc"><a
 										href="javascript:acyncMovePage('/ProductClientList?pageNum=${num}');">${num}</a></li>
 								</ul>
 							</c:forEach>
 							<!-- 다음페이지 버튼 -->
 							<c:if test="${pageMaker.next}">
 								<ul>
-									<li class="pageInfo_btn next"><a
+									<li class="pageInfo_btn next" id="abc"><a
 										href="javascript:acyncMovePage('ProductClientList?pageNum=${pageMaker.endPage + 1 }');">&gt;</a></li>
 								</ul>
 							</c:if>
