@@ -100,8 +100,7 @@ session = request.getSession();
                                  <h3>${c.pro_name }</h3>
                               </td>
                               <td>${c.pro_price }</td>
-                              <td><fmt:formatDate value="${c.cart_start }"
-                                    pattern="yyyy-MM-dd" /></td>
+                              <td><fmt:formatDate value="${c.cart_start }" pattern="yyyy-MM-dd" /></td>
                               <td>${c.cart_day }</td>
                               <td>${c.cart_cnt }<!--
                               <div class="quantity_div">
@@ -116,7 +115,7 @@ session = request.getSession();
 
                               <td><input type="button" value="변경"
                                  class="btn btn-primary py-3 px-5" data-toggle="modal"
-                                 data-target="#exampleModal" style="width:150px;">
+                                 data-target="#${c.pro_code }" style="width:150px;">
                                  <!-- <a href="/cart/cartUpdate/${c.cart_code }" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary py-3 px-5">변경</a> -->
                               </td>
                               <td>
@@ -165,7 +164,7 @@ session = request.getSession();
       <!-- Modal -->
 
 <c:forEach var="c" items="${cartList }">
-      <div class="modal fade" id="exampleModal" tabindex="9999"
+      <div class="modal fade" id="${c.pro_code }" tabindex="9999"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -178,33 +177,22 @@ session = request.getSession();
                </div>
                <div class="modal-body">
                      <input type="hidden" class="cart_code" value="${c.cart_code }">
-                     <img src="${path}/resources/images/product/${c.pro_image}"
-                        style="width: 100px; height: 50px;" />
+                     <img src="${path}/resources/images/product/${c.pro_image}" style="width: 100px; height: 50px;" />
                &nbsp;&nbsp;&nbsp; ${c.pro_name }  &nbsp;&nbsp;&nbsp; ${c.pro_price }원<br>
                      <br>배송 시작일 선택<br>
-                     <input type="date" name="cart_start"
-                        class="form-control input-number" style="width: 240px;"
-                        value="${c.cart_start }">
+                     <input type="date" name="cart_start" class="form-control input-number" style="width: 240px;" value="${c.cart_start }">
                      <br>배송 요일 선택 <br>
-                     <label for="mon"><input type="checkbox" name="cart_day"
-                        id="mon" style="transform: scale(2);" value="월">&nbsp;&nbsp;월</label> &nbsp;&nbsp;
-               <label for="tue"><input type="checkbox"
-                        name="cart_day" id="tue" style="transform: scale(2);" value="화">&nbsp;&nbsp;화</label> &nbsp;&nbsp;
-               <label for="wed"><input type="checkbox"
-                        name="cart_day" id="wed" style="transform: scale(2);" value="수">&nbsp;&nbsp;수</label> &nbsp;&nbsp;
-               <label for="thu"><input type="checkbox"
-                        name="cart_day" id="thu" style="transform: scale(2);" value="목">&nbsp;&nbsp;목</label> &nbsp;&nbsp;
-               <label for="fri"><input type="checkbox"
-                        name="cart_day" id="fri" style="transform: scale(2);" value="금">&nbsp;&nbsp;금</label> &nbsp;&nbsp;
-               <label for="sat"><input type="checkbox"
-                        name="cart_day" id="sat" style="transform: scale(2);" value="토">&nbsp;&nbsp;토</label> &nbsp;&nbsp;
-               <label for="sun"><input type="checkbox"
-                        name="cart_day" id="sun" style="transform: scale(2);" value="일">&nbsp;&nbsp;일</label>
+                     <label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform: scale(2);" value="월">&nbsp;&nbsp;월</label> &nbsp;&nbsp;
+               <label for="tue"><input type="checkbox" name="cart_day" id="tue" style="transform: scale(2);" value="화">&nbsp;&nbsp;화</label> &nbsp;&nbsp;
+               <label for="wed"><input type="checkbox" name="cart_day" id="wed" style="transform: scale(2);" value="수">&nbsp;&nbsp;수</label> &nbsp;&nbsp;
+               <label for="thu"><input type="checkbox" name="cart_day" id="thu" style="transform: scale(2);" value="목">&nbsp;&nbsp;목</label> &nbsp;&nbsp;
+               <label for="fri"><input type="checkbox" name="cart_day" id="fri" style="transform: scale(2);" value="금">&nbsp;&nbsp;금</label> &nbsp;&nbsp;
+               <label for="sat"><input type="checkbox" name="cart_day" id="sat" style="transform: scale(2);" value="토">&nbsp;&nbsp;토</label> &nbsp;&nbsp;
+               <label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform: scale(2);" value="일">&nbsp;&nbsp;일</label>
                      <br>
                      <br>
                   배송 횟수 선택 <br>
-                     <input type="number" name="cart_cnt" value="${c.cart_cnt}"
-                        class="quantity_input">
+                     <input type="number" name="cart_cnt" value="${c.cart_cnt}" class="quantity_input">
 
                    
                      <br>
@@ -212,10 +200,9 @@ session = request.getSession();
            
                </div>
                <div class="modal-footer">
-               <a href="/cart/cartUpdate/${c.cart_code}"
-                        class="btn btn-primary py-3 px-5">변경</a>
+               <a href="/cart/cartUpdate/${c.cart_code}" class="btn btn-primary py-3 px-5">변경</a>
                   <button type="button" class="btn btn-secondary"
-                     data-dismiss="modal" style="width:130px;">Close</button>
+                  data-dismiss="modal" style="width:130px;">Close</button>
                </div>
             </div>
          </div>
