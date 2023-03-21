@@ -29,24 +29,24 @@ public class apiController {
 	@RequestMapping(value = "/naverSave", method = RequestMethod.POST)
 	@ResponseBody
 	public String naverSave(MemberVO vo, HttpSession session, RedirectAttributes rttr) {
-		System.out.println(vo);
+		System.out.println("123"+vo);
 		String result = null;
 		try {
 			if (vo != null) {
 				int idCheck = memberService.idCheck(vo.getMem_id());
 				if (idCheck == 0){
-					vo.setMem_isapi("naver");
-					memberService.createUser(vo);
-					session.setAttribute("mem_id", vo.getMem_id());
-					rttr.addFlashAttribute("message", "회원가입 성공하였습니다.");
-					System.out.println("naverapi 회원가입 성공");
-					result = "joinsuccess";
+//					vo.setMem_isapi("naver");
+//					memberService.createUser(vo);
+//					session.setAttribute("mem_id", vo.getMem_id());
+//					rttr.addFlashAttribute("message", "회원가입 성공하였습니다.");
+//					System.out.println("naverapi 회원가입 성공");
+					result = "join";
 				} else if (idCheck == 1) {
 					String mem_id = memberService.login(vo).getMem_id();
 					session.setAttribute("mem_id", mem_id);
 					rttr.addFlashAttribute("message", "로그인에 성공하였습니다.");
 					System.out.println("naverapi 로그인 완료!");
-					result = "loginsuccess";
+					result = "login";
 				}
 			}
 		} catch (Exception e) {
@@ -54,6 +54,16 @@ public class apiController {
 		}
 		return result;
 	}
+	
+	
+	@RequestMapping(value = "/naverTest", method = RequestMethod.POST)
+	public String naverTest(MemberVO vo, HttpSession session, RedirectAttributes rttr) {
+		System.out.println("1234"+vo);
+		
+		return "member/join";
+	}
+	
+
 
 	// 카카오 로그인
 	@RequestMapping(value = "/kakaoLogin")
