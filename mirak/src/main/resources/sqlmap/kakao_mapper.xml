@@ -27,7 +27,7 @@
 	</select>
 	
 	<update id="cancelStatus">
-		update pay set status = '주문취소' where group_id = #{group_id}  
+		update pay set status = '주문 취소' where group_id = #{group_id}  
 	</update>
 	
 	
