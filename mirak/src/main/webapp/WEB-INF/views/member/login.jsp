@@ -86,12 +86,11 @@
 					
 					
 					<!-- 네이버 -->
-					<div class="col-sm-4 text-center ftco-animate" >
-						
+					<div class="col-sm-4 text-center ftco-animate">
 							<img alt="" src="resources/images/ico_member_naver.png" style="cursor:pointer" id="naverIdLoginBtn">
-						
 					</div>
 					<div id="naverIdLogin" style="display: none;" onclick="naverLoginclick()"></div>
+					
 						
 					<!-- 카카오 -->
 					<div class="col-sm-2 text-center ftco-animate">
@@ -123,76 +122,83 @@
 			alert("${message}");
 			 <%session.setAttribute("message", "");%>
 		}
-		var naverLogin = new naver.LoginWithNaverId({
-			clientId : "zkOzac5hPC_Qw6v8eOzQ",
-			callbackUrl : "http://localhost:8080/login",
-			isPopup : false,
-			loginButton: {color: "green", type: 1, height: 60},
-			callbackHandle : false
-		})
+	
+		naverLogin = new naver.LoginWithNaverId({
+		    clientId : "zkOzac5hPC_Qw6v8eOzQ",
+		    callbackUrl : "http://localhost:8080/",
+		    isPopup : false,
+		    loginButton: {
+		        color: "green",
+		        type: 1,
+		        height: 60,
+		    },
+		    callbackHandle : true
+		});
 		naverLogin.init();
 	})
-		
-		
-		$(document).on("click", "#naverIdLoginBtn", function(){ 
-			var btnNaverLogin = $("#naverIdLogin");
-			btnNaverLogin.click();
-		});
-		
 	
-	
-		function naverLoginclick(){
-			console.log('클릭인식')
-			
-			naverLogin.getLoginStatus(function(status) {
-				console.log(naverLogin.user);
-				console.log("accessToken : " + naverLogin.accessToken);
-				
-				console.log("status : " + status);
-				if (status) {
-					var accessToken = naverLogin.accessToken.accessToken;
-					
-					var mem_id = naverLogin.user.getEmail();
-					if (naverLogin.user.getGender() == 'F') {
-						var mem_gender = 2
-					} else {
-						var mem_gender = 1
-					}
-					var mem_pw = naverLogin.user.getId();
-					var mem_name = naverLogin.user.getName();
-					
-					$.ajax({
-						type : 'post',
-						url : '/naverSave',
-						data : {
-							'mem_id' : mem_id,
-							'mem_gender' : mem_gender,
-							'mem_pw' : mem_pw,
-							'mem_name' : mem_name
-						},
-						dataType : "text",
-						success : function(responseData) {
-							if (responseData == 'loginsuccess') {
-								location.href = "/";
-							} else if (responseData == 'joinsuccess') {
-								location.href = "/";
-							}else {
-								alert('로그인실패');
-								console.log('실패')
-								return false;
-							}
-						},
-						error : function(responseData) {
-							alert('오류발생');
-							console.log('오류 발생')
+	$(document).on("click", "#naverIdLoginBtn", function() {
+		var btnNaverLogin = $("#naverIdLogin_loginButton");
+		btnNaverLogin.click();
+	});
+
+	function naverLoginclick(){
+		console.log("클릭");
+		console.log(naverLogin);
+		
+	    if (!naverLogin) {
+	        alert('네이버 로그인 초기화 중입니다. 잠시 후 다시 시도해 주세요.');
+	        return false;
+	    }
+	    naverLogin.getLoginStatus(function(status) {
+			console.log(naverLogin.user);
+			console.log("accessToken : " + naverLogin.accessToken);
+
+			console.log("status : " + status);
+			if (status) {
+				var accessToken = naverLogin.accessToken.accessToken;
+
+				var mem_id = naverLogin.user.getEmail();
+				if (naverLogin.user.getGender() == 'F') {
+					var mem_gender = 2
+				} else {
+					var mem_gender = 1
+				}
+				var mem_pw = naverLogin.user.getId();
+				var mem_name = naverLogin.user.getName();
+
+				$.ajax({
+					type : 'post',
+					url : '/naverSave',
+					data : {
+						'mem_id' : mem_id,
+						'mem_gender' : mem_gender,
+						'mem_pw' : mem_pw,
+						'mem_name' : mem_name
+					},
+					dataType : "text",
+					success : function(responseData) {
+						if (responseData == 'loginsuccess') {
+							location.href = "/";
+						} else if (responseData == 'joinsuccess') {
+							location.href = "/";
+						} else {
+							alert('로그인실패');
+							console.log('실패')
 							return false;
 						}
-					})
-				} else {
-					alert('callback 실패');
-					console.log("callback 처리에 실패하였습니다.");
-					return false;
-				}
-			})
-		}
+					},
+					error : function(responseData) {
+						alert('오류발생');
+						console.log('오류 발생')
+						return false;
+					}
+				})
+			} else {
+				alert('callback 실패');
+				console.log("callback 처리에 실패하였습니다.");
+				return false;
+			}
+		});
+	}
 </script>
