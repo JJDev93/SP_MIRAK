@@ -31,23 +31,20 @@
 
 					<input type="hidden" id="mem_id" name="mem_id" value="${mem_id }">
 
-					<h3 class="mb-4 billing-heading">주문 확인</h3>
+					<h3 class="mb-4 billing-heading">상세 결제내역 확인</h3>
 					
 					<c:forEach items="${payVOList}" var="productVO">
+						<input type="hidden" class="totalPrice" name="cart_totprice" value="${productVO.cart_cnt * productVO.pro_price}">
 						<div class="cart-detail p-3 p-md-4 mb-5">
 							<div class="ftco-animate fadeInUp ftco-animated">
 								<div class="blog-entry align-self-stretch d-md-flex">
 <%-- 									<a href="blog-single.html" class="block-20" style="background-image: url('images/${productVO.pro_image }');"> </a> --%>
-									<img alt="1" src="${path}/resources/images/product/${productVO.pro_image}" style="width: 250px; height: 250px;">
+									<img alt="1" src="${path}/resources/images/product/${productVO.pro_image}"  title="${productVO.pro_name }" alt="${productVO.pro_desc }" style="width: 250px; height: 250px;">
 									<div class="text d-block pl-md-4">
 										<h3 class="heading">
-											<a href="#">${productVO.pro_name }</a>
+											${productVO.pro_name }
 										</h3>
-										<input type="hidden" class="pro_name" name="pro_name" value="${productVO.pro_name }">
-										<input type="hidden" class="pro_code" name="pro_code" value="${productVO.pro_code }">
-										<input type="hidden" class="pro_desc" name="pro_desc" value="${productVO.pro_desc }">
-										<input type="hidden" class="pro_image" name="pro_image" value="${productVO.pro_image }">
-										<input type="hidden" class="cart_day" name="cart_day" value="${productVO.cart_day }">
+
 										<c:choose>
 											<c:when test="${codecheck == 1}">
 												<input type="hidden" class="cart_code" name="cart_code" value="${productVO.cart_code }">
@@ -56,10 +53,7 @@
 												<input type="hidden" class="cart_code" name="cart_code" value="0">
 											</c:otherwise>
 										</c:choose>
-										<input type="hidden" class="cart_start" name="cart_start" value="${productVO.cart_start }">
-										<input type="hidden" class="pro_price" name="pro_price" value="${productVO.pro_price }">
-										<input type="hidden" class="cart_cnt" name="cart_cnt" value="${productVO.cart_cnt }">
-										<input type="hidden" class="totalPrice" name="cart_totprice" value="${productVO.cart_cnt * productVO.pro_price}">
+
 										
 										<p>
 											<span class="font-weight-bold text-dark">상품 상세</span> ${productVO.pro_desc} <br>
@@ -143,19 +137,9 @@
 					<div class="col-md-12 d-flex mb-5">
 						<div class="cart-detail cart-total p-3 p-md-4">
 							<h3 class="billing-heading mb-4">Cart Total</h3>
-							<p class="d-flex">
-								<span>상품 가격</span> <span id="totalPrice"></span><span>원</span>
-								<input type="hidden" id="payPrice">
-							</p>
-							<p class="d-flex">
-								<span>배송료</span> <span>$0.00</span>
-							</p>
-							<p class="d-flex">
-								<span>Discount</span> <span>$3.00</span>
-							</p>
 							<hr>
 							<p class="d-flex total-price">
-								<span>총 결제금액</span> <span>$100</span>
+								<span>총 결제금액</span> <span id="totalPrice"></span><span>원</span>
 							</p>
 						</div>
 					</div>

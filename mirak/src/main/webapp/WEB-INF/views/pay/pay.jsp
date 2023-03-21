@@ -32,10 +32,10 @@
 							<div class="ftco-animate fadeInUp ftco-animated">
 								<div class="blog-entry align-self-stretch d-md-flex">
 <%-- 									<a href="blog-single.html" class="block-20" style="background-image: url('images/${productVO.pro_image }');"> </a> --%>
-									<img alt="1" src="${path}/resources/images/product/${productVO.pro_image }" title="${productVO.pro_name }" alt="${productVO.pro_desc }" style="width: 250px; height: 250px;">
+									<img src="${path}/resources/images/product/${productVO.pro_image }" title="${productVO.pro_name }" alt="${productVO.pro_desc }" style="width: 250px; height: 250px;">
 									<div class="text d-block pl-md-4">
 										<h3 class="heading">
-											<a href="#">${productVO.pro_name }</a>
+											${productVO.pro_name }
 										</h3>
 										<input type="hidden" class="pro_name" name="pro_name" value="${productVO.pro_name }">
 										<input type="hidden" class="pro_code" name="pro_code" value="${productVO.pro_code }">
@@ -136,7 +136,6 @@
 					<div class="col-md-12 d-flex mb-5">
 						<div class="cart-detail cart-total p-3 p-md-4">
 							<h3 class="billing-heading mb-4">Cart Total</h3>
-
 							<hr>
 							<p class="d-flex total-price">
 								<span>총 결제금액</span> <span id="totalPrice"></span><span>원</span>
