@@ -23,9 +23,6 @@
 </div>
 
 <section class="ftco-section">
-
-
-
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-xl-7 ftco-animate">
@@ -36,40 +33,55 @@
 
 					<h3 class="mb-4 billing-heading">주문 확인</h3>
 					
-
-
 					<c:forEach items="${payVOList}" var="productVO">
-
-
-				
-					<div class="col-md-12 d-flex mb-5">
-						<div class="cart-detail cart-total p-3 p-md-4">
-							<p class="d-flex">
-								<span>상품명</span> <span class="font-weight-bold text-dark">${productVO.pro_name }</span>
-								<span>상품 코드</span><span>${productVO.pro_code }</span>
-							</p>
-							<p class="d-flex">
-								<span>배송 시작일</span> <span class="font-weight-bold text-dark">${productVO.cart_start }</span>			
-								<input type="hidden" class="pro_price" name="pro_price" value="${productVO.pro_price }">					
-								<span>상품 가격</span><span class="font-weight-bold text-dark">${productVO.pro_price }원</span>
-							</p>
-							<p class="d-flex">
-								<span>배송 요일</span><span class="font-weight-bold text-dark">${productVO.cart_day }</span>
-								<input type="hidden" class="totalPrice" name="cart_totprice" value="${productVO.cart_cnt * productVO.pro_price}">								
-								<span>상품 개수</span><span class="font-weight-bold text-dark">${productVO.cart_cnt }</span>
-							</p>
-							<hr>
-							<p class="d-flex total-price">
-								<span>상품별 합계</span><span></span><span></span><span>${productVO.cart_cnt * productVO.pro_price}원</span>
-								
-							</p>
+						<div class="cart-detail p-3 p-md-4 mb-5">
+							<div class="ftco-animate fadeInUp ftco-animated">
+								<div class="blog-entry align-self-stretch d-md-flex">
+<%-- 									<a href="blog-single.html" class="block-20" style="background-image: url('images/${productVO.pro_image }');"> </a> --%>
+									<img alt="1" src="${path}/resources/images/product/${productVO.pro_image}" style="width: 250px; height: 250px;">
+									<div class="text d-block pl-md-4">
+										<h3 class="heading">
+											<a href="#">${productVO.pro_name }</a>
+										</h3>
+										<input type="hidden" class="pro_name" name="pro_name" value="${productVO.pro_name }">
+										<input type="hidden" class="pro_code" name="pro_code" value="${productVO.pro_code }">
+										<input type="hidden" class="pro_desc" name="pro_desc" value="${productVO.pro_desc }">
+										<input type="hidden" class="pro_image" name="pro_image" value="${productVO.pro_image }">
+										<input type="hidden" class="cart_day" name="cart_day" value="${productVO.cart_day }">
+										<c:choose>
+											<c:when test="${codecheck == 1}">
+												<input type="hidden" class="cart_code" name="cart_code" value="${productVO.cart_code }">
+											</c:when>
+											<c:otherwise>
+												<input type="hidden" class="cart_code" name="cart_code" value="0">
+											</c:otherwise>
+										</c:choose>
+										<input type="hidden" class="cart_start" name="cart_start" value="${productVO.cart_start }">
+										<input type="hidden" class="pro_price" name="pro_price" value="${productVO.pro_price }">
+										<input type="hidden" class="cart_cnt" name="cart_cnt" value="${productVO.cart_cnt }">
+										<input type="hidden" class="totalPrice" name="cart_totprice" value="${productVO.cart_cnt * productVO.pro_price}">
+										
+										<p>
+											<span class="font-weight-bold text-dark">상품 상세</span> ${productVO.pro_desc} <br>
+											<span class="font-weight-bold text-dark">상품 코드</span> ${productVO.pro_code } <br>
+											<span class="font-weight-bold text-dark">배송 시작일</span> ${productVO.cart_start } <br>
+											<span class="font-weight-bold text-dark">상품 가격</span> ${productVO.pro_price }원 <br>
+											<span class="font-weight-bold text-dark">배송 요일</span> ${productVO.cart_day } <br>
+											<span class="font-weight-bold text-dark">상품 개수</span> ${productVO.cart_cnt }
+										</p>
+										<hr>
+										<p><span  class="font-weight-bold text-dark">상품별 합계</span> ${productVO.cart_cnt * productVO.pro_price}원</p>
+<!-- 										<p> -->
+<!-- 											<a href="blog-single.html" class="btn btn-primary py-2 px-3">삭제</a> -->
+<!-- 										</p> -->
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
+
+					</c:forEach>
 					
 
-						
-						
-					</c:forEach>
 
 
 					<div class="row align-items-end">

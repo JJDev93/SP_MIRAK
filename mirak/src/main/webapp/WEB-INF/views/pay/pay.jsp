@@ -31,7 +31,8 @@
 						<div class="cart-detail p-3 p-md-4 mb-5">
 							<div class="ftco-animate fadeInUp ftco-animated">
 								<div class="blog-entry align-self-stretch d-md-flex">
-									<a href="blog-single.html" class="block-20" style="background-image: url('images/${productVO.pro_image }.jpg');"> </a>
+<%-- 									<a href="blog-single.html" class="block-20" style="background-image: url('images/${productVO.pro_image }');"> </a> --%>
+									<img alt="1" src="${path}/resources/images/product/${productVO.pro_image}" style="width: 250px; height: 250px;">
 									<div class="text d-block pl-md-4">
 										<h3 class="heading">
 											<a href="#">${productVO.pro_name }</a>
@@ -39,6 +40,8 @@
 										<input type="hidden" class="pro_name" name="pro_name" value="${productVO.pro_name }">
 										<input type="hidden" class="pro_code" name="pro_code" value="${productVO.pro_code }">
 										<input type="hidden" class="pro_desc" name="pro_desc" value="${productVO.pro_desc }">
+										<input type="hidden" class="pro_image" name="pro_image" value="${productVO.pro_image }">
+										<input type="hidden" class="cart_day" name="cart_day" value="${productVO.cart_day }">
 										<c:choose>
 											<c:when test="${codecheck == 1}">
 												<input type="hidden" class="cart_code" name="cart_code" value="${productVO.cart_code }">
@@ -62,25 +65,15 @@
 										</p>
 										<hr>
 										<p><span  class="font-weight-bold text-dark">상품별 합계</span> ${productVO.cart_cnt * productVO.pro_price}원</p>
-										<p>
-											<a href="blog-single.html" class="btn btn-primary py-2 px-3">삭제</a>
-										</p>
+<!-- 										<p> -->
+<!-- 											<a href="blog-single.html" class="btn btn-primary py-2 px-3">삭제</a> -->
+<!-- 										</p> -->
 									</div>
 								</div>
 							</div>
 						</div>
 
-						<div>상품명 ${productVO.pro_name }</div>
 
-						<div>
-							상품이미지 <input type="hidden" class="pro_image" name="pro_image"
-								value="${productVO.pro_image }">${productVO.pro_image }</div>
-						<div>배송요일 ${productVO.cart_day }</div>
-						<div>배송시작일 ${productVO.cart_start }</div>
-						<div>상품 가격 ${productVO.pro_price }</div>
-						<div>상품 개수 ${productVO.cart_cnt }</div>
-						<div>상품별 합계 ${productVO.cart_cnt * productVO.pro_price}</div>
-						<br>
 					</c:forEach>
 
 
