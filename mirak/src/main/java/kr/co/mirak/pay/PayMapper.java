@@ -23,8 +23,8 @@ public interface PayMapper {
 	List<PayVO> getProductInfo(String group_id);
 	
 	PayVO info(int id);
-
-	int insert(PayVO vo);
+	
+	int updateStatusConfirm(String group_id);
 
 	int update(PayVO vo);
 

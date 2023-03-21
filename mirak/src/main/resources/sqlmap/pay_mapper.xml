@@ -21,7 +21,7 @@
 	<select id="getClientPayList" resultType="kr.co.mirak.pay.PayVO">
 		select group_id, pro_image, pay_date, status, sum(cart_cnt) as pro_price,
 		pro_name, count(group_id) as cart_cnt, sum(totalPrice) as totalPrice
-		from pay where mem_id=#{mem_id} and status not in ('주문취소') and pay_date BETWEEN DATE_ADD (NOW(), INTERVAL -3 MONTH) AND NOW() group by group_id order by pay_code desc
+		from pay where mem_id=#{mem_id} and status not in ('주문 취소') and pay_date BETWEEN DATE_ADD (NOW(), INTERVAL -3 MONTH) AND NOW() group by group_id order by pay_code desc
 	</select>
 
 	<select id="getPayListDetail" resultType="kr.co.mirak.pay.PayVO">
@@ -33,6 +33,13 @@
     	update pay set status = '배송중' where pay_code = #{pay_code} and group_id = #{group_id};
 	</update>
 	
+	
+	<update id="updateStatusConfirm" parameterType="kr.co.mirak.pay.PayVO">
+    	update pay set status = '구매 확정' where group_id = #{group_id};
+	</update>
+	
+
+	
 	<select id="getTotal" resultType="int">
 		select count(*) from pay
 	</select>
@@ -42,11 +49,7 @@
  		from pay where group_id = #{group_id};
 	</select>
 
-	<insert id="insert" parameterType="kr.co.mirak.pay.PayVO">
-		insert into test (name)
-		values
-		(#{name})
-	</insert>
+
 
 	<!-- 카트 목록 -->
 	<select id="cartCheckList" resultType="kr.co.mirak.cart.CartVO">
