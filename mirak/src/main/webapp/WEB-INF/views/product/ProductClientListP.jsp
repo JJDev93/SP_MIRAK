@@ -24,19 +24,22 @@
 			<div class="row">
 				<c:forEach items="${productList}" var="product">
 					<div class="col-md-6 col-lg-4 ftco-animate">
-						<div class="product">
-							<a href="ProductClientDetail/${product.pro_code}"
-								class="img-prod"> <img alt="${product.pro_desc}"
-								src="${path}/resources/images/product/${product.pro_image}"
-								style="width: 350px; height: 250px;" title="${product.pro_name}">
-							</a>
-							<div class="text py-3 pb-4 px-3 text-center">
-								<h3>
-									<a href="ProductClientDetail/${product.pro_code}">${product.pro_name}</a>
+	    				<div class="product">
+	    					<a href="ProductClientDetail/${product.pro_code}" class="img-prod" >
+	    						<div class="imgDiv" style="width: 100%; height: 250px; background: url(${path}/resources/images/product/${product.pro_image}) no-repeat 50% 50%; background-size: contain;"></div>
+	    					</a>
+	    					<div class="text py-3 pb-4 px-3 text-center">
+								<h3 class="text-center">
+									<a href="ProductClientDetail/${product.pro_code}"  class="text_wrap">${product.pro_name}</a>
 								</h3>
-							</div>
-						</div>
-					</div>
+	    						<div class="d-flex">
+	    							<div class="pricing">
+			    						<p class="price"><span class="mr-2 price-dc"></span><span class="price-sale">${product.pro_price} 원</span></p>
+			    					</div>
+		    					</div>
+	    					</div>
+	    				</div>
+	    			</div>
 				</c:forEach>
 			</div>
 			
