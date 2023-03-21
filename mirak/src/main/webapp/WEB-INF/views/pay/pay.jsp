@@ -32,7 +32,7 @@
 							<div class="ftco-animate fadeInUp ftco-animated">
 								<div class="blog-entry align-self-stretch d-md-flex">
 <%-- 									<a href="blog-single.html" class="block-20" style="background-image: url('images/${productVO.pro_image }');"> </a> --%>
-									<img alt="1" src="${path}/resources/images/product/${productVO.pro_image}" style="width: 250px; height: 250px;">
+									<img alt="1" src="${path}/resources/images/product/${productVO.pro_image }" title="${productVO.pro_name }" alt="${productVO.pro_desc }" style="width: 250px; height: 250px;">
 									<div class="text d-block pl-md-4">
 										<h3 class="heading">
 											<a href="#">${productVO.pro_name }</a>
