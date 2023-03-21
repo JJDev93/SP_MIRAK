@@ -4,8 +4,8 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 <!-- START 슬라이더 -->
-<section id="home-section" class="hero" style="height:400px;">
-	<div class="home-slider owl-carousel" style="height:100%;">
+<section id="home-section" class="hero">
+	<div class="home-slider owl-carousel">
 		<div class="slider-item" style="background-image: url(${path}/resources/images/bg_1.jpg);height:100%;">
 			<div class="overlay"></div>
 			<div class="container">
