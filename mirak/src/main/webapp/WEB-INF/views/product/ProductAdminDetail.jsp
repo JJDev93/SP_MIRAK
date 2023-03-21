@@ -46,7 +46,7 @@
                <div class="form-group">
                   <label for="imagefile">이미지 파일</label>
                </div>
-               <img alt="1" src="${path}/resources/images/product/${product.pro_image}" style="width:200px; heigt:200px;">
+               <img alt="${product.pro_desc }" src="${path}/resources/images/product/${product.pro_image}" style="width:200px; heigt:200px;" title="${product.pro_name}">
             </div>
             
             <div class="col-md-12">
@@ -64,7 +64,11 @@
             </div>
          </div>
       </form>      
+      
       <a href="/admin/products" class="btn btn-secondary">목록</a>
+      
+<%--       ?pageNum=${pageNum} --%>
+	
       <input type="button" class="btn btn-danger" value="삭제" onclick="deleteBtn()">
    </div>
 </div>
@@ -81,4 +85,7 @@ function deleteBtn(){
 		}
 	
 	}
+	
+	
+	
 </script>

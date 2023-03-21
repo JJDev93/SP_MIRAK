@@ -1,8 +1,5 @@
 package kr.co.mirak.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,19 +16,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.co.mirak.member.MemberService;
 import kr.co.mirak.member.MemberVO;
 import kr.co.mirak.member.login.google.GoogleOAuthConfigUtils;
+import kr.co.mirak.member.login.google.SnsLoginService;
 
 @Controller
 public class LoginController {
 	final static String GOOGLE_AUTH_BASE_URL = "https://accounts.google.com/o/oauth2/v2/auth";
 	final static String GOOGLE_TOKEN_BASE_URL = "https://oauth2.googleapis.com/token";
 	final static String GOOGLE_REVOKE_TOKEN_BASE_URL = "https://oauth2.googleapis.com/revoke";
-	
+
 	@Autowired
 	private MemberService memberService;
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder;
 	@Autowired
 	private GoogleOAuthConfigUtils googleUtils;
+	@Autowired
+	private SnsLoginService snslogin;
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
@@ -79,7 +79,19 @@ public class LoginController {
 
 				session.setAttribute("mem_id", mem_id); // 세션에 사용자정보 저장
 				logger.info("로그인 성공");
-				return "redirect:/"; // 메인페이지로 이동
+
+				String preUrl = (String) session.getAttribute("pre_url");
+				String returnURL = "";
+				System.out.println("preUrl : " + preUrl);
+				if (preUrl != null) {
+					System.out.println("이전 페이지로 이동");
+					returnURL = "redirect:" + preUrl;
+					session.removeAttribute("pre_url");
+				} else {
+					System.out.println("메인으로 이동");
+					returnURL = "redirect:/";
+				}
+				return returnURL;
 
 			} else { // 일치하는 아이디가 존재하지 않을 시 (로그인 실패)
 
@@ -97,54 +109,42 @@ public class LoginController {
 
 	}
 
-	/*
-	 * System.out.println("로그인을 시도합니다."); String returnURL = ""; String preUrl =
-	 * (String) session.getAttribute("pre_url"); System.out.println("preUrl : " +
-	 * preUrl);
-	 * 
-	 * try { String mem_id = memberService.login(memberVO).getMem_id(); if (mem_id
-	 * != null) { session.setAttribute("mem_id", mem_id);
-	 * 
-	 * System.out.println("로그인 성공!"); if (preUrl != null) {
-	 * System.out.println("이전 페이지로 이동"); returnURL = "redirect:" + preUrl;
-	 * 
-	 * } else {
-	 * 
-	 * System.out.println("메인으로 이동"); returnURL = "redirect:/"; } } else {
-	 * System.out.println("로그인 실패ㅠ 로그인 페이지로 이동"); returnURL = "member/login"; }
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); returnURL = "member/login";
-	 * model.addAttribute("message", "아이디와 비밀번호 확인해주세요......"); }
-	 * session.removeAttribute("pre_url"); return returnURL;
-	 * 
-	 * }
-	 * 
-	 */
-
-	// 로그아웃
+	//로그아웃
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) throws Exception {
-
-		
+		String mem_id = (String) session.getAttribute("mem_id");
 		String access_Token = (String) session.getAttribute("access_Token");
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("Authorization", "Bearer "+ access_Token);
-		
-		
-		if (access_Token != null && !"".equals(access_Token)) {
-			memberService.kakaoLogout(access_Token);
-			session.removeAttribute("access_Token");
-			session.removeAttribute("userId");
+		MemberVO member = memberService.getMemberDetail(mem_id);
+		String user_api = member.getMem_isapi();
+		System.out.println("user_api : " + user_api);
+				
+		if (access_Token != null) {
+			if(user_api.equals("google")){
+				int result = snslogin.googleLogout(access_Token);
+				System.out.println("구글로그아웃 : " + result);
+			}else if(user_api.equals("kakao")){
+				return "redirect:/kakaounlink";
+			}else if(user_api.equals("naver")){
+				
+			}
+			session.invalidate();
+			System.out.println(user_api + "로그아웃 성공!!");
 		} else {
+			session.invalidate();
 			System.out.println("access_Token is null");
 		}
-
-		session.invalidate();
-
-		System.out.println("로그아웃 성공!!");
 		return "redirect:/";
 	}
+	
+	//연결끊기
+	@RequestMapping(value = "/kakaounlink")
+	public String unlink(HttpSession session) {
+		memberService.unlink( (String)session.getAttribute("access_Token"));
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	
 
 	// 아이디찾기
 	@RequestMapping(value = "/idfind", method = RequestMethod.GET)
