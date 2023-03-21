@@ -34,7 +34,7 @@
 	<!-- 카트 옵션 수정 -->
 	<update id="cartUpdate">
 	<![CDATA[
-		UPDATE CART SET CART_DAY = #{cart_day}, CART_START = #{cart_start}, CART_CNT = #{cart_cnt} WHERE CART_CODE = #{cart_code}
+		UPDATE CART SET CART_DAY = #{cart_day}, CART_START = #{cart_start}, CART_CNT = #{cart_cnt} WHERE cart_code = #{cart_code}
 	]]>
 	</update>
 

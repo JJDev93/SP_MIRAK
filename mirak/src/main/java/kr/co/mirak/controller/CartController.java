@@ -60,7 +60,7 @@ public class CartController {
 //   }
    
    // update
-   @RequestMapping(value = "/cart/cartUpdate")
+   @RequestMapping(value = "/cartUpdate/{pro_code}")
    public String cartUpdate(CartVO vo) {
       cartService.cartUpdate(vo);
       return "redirect:/cart";
