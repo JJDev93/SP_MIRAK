@@ -12,6 +12,7 @@
 }
 
 :root {
+  accent-color: #000;  /* 체크박스 색상변경하는거*/
   --blue: #007bff;
   --indigo: #6610f2;
   --purple: #6f42c1;
@@ -8364,13 +8365,13 @@ h1, h2, h3, h4, h5,
         background: #b3b3b3; }
   .owl-carousel.home-slider {
     position: relative;
-    height: 650px;
+    height: 400px;
     z-index: 0; }
     .owl-carousel.home-slider .slider-item {
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;
-      height: 650px;
+      height: 400px;
       position: relative;
       z-index: 0; }
       @media (max-width: 1199.98px) {
@@ -8385,7 +8386,7 @@ h1, h2, h3, h4, h5,
         background: #000000;
         opacity: .2; }
       .owl-carousel.home-slider .slider-item .slider-text {
-        height: 650px;
+        height: 400px;
         z-index: 0; }
         @media (max-width: 991.98px) {
           .owl-carousel.home-slider .slider-item .slider-text {
@@ -8557,9 +8558,9 @@ h1, h2, h3, h4, h5,
     border: 1px solid #000000;
     color: #fff; }
     .btn.btn-black:hover {
-      background: #82ae46;
+      background: #fff;
       border: 1px solid #82ae46;
-      color: #fff; }
+      color: #82ae46; }
     .btn.btn-black.btn-outline-white {
       border: 1px solid #000000;
       background: transparent;
@@ -10002,6 +10003,12 @@ textarea.form-control {
     text-overflow: ellipsis;
     overflow: hidden;
     display: block;
+}
+.table_wrap thead th,
+.table_wrap tbody td{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 @-webkit-keyframes loader-rotate {
   100% {
