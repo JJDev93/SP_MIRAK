@@ -1,76 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  <mapper namespace="kr.co.mirak.cart.CartMapper">
 
-
+<mapper namespace="kr.co.mirak.cart.CartMapper">
 	<!-- 카트 목록 -->
 	<select id="cartClientList" resultType="kr.co.mirak.cart.CartVO">
-	
-		SELECT * FROM CART WHERE MEM_ID = #{mem_id} and CART_SHOW =1
-	
+		SELECT CART_CODE, CART_START, CART_CNT, CART_DAY, CART_TOTPRICE, CART_SHOW, CART_CHECK, 
+		MEM_ID, PRO_CODE, PRO_NAME, PRO_PRICE, PRO_DESC, PRO_IMAGE FROM CART WHERE MEM_ID =
+		#{mem_id} and CART_SHOW =1
 	</select>
-	
-	
+
 	<!-- 어드민용 카트 전체 목록 -->
 	<select id="cartAdminList" resultType="kr.co.mirak.cart.CartVO">
-	
-		SELECT MEM_ID, PRO_NAME, PRO_PRICE, CART_START, CART_DAY, CART_CNT, CART_TOTPRICE, CART_CHECK FROM CART
-	
+		SELECT MEM_ID, PRO_NAME, PRO_PRICE, CART_START, CART_DAY, CART_CNT,
+		CART_TOTPRICE, CART_CHECK FROM CART
 	</select>
-	
-	<!-- CartVO info (int id);  -->
-	
+
 	<!-- 카트 추가 -->
 	<insert id="cartInsert">
-   
-      INSERT INTO CART (MEM_ID, PRO_CODE, CART_DAY, CART_START, CART_CNT, PRO_NAME, PRO_PRICE, PRO_DESC, PRO_IMAGE)
-      VALUES (#{mem_id}, #{pro_code}, #{cart_day}, #{cart_start}, #{cart_cnt}, #{pro_name}, #{pro_price}, #{pro_desc}, #{pro_image} )
-      
-   </insert>
-	
-	
+		INSERT INTO CART (MEM_ID, PRO_CODE, CART_DAY, CART_START, CART_CNT,
+		PRO_NAME, PRO_PRICE, PRO_DESC, PRO_IMAGE)
+		VALUES (#{mem_id}, #{pro_code}, #{cart_day}, #{cart_start}, #{cart_cnt},
+		#{pro_name}, #{pro_price}, #{pro_desc}, #{pro_image} )
+	</insert>
+
 	<!-- 카트 옵션 수정 -->
 	<update id="cartUpdate">
-	<![CDATA[
-		UPDATE CART SET CART_DAY = #{cart_day}, CART_START = #{cart_start}, CART_CNT = #{cart_cnt} WHERE cart_code = #{cart_code}
-	]]>
+		<![CDATA[
+			UPDATE CART SET CART_DAY = #{cart_day}, CART_START = #{cart_start}, CART_CNT = #{cart_cnt}, CART_TOTPRICE = #{cart_totprice} WHERE CART_CODE = #{cart_code}
+		]]>
 	</update>
 
 	<!-- 카트 삭제 -->
 	<update id="cartDelete">
-	<![CDATA[
-		UPDATE CART SET CART_SHOW = 0 WHERE CART_CODE = #{cart_code}
-	]]>
-	</update>
-		
-	
-	<!-- product cartVO형태로 담기 -->
-   <select id="productToCart" resultType="kr.co.mirak.cart.CartVO">
-      <![CDATA[
-      SELECT *
-      FROM PRODUCT
-      WHERE pro_code = #{pro_code}
-      ]]>
-   </select>
-   
-   <select id="getListPaging" resultType="kr.co.mirak.cart.CartVO">
-		
 		<![CDATA[
-  		 
-		select * from (select * from cart) as T1 limit #{skip},#{amount}
- 		]]>
+			UPDATE CART SET CART_SHOW = 0 WHERE CART_CODE = #{cart_code}
+		]]>
+	</update>
 
+	<!-- product cartVO형태로 담기 -->
+	<select id="productToCart" resultType="kr.co.mirak.cart.CartVO">
+      <![CDATA[
+	      SELECT *
+	      FROM PRODUCT
+	      WHERE pro_code = #{pro_code}
+      ]]>
 	</select>
-	
-	<!-- 	페이징 처리 (카트 총 개수 출력) -->
+
+	<select id="getListPaging" resultType="kr.co.mirak.cart.CartVO">
+		<![CDATA[
+			select * from (select * from cart) as T1 limit #{skip},#{amount}
+ 		]]>
+	</select>
+
+	<!-- 페이징 처리 (카트 총 개수 출력) -->
 	<select id="getTotal" resultType="int">
 		<![CDATA[
-		select count(*) from cart
+			select count(*) from cart
 		]]>
 	</select>
-	
-	
-	
-  </mapper>
+</mapper>

@@ -83,7 +83,7 @@
 										<td>${c.cart_cnt }</td>
 										<td>${c.cart_totprice }</td>
 										<td>
-											<input type="button" value="변경" class="btn btn-primary" data-toggle="modal" data-target="#${c.pro_code }">
+											<input type="button" value="변경" class="btn btn-primary" data-toggle="modal" data-target="#modal${c.cart_code }">
 										</td>
 										<td class="product-remove">
 											<a href="/cart/cartDelete/${c.cart_code }" onclick="return confirm('삭제하시겠습니까?');">
@@ -125,67 +125,67 @@
 	</div>
 	<!-- Modal -->
 	<c:forEach var="c" items="${cartList}">
-		<div class="modal fade" id="${c.pro_code }" tabindex="9999"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="modal${c.cart_code }" tabindex="9999" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">구매 옵션 변경</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<div class="ftco-animated">
-							<div class="blog-entry align-self-stretch d-md-flex">
-								<div>
-									<img src="${path}/resources/images/product/${c.pro_image}" title="${c.pro_name }" alt="${c.pro_desc }" style="width: 250px;">
-								</div>
-								<div class="text d-block pl-md-4">
-									<h3 class="heading">
-										${c.pro_name }
-									</h3>
-									<input type="hidden" class="cart_code" value="${c.cart_code }">										
-									<p>
-										<span class="font-weight-bold text-dark">상품 상세</span> ${c.pro_desc}
-									</p>						
-									<p>
-										<span class="font-weight-bold text-dark">상품 코드</span> ${c.cart_code }
-									</p>											
-									<p>
-										<span class="font-weight-bold text-dark">상품 가격</span> ${c.pro_price }원 <br>
-										<input type="date" name="cart_start" class="form-control input-number" value="${c.cart_start }">
-									</p>						
-									<p>
-										<span class="font-weight-bold text-dark">배송 시작일</span>
-										<input type="date" name="cart_start" class="form-control input-number" value="${c.cart_start }">
-									</p>		
-									<p>
-										<span  class="font-weight-bold text-dark">배송 요일</span><br>
-										&nbsp;
-										<label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform: scale(1.5);" value="월" <c:if test = "${fn : contains(c.cart_day, '월')}">checked</c:if>>&nbsp;&nbsp;월</label>&nbsp;&nbsp; 
-										<label for="tue"><input type="checkbox" name="cart_day" id="tue" style="transform: scale(1.5);" value="화" <c:if test = "${fn : contains(c.cart_day, '화')}">checked</c:if>>&nbsp;&nbsp;화</label>&nbsp;&nbsp; 
-										<label for="wed"><input type="checkbox" name="cart_day" id="wed" style="transform: scale(1.5);" value="수" <c:if test = "${fn : contains(c.cart_day, '수')}">checked</c:if>>&nbsp;&nbsp;수</label>&nbsp;&nbsp; 
-										<label for="thu"><input type="checkbox" name="cart_day" id="thu" style="transform: scale(1.5);" value="목" <c:if test = "${fn : contains(c.cart_day, '목')}">checked</c:if>>&nbsp;&nbsp;목</label>&nbsp;&nbsp; 
-										<label for="fri"><input type="checkbox" name="cart_day" id="fri" style="transform: scale(1.5);" value="금" <c:if test = "${fn : contains(c.cart_day, '금')}">checked</c:if>>&nbsp;&nbsp;금</label>&nbsp;&nbsp; 
-										<label for="sat"><input type="checkbox" name="cart_day" id="sat" style="transform: scale(1.5);" value="토" <c:if test = "${fn : contains(c.cart_day, '토')}">checked</c:if>>&nbsp;&nbsp;토</label>&nbsp;&nbsp; 
-										<label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform: scale(1.5);" value="일" <c:if test = "${fn : contains(c.cart_day, '일')}">checked</c:if>>&nbsp;&nbsp;일</label>
-									</p>						
-									<p>
-										<span  class="font-weight-bold text-dark">상품 개수</span><br>
-										<input type="number" name="cart_cnt" value="${c.cart_cnt}" class="quantity_input" min="1">
-									</p>
-									<hr>
-									<p><span  class="font-weight-bold text-dark">총 금액</span> ${c.cart_cnt * c.pro_price} 원</p>
+					<form action="/cartUpdate/${c.cart_code }" method="post">
+						<input type="hidden" name="cart_code" value="${c.cart_code }">		
+						<input type="hidden" name="cart_totprice" value="${c.cart_cnt * c.pro_price}">		
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">구매 옵션 변경</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="ftco-animated">
+								<div class="blog-entry align-self-stretch d-md-flex">
+									<div>
+										<img src="${path}/resources/images/product/${c.pro_image}" title="${c.pro_name }" alt="${c.pro_desc }" style="width: 250px;">
+									</div>
+									<div class="text d-block pl-md-4">
+										<h3 class="heading">${c.pro_name }</h3>								
+										<p>
+											<span class="font-weight-bold text-dark">상품 상세</span> ${c.pro_desc}
+										</p>						
+										<p>
+											<span class="font-weight-bold text-dark">상품 코드</span> ${c.cart_code }
+										</p>											
+										<p>
+											<span class="font-weight-bold text-dark">상품 가격</span> ${c.pro_price }원 <br>
+										</p>					
+										<p>
+											<span class="font-weight-bold text-dark">배송 시작일</span>
+											<input type="date" name="cart_start" class="form-control input-number" value="${c.cart_start }">
+										</p>		
+										<p>
+											<span  class="font-weight-bold text-dark">배송 요일</span><br>
+											&nbsp;
+											<label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform: scale(1.5);" value="월" <c:if test = "${fn : contains(c.cart_day, '월')}">checked</c:if>>&nbsp;&nbsp;월</label>&nbsp;&nbsp; 
+											<label for="tue"><input type="checkbox" name="cart_day" id="tue" style="transform: scale(1.5);" value="화" <c:if test = "${fn : contains(c.cart_day, '화')}">checked</c:if>>&nbsp;&nbsp;화</label>&nbsp;&nbsp; 
+											<label for="wed"><input type="checkbox" name="cart_day" id="wed" style="transform: scale(1.5);" value="수" <c:if test = "${fn : contains(c.cart_day, '수')}">checked</c:if>>&nbsp;&nbsp;수</label>&nbsp;&nbsp; 
+											<label for="thu"><input type="checkbox" name="cart_day" id="thu" style="transform: scale(1.5);" value="목" <c:if test = "${fn : contains(c.cart_day, '목')}">checked</c:if>>&nbsp;&nbsp;목</label>&nbsp;&nbsp; 
+											<label for="fri"><input type="checkbox" name="cart_day" id="fri" style="transform: scale(1.5);" value="금" <c:if test = "${fn : contains(c.cart_day, '금')}">checked</c:if>>&nbsp;&nbsp;금</label>&nbsp;&nbsp; 
+											<label for="sat"><input type="checkbox" name="cart_day" id="sat" style="transform: scale(1.5);" value="토" <c:if test = "${fn : contains(c.cart_day, '토')}">checked</c:if>>&nbsp;&nbsp;토</label>&nbsp;&nbsp; 
+											<label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform: scale(1.5);" value="일" <c:if test = "${fn : contains(c.cart_day, '일')}">checked</c:if>>&nbsp;&nbsp;일</label>
+										</p>						
+										<p>
+											<span  class="font-weight-bold text-dark">상품 개수</span><br>
+											<input type="number" name="cart_cnt" value="${c.cart_cnt}" class="quantity_input" min="1">
+										</p>
+										<hr>
+										<p><span class="font-weight-bold text-dark">총 금액</span> ${c.cart_cnt * c.pro_price} 원</p>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="modal-footer">
-						<a href="/cart/cartUpdate/${c.cart_code}" class="btn btn-primary py-3 px-5">변경</a>
-						<button type="button" class="btn btn-black py-3 px-5" data-dismiss="modal">Close</button>
-					</div>
+						<div class="modal-footer">
+							<%-- <a href="/cartUpdate/${c.cart_code}" class="btn btn-primary py-3 px-5">변경</a> --%>
+							<input type="submit" value="변경" class="btn btn-primary py-3 px-5">
+							<button type="button" class="btn btn-black py-3 px-5" data-dismiss="modal">Close</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
