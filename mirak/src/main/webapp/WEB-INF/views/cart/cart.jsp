@@ -36,8 +36,8 @@ session = request.getSession();
                      <thead class="thead-primary">
                         <tr class="text-center">
                            <th>
-                              <div class="all_check_input_div"  style="width:80px;">                              
-                                 <span class="all_chcek_span">전체선택</span>
+                              <div class="all_check_input_div"  style="width:30px;">                              
+                                 <span class="all_chcek_span"></span>
                                  <input type="checkbox" class="all_check" checked="checked">
                               </div>
                            </th>
@@ -90,6 +90,7 @@ session = request.getSession();
                                 <input type="hidden" class="count_input" value="${c.cart_cnt }">
                                 <input type="hidden" class="totalPrice_input" value="${c.pro_price * c.cart_cnt }">
                                 <input type="hidden" class="pro_code" value="${c.pro_code }">
+                                <input type="hidden" class="cart_code" value="${c.cart_code }">
                               </td>
                               <td class="image-prod"><div>
                                     <img alt="1"
@@ -118,12 +119,10 @@ session = request.getSession();
                                  data-target="#${c.pro_code }" style="width:150px;">
                                  <!-- <a href="/cart/cartUpdate/${c.cart_code }" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary py-3 px-5">변경</a> -->
                               </td>
-                              <td>
-                                 <!-- <button type="button" class="btn btn-primary py-3 px-5" onclick="javascript:del()"> -->
-                                 <!-- <input type="button" value="삭제" class="btn btn-primary py-3 px-5" onclick="location.href='/cart/cartDelete/${c.cart_code }'; return confirm('삭제하시겠습니까?');"> -->
-                                 <a href="/cart/cartDelete/${c.cart_code }"
-                                 onclick="return confirm('삭제하시겠습니까?');"
-                                 class="btn btn-primary py-3 px-5" style="width:150px; ">삭제</a>                           
+                              <td class="product-remove">
+                              <a href="/cart/cartDelete/${c.cart_code }"
+                                 onclick="return confirm('삭제하시겠습니까?');"><span
+                                 class="ion-ios-close"></span></a>
                               </td>
                            </tr>
                         </c:forEach>
