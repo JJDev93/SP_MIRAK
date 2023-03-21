@@ -3,11 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
-:root {
-	accent-color: #000;
-   
+.input-number{
+	
 }
+
+
 </style>
+
+
+
+
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
@@ -50,9 +55,10 @@
 							<p style="margin-top:5px;">수량 : &nbsp;&nbsp; </p><input type="text" id="result" name="cart_cnt" class="form-control input-number" min="1" max="100" value="1" onchange="payBtnCnt()">
 						</div>
 					</div>
-
+					
+					
 					<label for="start">배송 시작일<input type="date" name="cart_start" class="form-control input-number" style="width:240px;" id="start" min=""></label>
-
+					
 					<br>
 					
 					요일 선택<br>
@@ -68,8 +74,8 @@
 					<br>
 					<p>
 
-						<a href="/cart/${product.pro_code }/1" id="cartBtn" class="btn btn-primary py-3 px-5" onclick="payBtnCnt()">장바구니</a>
-		             	<a href="/pay/${product.pro_code }/1" id="payBtn" class="btn btn-black py-3 px-5" onclick="payBtnCnt()">즉시 구매</a>
+						<a href="/cart/${product.pro_code }/1" id="cartBtn" class="btn btn-primary py-3 px-5" onclick="return payBtnCnt()">장바구니</a>
+		             	<a href="/pay/${product.pro_code }/1" id="payBtn" class="btn btn-black py-3 px-5" onclick="return payBtnCnt()">즉시 구매</a>
 
 					</p>
 				</div>
@@ -79,7 +85,19 @@
 </form>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
 <script>
+
 	const payBtnCnt = function() {
+		
+		const dateInput = document.getElementById('start');
+
+		if (!dateInput.value) {
+			  
+		  alert('날짜를 입력해주세요.');
+			return false;
+		}
+			
+		
+		
 	 let cnt = document.getElementById("result").value;
 		
 	 let start = document.getElementById("start").value;
@@ -108,6 +126,14 @@
 	
 	document.getElementById("start").min = today;	
 	document.getElementById('start').valueAsDate = new Date();
+	
+	
+	
+	
 </script>
+
+
+
+
 </body>
 </html>

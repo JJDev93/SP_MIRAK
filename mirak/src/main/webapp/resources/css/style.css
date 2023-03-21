@@ -12,6 +12,7 @@
 }
 
 :root {
+  accent-color: #000;  /* 체크박스 색상변경하는거*/
   --blue: #007bff;
   --indigo: #6610f2;
   --purple: #6f42c1;
@@ -8557,9 +8558,9 @@ h1, h2, h3, h4, h5,
     border: 1px solid #000000;
     color: #fff; }
     .btn.btn-black:hover {
-      background: #82ae46;
+      background: #fff;
       border: 1px solid #82ae46;
-      color: #fff; }
+      color: #82ae46; }
     .btn.btn-black.btn-outline-white {
       border: 1px solid #000000;
       background: transparent;
