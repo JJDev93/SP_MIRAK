@@ -137,50 +137,50 @@
 						</button>
 					</div>
 					<div class="modal-body">
-							<div class="ftco-animated">
-								<div class="blog-entry align-self-stretch d-md-flex">
-									<div>
-										<img src="${path}/resources/images/product/${c.pro_image}" title="${c.pro_name }" alt="${c.pro_desc }" style="width: 250px;">
-									</div>
-									<div class="text d-block pl-md-4">
-										<h3 class="heading">
-											${c.pro_name }
-										</h3>
-										<input type="hidden" class="cart_code" value="${c.cart_code }">										
-										<p>
-											<span class="font-weight-bold text-dark">상품 상세</span> ${c.pro_desc}
-										</p>						
-										<p>
-											<span class="font-weight-bold text-dark">상품 코드</span> ${c.cart_code }
-										</p>											
-										<p>
-											<span class="font-weight-bold text-dark">상품 가격</span> ${c.pro_price }원 <br>
-											<input type="date" name="cart_start" class="form-control input-number" value="${c.cart_start }">
-										</p>						
-										<p>
-											<span class="font-weight-bold text-dark">배송 시작일</span>
-											<input type="date" name="cart_start" class="form-control input-number" value="${c.cart_start }">
-										</p>		
-										<p>
-											<span  class="font-weight-bold text-dark">배송 요일</span><br>
-											&nbsp;
-											<label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform: scale(1.5);" value="월" <c:if test = "${fn : contains(c.cart_day, '월')}">checked</c:if>>&nbsp;&nbsp;월</label>&nbsp;&nbsp; 
-											<label for="tue"><input type="checkbox" name="cart_day" id="tue" style="transform: scale(1.5);" value="화" <c:if test = "${fn : contains(c.cart_day, '화')}">checked</c:if>>&nbsp;&nbsp;화</label>&nbsp;&nbsp; 
-											<label for="wed"><input type="checkbox" name="cart_day" id="wed" style="transform: scale(1.5);" value="수" <c:if test = "${fn : contains(c.cart_day, '수')}">checked</c:if>>&nbsp;&nbsp;수</label>&nbsp;&nbsp; 
-											<label for="thu"><input type="checkbox" name="cart_day" id="thu" style="transform: scale(1.5);" value="목" <c:if test = "${fn : contains(c.cart_day, '목')}">checked</c:if>>&nbsp;&nbsp;목</label>&nbsp;&nbsp; 
-											<label for="fri"><input type="checkbox" name="cart_day" id="fri" style="transform: scale(1.5);" value="금" <c:if test = "${fn : contains(c.cart_day, '금')}">checked</c:if>>&nbsp;&nbsp;금</label>&nbsp;&nbsp; 
-											<label for="sat"><input type="checkbox" name="cart_day" id="sat" style="transform: scale(1.5);" value="토" <c:if test = "${fn : contains(c.cart_day, '토')}">checked</c:if>>&nbsp;&nbsp;토</label>&nbsp;&nbsp; 
-											<label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform: scale(1.5);" value="일" <c:if test = "${fn : contains(c.cart_day, '일')}">checked</c:if>>&nbsp;&nbsp;일</label>
-										</p>						
-										<p>
-											<span  class="font-weight-bold text-dark">상품 개수</span><br>
-											<input type="number" name="cart_cnt" value="${c.cart_cnt}" class="quantity_input" min="1">
-										</p>
-										<hr>
-										<p><span  class="font-weight-bold text-dark">총 금액</span> ${c.cart_cnt * c.pro_price} 원</p>
-									</div>
+						<div class="ftco-animated">
+							<div class="blog-entry align-self-stretch d-md-flex">
+								<div>
+									<img src="${path}/resources/images/product/${c.pro_image}" title="${c.pro_name }" alt="${c.pro_desc }" style="width: 250px;">
+								</div>
+								<div class="text d-block pl-md-4">
+									<h3 class="heading">
+										${c.pro_name }
+									</h3>
+									<input type="hidden" class="cart_code" value="${c.cart_code }">										
+									<p>
+										<span class="font-weight-bold text-dark">상품 상세</span> ${c.pro_desc}
+									</p>						
+									<p>
+										<span class="font-weight-bold text-dark">상품 코드</span> ${c.cart_code }
+									</p>											
+									<p>
+										<span class="font-weight-bold text-dark">상품 가격</span> ${c.pro_price }원 <br>
+										<input type="date" name="cart_start" class="form-control input-number" value="${c.cart_start }">
+									</p>						
+									<p>
+										<span class="font-weight-bold text-dark">배송 시작일</span>
+										<input type="date" name="cart_start" class="form-control input-number" value="${c.cart_start }">
+									</p>		
+									<p>
+										<span  class="font-weight-bold text-dark">배송 요일</span><br>
+										&nbsp;
+										<label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform: scale(1.5);" value="월" <c:if test = "${fn : contains(c.cart_day, '월')}">checked</c:if>>&nbsp;&nbsp;월</label>&nbsp;&nbsp; 
+										<label for="tue"><input type="checkbox" name="cart_day" id="tue" style="transform: scale(1.5);" value="화" <c:if test = "${fn : contains(c.cart_day, '화')}">checked</c:if>>&nbsp;&nbsp;화</label>&nbsp;&nbsp; 
+										<label for="wed"><input type="checkbox" name="cart_day" id="wed" style="transform: scale(1.5);" value="수" <c:if test = "${fn : contains(c.cart_day, '수')}">checked</c:if>>&nbsp;&nbsp;수</label>&nbsp;&nbsp; 
+										<label for="thu"><input type="checkbox" name="cart_day" id="thu" style="transform: scale(1.5);" value="목" <c:if test = "${fn : contains(c.cart_day, '목')}">checked</c:if>>&nbsp;&nbsp;목</label>&nbsp;&nbsp; 
+										<label for="fri"><input type="checkbox" name="cart_day" id="fri" style="transform: scale(1.5);" value="금" <c:if test = "${fn : contains(c.cart_day, '금')}">checked</c:if>>&nbsp;&nbsp;금</label>&nbsp;&nbsp; 
+										<label for="sat"><input type="checkbox" name="cart_day" id="sat" style="transform: scale(1.5);" value="토" <c:if test = "${fn : contains(c.cart_day, '토')}">checked</c:if>>&nbsp;&nbsp;토</label>&nbsp;&nbsp; 
+										<label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform: scale(1.5);" value="일" <c:if test = "${fn : contains(c.cart_day, '일')}">checked</c:if>>&nbsp;&nbsp;일</label>
+									</p>						
+									<p>
+										<span  class="font-weight-bold text-dark">상품 개수</span><br>
+										<input type="number" name="cart_cnt" value="${c.cart_cnt}" class="quantity_input" min="1">
+									</p>
+									<hr>
+									<p><span  class="font-weight-bold text-dark">총 금액</span> ${c.cart_cnt * c.pro_price} 원</p>
 								</div>
 							</div>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<a href="/cart/cartUpdate/${c.cart_code}" class="btn btn-primary py-3 px-5">변경</a>
@@ -193,24 +193,6 @@
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
 <script>
-	/*
-	 const payBtnCnt = function() {
-	 let cnt = document.getElementById("result").value;
-	
-	 let start = document.getElementById("start").value;
-	 let mon = document.getElementById("mon").checked ? "월" : "";
-	 let tue = document.getElementById("tue").checked ? "화" : "";
-	 let wed = document.getElementById("wed").checked ? "수" : "";
-	 let thu = document.getElementById("thu").checked ? "목" : "";
-	 let fri = document.getElementById("fri").checked ? "금" : "";
-	 let sat = document.getElementById("sat").checked ? "토" : "";
-	 let sun = document.getElementById("sun").checked ? "일" : "";
-	
-	 document.getElementById("payBtn").href = "/pay/${product.pro_code}/"  + cnt + "/" + start + "/" + mon + tue + wed + thu + fri + sat + sun;
-	 document.getElementById("cartBtn").href = "/cart/${product.pro_code}/" + cnt + "/" + start + "/" + mon + tue + wed + thu + fri + sat + sun;
-	 }
-	 */
-
 	$(function() {
 		$('input[name="daterange"]').daterangepicker(
 				{
@@ -297,69 +279,4 @@
 		// 최종 가격(총 가격 + 배송비)
 		$(".finalTotalPrice_span").text(finalTotalPrice.toLocaleString());
 	}
-
-	/* 수량 조절 버튼
-	$(".plus_btn").on("click", function() {
-	   let quantity = $(this).parent("div").find("input").val();
-	   $(this).parent("div").find("input").val(++quantity);
-	});
-	$(".minus_btn").on("click", function() {
-	   let quantity = $(this).parent("div").find("input").val();
-	   if (quantity > 1) {
-	      $(this).parent("div").find("input").val(--quantity);
-	   }
-	});
-
-	 수량 수정 버튼
-	$(".quantity_update_btn").on("click", function() {
-	   let cartId = $(this).data("cartid");
-	   let count = $(this).parent("td").find("input").val();
-	   $(".update_cartId").val(cartId);
-	   $(".update_count").val(count);
-	   $(".quantity_update_form").submit();
-
-	});
-	 */
-
-	/*
-	 결제 페이지 이동 
-	$(".pay_btn")
-	      .on(
-	            "click",
-	            function() {
-
-	               let form_contents = '';
-	               let orderNumber = 0;
-
-	               $(".cart_info")
-	                     .each(
-	                           function(index, element) {
-
-	                              if ($(element).find(
-	                                    ".cart_checkbox").is(
-	                                    ":checked") === true) { // 체크 여부 확인
-
-	                                 let pro_name = $(element).find(
-	                                       ".pro_name_input")
-	                                       .val();
-	                                 let cart_cnt = $(element).find(
-	                                       ".cart_cnt_input")
-	                                       .val();
-
-	                                 let pro_name_input = "<input name='orders[" + orderNumber + "].pro_name' type='hidden' value='" + pro_name + "'>";
-	                                 form_contents += pro_name_input;
-
-	                                 let cart_cnt_input = "<input name='orders[" + orderNumber + "].cart_cnt' type='hidden' value='" + cart_cnt + "'>";
-	                                 form_contents += cart_cnt_input;
-
-	                                 orderNumber += 1;
-
-	                              }
-	                           });
-
-	               $(".pay_form").html(form_contents);
-	               $(".pay_form").submit();
-
-	            });
-	 */
 </script>
