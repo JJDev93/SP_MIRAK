@@ -10004,6 +10004,12 @@ textarea.form-control {
     overflow: hidden;
     display: block;
 }
+.table_wrap thead th,
+.table_wrap tbody td{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
 @-webkit-keyframes loader-rotate {
   100% {
     -webkit-transform: rotate(360deg);

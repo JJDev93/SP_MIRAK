@@ -35,7 +35,7 @@
 											<label for="id">이메일(ID)</label>
 											<div class="row">
 												<div class="col-sm-12">
-													<input type="email" path="memMail" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required="required">
+													<input type="email" path="memMail" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" >
 												</div>
 											</div>
 										</div>
@@ -47,7 +47,7 @@
 											<label for="id">이메일(ID)</label>
 											<div class="row mb-2">
 												<div class="col-sm-9">
-													<input type="email" path="memMail" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required="required">
+													<input type="email" path="memMail" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required tabindex="1" autofocus="autofocus">
 												</div>
 												<div class="col-sm-3">
 													<button type="button" class="btn btn-primary joinBtn mb-3" id="idCheck" value="N" onclick="fn_idCheck();">중복확인</button>
@@ -59,7 +59,7 @@
 													<div class="mail_check_input_box" id="mail_check_input_box_false">
 														<input class="form-control" id="mail_check_input" disabled="disabled" placeholder="인증번호 6자리를 입력해주세요!" maxlength="6">
 														<div class="clearfix"></div>
-			                  								<span id="mail_check_input_box_warn"></span>
+			                  							<span id="mail_check_input_box_warn"></span>
 													</div>
 												</div>
 												<div class="col-sm-3">
@@ -85,14 +85,14 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="firstname">이름</label> 
-									<input type="text" name="mem_name" class="form-control" placeholder="이름을 입력해주세요" required="required" value="${member.mem_name }">
+									<input type="text" name="mem_name" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required">
 								</div>
 							</div>
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="age">나이</label> 
-									<input type="text" name="mem_age" id="age" class="form-control" placeholder="나이를 입력해주세요" required="required" value="${member.mem_age }">
+									<input type="text" name="mem_age" id="age" class="form-control" placeholder="나이를 입력해주세요" value="${member.mem_age }" required="required">
 								</div>
 							</div>
 	
@@ -122,14 +122,14 @@
 									<label for="streetaddress">주소</label>
 									<div class="row mb-4">
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="address_input_1" name="mem_zipcode" placeholder="우편번호" readonly="readonly">
+											<input type="text" class="form-control" id="address_input_1" name="mem_zipcode" placeholder="우편번호" readonly>
 										</div>
 										<div class="col-sm-4">
 											<button type="button" class="btn btn-primary joinBtn address button" onclick="execution_daum_address();">우편번호찾기</button>
 										</div>
 									</div>
 									<input type="text" id="address_input_2" class="form-control mb-4" name="mem_add1" placeholder="주소지를 입력해주세요" readonly="readonly"> 
-									<input type="text"  id="address_input_3" class="form-control" name="mem_add2" placeholder="상세주소를 작성해주세요" readonly="readonly" >
+									<input type="text"  id="address_input_3" class="form-control" name="mem_add2" placeholder="상세주소를 작성해주세요" readonly>
 								</div>
 							</div>
 							
@@ -137,7 +137,7 @@
 						</div>
 						<div class="row mb-5">
 							<div class="col-md-6">
-								<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100">
+								<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return checkAddressInput() && checkAgeInput();">
 							</div>
 							<div class="col-md-6">
 								<a href="/" class="btn btn-secondary py-3 px-5 w-100">가입취소</a>
@@ -149,6 +149,8 @@
 		</div>
 	</section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
+
+
 <script>
 	$(document).ready(function() {
 		console.log($("button[id='idCheck']").val() == "N");
@@ -166,6 +168,12 @@
 			$("input[name='checked_id']").eq(0).focus();
 			return false;
 		}
+		
 		return true;
 	}
 </script>
+
+
+	
+
+

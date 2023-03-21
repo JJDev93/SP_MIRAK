@@ -135,7 +135,6 @@
          dataType : "html",
          cache : false
       };
-
       $.ajax(ajaxOption).done(function(data) {
          // Contents 영역 삭제
          $('#test').children().remove();

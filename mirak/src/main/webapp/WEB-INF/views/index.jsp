@@ -11,8 +11,8 @@
 			<div class="container">
 				<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 					<div class="col-md-12 ftco-animate text-center">
-						<h1 class="mb-2">We serve Fresh Vegestables &amp; Fruits</h1>
-						<h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
+						<h1 class="mb-2">맛과 행복을 전하는 도시락 &nbsp; 미락(美樂)</h1>
+						<h2 class="subheading mb-4">Lunch box that conveys taste and happiness &nbsp; MiRak</h2>
 						<!-- <p>
 							<a href="#" class="btn btn-primary">View Details</a>
 						</p> -->
@@ -26,8 +26,8 @@
 			<div class="container">
 				<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 					<div class="col-sm-12 ftco-animate text-center">
-						<h1 class="mb-2">100% Fresh &amp; Organic Foods</h1>
-						<h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
+						<h1 class="mb-2" style="font-size: 50px;">하루 한 끼! 점심대용식!&nbsp;다양한 종류로 맛있게!</h1>
+						<h2 class="subheading mb-4">We deliver high-quality lunch boxes &amp; Freshly</h2>
 						<!-- <p>
 							<a href="#" class="btn btn-primary">View Details</a>
 						</p> -->
