@@ -154,7 +154,7 @@
 										</p>					
 										<p>
 											<span class="font-weight-bold text-dark">배송 시작일</span>
-											<input type="date" name="cart_start" class="form-control input-number" value="${c.cart_start }">
+											<input type="date" id="start" name="cart_start" class="form-control input-number" value="${c.cart_start }">
 										</p>		
 										<p>
 											<span  class="font-weight-bold text-dark">배송 요일</span><br>
@@ -179,7 +179,8 @@
 						</div>
 						<div class="modal-footer">
 							<%-- <a href="/cartUpdate/${c.cart_code}" class="btn btn-primary py-3 px-5">변경</a> --%>
-							<input type="submit" value="변경" class="btn btn-primary py-3 px-5">
+							<!-- <input type="submit" value="변경" class="btn btn-primary py-3 px-5"> -->
+							<input type="submit" value="변경" class="btn btn-primary py-3 px-5" onclick="if(document.getElementsByName('cart_start')[0].value==''){alert('배송 시작일을 입력해주세요.');return false;}">
 							<button type="button" class="btn btn-black py-3 px-5" data-dismiss="modal">Close</button>
 						</div>
 					</form>
@@ -189,6 +190,8 @@
 	</c:forEach>
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
+
+
 <script>
 	$(function() {
 		$('input[name="daterange"]').daterangepicker(
@@ -201,6 +204,14 @@
 							+ end.format('YYYY-MM-DD'));
 				});
 	});
+	
+	let today = new Date().toISOString().substr(0, 10);
+	document.getElementById("start").min = today;	
+	document.getElementById('start').valueAsDate = new Date();
+	
+	
+	
+	
 
 	$(document).ready(function() {
 		// 종합 정보 삽입
