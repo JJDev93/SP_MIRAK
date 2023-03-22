@@ -46,7 +46,6 @@ tr .tr-custom {
 						<tr>
 							<th scope="col">주문번호</th>
 							<th scope="col">상품명</th>
-							<th scope="col">도시락 종류</th>
 							<th scope="col">총 가격</th>
 							<th scope="col">주문자이름</th>
 							<th scope="col">전화번호</th>
@@ -54,7 +53,7 @@ tr .tr-custom {
 							<th scope="col">요청사항</th>
 							<th scope="col">결제일</th>
 							<th scope="col">주문상태</th>
-							<th scope="col">배송상태</th>
+							<th scope="col">결제취소</th>
 							<th scope="col">상세정보</th>
 						</tr>
 					</thead>
@@ -70,7 +69,6 @@ tr .tr-custom {
                         ${payList.pro_name}외 ${payList.cart_cnt-1}종
                     </c:otherwise>
 									</c:choose></td>
-								<td>${payList.cart_cnt}</td>
 								<td>${payList.totalPrice}</td>
 								<td>${payList.mem_name}</td>
 								<td>${payList.mem_phone}</td>
@@ -81,12 +79,10 @@ tr .tr-custom {
 								<td>
 								<c:choose>
  								 <c:when test="${payList.status == '결제 완료'}">
-    								<button id="statusBtn_${payList.group_id}" class="btn btn-secondary" type="button" onclick="updateStatus(${payList.group_id})">배송시작</button>
+    								<button id="statusBtn_${payList.group_id}" class="btn btn-secondary" type="button" onclick="updateStatus(${payList.group_id})">결제취소</button>
   								</c:when>
-  								<c:when test="${payList.status == '배송중'}">
-    								<button id="statusBtn_${payList.group_id}" class="btn btn-secondary" type="button" disabled>배송중</button>
-  								</c:when>
-								  <c:when test="${payList.status == '구매 확정'}">
+  								<c:when test="${payList.status == '주문 완료' || payList.status == '결제 취소' || payList.status == '구매 확정'}">
+    								<button id="statusBtn_${payList.group_id}" class="btn btn-secondary" type="button" disabled>X</button>
   								</c:when>
 								</c:choose>
 								</td>
@@ -167,46 +163,92 @@ tr .tr-custom {
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>
 </div>
 <script>
-function updateStatus(group_id) {
-	  var statusTd = $('#statusTd_' + group_id);
-	  var statusBtn = $('#statusBtn_' + group_id);
-	  $.ajax({
-	    url: "/admin/payment/" + group_id + "/updateStatus",
-	    method: "PUT",
-	    success: function (data) {
-	      alert("배송 상태가 업데이트 되었습니다.");
-	      var updatedStatus = '';
-	      for (var i = 0; i < data.length; i++) {
-	        if (data[i].group_id == group_id) {
-	          updatedStatus = data[i].status;
-	          break;
-	        }
-	      }
-	      statusTd.text(updatedStatus);
-	      if (updatedStatus === '배송중') {
-	        statusBtn.prop('disabled', true);
-	      }
-	    },
-	    error: function () {
-	      alert("배송 상태 업데이트에 실패하였습니다.");
-	    },
-	  });
-	}
-
-	function detailTable(data, group_id) {
+function detailTable(data, group_id) {
 	  var tbody = $("#accordianBody-" + group_id);
-	  tbody.empty();
+	  tbody.empty();	  
+	  var productList = JSON.parse('${productList}');
 
 	  data.forEach(function (item) {
-	    var date = new Date(item.cart_start);
-	    var cart_start = date.toISOString().substring(0, 10);
+	      var date = new Date(item.cart_start);
+	      var cart_start = date.toISOString().substring(0, 10);
+	      
+	      var select = $("<select>").addClass("form-control");
+	      productList.forEach(function(product) {
+	        var option = $("<option>").attr("value", product.pro_name).text(product.pro_name);
+	        if (item.pro_name === product.pro_name) {
+	          option.attr("selected", true);
+	        }
+	        select.append(option);
+	      });
+	      
+	      var totalPrice = item.cart_cnt * productList.find(function(product) {
+	          return product.pro_name === item.pro_name;
+	        }).pro_price;
+	      
+	      select.on("change", function() { 
+	        var selectedProduct = productList.find(function(product) {
+	          return product.pro_name === select.val();
+	          })
+	        var price = selectedProduct.pro_price;
+	        totalPrice = price * parseInt(cart_cnt.val()); 
+	        $(this).closest("tr").find(".totalPrice").text(totalPrice); 
+	      });
+	      
+	      var cart_cnt = $("<input>").addClass("form-control").attr({
+	    	  "type": "number",
+	    	  "min": "0",
+	    	  "max": "99",
+	    	  "step": "1",
+	    	  "value": item.cart_cnt
+	    	});
+	      
+	      cart_cnt.on("input", function() { 
+	        var selectedProduct = productList.find(function(product) {
+	          return product.pro_name === select.val();
+	        });
+	        var price = selectedProduct.pro_price;
+	        totalPrice = price * parseInt(cart_cnt.val());
+	        $(this).closest("tr").find(".totalPrice").text(totalPrice); 
+	      });
+	    
+	    var cart_day = $("<div>").addClass("cart_day");
+	    
+	    var days = ["월", "화", "수", "목", "금", "토", "일"];
+	    for (var i = 0; i < days.length; i++) {
+	      var isChecked = item.cart_day.includes(days[i]);
+	      var input = $("<input>").attr({
+	        "type": "checkbox",
+	        "name": "cart_day",
+	        "id": days[i],
+	        "value": days[i],
+	        "class": "form-check-input",
+	      }).css({"margin-left":"-0.8rem"}).prop("checked", isChecked);
+	      var label = $("<label>").attr({
+	        "for": days[i],
+	        "class": "form-check-label",
+	      }).text(days[i]);
+	      var div = $("<div>").addClass("form-check").css({"display":"inline-block"}).append(input).append(label);
+	      cart_day.append(div);
+	    }
+	    
+	    var cart_start = $("<input>").attr({
+	    	  "type": "date",
+	    	  "name": "cart_start",
+	    	  
+	    	  "value": item.cart_start
+	    	});
+	    	$("<td>").append(cart_start);
+	    
 
+	    
+	    
+	    
 	    tbody.append(
 	      $("<tr>").append(
-	        $("<td>").text(item.pro_name),
-	        $("<td>").text(item.cart_cnt),
-	        $("<td>").text(item.totalPrice),
-	        $("<td>").text(item.cart_day),
+	        $("<td>").append(select),
+	        $("<td>").append(cart_cnt),
+	        $("<td class='totalPrice'>").text(totalPrice),
+	        $("<td>").append(cart_day),
 	        $("<td>").text(cart_start),
 	        $("<td>").text(item.status)
 	      )

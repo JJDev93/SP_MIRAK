@@ -26,7 +26,7 @@
 
 	<select id="getPayListDetail" resultType="kr.co.mirak.pay.PayVO">
 		select pay_code, pro_name, cart_cnt, totalPrice, cart_day, cart_start, status, group_id
- 		from pay where group_id = #{group_id};
+ 		from pay where group_id = #{group_id} order by cart_start;
 	</select>
 	
 	<update id="updateStatus" parameterType="kr.co.mirak.pay.PayVO">

@@ -11,12 +11,13 @@
 		
 		]]>
 	</insert>
-
+	
+	
 
 	<select id="productList" resultType="product">
 		
 		<![CDATA[
- 		SELECT pro_code, pro_name, pro_price, pro_desc, pro_image from product limit 4;
+ 		SELECT pro_name, pro_price from product;
 		
  		]]>
 

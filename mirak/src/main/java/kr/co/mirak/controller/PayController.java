@@ -6,27 +6,23 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import kr.co.mirak.cart.CartService;
 import kr.co.mirak.cart.CartVO;
 import kr.co.mirak.member.MemberService;
-import kr.co.mirak.member.MemberVO;
 import kr.co.mirak.pay.CriteriaP;
 import kr.co.mirak.pay.PageMakerDTOP;
 import kr.co.mirak.pay.PayService;
@@ -188,14 +184,23 @@ public class PayController {
 	}
 
 	@RequestMapping(value = "/admin/pays/{num}", method = RequestMethod.GET)
-	public String getAdminPayList(PayVO payVO, Model model, CriteriaP criP, @PathVariable("num") int num) {
+	public String getAdminPayList(ProductVO productVO, PayVO payVO, Model model, CriteriaP criP, @PathVariable("num") int num) {
 		criP.setPageNum(num); 
-		model.addAttribute("payList", payService.getAdminPayList(criP));
+		
+		List<PayVO> payList = payService.getAdminPayList(criP);
+		model.addAttribute("payList", payList);
+		
+		List<ProductVO> productList = productService.productList(productVO);
+		String productListJson = new Gson().toJson(productList);
+		model.addAttribute("productList", productListJson);
+		
 		int total = payService.getTotal();
 		PageMakerDTOP pageMake = new PageMakerDTOP(criP, total);
 		
 		model.addAttribute("pageMaker", pageMake);
+
 		model.addAttribute("curPage", num);
+
 
 		return "pay/adminPayments";
 	}
