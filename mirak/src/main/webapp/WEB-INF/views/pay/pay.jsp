@@ -11,11 +11,8 @@
 	<div class="container">
 		<div
 			class="row no-gutters slider-text align-items-center justify-content-center">
-			<div class="col-md-9 ftco-animate text-center">
-				<p class="breadcrumbs">
-					<span class="mr-2"><a href="index.html">Home</a></span> <span>Checkout</span>
-				</p>
-				<h1 class="mb-0 bread">Checkout</h1>
+			<div class="col-md-9 ftco-animate text-center">				
+				<h1 class="mb-0 bread">주문 하기</h1>
 			</div>
 		</div>
 	</div>
@@ -32,7 +29,7 @@
 							<div class="ftco-animate fadeInUp ftco-animated">
 								<div class="blog-entry align-self-stretch d-md-flex">
 <%-- 									<a href="blog-single.html" class="block-20" style="background-image: url('images/${productVO.pro_image }');"> </a> --%>
-									<img src="${path}/resources/images/product/${productVO.pro_image }" title="${productVO.pro_name }" alt="${productVO.pro_desc }" style="width: 250px; height: 250px;">
+									<img src="${path}/resources/images/product/${productVO.pro_image }" title="${productVO.pro_name }" alt="${productVO.pro_desc }" style="width: 250px; height: 200px;">
 									<div class="text d-block pl-md-4">
 										<h3 class="heading">
 											${productVO.pro_name }
@@ -153,8 +150,8 @@
 								</div>
 							</div>
 							<p>
-								<input type="button" id="btn-kakao-pay" class="btn btn-primary py-3 px-5 l-100" value="주문하기"><br>
-								<a href="/" class="btn btn-black py-3 px-5 l-100">취소</a><br>
+								<input type="button" id="btn-kakao-pay" class="btn btn-primary py-3 px-5 l-100 mb-2" value="주문하기">
+								<a href="/" class="btn btn-black py-3 px-5 d-block">취소</a><br>
 							</p>
 						</div>
 					</div>

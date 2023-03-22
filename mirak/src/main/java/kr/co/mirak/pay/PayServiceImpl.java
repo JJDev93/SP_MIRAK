@@ -29,6 +29,7 @@ public class PayServiceImpl implements PayService {
 		List<PayVO> adminPayList = payMapper.getAdminPayList(criP);
 
 		return adminPayList;
+
 	}
 
 	@Override

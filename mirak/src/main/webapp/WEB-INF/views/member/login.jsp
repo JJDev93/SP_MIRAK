@@ -35,7 +35,6 @@
 </div>
 <section class="ftco-section">
    <div class="container">
-
       <div class="row justify-content-center">
          <div class="col-md-5 ftco-animate">
             <form action="login" method="post" class="contact-form">
@@ -104,16 +103,16 @@
          </div>
       </div>
    </div>
-<ul>
+<!-- <ul> -->
 
-   <li onclick="naverLogout(); return false;">
-      <a href="javascript:void(0)">
-          <span>네이버 로그아웃</span>
-      </a>
-   </li>
-</ul>
+<!--    <li onclick="naverLogout(); return false;"> -->
+<!--       <a href="javascript:void(0)"> -->
+<!--           <span>네이버 로그아웃</span> -->
+<!--       </a> -->
+<!--    </li> -->
+<!-- </ul> -->
 
-<form id="naverJoin" action="/naverTest" method="post">
+<form id="naverJoin" action="/naverjoin" method="post">
 <input type="hidden" name="mem_id" value="" id="mem_id">
 <input type="hidden" name="mem_gender" value="" id="mem_gender">
 <input type="hidden" name="mem_pw" value="" id="mem_pw">
@@ -170,8 +169,7 @@
                    console.log("로그인 AJAXX~~~~~~~~~~~~~~~~");
                    console.log(responseData);
 
-                   if (responseData == 'loginsuccess') {
-
+                   if (responseData == 'login') {
                       location.href = "/";
                    } else if (responseData == 'join') {
                 	   
@@ -203,21 +201,19 @@
       });
    });
 
-   var testPopUp;
-   function openPopUp() {
-      testPopUp = window.open("https://nid.naver.com/nidlogin.logout",
-            "_blank",
-            "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
-   }
-   function closePopUp() {
-      testPopUp.close();
-   }
+//    var testPopUp;
+//    function openPopUp() {
+//       testPopUp = window.open("https://nid.naver.com/nidlogin.logout","_blank","toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
+//    }
+//    function closePopUp() {
+//       testPopUp.close();
+//    }
 
-   function naverLogout() {
-      openPopUp();
-      setTimeout(function() {
-         closePopUp();
-      }, 1000);
+//    function naverLogout() {
+//       openPopUp();
+//       setTimeout(function() {
+//          closePopUp();
+//       }, 1);
 
-   }
+//    }
 </script>

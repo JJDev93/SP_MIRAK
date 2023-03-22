@@ -19,18 +19,14 @@
 						<div class="row align-items-end">
 							<c:choose>
 							    <c:when test="${not empty member.mem_isapi}">
-							    	<div class="col-md-12">
-										<div class="form-group">
-											<input type="text" name="mem_pw" class="form-control" value="${member.mem_pw }">
-							    			<input type="text" name="mem_isapi" class="form-control" value="${member.mem_isapi}">
-										</div>
-									</div>
+							    	<input type="hidden" name="mem_pw" class="form-control" value="${member.mem_pw }" readonly="readonly">
+							    	<input type="hidden" name="mem_isapi" class="form-control" value="${member.mem_isapi}" readonly="readonly">
 							    	<div class="col-md-12">
 										<div class="form-group">
 											<label for="id">이메일(ID)</label>
 											<div class="row">
 												<div class="col-sm-12">
-													<input type="email" path="memMail" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" >
+													<input type="email" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required="required">
 												</div>
 											</div>
 										</div>
@@ -42,7 +38,7 @@
 											<label for="id">이메일(ID)</label>
 											<div class="row mb-2">
 												<div class="col-sm-9">
-													<input type="email" path="memMail" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required tabindex="1" autofocus="autofocus">
+													<input type="email" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required tabindex="1" autofocus="autofocus">
 												</div>
 												<div class="col-sm-3">
 													<button type="button" class="btn btn-primary joinBtn mb-3" id="idCheck" value="N" onclick="fn_idCheck();">중복확인</button>

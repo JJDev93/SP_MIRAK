@@ -13,10 +13,8 @@
 		<div
 			class="row no-gutters slider-text align-items-center justify-content-center">
 			<div class="col-md-9 ftco-animate text-center">
-				<p class="breadcrumbs">
-					<span class="mr-2"><a href="index.html">Home</a></span> <span>Checkout</span>
-				</p>
-				<h1 class="mb-0 bread">Checkout</h1>
+
+				<h1 class="mb-0 bread">상세 결제내역</h1>
 			</div>
 		</div>
 	</div>
@@ -39,7 +37,7 @@
 							<div class="ftco-animate fadeInUp ftco-animated">
 								<div class="blog-entry align-self-stretch d-md-flex">
 <%-- 									<a href="blog-single.html" class="block-20" style="background-image: url('images/${productVO.pro_image }');"> </a> --%>
-									<img alt="1" src="${path}/resources/images/product/${productVO.pro_image}"  title="${productVO.pro_name }" alt="${productVO.pro_desc }" style="width: 250px; height: 250px;">
+									<img alt="1" src="${path}/resources/images/product/${productVO.pro_image}"  title="${productVO.pro_name }" alt="${productVO.pro_desc }" style="width: 250px; height: 200px;">
 									<div class="text d-block pl-md-4">
 										<h3 class="heading">
 											${productVO.pro_name }
@@ -80,8 +78,8 @@
 
 					<div class="row align-items-end">
 
-
-
+				
+						<div class="w-100"></div>
 						<div class="col-md-12">
 							<div class="form-group"></div>
 						</div>
@@ -89,8 +87,11 @@
 						<div class="w-100"></div>
 						<div class="col-md-12">
 							<div class="form-group">
-								주소<br>
-								${payVOList[0].mem_zipcode }${payVOList[0].mem_add1 }${payVOList[0].mem_add2 }
+								<label for="address">주소</label> <input type="text"
+									name="mem_address" class="form-control" id="address"
+									style="cursor: default"
+									value="${payVOList[0].mem_zipcode} ${payVOList[0].mem_add1} ${payVOList[0].mem_add2}"
+									readonly>
 							</div>
 						</div>
 
@@ -98,24 +99,29 @@
 						<div class="w-100"></div>
 						<div class="col-md-12">
 							<div class="form-group">
-								받는 사람<br>
-								${payVOList[0].mem_name }
+								<label for="receiverName">받는 사람</label> <input type="text"
+									style="cursor: default" name="mem_name" class="form-control"
+									placeholder="이름" id="receiverName" value="${payVOList[0].mem_name}"
+									readonly>
 							</div>
 						</div>
 
 						<div class="w-100"></div>
 						<div class="col-md-12">
 							<div class="form-group">
-								휴대폰 번호<br>
-								${payVOList[0].mem_phone }
+								<label for="phone">휴대폰 번호</label> <input type="tel"
+									style="cursor: default" name="mem_phone" class="form-control"
+									maxlength="11" pattern="[0-9]{11}" placeholder="" id="phone"
+									value="${payVOList[0].mem_phone}" readonly>
 							</div>
 						</div>
 
 						<div class="w-100"></div>
 						<div class="col-md-12">
 							<div class="form-group">
-								배송 요청사항<br>
-								${payVOList[0].pay_req }
+								<label for="req">배송 요청사항</label> <input type="text" style="cursor: default"
+									name="pay_req" class="form-control" value="${payVOList[0].pay_req }"
+									placeholder="요청 사항이 없습니다." id="req" readonly>
 							</div>
 						</div>
 
@@ -154,7 +160,7 @@
 								<button id="payCancel" class="btn btn-primary py-3 px-5 l-100" data-group_id="${payVOList[0].group_id }">결제 취소</button><br>
 							</c:if>
 							<c:if test="${payVOList[0].status eq '배송중'}">	
-								<a href="/" class="btn btn-black py-3 px-5 l-100">구매확정</a><br>
+								<button id="payConfirm" href="/" class="btn btn-black py-3 px-5 l-100">구매확정</button><br>
 							</c:if>
 							
 						</div>
@@ -211,10 +217,39 @@ document.addEventListener('DOMContentLoaded', function(){
 				}
 
 			})
+			
+			
+			$("#payConfirm").click(
+					function() {
+
+						let group_id = $(this).data('group_id');
+
+						let result = confirm("구매 확정을 하시겠습니까?")
+
+						if (result) {
+							// 카카오페이 결제 취소 전송
+							location.href = "/payConfirm/"+group_id
+						}
+
+					})
+							
+
+			})
 	
 })
 
 
+</script>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		let totalPrice = 0;
+		document.querySelectorAll('.totalPrice').forEach(function(item) {
+			totalPrice = totalPrice + Number(item.value)
+		})
+		document.querySelector('#totalPrice').innerText = totalPrice
+		document.querySelector('#payPrice').value = totalPrice
+	})
 </script>
 
 </body>
