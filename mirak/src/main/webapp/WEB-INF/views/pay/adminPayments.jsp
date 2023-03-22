@@ -234,7 +234,7 @@ function detailTable(data, group_id) {
 	    var cart_start = $("<input>").attr({
 	    	  "type": "date",
 	    	  "name": "cart_start",
-	    	  
+	    	  "class": "form-control input-number",
 	    	  "value": item.cart_start
 	    	});
 	    	$("<td>").append(cart_start);
