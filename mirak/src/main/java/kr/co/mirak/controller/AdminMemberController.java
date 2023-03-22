@@ -30,25 +30,12 @@ public class AdminMemberController {
 		
 		return "member/admin_member_list";
 	}
-
-	// 상세 페이지
-//	@RequestMapping(value="/adminMember/{memId}", method=RequestMethod.GET)	
-//	public String getMemberDetail(@PathVariable String memId, Model model) {
-//		System.out.println("====== 어드민 상세페이지 ======");
-//		System.out.println("memId = " + memId);
-//		MemberVO member = memberService.getMemberDetail(memId);
-//		model.addAttribute("member", member);
-//		return "member/admin_member_detail";
-//	}
 	
 	@RequestMapping(value="/admin/member/{mem_name}", method=RequestMethod.GET)	
 	public String getMemberDetail(MemberVO mvo, Model model) {
 		System.out.println("====== 어드민 상세페이지 ======");
-				
 		model.addAttribute("member", memberService.getMemberDetail(mvo));
-		
 		memberService.getMemberDetail(mvo);
-		
 		return "member/admin_member_detail";
 	}
 }

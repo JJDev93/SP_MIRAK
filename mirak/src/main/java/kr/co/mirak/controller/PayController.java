@@ -187,19 +187,22 @@ public class PayController {
 		return "redirect:/mypage";
 	}
 
-	@RequestMapping("/admin/pays")
-	public String getAdminPayList(PayVO payVO, Model model, CriteriaP criP) {
-
+	@RequestMapping(value = "/admin/pays/{num}", method = RequestMethod.GET)
+	public String getAdminPayList(PayVO payVO, Model model, CriteriaP criP, @PathVariable("num") int num) {
+		criP.setPageNum(num); 
 		model.addAttribute("payList", payService.getAdminPayList(criP));
 		int total = payService.getTotal();
 		PageMakerDTOP pageMake = new PageMakerDTOP(criP, total);
 		
 		model.addAttribute("pageMaker", pageMake);
 
+		model.addAttribute("curPage", num);
+
+
 		return "pay/adminPayments";
 	}
 
-	@RequestMapping(value = "/admin/pays/{group_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/payment/{group_id}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<PayVO> getAdminPayListDetail(Model model, @PathVariable("group_id") String group_id) {
 
@@ -207,7 +210,7 @@ public class PayController {
 		return payListDetail;
 	}
 	
-	@RequestMapping(value = "/admin/pays/{group_id}/updateStatus", produces = "application/json;charset=UTF-8", method = RequestMethod.PUT)
+	@RequestMapping(value = "/admin/payment/{group_id}/updateStatus", produces = "application/json;charset=UTF-8", method = RequestMethod.PUT)
 	@ResponseBody
 	public List<PayVO> updateStatus(@PathVariable("group_id") String group_id, CriteriaP criP) {
 		

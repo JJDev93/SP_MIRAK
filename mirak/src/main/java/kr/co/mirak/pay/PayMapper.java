@@ -10,8 +10,6 @@ import kr.co.mirak.product.ProductVO;
 public interface PayMapper {
 	List<PayVO> getAdminPayList(CriteriaP criP);
 	
-	List<ProductVO> getListPaging(PayVO cri);
-	
 	public int getTotal();
 
 	List<PayVO> getClientPayList(String mem_id);
