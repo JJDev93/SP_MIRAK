@@ -170,7 +170,7 @@ public class PayController {
 		
 		int result = payService.updateStateConfirm(group_id);
 		
-		return "pay/payInfo";
+		return "redirect:/payInfo";
 	}
 
 
