@@ -154,7 +154,7 @@
 										</p>					
 										<p>
 											<span class="font-weight-bold text-dark">배송 시작일</span>
-											<input type="date" id="start" name="cart_start" class="form-control input-number" value="${c.cart_start }">
+											<input type="date" id="startDay" name="cart_start" class="form-control input-number" value="${c.cart_start }">
 										</p>		
 										<p>
 											<span  class="font-weight-bold text-dark">배송 요일</span><br>
@@ -206,8 +206,8 @@
 	});
 	
 	let today = new Date().toISOString().substr(0, 10);
-	document.getElementById("start").min = today;	
-	document.getElementById('start').valueAsDate = new Date();
+	document.getElementById("startDay").min = today;	
+	document.getElementById('startDay').valueAsDate = new Date();
 	
 	
 	
