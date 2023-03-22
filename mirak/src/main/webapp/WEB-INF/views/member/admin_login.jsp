@@ -76,9 +76,12 @@ body {
 		<input type="password" id="PW" name="mem_pw" class="form-control" placeholder="비밀번호를 입력하세요" required>
 		
 		<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+		<br>
+		<a href="/">Client</a>
 		
 		<p class="mt-5 mb-3 text-muted">
-			&copy Copyright by MiRak <br> 신용우, 김연주, 김원중, 서현진, 안창주, 정동하, 전지혜
+			&copy Copyright MIRAK .2023<br>
+					신용우 전지혜 김연주 김원중 서현진 안창주 정동하
 		</p>
 	</form>
 	<script src="${path}/resources/js/bootstrap.min.js"></script>
