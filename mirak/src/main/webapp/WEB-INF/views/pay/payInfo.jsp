@@ -63,12 +63,11 @@
 											<p>
 												<a href="/payDetailInfo/${payVO.group_id }" class="btn btn-primary py-2 px-3 detailProduct">상세보기</a>
 												<c:if test="${payVO.status eq '배송중'}">	
-													<button class="btn btn-primary py-2 px-3" value="">구매확정</button>
+													<button id="payConfirm" class="btn btn-primary py-2 px-3" data-group_id="${payVO.group_id }">구매확정</button>
 												</c:if>
 												<c:if test="${payVO.status eq '결제 완료'}">
 												<button class="btn btn-primary py-2 px-3 payCancel"
-													data-total_price="${payVO.totalPrice }" data-pro_name="${payVO.pro_name} <c:if
-														test="${payVO.cart_cnt > 1 }"> 외 ${payVO.cart_cnt - 1 }개 품목</c:if>" 
+													data-total_price="${payVO.totalPrice }" data-pro_name='${payVO.pro_name} <c:if test="${payVO.cart_cnt > 1 }"> 외 ${payVO.cart_cnt - 1 }개 품목</c:if>' 
 													data-group_id="${payVO.group_id }">주문취소</button>
 												</c:if>
 											</p>
@@ -135,6 +134,22 @@
 
 			})
 			
+			
+		
+	$("#payConfirm").click(
+			function() {
+
+				let group_id = $(this).data('group_id');
+
+				let result = confirm("구매 확정을 하시겠습니까?")
+
+				if (result) {
+					// 카카오페이 결제 취소 전송
+					location.href = "/payConfirm/"+group_id
+				}
+
+			})
+					
 			
 			
 	

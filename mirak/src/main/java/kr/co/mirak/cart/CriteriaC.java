@@ -8,9 +8,11 @@ public class CriteriaC {
     /* 한 페이지 당 보여질 게시물 갯수 */
     private int amount;
     
+    
     /* 스킵 할 게시물 수( (pageNum-1) * amount ) */
     private int skip;
     
+    /* 검색 키워드 */
     private String keyword;
     
     /* 기본 생성자 -> 기봅 세팅 : pageNum = 1, amount = 10 */
