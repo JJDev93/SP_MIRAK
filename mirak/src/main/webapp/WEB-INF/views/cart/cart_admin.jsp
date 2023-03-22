@@ -42,6 +42,7 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
+							<th scope="col">카트번호</th>
 							<th scope="col">ID</th>
 							<th scope="col">상품명</th>
 							<th scope="col">가격</th>
@@ -56,6 +57,7 @@
 						<c:forEach var="c" items="${cartList }">
 						<tr>
 <%-- 							<a href="/adminMembers/${c.mem_id}"></a> --%>
+							<td>${c.cart_code }</td>
 							<th scope="row">${c.mem_id }</th>
 							<td>${c.pro_name }</td>
 							<td>${c.pro_price }</td>
