@@ -26,8 +26,8 @@
 							    <c:when test="${not empty member.mem_isapi}">
 							    	<div class="col-md-12">
 										<div class="form-group">
-											<input type="text" name="mem_pw" class="form-control" value="${member.mem_pw }">
-							    			<input type="text" name="mem_isapi" class="form-control" value="${member.mem_isapi}">
+											<input type="text" name="mem_pw" class="form-control" value="${member.mem_pw }" readonly="readonly">
+							    			<input type="text" name="mem_isapi" class="form-control" value="${member.mem_isapi}" readonly="readonly">
 										</div>
 									</div>
 							    	<div class="col-md-12">
@@ -35,7 +35,7 @@
 											<label for="id">이메일(ID)</label>
 											<div class="row">
 												<div class="col-sm-12">
-													<input type="email" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" readonly="readonly">
+													<input type="email" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required="required">
 												</div>
 											</div>
 										</div>
