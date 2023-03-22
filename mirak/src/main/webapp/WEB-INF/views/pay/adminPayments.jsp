@@ -248,38 +248,4 @@ function updateStatus(group_id) {
 	  var detailBtn = $('.detail_btn[data-group_id="' + group_id + '"]');
 	  detailBtn.html("닫기<i class='fas fa-angle-up'></i>");
 	});
-<<<<<<< HEAD
-=======
-
-	
-	   function acyncMovePage(url) {
-		      // ajax option
-		      var ajaxOption = {
-		         url : url,
-		         async : true,
-		         type : "GET",
-		         dataType : "html",
-		         cache : false
-		      };
-
-
-	function acyncMovePage(url) {
-	  // ajax option
-	  var ajaxOption = {
-	    url: url,
-	    async: true,
-	    type: "POST",
-	    dataType: "html",
-	    cache: false,
-	  };
-
-	  $.ajax(ajaxOption).done(function (data) {
-	    // Contents 영역 삭제
-	    $("#test").children().remove();
-	    // Contents 영역 교체
-	    $("#test").html(data);
-	  });
-	}
-
->>>>>>> branch 'Pay' of https://github.com/ywshin0112/mirak.git
 </script>
