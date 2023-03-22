@@ -2,6 +2,8 @@ package kr.co.mirak.cart;
 
 import java.util.List;
 
+import kr.co.mirak.product.ProductVO;
+
 
 public interface CartMapper {
 	List<CartVO> cartClientList(CartVO vo);
@@ -26,5 +28,5 @@ public interface CartMapper {
     /* 게시판 목록(페이징 적용) */
     public List<CartVO> getListPaging(CriteriaC cri);	
 	
-	
+    CartVO cartDetail(CartVO vo);
 }

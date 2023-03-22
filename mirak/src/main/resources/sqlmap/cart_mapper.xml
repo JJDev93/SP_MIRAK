@@ -83,5 +83,13 @@
 	</select>
 	
 	
+	<select id="cartDetail" resultType="kr.co.mirak.cart.CartVO">
+		<![CDATA[
+		SELECT *
+		FROM CART
+		WHERE cart_code = #{cart_code};
+		]]>
+	</select>
+	
 	
   </mapper>

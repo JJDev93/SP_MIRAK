@@ -112,5 +112,10 @@ public class CartServiceImpl implements CartService {
 		CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
 		return mapper.getListPaging(cri);
 	}
+	
+	public CartVO cartDetail(CartVO vo) {
+		CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
+		return mapper.cartDetail(vo);
+	}
 
 }
