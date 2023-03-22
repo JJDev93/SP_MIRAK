@@ -154,13 +154,13 @@
                      
                      
 
-                     <a href="/payInfo" class="btn btn-primary py-3 px-5 l-100">결제내역 보기</a><br>
+                     <a href="/payInfo" class="btn btn-primary py-3 px-5 l-100 mb-2">결제내역 보기</a>
                         
                      <c:if test="${payVOList[0].status eq '결제 완료'}">                        
-                        <button id="payCancel" class="btn btn-black py-3 px-5 l-100" data-group_id="${payVOList[0].group_id }">결제 취소</button><br>
+                        <button id="payCancel" class="btn btn-black py-3 px-5 d-block w-100" data-group_id="${payVOList[0].group_id }">결제 취소</button>
                      </c:if>
                      <c:if test="${payVOList[0].status eq '배송중'}">   
-                        <button id="payConfirm" class="btn btn-black py-3 px-5 l-100">구매확정</button><br>
+                        <button id="payConfirm" class="btn btn-black py-3 px-5 d-block w-100">구매확정</button>
                      </c:if>
                      
                   </div>
