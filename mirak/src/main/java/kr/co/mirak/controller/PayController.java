@@ -6,6 +6,8 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -21,6 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kr.co.mirak.cart.CartService;
+import kr.co.mirak.cart.CartVO;
 import kr.co.mirak.member.MemberService;
 import kr.co.mirak.member.MemberVO;
 import kr.co.mirak.pay.CriteriaP;
@@ -48,6 +52,8 @@ public class PayController {
 	private ProductService productService;
 	@Autowired
 	private ChartService chartService;
+	@Autowired 
+	private CartService cartService;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -106,8 +112,18 @@ public class PayController {
 
 	// 카트에서 넘어올때
 	@RequestMapping(value = "/pay", method = RequestMethod.POST)
-	public String cartpay(Model model, ProductVO productVO, HttpSession session) {
-
+	public String cartpay(Model model, ProductVO productVO, CartVO cartVO, HttpServletRequest request, HttpSession session) {
+		String[] cart_checks = request.getParameterValues("cart_check");
+		String mem_id = (String)session.getAttribute("mem_id");
+		System.out.println(mem_id);
+		cartVO.setMem_id(mem_id);
+		cartService.cartUpdateCheckAll(cartVO);
+		for (int i = 0; i < cart_checks.length; i++) {
+			System.out.println("카트 코드 : " + cart_checks[i]);
+			cartVO.setCart_code(Integer.parseInt(cart_checks[i]));
+			cartService.cartUpdateCheck(cartVO);
+		}
+		
 		// 회원정보
 		model.addAttribute("memberVO", memberService.getMemberInfo(session));
 
