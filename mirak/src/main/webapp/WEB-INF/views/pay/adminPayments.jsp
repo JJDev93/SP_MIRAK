@@ -7,6 +7,11 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 <style>
+   li {
+      float:left;
+      margin-right:10px;
+   }
+
 .detail-row .hidden-row {
 	display: none;
 }
@@ -49,6 +54,7 @@ tr .tr-custom {
 							<th scope="col">요청사항</th>
 							<th scope="col">결제일</th>
 							<th scope="col">주문상태</th>
+							<th scope="col">배송상태</th>
 							<th scope="col">상세정보</th>
 						</tr>
 					</thead>
@@ -71,7 +77,20 @@ tr .tr-custom {
 								<td>${payList.mem_add1} ${payList.mem_add2}</td>
 								<td>${payList.pay_req}</td>
 								<td>${payList.pay_date}</td>
-								<td>${payList.status}</td>
+								<td id="statusTd_${payList.group_id}">${payList.status}</td>
+								<td>
+								<c:choose>
+ 								 <c:when test="${payList.status == '결제 완료'}">
+    								<button id="statusBtn_${payList.group_id}" class="btn btn-secondary" type="button" onclick="updateStatus(${payList.group_id})">배송시작</button>
+  								</c:when>
+  								<c:when test="${payList.status == '배송중'}">
+    								<button id="statusBtn_${payList.group_id}" class="btn btn-secondary" type="button" disabled>배송중</button>
+  								</c:when>
+								  <c:when test="${payList.status == '구매 확정'}">
+    								<!-- 버튼이 필요 없으므로 비워둡니다. -->
+  								</c:when>
+								</c:choose>
+								</td>
 								<td>
 									<div class="accordion">
 										<button class="detail_btn btn btn-secondary" type="button"
@@ -86,7 +105,7 @@ tr .tr-custom {
 								</td>
 							</tr>
 							<tr class="detail-row">
-								<td class="detail-col" style="padding: 2px;" colspan="11">
+								<td class="detail-col" style="padding: 2px;" colspan="12">
 									<div class="collapse" id="collapse-${payList.group_id}">
 										<div class="table-responsive"
 											style="width: 90%; float: right;">
@@ -99,7 +118,6 @@ tr .tr-custom {
 														<th>희망요일</th>
 														<th>배송시작일</th>
 														<th>주문상태</th>
-														<th>배송상태</th>
 													</tr>
 												</thead>
 												<tbody id="accordianBody-${payList.group_id}"></tbody>
@@ -146,58 +164,45 @@ tr .tr-custom {
                </div>
 			</div>
 		</div>
-		<div class="row mt-5">
-            <div class="col text-center">
-               <div class="block-27"></div>
-            </div>
-         </div>
+		
 	</div>
 </div>
 
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>
 <script>
-function updateStatus(pay_code, group_id, statusTd) {
+function updateStatus(group_id) {
+	  var statusTd = $('#statusTd_' + group_id);
+	  var statusBtn = $('#statusBtn_' + group_id);
 	  $.ajax({
-	    url: "/admin/pays/" + pay_code + "/" + group_id + "/updateStatus",
+	    url: "/admin/pays/" + group_id + "/updateStatus",
 	    method: "PUT",
 	    success: function (data) {
 	      alert("배송 상태가 업데이트 되었습니다.");
-	      statusTd.text(data.status);
-	      // 테이블 업데이트
-	      $.ajax({
-	        url: "/admin/pays/" + group_id,
-	        method: "GET",
-	        success: function (data) {
-	          updateTable(data, group_id);
-	        },
-	        error: function () {
-	          alert("데이터를 가져올 수 없습니다.");
-	        },
-	      });
+	      var updatedStatus = '';
+	      for (var i = 0; i < data.length; i++) {
+	        if (data[i].group_id == group_id) {
+	          updatedStatus = data[i].status;
+	          break;
+	        }
+	      }
+	      statusTd.text(updatedStatus);
+	      if (updatedStatus === '배송중') {
+	        statusBtn.prop('disabled', true);
+	      }
 	    },
 	    error: function () {
 	      alert("배송 상태 업데이트에 실패하였습니다.");
 	    },
 	  });
 	}
-	function updateTable(data, group_id) {
+
+	function detailTable(data, group_id) {
 	  var tbody = $("#accordianBody-" + group_id);
 	  tbody.empty();
 
 	  data.forEach(function (item) {
-		var date = new Date(item.cart_start);
-		var cart_start = date.toISOString().substring(0, 10);  
-	    var statusBtn = $("<button>")
-	      .addClass("btn btn-secondary")
-	      .attr("type", "button")
-	      .text("배송시작")
-	      .on("click", function () {
-	        var statusBtn = $(this);
-	        updateStatus(item.pay_code, group_id, statusBtn);
-	      });
-	    if (item.status === "배송중") {
-	      statusBtn.prop("disabled", true);
-	    }
+	    var date = new Date(item.cart_start);
+	    var cart_start = date.toISOString().substring(0, 10);
 
 	    tbody.append(
 	      $("<tr>").append(
@@ -206,8 +211,7 @@ function updateStatus(pay_code, group_id, statusTd) {
 	        $("<td>").text(item.totalPrice),
 	        $("<td>").text(item.cart_day),
 	        $("<td>").text(cart_start),
-	        $("<td>").addClass("status-td").text(item.status), // status-td 클래스 추가
-	        $("<td>").append(statusBtn)
+	        $("<td>").text(item.status)
 	      )
 	    );
 	  });
@@ -228,7 +232,7 @@ function updateStatus(pay_code, group_id, statusTd) {
 	    url: "/admin/pays/" + group_id,
 	    method: "GET",
 	    success: function (data) {
-	      updateTable(data, group_id);
+	      detailTable(data, group_id);
 	    },
 	    error: function () {
 	      alert("데이터를 가져올 수 없습니다.");
@@ -247,22 +251,23 @@ function updateStatus(pay_code, group_id, statusTd) {
 	  var detailBtn = $('.detail_btn[data-group_id="' + group_id + '"]');
 	  detailBtn.html("닫기<i class='fas fa-angle-up'></i>");
 	});
-	
-	   function acyncMovePage(url) {
-		      // ajax option
-		      var ajaxOption = {
-		         url : url,
-		         async : true,
-		         type : "POST",
-		         dataType : "html",
-		         cache : false
-		      };
 
-		      $.ajax(ajaxOption).done(function(data) {
-		         // Contents 영역 삭제
-		         $('#test').children().remove();
-		         // Contents 영역 교체
-		         $('#test').html(data);
-		      });
-		   };
+	function acyncMovePage(url) {
+	  // ajax option
+	  var ajaxOption = {
+	    url: url,
+	    async: true,
+	    type: "POST",
+	    dataType: "html",
+	    cache: false,
+	  };
+
+	  $.ajax(ajaxOption).done(function (data) {
+	    // Contents 영역 삭제
+	    $("#test").children().remove();
+	    // Contents 영역 교체
+	    $("#test").html(data);
+	  });
+	}
+
 </script>

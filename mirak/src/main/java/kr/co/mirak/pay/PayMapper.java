@@ -12,13 +12,13 @@ public interface PayMapper {
 	
 	List<ProductVO> getListPaging(PayVO cri);
 	
-	int getTotal(CriteriaP criP);
+	public int getTotal();
 
 	List<PayVO> getClientPayList(String mem_id);
 	
 	List<PayVO> getPayListDetail(String group_id);
 	
-	int updateStatus(@Param("pay_code") int pay_code, @Param("group_id") String group_id);
+	int updateStatus(@Param("group_id") String group_id);
 	
 	List<PayVO> getProductInfo(String group_id);
 	

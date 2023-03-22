@@ -5,15 +5,35 @@
 	<select id="getTotalByMenuList"
 		resultType="kr.co.mirak.pay.chart.TotalByMenuVO">
 		select pro_name, sum(totalPrice) as
-		totalPrice from pay group by
+		totalPrice from pay
+		group by
 		pro_name;
+	</select>
+
+	<select id="getTotalByMonthList"
+		resultType="kr.co.mirak.pay.chart.TotalByDayVO">
+		SELECT DATE_FORMAT(pay_date, '%Y-%m') AS pay_date,
+		SUM(totalPrice) AS totalPrice
+		FROM pay
+		GROUP BY DATE_FORMAT(pay_date,
+		'%Y-%m')
+		ORDER BY pay_date;
 	</select>
 
 	<select id="getTotalByDayList"
 		resultType="kr.co.mirak.pay.chart.TotalByDayVO">
-		select pay_date, sum(totalPrice) as totalPrice
-		from pay as t1
-		group by t1.pay_date
-		order by t1.pay_date;
+		SELECT DATE_FORMAT(pay_date, '%Y-%m-%d') AS pay_date,
+		SUM(totalPrice) AS totalPrice
+		FROM pay WHERE MONTH(pay_date) =
+		#{clickedMonth}
+		GROUP BY pay_date
+		ORDER BY
+		pay_date;
+	</select>
+
+	<select id="getTotalByEachMenu"
+		resultType="kr.co.mirak.pay.chart.TotalByDayVO">
+		select pay_date, totalPrice from pay where pro_name =
+		#{clickedMenu} ORDER BY pay_date;
 	</select>
 </mapper>
