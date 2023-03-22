@@ -67,7 +67,7 @@
 							<td>${c.cart_totprice }</td>
 							<td>${c.cart_check }</td>
 						</tr>
-						</c:forEach>
+						</c:forEach> 
 					</tbody>
 				</table>
 			</div>
