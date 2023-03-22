@@ -180,7 +180,9 @@
 						<div class="modal-footer">
 							<%-- <a href="/cartUpdate/${c.cart_code}" class="btn btn-primary py-3 px-5">변경</a> --%>
 							<!-- <input type="submit" value="변경" class="btn btn-primary py-3 px-5"> -->
-							<input type="submit" value="변경" class="btn btn-primary py-3 px-5" onclick="if(document.getElementsByName('cart_start')[0].value==''){alert('배송 시작일을 입력해주세요.');return false;}">
+							<!-- <input type="submit" value="변경" class="btn btn-primary py-3 px-5" onclick="if(document.getElementsByName('cart_start')[0].value==''){alert('배송 시작일을 입력해주세요.');return false;}"> -->
+							<input type="submit" value="변경" class="btn btn-primary py-3 px-5" onclick="return change()">
+							
 							<button type="button" class="btn btn-black py-3 px-5" data-dismiss="modal">Close</button>
 						</div>
 					</form>
@@ -193,6 +195,20 @@
 
 
 <script>
+
+
+const change = function() {
+	const dateInput = document.getElementById('startDay');
+
+	if (!dateInput.value) {
+
+		alert('날짜를 입력해주세요.');
+		return false;
+	}
+}
+
+
+
 	$(function() {
 		$('input[name="daterange"]').daterangepicker(
 				{
