@@ -32,7 +32,7 @@
 			      </li>
 			      <li class="nav-item">
 
-			        <a class="nav-link" href="/admin/pays">결재관리</a>
+			        <a class="nav-link" href="/admin/pays/1">결제관리</a>
 			      </li>
 			    </ul>
 			    <div class="form-inline my-2 my-lg-0">
