@@ -30,7 +30,7 @@
 	</select>
 	
 	<update id="updateStatus" parameterType="kr.co.mirak.pay.PayVO">
-    	update pay set status = '배송중' where pay_code = #{pay_code} and group_id = #{group_id};
+    	update pay set status = '배송중' where group_id = #{group_id};
 	</update>
 	
 	

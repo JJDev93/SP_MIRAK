@@ -77,7 +77,7 @@ $(function () {
 
           $.ajax({
             type: "GET",
-            url: "/admin/charts/getTotalByDayList/" + clickedMenu,
+            url: "/admin/charts/getTotalByMenuList/" + clickedMenu,
             data: {
               clickedMenu: clickedMenu,
             },
