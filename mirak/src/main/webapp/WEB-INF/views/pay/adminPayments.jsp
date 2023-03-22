@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/common/admin_hd.jsp"></jsp:include>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.css">
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.js"></script>
@@ -25,6 +25,8 @@ tr .tr-custom {
 	background-color: initial;
 }
 </style>
+<div id="test">
+<jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <div class="ftco-section">
 	<div class="justify-content-center mb-3 pb-3">
 		<div class="heading-section text-center">
@@ -155,6 +157,7 @@ tr .tr-custom {
 </div>
 
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>
+</div>
 <script>
 function updateStatus(pay_code, group_id, statusTd) {
 	  $.ajax({
@@ -253,7 +256,7 @@ function updateStatus(pay_code, group_id, statusTd) {
 		      var ajaxOption = {
 		         url : url,
 		         async : true,
-		         type : "POST",
+		         type : "GET",
 		         dataType : "html",
 		         cache : false
 		      };
