@@ -79,7 +79,7 @@
 										<td><fmt:formatDate value="${c.cart_start }" pattern="yyyy-MM-dd" /></td>
 										<td>${c.cart_day }</td>
 										<td>${c.cart_cnt }</td>
-										<td>${c.cart_totprice }</td>
+										<td>${c.pro_price * c.cart_cnt}</td>
 										<td>
 											<input type="button" value="변경" class="btn btn-primary" data-toggle="modal" data-target="#modal${c.cart_code }">
 										</td>
