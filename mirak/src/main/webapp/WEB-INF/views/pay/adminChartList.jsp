@@ -7,10 +7,11 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 .container {
+	
 }
 
 canvas {
-	display : inline-block;
+	display: inline-block;
 }
 </style>
 
@@ -25,11 +26,17 @@ canvas {
 		<div class="bd-example-snippet bd-code-snippet">
 			<div class="bd-example">
 				<div class="row">
-					<div class="col-md-6">
-						<canvas id="myChart1" width="400" height="400"></canvas>
+					<div class="col-md-7">
+						<canvas id="myChart1" width="600" height="450"></canvas>
 					</div>
-					<div class="col-md-6">
-						<canvas id="myChart2" width="800" height="400"></canvas>
+					<div class="col-md-5">
+						<canvas id="myChart2" width="500" height="400"></canvas>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<canvas id="myChart3" width="1200" height="450"></canvas>
 					</div>
 				</div>
 			</div>

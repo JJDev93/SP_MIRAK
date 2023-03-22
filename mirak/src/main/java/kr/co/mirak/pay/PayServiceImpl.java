@@ -41,17 +41,17 @@ public class PayServiceImpl implements PayService {
 	}
 	
 	@Override
-	public int updateStatus(int pay_code, String group_id) {
+	public int updateStatus(String group_id) {
 		int result = 0;
 		PayMapper payMapper = sqlSessionTemplate.getMapper(PayMapper.class);
-		result = payMapper.updateStatus(pay_code, group_id);
+		result = payMapper.updateStatus(group_id);
 		
 		return result;
 	}
 	
-	public int getTotal(CriteriaP criP) {
+	public int getTotal() {
 		PayMapper mapper = sqlSessionTemplate.getMapper(PayMapper.class);
-		return mapper.getTotal(criP);
+		return mapper.getTotal();
 	}
 	
 	public List<PayVO> getClientPayList(HttpSession session) {
