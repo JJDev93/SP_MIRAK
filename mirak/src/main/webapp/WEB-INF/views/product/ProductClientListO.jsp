@@ -23,7 +23,10 @@
 					<div class="col-md-6 col-lg-4 ftco-animate">
 	    				<div class="product">
 	    					<a href="ProductClientDetail/${product.pro_code}" class="img-prod" >
-	    						<div class="imgDiv" style="width: 100%; height: 250px; background: url(${path}/resources/images/product/${product.pro_image}) no-repeat 50% 50%; background-size: contain;"></div>
+<%-- 	    						<div class="imgDiv" style="width: 100%; height: 250px; background: url(${path}/resources/images/product/${product.pro_image}) no-repeat 50% 50%; background-size: contain;"></div> --%>
+	    						<div class="imgDiv" style="width: 100%; height: 250px; no-repeat 50% 50%; background-size: contain;">
+	    						<img src="${path}/resources/images/product/${product.pro_image}" class="img-fluid" alt="${product.pro_desc}" title="${product.pro_name}">
+	    						</div>
 	    					</a>
 	    					<div class="text py-3 pb-4 px-3 text-center">
 								<h3 class="text-center">
@@ -51,7 +54,7 @@
 							</c:if>
 							<c:forEach var="num" begin="${pageMaker.startPage}"
 								end="${pageMaker.endPage}">
-								<li class="pageInfo_btn" id="abc"><a href="javascript:acyncMovePage('/ProductClientListO?pageNum=${num}');">${num}</a></li>
+								<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"" id="abc"><a href="javascript:acyncMovePage('/ProductClientListO?pageNum=${num}');">${num}</a></li>
 							</c:forEach>
 							<!-- 다음페이지 버튼 -->
 							<c:if test="${pageMaker.next}">

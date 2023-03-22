@@ -116,12 +116,12 @@ public class JoinController {
 
 		/* 뷰(View)로부터 넘어온 데이터 확인 */
 		System.out.println("이메일 데이터 전송 확인");
-		System.out.println("인증번호 : " + email);
+		System.out.println("이메일 : " + email);
 
 		/* 인증번호(난수) 생성 */
 		Random random = new Random();
 		int checkNum = random.nextInt(888888) + 111111;
-		System.out.println("인증번호" + checkNum);
+		System.out.println("인증번호 : " + checkNum);
 
 		/* 이메일 보내기 */
 		String setFrom = "acj119@naver.com";

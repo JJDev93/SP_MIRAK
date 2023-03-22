@@ -89,8 +89,13 @@
                               </c:if>
                               <c:forEach var="num" begin="${pageMaker.startPage}"
                                  end="${pageMaker.endPage}">
+<<<<<<< HEAD
                                  <ul style="text-align: center;" id="abc">
                                     <li class="pageInfo_btn"><a href="/admin/carts/${num}">${num}</a></li>
+=======
+                                 <ul style="text-align: center;">
+                                    <li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }""><a href="javascript:acyncMovePage('/admin/carts?pageNum=${num}');">${num}</a></li>
+>>>>>>> refs/remotes/origin/Dev
                                  </ul>
                               </c:forEach>
                               <!-- 다음페이지 버튼 -->

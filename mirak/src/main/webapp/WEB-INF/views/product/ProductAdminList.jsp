@@ -6,6 +6,7 @@
       float:left;
       margin-right:10px;
    }
+ 
 </style>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <%-- <c:set var="path" value="${request.getSession().getServletContext().getRealPath('resources/images/product')}" /> --%>
@@ -35,7 +36,7 @@
                   <tbody>
                      <c:forEach items="${productList}" var="product">
                         <tr>
-                           <td><a href="/admin/product/${product.pro_code}">
+                           <td><a href="/admin/product/${curPage}/${product.pro_code}">
                                  <img alt="${product.pro_desc }"
                                  src="${path}/resources/images/product/${product.pro_image}"
                                  style="width: 100px; height: 100px;" title="${product.pro_name}">
@@ -61,7 +62,8 @@
                               <c:if test="${pageMaker.prev}">
                                  <ul>
                                     <li class="pageInfo_btn previous" id="abc">
-                                       <a href="javascript:acyncMovePage('/admin/products/${pageMaker.startPage-1}');">&lt;</a>
+<%--                                        <a href="javascript:acyncMovePage('/admin/products/${pageMaker.startPage-1}');">&lt;</a> --%>
+                                       <a href="/admin/products/${pageMaker.startPage-1}">&lt;</a>
                                     </li>
                                  </ul>
                               </c:if>
@@ -69,14 +71,15 @@
                                  end="${pageMaker.endPage}">
                                  <ul style="text-align: center;" id="abc">
 <%--                                     <li class="pageInfo_btn"><a href="javascript:acyncMovePage('/admin/products?pageNum=${num}');">${num}</a></li> --%>
-                                    <li class="pageInfo_btn"><a href="/admin/products/${num}">${num}</a></li>
+                                    <li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="/admin/products/${num}">${num}</a></li>
                                  </ul>
                               </c:forEach>
                               <!-- 다음페이지 버튼 -->
                               <c:if test="${pageMaker.next}">
                                  <ul>
                                     <li class="pageInfo_btn next" id="abc">
-                                       <a href="javascript:acyncMovePage('/admin/products/${pageMaker.endPage + 1 }');">&gt;</a>
+<%--                                        <a href="javascript:acyncMovePage('/admin/products/${pageMaker.endPage + 1 }');">&gt;</a> --%>
+                                       <a href="/admin/products/${pageMaker.endPage + 1 }">&gt;</a>
                                     </li>
                                  </ul>
                               </c:if>
