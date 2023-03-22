@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -148,9 +150,10 @@ public class ProductController {
 
    // 상품 수정
    @RequestMapping(value = "/admin/productUpdate")
-   public String updateProduct(ProductVO vo) {
+   public String updateProduct(ProductVO vo, Model model, Criteria cri, @RequestParam("curPage") int curPage) {
       productService.updateProduct(vo);
-      return "redirect:/admin/products/1";
+      model.addAttribute("curPage", curPage);
+      return "redirect:/admin/products/{curPage}";
    }
 
    // 상품 삭제
