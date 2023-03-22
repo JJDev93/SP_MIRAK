@@ -175,7 +175,7 @@ public class PayController {
 	public String getAdminPayList(PayVO payVO, Model model, CriteriaP criP) {
 
 		model.addAttribute("payList", payService.getAdminPayList(criP));
-		int total = payService.getTotal(criP);
+		int total = payService.getTotal();
 		PageMakerDTOP pageMake = new PageMakerDTOP(criP, total);
 		
 		model.addAttribute("pageMake", pageMake);
@@ -191,14 +191,16 @@ public class PayController {
 		return payListDetail;
 	}
 	
-	@RequestMapping(value = "/admin/pays/{pay_code}/{group_id}/updateStatus", produces = "application/json;charset=UTF-8", method = RequestMethod.PUT)
+	@RequestMapping(value = "/admin/pays/{group_id}/updateStatus", produces = "application/json;charset=UTF-8", method = RequestMethod.PUT)
 	@ResponseBody
-	public List<PayVO> updateStatus(@PathVariable("pay_code") int pay_code, @PathVariable("group_id") String group_id) {
-	    int result = payService.updateStatus(pay_code, group_id);
+	public List<PayVO> updateStatus(@PathVariable("group_id") String group_id, CriteriaP criP) {
+		
+		System.out.println("group_id는 ~~~~~~~~~~~~~ "+ group_id);
+	    int result = payService.updateStatus(group_id);
 
 	    if (result > 0) {
 	        System.out.println("배송시작 완료");
-	        List<PayVO> payListDetail = payService.getPayListDetail(group_id);
+	        List<PayVO> payListDetail = payService.getAdminPayList(criP);
 	        return payListDetail;
 	    } else {
 	        System.out.println("결제 상태 변경에 실패했습니다.");
@@ -224,15 +226,43 @@ public class PayController {
 	    TotalByDayVO dvo = new TotalByDayVO();
 
 		Map<String, List<Object>> totalBymenulist = chartService.getTotalByMenuList(mvo);
-		Map<String, List<Object>> totalByDayList = chartService.getTotalByDayList(dvo);
+		Map<String, List<Object>> totalByMonthList = chartService.getTotalByMonthList(dvo);
 
 		chartData.setTotalByMenuList(totalBymenulist);
-		chartData.setTotalByDayList(totalByDayList);
+		chartData.setTotalByMonthList(totalByMonthList);
 
 		String data = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(chartData);
 		System.out.println(data);
 
 		return data;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/admin/charts/getTotalByDayList/{clickedMonth}", produces = "application/json;charset=UTF-8", method = RequestMethod.GET)
+	public String getTotalByDayList(@PathVariable String clickedMonth) throws Exception {
+	    TotalByDayVO dvo = new TotalByDayVO();
+	    dvo.setPay_date(clickedMonth);
+	    Map<String, List<Object>> totalByDayList = chartService.getTotalByDayList(dvo, clickedMonth);
+
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    String data = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(totalByDayList);
+	    System.out.println(data);
+
+	    return data;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/admin/charts/getTotalByMenuList/{clickedMenu}", produces = "application/json;charset=UTF-8", method = RequestMethod.GET)
+	public String getTotalByEachMenu(@PathVariable String clickedMenu) throws Exception {
+		TotalByDayVO dvo = new TotalByDayVO();
+		Map<String, List<Object>> totalByEachMenu = chartService.getTotalByEachMenu(dvo, clickedMenu);
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		String data = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(totalByEachMenu);
+		System.out.println(data);
+		
+		return data;
+	}
+
 
 }

@@ -153,8 +153,8 @@
 								</div>
 							</div>
 							<p>
-								<input type="button" id="btn-kakao-pay" class="btn btn-primary py-3 px-5 l-100" value="주문하기"><br>
-								<a href="/" class="btn btn-black py-3 px-5 l-100">취소</a><br>
+								<input type="button" id="btn-kakao-pay" class="btn btn-primary py-3 px-5 l-100 mb-2" value="주문하기">
+								<a href="/" class="btn btn-black py-3 px-5 d-block">취소</a><br>
 							</p>
 						</div>
 					</div>

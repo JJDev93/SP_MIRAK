@@ -13,7 +13,7 @@
 	
 		select * from (select group_id,
 		pro_name, count(cart_cnt) as cart_cnt, sum(totalPrice) as totalPrice, mem_name, mem_phone, mem_add1, mem_add2, pay_req, pay_date, status
-		from pay group by group_id order by pay_code desc)
+		from pay group by group_id order by pay_date desc)
 		as T1 limit #{skip},#{amount}
 		
 	</select>
@@ -30,7 +30,7 @@
 	</select>
 	
 	<update id="updateStatus" parameterType="kr.co.mirak.pay.PayVO">
-    	update pay set status = '배송중' where pay_code = #{pay_code} and group_id = #{group_id};
+    	update pay set status = '배송중' where group_id = #{group_id};
 	</update>
 	
 	
