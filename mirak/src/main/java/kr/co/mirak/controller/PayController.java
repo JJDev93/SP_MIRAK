@@ -107,7 +107,7 @@ public class PayController {
 	// 카트에서 넘어올때
 	@RequestMapping(value = "/pay", method = RequestMethod.POST)
 	public String cartpay(Model model, ProductVO productVO, HttpSession session) {
-
+		
 		// 회원정보
 		model.addAttribute("memberVO", memberService.getMemberInfo(session));
 
