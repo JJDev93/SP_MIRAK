@@ -40,12 +40,12 @@
 							<li class="nav-item"><a href="/login" class="nav-link">로그인</a></li>
 							<li class="nav-item"><a href="/join" class="nav-link">회원가입</a></li>
 						<%} else if (session.getAttribute("mem_id").equals("admin")) {%>
-							<li class="nav-item"><a href="/logout" class="nav-link">로그아웃</a></li>
+							<li class="nav-item"><a href="/admin/logout" class="nav-link">로그아웃</a></li>
 							<li class="nav-item"><a href="/admin/charts" class="nav-link">Admin</a></li>
 						<%} else {%>
-<!-- 						<li class="nav-item"><a href="/logout" class="nav-link">로그아웃</a></li> -->
-							<li class="nav-item" onclick="naverLogout(); return false;"><a href="javascript:void(0)" class="nav-link"><span>로그아웃</span></a>
-						<!-- <li class="nav-item"><a href="/kakaounlink" class="nav-link">연결해제</a></li> -->
+							<li class="nav-item"><a href="/logout" class="nav-link">로그아웃</a></li>
+							<!-- <li class="nav-item" onclick="naverLogout(); return false;"><a href="javascript:void(0)" class="nav-link"><span>로그아웃</span></a> -->
+							<!-- <li class="nav-item"><a href="/kakaounlink" class="nav-link">연결해제</a></li> -->
 						<li class="nav-item"><a href="/mypage" class="nav-link">마이페이지</a></li>
 						<%}%>
 					</ul>
