@@ -236,14 +236,17 @@ public class MemberServiceImpl implements MemberService {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	//연결해제
 	@Override
 	public void unlink(String access_Token) {
-	    String reqURL = "https://kapi.kakao.com/v1/user/unlink";
+		String reqURL = "https://kapi.kakao.com/v1/user/unlink";
+		String naverURL = "https://nid.naver.com/nidlogin.logout";
+		
 	    try {
+	    	if(access_Token != null) {
 	        URL url = new URL(reqURL);
+	        System.out.println(url);
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	        conn.setRequestMethod("POST");
 	        conn.setRequestProperty("Authorization", "Bearer " + access_Token);
@@ -260,10 +263,11 @@ public class MemberServiceImpl implements MemberService {
 	            result += line;
 	        }
 	        System.out.println(result);
+	    	}
+	    	
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
-
 	}
 
 	// ADMIN ID값으로 회원 정보 확인
