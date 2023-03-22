@@ -82,7 +82,7 @@ public class ChartServiceImpl implements ChartService {
 	@Override
 	public Map<String, List<Object>> getTotalByEachMenu(TotalByDayVO vo, String clickedMenu) {
 		ChartMapper mapper = sqlSessionTemplate.getMapper(ChartMapper.class);
-		System.out.println("clickedMonth는 ~~~~~~~~~~~" + clickedMenu);
+		System.out.println("clickedMenu는 ~~~~~~~~~~~" + clickedMenu);
 	    List<Double> totalPrice = new ArrayList<>();
 	    List<String> pay_date = new ArrayList<>();
 
