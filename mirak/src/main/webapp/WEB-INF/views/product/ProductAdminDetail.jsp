@@ -65,7 +65,7 @@
          </div>
       </form>      
       
-      <a href="/admin/products" class="btn btn-secondary">목록</a>
+      <a href="/admin/products/${curPage }" class="btn btn-secondary">목록</a>
       
 <%--       ?pageNum=${pageNum} --%>
 	
