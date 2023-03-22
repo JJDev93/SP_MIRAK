@@ -35,7 +35,6 @@
 </div>
 <section class="ftco-section">
    <div class="container">
-
       <div class="row justify-content-center">
          <div class="col-md-5 ftco-animate">
             <form action="login" method="post" class="contact-form">

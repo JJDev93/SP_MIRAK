@@ -30,6 +30,16 @@
 			UPDATE CART SET CART_DAY = #{cart_day}, CART_START = #{cart_start}, CART_CNT = #{cart_cnt}, CART_TOTPRICE = #{cart_totprice} WHERE CART_CODE = #{cart_code}
 		]]>
 	</update>
+	<update id="cartUpdateCheckAll">
+		<![CDATA[
+			UPDATE CART SET CART_CHECK = 0 WHERE MEM_ID = #{mem_id}
+		]]>
+	</update>
+	<update id="cartUpdateCheck">
+		<![CDATA[
+			UPDATE CART SET CART_CHECK = 1 WHERE CART_CODE = #{cart_code}
+		]]>
+	</update>
 
 	<!-- 카트 삭제 -->
 	<update id="cartDelete">

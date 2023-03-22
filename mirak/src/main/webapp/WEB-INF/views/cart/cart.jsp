@@ -79,7 +79,7 @@
 										<td><fmt:formatDate value="${c.cart_start }" pattern="yyyy-MM-dd" /></td>
 										<td>${c.cart_day }</td>
 										<td>${c.cart_cnt }</td>
-										<td>${c.cart_totprice }</td>
+										<td>${c.pro_price * c.cart_cnt}</td>
 										<td>
 											<input type="button" value="변경" class="btn btn-primary" data-toggle="modal" data-target="#modal${c.cart_code }">
 										</td>
@@ -125,7 +125,7 @@
 		<div class="modal fade" id="modal${c.cart_code }" tabindex="9999" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
-					<form action="/cartUpdate/${c.cart_code }" method="post">
+					<form action="/cartUpdate" method="post">
 						<input type="hidden" name="cart_code" value="${c.cart_code }">		
 						<input type="hidden" name="cart_totprice" value="${c.cart_cnt * c.pro_price}">		
 						<div class="modal-header">
