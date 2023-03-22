@@ -46,7 +46,7 @@
 					<div class="row mt-4">
 						<div class="input-group col-md-6 d-flex mb-3">
 							<p style="margin-top: 5px;">수량 : &nbsp;&nbsp;</p>
-							<input type="text" id="result" name="cart_cnt"
+							<input type="number" id="result" name="cart_cnt"
 								class="form-control input-number" min="1" max="100" value="1"
 								onchange="payBtnCnt()">
 						</div>

@@ -15,7 +15,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
-					<form action="/join" method="post" onsubmit="return Duplicate()">
+					<form action="/join" method="post" onsubmit="return Duplicate()" class="billing-form">
 						<div class="row align-items-end">
 							<c:choose>
 							    <c:when test="${not empty member.mem_isapi}">
@@ -26,7 +26,7 @@
 											<label for="id">이메일(ID)</label>
 											<div class="row">
 												<div class="col-sm-12">
-													<input type="email" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required="required">
+													<input type="email" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required="required" readonly="readonly">
 												</div>
 											</div>
 										</div>

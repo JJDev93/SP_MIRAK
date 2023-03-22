@@ -22,7 +22,6 @@ body {
 	align-items: center;
 	padding-top: 40px;
 	padding-bottom: 40px;
-	background-color: #f5f5f5;
 }
 
 .form-signin {
@@ -59,11 +58,16 @@ body {
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 }
+
+.MIRAK{
+	font-size: 40px;
+	font-weight: bold;	
+}
+
 </style>
 <body class="text-center">
 	<form class="form-signin" action="/admin" method="post">
-		<img class="mb-4" src="${path}/resources/images/favicon.gif" alt="" width="72" height="72">
-		<h1 class="h3 mb-3 font-weight-normal">Login</h1>
+		<h1 class="h3 mb-3 font-weight-normal MIRAK">MIRAK 관리자</h1>
 		
 		<label for="ID" class="sr-only">어드민 아이디를 입력하세요</label> 
 		<input type="text" id="ID" name="mem_id" class="form-control mb-3" placeholder="아이디를 입력하세요" required autofocus> 
@@ -72,9 +76,12 @@ body {
 		<input type="password" id="PW" name="mem_pw" class="form-control" placeholder="비밀번호를 입력하세요" required>
 		
 		<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+		<br>
+		<a href="/">Client</a>
 		
 		<p class="mt-5 mb-3 text-muted">
-			&copy Copyright by MiRak <br> 신용우, 김연주, 김원중, 서현진, 안창주, 정동하, 전지혜
+			&copy Copyright MIRAK .2023<br>
+					신용우 전지혜 김연주 김원중 서현진 안창주 정동하
 		</p>
 	</form>
 	<script src="${path}/resources/js/bootstrap.min.js"></script>
