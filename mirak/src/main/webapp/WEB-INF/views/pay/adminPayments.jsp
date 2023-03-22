@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.css">
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.js"></script>
@@ -30,14 +29,15 @@ tr .tr-custom {
 	background-color: initial;
 }
 </style>
+<jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <div class="ftco-section">
+	<div class="container-fluid">
 	<div class="justify-content-center mb-3 pb-3">
 		<div class="heading-section text-center">
 			<h2>결제관리</h2>
 			<p>결제관리 리스트 페이지 입니다.</p>
 		</div>
 	</div>
-	<div class="container-fluid">
 		<div class="bd-example-snippet bd-code-snippet">
 			<div class="bd-example">
 				<table
@@ -87,7 +87,6 @@ tr .tr-custom {
     								<button id="statusBtn_${payList.group_id}" class="btn btn-secondary" type="button" disabled>배송중</button>
   								</c:when>
 								  <c:when test="${payList.status == '구매 확정'}">
-    								<!-- 버튼이 필요 없으므로 비워둡니다. -->
   								</c:when>
 								</c:choose>
 								</td>
@@ -132,28 +131,27 @@ tr .tr-custom {
 				<div class="row mt-5">
                   <div class="col text-center">
                      <div class="block-27">
-                        <!-- 각 번호 페이지 버튼 -->
                         <table>
                            <tr>
                               <!-- 이전페이지 버튼 -->
                               <c:if test="${pageMaker.prev}">
                                  <ul>
                                     <li class="pageInfo_btn previous">
-                                       <a href="javascript:acyncMovePage('/admin/pays?pageNum= ${pageMaker.startPage-1}');">&lt;</a>
+                                       <a href="'/admin/pays/${pageMaker.startPage-1}'">&lt;</a>
                                     </li>
                                  </ul>
                               </c:if>
                               <c:forEach var="num" begin="${pageMaker.startPage}"
                                  end="${pageMaker.endPage}">
                                  <ul style="text-align: center;">
-                                    <li class="pageInfo_btn"><a href="javascript:acyncMovePage('/admin/pays?pageNum=${num}');">${num}</a></li>
+                                    <li class="pageInfo_btn"><a href="/admin/pays/${num}">${num}</a></li>
                                  </ul>
                               </c:forEach>
                               <!-- 다음페이지 버튼 -->
                               <c:if test="${pageMaker.next}">
                                  <ul>
                                     <li class="pageInfo_btn next">
-                                       <a href="javascript:acyncMovePage('/admin/pays?pageNum=${pageMaker.endPage + 1 }');">&gt;</a>
+                                       <a href="'/admin/pays/${pageMaker.endPage + 1 }'">&gt;</a>
                                     </li>
                                  </ul>
                               </c:if>
@@ -163,18 +161,17 @@ tr .tr-custom {
                   </div>
                </div>
 			</div>
-		</div>
-		
 	</div>
 </div>
 
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>
+</div>
 <script>
 function updateStatus(group_id) {
 	  var statusTd = $('#statusTd_' + group_id);
 	  var statusBtn = $('#statusBtn_' + group_id);
 	  $.ajax({
-	    url: "/admin/pays/" + group_id + "/updateStatus",
+	    url: "/admin/payment/" + group_id + "/updateStatus",
 	    method: "PUT",
 	    success: function (data) {
 	      alert("배송 상태가 업데이트 되었습니다.");
@@ -229,7 +226,7 @@ function updateStatus(group_id) {
 	  var detail_btn = $('.detail_btn[data-group_id="' + group_id + '"]');
 
 	  $.ajax({
-	    url: "/admin/pays/" + group_id,
+	    url: "/admin/payment/" + group_id,
 	    method: "GET",
 	    success: function (data) {
 	      detailTable(data, group_id);
@@ -251,23 +248,4 @@ function updateStatus(group_id) {
 	  var detailBtn = $('.detail_btn[data-group_id="' + group_id + '"]');
 	  detailBtn.html("닫기<i class='fas fa-angle-up'></i>");
 	});
-
-	function acyncMovePage(url) {
-	  // ajax option
-	  var ajaxOption = {
-	    url: url,
-	    async: true,
-	    type: "POST",
-	    dataType: "html",
-	    cache: false,
-	  };
-
-	  $.ajax(ajaxOption).done(function (data) {
-	    // Contents 영역 삭제
-	    $("#test").children().remove();
-	    // Contents 영역 교체
-	    $("#test").html(data);
-	  });
-	}
-
 </script>
