@@ -28,7 +28,7 @@
 			        <a class="nav-link" href="/admin/products/1">상품관리</a>
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link" href="/admin/carts">장바구니</a>
+			        <a class="nav-link" href="/admin/carts/1">장바구니</a>
 			      </li>
 			      <li class="nav-item">
 

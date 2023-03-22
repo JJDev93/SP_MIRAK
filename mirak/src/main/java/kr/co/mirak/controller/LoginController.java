@@ -110,33 +110,34 @@ public class LoginController {
 	}
 
 	// 로그아웃
-	@RequestMapping("/logout")
-	public String logout(HttpSession session) throws Exception {
-		String mem_id = (String) session.getAttribute("mem_id");
-		String access_Token = (String) session.getAttribute("access_Token");
-		MemberVO member = memberService.getMemberDetail(mem_id);
-		String user_api = member.getMem_isapi();
-		System.out.println("user_api : " + user_api);
+	   @RequestMapping("/logout")
+	   public String logout(HttpSession session) throws Exception {
+	      String mem_id = (String) session.getAttribute("mem_id");
+	      String access_Token = (String) session.getAttribute("access_Token");
+	      MemberVO member = memberService.getMemberDetail(mem_id);
+	      String user_api = member.getMem_isapi();
+	      System.out.println("user_api : " + user_api);
 
-		if (access_Token != null) {
-			if (user_api.equals("google")) {
-				int result = snslogin.googleLogout(access_Token);
-				System.out.println("구글로그아웃 : " + result);
-			} else if (user_api.equals("kakao") || user_api.equals("naver")) {
-				System.out.println("unlink :" + user_api);
-				return "redirect:/kakaounlink";
-			}
-			session.invalidate();
-			System.out.println(user_api + "로그아웃 성공!!");
-		} else if (user_api.equals("naver")) {
-			System.out.println("unlink :" + user_api);
-			return "redirect:/kakaounlink";
-		} else {
-			session.invalidate();
-			System.out.println("access_Token is null");
-		}
-		return "redirect:/";
-	}
+	      if (access_Token != null) {
+	         if (user_api.equals("google")) {
+	            int result = snslogin.googleLogout(access_Token);
+	            System.out.println("구글로그아웃 : " + result);
+	         } else if (user_api.equals("kakao")) {
+	            System.out.println("unlink :" + user_api);
+	            return "redirect:/kakaounlink";
+	         }
+	         session.invalidate();
+	         System.out.println(user_api + "로그아웃 성공!!");
+	      } else if(user_api == null) {
+	      session.invalidate();
+	      System.out.println("access_Token is null");
+	      }else if(user_api.equals("naver")) {
+	         System.out.println("unlink :" + user_api);
+	         session.invalidate();
+	         return "redirect:/kakaounlink";
+	      }
+	      return "redirect:/";
+	   }
 
 	// 연결끊기
 	@RequestMapping(value = "/kakaounlink")
