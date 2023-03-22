@@ -195,7 +195,9 @@ public class PayController {
 		PageMakerDTOP pageMake = new PageMakerDTOP(criP, total);
 		
 		model.addAttribute("pageMaker", pageMake);
+
 		model.addAttribute("curPage", num);
+
 
 		return "pay/adminPayments";
 	}
