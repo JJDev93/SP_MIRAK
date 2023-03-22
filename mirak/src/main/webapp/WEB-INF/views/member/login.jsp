@@ -35,7 +35,6 @@
 </div>
 <section class="ftco-section">
    <div class="container">
-
       <div class="row justify-content-center">
          <div class="col-md-5 ftco-animate">
             <form action="login" method="post" class="contact-form">
@@ -104,14 +103,14 @@
          </div>
       </div>
    </div>
-<ul>
-
-   <li onclick="naverLogout(); return false;">
-      <a href="javascript:void(0)">
-          <span>네이버 로그아웃</span>
-      </a>
-   </li>
-</ul>
+	<!-- <ul>
+	
+	   <li onclick="naverLogout(); return false;">
+	      <a href="javascript:void(0)">
+	          <span>네이버 로그아웃</span>
+	      </a>
+	   </li>
+	</ul> -->
 
 <form id="naverJoin" action="/naverTest" method="post">
 <input type="hidden" name="mem_id" value="" id="mem_id">

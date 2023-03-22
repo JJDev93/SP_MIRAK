@@ -13,6 +13,8 @@ public interface CartService {
 	// int cartUpdate(CartVO vo, HttpSession session);
 	
 	void cartUpdate(CartVO vo);
+	void cartUpdateCheck(CartVO vo);
+	void cartUpdateCheckAll(CartVO vo);
 	
 	void cartDelete(CartVO vo);
 	
