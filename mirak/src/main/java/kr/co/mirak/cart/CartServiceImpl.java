@@ -86,6 +86,16 @@ public class CartServiceImpl implements CartService {
 		CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
 		mapper.cartUpdate(vo);
 	}
+	@Override
+	public void cartUpdateCheck(CartVO vo) {
+		CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
+		mapper.cartUpdateCheck(vo);
+	}
+	@Override
+	public void cartUpdateCheckAll(CartVO vo) {
+		CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
+		mapper.cartUpdateCheckAll(vo);
+	}
 	
 	@Override
 	public void cartDelete(CartVO vo) {

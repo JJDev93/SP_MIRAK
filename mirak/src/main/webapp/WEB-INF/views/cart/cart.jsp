@@ -34,7 +34,7 @@
 		</div>
 		<div class="row justify-content-center">
 			<div class="col-xl-12 ftco-animate">
-				<form method="post">
+				<form method="post" action="/pay">
 					<div class="cart-list">
 						<table class="table table_wrap">
 							<thead class="thead-primary">
@@ -60,12 +60,13 @@
 								<c:forEach var="c" items="${cartList }">
 									<tr class="text-center">
 										<td class="cart_info">
-											<input type="checkbox" class="cart_checkbox" checked="checked"> 
+											<input type="checkbox" class="cart_checkbox" name="cart_check" checked="checked" value="${c.cart_code }"> 
 											<input type="hidden" class="price_input" value="${c.pro_price }">
 											<input type="hidden" class="count_input" value="${c.cart_cnt }"> 
 											<input type="hidden" class="totalPrice_input" value="${c.pro_price * c.cart_cnt }">
 											<input type="hidden" class="pro_code" value="${c.pro_code }">
-											<input type="hidden" class="cart_code" value="${c.cart_code }"></td>
+											<input type="hidden" class="cart_code" value="${c.cart_code }">
+										</td>
 										<td class="image-prod">
 											<div>
 												<img alt="1" src="${path}/resources/images/product/${c.pro_image}" style="width: 100px;">
@@ -78,7 +79,7 @@
 										<td><fmt:formatDate value="${c.cart_start }" pattern="yyyy-MM-dd" /></td>
 										<td>${c.cart_day }</td>
 										<td>${c.cart_cnt }</td>
-										<td>${c.cart_totprice }</td>
+										<td>${c.pro_price * c.cart_cnt}</td>
 										<td>
 											<input type="button" value="변경" class="btn btn-primary" data-toggle="modal" data-target="#modal${c.cart_code }">
 										</td>
@@ -111,8 +112,7 @@
 								</p>
 							</div>
 							<p>
-								<input type="submit" value="결제하기" formaction="/pay"
-									class="btn btn-primary py-3 px-5">
+								<input type="submit" value="결제하기" class="btn btn-primary py-3 px-5">
 							</p>
 						</div>
 					</div>
@@ -125,7 +125,7 @@
 		<div class="modal fade" id="modal${c.cart_code }" tabindex="9999" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
-					<form action="/cartUpdate/${c.cart_code }" method="post">
+					<form action="/cartUpdate" method="post">
 						<input type="hidden" name="cart_code" value="${c.cart_code }">		
 						<input type="hidden" name="cart_totprice" value="${c.cart_cnt * c.pro_price}">		
 						<div class="modal-header">
@@ -214,17 +214,25 @@
 	});
 
 	// 체크박스 전체 선택
-	$(".all_check").on("click", function() {
+	$(document).ready(function() {
+		$(".all_check").click(function() {
+			if ($(".all_check").is(":checked"))
+				$("input[class=cart_checkbox]").prop("checked", true);
+			else
+				$("input[class=cart_checkbox]").prop("checked", false);
+			// 총 주문 정보 세팅(배송비, 총 가격, 물품 수, 종류)
+			setTotalInfo($(".cart_info"));
+		});
 
-		// 체크박스 체크 해제
-		if ($(".all_check").prop("checked")) {
-			$(".cart_checkbox").attr("checked", true);
-		} else {
-			$(".cart_checkbox").attr("checked", false);
-		}
+		$("input[class=cart_checkbox]").click(function() {
+			var total = $("input[class=cart_checkbox]").length;
+			var checked = $("input[class=cart_checkbox]:checked").length;
 
-		// 총 주문 정보 세팅(배송비, 총 가격, 물품 수, 종류)
-		setTotalInfo($(".cart_info"));
+			if (total != checked)
+				$(".all_check").prop("checked", false);
+			else
+				$(".all_check").prop("checked", true);
+		});
 	});
 
 	// 총 주문 정보 세팅(배송비, 총 가격, 물품 수, 종류)
@@ -239,7 +247,6 @@
 		$(".cart_info")
 				.each(
 						function(index, element) {
-
 							if ($(element).find(".cart_checkbox")
 									.is(":checked") === true) { // 체크 여부 확인
 								// 총 가격

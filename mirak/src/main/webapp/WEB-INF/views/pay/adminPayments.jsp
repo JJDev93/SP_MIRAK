@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/common/admin_hd.jsp"></jsp:include>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.css">
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.js"></script>
@@ -30,6 +30,8 @@ tr .tr-custom {
 	background-color: initial;
 }
 </style>
+<div id="test">
+<jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <div class="ftco-section">
 	<div class="justify-content-center mb-3 pb-3">
 		<div class="heading-section text-center">
@@ -169,6 +171,7 @@ tr .tr-custom {
 </div>
 
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>
+</div>
 <script>
 function updateStatus(group_id) {
 	  var statusTd = $('#statusTd_' + group_id);
@@ -251,6 +254,18 @@ function updateStatus(group_id) {
 	  var detailBtn = $('.detail_btn[data-group_id="' + group_id + '"]');
 	  detailBtn.html("닫기<i class='fas fa-angle-up'></i>");
 	});
+
+	
+	   function acyncMovePage(url) {
+		      // ajax option
+		      var ajaxOption = {
+		         url : url,
+		         async : true,
+		         type : "GET",
+		         dataType : "html",
+		         cache : false
+		      };
+
 
 	function acyncMovePage(url) {
 	  // ajax option
