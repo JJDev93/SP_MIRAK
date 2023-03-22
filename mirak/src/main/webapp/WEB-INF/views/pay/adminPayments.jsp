@@ -5,8 +5,10 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.css">
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <style>
-   li {
+li {
       float:left;
       margin-right:10px;
    }
@@ -28,6 +30,7 @@ tr .tr-custom {
 .table-hover tbody .detail-row:nth-child(even):hover {
 	background-color: initial;
 }
+
 </style>
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <div class="ftco-section">
@@ -50,7 +53,6 @@ tr .tr-custom {
 							<th scope="col">주문자이름</th>
 							<th scope="col">전화번호</th>
 							<th scope="col">배송지주소</th>
-							<th scope="col">요청사항</th>
 							<th scope="col">결제일</th>
 							<th scope="col">주문상태</th>
 							<th scope="col">결제취소</th>
@@ -73,7 +75,6 @@ tr .tr-custom {
 								<td>${payList.mem_name}</td>
 								<td>${payList.mem_phone}</td>
 								<td>${payList.mem_add1} ${payList.mem_add2}</td>
-								<td>${payList.pay_req}</td>
 								<td>${payList.pay_date}</td>
 								<td id="statusTd_${payList.group_id}">${payList.status}</td>
 								<td>
@@ -100,19 +101,21 @@ tr .tr-custom {
 								</td>
 							</tr>
 							<tr class="detail-row">
-								<td class="detail-col" style="padding: 2px;" colspan="12">
+								<td></td>
+								<td class="detail-col" style="padding: 2px;" colspan="11">
 									<div class="collapse" id="collapse-${payList.group_id}">
 										<div class="table-responsive"
-											style="width: 90%; float: right;">
+											style="float: right;">
 											<table class="table table-hover table-striped table-bordered">
 												<thead class="thead-custom">
 													<tr>
-														<th>상품명</th>
-														<th>수량</th>
-														<th>가격</th>
-														<th>희망요일</th>
-														<th>배송시작일</th>
-														<th>주문상태</th>
+														<th style="width:300px;">상품명</th>
+														<th style="width:100px;">수량</th>
+														<th style="width:100px;">가격</th>
+														<th style="width:330px;">희망요일</th>
+														<th style="width:150px;">배송시작일</th>
+														<th>요청사항</th>
+														<th style="width:120px;">주문상태</th>
 													</tr>
 												</thead>
 												<tbody id="accordianBody-${payList.group_id}"></tbody>
@@ -120,6 +123,7 @@ tr .tr-custom {
 										</div>
 									</div>
 								</td>
+
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -164,130 +168,162 @@ tr .tr-custom {
 </div>
 <script>
 function detailTable(data, group_id) {
-	  var tbody = $("#accordianBody-" + group_id);
-	  tbody.empty();	  
-	  var productList = JSON.parse('${productList}');
+    var tbody = $("#accordianBody-" + group_id);
+    tbody.empty();	  
+    var productList = JSON.parse('${productList}');
 
-	  data.forEach(function (item) {
-	      var date = new Date(item.cart_start);
-	      var cart_start = date.toISOString().substring(0, 10);
-	      
-	      var select = $("<select>").addClass("form-control");
-	      productList.forEach(function(product) {
-	        var option = $("<option>").attr("value", product.pro_name).text(product.pro_name);
-	        if (item.pro_name === product.pro_name) {
-	          option.attr("selected", true);
-	        }
-	        select.append(option);
-	      });
-	      
-	      var totalPrice = item.cart_cnt * productList.find(function(product) {
-	          return product.pro_name === item.pro_name;
-	        }).pro_price;
-	      
-	      select.on("change", function() { 
-	        var selectedProduct = productList.find(function(product) {
-	          return product.pro_name === select.val();
-	          })
-	        var price = selectedProduct.pro_price;
-	        totalPrice = price * parseInt(cart_cnt.val()); 
-	        $(this).closest("tr").find(".totalPrice").text(totalPrice); 
-	      });
-	      
-	      var cart_cnt = $("<input>").addClass("form-control").attr({
-	    	  "type": "number",
-	    	  "min": "0",
-	    	  "max": "99",
-	    	  "step": "1",
-	    	  "value": item.cart_cnt
-	    	});
-	      
-	      cart_cnt.on("input", function() { 
-	        var selectedProduct = productList.find(function(product) {
-	          return product.pro_name === select.val();
-	        });
-	        var price = selectedProduct.pro_price;
-	        totalPrice = price * parseInt(cart_cnt.val());
-	        $(this).closest("tr").find(".totalPrice").text(totalPrice); 
-	      });
-	    
-	    var cart_day = $("<div>").addClass("cart_day");
-	    
-	    var days = ["월", "화", "수", "목", "금", "토", "일"];
-	    for (var i = 0; i < days.length; i++) {
-	      var isChecked = item.cart_day.includes(days[i]);
-	      var input = $("<input>").attr({
-	        "type": "checkbox",
-	        "name": "cart_day",
-	        "id": days[i],
-	        "value": days[i],
-	        "class": "form-check-input",
-	      }).css({"margin-left":"-0.8rem"}).prop("checked", isChecked);
-	      var label = $("<label>").attr({
-	        "for": days[i],
-	        "class": "form-check-label",
-	      }).text(days[i]);
-	      var div = $("<div>").addClass("form-check").css({"display":"inline-block"}).append(input).append(label);
-	      cart_day.append(div);
-	    }
-	    
-	    var cart_start = $("<input>").attr({
-	    	  "type": "date",
-	    	  "name": "cart_start",
-	    	  "class": "form-control input-number",
-	    	  "value": item.cart_start
-	    	});
-	    	$("<td>").append(cart_start);
-	    
+    data.forEach(function (item) {
+        var pro_name = $("<select>").addClass("form-control");
+        productList.forEach(function(product) {
+          var option = $("<option>").attr("value", product.pro_name).text(product.pro_name).css({"max-width":"200px", "text-align":"center"});
+          if (item.pro_name === product.pro_name) {
+            option.attr("selected", true);
+          }
+          pro_name.append(option);
+        });
+        
+        var totalPrice = item.cart_cnt * productList.find(function(product) {
+            return product.pro_name === item.pro_name;
+          }).pro_price;
+        
+        pro_name.on("change", function() { 
+          var selectedProduct = productList.find(function(product) {
+            return product.pro_name === pro_name.val();
+            })
+          var price = selectedProduct.pro_price;
+          totalPrice = price * parseInt(cart_cnt.val()); 
+          $(this).closest("tr").find(".totalPrice").text(totalPrice); 
+        });
+        
+        var cart_cnt = $("<input>").addClass("form-control").attr({
+            "type": "number",
+            "min": "0",
+            "max": "99",
+            "step": "1",
+            "value": item.cart_cnt
+          }).css({"text-align":"center","padding-left":"20"});
+        
+        cart_cnt.on("input", function() { 
+          var selectedProduct = productList.find(function(product) {
+            return product.pro_name === pro_name.val();
+          });
+          var price = selectedProduct.pro_price;
+          totalPrice = price * parseInt(cart_cnt.val());
+          $(this).closest("tr").find(".totalPrice").text(totalPrice); 
+        });
+      
+      var cart_day = $("<div>").addClass("cart_day");
+      
+      var days = ["월", "화", "수", "목", "금", "토", "일"];
+      for (var i = 0; i < days.length; i++) {
+        var isChecked = item.cart_day.includes(days[i]);
+        var input = $("<input>").attr({
+          "type": "checkbox",
+          "name": "cart_day",
+          "id": days[i],
+          "value": days[i],
+          "class": "form-check-input",
+        }).css({"margin-left":"-0.8rem","text-align":"center"}).prop("checked", isChecked);
+        var label = $("<label>").attr({
+          "for": days[i],
+          "class": "form-check-label",
+        }).text(days[i]);
+        var div = $("<div>").addClass("form-check").css({"display":"inline-block"}).append(input).append(label);
+        cart_day.append(div);
+      }
+      
+      var dateString = new Date(item.cart_start).toISOString().slice(0,10);
+      var cart_start = $("<input>").attr({
+          "type": "text",
+          "name": "cart_start",
+          "class": "form-control input-number",
+          "readonly": true,
+      }).val(dateString).datepicker({dateFormat: "yy-mm-dd"}).css({"text-align":"center"});
+      
+      var pay_req =  $("<input>").attr({
+          "type": "text",
+          "name": "pay_req",
+          "class": "form-control input-number",
+      }).val(item.pay_code);
+      
+      var pay_code = item.pay_code;
+      
+      tbody.append(
+        $("<tr>").append(
+          $("<td>").attr("class", "changeUpdate").attr("id", "pro_name_" + pay_code).attr("name", "pro_name").append(pro_name),
+          $("<td>").attr("class", "changeUpdate").attr("id", "cart_cnt_" + pay_code).attr("name", "cart_cnt").append(cart_cnt),
+          $("<td>").attr("class", "totalPrice changeUpdate").attr("id", "totalPrice_" + pay_code).attr("name", "totalPrice").text(totalPrice),
+          $("<td>").attr("class", "changeUpdate").attr("id", "cart_day_" + pay_code).attr("name", "cart_day").append(cart_day),
+          $("<td>").attr("class", "changeUpdate").attr("id", "cart_start_" + pay_code).attr("name", "cart_start").append(cart_start),
+          $("<td>").attr("class", "changeUpdate").attr("id", "pay_req_" + pay_code).attr("name", "pay_req").append(pay_req),
+          $("<td>").attr("class", "changeUpdate").attr("id", "status_" + pay_code).attr("name", "status").text(item.status)
+        )
+      );
+      
+      changeUpdate.on("change", function() { 
+      var data = {
+    		  "pro_name": pro_name,
+    		  "cart_cnt": parseInt(cart_cnt),
+    		  "totalPrice": totalPrice,
+    		  "cart_day": cart_day.find("input:checked").map(function() {
+    		    return $(this).val();
+    		  }).get(),
+    		  "cart_start": cart_start,
+    		  "pay_req": pay_req,
+    		  "pay_code": pay_code
+            };
+            updatePay(pay_code, data);
+      });
+      
+      function updatePay(pay_code, data) {
+            $.ajax({
+              url: "/mypage/pay/" + pay_code,
+              type: "PUT",
+              dataType: "json",
+              data: data,
+              success: function(response) {
+                alert("수정완료~~~");
+              },
+              error: function(xhr, status, error) {
+                alert("수정실패!!!");
+              }
+            });
+          }
+    });
+  }
+  $(document).on("click", ".detail_btn", function () {
+    var open_collapse = $(".collapse.show");
+    if (open_collapse.length > 0) {
+      open_collapse.each(function () {
+        $(this).collapse("hide");
+      });
+    }
 
-	    
-	    
-	    
-	    tbody.append(
-	      $("<tr>").append(
-	        $("<td>").append(select),
-	        $("<td>").append(cart_cnt),
-	        $("<td class='totalPrice'>").text(totalPrice),
-	        $("<td>").append(cart_day),
-	        $("<td>").text(cart_start),
-	        $("<td>").text(item.status)
-	      )
-	    );
-	  });
-	}
-	$(document).on("click", ".detail_btn", function () {
-	  var open_collapse = $(".collapse.show");
-	  if (open_collapse.length > 0) {
-	    open_collapse.each(function () {
-	      $(this).collapse("hide");
-	    });
-	  }
+    var group_id = $(this).data("group_id");
+    var tbody = $("#accordianBody-" + group_id);
+    var detail_btn = $('.detail_btn[data-group_id="' + group_id + '"]');
 
-	  var group_id = $(this).data("group_id");
-	  var tbody = $("#accordianBody-" + group_id);
-	  var detail_btn = $('.detail_btn[data-group_id="' + group_id + '"]');
+    $.ajax({
+      url: "/admin/payment/" + group_id,
+      method: "GET",
+      success: function (data) {
+        detailTable(data, group_id);
+      },
+      error: function () {
+        alert("데이터를 가져올 수 없습니다.");
+      },
+    });
+  });
 
-	  $.ajax({
-	    url: "/admin/payment/" + group_id,
-	    method: "GET",
-	    success: function (data) {
-	      detailTable(data, group_id);
-	    },
-	    error: function () {
-	      alert("데이터를 가져올 수 없습니다.");
-	    },
-	  });
-	});
+  $(".collapse").on("hidden.bs.collapse", function () {
+    var group_id = $(this).attr("id").split("-")[1];
+    var detailBtn = $('.detail_btn[data-group_id="' + group_id + '"]');
+    detailBtn.html("상세보기<i class='fas fa-angle-down'></i>");
+  });
 
-	$(".collapse").on("hidden.bs.collapse", function () {
-	  var group_id = $(this).attr("id").split("-")[1];
-	  var detailBtn = $('.detail_btn[data-group_id="' + group_id + '"]');
-	  detailBtn.html("상세보기<i class='fas fa-angle-down'></i>");
-	});
-
-	$(".collapse").on("shown.bs.collapse", function () {
-	  var group_id = $(this).attr("id").split("-")[1];
-	  var detailBtn = $('.detail_btn[data-group_id="' + group_id + '"]');
-	  detailBtn.html("닫기<i class='fas fa-angle-up'></i>");
-	});
+  $(".collapse").on("shown.bs.collapse", function () {
+    var group_id = $(this).attr("id").split("-")[1];
+    var detailBtn = $('.detail_btn[data-group_id="' + group_id + '"]');
+    detailBtn.html("닫기<i class='fas fa-angle-up'></i>");
+  });
 </script>
