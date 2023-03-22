@@ -22,7 +22,6 @@ body {
 	align-items: center;
 	padding-top: 40px;
 	padding-bottom: 40px;
-	background-color: #f5f5f5;
 }
 
 .form-signin {
@@ -59,11 +58,16 @@ body {
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 }
+
+.MIRAK{
+	font-size: 40px;
+	font-weight: bold;	
+}
+
 </style>
 <body class="text-center">
 	<form class="form-signin" action="/admin" method="post">
-		<img class="mb-4" src="${path}/resources/images/favicon.gif" alt="" width="72" height="72">
-		<h1 class="h3 mb-3 font-weight-normal">Login</h1>
+		<h1 class="h3 mb-3 font-weight-normal MIRAK">MIRAK 관리자</h1>
 		
 		<label for="ID" class="sr-only">어드민 아이디를 입력하세요</label> 
 		<input type="text" id="ID" name="mem_id" class="form-control mb-3" placeholder="아이디를 입력하세요" required autofocus> 
