@@ -36,7 +36,7 @@
 					<div class="row mt-4">
 						<div class="input-group col-md-6 d-flex mb-3">
 							<p style="margin-top: 5px;">수량 : &nbsp;&nbsp;</p>
-							<input type="text" id="result" name="cart_cnt"
+							<input type="number" id="result" name="cart_cnt"
 								class="form-control input-number" min="1" max="100" value="1"
 								onchange="payBtnCnt()">
 						</div>
@@ -59,10 +59,16 @@
 					&nbsp;&nbsp;	
 					 <label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform: scale(1.5);" value="일" checked>&nbsp;&nbsp;일</label>
 					<br> <br>
-					<p>
-						<a href="/cart/${product.pro_code }/1" id="cartBtn" class="btn btn-primary py-3 px-5" onclick="return payBtnCnt()">장바구니</a>
-						<a href="/pay/${product.pro_code }/1" id="payBtn" class="btn btn-black py-3 px-5" onclick="return payBtnCnt()">즉시 구매</a>
-					</p>
+					<c:choose>
+					    <c:when test="${sessionScope.mem_id eq 'admin'}">
+					    </c:when>
+					    <c:otherwise>
+							<p>
+								<a href="/cart/${product.pro_code }/1" id="cartBtn" class="btn btn-primary py-3 px-5" onclick="return payBtnCnt()">장바구니</a>
+								<a href="/pay/${product.pro_code }/1" id="payBtn" class="btn btn-black py-3 px-5" onclick="return payBtnCnt()">즉시 구매</a>
+							</p>
+				    	</c:otherwise>
+				    </c:choose>
 				</div>
 			</div>
 		</div>

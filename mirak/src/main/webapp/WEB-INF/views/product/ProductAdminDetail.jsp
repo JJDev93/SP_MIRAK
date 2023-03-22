@@ -54,7 +54,7 @@
                   <label for="cnt">이미지 파일</label> <input type="file" class="form-control" id="cnt" name="uploadFile">
                </div>
             </div>
-            
+            <input type="hidden" name="curPage" value="${curPage}">
             <br><br><br><br><br><br><br><br><br>
             
             <div class="col-md-12">
@@ -65,7 +65,7 @@
          </div>
       </form>      
       
-      <a href="/admin/products" class="btn btn-secondary">목록</a>
+      <a href="/admin/products/${curPage}" class="btn btn-secondary">목록</a>
       
 <%--       ?pageNum=${pageNum} --%>
 	

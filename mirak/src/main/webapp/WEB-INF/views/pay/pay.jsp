@@ -21,7 +21,7 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-xl-7 ftco-animate">
-				<form id="orderForm" class="billing-form" action="/paySubmit" method="post">
+				<form id="orderForm" action="/paySubmit" method="post">
 					<input type="hidden" id="mem_id" name="mem_id" value="${mem_id }">
 					<h3 class="mb-4 billing-heading">주문 확인</h3>
 					<c:forEach items="${productList}" var="productVO">

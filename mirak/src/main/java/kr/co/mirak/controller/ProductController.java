@@ -6,8 +6,11 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -98,9 +101,11 @@ public class ProductController {
 
 
    // 상품 Admin 리스트
-   @RequestMapping("/admin/products")
-   public String productadminList(ProductVO vo, Model model, Criteria cri) {
+   @RequestMapping("/admin/products/{page}")
+   public String productadminList(ProductVO vo, Model model, Criteria cri, @PathVariable("page") int page) {
+	  cri.setPageNum(page);
       model.addAttribute("productList", productService.getListPaging(cri));
+      model.addAttribute("curPage", page);
       int total = productService.getTotal();
       PageMakerDTO pageMake = new PageMakerDTO(cri, total);
       model.addAttribute("pageMaker", pageMake);
@@ -125,34 +130,37 @@ public class ProductController {
       }
       productService.insertProduct(vo);
       System.out.println(vo);
-      return "redirect:/admin/products";
+      return "redirect:/admin/products/1";
    }
 
    // 상품 Admin 상세 페이지
-   @RequestMapping(value = "/admin/product/{pro_code}")
-   public String productDetail(ProductVO vo, Model model, Criteria cri) {
+   @RequestMapping(value = "/admin/product/{curPage}/{pro_code}")
+   public String productDetail(ProductVO vo, Model model, Criteria cri, @PathVariable("curPage") int curPage) {
       model.addAttribute("product", productService.productDetail(vo));
+      model.addAttribute("curPage", curPage);
       productService.productDetail(vo);
           
       int total = productService.getTotal();
       PageMakerDTO pageMake = new PageMakerDTO(cri, total);
       model.addAttribute("pageMaker", pageMake);
+
       
       return "/product/ProductAdminDetail";
    }
 
    // 상품 수정
    @RequestMapping(value = "/admin/productUpdate")
-   public String updateProduct(ProductVO vo) {
+   public String updateProduct(ProductVO vo, Model model, Criteria cri, @RequestParam("curPage") int curPage) {
       productService.updateProduct(vo);
-      return "redirect:/admin/products";
+      model.addAttribute("curPage", curPage);
+      return "redirect:/admin/products/{curPage}";
    }
 
    // 상품 삭제
    @RequestMapping("/admin/productDelete")
    public String deleteProduct(ProductVO vo) {
       productService.deleteProduct(vo);
-      return "redirect:/admin/products";
+      return "redirect:/admin/products/1";
    }
    
    // 인덱스 페이지
