@@ -41,7 +41,7 @@
 
 	
 	<select id="getTotal" resultType="int">
-		select count(*) from pay
+		select count(distinct group_id) from pay;
 	</select>
 	
 	<select id="getProductInfo" resultType="kr.co.mirak.pay.PayVO">

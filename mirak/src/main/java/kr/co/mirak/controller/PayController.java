@@ -194,7 +194,7 @@ public class PayController {
 		int total = payService.getTotal();
 		PageMakerDTOP pageMake = new PageMakerDTOP(criP, total);
 		
-		model.addAttribute("pageMake", pageMake);
+		model.addAttribute("pageMaker", pageMake);
 
 		return "pay/adminPayments";
 	}

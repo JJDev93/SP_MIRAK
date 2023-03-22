@@ -43,6 +43,7 @@ public class mypageController {
 	public int memdelete(MemberVO vo, HttpSession session) {
 		System.out.println("memberVO :" + vo);
 		int success = memberService.memdelete(vo);
+		session.invalidate();
 		return success;
 	}
 }

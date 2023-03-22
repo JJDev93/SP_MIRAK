@@ -75,6 +75,8 @@ public class JoinController {
 			//회원 가입 쿼리 실행
 			memberService.createUser(vo);
 			session.setAttribute("message2", "회원가입 성공하였습니다!");
+			String mem_id = vo.getMem_id();
+			session.setAttribute("mem_id", mem_id); // 세션에 사용자정보 저장
 			System.out.println("가입성공");
 		}catch(DuplicateKeyException e){
 			session.setAttribute("message", "중복된 아이디 입니다.");
@@ -101,7 +103,7 @@ public class JoinController {
 			throw new RuntimeException();
 		}
 */		
-		return "member/login";
+		return "redirect:/";
 	}
 	
 
