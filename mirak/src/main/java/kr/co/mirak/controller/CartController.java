@@ -53,8 +53,8 @@ public class CartController {
 	}   
 	
 	// update
-	@RequestMapping(value = "/cartUpdate/{cart_code}")
-	public String cartUpdate(CartVO vo, @PathVariable("cart_code") int cart_code) {
+	@RequestMapping(value = "/cartUpdate")
+	public String cartUpdate(CartVO vo) {
 		String str1 = vo.getCart_day();
 		String str2 = str1.replaceAll(",", "");
 		vo.setCart_day(str2);

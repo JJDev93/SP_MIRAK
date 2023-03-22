@@ -183,7 +183,7 @@
                   document.getElementById('pw_1').value = '';
                } else if(data == "1"){
                   alert("회원탈퇴 되었습니다.");
-                  location.href="logout";
+                  location.href="/";
                }
             }
          });

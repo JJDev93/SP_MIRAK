@@ -82,27 +82,36 @@ $(function () {
               clickedMenu: clickedMenu,
             },
             success: function (data) {
+              
               console.log("data반환 success~~~");
               const totalPrice = data.totalPrice;
-              const pay_date = data.pay_date;
-              const chartData = {
-                labels: pay_date,
+              const pay_day = data.pay_day;
+              console.log(data.totalPrice);
+              console.log(data.pay_day);
+               const chartData = {
+                labels: pay_day,
                 datasets: [
                   {
                     label: `${clickedMenu} 판매현황`,
                     data: totalPrice,
-                    backgroundColor: "rgba(255, 99, 71, 0.2)",
-                    borderColor: "rgb(255, 99, 71)",
+                    borderColor: "rgb(51, 153, 255, 1)",
+                    tension: 0.2,
+                    fill: false,
+                    borderWidth: 2,
+                    borderCapStyle: "round",
+                    borderJoinStyle: "miter",
                   },
                 ],
               };
               if (isByMenuChart) {
                 myChart1.data = chartData;
                 myChart1.options.title.text = `${clickedMenu} 판매현황`;
+                myChart1.config.type = 'line';
                 isByMenuChart = false;
               } else {
                 myChart1.data = byMenuChartData;
                 myChart1.options.title.text = "메뉴 별 판매현황";
+                myChart1.config.type = 'bar';
                 isByMenuChart = true;
               }
 
@@ -117,6 +126,7 @@ $(function () {
           if (!isByMenuChart) {
             myChart1.data = byMenuChartData;
             myChart1.options.title.text = "메뉴 별 판매현황";
+            myChart1.config.type = 'bar'; 
             isByMenuChart = true;
             myChart1.update();
             console.log("myChart11 수정");

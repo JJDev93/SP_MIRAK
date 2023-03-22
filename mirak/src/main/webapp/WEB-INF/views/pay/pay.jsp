@@ -11,11 +11,8 @@
 	<div class="container">
 		<div
 			class="row no-gutters slider-text align-items-center justify-content-center">
-			<div class="col-md-9 ftco-animate text-center">
-				<p class="breadcrumbs">
-					<span class="mr-2"><a href="index.html">Home</a></span> <span>Checkout</span>
-				</p>
-				<h1 class="mb-0 bread">Checkout</h1>
+			<div class="col-md-9 ftco-animate text-center">				
+				<h1 class="mb-0 bread">주문 하기</h1>
 			</div>
 		</div>
 	</div>
@@ -24,7 +21,7 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-xl-7 ftco-animate">
-				<form id="orderForm" class="billing-form" action="/paySubmit" method="post">
+				<form id="orderForm" action="/paySubmit" method="post">
 					<input type="hidden" id="mem_id" name="mem_id" value="${mem_id }">
 					<h3 class="mb-4 billing-heading">주문 확인</h3>
 					<c:forEach items="${productList}" var="productVO">
@@ -32,7 +29,7 @@
 							<div class="ftco-animate fadeInUp ftco-animated">
 								<div class="blog-entry align-self-stretch d-md-flex">
 <%-- 									<a href="blog-single.html" class="block-20" style="background-image: url('images/${productVO.pro_image }');"> </a> --%>
-									<img src="${path}/resources/images/product/${productVO.pro_image }" title="${productVO.pro_name }" alt="${productVO.pro_desc }" style="width: 250px; height: 250px;">
+									<img src="${path}/resources/images/product/${productVO.pro_image }" title="${productVO.pro_name }" alt="${productVO.pro_desc }" style="width: 250px; height: 200px;">
 									<div class="text d-block pl-md-4">
 										<h3 class="heading">
 											${productVO.pro_name }

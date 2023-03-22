@@ -42,32 +42,33 @@
 						</div>
 					</div>
 					
-					<label for="start">배송 시작일<input type="date"
-						name="cart_start" class="form-control input-number"
-						style="width: 240px;" id="start" min=""></label> <br> 요일 선택<br>
-					<label for="mon"><input type="checkbox" name="cart_day"
-						id="mon" style="transform: scale(1.5);" value="월" checked>&nbsp;&nbsp;월</label>
-					&nbsp;&nbsp; <label for="tue"><input type="checkbox"
-						name="cart_day" id="tue" style="transform: scale(1.5);" value="화"
-						checked>&nbsp;&nbsp;화</label> &nbsp;&nbsp; <label for="wed"><input
-						type="checkbox" name="cart_day" id="wed"
-						style="transform: scale(1.5);" value="수" checked>&nbsp;&nbsp;수</label>
-					&nbsp;&nbsp; <label for="thu"><input type="checkbox"
-						name="cart_day" id="thu" style="transform: scale(1.5);" value="목"
-						checked>&nbsp;&nbsp;목</label> &nbsp;&nbsp; <label for="fri"><input
-						type="checkbox" name="cart_day" id="fri"
-						style="transform: scale(1.5);" value="금" checked>&nbsp;&nbsp;금</label>
-					&nbsp;&nbsp; <label for="sat"><input type="checkbox"
-						name="cart_day" id="sat" style="transform: scale(1.5);" value="토"
-						checked>&nbsp;&nbsp;토</label> &nbsp;&nbsp; <label for="sun"><input
-						type="checkbox" name="cart_day" id="sun"
-						style="transform: scale(1.5);" value="일" checked>&nbsp;&nbsp;일</label>
-
+					<label for="start">배송 시작일<input type="date" name="cart_start" class="form-control input-number" style="width: 240px;" id="start" min=""></label>
+					<br> 요일 선택<br>	
+					
+					<label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform: scale(1.5);" value="월" checked>&nbsp;&nbsp;월</label>
+					&nbsp;&nbsp; 
+					<label for="tue"><input type="checkbox" name="cart_day" id="tue" style="transform: scale(1.5);" value="화" checked>&nbsp;&nbsp;화</label>
+					&nbsp;&nbsp; 
+					<label for="wed"><input type="checkbox" name="cart_day" id="wed" style="transform: scale(1.5);" value="수" checked>&nbsp;&nbsp;수</label>
+					&nbsp;&nbsp;	
+					<label for="thu"><input type="checkbox" name="cart_day" id="thu" style="transform: scale(1.5);" value="목" checked>&nbsp;&nbsp;목</label>
+					&nbsp;&nbsp;
+					<label for="fri"><input type="checkbox" name="cart_day" id="fri" style="transform: scale(1.5);" value="금" checked>&nbsp;&nbsp;금</label>
+					&nbsp;&nbsp;
+					<label for="sat"><input type="checkbox" name="cart_day" id="sat" style="transform: scale(1.5);" value="토" checked>&nbsp;&nbsp;토</label>	
+					&nbsp;&nbsp;	
+					 <label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform: scale(1.5);" value="일" checked>&nbsp;&nbsp;일</label>
 					<br> <br>
-					<p>
-						<a href="/cart/${product.pro_code }/1" id="cartBtn" class="btn btn-primary py-3 px-5" onclick="return payBtnCnt()">장바구니</a>
-						<a href="/pay/${product.pro_code }/1" id="payBtn" class="btn btn-black py-3 px-5" onclick="return payBtnCnt()">즉시 구매</a>
-					</p>
+					<c:choose>
+					    <c:when test="${sessionScope.mem_id eq 'admin'}">
+					    </c:when>
+					    <c:otherwise>
+							<p>
+								<a href="/cart/${product.pro_code }/1" id="cartBtn" class="btn btn-primary py-3 px-5" onclick="return payBtnCnt()">장바구니</a>
+								<a href="/pay/${product.pro_code }/1" id="payBtn" class="btn btn-black py-3 px-5" onclick="return payBtnCnt()">즉시 구매</a>
+							</p>
+				    	</c:otherwise>
+				    </c:choose>
 				</div>
 			</div>
 		</div>

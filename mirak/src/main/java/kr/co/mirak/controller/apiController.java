@@ -56,9 +56,11 @@ public class apiController {
 	}
 	
 	
-	@RequestMapping(value = "/naverTest", method = RequestMethod.POST)
-	public String naverTest(MemberVO vo, HttpSession session, RedirectAttributes rttr) {
-		System.out.println("1234"+vo);
+	@RequestMapping(value = "/naverjoin", method = RequestMethod.POST)
+	public String naverTest(MemberVO vo, Model model) {
+		vo.setMem_isapi("naver");
+		model.addAttribute("member", vo);
+		System.out.println("model"+model);
 		
 		return "member/join";
 	}

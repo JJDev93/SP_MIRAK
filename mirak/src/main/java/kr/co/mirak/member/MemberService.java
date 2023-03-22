@@ -40,6 +40,7 @@ public interface MemberService {
 	void kakaoLogout(String access_Token);
 	
 	void unlink(String attribute);
+	
 
 
 
