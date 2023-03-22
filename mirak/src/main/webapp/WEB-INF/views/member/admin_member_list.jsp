@@ -94,7 +94,7 @@ margin-right:10px;
 								<c:forEach var="num" begin="${pageMaker.startPage}"
 									end="${pageMaker.endPage}">
 									<ul style="text-align: center;">
-										<li class="pageInfo_btn"><a
+										<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }""><a
 											href="javascript:acyncMovePage('/admin/members?pageNum=${num}');">${num}</a></li>
 									</ul>
 								</c:forEach>
