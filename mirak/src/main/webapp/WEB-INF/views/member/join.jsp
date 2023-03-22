@@ -6,11 +6,7 @@
 		<div class="container">
 			<div class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">Welcome to MiRak</a></span>
-						<span></span>
-					</p>
-					<h1 class="mb-0 bread">Join Page</h1>
+					<h1 class="mb-0 bread">회원가입</h1>
 				</div>
 			</div>
 		</div>
@@ -20,7 +16,6 @@
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
 					<form action="/join" method="post" onsubmit="return Duplicate()" class="billing-form">
-						<h3 class="mb-4 billing-heading">회원가입</h3>
 						<div class="row align-items-end">
 							<c:choose>
 							    <c:when test="${not empty member.mem_isapi}">

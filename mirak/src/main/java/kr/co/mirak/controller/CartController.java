@@ -52,8 +52,11 @@ public class CartController {
 	}   
 	
 	// update
-	@RequestMapping(value = "/cartUpdate/{pro_code}")
-	public String cartUpdate(CartVO vo) {
+	@RequestMapping(value = "/cartUpdate/{cart_code}")
+	public String cartUpdate(CartVO vo, @PathVariable("cart_code") int cart_code) {
+		String str1 = vo.getCart_day();
+		String str2 = str1.replaceAll(",", "");
+		vo.setCart_day(str2);
 		cartService.cartUpdate(vo);
 		return "redirect:/cart";
 	}
