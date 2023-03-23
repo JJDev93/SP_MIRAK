@@ -118,7 +118,9 @@ public class LoginController {
       String user_api = member.getMem_isapi();
       System.out.println("user_api : " + user_api);
       
-
+      try {
+    	  
+      
       if (access_Token != null) {
          if (user_api.equals("google")) {
             int result = snslogin.googleLogout(access_Token);
@@ -128,8 +130,8 @@ public class LoginController {
             return "redirect:/kakaounlink";
          }
          System.out.println(user_api + "로그아웃 성공!!");
-      } else if(user_api == null) {
-         session.invalidate();
+      }else if(user_api == null) {
+    	  
       }else if(user_api.equals("naver")) {
          System.out.println("unlink :" + user_api);
          return "redirect:/kakaounlink";
@@ -137,6 +139,9 @@ public class LoginController {
       System.out.println("access_Token is null");
       session.invalidate();
       return "redirect:/";
+      }catch(Exception e) {
+    	  e.printStackTrace();
+      }
    }
 
    // 연결끊기
