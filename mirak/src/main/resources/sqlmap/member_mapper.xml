@@ -107,7 +107,7 @@
  		]]>
 	</select>
 
-	<select id="getMemberDetail" resultType="member">
+	<select id="adminMemberDetail" resultType="member">
 		<![CDATA[
 			SELECT MEM_ID, 
 				MEM_NAME, MEM_AGE, 

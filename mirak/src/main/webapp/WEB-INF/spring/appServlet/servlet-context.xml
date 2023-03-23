@@ -62,6 +62,8 @@
 			<exclude-mapping path="/resources/**" />
 			<beans:bean id="Interceptor" class="kr.co.mirak.controller.Interceptor" />
 		</interceptor> 
+		
+			
 	</interceptors>
 
 </beans:beans>

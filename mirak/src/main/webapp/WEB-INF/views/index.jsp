@@ -8,10 +8,11 @@
 	border:none; 
 	border-radius: 6px;
 	box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
-	margin: 30px 0;
+	background: white;
+	margin-top: 20px;
 	padding: 10px;
-
 }
+
 </style>
 <!-- START 슬라이더 -->
 <section id="home-section" class="hero">
@@ -58,7 +59,7 @@
 						<h2 class="mb-4">인기상품</h2>
 					</div>
 				</div>
-				<div class="row" style="border-radius: 6px; box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);padding:10px;">
+				<div class="row" style="border-radius: 6px; background: #e6f5e7; padding:10px;">
 					<c:forEach items="${productList2}" var="product">
 						<div class="col-md-6 ftco-animate">
 		    				<div class="product">
@@ -88,7 +89,7 @@
 						<h2 class="mb-4">추천상품</h2>
 					</div>
 				</div>
-				<div class="row" style="border-radius: 6px; box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05); padding:10px;">
+				<div class="row" style="border-radius: 6px; background: #e6f5e7; padding:10px;">
 					<c:forEach items="${productList1}" var="product">						
 						<div class="col-md-6 ftco-animate">
 		    				<div class="product">

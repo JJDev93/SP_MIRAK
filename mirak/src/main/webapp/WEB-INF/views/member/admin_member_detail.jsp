@@ -36,7 +36,7 @@
 							<c:when test="${member.mem_gender == '1'}">
 								<input type="text" class="form-control" id="gender" name="mem_gender" value="남" readonly>
 	                        </c:when>
-							<c:when test="${member.mem_gender == '0' }">
+							<c:when test="${member.mem_gender == '2' }">
 								<input type="text" class="form-control" id="gender" name="mem_gender" value="여" readonly>
 							</c:when>
 						</c:choose>
@@ -50,7 +50,7 @@
 				</div>
 			</div>
 		</form>		
-		<a href="/admin/members" class="btn btn-secondary">목록</a>
+		<a href="/admin/members/${curPage}" class="btn btn-secondary">목록</a>
 	</div>
 </div>
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>
