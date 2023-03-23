@@ -40,7 +40,7 @@
 
 <!-- START 공지, 추천 -->
 <div class="container">
-	<div class="row">
+	<div class="row" style="">
 		<div class="col-md-6">
 			<section class="ftco-section ftco-category">
 				<div class="justify-content-center mb-3 pb-3">
@@ -48,7 +48,7 @@
 						<h2 class="mb-4">인기상품</h2>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" style="">
 					<c:forEach items="${productList2}" var="product">
 						<div class="col-md-6 ftco-animate">
 		    				<div class="product">

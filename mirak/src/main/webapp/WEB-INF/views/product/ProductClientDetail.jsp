@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
@@ -12,12 +13,21 @@
 		<div
 			class="row no-gutters slider-text align-items-center justify-content-center">
 			<div class="col-md-9 ftco-animate text-center">
-				<h1 class="mb-0 bread">${product.pro_name }</h1>
+				<c:if test="${fn : contains(product.pro_code, 'P')}">
+					<h1 class="mb-0 bread">프리미엄</h1>
+				</c:if>
+				<c:if test="${fn : contains(product.pro_code, 'T')}">
+					<h1 class="mb-0 bread">2·3인세트</h1>
+				</c:if>
+				<c:if test="${fn : contains(product.pro_code, 'O')}">
+					<h1 class="mb-0 bread">1인세트</h1>
+				</c:if>				
 			</div>
 		</div>
 	</div>
 </div>
 <form method="post">
+<input type="hidden" value="${product.pro_code}" name="pro_code">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
