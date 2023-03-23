@@ -32,7 +32,13 @@
             
             <div class="col-md-12">
                <div class="form-group">
-                  <label for="desc">상품설명</label> <textarea name="pro_desc" cols="40" rows="10" class="form-control" id="desc">${product.pro_desc }</textarea>
+                  <label for="desc">상품 요약설명</label> <textarea name="pro_desc2" cols="10" rows="1" class="form-control" id="desc">${product.pro_desc2 }</textarea>
+               </div>
+            </div>
+            
+            <div class="col-md-12">
+               <div class="form-group">
+                  <label for="desc">상품 상세설명</label> <textarea name="pro_desc" cols="40" rows="10" class="form-control" id="desc">${product.pro_desc }</textarea>
                </div>
             </div>
             
@@ -46,7 +52,7 @@
                <div class="form-group">
                   <label for="imagefile">이미지 파일</label>
                </div>
-               <img alt="${product.pro_desc }" src="${path}/resources/images/product/${product.pro_image}" style="width:200px; heigt:200px;" title="${product.pro_name}">
+               <img alt="${product.pro_desc2}" src="${path}/resources/images/product/${product.pro_image}" style="width:200px; heigt:200px;" title="${product.pro_name}">
             </div>
             
             <div class="col-md-12">
