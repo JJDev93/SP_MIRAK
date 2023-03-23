@@ -17,7 +17,7 @@
 	<select id="productList" resultType="product">
 		
 		<![CDATA[
- 		SELECT pro_name, pro_price from product;
+ 		SELECT pro_code, pro_name, pro_price from product WHERE pro_code LIKE CONCAT('%', #{cate}, '%')
 		
  		]]>
 

@@ -101,15 +101,15 @@ tr .tr-custom {
 								</td>
 							</tr>
 							<tr class="detail-row">
-								<td></td>
-								<td class="detail-col" style="padding: 2px;" colspan="11">
+								<td class="detail-col" style="padding: 2px;" colspan="10">
 									<div class="collapse" id="collapse-${payList.group_id}">
 										<div class="table-responsive"
 											style="float: right;">
-											<table class="table table-hover table-striped table-bordered">
+											<table class="table table-hover table-striped table-bordered table-sm">
 												<thead class="thead-custom">
 													<tr>
-														<th style="width:300px;">상품명</th>
+														<th>카테고리</th>
+														<th style="width:200px;">상품명</th>
 														<th style="width:100px;">수량</th>
 														<th style="width:100px;">가격</th>
 														<th style="width:330px;">희망요일</th>
@@ -167,51 +167,82 @@ tr .tr-custom {
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>
 </div>
 <script>
+$(document).on("click", ".detail_btn", function () {
+    var open_collapse = $(".collapse.show");
+    if (open_collapse.length > 0) {
+      open_collapse.each(function () {
+        $(this).collapse("hide");
+      });
+    }
+
+    var group_id = $(this).data("group_id");
+    var tbody = $("#accordianBody-" + group_id);
+    var detail_btn = $('.detail_btn[data-group_id="' + group_id + '"]');
+
+    $.ajax({
+      url: "/admin/payment/" + group_id,
+      method: "GET",
+      success: function (data) {
+        detailTable(data, group_id);
+      },
+      error: function () {
+        alert("데이터를 가져올 수 없습니다.");
+      },
+    });
+  });
+
 function detailTable(data, group_id) {
     var tbody = $("#accordianBody-" + group_id);
     tbody.empty();	  
     var productList = JSON.parse('${productList}');
-
     data.forEach(function (item) {
-        var pro_name = $("<select>").addClass("form-control");
-        productList.forEach(function(product) {
-          var option = $("<option>").attr("value", product.pro_name).text(product.pro_name).css({"max-width":"200px", "text-align":"center"});
-          if (item.pro_name === product.pro_name) {
-            option.attr("selected", true);
-          }
-          pro_name.append(option);
-        });
-        
-        var totalPrice = item.cart_cnt * productList.find(function(product) {
-            return product.pro_name === item.pro_name;
-          }).pro_price;
-        
-        pro_name.on("change", function() { 
-          var selectedProduct = productList.find(function(product) {
-            return product.pro_name === pro_name.val();
-            })
-          var price = selectedProduct.pro_price;
-          totalPrice = price * parseInt(cart_cnt.val()); 
-          $(this).closest("tr").find(".totalPrice").text(totalPrice); 
-        });
-        
+    	  var cate = $("<select>").addClass("form-control").css({"max-width":"250px", "height":"40px", "text-align":"center", "font-size":"14px"});
+    	  var keys = Object.keys(productList);
+
+    	  keys.forEach(function(key) {
+    	    var option = $("<option>").val(key).text(key);
+    	    cate.append(option);
+    	  });
+    	  if (item.pro_code.substr(0, 1) === 'P') {
+    	    cate.val('프리미엄');
+    	  } else if (item.pro_code.substr(0, 1) === 'O') {
+    	    cate.val('1인세트');
+    	  } else {
+    	    cate.val('2·3인세트');
+    	  }
+    	  cate.on("change", function() {
+    	    var selectCate = $(this).val();
+    	    var productListByCate = productList[selectCate];
+    	    var pro_name = $("<select>").addClass("form-control").css({"max-width":"250px", "height":"40px", "text-align":"center", "font-size":"14px"});
+    	    productListByCate.forEach(function(product) {
+    	      var option = $("<option>").val(product.pro_name).text(product.pro_name);
+    	      pro_name.append(option);
+    	    });
+    	    pro_name.on("change", function() {
+    	      var selectName = pro_name.val();
+    	      var selectProduct = productList[selectCate].find(function(product) {
+    	        return product.pro_name === selectName;
+    	      });
+    	      var selectPrice = selectProduct.pro_price;
+
+    	      console.log("가격은~~" + selectPrice);
+    	      console.log("개수는~~" + item.cart_cnt);
+
+    	      var totalPrice = item.cart_cnt * selectPrice;
+
+    	      var totalPriceElement = $(this).closest("tr").find(".total-price");
+    	      totalPriceElement.text(totalPrice.toLocaleString() + "원");
+    	    });
+    	  });
+    	
         var cart_cnt = $("<input>").addClass("form-control").attr({
             "type": "number",
             "min": "0",
             "max": "99",
             "step": "1",
             "value": item.cart_cnt
-          }).css({"text-align":"center","padding-left":"20"});
-        
-        cart_cnt.on("input", function() { 
-          var selectedProduct = productList.find(function(product) {
-            return product.pro_name === pro_name.val();
-          });
-          var price = selectedProduct.pro_price;
-          totalPrice = price * parseInt(cart_cnt.val());
-          $(this).closest("tr").find(".totalPrice").text(totalPrice); 
-        });
-      
+          }).css({"text-align":"center","padding-left":"20px"});
+
       var cart_day = $("<div>").addClass("cart_day");
       
       var days = ["월", "화", "수", "목", "금", "토", "일"];
@@ -250,70 +281,18 @@ function detailTable(data, group_id) {
       
       tbody.append(
         $("<tr>").append(
-          $("<td>").attr("class", "changeUpdate").attr("id", "pro_name_" + pay_code).attr("name", "pro_name").append(pro_name),
-          $("<td>").attr("class", "changeUpdate").attr("id", "cart_cnt_" + pay_code).attr("name", "cart_cnt").append(cart_cnt),
-          $("<td>").attr("class", "totalPrice changeUpdate").attr("id", "totalPrice_" + pay_code).attr("name", "totalPrice").text(totalPrice),
-          $("<td>").attr("class", "changeUpdate").attr("id", "cart_day_" + pay_code).attr("name", "cart_day").append(cart_day),
-          $("<td>").attr("class", "changeUpdate").attr("id", "cart_start_" + pay_code).attr("name", "cart_start").append(cart_start),
-          $("<td>").attr("class", "changeUpdate").attr("id", "pay_req_" + pay_code).attr("name", "pay_req").append(pay_req),
-          $("<td>").attr("class", "changeUpdate").attr("id", "status_" + pay_code).attr("name", "status").text(item.status)
+          $("<td>").css("height", "40px").attr("class", "changeUpdate").attr("id", "cate_" + pay_code).attr("name", "cate").append(cate),
+          $("<td>").css("height", "40px").attr("class", "changeUpdate").attr("id", "pro_name_" + pay_code).attr("name", "pro_name").append(pro_name),
+          $("<td>").css("height", "40px").attr("class", "changeUpdate").attr("id", "cart_cnt_" + pay_code).attr("name", "cart_cnt").append(cart_cnt),
+          $("<td>").css("height", "40px").attr("class", "changeUpdate").attr("id", "totalPrice_" + pay_code).attr("name", "totalPrice").text(totalPrice),
+          $("<td>").css("height", "40px").attr("class", "changeUpdate").attr("id", "cart_day_" + pay_code).attr("name", "cart_day").append(cart_day),
+          $("<td>").css("height", "40px").attr("class", "changeUpdate").attr("id", "cart_start_" + pay_code).attr("name", "cart_start").append(cart_start),
+          $("<td>").css("height", "40px").attr("class", "changeUpdate").attr("id", "pay_req_" + pay_code).attr("name", "pay_req").append(pay_req),
+          $("<td>").css("height", "40px").attr("class", "changeUpdate").attr("id", "status_" + pay_code).attr("name", "status").text(item.status)
         )
       );
-      
-      changeUpdate.on("change", function() { 
-      var data = {
-    		  "pro_name": pro_name,
-    		  "cart_cnt": parseInt(cart_cnt),
-    		  "totalPrice": totalPrice,
-    		  "cart_day": cart_day.find("input:checked").map(function() {
-    		    return $(this).val();
-    		  }).get(),
-    		  "cart_start": cart_start,
-    		  "pay_req": pay_req,
-    		  "pay_code": pay_code
-            };
-            updatePay(pay_code, data);
-      });
-      
-      function updatePay(pay_code, data) {
-            $.ajax({
-              url: "/mypage/pay/" + pay_code,
-              type: "PUT",
-              dataType: "json",
-              data: data,
-              success: function(response) {
-                alert("수정완료~~~");
-              },
-              error: function(xhr, status, error) {
-                alert("수정실패!!!");
-              }
-            });
-          }
-    });
-  }
-  $(document).on("click", ".detail_btn", function () {
-    var open_collapse = $(".collapse.show");
-    if (open_collapse.length > 0) {
-      open_collapse.each(function () {
-        $(this).collapse("hide");
-      });
-    }
-
-    var group_id = $(this).data("group_id");
-    var tbody = $("#accordianBody-" + group_id);
-    var detail_btn = $('.detail_btn[data-group_id="' + group_id + '"]');
-
-    $.ajax({
-      url: "/admin/payment/" + group_id,
-      method: "GET",
-      success: function (data) {
-        detailTable(data, group_id);
-      },
-      error: function () {
-        alert("데이터를 가져올 수 없습니다.");
-      },
-    });
-  });
+	});
+    };
 
   $(".collapse").on("hidden.bs.collapse", function () {
     var group_id = $(this).attr("id").split("-")[1];

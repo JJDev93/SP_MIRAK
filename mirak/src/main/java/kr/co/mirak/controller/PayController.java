@@ -3,6 +3,7 @@ package kr.co.mirak.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -189,8 +190,12 @@ public class PayController {
 		
 		List<PayVO> payList = payService.getAdminPayList(criP);
 		model.addAttribute("payList", payList);
-		
-		List<ProductVO> productList = productService.productList(productVO);
+		System.out.println("payLsitAdasdjsakldjasldjasld "+payList);
+		List<String> cateList = new ArrayList<String>();
+		cateList.add("O");
+		cateList.add("T");
+		cateList.add("P");
+		Map<String,List<ProductVO>> productList = productService.productList(cateList);
 		String productListJson = new Gson().toJson(productList);
 		model.addAttribute("productList", productListJson);
 		

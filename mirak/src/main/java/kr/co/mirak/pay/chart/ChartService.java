@@ -3,10 +3,6 @@ package kr.co.mirak.pay.chart;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
-
-import kr.co.mirak.pay.PayVO;
-
 public interface ChartService {
 	Map<String, List<Object>> getTotalByMenuList(TotalByMenuVO vo);
 

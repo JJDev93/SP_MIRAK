@@ -11,7 +11,7 @@
 
 	<select id="getAdminPayList" resultType="kr.co.mirak.pay.PayVO">
 	
-		select * from (select group_id,
+		select * from (select group_id, pro_code, pro_price,
 		pro_name, count(cart_cnt) as cart_cnt, sum(totalPrice) as totalPrice, mem_name, mem_phone, mem_add1, mem_add2, pay_req, pay_date, status
 		from pay group by group_id order by pay_code desc)
 		as T1 limit #{skip},#{amount}
@@ -25,7 +25,7 @@
 	</select>
 
 	<select id="getPayListDetail" resultType="kr.co.mirak.pay.PayVO">
-		select pay_code, pro_name, cart_cnt, totalPrice, cart_day, cart_start, pay_req, status, group_id
+		select pay_code, pro_code, pro_price, pro_name, cart_cnt, totalPrice, cart_day, cart_start, pay_req, status, group_id
  		from pay where group_id = #{group_id} order by cart_start;
 	</select>
 	
