@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class MemberVO {
 	private String mem_id, mem_pw, mem_name, mem_phone, mem_zipcode, mem_add1, mem_add2, mem_isapi;
-	private int mem_age, mem_gender;
+	private int mem_code, mem_age, mem_gender;
 	private Date mem_regdate;
 	public String getMem_id() {
 		return mem_id;
@@ -48,6 +48,18 @@ public class MemberVO {
 	public void setMem_add2(String mem_add2) {
 		this.mem_add2 = mem_add2;
 	}
+	public String getMem_isapi() {
+		return mem_isapi;
+	}
+	public void setMem_isapi(String mem_isapi) {
+		this.mem_isapi = mem_isapi;
+	}
+	public int getMem_code() {
+		return mem_code;
+	}
+	public void setMem_code(int mem_code) {
+		this.mem_code = mem_code;
+	}
 	public int getMem_age() {
 		return mem_age;
 	}
@@ -66,19 +78,11 @@ public class MemberVO {
 	public void setMem_regdate(Date mem_regdate) {
 		this.mem_regdate = mem_regdate;
 	}
-	public String getMem_isapi() {
-		return mem_isapi;
-	}
-	public void setMem_isapi(String mem_isapi) {
-		this.mem_isapi = mem_isapi;
-	}
 	@Override
 	public String toString() {
 		return "MemberVO [mem_id=" + mem_id + ", mem_pw=" + mem_pw + ", mem_name=" + mem_name + ", mem_phone="
 				+ mem_phone + ", mem_zipcode=" + mem_zipcode + ", mem_add1=" + mem_add1 + ", mem_add2=" + mem_add2
-				+ ", mem_age=" + mem_age + ", mem_gender=" + mem_gender + ", mem_regdate=" + mem_regdate
-				+ ", mem_isapi=" + mem_isapi + "]";
+				+ ", mem_isapi=" + mem_isapi + ", mem_code=" + mem_code + ", mem_age=" + mem_age + ", mem_gender="
+				+ mem_gender + ", mem_regdate=" + mem_regdate + "]";
 	}
-
-	
 }

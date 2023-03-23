@@ -290,10 +290,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	public MemberVO getMemberDetail(MemberVO mvo) {
-
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		return mapper.getMemberDetail(mvo);
-
+		MemberVO memVO = mapper.getMemberDetail(mvo);
+		memVO.toString();
+		return memVO;
 	}
 
 

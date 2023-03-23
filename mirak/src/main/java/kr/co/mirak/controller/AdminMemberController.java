@@ -1,8 +1,12 @@
 package kr.co.mirak.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,23 +23,19 @@ public class AdminMemberController {
 	
 	@RequestMapping(value="/admin/members", method=RequestMethod.GET)
 	public String getMemeberList(MemberVO mvo,Model model, CriteriaM cri) {
-		
-		//김원중이 건드린 부분
 		model.addAttribute("memberList", memberService.getListPaging(cri));
 		int total = memberService.getTotal(cri);
 		PageMakerDTOM pageMake = new PageMakerDTOM(cri, total);
 		model.addAttribute("pageMaker", pageMake);
-		//여기까지 (매개변수에 CriteriaM 부분 추가했음-> 오류발생시 제거해야함!)
-		
-		
 		return "member/admin_member_list";
 	}
 	
-	@RequestMapping(value="/admin/member/{mem_name}", method=RequestMethod.GET)	
-	public String getMemberDetail(MemberVO mvo, Model model) {
+	@RequestMapping(value="/admin/member/{mem_code}", method=RequestMethod.GET)	
+	public String getMemberDetail(MemberVO mvo, Model model, @PathVariable("mem_code") String mem_code) throws UnsupportedEncodingException {
 		System.out.println("====== 어드민 상세페이지 ======");
-		model.addAttribute("member", memberService.getMemberDetail(mvo));
-		memberService.getMemberDetail(mvo);
+		System.out.println(mem_code);
+		model.addAttribute("member", memberService.getMemberDetail(mem_code));
+		mvo.toString();
 		return "member/admin_member_detail";
 	}
 }
