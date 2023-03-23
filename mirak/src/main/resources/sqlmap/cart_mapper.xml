@@ -8,7 +8,7 @@
 	<!-- 카트 목록 -->
 	<select id="cartClientList" resultType="kr.co.mirak.cart.CartVO">
 	
-		SELECT * FROM CART WHERE MEM_ID = #{mem_id} and CART_SHOW =1
+		SELECT * FROM CART WHERE MEM_ID = #{mem_id} and CART_SHOW =1 ORDER BY CART_CODE DESC
 	
 	</select>
 	
