@@ -4,7 +4,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <div id="test">
 	<jsp:include page="/common/client_hd.jsp"></jsp:include>
-	<div class="hero-wrap hero-bread" style="background-image: url('${path}/resources/images/productnew.jpg');">
+	<div class="hero-wrap hero-bread" style="background-image: url('${path}/resources/images/bg_3.jpg');">
 		<div class="container">
 			<div class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-12 ftco-animate text-center">
