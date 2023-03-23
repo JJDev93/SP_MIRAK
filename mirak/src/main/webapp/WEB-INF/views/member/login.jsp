@@ -131,12 +131,12 @@
 	$(document).ready(function() {
 	console.log("message : "+"${message}");
 	console.log("mem_id : "+"${mem_id}");
-	if("${message}" !=""){
-		alert("${message}");
-		 <%session.setAttribute("message","");%>
-	}
+// 	if("${message}" !=""){
+// 		alert("${message}");
+<%-- 		 <%session.setAttribute("message","");%> --%>
+// 	}
 	if("${mem_id}" !=""){
-		location.href("/");
+		location.href = "/";
 	}
 	})
    var naverLogin = new naver.LoginWithNaverId({
