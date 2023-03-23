@@ -22,7 +22,7 @@
 			  <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
 			    <ul class="navbar-nav me-auto mb-2 mb-md-0">
 			      <li class="nav-item">
-			        <a class="nav-link" aria-current="page" href="/admin/members">회원관리</a>
+			        <a class="nav-link" aria-current="page" href="/admin/members/1">회원관리</a>
 			      </li>
 			      <li class="nav-item">
 			        <a class="nav-link" href="/admin/products/1">상품관리</a>

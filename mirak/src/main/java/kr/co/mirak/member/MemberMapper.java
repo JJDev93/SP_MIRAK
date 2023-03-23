@@ -26,6 +26,6 @@ public interface MemberMapper {
     
     /* 게시판 목록(페이징 적용) */
     public List<MemberVO> getListPaging(CriteriaM cri);
-    MemberVO getMemberDetail(MemberVO mvo);
+    MemberVO adminMemberDetail(MemberVO vo);
     // 여기까지!    
 }
