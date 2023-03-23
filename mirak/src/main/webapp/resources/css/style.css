@@ -3600,7 +3600,8 @@ input[type="button"].btn-block {
         position: absolute; }
       .navbar-expand-md .navbar-nav .nav-link {
         padding-right: 0.5rem;
-        padding-left: 0.5rem; }
+        padding-left: 0.5rem;
+        font-size:25px }
     .navbar-expand-md > .container,
     .navbar-expand-md > .container-fluid {
       -ms-flex-wrap: nowrap;
@@ -8006,7 +8007,7 @@ a.text-dark:hover, a.text-dark:focus {
 body {
   font-family: "S-CoreDream-3Light", Arial, sans-serif;
   background: #fff;
-  font-size: 23px;
+  font-size: 16px;
   line-height: 1.8;
   font-weight: 400;
   color: gray; }
