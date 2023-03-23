@@ -5,12 +5,12 @@
 	<c:set var="path" value="${pageContext.request.contextPath}" />
 	<jsp:include page="/common/client_hd.jsp"></jsp:include>
 	<div class="hero-wrap hero-bread"
-		style="background-image: url('${path}/resources/images/bg_1.jpg');">
+		style="background-image: url('${path}/resources/images/productnew.jpg');">
 		<div class="container">
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
-					<h1 class="mb-0 bread">1인세트</h1>
+					<h1 class="mb-0 bread">프리미엄</h1>
 				</div>
 			</div>
 		</div>
@@ -42,10 +42,11 @@
 	    			</div>
 				</c:forEach>
 			</div>
+			
 			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 			<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-	
-						<div class="row mt-5">
+			
+			<div class="row mt-5">
 				<div class="col text-center">
 					<div class="block-27">
 						<ul>
@@ -70,25 +71,27 @@
 			
 		</div>
 	</section>
+
 	<script src="${path}/resources/js/product/product.js"></script>
 	<jsp:include page="/common/client_ft.jsp"></jsp:include>
 </div>
+</body>
 <script>
-function acyncMovePage(url){
-   // ajax option
-   var ajaxOption = {
-           url : url,
-           async : true,
-           type : "POST",
-           dataType : "html",
-           cache : false
-   };
-   
-   $.ajax(ajaxOption).done(function(data){
-       // Contents 영역 삭제
-       $('#test').children().remove();
-       // Contents 영역 교체
-       $('#test').html(data);
-   });
-}
+	function acyncMovePage(url){
+	   // ajax option
+	   var ajaxOption = {
+	           url : url,
+	           async : true,
+	           type : "POST",
+	           dataType : "html",
+	           cache : false
+	   };
+	   
+	   $.ajax(ajaxOption).done(function(data){
+	       // Contents 영역 삭제
+	       $('#test').children().remove();
+	       // Contents 영역 교체
+	       $('#test').html(data);
+	   });
+	}
 </script>

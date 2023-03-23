@@ -23,7 +23,7 @@
 }
 </style>
 <div class="hero-wrap hero-bread"
-   style="background-image: url('${path}/resources/images/bg_1.jpg');">
+   style="background-image: url('${path}/resources/images/main2.jpg');">
    <div class="container">
       <div
          class="row no-gutters slider-text align-items-center justify-content-center">
@@ -128,6 +128,17 @@
 <script src="${path}/resources/js/naverapi.js"></script>
 
 <script>
+	$(document).ready(function() {
+	console.log("message : "+"${message}");
+	console.log("mem_id : "+"${mem_id}");
+// 	if("${message}" !=""){
+// 		alert("${message}");
+<%-- 		 <%session.setAttribute("message","");%> --%>
+// 	}
+	if("${mem_id}" !=""){
+		location.href = "/";
+	}
+	})
    var naverLogin = new naver.LoginWithNaverId({
       clientId : "zkOzac5hPC_Qw6v8eOzQ", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
       callbackUrl : "http://localhost:8080/login", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
