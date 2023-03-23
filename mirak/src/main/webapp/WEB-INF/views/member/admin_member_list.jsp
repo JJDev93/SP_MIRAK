@@ -40,12 +40,14 @@
 							<th scope="col">성별</th>
 							<th scope="col">연락처</th>
 							<th scope="col">가입일자</th>
+							<th scope="col" width="85px">수정</th>
+							<th scope="col" width="85px">식제</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${memberList}" var="member">
 						<tr>
-							<td scope="row"><a href="/admin/member/${member.mem_code}">${member.mem_id }</a></td>
+							<td scope="row"><a href="/admin/member/${curPage}/${member.mem_code}">${member.mem_id }</a></td>
 							<td>${member.mem_name }</td>
 							<td>${member.mem_age }</td>
 							<td>
@@ -53,17 +55,38 @@
 									<c:when test="${member.mem_gender == '1'}">
 										남	
 									</c:when>
-									<c:when test="${member.mem_gender == '0' }">
+									<c:when test="${member.mem_gender == '2' }">
 										여
 									</c:when>
 								</c:choose>
 							</td>
 							<td>${member.mem_phone }</td>
 							<td><fmt:formatDate value="${member.mem_regdate }"/></td>
+							<td><a href="/admin/memberUpdate/${curPage}/${member.mem_code}" class="btn btn-primary">수정</a></td>
+							<td><a href="/admin/memberDel/${curPage}/${member.mem_code}" class="btn btn-danger">삭제</a></td>
 						</tr>
 						</c:forEach>
 					</tbody>
 				</table>
+			</div>
+		</div>
+		<div class="row mt-5">
+			<div class="col text-center">
+				<div class="block-27">
+					<ul>
+						<!-- 이전페이지 버튼 -->
+						<c:if test="${pageMaker.prev}">
+							<li class="pageInfo_btn previous" id="abc"><a href="/admin/members/${pageMaker.startPage-1}">&lt;</a></li>
+						</c:if>
+						<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+							<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="/admin/members/${num}">${num}</a></li>
+						</c:forEach>
+						<c:if test="${pageMaker.next}">
+							<li class="pageInfo_btn next" id="abc"><a href="/admin/products/${pageMaker.endPage + 1 }">&gt;</a></li>
+						</c:if>
+						<!-- 다음페이지 버튼 -->
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>

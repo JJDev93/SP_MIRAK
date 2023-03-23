@@ -22,26 +22,27 @@
 			  <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
 			    <ul class="navbar-nav me-auto mb-2 mb-md-0">
 			      <li class="nav-item">
-			        <a class="nav-link" aria-current="page" href="/admin/members">회원관리</a>
+			        <a class="nav-link" aria-current="page" href="/admin/members/1" style="font-size:25px;">회원관리</a>
+
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link" href="/admin/products/1">상품관리</a>
+			        <a class="nav-link" href="/admin/products/1" style="font-size:25px;">상품관리</a>
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link" href="/admin/carts/1">장바구니</a>
+			        <a class="nav-link" href="/admin/carts/1" style="font-size:25px;">장바구니</a>
 			      </li>
 			      <li class="nav-item">
 
-			        <a class="nav-link" href="/admin/pays/1">결제관리</a>
+			        <a class="nav-link" href="/admin/pays/1" style="font-size:25px;">결제관리</a>
 			      </li>
 			    </ul>
 			    <div class="form-inline my-2 my-lg-0">
 				    <ul class="navbar-nav my-2 my-sm-0">
 				      <li class="nav-item">
-				        <a class="nav-link" href="/">Client</a>
+				        <a class="nav-link" href="/" style="font-size:25px;">Client</a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="/admin/logout">로그아웃</a>
+				        <a class="nav-link" href="/admin/logout" style="font-size:25px;">로그아웃</a>
 				      </li>
 				    </ul>
 			    </div>

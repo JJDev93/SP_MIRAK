@@ -54,7 +54,8 @@
 	<!-- 어드민 카트 전체 목록 -->
 	<select id="cartAdminList" resultType="kr.co.mirak.cart.CartVO">
 	
-		SELECT MEM_ID, PRO_NAME, PRO_PRICE, CART_START, CART_DAY, CART_CNT, CART_TOTPRICE, CART_SHOW FROM CART
+		SELECT * FROM CART
+		ORDER BY CART_CODE DESC
 
 	</select>
 	

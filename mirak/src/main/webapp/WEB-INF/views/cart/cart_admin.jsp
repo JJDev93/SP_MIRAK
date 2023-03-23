@@ -9,7 +9,6 @@
    }
 </style>
 
-
 <div id="test">
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <div class="ftco-section">
@@ -87,8 +86,9 @@
 				</table>
 			</div>
 		</div>
-		
-		 <div class="row mt-5">
+	
+               
+			<div class="row mt-5">
                   <div class="col text-center">
                      <div class="block-27">
                         <!-- 각 번호 페이지 버튼 -->
@@ -102,10 +102,9 @@
                                     </li>
                                  </ul>
                               </c:if>
-                              <c:forEach var="num" begin="${pageMaker.startPage}"
-                                 end="${pageMaker.endPage}">
+                              <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
                                  <ul style="text-align: center;" id="abc">
-                                    <li class="pageInfo_btn"><a href="/admin/carts/${num}">${num}</a></li>
+                                    <li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="/admin/carts/${num}">${num}</a></li>
                                  </ul>
                               </c:forEach>
                               <!-- 다음페이지 버튼 -->

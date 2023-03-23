@@ -289,9 +289,9 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.getListPaging(cri);
 	}
 
-	public MemberVO getMemberDetail(MemberVO mvo) {
+	public MemberVO adminMemberDetail(MemberVO vo) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		MemberVO memVO = mapper.getMemberDetail(mvo);
+		MemberVO memVO = mapper.adminMemberDetail(vo);
 		memVO.toString();
 		return memVO;
 	}
