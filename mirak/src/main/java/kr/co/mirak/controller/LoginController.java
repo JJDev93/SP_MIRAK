@@ -117,7 +117,6 @@ public class LoginController {
       MemberVO member = memberService.getMemberDetail(mem_id);
       String user_api = member.getMem_isapi();
       System.out.println("user_api : " + user_api);
-      
 
       if (access_Token != null) {
          if (user_api.equals("google")) {
@@ -125,11 +124,12 @@ public class LoginController {
             System.out.println("구글로그아웃 : " + result);
          } else if (user_api.equals("kakao")) {
             System.out.println("unlink :" + user_api);
+            session.invalidate();
             return "redirect:/kakaounlink";
          }
          System.out.println(user_api + "로그아웃 성공!!");
-      } else if(user_api == null) {
-         session.invalidate();
+      }else if(user_api == null) {
+    	  
       }else if(user_api.equals("naver")) {
          System.out.println("unlink :" + user_api);
          return "redirect:/kakaounlink";

@@ -75,22 +75,19 @@ public class PayController {
 			return "redirect:/login";
 		}
 		
-		System.out.println(pro_code + ", " + cart_cnt + ", " + cart_start + ", " + cart_day);
-		
+		cart_day.trim();
 		String dayWeek = "월화수목금토일";
 		int j = 0;
 		for(int i=0; i<cart_day.length(); i++) {
 			if(dayWeek.indexOf(cart_day.charAt(i)) == -1) {
-				System.out.println("어디서1 cart_day.charAt(i): " + cart_day.charAt(i));
 				return "redirect:/";
 			}
 			
-			if(j < dayWeek.indexOf(cart_day.charAt(i))) {
-				System.out.println("어디서2 j: " + j + ", cart_day.charAt(i): " + cart_day.charAt(i));
+			if(j > dayWeek.indexOf(cart_day.charAt(i))) {
 				return "redirect:/";
 			}
 			
-			j = cart_day.charAt(i);
+			j = dayWeek.indexOf(cart_day.charAt(i));
 			
 		}
 		
