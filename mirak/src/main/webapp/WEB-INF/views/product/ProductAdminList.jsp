@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<style>
-   #abc{
-      float:left;
-      margin-right:10px;
-   }
- 
-</style>
+
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <%-- <c:set var="path" value="${request.getSession().getServletContext().getRealPath('resources/images/product')}" /> --%>
 <div id="test">
@@ -52,6 +46,7 @@
                      </c:forEach>
                   </tbody>
                </table>
+
                <div class="row mt-5">
                   <div class="col text-center">
                      <div class="block-27">
@@ -87,11 +82,26 @@
                      </div>
                   </div>
                </div>
+
             </div>
          </div>
          <div class="row mt-5">
             <div class="col text-center">
-               <div class="block-27"></div>
+               <div class="block-27">
+                  <ul>
+                     <!-- 이전페이지 버튼 -->
+                     <c:if test="${pageMaker.prev}">
+                        <a href="javascript:acyncMovePage('/admin/products/${pageMaker.startPage-1}');">&lt;</a>
+                     </c:if>
+                     <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+                        <li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="javascript:acyncMovePage('/admin/products/${num}');">${num}</a></li>
+                     </c:forEach>
+                     <!-- 다음페이지 버튼 -->
+                     <c:if test="${pageMaker.next}">
+                        <a href="javascript:acyncMovePage('/admin/products/${pageMaker.endPage + 1 }');">&gt;</a>
+                     </c:if>
+                  </ul>
+               </div>
             </div>
          </div>
       </div>

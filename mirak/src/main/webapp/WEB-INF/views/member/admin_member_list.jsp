@@ -40,6 +40,8 @@
 							<th scope="col">성별</th>
 							<th scope="col">연락처</th>
 							<th scope="col">가입일자</th>
+							<th scope="col" width="85px">수정</th>
+							<th scope="col" width="85px">식제</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -60,6 +62,8 @@
 							</td>
 							<td>${member.mem_phone }</td>
 							<td><fmt:formatDate value="${member.mem_regdate }"/></td>
+							<td><a href="/admin/memberUpdate/${curPage}/${member.mem_code}" class="btn btn-primary">수정</a></td>
+							<td><a href="/admin/memberDel/${curPage}/${member.mem_code}" class="btn btn-danger">삭제</a></td>
 						</tr>
 						</c:forEach>
 					</tbody>

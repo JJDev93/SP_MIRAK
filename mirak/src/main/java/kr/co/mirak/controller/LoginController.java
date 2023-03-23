@@ -117,6 +117,7 @@ public class LoginController {
       MemberVO member = memberService.getMemberDetail(mem_id);
       String user_api = member.getMem_isapi();
       System.out.println("user_api : " + user_api);
+      
 
       if (access_Token != null) {
          if (user_api.equals("google")) {
