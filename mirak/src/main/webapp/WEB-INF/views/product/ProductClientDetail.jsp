@@ -8,7 +8,7 @@
 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <div class="hero-wrap hero-bread"
-   style="background-image: url('${path}/resources/images/bg_1.jpg');">
+   style="background-image: url('${path}/resources/images/bg_3.jpg');">
    <div class="container">
       <div
          class="row no-gutters slider-text align-items-center justify-content-center">
