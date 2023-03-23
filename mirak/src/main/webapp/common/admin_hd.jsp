@@ -29,7 +29,7 @@
 			        <a class="nav-link" href="/admin/products/1" style="font-size:25px;">상품관리</a>
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link" href="/admin/carts" style="font-size:25px;">장바구니</a>
+			        <a class="nav-link" href="/admin/carts/1" style="font-size:25px;">장바구니</a>
 			      </li>
 			      <li class="nav-item">
 
