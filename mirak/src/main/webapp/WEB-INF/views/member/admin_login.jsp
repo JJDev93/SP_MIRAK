@@ -80,7 +80,7 @@ body {
 		<a href="/">Client</a>
 		
 		<p class="mt-5 mb-3 text-muted">
-			&copy Copyright MIRAK .2023<br>
+			&copy Copyright MIRAK. 2023<br>
 					신용우 전지혜 김연주 김원중 서현진 안창주 정동하
 		</p>
 	</form>
