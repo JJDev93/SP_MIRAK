@@ -117,10 +117,7 @@ public class LoginController {
       MemberVO member = memberService.getMemberDetail(mem_id);
       String user_api = member.getMem_isapi();
       System.out.println("user_api : " + user_api);
-      
-      try {
-    	  
-      
+
       if (access_Token != null) {
          if (user_api.equals("google")) {
             int result = snslogin.googleLogout(access_Token);
@@ -139,9 +136,6 @@ public class LoginController {
       System.out.println("access_Token is null");
       session.invalidate();
       return "redirect:/";
-      }catch(Exception e) {
-    	  e.printStackTrace();
-      }
    }
 
    // 연결끊기
