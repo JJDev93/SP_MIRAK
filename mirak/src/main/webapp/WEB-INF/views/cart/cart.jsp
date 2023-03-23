@@ -103,9 +103,6 @@
 								<p class="d-flex">
 									<span>상품합계</span> <span class="totalPrice_span"></span>
 								</p>
-								<p class="d-flex">
-									<span>배송비</span> <span class="delivery_price"></span>
-								</p>
 								<hr>
 								<p class="d-flex total-price">
 									<span>총 결제금액</span> <span class="finalTotalPrice_span"></span>
@@ -166,6 +163,12 @@
 											<label for="fri"><input type="checkbox" name="cart_day" id="fri" style="transform: scale(1.5);" value="금" <c:if test = "${fn : contains(c.cart_day, '금')}">checked</c:if>>&nbsp;&nbsp;금</label>&nbsp;&nbsp; 
 											<label for="sat"><input type="checkbox" name="cart_day" id="sat" style="transform: scale(1.5);" value="토" <c:if test = "${fn : contains(c.cart_day, '토')}">checked</c:if>>&nbsp;&nbsp;토</label>&nbsp;&nbsp; 
 											<label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform: scale(1.5);" value="일" <c:if test = "${fn : contains(c.cart_day, '일')}">checked</c:if>>&nbsp;&nbsp;일</label>
+											
+				<label for="all"><input type="checkbox" name="cart_all" id="all" style="transform: scale(1.5);" value="all" onclick='selectAll(this)'>&nbsp;&nbsp;전체선택</label>
+                &nbsp;&nbsp; 
+                <label for="pyeong"><input type="checkbox" name="cart_pyeong" id="pyeong" style="transform: scale(1.5);" value="pyeong" onclick='selectpyeong(this)'>&nbsp;&nbsp;주중선택</label>
+                &nbsp;&nbsp; 
+                <label for="jumal"><input type="checkbox" name="cart_jumal" id="jumal" style="transform: scale(1.5);" value="jumal" onclick='selectjumal(this)'>&nbsp;&nbsp;주말선택</label>
 										</p>						
 										<p>
 											<span  class="font-weight-bold text-dark">상품 개수</span><br>
@@ -203,6 +206,34 @@
 <script>
 
 
+function selectjumal(selectjumal)  {
+    const checkboxes3 
+         = document.querySelectorAll('#sat, #sun');
+    
+    checkboxes3.forEach((checkbox) => {
+      checkbox.checked = selectjumal.checked;
+    })
+  }
+
+function selectpyeong(selectpyeong)  {
+    const checkboxes2 
+         = document.querySelectorAll('#mon, #tue, #wed, #thu, #fri');
+    
+    checkboxes2.forEach((checkbox) => {
+      checkbox.checked = selectpyeong.checked;
+    })
+  }
+
+function selectAll(selectAll)  {
+     const checkboxes 
+          = document.getElementsByName('cart_day');
+     
+     checkboxes.forEach((checkbox) => {
+       checkbox.checked = selectAll.checked;
+     })
+   }
+
+
 	$(function() {
 		$('input[name="daterange"]').daterangepicker(
 				{
@@ -228,7 +259,7 @@
 	});
 	// 체크에 따른 정보 변화
 	$(".cart_checkbox").on("change", function() {
-		// 총 주문 정보 세팅(배송비, 총 가격, 물품 수, 종류)
+		// 총 주문 정보 세팅(총 가격, 물품 수, 종류)
 		setTotalInfo($(".cart_info"));
 	});
 	// 체크박스 전체 선택
@@ -238,7 +269,7 @@
 				$("input[class=cart_checkbox]").prop("checked", true);
 			else
 				$("input[class=cart_checkbox]").prop("checked", false);
-			// 총 주문 정보 세팅(배송비, 총 가격, 물품 수, 종류)
+			// 총 주문 정보 세팅(총 가격, 물품 수, 종류)
 			setTotalInfo($(".cart_info"));
 		});
 		$("input[class=cart_checkbox]").click(function() {
@@ -250,13 +281,12 @@
 				$(".all_check").prop("checked", true);
 		});
 	});
-	// 총 주문 정보 세팅(배송비, 총 가격, 물품 수, 종류)
+	// 총 주문 정보 세팅(총 가격, 물품 수, 종류)
 	function setTotalInfo() {
 		let totalPrice = 0; // 총 가격
 		let totalCount = 0; // 총 갯수
 		let totalKind = 0; // 총 종류
-		let deliveryPrice = 0; // 배송비
-		let finalTotalPrice = 0; // 최종 가격(총 가격 + 배송비)
+		
 		$(".cart_info")
 				.each(
 						function(index, element) {
@@ -272,25 +302,13 @@
 								totalKind += 1;
 							}
 						});
-		// 배송비
-		if (totalPrice >= 100000) {
-			deliveryPrice = 0;
-		} else if (totalPrice == 0) {
-			deliveryPrice = 0;
-		} else {
-			deliveryPrice = 10000;
-		}
-		// 최종 결제금액
-		finalTotalPrice = totalPrice + deliveryPrice;
+		
+		
 		// 총 가격
 		$(".totalPrice_span").text(totalPrice.toLocaleString());
 		// 총 갯수
 		$(".totalCount_span").text(totalCount);
 		// 총 가짓수
 		$(".totalKind_span").text(totalKind);
-		// 배송비
-		$(".delivery_price").text(deliveryPrice);
-		// 최종 가격(총 가격 + 배송비)
-		$(".finalTotalPrice_span").text(finalTotalPrice.toLocaleString());
 	}
 </script>

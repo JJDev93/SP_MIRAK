@@ -29,4 +29,11 @@ public interface CartMapper {
     public List<CartVO> getListPaging(CriteriaC cri);	
 	
     CartVO cartDetail(CartVO vo);
+    
+	CartVO getMemberDetail(CartVO vo);
+	
+	void cartAdminDelete(CartVO vo);
+	
+	void cartAdminUpdate(CartVO vo);
+	
 }

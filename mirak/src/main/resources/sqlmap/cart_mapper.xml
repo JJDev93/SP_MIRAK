@@ -13,14 +13,6 @@
 	</select>
 	
 	
-	<!-- 어드민용 카트 전체 목록 -->
-	<select id="cartAdminList" resultType="kr.co.mirak.cart.CartVO">
-	
-		SELECT MEM_ID, PRO_NAME, PRO_PRICE, CART_START, CART_DAY, CART_CNT, CART_TOTPRICE, CART_CHECK FROM CART
-		
-	
-	</select>
-	
 	<!-- CartVO info (int id);  -->
 	
 	<!-- 카트 추가 -->
@@ -53,6 +45,30 @@
 	<update id="cartDelete">
 	<![CDATA[
 		UPDATE CART SET CART_SHOW = 0 WHERE CART_CODE = #{cart_code}
+	]]>
+	</update>
+	
+	
+	
+	
+	<!-- 어드민 카트 전체 목록 -->
+	<select id="cartAdminList" resultType="kr.co.mirak.cart.CartVO">
+	
+		SELECT MEM_ID, PRO_NAME, PRO_PRICE, CART_START, CART_DAY, CART_CNT, CART_TOTPRICE, CART_SHOW FROM CART
+
+	</select>
+	
+	<!-- 어드민 카트 삭제 -->
+	<delete id="cartAdminDelete">
+	<![CDATA[
+			DELETE FROM CART WHERE cart_code=#{cart_code}
+		]]>
+	</delete>
+	
+	<!-- 어드민 카트 수정 -->
+	<update id="cartAdminUpdate">
+	<![CDATA[
+		UPDATE CART SET CART_DAY = #{cart_day}, CART_START = #{cart_start}, CART_CNT = #{cart_cnt}, CART_SHOW = #{cart_show} WHERE cart_code = #{cart_code}
 	]]>
 	</update>
 		
