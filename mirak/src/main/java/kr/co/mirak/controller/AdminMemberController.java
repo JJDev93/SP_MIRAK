@@ -19,7 +19,7 @@ public class AdminMemberController {
 	private MemberService memberService;
 	
 	@RequestMapping(value="/admin/members/{curPage}", method=RequestMethod.GET)
-	public String getMemeberList(MemberVO mvo,Model model, CriteriaM cri, @PathVariable("curPage") int curPage) {
+	public String adminMemListPage(MemberVO mvo,Model model, CriteriaM cri, @PathVariable("curPage") int curPage) {
 		System.out.println("====== 관리자 회원 목록페이지로 이동 ======");
 		model.addAttribute("memberList", memberService.getListPaging(cri));
 		int total = memberService.getTotal(cri);
@@ -30,7 +30,7 @@ public class AdminMemberController {
 	}
 	
 	@RequestMapping(value="/admin/member/{curPage}/{mem_code}", method=RequestMethod.GET)	
-	public String getMemberDetail(MemberVO mvo, Model model, @PathVariable("mem_code") String mem_code, @PathVariable("curPage") int curPage) {
+	public String adminMemDetailPage(MemberVO mvo, Model model, @PathVariable("mem_code") String mem_code, @PathVariable("curPage") int curPage) {
 		System.out.println("====== 관리자 회원 상세페이지로 이동 ======");
 		mvo.setMem_code(Integer.parseInt(mem_code));
 		model.addAttribute("member", memberService.adminMemberDetail(mvo));
@@ -39,7 +39,7 @@ public class AdminMemberController {
 	}
 	
 	@RequestMapping(value="/admin/memberUpdate/{curPage}/{mem_code}", method=RequestMethod.GET)	
-	public String memberUpdatePage(MemberVO mvo, Model model, @PathVariable("mem_code") String mem_code, @PathVariable("curPage") int curPage) {
+	public String adminMemUpdatePage(MemberVO mvo, Model model, @PathVariable("mem_code") String mem_code, @PathVariable("curPage") int curPage) {
 		System.out.println("====== 관리자 회원 수정페이지로 이동 ======");
 		mvo.setMem_code(Integer.parseInt(mem_code));
 		model.addAttribute("member", memberService.adminMemberDetail(mvo));
@@ -48,10 +48,19 @@ public class AdminMemberController {
 	}
 	
 	@RequestMapping(value="/admin/memberUpdate/{curPage}/{mem_code}", method=RequestMethod.POST)	
-	public String memberUpdate(MemberVO mvo, Model model, @PathVariable("mem_code") String mem_code, @PathVariable("curPage") int curPage) {
+	public String adminMemUpdate(MemberVO mvo, Model model, @PathVariable("mem_code") String mem_code, @PathVariable("curPage") int curPage) {
 		System.out.println("====== 관리자 회원 수정 ======");
 		model.addAttribute("member", memberService.adminMemberDetail(mvo));
 		model.addAttribute("curPage", curPage);
 		return "member/admin_member_update";
+	}
+	
+	@RequestMapping(value="/admin/memberDel/{curPage}/{mem_code}", method=RequestMethod.GET)	
+	public String adminMemDel(MemberVO mvo, Model model, @PathVariable("curPage") int curPage, @PathVariable("mem_code") String mem_code) {
+		System.out.println("====== 관리자 회원 삭제 ======");
+		System.out.println("삭제할 코드 : " + mem_code);
+		mvo.setMem_code(Integer.parseInt(mem_code));
+		model.addAttribute("member", memberService.adminMemberDel(mvo));
+		return "redirect:/admin/members/" + curPage;
 	}
 }

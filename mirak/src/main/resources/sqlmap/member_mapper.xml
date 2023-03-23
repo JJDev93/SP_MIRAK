@@ -19,7 +19,7 @@
  			 SELECT MEM_ID FROM MEMBER WHERE MEM_NAME=#{mem_name} AND MEM_PHONE=#{mem_phone} AND MEM_ID=#{mem_id} 
  		]]>
 	</select>
-	<update id="pwreset" parameterType="kr.co.mirak.member.MemberVO">
+	<update id="pwreset" parameterType="member">
 		<![CDATA[
 			UPDATE MEMBER SET
 				MEM_PW = #{mem_pw}
@@ -41,8 +41,7 @@
  		]]>
 	</insert>
 
-	<update id="memupdate"
-		parameterType="kr.co.mirak.member.MemberVO">
+	<update id="memupdate" parameterType="member">
 		<![CDATA[
 			UPDATE MEMBER SET
 				MEM_PW = #{mem_pw},
@@ -82,12 +81,12 @@
 	</select>
 
 	<!-- 아이디 확인 -->
-	<select id="idCheck" parameterType="kr.co.mirak.member.MemberVO" resultType="int">
+	<select id="idCheck" parameterType="member" resultType="int">
 		SELECT count(*) FROM MEMBER WHERE mem_id= #{mem_id}
 	</select>
 
 	<!-- 회원탈퇴 -->
-	<delete id="memdelete" parameterType="kr.co.mirak.member.MemberVO">
+	<delete id="memdelete" parameterType="member">
 		<![CDATA[
 			DELETE FROM MEMBER
 			WHERE MEM_ID = #{mem_id} and MEM_PW = #{mem_pw}
@@ -109,7 +108,7 @@
 
 	<select id="adminMemberDetail" resultType="member">
 		<![CDATA[
-			SELECT MEM_ID, 
+			SELECT MEM_CODE, MEM_ID, 
 				MEM_NAME, MEM_AGE, 
 				MEM_GENDER, MEM_PHONE, 
 				MEM_REGDATE, 
@@ -120,4 +119,10 @@
 			WHERE MEM_CODE=#{mem_code}	
 		]]>
 	</select>
+	<delete id="adminMemberDel" parameterType="member">
+		<![CDATA[
+			DELETE FROM MEMBER
+			WHERE MEM_CODE = #{mem_code}
+		]]>
+	</delete>
 </mapper>

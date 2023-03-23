@@ -40,8 +40,8 @@
 							<th scope="col">성별</th>
 							<th scope="col">연락처</th>
 							<th scope="col">가입일자</th>
-							<th scope="col" width="85px">수정</th>
-							<th scope="col" width="85px">식제</th>
+							<th scope="col" width="95px">수정</th>
+							<th scope="col" width="95px">식제</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -63,7 +63,7 @@
 							<td>${member.mem_phone }</td>
 							<td><fmt:formatDate value="${member.mem_regdate }"/></td>
 							<td><a href="/admin/memberUpdate/${curPage}/${member.mem_code}" class="btn btn-primary">수정</a></td>
-							<td><a href="/admin/memberDel/${curPage}/${member.mem_code}" class="btn btn-danger">삭제</a></td>
+							<td><a href="/admin/memberDel/${curPage}/${member.mem_code}" class="btn btn-danger" onclick="return confirmDelMember()">삭제</a></td>
 						</tr>
 						</c:forEach>
 					</tbody>
@@ -92,3 +92,13 @@
 	</div>
 </div>
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>
+<script>
+function confirmDelMember() {
+  if (confirm("회원을 삭제하시겠습니까?")) {
+    alert("삭제되었습니다");
+    return true;
+  }else{
+	return false;
+  }
+}
+</script>

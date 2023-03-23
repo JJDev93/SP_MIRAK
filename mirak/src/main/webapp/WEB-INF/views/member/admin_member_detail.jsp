@@ -12,6 +12,7 @@
 		</div>
 		<div class="p-5 bg-light mb-4">
 			<div class="row">
+				<input type="hidden" class="form-control" name="mem_code" value="${member.mem_code }" readonly>
 				<div class="col-md-12">
 					<div class="form-group">
 						<label for="ID">아이디</label> 
@@ -81,7 +82,17 @@
 		</div>		
 		<a href="/admin/members/${curPage}" class="btn btn-secondary">목록</a>
 		<a href="/admin/memberUpdate/${curPage}/${member.mem_code}" class="btn btn-primary">수정</a>
-		<a href="/admin/memberDel/${curPage}/${member.mem_code}" class="btn btn-danger">삭제</a>
+		<a href="/admin/memberDel/${curPage}/${member.mem_code}" class="btn btn-danger" onclick="return confirmDelMember()">삭제</a>
 	</div>
 </div>
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>
+<script>
+function confirmDelMember() {
+  if (confirm("회원을 삭제하시겠습니까?")) {
+    alert("삭제되었습니다");
+    return true;
+  }else{
+	return false;
+  }
+}
+</script>
