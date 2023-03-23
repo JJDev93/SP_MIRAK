@@ -126,16 +126,15 @@ public class LoginController {
             System.out.println("unlink :" + user_api);
             return "redirect:/kakaounlink";
          }
-         session.invalidate();
          System.out.println(user_api + "로그아웃 성공!!");
       } else if(user_api == null) {
          session.invalidate();
-         System.out.println("access_Token is null");
       }else if(user_api.equals("naver")) {
          System.out.println("unlink :" + user_api);
-         session.invalidate();
          return "redirect:/kakaounlink";
       }
+      System.out.println("access_Token is null");
+      session.invalidate();
       return "redirect:/";
    }
 
