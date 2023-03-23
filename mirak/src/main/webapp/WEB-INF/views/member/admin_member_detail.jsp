@@ -26,6 +26,9 @@
 							<c:when test="${member.mem_isapi == 'kakao' }">
 								Kakao 빠른로그인 회원입니다
 							</c:when>
+							<c:otherwise> 
+								일반 회원입니다.
+							</c:otherwise>
 						</c:choose>
 					</div>
 				</div>
