@@ -498,8 +498,9 @@ pre {
 .col-xl-auto {
   position: relative;
   width: 100%;
-  padding-right: 15px;
-  padding-left: 15px; }
+  padding-right: 22px;
+  padding-left: 22px;
+  padding-top: 22px; }
 
 .col {
   -ms-flex-preferred-size: 0;
@@ -9200,7 +9201,7 @@ textarea.form-control {
   font-size: 24px; }
 
 .ftco-section {
-  padding: 4em 1em;
+  padding: 2em 1em;
   position: relative; }
 
 .ftco-no-pt {
@@ -9800,7 +9801,7 @@ textarea.form-control {
   border-radius: 4px;
   color: #000000;
   border: 1px solid #ccc;
-  font-size: 11px; }
+  font-size: 16px; }
   .tagcloud a:hover {
     border: 1px solid #000; }
 
