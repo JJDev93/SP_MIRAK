@@ -46,6 +46,7 @@ public interface MemberService {
 	public int getTotal(CriteriaM cri);
 	List<MemberVO> getListPaging(CriteriaM cri);
 	MemberVO adminMemberDetail(MemberVO vo);
+	int adminMemberUpdate(MemberVO vo);
 	int adminMemberDel(MemberVO vo);
 	// 여기까지
 }

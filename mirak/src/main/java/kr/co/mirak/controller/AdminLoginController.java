@@ -62,6 +62,6 @@ public class AdminLoginController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		System.out.println("로그아웃 성공!!");
-		return "redirect:/";
+		return "redirect:/admin";
 	}
 }

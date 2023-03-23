@@ -119,6 +119,18 @@
 			WHERE MEM_CODE=#{mem_code}	
 		]]>
 	</select>
+	<update id="adminMemberUpdate" parameterType="member">
+		<![CDATA[
+			UPDATE MEMBER SET
+				MEM_AGE = #{mem_age},
+				MEM_GENDER = #{mem_gender},
+				MEM_PHONE = #{mem_phone},
+				MEM_ADD1 =#{mem_add1},
+				MEM_ADD2 =#{mem_add2},
+				MEM_ZIPCODE =#{mem_zipcode}
+			WHERE MEM_CODE = #{mem_code}
+		]]>
+	</update>
 	<delete id="adminMemberDel" parameterType="member">
 		<![CDATA[
 			DELETE FROM MEMBER

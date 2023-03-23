@@ -28,5 +28,5 @@ public interface MemberMapper {
     public List<MemberVO> getListPaging(CriteriaM cri);
     MemberVO adminMemberDetail(MemberVO vo);
     int adminMemberDel(MemberVO vo);
-    // 여기까지!    
+	int adminMemberUpdate(MemberVO vo);
 }

@@ -50,17 +50,16 @@ public class AdminMemberController {
 	@RequestMapping(value="/admin/memberUpdate/{curPage}/{mem_code}", method=RequestMethod.POST)	
 	public String adminMemUpdate(MemberVO mvo, Model model, @PathVariable("mem_code") String mem_code, @PathVariable("curPage") int curPage) {
 		System.out.println("====== 관리자 회원 수정 ======");
-		model.addAttribute("member", memberService.adminMemberDetail(mvo));
-		model.addAttribute("curPage", curPage);
-		return "member/admin_member_update";
+		memberService.adminMemberUpdate(mvo);
+		return "redirect:/admin/member/" + curPage + "/" + mem_code;
 	}
 	
 	@RequestMapping(value="/admin/memberDel/{curPage}/{mem_code}", method=RequestMethod.GET)	
-	public String adminMemDel(MemberVO mvo, Model model, @PathVariable("curPage") int curPage, @PathVariable("mem_code") String mem_code) {
+	public String adminMemDel(MemberVO mvo, Model model, @PathVariable("curPage") String curPage, @PathVariable("mem_code") String mem_code) {
 		System.out.println("====== 관리자 회원 삭제 ======");
 		System.out.println("삭제할 코드 : " + mem_code);
 		mvo.setMem_code(Integer.parseInt(mem_code));
-		model.addAttribute("member", memberService.adminMemberDel(mvo));
+		memberService.adminMemberDel(mvo);
 		return "redirect:/admin/members/" + curPage;
 	}
 }
