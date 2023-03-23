@@ -8,6 +8,8 @@
       margin-right:10px;
    }
 </style>
+
+
 <div id="test">
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <div class="ftco-section">
@@ -74,7 +76,7 @@
 							<td><fmt:formatDate pattern="yy-MM-dd" value="${c.cart_start}"/> </td>
 							<td>${c.cart_day }</td>
 							<td>${c.cart_cnt }</td>
-							<td>${c.cart_totprice }</td>
+							<td>${c.pro_price * c.cart_cnt }</td>
 							<td>
 								<c:if test="${c.cart_show == 0}"> 결제 전</c:if>
 								<c:if test="${c.cart_show == 1}"> 결제 완료</c:if>
