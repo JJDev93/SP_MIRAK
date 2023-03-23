@@ -295,6 +295,12 @@ public class MemberServiceImpl implements MemberService {
 		memVO.toString();
 		return memVO;
 	}
+	
+	public int adminMemberDel(MemberVO vo) {
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		int result = mapper.adminMemberDel(vo);
+		return result;
+	}
 
 
 
