@@ -50,7 +50,7 @@ public interface MemberService {
 
 	List<MemberVO> getListPaging(CriteriaM cri);
 
-	MemberVO getMemberDetail(MemberVO mvo);
+	MemberVO adminMemberDetail(MemberVO vo);
 
 
 

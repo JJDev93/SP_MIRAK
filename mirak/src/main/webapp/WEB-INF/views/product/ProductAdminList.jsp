@@ -67,8 +67,7 @@
                                     </li>
                                  </ul>
                               </c:if>
-                              <c:forEach var="num" begin="${pageMaker.startPage}"
-                                 end="${pageMaker.endPage}">
+                              <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
                                  <ul style="text-align: center;" id="abc">
 <%--                                     <li class="pageInfo_btn"><a href="javascript:acyncMovePage('/admin/products?pageNum=${num}');">${num}</a></li> --%>
                                     <li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="/admin/products/${num}">${num}</a></li>
