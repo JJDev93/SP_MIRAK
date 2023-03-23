@@ -109,7 +109,15 @@
 
 	<select id="getMemberDetail" resultType="member">
 		<![CDATA[
-			select * from member where mem_name = #{mem_name}		
+			SELECT MEM_ID, 
+				MEM_NAME, MEM_AGE, 
+				MEM_GENDER, MEM_PHONE, 
+				MEM_REGDATE, 
+				MEM_ADD1,
+				MEM_ADD2,
+				MEM_ZIPCODE,
+				MEM_ISAPI FROM MEMBER
+			WHERE MEM_CODE=#{mem_code}	
 		]]>
 	</select>
 </mapper>
