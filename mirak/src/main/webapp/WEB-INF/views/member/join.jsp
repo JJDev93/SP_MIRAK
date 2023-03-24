@@ -38,23 +38,23 @@
 											<label for="id">이메일(ID)</label>
 											<div class="row mb-2">
 												<div class="col-sm-9">
-													<input type="email" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required tabindex="1" >
+													<input type="email" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required tabindex="1" autofocus="autofocus">
 												</div>
 												<div class="col-sm-3">
-													<button type="button" class="btn btn-primary joinBtn mb-3" id="idCheck" value="N" onclick="return fn_idCheck();">중복확인</button>
+													<button type="button" tabIndex="2" class="btn btn-primary joinBtn mb-3" id="idCheck" value="N" onclick="return fn_idCheck();">중복확인</button>
 				                                    <span id="idCheckmsg"></span>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-sm-9 mail_check_wrap">
 													<div class="mail_check_input_box" id="mail_check_input_box_false">
-														<input class="form-control" id="mail_check_input" disabled="disabled" placeholder="인증번호 6자리를 입력해주세요!" maxlength="6">
+														<input class="form-control" tabIndex="4" id="mail_check_input" disabled="disabled" placeholder="인증번호 6자리를 입력해주세요!" maxlength="6">
 														<div class="clearfix"></div>
 			                  							<span id="mail_check_input_box_warn"></span>
 													</div>
 												</div>
 												<div class="col-sm-3">
-													<button type="button" id="mail_check_button" class="form-control mb-2 doubleChk">인증번호발송</button>
+													<button type="button" tabIndex="3" id="mail_check_button" class="form-control mb-2 doubleChk">인증번호발송</button>
 												</div>
 											</div>
 										</div>
@@ -62,11 +62,11 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											<label for="pw">비밀번호</label> 
-											<input type="password" name="mem_pw" class="form-control" id="pw" onchange="check_pw()" placeholder="비밀번호" required="required" value="${member.mem_pw }">
+											<input type="password" tabIndex="5" name="mem_pw" class="form-control" id="pw" onchange="check_pw()" placeholder="비밀번호" required="required" value="${member.mem_pw }">
 										</div>
 										<div class="form-group">
 											<label for="pw2">비밀번호 확인</label> 
-											<input type="password" class="form-control" id="pw2" onchange="check_pw()" placeholder="비밀번호 확인" required="required"> 
+											<input type="password" tabIndex="6" class="form-control" id="pw2" onchange="check_pw()" placeholder="비밀번호 확인" required="required"> 
 											<span id="check"></span>
 										</div>
 									</div>
@@ -76,14 +76,18 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="firstname">이름</label> 
+<<<<<<< HEAD
 									<input type="text" name="mem_name" id="name" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required" >
+=======
+									<input type="text" name="mem_name" tabIndex="7" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required" >
+>>>>>>> branch 'member' of https://github.com/ywshin0112/mirak.git
 								</div>
 							</div>
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="age">나이</label> 
-									<input type="text" name="mem_age" id="age" class="form-control" placeholder="나이를 입력해주세요" value="${member.mem_age }" required="required">
+									<input type="text" name="mem_age" tabIndex="8" id="age" class="form-control" placeholder="나이를 입력해주세요" value="${member.mem_age }" required="required">
 								</div>
 							</div>
 	
@@ -92,9 +96,9 @@
 								<div class="form-group">
 									<label for="gender">성별</label>
 									<div>
-										<input type="radio" name="mem_gender" value="1" checked> 남
+										<input type="radio" name="mem_gender" value="1" checked tabIndex="9"> 남
 										&nbsp;&nbsp;&nbsp; 
-										<input type="radio" name="mem_gender" value="2"> 여
+										<input type="radio" name="mem_gender" value="2" tabIndex="10"> 여
 									</div>
 								</div>
 							</div>
@@ -103,7 +107,11 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="phone">Phone</label> 
+<<<<<<< HEAD
 									<input type="text" name="mem_phone" id="phone" class="form-control" placeholder=" ' - ' 빼고 입력해주세요 " required="required" value="${member.mem_phone}" maxlength="11" pattern="[0-9]{11}">
+=======
+									<input type="text" name="mem_phone" tabIndex="11" class="form-control" placeholder=" ' - ' 빼고 입력해주세요 " required="required" value="${member.mem_phone}" maxlength="11" pattern="[0-9]{11}">
+>>>>>>> branch 'member' of https://github.com/ywshin0112/mirak.git
 								</div>
 							</div>
 	
@@ -116,11 +124,11 @@
 											<input type="text" class="form-control" id="address_input_1" name="mem_zipcode" placeholder="우편번호" readonly>
 										</div>
 										<div class="col-sm-4">
-											<button type="button" class="btn btn-primary joinBtn address button" onclick="execution_daum_address();">우편번호찾기</button>
+											<button type="button" class="btn btn-primary joinBtn address button" tabIndex="12" onclick="execution_daum_address();">우편번호찾기</button>
 										</div>
 									</div>
 									<input type="text" id="address_input_2" class="form-control mb-4" name="mem_add1" placeholder="주소지를 입력해주세요" readonly="readonly"> 
-									<input type="text"  id="address_input_3" class="form-control" name="mem_add2" placeholder="상세주소를 작성해주세요" readonly>
+									<input type="text"  id="address_input_3" class="form-control" name="mem_add2"tabIndex="13" placeholder="상세주소를 작성해주세요" readonly>
 								</div>
 							</div>
 							
@@ -129,8 +137,9 @@
 						<div class="row mb-5">
 							<div class="col-md-6">
 								<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return checkAll();">
+							</div>
 							<div class="col-md-6">
-								<a href="/" class="btn btn-secondary py-3 px-5 w-100">가입취소</a>
+								<a href="/" class="btn btn-secondary py-3 px-5 w-100" tabIndex="15">가입취소</a>
 							</div>
 						</div>
 					</form>
