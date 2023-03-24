@@ -121,7 +121,7 @@ session = request.getSession();
 									class="btn btn-primary py-3 px-5">
 							</p>
 							<div class="col-md-12">
-								<a href="javascript:history.go(-2);" class="tag-cloud-link">&lt;&nbsp;쇼핑 더하기</a>
+								<a href="ProductClientList" class="tag-cloud-link">&lt;&nbsp;쇼핑 더하기</a>
 							</div>
 						</div>
 					</div>
