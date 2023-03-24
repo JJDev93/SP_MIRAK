@@ -94,7 +94,7 @@
 	<!-- 	페이징 처리 (카트 총 개수 출력) -->
 	<select id="getTotal" resultType="int">
 		<![CDATA[
-		select count(*) from cart ORDER BY CART_CODE DESC
+		select count(*) from cart
 		]]>
 	</select>
 	
