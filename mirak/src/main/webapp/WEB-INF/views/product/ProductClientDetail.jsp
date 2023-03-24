@@ -30,6 +30,24 @@
 <input type="hidden" value="${product.pro_code}" name="pro_code">
    <section class="ftco-section">
       <div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="tagcloud">
+					<a href="/ProductClientList" class="tag-cloud-link">전체메뉴</a>&nbsp;&gt;&nbsp;
+					<c:if test="${fn : contains(product.pro_code, 'P')}">
+		               <a href="/ProductClientListP" class="tag-cloud-link">프리미엄</a>
+		            </c:if>
+		            <c:if test="${fn : contains(product.pro_code, 'T')}">
+						<a href="/ProductClientListT" class="tag-cloud-link">2·3인세트</a>
+		            </c:if>
+		            <c:if test="${fn : contains(product.pro_code, 'O')}">
+						<a href="/ProductClientListO" class="tag-cloud-link">1인세트</a>
+		            </c:if>  
+					&nbsp;&gt;&nbsp;
+					<a href="" class="tag-cloud-link">${product.pro_name}</a>
+				</div>
+			</div>
+		</div>
          <div class="row">
             <input type="hidden" name="pro_code" value="${product.pro_code }">
             <div class="col-lg-6 mb-5 ftco-animate">
