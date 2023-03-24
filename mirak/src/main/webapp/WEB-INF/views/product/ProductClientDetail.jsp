@@ -57,10 +57,10 @@
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                <h3>${product.pro_name}</h3>
-               <p class="price">
-                  가격 : <span>${product.pro_price}</span>
+               <p class="price" style="margin-bottom:-30px;">
+                  가격 : <span >${product.pro_price}</span>
                </p>
-               <p>${fn:replace(product.pro_desc, '.', "<br/>")}</p>
+               
                <div class="row mt-4">
                   <div class="input-group col-md-6 d-flex mb-3">
                      <p style="margin-top: 5px;">수량 : &nbsp;&nbsp;</p>
@@ -71,7 +71,7 @@
                   </div>
                </div>
                
-               <label for="start">배송 시작일<input type="date" name="cart_start" class="form-control input-number" style="width: 240px;" id="start" min=""></label>
+               <label for="start" style="margin-top:-30px;">배송 시작일<input type="date" name="cart_start" class="form-control input-number" style="width: 240px;" id="start" min=""></label>
                <br> 요일 선택<br>   
                               
                <label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform: scale(1.5);" value="월" >&nbsp;&nbsp;월</label>
@@ -107,7 +107,10 @@
                 </c:choose>
             </div>
          </div>
+	<h3>${product.pro_name}</h3>
+	<p>${fn:replace(product.pro_desc, '.', "<br/>")}</p>
       </div>
+     
    </section>
 </form>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
