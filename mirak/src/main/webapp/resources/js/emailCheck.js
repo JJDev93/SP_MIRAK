@@ -7,19 +7,18 @@ $("#mail_check_button").click(function(){
 	var email = $(".mail_input").val();        // 입력한 이메일
 	var cehckBox = $("#mail_check_input");        // 인증번호 입력란
     var boxWrap = $(".mail_check_input_box");    // 인증번호 입력란 박스
+    
+        if (email.trim() === "") {
+        alert("이메일을 입력해주세요");
+        return false;
+    }
+    
 	
     $.ajax({
         
         type:"GET",
         url:"mailCheck?email=" + email,
         success:function(data){
-        
-            if(id.value == ""){
-            	alert("이메일을 입력해주세요")
-            	return false;
-            }        
-        
-        
         	alert("인증번호가 발송되었습니다");
         	//console.log("data :" + data);
         	cehckBox.attr("disabled",false);
