@@ -21,9 +21,9 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-xl-7 ftco-animate">
+				<h3 class="mb-4 billing-heading text-center">주문 확인</h3>
 				<form id="orderForm" action="/paySubmit" method="post">
 					<input type="hidden" id="mem_id" name="mem_id" value="${mem_id }">
-					<h3 class="mb-4 billing-heading">주문 확인</h3>
 					<c:forEach items="${productList}" var="productVO">
 						<div class="cart-detail p-3 p-md-4 mb-5">
 							<div class="ftco-animate fadeInUp ftco-animated">
@@ -82,7 +82,6 @@
 						<div class="col-md-12">
 							<div class="form-group"></div>
 						</div>
-
 						<div class="w-100"></div>
 						<div class="col-md-12">
 							<div class="form-group">
@@ -153,6 +152,7 @@
 								<input type="button" id="btn-kakao-pay" class="btn btn-primary py-3 px-5 l-100 mb-2" value="주문하기">
 								<a href="/" class="btn btn-black py-3 px-5 d-block">취소</a><br>
 							</p>
+
 						</div>
 					</div>
 				</div>
