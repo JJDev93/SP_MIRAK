@@ -18,6 +18,8 @@ public class ProductVO {
 	private Date cart_start;
 	
 	private String cart_day;
+	
+	private String pro_desc2;
 
 	public String getPro_code() {
 		return pro_code;
@@ -25,6 +27,14 @@ public class ProductVO {
 
 	public void setPro_code(String pro_code) {
 		this.pro_code = pro_code;
+	}
+
+	public String getPro_desc2() {
+		return pro_desc2;
+	}
+
+	public void setPro_desc2(String pro_desc2) {
+		this.pro_desc2 = pro_desc2;
 	}
 
 	public String getPro_name() {

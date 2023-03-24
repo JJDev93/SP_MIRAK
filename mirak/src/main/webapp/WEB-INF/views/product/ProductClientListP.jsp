@@ -5,7 +5,7 @@
 	<c:set var="path" value="${pageContext.request.contextPath}" />
 	<jsp:include page="/common/client_hd.jsp"></jsp:include>
 	<div class="hero-wrap hero-bread"
-		style="background-image: url('${path}/resources/images/bg_1.jpg');">
+		style="background-image: url('${path}/resources/images/bg_3.jpg');">
 		<div class="container">
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
@@ -18,19 +18,23 @@
 
 	<section class="ftco-section">
 		<div class="container">
+			<div class="tagcloud">
+                <a href="/ProductClientList" class="tag-cloud-link">전체메뉴</a>&nbsp;&gt;&nbsp;
+                <a href="/ProductClientListP" class="tag-cloud-link">프리미엄</a>
+              </div>
 			<div class="row">
 				<c:forEach items="${productList}" var="product">
 					<div class="col-md-6 col-lg-4 ftco-animate">
 	    				<div class="product">
-	    					<a href="ProductClientDetail/${product.pro_code}" class="img-prod" >
+	    					<a href="/ProductClientDetail/${product.pro_code}" class="img-prod" >
 <%-- 	    						<div class="imgDiv" style="width: 100%; height: 250px; background: url(${path}/resources/images/product/${product.pro_image}) no-repeat 50% 50%; background-size: contain;"></div> --%>
 <!-- 	    						<div class="imgDiv" style="width: 100%; height: 250px; no-repeat 50% 50%; background-size: contain;"> -->
-	    						<img src="${path}/resources/images/product/${product.pro_image}" class="img-fluid" alt="${product.pro_desc}" title="${product.pro_name}">
+	    						<img src="${path}/resources/images/product/${product.pro_image}" class="img-fluid" alt="${product.pro_desc2}" title="${product.pro_name}">
 <!-- 	    						</div> -->
 	    					</a>
 	    					<div class="text py-3 pb-4 px-3 text-center">
 								<h3 class="text-center">
-									<a href="ProductClientDetail/${product.pro_code}"  class="text_wrap">${product.pro_name}</a>
+									<a href="/ProductClientDetail/${product.pro_code}"  class="text_wrap">${product.pro_name}</a>
 								</h3>
 	    						<div class="d-flex">
 	    							<div class="pricing">

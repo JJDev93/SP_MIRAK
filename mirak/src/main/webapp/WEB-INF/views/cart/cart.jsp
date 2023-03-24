@@ -204,8 +204,6 @@
 
 
 <script>
-
-
 function selectjumal(selectjumal)  {
     const checkboxes3 
          = document.querySelectorAll('#sat, #sun');
@@ -214,7 +212,6 @@ function selectjumal(selectjumal)  {
       checkbox.checked = selectjumal.checked;
     })
   }
-
 function selectpyeong(selectpyeong)  {
     const checkboxes2 
          = document.querySelectorAll('#mon, #tue, #wed, #thu, #fri');
@@ -223,7 +220,6 @@ function selectpyeong(selectpyeong)  {
       checkbox.checked = selectpyeong.checked;
     })
   }
-
 function selectAll(selectAll)  {
      const checkboxes 
           = document.getElementsByName('cart_day');
@@ -232,7 +228,6 @@ function selectAll(selectAll)  {
        checkbox.checked = selectAll.checked;
      })
    }
-
 function daycheck() {
 	const checkboxes4 
     = document.getElementsByName('cart_day');
@@ -243,10 +238,6 @@ function daycheck() {
 	}
 	return true;
 }
-
-
-
-
 	$(function() {
 		$('input[name="daterange"]').daterangepicker(
 				{
@@ -259,7 +250,6 @@ function daycheck() {
 				});
 	});
 	
-
 	let today = new Date().toISOString().substr(0, 10);
 	document.getElementById("start").min = today;	
 	document.getElementById('start').valueAsDate = new Date();
