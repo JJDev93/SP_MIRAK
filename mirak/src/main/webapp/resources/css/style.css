@@ -1641,7 +1641,7 @@ pre {
     opacity: 1; }
   .form-control:disabled, .form-control[readonly] {
     background-color: #e9ecef;
-    opacity: 1; }
+    opacity: 1; cursor: default; }
 
 select.form-control:focus::-ms-value {
   color: #495057;
