@@ -1,3 +1,4 @@
+  
         function check_pw(){
             var pw = document.getElementById('pw').value;
             var SC = ["!","@","#","$","%"];
@@ -31,4 +32,4 @@
             }
 
         }
-         
+     

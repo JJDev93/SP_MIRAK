@@ -15,7 +15,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
-					<form action="/join" method="post" onsubmit="return Duplicate();" class="billing-form">
+					<form action="/join" method="post"  onsubmit="return Duplicate()" class="billing-form">
 						<div class="row align-items-end">
 							<c:choose>
 							    <c:when test="${not empty member.mem_isapi}">
@@ -76,7 +76,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="firstname">이름</label> 
-									<input type="text" name="mem_name" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required" >
+									<input type="text" name="mem_name" id="name" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required" >
 								</div>
 							</div>
 							<div class="w-100"></div>
@@ -103,7 +103,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="phone">Phone</label> 
-									<input type="text" name="mem_phone" class="form-control" placeholder=" ' - ' 빼고 입력해주세요 " required="required" value="${member.mem_phone}" maxlength="11" pattern="[0-9]{11}">
+									<input type="text" name="mem_phone" id="phone" class="form-control" placeholder=" ' - ' 빼고 입력해주세요 " required="required" value="${member.mem_phone}" maxlength="11" pattern="[0-9]{11}">
 								</div>
 							</div>
 	
@@ -128,8 +128,7 @@
 						</div>
 						<div class="row mb-5">
 							<div class="col-md-6">
-								<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return IDCHECKFORM() && injungkeyForm() && checkAgeInput() && checkAddressInput();">
-							</div>
+								<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return checkAll();">
 							<div class="col-md-6">
 								<a href="/" class="btn btn-secondary py-3 px-5 w-100">가입취소</a>
 							</div>
@@ -140,7 +139,6 @@
 		</div>
 	</section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
-
 
 <script>
 	$(document).ready(function() {
@@ -185,7 +183,94 @@
 				alert("아이디를 입력해주세요");
 				return false;
 			}
+			return true;
+		}
+		
+		const PWCHECK = document.getElementById("pw");
+		function PWCHECKFORM(){
+			if(PWCHECK.value === ""){
+				alert("비밀번호를 입력해주세요");
+				return false;
+			}
+			return true;
+		}
+		
+		const PW2CHECK = document.getElementById("pw2");
+		function PW2CHECKFORM(){
+			if(PW2CHECK.value === ""){
+				alert("비밀번호 확인 입력해주세요");
+				return false;
+			}
+			return true;
+		}
+		
+		const NAMECHECK = document.getElementById("name");
+		function NAMECHECKFORM(){
+			if(NAMECHECK.value === ""){
+				alert("이름을	입력해주세요");
+				return false;
+			}
+			return true;
 		}
 	</script>
+ 
+ 
 
+ <script>
+ 	function checkAll() {
+ 		
+ 		if(IDCHECK.value === ""){
+			alert("아이디를 입력해주세요");
+			return false;
+			
+ 		}else if ($("button[id='idCheck']").val() == "N") {
+			alert('아이디 중복 확인을 해주세요.');
+			$("input[name='checked_id']").eq(0).focus();
+ 		return false;
+ 		
+ 		}else if (verificationCodeInput.value === "") {
+		    alert("인증번호를 입력해주세요.");
+		    return false;
+ 		
+ 		}else if(PWCHECK.value === ""){
+			alert("비밀번호를 입력해주세요");
+			return false;
+		
+		}else if(PW2CHECK.value === ""){
+			alert("비밀번호 확인 입력해주세요");
+			return false;
+ 		
+		}else if(NAMECHECK.value === ""){
+			alert("이름을 입력해주세요");
+			return false;
+		}
+ 		return true;
+	}
+ </script>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
