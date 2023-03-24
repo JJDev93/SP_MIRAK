@@ -73,10 +73,9 @@ body {
 		<input type="text" id="ID" name="mem_id" class="form-control mb-3" placeholder="아이디를 입력하세요" required autofocus> 
 		
 		<label for="PW" class="sr-only">어드민 비밀번호를 입력하세요</label> 
-		<input type="password" id="PW" name="mem_pw" class="form-control" placeholder="비밀번호를 입력하세요" required>
+		<input type="password" id="PW" name="mem_pw" class="form-control mb-3" placeholder="비밀번호를 입력하세요" required>
 		
-		<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
-		<br>
+		<button class="btn btn-lg btn-primary btn-block mb-3" type="submit">로그인</button>
 		<a href="/">Client</a>
 		
 		<p class="mt-5 mb-3 text-muted">

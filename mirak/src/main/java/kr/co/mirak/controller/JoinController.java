@@ -37,8 +37,11 @@ public class JoinController {
 
 	// 회원 가입 페이이지 이동
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
-	public String joinview() {
+	public String joinview(HttpSession session) {
 		System.out.println("회원가입 화면으로 이동!");
+		String preUrl = (String) session.getAttribute("pre_url");
+	    System.out.println("preUrl : " + preUrl);
+	    
 		return "member/join";
 	}
 	
@@ -77,7 +80,21 @@ public class JoinController {
 			session.setAttribute("message2", "회원가입 성공하였습니다!");
 			String mem_id = vo.getMem_id();
 			session.setAttribute("mem_id", mem_id); // 세션에 사용자정보 저장
-			System.out.println("가입성공");
+			
+			String preUrl = (String) session.getAttribute("pre_url");
+            String returnURL = "";
+            
+            System.out.println("preUrl : " + preUrl);
+            
+            if (preUrl != null) {
+            	System.out.println("가입성공");
+            	returnURL = "redirect:" + preUrl;
+            	session.removeAttribute("pre_url");
+            	return returnURL;
+            } else {
+                System.out.println("메인으로 이동");
+                returnURL = "redirect:/";
+             }
 		}catch(DuplicateKeyException e){
 			session.setAttribute("message", "중복된 아이디 입니다.");
 			return "member/join";

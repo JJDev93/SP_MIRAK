@@ -37,11 +37,15 @@ public class LoginController {
 
    // 로그인페이지
    @RequestMapping(value = "/login", method = RequestMethod.GET)
-   public String loginView(Model model) {
+   public String loginView(Model model, HttpSession session) {
       System.out.println("=== 로그인 화면으로 이동 중 ===");
       String googleUrl = googleUtils.googleInitUrl();
-      System.out.println("googleUrl : " + googleUrl);
+//      System.out.println("googleUrl : " + googleUrl);
       model.addAttribute("googleUrl", googleUrl);
+      
+      String preUrl = (String) session.getAttribute("pre_url");
+      System.out.println("preUrl : " + preUrl);
+      
       return "member/login";
    }
 
@@ -149,8 +153,15 @@ public class LoginController {
 
    // 아이디찾기
    @RequestMapping(value = "/idfind", method = RequestMethod.GET)
-   public String idfindform() {
+   public String idfindform(HttpSession session) {
       System.out.println("아이디 찾기 이동..");
+      
+      String preUrl = (String) session.getAttribute("pre_url");
+      System.out.println("preUrl : " + preUrl);
+      
+      if (preUrl != null) {
+         session.removeAttribute("pre_url");
+      }
       return "member/idfind";
    }
 

@@ -69,13 +69,13 @@
 
       <div class="hr-sect">or</div>
 
-      <div class="row justify-content-center mt-5">
+      <div class="row justify-content-center" style="margin: 2rem; margin-bottom: 50px;">
 
          <div class="col-md-6">
-            <div class="row justify-content-center ftco-services">
+            <div class="row justify-content-center ftco-services"> 
 
                <!-- 구글 -->
-               <div class="col-sm-2 text-center ftco-animate">
+               <div class="col-sm-4 text-center ftco-animate">
                   <a id="custom-login-btn" href="${googleUrl}"><img alt=""
                      src="resources/images/ico_member_google.png"></a>
                </div>
@@ -90,7 +90,7 @@
                </div>
 
                <!-- 카카오 -->
-               <div class="col-sm-2 text-center ftco-animate">
+               <div class="col-sm-4 text-center ftco-animate">
                   <div class="media block-6 services mb-md-0 mb-4 kakao">
                      <a id="btn"
                         href="https://kauth.kakao.com/oauth/authorize?client_id=e481c91b1136f51f927a619fc062146d&redirect_uri=http://localhost:8080/kakaoLogin&response_type=code">

@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
@@ -19,7 +19,9 @@
 		</div>
 	</div>
 </div>
-<% session = request.getSession(); %>
+<%
+session = request.getSession();
+%>
 
 <section class="ftco-section">
 	<div class="container">
@@ -32,6 +34,7 @@
 				</ul>
 			</div>
 		</div>
+
 		<div class="row justify-content-center">
 			<div class="col-xl-12 ftco-animate">
 				<form method="post" action="/pay">
@@ -192,7 +195,6 @@
 				</div>
 			</div>
 		</div>
-		
 
 	</c:forEach>
 </section>
