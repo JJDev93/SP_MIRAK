@@ -37,8 +37,11 @@ public class JoinController {
 
 	// 회원 가입 페이이지 이동
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
-	public String joinview() {
+	public String joinview(HttpSession session) {
 		System.out.println("회원가입 화면으로 이동!");
+		String preUrl = (String) session.getAttribute("pre_url");
+	    System.out.println("preUrl : " + preUrl);
+	    
 		return "member/join";
 	}
 	
