@@ -19,14 +19,14 @@ function fn_idCheck() {
             }
             
            
-      	  if (!emailRegex.test(email)) {
+      	 if (!emailRegex.test(email)) {
   		    alert("이메일 형식이 올바르지 않습니다.");
   		    emailInput.focus();
   		    return false;
   		  }
 
         
-            if(data == 1) {
+          if(data == 1) {
                 alert("이미 사용중인 이메일입니다.");
             } else if (data == 0) {
                 $("#idCheck").attr("value", "Y");

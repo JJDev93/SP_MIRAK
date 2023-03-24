@@ -7,7 +7,6 @@ function checkAddressInput() {
     return true;
 }
 
-
 function checkAgeInput() {
     var ageInput = document.getElementById("age");
     var age = ageInput.value;

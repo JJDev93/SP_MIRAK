@@ -15,7 +15,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
-					<form action="/join" method="post" onsubmit="return Duplicate()" class="billing-form">
+					<form action="/join" method="post" onsubmit="Duplicate();" class="billing-form">
 						<div class="row align-items-end">
 							<c:choose>
 							    <c:when test="${not empty member.mem_isapi}">
@@ -128,7 +128,7 @@
 						</div>
 						<div class="row mb-5">
 							<div class="col-md-6">
-								<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="checkAddressInput() && checkAgeInput();">
+								<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return checkAgeInput() && checkAddressInput();">
 							</div>
 							<div class="col-md-6">
 								<a href="/" class="btn btn-secondary py-3 px-5 w-100">가입취소</a>
@@ -164,11 +164,6 @@
 	}
 </script>
 
-
-
-<script>
-
-</script>
 	
 
 
