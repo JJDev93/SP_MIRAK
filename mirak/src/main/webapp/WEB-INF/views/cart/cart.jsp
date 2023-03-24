@@ -34,7 +34,10 @@ session = request.getSession();
 				</ul>
 			</div>
 		</div>
-
+		<div class="col-md-12-content-sright">
+			<a href="ProductClientList" class="tag-cloud-link">&lt;&nbsp;쇼핑
+				더하기</a>
+		</div>
 		<div class="row justify-content-center">
 			<div class="col-xl-12 ftco-animate">
 				<form method="post" action="/pay">
@@ -120,9 +123,7 @@ session = request.getSession();
 								<input type="submit" value="결제하기"
 									class="btn btn-primary py-3 px-5">
 							</p>
-							<div class="col-md-12">
-								<a href="ProductClientList" class="tag-cloud-link">&lt;&nbsp;쇼핑 더하기</a>
-							</div>
+
 						</div>
 					</div>
 				</form>
@@ -220,9 +221,22 @@ session = request.getSession();
 										</p>
 										<p>
 											<span class="font-weight-bold text-dark">상품 개수</span><br>
-											<input type="number" name="cart_cnt" value="${c.cart_cnt}"
-												class="quantity_input" min="1">
+										
+										<div class="product-details d-md-flex">
+											<div class="input-group d-flex">
+												<span class="input-group-btn mr-2">
+													<button type="button" class="quantity-left-minus btn" data-type="minus" data-field=""><i class="ion-ios-remove"></i></button>
+												</span> 
+												<input type="text" id="cart_cnt" name="cart_cnt" value="${c.cart_cnt}" class="form-control input-number"value="1" min="1" max="100">
+												<span class="input-group-btn ml-2">
+													<button type="button" class="quantity-right-plus btn" data-type="plus" data-field=""><i class="ion-ios-add"></i></button>
+												</span>
+											</div>
+										</div>
 										</p>
+
+										<%-- 											<input type="number" name="cart_cnt" value="${c.cart_cnt}" --%>
+<!-- 												class="quantity_input" min="1"> -->
 										<hr>
 										<p>
 											<span class="font-weight-bold text-dark">총 금액</span>
@@ -253,7 +267,27 @@ session = request.getSession();
 
 
 
+<!-- 수량 변경 기능 --> 
+<script>
+		$(document).ready(function(){
 
+		var cart_cnt=0;
+		   $('.quantity-right-plus').click(function(e){
+		        e.preventDefault();
+		        var cart_cnt = parseInt($('#cart_cnt').val());
+		            $('#cart_cnt').val(cart_cnt + 1);
+		    });
+
+		     $('.quantity-left-minus').click(function(e){
+		        e.preventDefault();
+		        var cart_cnt = parseInt($('#cart_cnt').val());
+		            if(cart_cnt>0){
+		            $('#cart_cnt').val(cart_cnt - 1);
+		            }
+		    });
+		    
+		});
+	</script>
 
 
 <script>
