@@ -62,7 +62,8 @@
 <%-- 							<a href="/adminMembers/${c.mem_id}"></a> --%>
 							<td><a href="/admin/cart/${curPage}/${c.cart_code}">${c.cart_code }</a></td>
 							<td>
-								<a href="/admin/member/${c.mem_id}">${c.mem_id }</a>
+							<!-- <a href="/admin/member/${curPage}/${c.mem_id}">${c.mem_id }</a> -->
+								${c.mem_id }
 							</td>
 							<td><a href="/admin/cart/${curPage}/${c.cart_code}">${c.pro_code }</a></td>
 							<td>

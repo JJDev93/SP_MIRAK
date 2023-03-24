@@ -122,7 +122,7 @@
 		<div class="modal fade" id="modal${c.cart_code }" tabindex="9999" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
-					<form action="/cartUpdate" method="post" name="day" onsubmit="return daycheck()">
+					<form action="/cartUpdate" method="post" name="day" onsubmit="return daycheck();">
 						<input type="hidden" name="cart_code" value="${c.cart_code }">		
 						<input type="hidden" name="cart_totprice" value="${c.cart_cnt * c.pro_price}">		
 						<div class="modal-header">
@@ -238,6 +238,9 @@ function daycheck() {
 	}
 	return true;
 }
+
+
+
 	$(function() {
 		$('input[name="daterange"]').daterangepicker(
 				{
