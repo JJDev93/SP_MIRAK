@@ -74,7 +74,7 @@
                   <div class="w-100"></div>
 							<div class="input-group col-md-6 d-flex mb-3">
 	             	<span class="input-group-btn mr-2">
-	                	<button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
+	                	수량 &nbsp;&nbsp; <button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
 	                   <i class="ion-ios-remove"></i>
 	                	</button>
 	            		</span>
@@ -88,7 +88,7 @@
 	          	
                </div>
                
-               <label for="start" style="margin-top:-30px;">배송 시작일<input type="date" name="cart_start" class="form-control input-number" style="width: 240px;" id="start" min=""></label>
+               <label for="start">배송 시작일<input type="date" name="cart_start" class="form-control input-number" style="width: 240px;" id="start" min=""></label>
                <br> 요일 선택<br>   
                               
                <label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform: scale(1.5);" value="월" >&nbsp;&nbsp;월</label>
@@ -135,6 +135,13 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
+
+<script>
+
+
+</script>
+
+
 <!-- 수량 변경 기능 --> 
 <script>
 		$(document).ready(function(){
@@ -165,7 +172,7 @@
 		        // If is not undefined
 		      
 		            // Increment
-		            if(result>0){
+		            if(result>1){
 		            $('#result').val(result - 1);
 		            }
 		    });
