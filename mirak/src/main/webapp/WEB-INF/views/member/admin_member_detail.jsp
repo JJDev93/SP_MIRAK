@@ -77,7 +77,9 @@
 							<label for="phone">가입일자</label> 
 							<input type="text" class="form-control" id="regdate" name="mem_regdate" value="<fmt:formatDate value="${member.mem_regdate }"/>" readonly>
 						</div>
-					</div>					
+					</div>
+				</div>
+				<div class="row">			
 					<div class="col-md-4">
 						<a href="/admin/members/${curPage}" class="btn btn-secondary py-3 px-5 w-100">목록</a>
 					</div>
