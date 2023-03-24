@@ -128,7 +128,7 @@
 						</div>
 						<div class="row mb-5">
 							<div class="col-md-6">
-								<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return checkAddressInput() && checkAgeInput();">
+								<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="checkAddressInput() && checkAgeInput();">
 							</div>
 							<div class="col-md-6">
 								<a href="/" class="btn btn-secondary py-3 px-5 w-100">가입취소</a>
@@ -165,6 +165,10 @@
 </script>
 
 
+
+<script>
+
+</script>
 	
 
 
