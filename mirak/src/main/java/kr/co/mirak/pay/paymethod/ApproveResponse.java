@@ -9,14 +9,13 @@ public class ApproveResponse {
 	private String partner_user_id;
 	private String payment_method_type;
 	private Amount amount;
-	private String card_info;
+	private CardInfo card_info;
 	private String item_name;
 	private String item_code;
 	private int quantity;
 	private String created_at;
 	private String approved_at;
 	private String payload;
-	
 	public String getAid() {
 		return aid;
 	}
@@ -65,10 +64,10 @@ public class ApproveResponse {
 	public void setAmount(Amount amount) {
 		this.amount = amount;
 	}
-	public String getCard_info() {
+	public CardInfo getCard_info() {
 		return card_info;
 	}
-	public void setCard_info(String card_info) {
+	public void setCard_info(CardInfo card_info) {
 		this.card_info = card_info;
 	}
 	public String getItem_name() {
@@ -107,7 +106,6 @@ public class ApproveResponse {
 	public void setPayload(String payload) {
 		this.payload = payload;
 	}
-	
 	@Override
 	public String toString() {
 		return "ApproveResponse [aid=" + aid + ", tid=" + tid + ", cid=" + cid + ", sid=" + sid + ", partner_order_id="
@@ -115,7 +113,7 @@ public class ApproveResponse {
 				+ payment_method_type + ", amount=" + amount + ", card_info=" + card_info + ", item_name=" + item_name
 				+ ", item_code=" + item_code + ", quantity=" + quantity + ", created_at=" + created_at
 				+ ", approved_at=" + approved_at + ", payload=" + payload + "]";
-	}	
+	}
 	
-	
+
 }
