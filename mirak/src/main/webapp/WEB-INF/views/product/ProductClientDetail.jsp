@@ -57,10 +57,10 @@
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                <h3>${product.pro_name}</h3>
-               <p class="price">
-                  가격 : <span>${product.pro_price}</span>
+               <p class="price" style="margin-bottom:-30px;">
+                  가격 &nbsp; <span >${product.pro_price}</span>
                </p>
-               <p>${fn:replace(product.pro_desc, '.', "<br/>")}</p>
+               
                <div class="row mt-4">
                
 <!--                   <div class="input-group col-md-6 d-flex mb-3"> -->
@@ -74,7 +74,7 @@
                   <div class="w-100"></div>
 							<div class="input-group col-md-6 d-flex mb-3">
 	             	<span class="input-group-btn mr-2">
-	                	<button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
+	                	수량 &nbsp;&nbsp; <button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
 	                   <i class="ion-ios-remove"></i>
 	                	</button>
 	            		</span>
@@ -124,13 +124,32 @@
                 </c:choose>
             </div>
          </div>
+	<h3>${product.pro_name}</h3>
+	<p>${fn:replace(product.pro_desc, '.', "<br/>")}</p>
       </div>
+     
    </section>
 </form>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+
+<script>
+const resultInput = document.getElementById('result');
+
+resultInput.addEventListener('change', function() {
+  const resultValue = parseFloat(resultInput.value);
+
+  if (isNaN(resultValue) || resultValue <= 0 || !Number.isInteger(resultValue)) {
+    alert('최소 1이상의 수량을 선택해 주세요');
+    resultInput.value = 1;
+  }
+});
+
+</script>
+
 
 <!-- 수량 변경 기능 --> 
 <script>
@@ -162,7 +181,7 @@
 		        // If is not undefined
 		      
 		            // Increment
-		            if(result>0){
+		            if(result>1){
 		            $('#result').val(result - 1);
 		            }
 		    });

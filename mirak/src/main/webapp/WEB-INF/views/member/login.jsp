@@ -39,14 +39,12 @@
          <div class="col-md-5 ftco-animate">
             <form action="login" method="post" class="contact-form">
                <div class="form-group">
-                  <label for="ID">아이디</label> <input type="text"
-                     class="form-control" id="ID" name="mem_id" placeholder="이메일(ID)"
-                     required="required">
+                  <label for="ID">아이디</label> 
+                  <input type="text" class="form-control" id="ID" name="mem_id" placeholder="이메일(ID)" required="required">
                </div>
                <div class="form-group">
-                  <label for="PW">비밀번호</label> <input type="password" id="PW"
-                     class="form-control" name="mem_pw" placeholder="비밀번호"
-                     required="required">
+                  <label for="PW">비밀번호</label> 
+                  <input type="password" id="PW" class="form-control" name="mem_pw" placeholder="비밀번호" required="required">
                </div>
                <div>
               		<c:if test="${message } != '로그인후 이용해주세요'">
@@ -55,8 +53,7 @@
                </div>
                <div class="form-group row">
                   <div class="col-md-12">
-                     <input type="submit" value="로그인"
-                        class="btn btn-primary py-3 px-5 w-100">
+                     <input type="submit" value="로그인" class="btn btn-primary py-3 px-5 w-100">
                   </div>
                </div>
                <div class="form-group row" style="text-align: right;">
@@ -123,9 +120,10 @@
 
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
-   
+
 <script>
 	$(document).ready(function() {
+<<<<<<< HEAD
 	console.log("message : "+"${message}");
 	console.log("mem_id : "+"${mem_id}");
 		if("${message}" !=""){

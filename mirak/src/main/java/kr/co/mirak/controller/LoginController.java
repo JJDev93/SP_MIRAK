@@ -128,9 +128,9 @@ public class LoginController {
             System.out.println("구글로그아웃 : " + result);
          } else if (user_api.equals("kakao")) {
             System.out.println("unlink :" + user_api);
-            session.invalidate();
             return "redirect:/kakaounlink";
          }
+         session.invalidate();
          System.out.println(user_api + "로그아웃 성공!!");
       }else if(user_api == null) {
     	  

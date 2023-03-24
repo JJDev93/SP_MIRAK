@@ -177,5 +177,15 @@
 		}
 	
 	</script>
+	
+	<script>
+	const IDCHECK = document.getElementById("id");
+		function IDCHECKFORM(){
+			if(IDCHECK.value === ""){
+				alert("아이디를 입력해주세요");
+				return false;
+			}
+		}
+	</script>
 
 

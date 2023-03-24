@@ -8683,6 +8683,7 @@ h1, h2, h3, h4, h5,
     display: block;
     overflow: hidden; 
     padding: 10px 0;
+    height:250px;
     }
     .product .img-prod .overlay {
       position: absolute;
@@ -8718,7 +8719,10 @@ h1, h2, h3, h4, h5,
       -o-transition: all 0.3s ease;
       -webkit-transition: all 0.3s ease;
       -ms-transition: all 0.3s ease;
-      transition: all 0.3s ease; }
+      transition: all 0.3s ease;
+      display:block;
+      max-height:100%;
+      margin:0 auto; }
     .product .img-prod:hover .imgDiv, .product .img-prod:focus .imgDiv,
     .product .img-prod:hover img, .product .img-prod:focus img {
       -webkit-transform: scale(1.1);
