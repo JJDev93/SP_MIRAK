@@ -50,8 +50,8 @@
 </section>
 
 <!-- START 공지, 추천 -->
-<div class="container-fluid pt-5 ">
-	<div class="row mb-5" style="">
+<div class="container-fluid ">
+	<div class="row" style="">
 		<div class="col-md-6">
 			<section class="ftco-section ftco-category">
 				<div class="justify-content-center mb-3 pb-1">
