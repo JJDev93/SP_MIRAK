@@ -110,7 +110,7 @@
 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
+								data-dismiss="modal" onclick="location.href='/login'">로그인으로 이동</button>
 							<button type="submit" class="btn btn-primary">비밀번호 찾기</button>
 						</div>
 					</div>
