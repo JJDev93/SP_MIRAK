@@ -10,25 +10,6 @@
 				<p>회원관리 리스트 페이지 입니다.</p>
 			</div>
 		</div>
-		<form action="#" class="p-5 bg-light mb-4">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="form-group">
-						<label for="name">Name *</label> <input type="text"
-							class="form-control" id="name">
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label for="email">Email *</label> <input type="email"
-							class="form-control" id="email">
-					</div>
-				</div>
-				<div class="col-md-12">
-					<input type="submit" value="검색" class="btn btn-primary">
-				</div>
-			</div>
-		</form>
 		<div class="bd-example-snippet bd-code-snippet">
 			<div class="bd-example">
 				<table class="table table-striped">
