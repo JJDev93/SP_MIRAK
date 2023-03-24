@@ -128,7 +128,7 @@
 						</div>
 						<div class="row mb-5">
 							<div class="col-md-6">
-								<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return injungkeyForm() && checkAgeInput() && checkAddressInput();">
+								<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return IDCHECKFORM() && injungkeyForm() && checkAgeInput() && checkAddressInput();">
 							</div>
 							<div class="col-md-6">
 								<a href="/" class="btn btn-secondary py-3 px-5 w-100">가입취소</a>
@@ -176,6 +176,16 @@
 		  return true;
 		}
 	
+	</script>
+	
+	<script>
+	const IDCHECK = document.getElementById("id");
+		function IDCHECKFORM(){
+			if(IDCHECK.value === ""){
+				alert("아이디를 입력해주세요");
+				return false;
+			}
+		}
 	</script>
 
 
