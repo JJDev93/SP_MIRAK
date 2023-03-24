@@ -40,7 +40,7 @@ public class LoginController {
    public String loginView(Model model, HttpSession session) {
       System.out.println("=== 로그인 화면으로 이동 중 ===");
       String googleUrl = googleUtils.googleInitUrl();
-      System.out.println("googleUrl : " + googleUrl);
+//      System.out.println("googleUrl : " + googleUrl);
       model.addAttribute("googleUrl", googleUrl);
       
       String preUrl = (String) session.getAttribute("pre_url");
