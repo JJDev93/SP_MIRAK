@@ -54,7 +54,6 @@
 			
 			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 			<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-
 			<div class="row mt-5">
 	
 			<div class="row ">
