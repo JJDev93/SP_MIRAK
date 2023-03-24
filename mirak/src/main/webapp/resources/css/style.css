@@ -500,8 +500,7 @@ pre {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
-  padding-top: 15px;
-  padding-bottom: 15px; }
+  padding-top: 15px; }
 
 .col {
   -ms-flex-preferred-size: 0;
@@ -1642,7 +1641,7 @@ pre {
     color: #6c757d;
     opacity: 1; }
   .form-control:disabled, .form-control[readonly] {
-    background-color: #e9ecef;
+    background-color: #e9ecef !important;
     opacity: 1; }
 
 select.form-control:focus::-ms-value {
@@ -9042,7 +9041,6 @@ h1, h2, h3, h4, h5,
   height: 58px !important;
   padding-left: 15px;
   padding-right: 15px;
-  background: white !important;
   color: rgba(0, 0, 0, 0.4) !important;
   font-size: 18px;
   border-radius: 0px;
