@@ -53,7 +53,7 @@
 										<input type="hidden" class="totalPrice" name="cart_totprice" value="${productVO.cart_cnt * productVO.pro_price}">
 										
 										<p>
-											<span class="font-weight-bold text-dark">상품 상세</span> ${productVO.pro_desc} <br>
+<%-- 											<span class="font-weight-bold text-dark">상품 상세</span> ${productVO.pro_desc} <br> --%>
 											<span class="font-weight-bold text-dark">상품 코드</span> ${productVO.pro_code } <br>
 											<span class="font-weight-bold text-dark">배송 시작일</span> ${productVO.cart_start } <br>
 											<span class="font-weight-bold text-dark">상품 가격</span> ${productVO.pro_price }원 <br>

@@ -22,6 +22,8 @@ import kr.co.mirak.product.ProductVO;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class ProductController {
 
@@ -188,6 +190,7 @@ public class ProductController {
 		return "redirect:/admin/products/1";
 	}
 
+
 	// 상품 Admin 상세 페이지
 	@RequestMapping(value = "/admin/product/{curPage}/{pro_code}")
 	public String productDetail(ProductVO vo, Model model, Criteria cri, @PathVariable("curPage") int curPage) {
@@ -217,11 +220,22 @@ public class ProductController {
 		return "redirect:/admin/products/1";
 	}
 
+//	// 인덱스 페이지
+//	@RequestMapping("/")
+//	public String productListindex(ProductVO vo, Model model) {
+//		model.addAttribute("productList2", productService.productListIndex1(vo));
+//		model.addAttribute("productList1", productService.productListIndex2(vo));
+//		return "/index";
+//	}
+	
 	// 인덱스 페이지
-	@RequestMapping("/")
-	public String productListindex(ProductVO vo, Model model) {
-		model.addAttribute("productList2", productService.productListIndex1(vo));
-		model.addAttribute("productList1", productService.productListIndex2(vo));
-		return "/index";
-	}
+   @RequestMapping("/")
+   public String productListindex(ProductVO vo, Model model, HttpSession session) {
+      model.addAttribute("productList2", productService.productListIndex1(vo));
+      model.addAttribute("productList1", productService.productListIndex2(vo));
+      session.removeAttribute("pre_url");
+      String preUrl = (String) session.getAttribute("pre_url");
+      System.out.println("pre_url 만료 완료." + preUrl);
+      return "/index";
+   }
 }
