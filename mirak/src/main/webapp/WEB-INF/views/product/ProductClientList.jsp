@@ -7,8 +7,8 @@
 	<div class="hero-wrap hero-bread" style="background-image: url('${path}/resources/images/bg_3.jpg');">
 		<div class="container">
 			<div class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-12 ftco-animate text-center">
-						<h1 class="mb-2 bread">전체메뉴</h1>
+				<div class="col-md-9 ftco-animate text-center">
+					<h1 class="mb-0 bread">전체메뉴</h1>
 				</div>
 			</div>
 		</div>
@@ -27,14 +27,14 @@
 				<c:forEach items="${productList}" var="product">
 					<div class="col-md-6 col-lg-4 ftco-animate">
 	    				<div class="product">
-	    					<a href="ProductClientDetail/${product.pro_code}" class="img-prod" >
+	    					<a href="/ProductClientDetail/${product.pro_code}" class="img-prod" >
 <!-- 	    					<div class="imgDiv" style="width: 100%; height: 250px; no-repeat 50% 50%; background-size: contain;"> -->
-	    						<img src="${path}/resources/images/product/${product.pro_image}" class="img-fluid" alt="${product.pro_desc}" title="${product.pro_name}">
+	    						<img src="${path}/resources/images/product/${product.pro_image}" class="img-fluid" alt="${product.pro_desc2}" title="${product.pro_name}">
 <!-- 	    					</div> -->
 	    					</a>
 	    					<div class="text py-3 pb-4 px-3 text-center">
 								<h3 class="text-center">
-									<a href="ProductClientDetail/${product.pro_code}"  class="text_wrap">${product.pro_name}</a>
+									<a href="/ProductClientDetail/${product.pro_code}"  class="text_wrap">${product.pro_name}</a>
 								</h3>
 	    						<div class="d-flex">
 	    							<div class="pricing">
@@ -59,7 +59,8 @@
 							</c:if>
 							<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
 <%-- 								<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active" : "" }"" id="abc"><a href="javascript:acyncMovePage('/ProductClientList?pageNum=${num}');">${num}</a></li> --%>
-								<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active" : "" }"" id="abc"><a href="/ProductClientList?pageNum=${num}">${num}</a></li>
+<%-- 								<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active" : "" }"" id="abc"><a href="/ProductClientList?pageNum=${num}">${num}</a></li> --%>
+									<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active" : "" }"" id="abc"><a href="/ProductClientList/${num}">${num}</a></li>
 							</c:forEach>
 							<!-- 다음페이지 버튼 -->
 							<c:if test="${pageMaker.next}">
