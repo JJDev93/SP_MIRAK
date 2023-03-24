@@ -39,22 +39,19 @@
          <div class="col-md-5 ftco-animate">
             <form action="login" method="post" class="contact-form">
                <div class="form-group">
-                  <label for="ID">아이디</label> <input type="text"
-                     class="form-control" id="ID" name="mem_id" placeholder="이메일(ID)"
-                     required="required">
+                  <label for="ID">아이디</label> 
+                  <input type="text" class="form-control" id="ID" name="mem_id" placeholder="이메일(ID)" required="required">
                </div>
                <div class="form-group">
-                  <label for="PW">비밀번호</label> <input type="password" id="PW"
-                     class="form-control" name="mem_pw" placeholder="비밀번호"
-                     required="required">
+                  <label for="PW">비밀번호</label> 
+                  <input type="password" id="PW" class="form-control" name="mem_pw" placeholder="비밀번호" required="required">
                </div>
                <div>
                   <label style="color: red">${message }</label>
                </div>
                <div class="form-group row">
                   <div class="col-md-12">
-                     <input type="submit" value="로그인"
-                        class="btn btn-primary py-3 px-5 w-100">
+                     <input type="submit" value="로그인" class="btn btn-primary py-3 px-5 w-100">
                   </div>
                </div>
                <div class="form-group row" style="text-align: right;">
@@ -121,23 +118,22 @@
 
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
+
 <!-- 네이버 스크립트 -->
-<script
-   src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
-   charset="utf-8"></script>
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 <script src="${path}/resources/js/naverapi.js"></script>
 
 <script>
 	$(document).ready(function() {
-	console.log("message : "+"${message}");
-	console.log("mem_id : "+"${mem_id}");
-// 	if("${message}" !=""){
-// 		alert("${message}");
-<%-- 		 <%session.setAttribute("message","");%> --%>
-// 	}
-	if("${mem_id}" !=""){
-		location.href = "/";
-	}
+		console.log("message : "+"${message}");
+		console.log("mem_id : "+"${mem_id}");
+	 	if("${message}" !=""){
+	 		alert("${message}");
+ 		 	<%session.setAttribute("message","");%>
+	 	}
+		if("${mem_id}" !=""){
+			location.href = "/";
+		}
 	})
    var naverLogin = new naver.LoginWithNaverId({
       clientId : "zkOzac5hPC_Qw6v8eOzQ", //내 애플리케이션 정보에 cliendId를 입력해줍니다.

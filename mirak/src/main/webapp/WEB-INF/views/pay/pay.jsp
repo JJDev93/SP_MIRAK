@@ -18,7 +18,7 @@
 </div>
 <section class="ftco-section">
 	<div class="container">
-		<h2 class="mb-4 billing-heading text-center">주문 확인</h2>
+		<h2 class="mb-2 billing-heading">주문 확인</h2>
 		<div class="row justify-content-center">
 			<div class="col-xl-7 ftco-animate">
 				<form id="orderForm" action="/paySubmit" method="post">
