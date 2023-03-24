@@ -9,9 +9,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import kr.co.mirak.member.MemberMapper;
 import kr.co.mirak.member.MemberVO;
-import kr.co.mirak.product.Criteria;
-import kr.co.mirak.product.ProductMapper;
-import kr.co.mirak.product.ProductVO;
 
 public class CartServiceImpl implements CartService {
 
@@ -119,12 +116,6 @@ public class CartServiceImpl implements CartService {
 		CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
 		return mapper.cartDetail(vo);
 	}
-
-	// ADMIN ID값으로 회원 정보 확인
-	public CartVO getMemberDetail(CartVO vo) {
-		CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
-		return mapper.getMemberDetail(vo);
-	}
 	
 	@Override
 	public void cartAdminDelete(CartVO vo) {
@@ -136,5 +127,12 @@ public class CartServiceImpl implements CartService {
 	public void cartAdminUpdate(CartVO vo) {
 		CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
 		mapper.cartAdminUpdate(vo);
+	}
+	
+	public MemberVO adminMemberDetail2(MemberVO vo) {
+		CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
+		MemberVO memVO = mapper.adminMemberDetail2(vo);
+		memVO.toString();
+		return memVO;
 	}
 }
