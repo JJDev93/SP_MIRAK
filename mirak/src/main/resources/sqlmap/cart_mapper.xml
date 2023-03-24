@@ -54,7 +54,7 @@
 	<!-- 어드민 카트 전체 목록 -->
 	<select id="cartAdminList" resultType="kr.co.mirak.cart.CartVO">
 	
-		SELECT * FROM CART ORDER BY CART_CODE DESC
+		SELECT * FROM CART
 
 	</select>
 	
@@ -86,7 +86,7 @@
 		
 		<![CDATA[
   		 
-		select * from (select * from cart) as T1 limit #{skip},#{amount}
+		select * from (select * from cart order by cart_code desc limit #{skip},#{amount}) as T1;
  		]]>
 
 	</select>
