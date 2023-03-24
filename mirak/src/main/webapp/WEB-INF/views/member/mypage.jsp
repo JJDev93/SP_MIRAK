@@ -110,7 +110,7 @@
 											value="${member.mem_zipcode }" readonly="readonly">
 									</div>
 									<div class="col-sm-4">
-										<button type="button" class="form-control address button"
+										<button type="button" class="btn btn-primary joinBtn address button"
 											onclick="execution_daum_address();">우편번호찾기</button>
 									</div>
 								</div>
