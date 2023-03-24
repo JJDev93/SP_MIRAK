@@ -7,7 +7,6 @@
 	<meta charset="UTF-8">
 	<title>MiRak Admin</title>
 	<link rel="icon" href="${path}/resources/images/favicon.gif">
-	<link rel="stylesheet" href="${path}/resources/css/ionicons.min.css">
 	<link rel="stylesheet" href="${path}/resources/css/style.css">
 </head>
 <body>

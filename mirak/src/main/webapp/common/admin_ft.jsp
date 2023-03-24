@@ -7,14 +7,6 @@
 <body>
 	<hr style="margin: 0;">
 	<footer class="ftco-footer ftco-section">
-		<div class="container">
-			<div class="mouse">
-				<a href="#" class="mouse-icon">
-					<div class="mouse-wheel">
-						<span class="ion-ios-arrow-up"></span>
-					</div>
-				</a>
-			</div>
 			<div class="text-center">
 				<p>
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -25,17 +17,6 @@
 			</div>
 		</div>
 	</footer>
-	<script src="${path}/resources/js/jquery.min.js"></script>
-	<script src="${path}/resources/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="${path}/resources/js/bootstrap.min.js"></script>
-	<script src="${path}/resources/js/jquery.easing.1.3.js"></script>
-	<script src="${path}/resources/js/jquery.waypoints.min.js"></script>
-	<script src="${path}/resources/js/jquery.stellar.min.js"></script>
-	<script src="${path}/resources/js/owl.carousel.min.js"></script>
-	<script src="${path}/resources/js/jquery.magnific-popup.min.js"></script>
-	<script src="${path}/resources/js/aos.js"></script>
-	<script src="${path}/resources/js/jquery.animateNumber.min.js"></script>
-	<script src="${path}/resources/js/scrollax.min.js"></script>
-	<script src="${path}/resources/js/main.js"></script>
 </body>
 </html>
