@@ -240,9 +240,6 @@ function daycheck() {
 	}
 	return true;
 }
-
-
-
 	$(function() {
 		$('input[name="daterange"]').daterangepicker(
 				{

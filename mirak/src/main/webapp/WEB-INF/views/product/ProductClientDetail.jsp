@@ -57,18 +57,35 @@
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                <h3>${product.pro_name}</h3>
-               <p class="price">
-                  가격 : <span>${product.pro_price}</span>
+               <p class="price" style="margin-bottom:-30px;">
+                  가격 &nbsp; <span >${product.pro_price}</span>
                </p>
-               <p>${fn:replace(product.pro_desc, '.', "<br/>")}</p>
+               
                <div class="row mt-4">
-                  <div class="input-group col-md-6 d-flex mb-3">
-                     <p style="margin-top: 5px;">수량 : &nbsp;&nbsp;</p>
-                     <input type="number" id="result" name="cart_cnt"
-                        class="form-control input-number" min="1" max="100" value="1"
-                        >
+               
+<!--                   <div class="input-group col-md-6 d-flex mb-3"> -->
+<!--                      <p style="margin-top: 5px;">수량 : &nbsp;&nbsp;</p> -->
+<!--                      <input type="number" id="result" name="cart_cnt" -->
+<!--                         class="form-control input-number" min="1" max="100" value="1" -->
+<!--                         > -->
 <!--                         onchange="payBtnCnt()" -->
-                  </div>
+<!--                   </div> -->
+                  
+                  <div class="w-100"></div>
+							<div class="input-group col-md-6 d-flex mb-3">
+	             	<span class="input-group-btn mr-2">
+	                	수량 &nbsp;&nbsp; <button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
+	                   <i class="ion-ios-remove"></i>
+	                	</button>
+	            		</span>
+	             	<input type="text" id="result" name="result" class="form-control input-number" value="1" min="1" max="100">
+	             	<span class="input-group-btn ml-2">
+	                	<button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+	                     <i class="ion-ios-add"></i>
+	                 </button>
+	             	</span>
+	          	</div>
+	          	
                </div>
                
                <label for="start">배송 시작일<input type="date" name="cart_start" class="form-control input-number" style="width: 240px;" id="start" min=""></label>
@@ -107,7 +124,10 @@
                 </c:choose>
             </div>
          </div>
+	<h3>${product.pro_name}</h3>
+	<p>${fn:replace(product.pro_desc, '.', "<br/>")}</p>
       </div>
+     
    </section>
 </form>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
@@ -115,11 +135,59 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-<script>
 
+<script>
+const resultInput = document.getElementById('result');
+
+resultInput.addEventListener('change', function() {
+  const resultValue = parseFloat(resultInput.value);
+
+  if (isNaN(resultValue) || resultValue <= 0 || !Number.isInteger(resultValue)) {
+    alert('최소 1이상의 수량을 선택해 주세요');
+    resultInput.value = 1;
+  }
+});
 
 </script>
 
+
+<!-- 수량 변경 기능 --> 
+<script>
+		$(document).ready(function(){
+
+		var result=0;
+		   $('.quantity-right-plus').click(function(e){
+		        
+		        // Stop acting like a button
+		        e.preventDefault();
+		        // Get the field name
+		        var result = parseInt($('#result').val());
+		        
+		        // If is not undefined
+		            
+		            $('#result').val(result + 1);
+
+		          
+		            // Increment
+		        
+		    });
+
+		     $('.quantity-left-minus').click(function(e){
+		        // Stop acting like a button
+		        e.preventDefault();
+		        // Get the field name
+		        var result = parseInt($('#result').val());
+		        
+		        // If is not undefined
+		      
+		            // Increment
+		            if(result>1){
+		            $('#result').val(result - 1);
+		            }
+		    });
+		    
+		});
+	</script>
 
 <script>
 
@@ -221,8 +289,4 @@ $(function() {
    document.getElementById("start").min = today;   
    document.getElementById('start').valueAsDate = new Date();
    
-
-</script>
-<script>
-
 </script>

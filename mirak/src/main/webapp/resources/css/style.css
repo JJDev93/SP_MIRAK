@@ -500,8 +500,7 @@ pre {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
-  padding-top: 15px;
-  padding-bottom: 15px; }
+  padding-top: 15px; }
 
 .col {
   -ms-flex-preferred-size: 0;
@@ -1605,7 +1604,6 @@ pre {
   font-weight: 400;
   line-height: 1.5;
   color: #495057;
-  background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
@@ -1643,7 +1641,7 @@ pre {
     opacity: 1; }
   .form-control:disabled, .form-control[readonly] {
     background-color: #e9ecef;
-    opacity: 1; }
+    opacity: 1; cursor: default; }
 
 select.form-control:focus::-ms-value {
   color: #495057;
@@ -8685,6 +8683,7 @@ h1, h2, h3, h4, h5,
     display: block;
     overflow: hidden; 
     padding: 10px 0;
+    height:250px;
     }
     .product .img-prod .overlay {
       position: absolute;
@@ -8720,7 +8719,10 @@ h1, h2, h3, h4, h5,
       -o-transition: all 0.3s ease;
       -webkit-transition: all 0.3s ease;
       -ms-transition: all 0.3s ease;
-      transition: all 0.3s ease; }
+      transition: all 0.3s ease;
+      display:block;
+      max-height:100%;
+      margin:0 auto; }
     .product .img-prod:hover .imgDiv, .product .img-prod:focus .imgDiv,
     .product .img-prod:hover img, .product .img-prod:focus img {
       -webkit-transform: scale(1.1);
@@ -8752,7 +8754,6 @@ h1, h2, h3, h4, h5,
   .product:hover .img-prod .overlay {
     opacity: 0; }
   .product .text {
-    background: #fff;
     position: relative;
     width: 100%; }
     .product .text h3 {
@@ -9175,7 +9176,6 @@ h1, h2, h3, h4, h5,
 
 .form-control {
   height: 52px !important;
-  background: #fff !important;
   color: #000000 !important;
   font-size: 18px;
   border-radius: 0px;

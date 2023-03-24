@@ -15,7 +15,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
-					<form action="/join" method="post" onsubmit="Duplicate();" class="billing-form">
+					<form action="/join" method="post" onsubmit="return Duplicate();" class="billing-form">
 						<div class="row align-items-end">
 							<c:choose>
 							    <c:when test="${not empty member.mem_isapi}">
@@ -41,7 +41,7 @@
 													<input type="email" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required tabindex="1" >
 												</div>
 												<div class="col-sm-3">
-													<button type="button" class="btn btn-primary joinBtn mb-3" id="idCheck" value="N" onclick="fn_idCheck();">중복확인</button>
+													<button type="button" class="btn btn-primary joinBtn mb-3" id="idCheck" value="N" onclick="return fn_idCheck();">중복확인</button>
 				                                    <span id="idCheckmsg"></span>
 												</div>
 											</div>
@@ -128,7 +128,7 @@
 						</div>
 						<div class="row mb-5">
 							<div class="col-md-6">
-								<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return checkAgeInput() && checkAddressInput();">
+								<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return IDCHECKFORM() && injungkeyForm() && checkAgeInput() && checkAddressInput();">
 							</div>
 							<div class="col-md-6">
 								<a href="/" class="btn btn-secondary py-3 px-5 w-100">가입취소</a>
@@ -165,5 +165,27 @@
 </script>
 
 	
+	<script>
+	const verificationCodeInput = document.getElementById("mail_check_input");
+	
+	function injungkeyForm() {
+		  if (verificationCodeInput.value === "") {
+		    alert("인증번호를 입력해주세요.");
+		    return false;
+		  }
+		  return true;
+		}
+	
+	</script>
+	
+	<script>
+	const IDCHECK = document.getElementById("id");
+		function IDCHECKFORM(){
+			if(IDCHECK.value === ""){
+				alert("아이디를 입력해주세요");
+				return false;
+			}
+		}
+	</script>
 
 

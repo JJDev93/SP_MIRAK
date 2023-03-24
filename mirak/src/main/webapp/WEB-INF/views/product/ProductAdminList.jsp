@@ -22,7 +22,7 @@
                      <tr>
                         <th scope="col">이미지</th>
                         <th scope="col" style="width:90px;">상품코드</th>
-                        <th scope="col">상품명</th>
+                        <th scope="col" style="width:90px;">상품명</th>
                         <th scope="col" style="width:90px;">상품가격</th>
                         <th scope="col">상품설명</th>
                      </tr>
@@ -41,7 +41,7 @@
                            <td><a href="/admin/product/${curPage}/${product.pro_code}">${product.pro_name }</a></td>
                           
                            <td>${product.pro_price }</td>
-                           <td>${product.pro_desc }</td>
+                           <td>${product.pro_desc2}</td>
                         </tr>
                      </c:forEach>
                   </tbody>
