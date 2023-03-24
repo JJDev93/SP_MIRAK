@@ -44,7 +44,7 @@ public class ProductController {
 		return "/product/ProductClientList";
 
 	}
-
+	// 상품 Client 전체메뉴 페이징 넘어가는 매핑
 	@RequestMapping("/ProductClientList/{num}")
 	public String productList(ProductVO vo, Model model, Criteria cri, @PathVariable("num") int num) {
 		
@@ -58,6 +58,8 @@ public class ProductController {
 		return "/product/ProductClientList";
 
 	}
+	
+	
 
 //    상품 Client 프리미엄 리스트
 	@RequestMapping("/ProductClientListP")
