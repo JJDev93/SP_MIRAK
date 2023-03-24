@@ -4,7 +4,7 @@
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <div class="ftco-section">
 	<div class="container">
-		<div class="justify-content-center mb-3 pb-3">
+		<div class="justify-content-center">
 			<div class="heading-section text-center">
 				<h2>회원관리</h2>
 				<p>회원정보 수정페이지입니다.</p>
