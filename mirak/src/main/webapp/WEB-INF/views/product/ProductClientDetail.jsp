@@ -30,6 +30,24 @@
 <input type="hidden" value="${product.pro_code}" name="pro_code">
    <section class="ftco-section">
       <div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="tagcloud">
+					<a href="/ProductClientList" class="tag-cloud-link">전체메뉴</a>&nbsp;&gt;&nbsp;
+					<c:if test="${fn : contains(product.pro_code, 'P')}">
+		               <a href="/ProductClientListP" class="tag-cloud-link">프리미엄</a>
+		            </c:if>
+		            <c:if test="${fn : contains(product.pro_code, 'T')}">
+						<a href="/ProductClientListT" class="tag-cloud-link">2·3인세트</a>
+		            </c:if>
+		            <c:if test="${fn : contains(product.pro_code, 'O')}">
+						<a href="/ProductClientListO" class="tag-cloud-link">1인세트</a>
+		            </c:if>  
+					&nbsp;&gt;&nbsp;
+					<a href="" class="tag-cloud-link">${product.pro_name}</a>
+				</div>
+			</div>
+		</div>
          <div class="row">
             <input type="hidden" name="pro_code" value="${product.pro_code }">
             <div class="col-lg-6 mb-5 ftco-animate">
@@ -42,7 +60,7 @@
                <p class="price">
                   가격 : <span>${product.pro_price}</span>
                </p>
-            	<p>${fn:replace(product.pro_desc, '.', "<br/>")}</p>
+               <p>${fn:replace(product.pro_desc, '.', "<br/>")}</p>
                <div class="row mt-4">
                   <div class="input-group col-md-6 d-flex mb-3">
                      <p style="margin-top: 5px;">수량 : &nbsp;&nbsp;</p>
@@ -55,7 +73,7 @@
                <label for="start">배송 시작일<input type="date" name="cart_start" class="form-control input-number" style="width: 240px;" id="start" min=""></label>
                <br> 요일 선택<br>   
                               
-               <label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform: scale(1.5);" value="월">&nbsp;&nbsp;월</label>
+               <label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform: scale(1.5);" value="월" >&nbsp;&nbsp;월</label>
                &nbsp;&nbsp; 
                <label for="tue"><input type="checkbox" name="cart_day" id="tue" style="transform: scale(1.5);" value="화" >&nbsp;&nbsp;화</label>
                &nbsp;&nbsp; 
@@ -68,12 +86,12 @@
                <label for="sat"><input type="checkbox" name="cart_day" id="sat" style="transform: scale(1.5);" value="토">&nbsp;&nbsp;토</label>   
                &nbsp;&nbsp;   
                 <label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform: scale(1.5);" value="일">&nbsp;&nbsp;일</label>
-               &nbsp;&nbsp; <br><br>
-                <label for="all"><input type="checkbox" name="cart_day" id="all" style="transform: scale(1.5);" value="all" onclick='selectAll(this)'>&nbsp;&nbsp;전체선택</label>
+               &nbsp;&nbsp; <br>
+                <label for="all"><input type="checkbox" name="cart_all" id="all" style="transform: scale(1.5);" value="all" onclick='selectAll(this)'>&nbsp;&nbsp;전체선택</label>
                 &nbsp;&nbsp; 
                 <label for="pyeong"><input type="checkbox" name="cart_pyeong" id="pyeong" style="transform: scale(1.5);" value="pyeong" onclick='selectpyeong(this)'>&nbsp;&nbsp;주중선택</label>
                 &nbsp;&nbsp; 
-                <label for="jumal"><input type="checkbox" name="cart_pyeong" id="jumal" style="transform: scale(1.5);" value="jumal" onclick='selectjumal(this)'>&nbsp;&nbsp;주말선택</label>
+                <label for="jumal"><input type="checkbox" name="cart_jumal" id="jumal" style="transform: scale(1.5);" value="jumal" onclick='selectjumal(this)'>&nbsp;&nbsp;주말선택</label>
                
                <br> <br>
                <c:choose>
@@ -95,6 +113,11 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+<script>
+
+
+</script>
 
 
 <script>
@@ -155,6 +178,21 @@ $(function() {
 
          alert('날짜를 입력해주세요.');
          return false;
+      }
+      
+      const checkboxes = document.getElementsByName('cart_day');
+      let isChecked = false;
+
+      for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          isChecked = true;
+          break;
+        }
+      }
+
+      if (!isChecked) {
+        alert('최소 하루 이상의 요일을 선택해 주세요');
+        return false;
       }
 
       let cnt = document.getElementById("result").value;

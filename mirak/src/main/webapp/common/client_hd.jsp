@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="cate" value="${fn:substringAfter(pageContext.request.requestURI, '/views/')}"/>
+<c:set var="cateAll" value="${fn:substringBefore(cate, '.jsp')}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,14 +34,13 @@
 				</button>
 				<div class="collapse navbar-collapse" id="ftco-nav">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item active"><a href="/ProductClientList" class="nav-link">전체메뉴</a></li>
-						<li class="nav-item"><a href="/ProductClientListP" class="nav-link">프리미엄</a></li>
-						<li class="nav-item"><a href="/ProductClientListT" class="nav-link">2·3인세트</a></li>
-						<li class="nav-item"><a href="/ProductClientListO" class="nav-link">1인세트</a></li>
-
+						<li class="nav-item <c:if test="${fn : contains(cateAll, '/product/ProductClientList') && fn : contains('/product/ProductClientList', cateAll)}">active</c:if>"><a href="/ProductClientList" class="nav-link">전체메뉴</a></li>
+						<li class="nav-item <c:if test="${fn : contains(cate, 'ProductClientListP')}">active</c:if>"><a href="/ProductClientListP" class="nav-link">프리미엄</a></li>
+						<li class="nav-item <c:if test="${fn : contains(cate, 'ProductClientListT')}">active</c:if>"><a href="/ProductClientListT" class="nav-link">2·3인세트</a></li>
+						<li class="nav-item <c:if test="${fn : contains(cate, 'ProductClientListO')}">active</c:if>" ><a href="/ProductClientListO" class="nav-link">1인세트</a></li>
 						<%if (session.getAttribute("mem_id") == null) {%>
-							<li class="nav-item"><a href="/login" class="nav-link">로그인</a></li>
-							<li class="nav-item"><a href="/join" class="nav-link">회원가입</a></li>
+							<li class="nav-item <c:if test="${fn : contains(cate, 'login')}">active</c:if>"><a href="/login" class="nav-link">로그인</a></li>
+							<li class="nav-item <c:if test="${fn : contains(cate, 'join')}">active</c:if>"><a href="/join" class="nav-link">회원가입</a></li>
 						<%} else if (session.getAttribute("mem_id").equals("admin")) {%>
 							<li class="nav-item"><a href="/admin/logout" class="nav-link">로그아웃</a></li>
 							<li class="nav-item"><a href="/admin/charts" class="nav-link">Admin</a></li>
@@ -46,7 +48,7 @@
 							<li class="nav-item"><a href="/logout" class="nav-link">로그아웃</a></li>
 							<!-- <li class="nav-item" onclick="naverLogout(); return false;"><a href="javascript:void(0)" class="nav-link"><span>로그아웃</span></a> -->
 							<!-- <li class="nav-item"><a href="/kakaounlink" class="nav-link">연결해제</a></li> -->
-						<li class="nav-item"><a href="/mypage" class="nav-link">마이페이지</a></li>
+							<li class="nav-item"><a href="/mypage" class="nav-link">마이페이지</a></li>
 						<%}%>
 					</ul>
 				</div>
