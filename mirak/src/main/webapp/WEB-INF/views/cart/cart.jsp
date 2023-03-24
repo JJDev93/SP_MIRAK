@@ -122,7 +122,7 @@
 		<div class="modal fade" id="modal${c.cart_code }" tabindex="9999" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
-					<form action="/cartUpdate" method="post">
+					<form action="/cartUpdate" method="post" name="day" onsubmit="return daycheck()">
 						<input type="hidden" name="cart_code" value="${c.cart_code }">		
 						<input type="hidden" name="cart_totprice" value="${c.cart_cnt * c.pro_price}">		
 						<div class="modal-header">
@@ -184,7 +184,7 @@
 							<%-- <a href="/cartUpdate/${c.cart_code}" class="btn btn-primary py-3 px-5">변경</a> --%>
 							<!-- <input type="submit" value="변경" class="btn btn-primary py-3 px-5"> -->
 							<!-- <input type="submit" value="변경" class="btn btn-primary py-3 px-5" onclick="if(document.getElementsByName('cart_start')[0].value==''){alert('배송 시작일을 입력해주세요.');return false;}"> -->
-							<input type="submit" value="변경" class="btn btn-primary py-3 px-5" >
+							<input type="submit" value="변경" class="btn btn-primary py-3 px-5">
 							
 							<button type="button" class="btn btn-black py-3 px-5" data-dismiss="modal">Close</button>
 						</div>
@@ -232,6 +232,19 @@ function selectAll(selectAll)  {
        checkbox.checked = selectAll.checked;
      })
    }
+
+function daycheck() {
+	const checkboxes4 
+    = document.getElementsByName('cart_day');
+	
+	if (checkboxes4.value == "") {
+		alert("요일을 선택해주세요");
+		return false;
+	}
+	return true;
+}
+
+
 
 
 	$(function() {
