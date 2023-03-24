@@ -11,7 +11,7 @@
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
-					<h1 class="mb-0 bread">프리미엄</h1>
+					<h1 class="mb-0 bread">1인세트</h1>
 				</div>
 			</div>
 		</div>
@@ -54,6 +54,8 @@
 			
 			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 			<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+			<div class="row mt-5">
+	
 			<div class="row ">
 				<div class="col text-center">
 					<div class="block-27">
@@ -65,7 +67,7 @@
 							</c:if>
 							<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
 <%-- 								<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active" : "" }"" id="abc"><a href="javascript:acyncMovePage('/ProductClientList?pageNum=${num}');">${num}</a></li> --%>
-								<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active" : "" }"" id="abc"><a href="/ProductClientListO?pageNum=${num}">${num}</a></li>
+								<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active" : "" }"" id="abc"><a href="/ProductClientListO/${num}">${num}</a></li>
 							</c:forEach>
 							<!-- 다음페이지 버튼 -->
 							<c:if test="${pageMaker.next}">
