@@ -59,7 +59,7 @@
 							</c:if>
 							<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
 <%-- 								<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active" : "" }"" id="abc"><a href="javascript:acyncMovePage('/ProductClientList?pageNum=${num}');">${num}</a></li> --%>
-								<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active" : "" }"" id="abc"><a href="/ProductClientListT?pageNum=${num}">${num}</a></li>
+								<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active" : "" }"" id="abc"><a href="/ProductClientListT/${num}">${num}</a></li>
 							</c:forEach>
 							<!-- 다음페이지 버튼 -->
 							<c:if test="${pageMaker.next}">

@@ -21,6 +21,7 @@ public class AdminMemberController {
 	@RequestMapping(value="/admin/members/{curPage}", method=RequestMethod.GET)
 	public String adminMemListPage(MemberVO mvo,Model model, CriteriaM cri, @PathVariable("curPage") int curPage) {
 		System.out.println("====== 관리자 회원 목록페이지로 이동 ======");
+		cri.setPageNum(curPage);
 		model.addAttribute("memberList", memberService.getListPaging(cri));
 		int total = memberService.getTotal(cri);
 		PageMakerDTOM pageMake = new PageMakerDTOM(cri, total);
