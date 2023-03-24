@@ -498,9 +498,10 @@ pre {
 .col-xl-auto {
   position: relative;
   width: 100%;
-  padding-right: 22px;
-  padding-left: 22px;
-  padding-top: 22px; }
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px; }
 
 .col {
   -ms-flex-preferred-size: 0;
@@ -3602,7 +3603,7 @@ input[type="button"].btn-block {
       .navbar-expand-md .navbar-nav .nav-link {
         padding-right: 0.5rem;
         padding-left: 0.5rem;
-        font-size:25px }
+        font-size:22px }
     .navbar-expand-md > .container,
     .navbar-expand-md > .container-fluid {
       -ms-flex-wrap: nowrap;
@@ -9205,7 +9206,7 @@ textarea.form-control {
   font-size: 24px; }
 
 .ftco-section {
-  padding: 2em 1em;
+  padding: 5rem 1em 10rem;
   position: relative; }
 
 .ftco-no-pt {
