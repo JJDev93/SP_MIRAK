@@ -1604,7 +1604,6 @@ pre {
   font-weight: 400;
   line-height: 1.5;
   color: #495057;
-  background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
@@ -9174,7 +9173,6 @@ h1, h2, h3, h4, h5,
 
 .form-control {
   height: 52px !important;
-  background: #fff !important;
   color: #000000 !important;
   font-size: 18px;
   border-radius: 0px;

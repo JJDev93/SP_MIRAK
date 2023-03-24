@@ -79,7 +79,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">			
+				<div class="row mt-2">			
 					<div class="col-md-4">
 						<a href="/admin/members/${curPage}" class="btn btn-secondary py-3 px-5 w-100">목록</a>
 					</div>
