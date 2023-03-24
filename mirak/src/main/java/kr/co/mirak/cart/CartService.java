@@ -23,4 +23,13 @@ public interface CartService {
     
     /* 게시판 목록(페이징 적용) */
     public List<CartVO> getListPaging(CriteriaC cri);
+    
+    CartVO cartDetail(CartVO vo);
+    
+    CartVO getMemberDetail(CartVO vo);
+    
+    void cartAdminDelete(CartVO vo);
+    
+    void cartAdminUpdate(CartVO vo);
+    
 }

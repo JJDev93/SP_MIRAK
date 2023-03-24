@@ -128,9 +128,20 @@
 <script src="${path}/resources/js/naverapi.js"></script>
 
 <script>
+	$(document).ready(function() {
+	console.log("message : "+"${message}");
+	console.log("mem_id : "+"${mem_id}");
+// 	if("${message}" !=""){
+// 		alert("${message}");
+<%-- 		 <%session.setAttribute("message","");%> --%>
+// 	}
+	if("${mem_id}" !=""){
+		location.href = "/";
+	}
+	})
    var naverLogin = new naver.LoginWithNaverId({
       clientId : "zkOzac5hPC_Qw6v8eOzQ", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
-      callbackUrl : "http://localhost:8080/", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+      callbackUrl : "http://localhost:8080/login", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
       isPopup : false,
       callbackHandle : true
    });
@@ -140,7 +151,6 @@
    $(document).on("click", "#naverIdLogin_loginButton", function() {
       naverLogin.getLoginStatus(function(status) {
          if (status) {
-
             var accessToken = naverLogin.accessToken.accessToken;
 
             var mem_id = naverLogin.user.getEmail();
@@ -192,11 +202,9 @@
                 }
 
              })
-
-            
-
          } else {
             console.log("callback 처리에 실패하였습니다.");
+            return false;
          }
       });
    });

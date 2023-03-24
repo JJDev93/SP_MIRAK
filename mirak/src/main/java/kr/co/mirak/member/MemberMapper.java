@@ -13,7 +13,7 @@ public interface MemberMapper {
 	int memupdate(MemberVO vo);
 	int memdelete(MemberVO vo);
 	//	List<MemberVO> getMemberList(Integer page);
-	MemberVO getMemberInfo(String memId);
+	MemberVO getMemberInfo(String mem_code);
 	int idCheck(String id);
 	
 	//카카오 로그인
@@ -26,6 +26,7 @@ public interface MemberMapper {
     
     /* 게시판 목록(페이징 적용) */
     public List<MemberVO> getListPaging(CriteriaM cri);
-    MemberVO getMemberDetail(MemberVO mvo);
-    // 여기까지!    
+    MemberVO adminMemberDetail(MemberVO vo);
+    int adminMemberDel(MemberVO vo);
+	int adminMemberUpdate(MemberVO vo);
 }

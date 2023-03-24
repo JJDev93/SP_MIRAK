@@ -40,19 +40,13 @@ public interface MemberService {
 	void kakaoLogout(String access_Token);
 	
 	void unlink(String attribute);
-	
-
-
 
 	// 김원중이 건드린 부분
 	/* 게시판 총 갯수 */
 	public int getTotal(CriteriaM cri);
-
 	List<MemberVO> getListPaging(CriteriaM cri);
-
-	MemberVO getMemberDetail(MemberVO mvo);
-
-
-
+	MemberVO adminMemberDetail(MemberVO vo);
+	int adminMemberUpdate(MemberVO vo);
+	int adminMemberDel(MemberVO vo);
 	// 여기까지
 }

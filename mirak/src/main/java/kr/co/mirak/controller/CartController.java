@@ -16,6 +16,10 @@ import kr.co.mirak.cart.CartService;
 import kr.co.mirak.cart.CartVO;
 import kr.co.mirak.cart.CriteriaC;
 import kr.co.mirak.cart.PageMakerDTOC;
+import kr.co.mirak.member.MemberVO;
+import kr.co.mirak.product.Criteria;
+import kr.co.mirak.product.PageMakerDTO;
+import kr.co.mirak.product.ProductVO;
 
 @Controller
 public class CartController {
@@ -62,17 +66,58 @@ public class CartController {
 		return "redirect:/cart";
 	}
 
-	// admin list select
-	@RequestMapping(value = "/admin/carts", method = RequestMethod.GET)
-	public String cartList2(Model model,CriteriaC cri) {
-		model.addAttribute("cartList", cartService.getListPaging(cri));
+	// Admin 리스트
+	   @RequestMapping("/admin/carts/{page}")
+	   public String cartAdminList(CartVO vo, Model model, CriteriaC cri, @PathVariable("page") int page) {
+		  cri.setPageNum(page);
+	      model.addAttribute("cartList", cartService.getListPaging(cri));
+	      model.addAttribute("curPage", page);
+	      int total = cartService.getTotal();
+	      PageMakerDTOC pageMake = new PageMakerDTOC(cri, total);
+	      model.addAttribute("pageMaker", pageMake);
+	      return "/cart/cart_admin";
+	   }
+	   
+	// Admin 상세 페이지
+	   @RequestMapping(value = "/admin/cart/{curPage}/{cart_code}")
+	   public String cartDetail(CartVO vo, Model model, CriteriaC cri, @PathVariable("curPage") int curPage) {
+	      model.addAttribute("cart", cartService.cartDetail(vo));
+	      model.addAttribute("curPage", curPage);
+	      cartService.cartDetail(vo);
+	          
+	      int total = cartService.getTotal();
+	      PageMakerDTOC pageMake = new PageMakerDTOC(cri, total);
+	      model.addAttribute("pageMaker", pageMake);
 
-		int total = cartService.getTotal();
-		PageMakerDTOC pageMake = new PageMakerDTOC(cri, total);
-		model.addAttribute("pageMaker", pageMake);
-
-		return "cart/cart_admin";
-	}
+	      return "/cart/cart_adminDetail";
+	   }
+	   
+	 // 회원정보 열람
+	   @RequestMapping(value="/admin/member/{mem_id}")	
+		public String getMemberDetail(CartVO vo, Model model) {
+			model.addAttribute("member", cartService.getMemberDetail(vo));
+			cartService.getMemberDetail(vo);
+			return "cart/cart_admin";
+		}
+	   
+	   
+	// Admin 카트 진짜 삭제
+		@RequestMapping(value = "/admin/cartAdminDelete")
+		public String cartAdminDelete(CartVO vo) {
+			cartService.cartAdminDelete(vo);
+			return "redirect:/admin/carts/1";
+		} 
+		
+	// Admin update
+		@RequestMapping(value = "/admin/cartUpdate")
+		public String cartAdminUpdate(CartVO vo) {
+			String str1 = vo.getCart_day();
+			String str2 = str1.replaceAll(",", "");
+			vo.setCart_day(str2);
+			cartService.cartAdminUpdate(vo);
+			return "redirect:/admin/carts/1";
+		}
+	   
 
 	@RequestMapping(value = "/goPay", method = RequestMethod.POST)   // 결제하기
 	public String goPay(Model model, HttpSession session) {

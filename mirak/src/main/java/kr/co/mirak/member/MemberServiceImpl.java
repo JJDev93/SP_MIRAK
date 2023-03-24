@@ -289,15 +289,23 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.getListPaging(cri);
 	}
 
-	public MemberVO getMemberDetail(MemberVO mvo) {
-
+	public MemberVO adminMemberDetail(MemberVO vo) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		return mapper.getMemberDetail(mvo);
-
+		MemberVO memVO = mapper.adminMemberDetail(vo);
+		memVO.toString();
+		return memVO;
+	}
+	
+	public int adminMemberDel(MemberVO vo) {
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		int result = mapper.adminMemberDel(vo);
+		return result;
 	}
 
-
-
-	// 여기까지
+	public int adminMemberUpdate(MemberVO vo) {
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		int updatesuccess = mapper.adminMemberUpdate(vo);
+		return updatesuccess;
+	}
 
 }
