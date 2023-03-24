@@ -48,7 +48,7 @@
 							<li class="nav-item"><a href="/logout" class="nav-link">로그아웃</a></li>
 							<!-- <li class="nav-item" onclick="naverLogout(); return false;"><a href="javascript:void(0)" class="nav-link"><span>로그아웃</span></a> -->
 							<!-- <li class="nav-item"><a href="/kakaounlink" class="nav-link">연결해제</a></li> -->
-							<li class="nav-item"><a href="/mypage" class="nav-link">마이페이지</a></li>
+							<li class="nav-item <c:if test="${fn : contains(cate, 'mypage')}">active</c:if>"><a href="/mypage" class="nav-link">마이페이지</a></li>
 						<%}%>
 					</ul>
 				</div>
