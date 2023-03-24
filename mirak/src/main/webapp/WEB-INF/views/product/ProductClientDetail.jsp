@@ -58,7 +58,7 @@
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                <h3>${product.pro_name}</h3>
                <p class="price" style="margin-bottom:-30px;">
-                  가격 : <span >${product.pro_price}</span>
+                  가격 &nbsp; <span >${product.pro_price}</span>
                </p>
                
                <div class="row mt-4">
@@ -137,7 +137,16 @@
 
 
 <script>
+const resultInput = document.getElementById('result');
 
+resultInput.addEventListener('change', function() {
+  const resultValue = parseFloat(resultInput.value);
+
+  if (isNaN(resultValue) || resultValue <= 0 || !Number.isInteger(resultValue)) {
+    alert('최소 1이상의 수량을 선택해 주세요');
+    resultInput.value = 1;
+  }
+});
 
 </script>
 

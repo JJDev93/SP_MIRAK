@@ -41,7 +41,7 @@
                            <td><a href="/admin/product/${curPage}/${product.pro_code}">${product.pro_name }</a></td>
                           
                            <td>${product.pro_price }</td>
-                           <td>${product.pro_desc }</td>
+                           <td>${product.pro_desc2}</td>
                         </tr>
                      </c:forEach>
                   </tbody>
