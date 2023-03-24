@@ -15,7 +15,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
-					<form action="/join" method="post"  class="billing-form">
+					<form action="/join" method="post" onsubmit="return Duplicate();" class="billing-form">
 						<div class="row align-items-end">
 							<c:choose>
 							    <c:when test="${not empty member.mem_isapi}">
@@ -128,7 +128,7 @@
 						</div>
 						<div class="row mb-5">
 							<div class="col-md-6">
-								<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return checkAgeInput() && checkAddressInput() && Duplicate();">
+								<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return IDCHECKFORM() && injungkeyForm() && checkAgeInput() && checkAddressInput();">
 							</div>
 							<div class="col-md-6">
 								<a href="/" class="btn btn-secondary py-3 px-5 w-100">가입취소</a>
@@ -165,5 +165,27 @@
 </script>
 
 	
+	<script>
+	const verificationCodeInput = document.getElementById("mail_check_input");
+	
+	function injungkeyForm() {
+		  if (verificationCodeInput.value === "") {
+		    alert("인증번호를 입력해주세요.");
+		    return false;
+		  }
+		  return true;
+		}
+	
+	</script>
+	
+	<script>
+	const IDCHECK = document.getElementById("id");
+		function IDCHECKFORM(){
+			if(IDCHECK.value === ""){
+				alert("아이디를 입력해주세요");
+				return false;
+			}
+		}
+	</script>
 
 
