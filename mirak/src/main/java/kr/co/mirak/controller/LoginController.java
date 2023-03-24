@@ -73,14 +73,14 @@ public class LoginController {
 
          System.out.println("제출한비번:" + rawPw);
          System.out.println("인코딩된비번:" + lvo.getMem_pw());
-
+         
          String mem_id;
 
          if (true == pwEncoder.matches(rawPw, encodePw)) { // 비번 일치 여부 판단
             // logger.info("일로오나");
             memberVO.setMem_pw(""); // 인코딩된 비번 정보 지움
             mem_id = memberVO.getMem_id();
-
+            session.setAttribute("message","로그인 되었습니다.");
             session.setAttribute("mem_id", mem_id); // 세션에 사용자정보 저장
             logger.info("로그인 성공");
 
@@ -99,14 +99,14 @@ public class LoginController {
 
          } else { // 일치하는 아이디가 존재하지 않을 시 (로그인 실패)
 
-            rttr.addFlashAttribute("result", 0);
+        	 session.setAttribute("result", 0);
             logger.info("일치하는 아이디가 없습니다");
             return "member/login"; // 로그인 페이지로 이동
          }
       } else { // 일치하는 아이디가 존재하지 않을시 (로그인 실패)
 
-         rttr.addFlashAttribute("result", 0);
-         rttr.addFlashAttribute("message", "일치하는 아이디가 없습니다.");
+    	 session.setAttribute("result", 0);
+         session.setAttribute("message", "일치하는 아이디가 없습니다.");
          logger.info("로그인 실패");
          return "member/login"; // 로그인페이지로 이동
       }
