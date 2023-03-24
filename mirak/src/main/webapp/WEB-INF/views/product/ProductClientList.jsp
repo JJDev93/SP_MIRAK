@@ -2,6 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<style>
+
+</style>
+
 <div id="test">
 	<jsp:include page="/common/client_hd.jsp"></jsp:include>
 	<div class="hero-wrap hero-bread" style="background-image: url('${path}/resources/images/bg_3.jpg');">
@@ -52,17 +57,17 @@
 							<!-- 이전페이지 버튼 -->
 							<c:if test="${pageMaker.prev}">
 <%-- 								<li class="pageInfo_btn previous" id="abc"><a href="javascript:acyncMovePage('ProductClientList?pageNum= ${pageMaker.startPage-1}');">&lt;</a></li> --%>
-								<li class="pageInfo_btn previous" id="abc"><a href="ProductClientList?pageNum= ${pageMaker.startPage-1}">&lt;</a></li>
+								<li class="pageInfo_btn previous"><a href="/ProductClientList/${pageMaker.startPage-1}">&lt;</a></li>
 							</c:if>
 							<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
 <%-- 								<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active" : "" }"" id="abc"><a href="javascript:acyncMovePage('/ProductClientList?pageNum=${num}');">${num}</a></li> --%>
 <%-- 								<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active" : "" }"" id="abc"><a href="/ProductClientList?pageNum=${num}">${num}</a></li> --%>
-									<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active" : "" }"" id="abc"><a href="/ProductClientList/${num}">${num}</a></li>
+									<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active" : "" }""><a href="/ProductClientList/${num}">${num}</a></li>
 							</c:forEach>
 							<!-- 다음페이지 버튼 -->
 							<c:if test="${pageMaker.next}">
 <%-- 								<li class="pageInfo_btn next" id="abc"><a href="javascript:acyncMovePage('ProductClientList?pageNum=${pageMaker.endPage + 1 }');">&gt;</a></li> --%>
-								<li class="pageInfo_btn next" id="abc"><a href="ProductClientList?pageNum=${pageMaker.endPage + 1 }">&gt;</a></li>
+								<li class="pageInfo_btn next"><a href="/ProductClientList/${pageMaker.endPage + 1 }">&gt;</a></li>
 							</c:if>
 						</ul>
 					</div>
@@ -91,4 +96,9 @@
 	       $('#test').html(data);
 	   });
 	}
+</script>
+
+
+<script>
+window.scrollTo(0, document.body.scrollHeight);
 </script>
