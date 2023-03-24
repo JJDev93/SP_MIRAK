@@ -61,7 +61,7 @@
 							<!-- 이전페이지 버튼 -->
 							<c:if test="${pageMaker.prev}">
 <%-- 								<li class="pageInfo_btn previous" id="abc"><a href="javascript:acyncMovePage('ProductClientList?pageNum= ${pageMaker.startPage-1}');">&lt;</a></li> --%>
-								<li class="pageInfo_btn previous" id="abc"><a href="ProductClientListP?pageNum= ${pageMaker.startPage-1}">&lt;</a></li>
+								<li class="pageInfo_btn previous" id="abc"><a href="ProductClientListP/${pageMaker.startPage-1}">&lt;</a></li>
 							</c:if>
 							<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
 <%-- 								<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active" : "" }"" id="abc"><a href="javascript:acyncMovePage('/ProductClientList?pageNum=${num}');">${num}</a></li> --%>
@@ -70,7 +70,7 @@
 							<!-- 다음페이지 버튼 -->
 							<c:if test="${pageMaker.next}">
 <%-- 								<li class="pageInfo_btn next" id="abc"><a href="javascript:acyncMovePage('ProductClientList?pageNum=${pageMaker.endPage + 1 }');">&gt;</a></li> --%>
-								<li class="pageInfo_btn next" id="abc"><a href="ProductClientListP?pageNum=${pageMaker.endPage + 1 }">&gt;</a></li>
+								<li class="pageInfo_btn next" id="abc"><a href="ProductClientListP/${pageMaker.endPage + 1 }">&gt;</a></li>
 							</c:if>
 						</ul>
 					</div>
