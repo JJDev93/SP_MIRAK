@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp" />
@@ -19,13 +18,13 @@
 </div>
 <section class="ftco-section">
 	<div class="container">
+		<h2 class="mb-4 billing-heading text-center">주문 확인</h2>
 		<div class="row justify-content-center">
 			<div class="col-xl-7 ftco-animate">
-				<h3 class="mb-4 billing-heading text-center">주문 확인</h3>
 				<form id="orderForm" action="/paySubmit" method="post">
 					<input type="hidden" id="mem_id" name="mem_id" value="${mem_id }">
 					<c:forEach items="${productList}" var="productVO">
-						<div class="cart-detail p-3 p-md-4 mb-5">
+						<div class="cart-detail p-3 p-md-4 mb-4">
 							<div class="ftco-animate fadeInUp ftco-animated">
 								<div class="blog-entry align-self-stretch d-md-flex">
 <%-- 									<a href="blog-single.html" class="block-20" style="background-image: url('images/${productVO.pro_image }');"> </a> --%>
@@ -69,32 +68,18 @@
 								</div>
 							</div>
 						</div>
-
-
 					</c:forEach>
 
-
 					<div class="row align-items-end">
-
-
-
-						<div class="w-100"></div>
-						<div class="col-md-12">
-							<div class="form-group"></div>
-						</div>
-						<div class="w-100"></div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label for="address">주소</label> <input type="text"
-									name="mem_address" class="form-control" id="address"
-									style="cursor: default"
-									value="${memberVO.mem_zipcode} ${memberVO.mem_add1} ${memberVO.mem_add2}"
-									readonly>
+								<label for="address">주소</label> 
+								<input type="hidden" name="mem_address" class="form-control" id="address" style="cursor: default" value="${memberVO.mem_zipcode} ${memberVO.mem_add1} ${memberVO.mem_add2}" readonly>
+								<input type="text" name="mem_zipcode" class="form-control mb-2" value="${memberVO.mem_zipcode}" readonly>
+								<input type="text" name="mem_add1" class="form-control mb-2" value="${memberVO.mem_add1}" readonly>
+								<input type="text" name="mem_add2" class="form-control mb-2" value="${memberVO.mem_add2}" readonly>
 							</div>
 						</div>
-
-
-						<div class="w-100"></div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="receiverName">받는 사람</label> <input type="text"
@@ -103,8 +88,6 @@
 									readonly>
 							</div>
 						</div>
-
-						<div class="w-100"></div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="phone">휴대폰 번호</label> <input type="tel"
@@ -113,8 +96,6 @@
 									value="${memberVO.mem_phone}" readonly>
 							</div>
 						</div>
-
-						<div class="w-100"></div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="req">배송 요청사항</label> <input type="text"
@@ -128,33 +109,26 @@
 				<!-- END -->
 			</div>
 			<div class="col-xl-5">
-				<div class="row mt-5 pt-3">
-					<div class="col-md-12 d-flex mb-5">
-						<div class="cart-detail cart-total p-3 p-md-4">
-							<h3 class="billing-heading mb-4">Cart Total</h3>
-							<hr>
-							<p class="d-flex total-price">
-								<span>총 결제금액</span> <span id="totalPrice"></span><span>원</span>
-							</p>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="cart-detail p-3 p-md-4">
-							<h3 class="billing-heading mb-4">결제 방법</h3>
-							<div class="form-group">
-								<div class="col-md-12">
-									<div class="radio">
-										<label><input type="radio" name="optradio" checked="on" class="mr-2">Kakao Pay</label>
-									</div>
-								</div>
+				<div class="cart-detail cart-total p-3 p-md-4 mb-3">
+					<h3 class="billing-heading mb-4">Cart Total</h3>
+					<hr>
+					<p class="d-flex total-price">
+						<span>총 결제금액</span> <span id="totalPrice"></span><span>원</span>
+					</p>
+				</div>
+				<div class="cart-detail p-3 p-md-4">
+					<h3 class="billing-heading mb-4">결제 방법</h3>
+					<div class="form-group">
+						<div class="col-md-12">
+							<div class="radio">
+								<label><input type="radio" name="optradio" checked="on" class="mr-2">Kakao Pay</label>
 							</div>
-							<p>
-								<input type="button" id="btn-kakao-pay" class="btn btn-primary py-3 px-5 l-100 mb-2" value="주문하기">
-								<a href="/" class="btn btn-black py-3 px-5 d-block">취소</a><br>
-							</p>
-
 						</div>
 					</div>
+					<p>
+						<input type="button" id="btn-kakao-pay" class="btn btn-primary py-3 px-5 l-100 mb-2" value="주문하기">
+						<a href="/" class="btn btn-black py-3 px-5 d-block">취소</a><br>
+					</p>
 				</div>
 			</div>
 			<!-- .col-md-8 -->
