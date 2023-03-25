@@ -11,7 +11,7 @@ import kr.co.mirak.product.ProductVO;
 public interface PayService {	
 	List<PayVO> getAdminPayList(CriteriaP criP);
 	List<PayVO> getPayListDetail(String group_id);
-	int updateStatus(String group_id);
+	int updatePayments(PayVO payVO);
 	public int getTotal();
 	List<PayVO> getProductInfo(String group_id);
 	List<PayVO> getClientPayList(HttpSession session);

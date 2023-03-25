@@ -111,11 +111,12 @@ tr .tr-custom {
 														<th>카테고리</th>
 														<th style="width:200px;">상품명</th>
 														<th style="width:100px;">수량</th>
-														<th style="width:100px;">가격</th>
-														<th style="width:330px;">희망요일</th>
+														<th style="width:100px;">결제 금액</th>
+														<th style="width:100px;">변경 금액</th>
+														<th style="width:330px;">희망 요일</th>
 														<th style="width:150px;">배송시작일</th>
-														<th>요청사항</th>
-														<th style="width:120px;">주문상태</th>
+														<th>요청 사항</th>
+														<th style="width:120px;">수정하기</th>
 													</tr>
 												</thead>
 												<tbody id="accordianBody-${payList.group_id}"></tbody>
@@ -195,8 +196,10 @@ function detailTable(data, group_id) {
     var tbody = $("#accordianBody-" + group_id);
     tbody.empty();	  
     var productList = JSON.parse('${productList}');
+    let selectCate;
     data.forEach(function (item) {
-    	  var cate = $("<select>").addClass("form-control").css({"max-width":"250px", "height":"40px", "text-align":"center", "font-size":"14px"});
+          var pay_code = item.pay_code;
+    	  var cate = $("<select>").addClass("form-control").attr("id", "cate_" + pay_code).css({"max-width":"250px", "height":"40px", "text-align":"center", "font-size":"14px"});
     	  var keys = Object.keys(productList);
 
     	  keys.forEach(function(key) {
@@ -210,38 +213,84 @@ function detailTable(data, group_id) {
     	  } else {
     	    cate.val('2·3인세트');
     	  }
-    	  cate.on("change", function() {
-    	    var selectCate = $(this).val();
+
+  	        selectCate = cate.val();
+    	    console.log(selectCate);
+    	    var pro_name = $("<select>").addClass("form-control").attr("id", "pro_name_" + pay_code).css({"max-width":"250px", "height":"40px", "text-align":"center", "font-size":"14px"});
     	    var productListByCate = productList[selectCate];
-    	    var pro_name = $("<select>").addClass("form-control").css({"max-width":"250px", "height":"40px", "text-align":"center", "font-size":"14px"});
-    	    productListByCate.forEach(function(product) {
-    	      var option = $("<option>").val(product.pro_name).text(product.pro_name);
-    	      pro_name.append(option);
-    	    });
-    	    pro_name.on("change", function() {
-    	      var selectName = pro_name.val();
-    	      var selectProduct = productList[selectCate].find(function(product) {
-    	        return product.pro_name === selectName;
+    	    console.log(productListByCate);
+    	    
+    	    if (productListByCate) {
+    	    	  productListByCate.forEach(function(product) {
+    	    	    var option = $("<option>").val(product.pro_name).text(product.pro_name);
+    	    	    pro_name.append(option);
+    	    	  });
+    	    	} else {
+    	    	  console.log("해당 카테고리의 상품이 존재하지 않습니다.");
+    	    	}
+    	    
+    	    var selectProduct = productListByCate.find(function(product) {
+    	    	return product;
     	      });
-    	      var selectPrice = selectProduct.pro_price;
-
-    	      console.log("가격은~~" + selectPrice);
-    	      console.log("개수는~~" + item.cart_cnt);
-
-    	      var totalPrice = item.cart_cnt * selectPrice;
-
-    	      var totalPriceElement = $(this).closest("tr").find(".total-price");
-    	      totalPriceElement.text(totalPrice.toLocaleString() + "원");
-    	    });
-    	  });
-    	
+    	    console.log(selectProduct);
+    	    if (selectProduct) {
+    	    	  var selectPrice = selectProduct.pro_price;
+    	    	  var totalPrice = item.cart_cnt * selectPrice;
+    	    	  var changePrice = item.cart_cnt * selectPrice;
+    	    	} else {
+    	    	  console.log("상품을 찾을 수 없습니다.");
+    	    	}
+    
         var cart_cnt = $("<input>").addClass("form-control").attr({
             "type": "number",
             "min": "0",
             "max": "99",
             "step": "1",
-            "value": item.cart_cnt
-          }).css({"text-align":"center","padding-left":"20px"});
+            "value": item.cart_cnt,
+          }).attr("id", "cart_cnt_" + pay_code).css({"text-align":"center","padding-left":"20px"});
+        
+        cate.on("change", function() {
+        	  console.log("cateChange함수~~~~~");
+        	  var pay_code = $(this).attr("id").replace("cate_", "");
+        	  selectCate = $(this).val();
+        	  console.log(selectCate);
+        	  var productListByCate = productList[selectCate];
+        	  var pro_name = $("#pro_name_" + pay_code);
+        	  pro_name.empty();
+        	  if (productListByCate) {
+        	    productListByCate.forEach(function(product) {
+        	      var option = $("<option>").val(product.pro_name).text(product.pro_name);
+        	      pro_name.append(option);
+        	    });
+        	  } else {
+        	    console.log("해당 카테고리의 상품이 존재하지 않습니다.");
+        	  }
+        	});
+        
+        var cnt = parseInt((cart_cnt).val());
+        
+        pro_name.on("change", function() {
+        	console.log("pro_name함수 실행~~~~~~~~");
+        	  var pay_code = $(this).attr("id").replace("pro_name_", "");
+        	  var selectPro_name = $(this).val();
+        	  console.log(selectCate);
+        	  console.log(selectPro_name);
+        	  var productListByCate = productList[selectCate];
+        	  console.log(productListByCate);
+        	  var selectProduct = productListByCate.find(function(product) {
+        	    return product.pro_name === selectPro_name;
+        	  });
+        	  var selectPrice = selectProduct ? selectProduct.pro_price : 0;
+        	  var cnt = parseInt($("#cart_cnt_" + pay_code).val());
+        	  var changePrice = cnt * selectPrice;
+        	  $("#changePrice" + pay_code).text(changePrice);
+        	});
+        
+        cart_cnt.on("change", function() {
+        	var cnt = parseInt($(this).val());
+        	var changePrice = cnt * selectPrice;
+  		  $("#changePrice" + pay_code).text(changePrice);
+        });
 
       var cart_day = $("<div>").addClass("cart_day");
       
@@ -250,18 +299,20 @@ function detailTable(data, group_id) {
         var isChecked = item.cart_day.includes(days[i]);
         var input = $("<input>").attr({
           "type": "checkbox",
-          "name": "cart_day",
+          "name": "cart_day_" + pay_code,
           "id": days[i],
           "value": days[i],
-          "class": "form-check-input",
+          "class": "form-check-input cart_day_" + pay_code + "",
         }).css({"margin-left":"-0.8rem","text-align":"center"}).prop("checked", isChecked);
         var label = $("<label>").attr({
-          "for": days[i],
           "class": "form-check-label",
         }).text(days[i]);
-        var div = $("<div>").addClass("form-check").css({"display":"inline-block"}).append(input).append(label);
+        label.prepend(input);
+        var div = $("<div>").addClass("form-check").css({"display":"inline-block"}).append(label);
         cart_day.append(div);
       }
+      
+
       
       var dateString = new Date(item.cart_start).toISOString().slice(0,10);
       var cart_start = $("<input>").attr({
@@ -275,25 +326,59 @@ function detailTable(data, group_id) {
           "type": "text",
           "name": "pay_req",
           "class": "form-control input-number",
-      }).val(item.pay_code);
+      }).val(item.pay_req);
       
-      var pay_code = item.pay_code;
+      var modify = $("<input>").attr({
+          "type": "button",
+          "name": "modify",
+          "value": "수정",
+          "class": "btn btn-secondary",
+      });
+      
+      modify.on("click",function() {
+    	  const checkedValues = [];
+    	  const checkboxes = document.querySelectorAll("input[name='cart_day_" + pay_code + "']:checked");
+    	  checkboxes.forEach(function(checkbox) {
+    	    checkedValues.push(checkbox.value);
+    	  });
+    	  
+    	  $.ajax({
+    		  type: "POST",
+    		  url: "/admin/pays/update",
+    		  data: {
+    		    pay_code: pay_code,
+    		    pro_name: pro_name.val(),
+    		    cart_cnt: cart_cnt.val(),
+    		    totalPrice : $("#changePrice_" + pay_code).text(),
+    		    cart_day: checkedValues.join(""),
+    		    cart_start: cart_start.val(),
+    		    pay_req: pay_req.val(),
+    		  },
+    		  success: function(data) {
+    		    console.log(data);
+    		  },
+    		  error: function(xhr, status, error) {
+    		    console.error(xhr);
+    		  }
+    		});
+        });
       
       tbody.append(
         $("<tr>").append(
-          $("<td>").css("height", "40px").attr("class", "changeUpdate").attr("id", "cate_" + pay_code).attr("name", "cate").append(cate),
-          $("<td>").css("height", "40px").attr("class", "changeUpdate").attr("id", "pro_name_" + pay_code).attr("name", "pro_name").append(pro_name),
-          $("<td>").css("height", "40px").attr("class", "changeUpdate").attr("id", "cart_cnt_" + pay_code).attr("name", "cart_cnt").append(cart_cnt),
-          $("<td>").css("height", "40px").attr("class", "changeUpdate").attr("id", "totalPrice_" + pay_code).attr("name", "totalPrice").text(totalPrice),
-          $("<td>").css("height", "40px").attr("class", "changeUpdate").attr("id", "cart_day_" + pay_code).attr("name", "cart_day").append(cart_day),
-          $("<td>").css("height", "40px").attr("class", "changeUpdate").attr("id", "cart_start_" + pay_code).attr("name", "cart_start").append(cart_start),
-          $("<td>").css("height", "40px").attr("class", "changeUpdate").attr("id", "pay_req_" + pay_code).attr("name", "pay_req").append(pay_req),
-          $("<td>").css("height", "40px").attr("class", "changeUpdate").attr("id", "status_" + pay_code).attr("name", "status").text(item.status)
+          $("<td>").css("height", "40px").attr("name", "cate").append(cate),
+          $("<td>").css("height", "40px").attr("name", "pro_name").append(pro_name),
+          $("<td>").css("height", "40px").attr("name", "cart_cnt").append(cart_cnt),
+          $("<td>").css("height", "40px").attr("name", "totalPrice").text(totalPrice),
+          $("<td>").css("height", "40px").attr("name", "changePrice").attr("id", "changePrice_" + pay_code).text(changePrice),
+          $("<td>").css("height", "40px").append(cart_day),
+          $("<td>").css("height", "40px").append(cart_start),
+          $("<td>").css("height", "40px").attr("name", "pay_req").append(pay_req),
+          $("<td>").css("height", "40px").attr("name", "modify").append(modify)
         )
       );
 	});
     };
-
+    
   $(".collapse").on("hidden.bs.collapse", function () {
     var group_id = $(this).attr("id").split("-")[1];
     var detailBtn = $('.detail_btn[data-group_id="' + group_id + '"]');

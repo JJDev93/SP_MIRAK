@@ -29,8 +29,10 @@
  		from pay where group_id = #{group_id} order by cart_start;
 	</select>
 	
-	<update id="updateStatus" parameterType="kr.co.mirak.pay.PayVO">
-    	update pay set status = '배송중' where group_id = #{group_id};
+	<update id="updatePayments" parameterType="kr.co.mirak.pay.PayVO">
+    	UPDATE pay SET pro_name = #{pro_name}, cart_cnt = #{cart_cnt}, totalPrice = #{totalPrice},
+    	cart_day = #{cart_day}, cart_start = #{cart_start}, pay_req = #{pay_req}
+		WHERE pay_code = #{pay_code};
 	</update>
 	
 	

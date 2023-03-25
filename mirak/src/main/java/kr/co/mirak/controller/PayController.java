@@ -190,7 +190,6 @@ public class PayController {
 		
 		List<PayVO> payList = payService.getAdminPayList(criP);
 		model.addAttribute("payList", payList);
-		System.out.println("payLsitAdasdjsakldjasldjasld "+payList);
 		List<String> cateList = new ArrayList<String>();
 		cateList.add("O");
 		cateList.add("T");
@@ -209,6 +208,18 @@ public class PayController {
 
 		return "pay/adminPayments";
 	}
+	
+	@RequestMapping(value = "/admin/pays/update", method = RequestMethod.POST)
+	@ResponseBody
+	public String update(PayVO payVO) {
+		System.out.println("수정하러 컨트롤라 진입");
+		int result = payService.updatePayments(payVO);
+		if (result == 1) {
+	        return "success";
+	    } else {
+	        return "fail";
+	    }
+	}
 
 	@RequestMapping(value = "/admin/payment/{group_id}", method = RequestMethod.GET)
 	@ResponseBody
@@ -218,24 +229,6 @@ public class PayController {
 		return payListDetail;
 	}
 	
-	@RequestMapping(value = "/admin/payment/{group_id}/updateStatus", produces = "application/json;charset=UTF-8", method = RequestMethod.PUT)
-	@ResponseBody
-	public List<PayVO> updateStatus(@PathVariable("group_id") String group_id, CriteriaP criP) {
-		
-		System.out.println("group_id는 ~~~~~~~~~~~~~ "+ group_id);
-	    int result = payService.updateStatus(group_id);
-
-	    if (result > 0) {
-	        System.out.println("배송시작 완료");
-	        List<PayVO> payListDetail = payService.getAdminPayList(criP);
-	        return payListDetail;
-	    } else {
-	        System.out.println("결제 상태 변경에 실패했습니다.");
-	        throw new RuntimeException("결제 상태 변경에 실패했습니다.");
-	    }
-	}
-
-
 	@RequestMapping(value = "/admin/charts", method = RequestMethod.GET)
 	public String chartList(Model model) throws Exception {
 
