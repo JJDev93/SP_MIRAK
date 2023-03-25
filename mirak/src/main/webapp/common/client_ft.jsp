@@ -18,8 +18,9 @@
 			<div class="text-center">
 				<p>
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					&copy Copyright by MiRak <br> 신용우, 김연주, 김원중, 서현진, 안창주, 정동하,
-					전지혜
+					&copy Copyright <a href="/admin" style="color: #000000;"> MIRAK. </a>2023<br>
+					신용우 전지혜 김연주 김원중 서현진 안창주 정동하
+					
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				</p>
 			</div>

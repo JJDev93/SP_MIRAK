@@ -37,8 +37,11 @@ public class JoinController {
 
 	// 회원 가입 페이이지 이동
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
-	public String joinview() {
+	public String joinview(HttpSession session) {
 		System.out.println("회원가입 화면으로 이동!");
+		String preUrl = (String) session.getAttribute("pre_url");
+	    System.out.println("preUrl : " + preUrl);
+	    
 		return "member/join";
 	}
 	
@@ -77,7 +80,21 @@ public class JoinController {
 			session.setAttribute("message2", "회원가입 성공하였습니다!");
 			String mem_id = vo.getMem_id();
 			session.setAttribute("mem_id", mem_id); // 세션에 사용자정보 저장
-			System.out.println("가입성공");
+			
+			String preUrl = (String) session.getAttribute("pre_url");
+            String returnURL = "";
+            
+            System.out.println("preUrl : " + preUrl);
+            
+            if (preUrl != null) {
+            	System.out.println("가입성공");
+            	returnURL = "redirect:" + preUrl;
+            	session.removeAttribute("pre_url");
+            	return returnURL;
+            } else {
+                System.out.println("메인으로 이동");
+                returnURL = "redirect:/";
+             }
 		}catch(DuplicateKeyException e){
 			session.setAttribute("message", "중복된 아이디 입니다.");
 			return "member/join";
@@ -116,12 +133,12 @@ public class JoinController {
 
 		/* 뷰(View)로부터 넘어온 데이터 확인 */
 		System.out.println("이메일 데이터 전송 확인");
-		System.out.println("인증번호 : " + email);
+		System.out.println("이메일 : " + email);
 
 		/* 인증번호(난수) 생성 */
 		Random random = new Random();
 		int checkNum = random.nextInt(888888) + 111111;
-		System.out.println("인증번호" + checkNum);
+		System.out.println("인증번호 : " + checkNum);
 
 		/* 이메일 보내기 */
 		String setFrom = "acj119@naver.com";

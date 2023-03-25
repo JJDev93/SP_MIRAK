@@ -8,6 +8,7 @@
 	<title>MiRak Admin</title>
 	<link rel="icon" href="${path}/resources/images/favicon.gif">
 	<link rel="stylesheet" href="${path}/resources/css/style.css">
+	<link rel="stylesheet" href="${path}/resources/css/ionicons.min.css">
 </head>
 <body>
 	<header>
@@ -22,13 +23,14 @@
 			  <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
 			    <ul class="navbar-nav me-auto mb-2 mb-md-0">
 			      <li class="nav-item">
-			        <a class="nav-link" aria-current="page" href="/admin/members">회원관리</a>
+			        <a class="nav-link" aria-current="page" href="/admin/members/1">회원관리</a>
+
 			      </li>
 			      <li class="nav-item">
 			        <a class="nav-link" href="/admin/products/1">상품관리</a>
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link" href="/admin/carts">장바구니</a>
+			        <a class="nav-link" href="/admin/carts/1">장바구니</a>
 			      </li>
 			      <li class="nav-item">
 

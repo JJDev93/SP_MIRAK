@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
-<div class="hero-wrap hero-bread" style="background-image: url('${path}/resources/images/bg_1.jpg');">
+<div class="hero-wrap hero-bread" style="background-image: url('${path}/resources/images/bg_3.jpg');">
 	<div class="container">
 		<div
 			class="row no-gutters slider-text align-items-center justify-content-center">
@@ -110,7 +110,7 @@
 											value="${member.mem_zipcode }" readonly="readonly">
 									</div>
 									<div class="col-sm-4">
-										<button type="button" class="form-control address button"
+										<button type="button" class="btn btn-primary joinBtn address button"
 											onclick="execution_daum_address();">우편번호찾기</button>
 									</div>
 								</div>

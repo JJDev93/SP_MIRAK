@@ -149,7 +149,7 @@ tr .tr-custom {
                               <c:forEach var="num" begin="${pageMaker.startPage}"
                                  end="${pageMaker.endPage}">
                                  <ul style="text-align: center;">
-                                    <li class="pageInfo_btn"><a href="/admin/pays/${num}">${num}</a></li>
+                                    <li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }""><a href="/admin/pays/${num}">${num}</a></li>
                                  </ul>
                               </c:forEach>
                               <!-- 다음페이지 버튼 -->

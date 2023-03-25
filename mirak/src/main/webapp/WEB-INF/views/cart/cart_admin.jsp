@@ -8,6 +8,7 @@
       margin-right:10px;
    }
 </style>
+
 <div id="test">
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <div class="ftco-section">
@@ -42,7 +43,10 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
+							<th scope="col">카트번호</th>
 							<th scope="col">ID</th>
+							<th scope="col">상품코드</th>
+							<th scope="col">이미지</th>
 							<th scope="col">상품명</th>
 							<th scope="col">가격</th>
 							<th scope="col">배송시작일</th>
@@ -56,22 +60,35 @@
 						<c:forEach var="c" items="${cartList }">
 						<tr>
 <%-- 							<a href="/adminMembers/${c.mem_id}"></a> --%>
-							<th scope="row">${c.mem_id }</th>
-							<td>${c.pro_name }</td>
+							<td><a href="/admin/cart/${curPage}/${c.cart_code}">${c.cart_code }</a></td>
+							<td>
+								<a href="/admin/member/${c.mem_id}">${c.mem_id }</a>
+							</td>
+							<td><a href="/admin/cart/${curPage}/${c.cart_code}">${c.pro_code }</a></td>
+							<td>
+								 <a href="/admin/cart/${curPage}/${c.cart_code}">
+                                 <img alt="1" src="${path}/resources/images/product/${c.pro_image}" style="width: 70px;">
+                                 </a>
+                           </td>
+							<td><a href="/admin/cart/${curPage}/${c.cart_code}">${c.pro_name }</a></td>
 							<td>${c.pro_price }</td>
 							<td><fmt:formatDate pattern="yy-MM-dd" value="${c.cart_start}"/> </td>
 							<td>${c.cart_day }</td>
 							<td>${c.cart_cnt }</td>
-							<td>${c.cart_totprice }</td>
-							<td>${c.cart_check }</td>
+							<td>${c.pro_price * c.cart_cnt }</td>
+							<td>
+								<c:if test="${c.cart_show == 0}"> 결제 전</c:if>
+								<c:if test="${c.cart_show == 1}"> 결제 완료</c:if>
+							</td>
 						</tr>
-						</c:forEach>
+						</c:forEach> 
 					</tbody>
 				</table>
 			</div>
 		</div>
-		
-		 <div class="row mt-5">
+	
+               
+			<div class="row mt-5">
                   <div class="col text-center">
                      <div class="block-27">
                         <!-- 각 번호 페이지 버튼 -->
@@ -81,21 +98,20 @@
                               <c:if test="${pageMaker.prev}">
                                  <ul>
                                     <li class="pageInfo_btn previous">
-                                       <a href="javascript:acyncMovePage('/admin/carts?pageNum= ${pageMaker.startPage-1}');">&lt;</a>
+                                       <a href="javascript:acyncMovePage('/admin/carts/${pageMaker.startPage-1}');">&lt;</a>
                                     </li>
                                  </ul>
                               </c:if>
-                              <c:forEach var="num" begin="${pageMaker.startPage}"
-                                 end="${pageMaker.endPage}">
-                                 <ul style="text-align: center;">
-                                    <li class="pageInfo_btn"><a href="javascript:acyncMovePage('/admin/carts?pageNum=${num}');">${num}</a></li>
+                              <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+                                 <ul style="text-align: center;" id="abc">
+                                    <li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="/admin/carts/${num}">${num}</a></li>
                                  </ul>
                               </c:forEach>
                               <!-- 다음페이지 버튼 -->
                               <c:if test="${pageMaker.next}">
                                  <ul>
                                     <li class="pageInfo_btn next">
-                                       <a href="javascript:acyncMovePage('/admin/carts?pageNum=${pageMaker.endPage + 1 }');">&gt;</a>
+                                       <a href="javascript:acyncMovePage('/admin/carts/${pageMaker.endPage + 1 }');">&gt;</a>
                                     </li>
                                  </ul>
                               </c:if>

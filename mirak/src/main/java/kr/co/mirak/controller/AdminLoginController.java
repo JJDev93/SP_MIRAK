@@ -45,7 +45,7 @@ public class AdminLoginController {
 					
 				}
 				System.out.println("관리자가 아닙니다.");
-				return "redirect:/";
+				return "redirect:/admin";
 			} else {
 				System.out.println("로그인 실패. 존재하지 않는 아이디입니다.");
 				return "redirect:/admin";
@@ -62,6 +62,6 @@ public class AdminLoginController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		System.out.println("로그아웃 성공!!");
-		return "redirect:/";
+		return "redirect:/admin";
 	}
 }
