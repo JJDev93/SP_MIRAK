@@ -12,6 +12,12 @@ li {
       float:left;
       margin-right:10px;
    }
+   
+.detail_td {
+	color: #333333;
+    cursor: pointer;
+    text-decoration: underline;
+  }
 
 .detail-row .hidden-row {
 	display: none;
@@ -63,33 +69,31 @@ tr .tr-custom {
 						<c:forEach var="payList" items="${payList}">
 							<tr class="tr-custom">
 								<td>${payList.group_id}</td>
-								<td><c:choose>
-										<c:when test="${payList.cart_cnt == 1}">
-                        ${payList.pro_name}
-                    </c:when>
-										<c:otherwise>
-                        ${payList.pro_name}외 ${payList.cart_cnt-1}종
-                    </c:otherwise>
-									</c:choose></td>
-								<td>${payList.totalPrice}</td>
+								<td class="detail_td" id="pro_name_${payList.group_id}"
+									data-toggle="collapse"
+									data-target="#collapse-${payList.group_id}"
+									aria-expanded="false"
+									aria-controls="collapse-${payList.group_id}"
+									data-group_id="${payList.group_id}">${payList.pro_name} <c:if test="${payList.cart_cnt > 1 }"> 외 ${payList.cart_cnt - 1 }개 품목</c:if>
+								</td>
+								<td id="totalPrice_${payList.group_id}">${payList.totalPrice}</td>
 								<td>${payList.mem_name}</td>
 								<td>${payList.mem_phone}</td>
 								<td>${payList.mem_add1} ${payList.mem_add2}</td>
 								<td>${payList.pay_date}</td>
 								<td id="statusTd_${payList.group_id}">${payList.status}</td>
+								
+								
 								<td>
-								<c:choose>
- 								 <c:when test="${payList.status == '결제 완료'}">
-    								<button id="statusBtn_${payList.group_id}" class="btn btn-secondary" type="button" onclick="updateStatus(${payList.group_id})">결제취소</button>
-  								</c:when>
-  								<c:when test="${payList.status == '주문 완료' || payList.status == '결제 취소' || payList.status == '구매 확정'}">
-    								<button id="statusBtn_${payList.group_id}" class="btn btn-secondary" type="button" disabled>X</button>
-  								</c:when>
-								</c:choose>
+									<button class="btn btn-dark py-2 px-3 payCancel"
+											data-group_id="${payList.group_id}"
+											data-total_price="${payList.totalPrice}"
+											data-pro_name='${payList.pro_name} <c:if test="${payList.cart_cnt > 1 }"> 외 ${payList.cart_cnt - 1 }개 품목</c:if>'
+											<c:if test="${payList.status eq '주문 취소'}">disabled</c:if>>결제취소</button>
 								</td>
 								<td>
 									<div class="accordion">
-										<button class="detail_btn btn btn-secondary" type="button"
+										<button class="detail_btn btn btn-secondary py-2 px-3" type="button"
 											data-toggle="collapse"
 											data-target="#collapse-${payList.group_id}"
 											aria-expanded="false"
@@ -168,7 +172,12 @@ tr .tr-custom {
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>
 </div>
 <script>
-$(document).on("click", ".detail_btn", function () {
+$('.payCancel[disabled]').each(function() {
+	  $(this).text('취소된 주문');
+	});
+
+$(document).on("click", ".detail_btn, .detail_td", function () {
+	console.log("클릭이벤트 실행");
     var open_collapse = $(".collapse.show");
     if (open_collapse.length > 0) {
       open_collapse.each(function () {
@@ -192,47 +201,76 @@ $(document).on("click", ".detail_btn", function () {
     });
   });
 
+	$(".payCancel").on("click", function() {
+			let totalPrice = $(this).data('total_price');
+			console.log(totalPrice);
+			let group_id = $(this).data('group_id');
+			let pro_name = $(this).data('pro_name');
+
+			let result = confirm("선택하신 상품은 <<" + pro_name + ">>입니다. \n 주문을 취소하시겠습니까?")
+
+			if (result) {
+				$.ajax({
+					type : "get",
+					url : "/pay/kakao/cancel",
+					data : {
+						group_id : group_id,
+						totalPrice : totalPrice,
+					},
+					success : function(response) {
+						alert("결제가 취소되었습니다.");
+						var status = $("#statusTd_" + group_id).text();
+						$('#statusTd_' + group_id).text("주문 취소");
+					},
+		            error: function(xhr, status, error) {
+		                alert("결제취소가 실패했습니다.");
+		              }
+				});
+			};
+		});
+
 function detailTable(data, group_id) {
     var tbody = $("#accordianBody-" + group_id);
     tbody.empty();	  
     var productList = JSON.parse('${productList}');
     let selectCate;
+    let pro_code;
     data.forEach(function (item) {
+          pro_code = item.pro_code;
           var pay_code = item.pay_code;
     	  var cate = $("<select>").addClass("form-control").attr("id", "cate_" + pay_code).css({"max-width":"250px", "height":"40px", "text-align":"center", "font-size":"14px"});
     	  var keys = Object.keys(productList);
-
     	  keys.forEach(function(key) {
     	    var option = $("<option>").val(key).text(key);
     	    cate.append(option);
     	  });
-    	  if (item.pro_code.substr(0, 1) === 'P') {
+    	  if (pro_code.substr(0, 1) === 'P') {
     	    cate.val('프리미엄');
-    	  } else if (item.pro_code.substr(0, 1) === 'O') {
+    	  } else if (pro_code.substr(0, 1) === 'O') {
     	    cate.val('1인세트');
     	  } else {
     	    cate.val('2·3인세트');
     	  }
 
   	        selectCate = cate.val();
-    	    console.log(selectCate);
     	    var pro_name = $("<select>").addClass("form-control").attr("id", "pro_name_" + pay_code).css({"max-width":"250px", "height":"40px", "text-align":"center", "font-size":"14px"});
     	    var productListByCate = productList[selectCate];
-    	    console.log(productListByCate);
     	    
     	    if (productListByCate) {
     	    	  productListByCate.forEach(function(product) {
-    	    	    var option = $("<option>").val(product.pro_name).text(product.pro_name);
-    	    	    pro_name.append(option);
+    	    		  var option = $("<option>").val(product.pro_name).text(product.pro_name);
+    	    		  if (product.pro_name === item.pro_name) {
+    	    		    option.attr("selected", true);
+    	    		  }
+    	    		  pro_name.append(option);
     	    	  });
     	    	} else {
     	    	  console.log("해당 카테고리의 상품이 존재하지 않습니다.");
     	    	}
     	    
     	    var selectProduct = productListByCate.find(function(product) {
-    	    	return product;
+    	    	return product.pro_name === pro_name.val();
     	      });
-    	    console.log(selectProduct);
     	    if (selectProduct) {
     	    	  var selectPrice = selectProduct.pro_price;
     	    	  var totalPrice = item.cart_cnt * selectPrice;
@@ -250,10 +288,9 @@ function detailTable(data, group_id) {
           }).attr("id", "cart_cnt_" + pay_code).css({"text-align":"center","padding-left":"20px"});
         
         cate.on("change", function() {
-        	  console.log("cateChange함수~~~~~");
+        	
         	  var pay_code = $(this).attr("id").replace("cate_", "");
         	  selectCate = $(this).val();
-        	  console.log(selectCate);
         	  var productListByCate = productList[selectCate];
         	  var pro_name = $("#pro_name_" + pay_code);
         	  pro_name.empty();
@@ -270,26 +307,24 @@ function detailTable(data, group_id) {
         var cnt = parseInt((cart_cnt).val());
         
         pro_name.on("change", function() {
-        	console.log("pro_name함수 실행~~~~~~~~");
         	  var pay_code = $(this).attr("id").replace("pro_name_", "");
         	  var selectPro_name = $(this).val();
-        	  console.log(selectCate);
-        	  console.log(selectPro_name);
+        	  var selectCate = $("#cate_" + pay_code).val();
         	  var productListByCate = productList[selectCate];
-        	  console.log(productListByCate);
         	  var selectProduct = productListByCate.find(function(product) {
         	    return product.pro_name === selectPro_name;
         	  });
+        	  pro_code = selectProduct.pro_code;
         	  var selectPrice = selectProduct ? selectProduct.pro_price : 0;
         	  var cnt = parseInt($("#cart_cnt_" + pay_code).val());
         	  var changePrice = cnt * selectPrice;
-        	  $("#changePrice" + pay_code).text(changePrice);
+        	  $("#changePrice_" + pay_code).text(changePrice);
         	});
         
         cart_cnt.on("change", function() {
         	var cnt = parseInt($(this).val());
         	var changePrice = cnt * selectPrice;
-  		  $("#changePrice" + pay_code).text(changePrice);
+  		  $("#changePrice_" + pay_code).text(changePrice);
         });
 
       var cart_day = $("<div>").addClass("cart_day");
@@ -314,13 +349,14 @@ function detailTable(data, group_id) {
       
 
       
-      var dateString = new Date(item.cart_start).toISOString().slice(0,10);
+      var dateString = new Date(item.cart_start);
+      var localDateString = dateString.getFullYear() + "-" + ("0" + (dateString.getMonth() + 1)).slice(-2) + "-" + ("0" + dateString.getDate()).slice(-2);
       var cart_start = $("<input>").attr({
           "type": "text",
           "name": "cart_start",
           "class": "form-control input-number",
           "readonly": true,
-      }).val(dateString).datepicker({dateFormat: "yy-mm-dd"}).css({"text-align":"center"});
+      }).val(localDateString).datepicker({dateFormat: "yy-mm-dd"}).css({"text-align":"center"});
       
       var pay_req =  $("<input>").attr({
           "type": "text",
@@ -332,52 +368,61 @@ function detailTable(data, group_id) {
           "type": "button",
           "name": "modify",
           "value": "수정",
-          "class": "btn btn-secondary",
+          "class": "btn btn-secondary py-2 px-3",
       });
       
-      modify.on("click",function() {
-    	  const checkedValues = [];
-    	  const checkboxes = document.querySelectorAll("input[name='cart_day_" + pay_code + "']:checked");
-    	  checkboxes.forEach(function(checkbox) {
-    	    checkedValues.push(checkbox.value);
-    	  });
-    	  
-    	  $.ajax({
-    		  type: "POST",
-    		  url: "/admin/pays/update",
-    		  data: {
-    		    pay_code: pay_code,
-    		    pro_name: pro_name.val(),
-    		    cart_cnt: cart_cnt.val(),
-    		    totalPrice : $("#changePrice_" + pay_code).text(),
-    		    cart_day: checkedValues.join(""),
-    		    cart_start: cart_start.val(),
-    		    pay_req: pay_req.val(),
-    		  },
-    		  success: function(data) {
-    		    console.log(data);
-    		  },
-    		  error: function(xhr, status, error) {
-    		    console.error(xhr);
-    		  }
-    		});
-        });
+      modify.on("click", function() {
+          const checkedValues = [];
+          const checkboxes = document.querySelectorAll("input[name='cart_day_" + pay_code + "']:checked");
+          checkboxes.forEach(function(checkbox) {
+            checkedValues.push(checkbox.value);
+          });
+
+          if (confirm("정보를 변경하시겠습니까?")) {
+            $.ajax({
+              type: "POST",
+              url: "/admin/pays/update",
+              data: {
+              pro_code: pro_code,
+                pay_code: pay_code,
+                pro_name: pro_name.val(),
+                cart_cnt: cart_cnt.val(),
+                totalPrice: $("#changePrice_" + pay_code).text(),
+                cart_day: checkedValues.join(""),
+                cart_start: cart_start.val(),
+                pay_req: pay_req.val(),
+              },
+              success: function(data) {
+                alert("정보가 변경되었습니다.");
+
+                	  var productName = cart_cnt.val() == 1 ? pro_name.val() : pro_name.val() + "외 " + (cart_cnt.val() - 1) + "종";
+                	  var totalPrice = $("#changePrice_" + pay_code).text();
+                	  $('#pro_name_' + group_id).text(productName);
+                	  $('#totalPrice_' + group_id).text(totalPrice);
+                	  
+                      },
+              error: function(xhr, status, error) {
+                alert("업데이트가 실패했습니다.");
+              }
+          })
+        }
+      });
       
-      tbody.append(
-        $("<tr>").append(
-          $("<td>").css("height", "40px").attr("name", "cate").append(cate),
-          $("<td>").css("height", "40px").attr("name", "pro_name").append(pro_name),
-          $("<td>").css("height", "40px").attr("name", "cart_cnt").append(cart_cnt),
-          $("<td>").css("height", "40px").attr("name", "totalPrice").text(totalPrice),
-          $("<td>").css("height", "40px").attr("name", "changePrice").attr("id", "changePrice_" + pay_code).text(changePrice),
-          $("<td>").css("height", "40px").append(cart_day),
-          $("<td>").css("height", "40px").append(cart_start),
-          $("<td>").css("height", "40px").attr("name", "pay_req").append(pay_req),
-          $("<td>").css("height", "40px").attr("name", "modify").append(modify)
-        )
-      );
-	});
-    };
+        
+        tbody.append(
+          $("<tr>").append(
+            $("<td>").css("height", "40px").attr("name", "cate").append(cate),
+            $("<td>").css("height", "40px").attr("name", "pro_name").append(pro_name),
+            $("<td>").css("height", "40px").attr("name", "cart_cnt").append(cart_cnt),
+            $("<td>").css("height", "40px").attr("name", "totalPrice").text(totalPrice),
+            $("<td>").css("height", "40px").attr("name", "changePrice").attr("id", "changePrice_" + pay_code).text(changePrice),
+            $("<td>").css("height", "40px").append(cart_day),
+            $("<td>").css("height", "40px").append(cart_start),
+            $("<td>").css("height", "40px").attr("name", "pay_req").append(pay_req),
+            $("<td>").css("height", "40px").attr("name", "modify").append(modify)
+          )
+        );
+      })};
     
   $(".collapse").on("hidden.bs.collapse", function () {
     var group_id = $(this).attr("id").split("-")[1];

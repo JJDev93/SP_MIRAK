@@ -212,12 +212,11 @@ public class PayController {
 	@RequestMapping(value = "/admin/pays/update", method = RequestMethod.POST)
 	@ResponseBody
 	public String update(PayVO payVO) {
-		System.out.println("수정하러 컨트롤라 진입");
 		int result = payService.updatePayments(payVO);
 		if (result == 1) {
 	        return "success";
 	    } else {
-	        return "fail";
+	        return "error";
 	    }
 	}
 
