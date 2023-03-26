@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.css">
-<script type="text/javascript" src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <style>
 li {
       float:left;
@@ -166,11 +162,14 @@ tr .tr-custom {
                   </div>
                </div>
 			</div>
+		</div>
 	</div>
 </div>
-
-<jsp:include page="/common/admin_ft.jsp"></jsp:include>
-</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<jsp:include page="/common/admin_ft.jsp"></jsp:include>
 <script>
 $('.payCancel[disabled]').each(function() {
 	  $(this).text('취소된 주문');
@@ -367,9 +366,13 @@ function detailTable(data, group_id) {
       var modify = $("<input>").attr({
           "type": "button",
           "name": "modify",
-          "value": "수정",
+          "value": "변경하기",
           "class": "btn btn-secondary py-2 px-3",
       });
+      if($("#statusTd_" + group_id).text() == "주문 취소") {
+    	  modify.attr("disabled", true).val("취소된 주문");
+      }
+      
       
       modify.on("click", function() {
           const checkedValues = [];

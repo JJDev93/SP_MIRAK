@@ -31,6 +31,7 @@ import kr.co.mirak.pay.PayStringVO;
 import kr.co.mirak.pay.PayVO;
 import kr.co.mirak.pay.chart.ChartData;
 import kr.co.mirak.pay.chart.ChartService;
+import kr.co.mirak.pay.chart.RatioByVO;
 import kr.co.mirak.pay.chart.TotalByDayVO;
 import kr.co.mirak.pay.chart.TotalByMenuVO;
 import kr.co.mirak.product.ProductService;
@@ -248,37 +249,45 @@ public class PayController {
 		chartData.setTotalByMonthList(totalByMonthList);
 
 		String data = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(chartData);
-		System.out.println(data);
 
 		return data;
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/admin/charts/getTotalByDayList/{clickedMonth}", produces = "application/json;charset=UTF-8", method = RequestMethod.GET)
-	public String getTotalByDayList(@PathVariable String clickedMonth) throws Exception {
-	    TotalByDayVO dvo = new TotalByDayVO();
-	    dvo.setPay_date(clickedMonth);
-	    Map<String, List<Object>> totalByDayList = chartService.getTotalByDayList(dvo, clickedMonth);
-
-	    ObjectMapper objectMapper = new ObjectMapper();
-	    String data = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(totalByDayList);
-	    System.out.println(data);
-
-	    return data;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/admin/charts/getTotalByMenuList/{clickedMenu}", produces = "application/json;charset=UTF-8", method = RequestMethod.GET)
-	public String getTotalByEachMenu(@PathVariable String clickedMenu) throws Exception {
-		TotalByDayVO dvo = new TotalByDayVO();
-		Map<String, List<Object>> totalByEachMenu = chartService.getTotalByEachMenu(dvo, clickedMenu);
-		
+	@RequestMapping(value = "/admin/charts/getCountByRatio/{clickedMenu}", produces = "application/json;charset=UTF-8", method = RequestMethod.GET)
+	public String getCountByGender(@PathVariable String clickedMenu) throws Exception {
+		ChartData chartData = new ChartData();
 		ObjectMapper objectMapper = new ObjectMapper();
-		String data = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(totalByEachMenu);
-		System.out.println(data);
+		
+		RatioByVO rvo = new RatioByVO();
+		
+		Map<String, List<Object>> countByGender = chartService.getCountByGender(rvo, clickedMenu);
+		Map<String, List<Object>> countByAge = chartService.getCountByAge(rvo, clickedMenu);
+		
+		
+		chartData.setCountByGender(countByGender);
+		chartData.setCountByAge(countByAge);
+		
+		
+		String data = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(chartData);
+		System.out.println("지금 뽑은 data는~~~~~~~~~~~~~~~~~~~ : " + data);
 		
 		return data;
 	}
+	
+//	@ResponseBody
+//	@RequestMapping(value = "/admin/charts/getTotalByDayList/{clickedMonth}", produces = "application/json;charset=UTF-8", method = RequestMethod.GET)
+//	public String getTotalByDayList(@PathVariable String clickedMonth) throws Exception {
+//		
+//	    TotalByDayVO dvo = new TotalByDayVO();
+//	    dvo.setPay_date(clickedMonth);
+//	    Map<String, List<Object>> totalByDayList = chartService.getTotalByDayList(dvo, clickedMonth);
+//
+//	    ObjectMapper objectMapper = new ObjectMapper();
+//	    String data = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(totalByDayList);
+//
+//	    return data;
+//	}
 
 
 }

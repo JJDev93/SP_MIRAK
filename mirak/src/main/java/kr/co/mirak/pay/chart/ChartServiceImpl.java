@@ -80,22 +80,47 @@ public class ChartServiceImpl implements ChartService {
 	}
 
 	@Override
-	public Map<String, List<Object>> getTotalByEachMenu(TotalByDayVO vo, String clickedMenu) {
+	public Map<String, List<Object>> getCountByGender(RatioByVO vo, String clickedMenu) {
 		ChartMapper mapper = sqlSessionTemplate.getMapper(ChartMapper.class);
 		System.out.println("clickedMenu는 ~~~~~~~~~~~" + clickedMenu);
-	    List<Double> totalPrice = new ArrayList<>();
-	    List<String> pay_date = new ArrayList<>();
+	    List<Integer> mem_gender = new ArrayList<>();
+	    List<Integer> countByGender = new ArrayList<>();
 
-	    List<TotalByDayVO> totalByEachMenu = mapper.getTotalByEachMenu(vo, clickedMenu);
-	    for (TotalByDayVO item : totalByEachMenu) {
-	    	totalPrice.add((double) item.getTotalPrice());
-	        pay_date.add(item.getPay_date());
+	    List<RatioByVO> countByGenderList = mapper.getCountByGender(vo, clickedMenu);
+	    for (RatioByVO item : countByGenderList) {
+	    	mem_gender.add(item.getMem_gender());
+	    	countByGender.add(item.getCount());
 	    }
 	    
 	    Map<String, List<Object>> map = new HashMap<>();
-	    map.put("totalPrice", new ArrayList<Object>(totalPrice));
-	    map.put("pay_day", new ArrayList<Object>(pay_date));
+	    map.put("mem_gender", new ArrayList<Object>(mem_gender));
+	    map.put("countByGender", new ArrayList<Object>(countByGender));
+	    System.out.println("map에 담긴것~~~~~~ : " + map);
 
 	    return map;
+	}
+	
+	@Override
+	public Map<String, List<Object>> getCountByAge(RatioByVO vo, String clickedMenu) {
+		ChartMapper mapper = sqlSessionTemplate.getMapper(ChartMapper.class);
+		System.out.println("clickedMenu는 ~~~~~~~~~~~" + clickedMenu);
+		
+		List<Integer> mem_age = new ArrayList<>();
+		List<Integer> countByAge = new ArrayList<>();
+		
+		List<RatioByVO> countByAgeList = mapper.getCountByAge(vo, clickedMenu);
+		for (RatioByVO item : countByAgeList) {
+			mem_age.add(item.getMem_age());
+			countByAge.add(item.getCount());
+		}
+		
+		
+		Map<String, List<Object>> map = new HashMap<>();
+		map.put("mem_age", new ArrayList<Object>(mem_age));
+		map.put("countByAge", new ArrayList<Object>(countByAge));
+		
+		System.out.println("map에 담긴것~~~~~~ : " + map);
+		
+		return map;
 	}
 }
