@@ -77,72 +77,73 @@
 									<div class="form-group">
 										<label for="pw2">비밀번호 확인</label> <input type="password" tabIndex="6" class="form-control" id="pw2" onchange="check_pw()" placeholder="비밀번호 확인" required="required">
 											<span id="check"></span>
+										</div>
 									</div>
-								</div>
-							</c:otherwise>
-						</c:choose>
-						
-						<div class="w-100"></div>
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="firstname">이름</label>  
-								<input type="text" name="mem_name" id="name" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required">  
-							</div>
-						</div>
-						<div class="w-100"></div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="age">나이</label> <input type="text" name="mem_age" tabIndex="8" id="age" class="form-control"
-																			placeholder="나이를 입력해주세요" value="${member.mem_age }" required="required">
-							</div>
-						</div>
-
-						<div class="w-100"></div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="gender">성별</label>
-								<div>
-									<input type="radio" name="mem_gender" value="1" checked tabIndex="9"> 남 &nbsp;&nbsp;&nbsp; <input type="radio"name="mem_gender" value="2" tabIndex="10"> 여
+							    </c:otherwise>
+							</c:choose>
+							
+							<div class="w-100"></div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="firstname">이름</label> 
+									<input type="text" name="mem_name" id="name" tabIndex="7" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required" >
 								</div>
 							</div>
-						</div>
-
-						<div class="w-100"></div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="phone">Phone</label>
-								<input type="text" name="mem_phone" id="phone" class="form-control" placeholder=" ' - ' 빼고 입력해주세요 " required="required"value="${member.mem_phone}" maxlength="11" pattern="[0-9]{11}">
+							<div class="w-100"></div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="age">나이</label> 
+									<input type="text" name="mem_age" tabIndex="8" id="age" class="form-control" placeholder="나이를 입력해주세요" value="${member.mem_age }" required="required">
+								</div>
 							</div>
-						</div>
+	
+							<div class="w-100"></div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="gender">성별</label>
+									<div>
+										<input type="radio" name="mem_gender" value="1" checked tabIndex="9"> 남
+										&nbsp;&nbsp;&nbsp; 
+										<input type="radio" name="mem_gender" value="2" tabIndex="10"> 여
 
-						<div class="w-100"></div>
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="streetaddress">주소</label>
-								<div class="row mb-4">
-									<div class="col-sm-8">
-										<input type="text" class="form-control" id="address_input_1" name="mem_zipcode" placeholder="우편번호" readonly>
-									</div>
-									<div class="col-sm-4">
-										<button type="button" class="btn btn-primary joinBtn address button" tabIndex="12" onclick="execution_daum_address();">우편번호찾기</button>
 									</div>
 								</div>
-								
-								<input type="text" id="address_input_2" class="form-control mb-4" name="mem_add1" placeholder="주소지를 입력해주세요" readonly="readonly">
-								<input type="text" id="address_input_3" class="form-control" name="mem_add2" tabIndex="13" placeholder="상세주소를 작성해주세요" readonly>
+												
+							<div class="w-100"></div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="phone">Phone</label> 
+									<input type="text" name="mem_phone" id="phone" tabIndex="11" class="form-control" placeholder=" ' - ' 빼고 입력해주세요 " required="required" value="${member.mem_phone}" maxlength="11" pattern="[0-9]{11}">
+								</div>
+							</div>
+	
+							<div class="w-100"></div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="streetaddress">주소</label>
+									<div class="row mb-4">
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="address_input_1" name="mem_zipcode" placeholder="우편번호" readonly>
+										</div>
+										<div class="col-sm-4">
+											<button type="button" class="btn btn-primary joinBtn address button" tabIndex="12" onclick="execution_daum_address();">우편번호찾기</button>
+										</div>
+									</div>
+									<input type="text" id="address_input_2" class="form-control mb-4" name="mem_add1" placeholder="주소지를 입력해주세요" readonly="readonly"> 
+									<input type="text"  id="address_input_3" class="form-control" name="mem_add2"tabIndex="13" placeholder="상세주소를 작성해주세요" readonly>
+								</div>
+							</div>
+							
+							<div class="w-100 mb-5"></div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-md-6">
+								<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return checkAll();">
+							</div>
+							<div class="col-md-6">
+								<a href="/" class="btn btn-secondary py-3 px-5 w-100" tabIndex="15">가입취소</a>
 							</div>
 						</div>
-
-						<div class="w-100 mb-5"></div>
-					</div>
-					<div class="row mb-5">
-						<div class="col-md-6">
-							<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return checkAll();">
-						</div>
-						<div class="col-md-6">
-							<a href="/" class="btn btn-secondary py-3 px-5 w-100" tabIndex="15">가입취소</a>
-						</div>
-					</div>
 				</form>
 			</div>
 		</div>
@@ -221,6 +222,7 @@
 		}
 		return true;
 	}
+<<<<<<< HEAD
 
 	const AGECHECK = document.getElementById("age");
 	function AGECHECKFORM() {
@@ -322,3 +324,6 @@
 
 
 
+=======
+ </script>
+>>>>>>> branch 'member' of https://github.com/ywshin0112/mirak.git
