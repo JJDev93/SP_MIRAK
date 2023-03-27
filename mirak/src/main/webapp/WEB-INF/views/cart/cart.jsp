@@ -207,7 +207,7 @@ session = request.getSession();
 
 <script>
 function selectjumal(selectjumal)  {
-    const checkboxes3 
+    var checkboxes3 
          = document.querySelectorAll('#sat, #sun');
     
     checkboxes3.forEach((checkbox) => {
@@ -215,7 +215,7 @@ function selectjumal(selectjumal)  {
     })
   }
 function selectpyeong(selectpyeong)  {
-    const checkboxes2 
+    var checkboxes2 
          = document.querySelectorAll('#mon, #tue, #wed, #thu, #fri');
     
     checkboxes2.forEach((checkbox) => {
@@ -223,7 +223,7 @@ function selectpyeong(selectpyeong)  {
     })
   }
 function selectAll(selectAll)  {
-     const checkboxes 
+     var checkboxes 
           = document.getElementsByName('cart_day');
      
      checkboxes.forEach((checkbox) => {
@@ -235,8 +235,8 @@ function selectAll(selectAll)  {
 //체크박스가 체크되었는지 확인
 function CheckTest() {
 		
-	var day = document.getElementsByName("cart_day");
-	
+	var day = document.getElementsByName('cart_day');
+
 	for (var i=0; i<day.length; i++) {
 		// 체크된 값을 가져오기. day 값의 체크된 (checked)
 		if (day[i].checked) {
@@ -244,7 +244,7 @@ function CheckTest() {
 		}
 	}
 	// 값이 없을 경우 for 건너뛰고 출력
-	alert ("요일을 선택하세요");	// 체크된 값 없을 경우 
+	alert ('요일을 선택하세요');	// 체크된 값 없을 경우 
 	return false;
 }
 
