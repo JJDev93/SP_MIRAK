@@ -165,10 +165,7 @@ tr .tr-custom {
 		</div>
 	</div>
 </div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script type="text/javascript" src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
 	<jsp:include page="/common/admin_ft.jsp"></jsp:include>
 <script>
 $('.payCancel[disabled]').each(function() {

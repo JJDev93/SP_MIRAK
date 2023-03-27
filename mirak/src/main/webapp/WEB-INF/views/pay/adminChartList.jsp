@@ -39,13 +39,13 @@ canvas {
 				<div class="row">
 					<div class="col-md-1"></div>
 					<div class="col-md-10">
-						<div class="chart-wrapper1 chart-visible">
+						<div id="chartWrapper1" class="chart-visible">
 							<canvas id="myChart1" width="1000" height="400"></canvas>
 						</div>
-						<div class="chart-wrapper2 chart-hidden">
+						<div id="chartWrapper2" class="chart-hidden">
 							<canvas id="myChart5" width="400" height="400"></canvas>
 						</div>
-						<div class="chart-wrapper2 chart-hidden">
+						<div id="chartWrapper3" class="chart-hidden">
 							<canvas id="myChart6" width="400" height="400"></canvas>
 						</div>
 					</div>
