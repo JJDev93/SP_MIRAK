@@ -74,4 +74,19 @@ public class mypageController {
 		}
 		return success;
 	}
+	
+	
+	/*
+	//api회원탈퇴
+	@RequestMapping(value="/apidelete", method = RequestMethod.POST)
+	@ResponseBody
+	public int apidelete(MemberVO vo , HttpSession session) {
+		
+		
+		
+		return 0;
+		
+	}
+	*/
+	
 }
