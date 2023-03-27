@@ -4,9 +4,12 @@
 <mapper namespace="kr.co.mirak.pay.chart.ChartMapper">
 	<select id="getTotalByMenuList"
 		resultType="kr.co.mirak.pay.chart.TotalByMenuVO">
-		select pro_name, sum(totalPrice) as
-		totalPrice from pay
-		group by pro_name order by totalPrice desc limit 20;
+		SELECT pro_name, SUM(totalPrice) AS totalPrice, 
+        (SUM(totalPrice) / (SELECT SUM(totalPrice) FROM pay WHERE status = '결제 완료') * 100) AS totalRatio
+        FROM pay WHERE status = '결제 완료'
+        GROUP BY pro_name
+        ORDER BY totalPrice DESC
+        LIMIT 20;
 	</select>
 
 	<select id="getCountByGender"
@@ -43,27 +46,6 @@
 		ORDER BY mem_age ASC;
 	</select>
 
-	<select id="getTotalByMonthList"
-		resultType="kr.co.mirak.pay.chart.TotalByDayVO">
-		SELECT DATE_FORMAT(pay_date, '%Y-%m') AS pay_date,
-		SUM(totalPrice) AS totalPrice
-		FROM pay
-		GROUP BY DATE_FORMAT(pay_date,
-		'%Y-%m')
-		ORDER BY pay_date;
-	</select>
-
-	<select id="getTotalByDayList"
-		resultType="kr.co.mirak.pay.chart.TotalByDayVO">
-		SELECT DATE_FORMAT(pay_date, '%Y-%m-%d') AS pay_date,
-		SUM(totalPrice) AS totalPrice
-		FROM pay WHERE MONTH(pay_date) =
-		#{clickedMonth}
-		GROUP BY pay_date
-		ORDER BY
-		pay_date;
-	</select>
-
 	<select id="getPurchaseRateList"
 		resultType="kr.co.mirak.pay.chart.PurchaseRateVO">
 	<![CDATA[
@@ -78,13 +60,5 @@
 		ORDER BY ratio DESC
 		LIMIT 10;
 		]]>
-	</select>
-
-
-
-	<select id="getTotalByEachMenu"
-		resultType="kr.co.mirak.pay.chart.TotalByDayVO">
-		select pay_date, totalPrice from pay where pro_name =
-		#{clickedMenu} ORDER BY pay_date;
 	</select>
 </mapper>

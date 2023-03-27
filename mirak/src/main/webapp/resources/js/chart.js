@@ -8,7 +8,9 @@ $(function () {
     success: function (data) {
       var totalByMenuList = data["totalByMenuList"];
       var purchaseRateList = data["purchaseRateList"];
-
+      
+      console.log(totalByMenuList.totalRatio);
+      
       function changeClass(element, removeClass, addClass) {
         element.classList.remove(removeClass);
         element.classList.add(addClass);
@@ -41,6 +43,20 @@ $(function () {
               "rgb(255, 192, 203)",
             ],
             borderWidth: 2,
+            datalabels: {
+              color: "black",
+              font: {
+              	size : 14,
+                weight: "bold",
+              },
+              anchor: "begin",
+              align: "middle",
+              formatter: function (value, context) {
+                var index = context.dataIndex;
+                var totalRatio = totalByMenuList.totalRatio[index];
+                return totalRatio.toFixed(1) + "%";
+              },
+            },
           },
         ],
       };
@@ -64,6 +80,7 @@ $(function () {
         type: "bar",
         data: byMenuChartData,
         options: byMenuChartDataOpt,
+        plugins: [ChartDataLabels],
       });
 
       myChart1.canvas.addEventListener("click", function (e) {
@@ -140,7 +157,7 @@ $(function () {
                 plugins: {
                   title: {
                     display: true,
-                    text: clickedMenu + " 주문 성별 비율",
+                    text: " 주문 성별 비율",
                   },
                   datalabels: {
                     color: "#fff",
@@ -234,8 +251,9 @@ $(function () {
             type: "bar",
             label: "장바구니에 담긴 횟수",
             data: purchaseRateList.cart_cnt,
-            borderColor: "rgb(255, 99, 132)",
+            borderColor: "rgba(128, 128, 128, 0.5)",
             backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderWidth: 1,
             order: 1,
             datalabels: {
               color: function (context) {
@@ -256,7 +274,7 @@ $(function () {
                 var index = context.dataIndex;
                 var ratio = purchaseRateList.ratio[index];
                 var rec = purchaseRateList.rec[index];
-                return ratio.toFixed(1) + "%\n\n" + rec;
+                return "ㅤ"+ratio.toFixed(1) + "%\n\n" + "ㅤ"+rec;
               },
             },
           },
@@ -264,8 +282,9 @@ $(function () {
             type: "bar",
             label: "실제 구매횟수",
             data: purchaseRateList.cart_show,
-            borderColor: "rgb(54, 162, 235)",
+            borderColor: "rgba(128, 128, 128, 0.5)",
             backgroundColor: "rgba(54, 162, 235, 0.2)",
+            borderWidth: 1,
             order: 2,
             datalabels: {
               display: false,
@@ -278,6 +297,12 @@ $(function () {
       const purchaseRateOpt = {
         maintainAspectRatio: false,
         responsive: false,
+        plugins: {
+          title: {
+            display: true,
+            text: "구매율",
+          },
+        },
         scales: {
           yAxes: [
             {

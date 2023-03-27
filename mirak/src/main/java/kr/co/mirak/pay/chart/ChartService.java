@@ -12,8 +12,4 @@ public interface ChartService {
 
 	Map<String, List<Object>> getPurchaseRateList(PurchaseRateVO vo);
 
-	Map<String, List<Object>> getTotalByMonthList(TotalByDayVO vo);
-
-	Map<String, List<Object>> getTotalByDayList(TotalByDayVO vo, String clickedMonth);
-
 }

@@ -16,8 +16,4 @@ public interface ChartMapper {
 	
 	List<PurchaseRateVO> getPurchaseRateList(PurchaseRateVO vo);
 
-	List<TotalByDayVO> getTotalByMonthList(TotalByDayVO vo);
-
-	List<TotalByDayVO> getTotalByDayList(TotalByDayVO vo, @Param("clickedMonth") String clickedMonth);
-
 }

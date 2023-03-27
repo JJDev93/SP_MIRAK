@@ -7,7 +7,7 @@ public class ChartData {
 
 	public Map<String, List<Object>> totalByMenuList;
 
-	public Map<String, List<Object>> totalByMonthList;
+	public Map<String, List<Object>> totalRatioList;
 
 	public Map<String, List<Object>> countByGender;
 
@@ -23,12 +23,12 @@ public class ChartData {
 		this.totalByMenuList = totalByMenuList;
 	}
 
-	public Map<String, List<Object>> getTotalByMonthList() {
-		return totalByMonthList;
+	public Map<String, List<Object>> getTotalRatioList() {
+		return totalRatioList;
 	}
 
-	public void setTotalByMonthList(Map<String, List<Object>> totalByMonthList) {
-		this.totalByMonthList = totalByMonthList;
+	public void setTotalRatioList(Map<String, List<Object>> totalRatioList) {
+		this.totalRatioList = totalRatioList;
 	}
 
 	public Map<String, List<Object>> getCountByGender() {
