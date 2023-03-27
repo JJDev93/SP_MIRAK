@@ -125,7 +125,7 @@ session = request.getSession();
 		<div class="modal fade" id="modal${c.cart_code }" tabindex="9999" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
-					<form action="/cartUpdate" method="post" name="day" onsubmit="return daycheck();">
+					<form action="/cartUpdate" method="post" name="day">
 						<input type="hidden" name="cart_code" value="${c.cart_code }">		
 						<input type="hidden" name="cart_totprice" value="${c.cart_cnt * c.pro_price}">		
 						<div class="modal-header">
@@ -187,7 +187,7 @@ session = request.getSession();
 							<%-- <a href="/cartUpdate/${c.cart_code}" class="btn btn-primary py-3 px-5">변경</a> --%>
 							<!-- <input type="submit" value="변경" class="btn btn-primary py-3 px-5"> -->
 							<!-- <input type="submit" value="변경" class="btn btn-primary py-3 px-5" onclick="if(document.getElementsByName('cart_start')[0].value==''){alert('배송 시작일을 입력해주세요.');return false;}"> -->
-							<input type="submit" value="변경" class="btn btn-primary py-3 px-5">
+							<input type="submit" value="변경" class="btn btn-primary py-3 px-5" onclick="return CheckTest();">
 							
 							<button type="button" class="btn btn-black py-3 px-5" data-dismiss="modal">Close</button>
 						</div>
@@ -230,16 +230,26 @@ function selectAll(selectAll)  {
        checkbox.checked = selectAll.checked;
      })
    }
-function daycheck() {
-	const checkboxes4 
-    = document.getElementsByName('cart_day');
+
+
+//체크박스가 체크되었는지 확인
+function CheckTest() {
+		
+	var day = document.getElementsByName("cart_day");
 	
-	if (checkboxes4.value == "") {
-		alert("요일을 선택해주세요");
-		return false;
+	for (var i=0; i<day.length; i++) {
+		// 체크된 값을 가져오기. day 값의 체크된 (checked)
+		if (day[i].checked) {
+			return true;	// 계속 진행 (체크된 값 진행)
+		}
 	}
-	return true;
+	// 값이 없을 경우 for 건너뛰고 출력
+	alert ("요일을 선택하세요");	// 체크된 값 없을 경우 
+	return false;
 }
+
+
+
 	$(function() {
 		$('input[name="daterange"]').daterangepicker(
 				{

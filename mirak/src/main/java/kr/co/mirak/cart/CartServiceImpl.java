@@ -10,6 +10,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import kr.co.mirak.member.MemberMapper;
 import kr.co.mirak.member.MemberVO;
 
+
 public class CartServiceImpl implements CartService {
 
    private SqlSessionTemplate sqlSessionTemplate;
@@ -130,8 +131,8 @@ public class CartServiceImpl implements CartService {
 	}
 	
 	public MemberVO adminMemberDetail2(MemberVO vo) {
-		CartMapper mapper = sqlSessionTemplate.getMapper(CartMapper.class);
-		MemberVO memVO = mapper.adminMemberDetail2(vo);
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		MemberVO memVO = mapper.adminMemberDetail(vo);
 		memVO.toString();
 		return memVO;
 	}

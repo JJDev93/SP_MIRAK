@@ -1,8 +1,9 @@
 package kr.co.mirak.controller;
 
-import java.sql.Date;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.sql.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import kr.co.mirak.cart.CartService;
 import kr.co.mirak.cart.CartVO;
 import kr.co.mirak.cart.CriteriaC;
 import kr.co.mirak.cart.PageMakerDTOC;
+import kr.co.mirak.member.MemberService;
 import kr.co.mirak.member.MemberVO;
 
 
@@ -23,6 +25,8 @@ import kr.co.mirak.member.MemberVO;
 public class CartController {
 	@Autowired 
 	private CartService cartService;
+	@Autowired
+	private MemberService memberService;
 
 	// list select
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)   
@@ -110,10 +114,10 @@ public class CartController {
 		
 	// Admin 에서 회원정보 열람
 		@RequestMapping(value="/admin/cartmember/{curPage}/{mem_code}", method=RequestMethod.GET)	
-		public String adminMemDetailPage2(MemberVO mvo, Model model, @PathVariable("mem_code") String mem_code, @PathVariable("curPage") int curPage) {
+		public String adminMemDetail2(MemberVO mvo, Model model, @PathVariable("mem_code") String mem_code, @PathVariable("curPage") int curPage) {
 			System.out.println("====== 관리자 회원 상세페이지로 이동 ======");
 			mvo.setMem_code(Integer.parseInt(mem_code));
-			model.addAttribute("member", cartService.adminMemberDetail2(mvo));
+			model.addAttribute("member", memberService.adminMemberDetail(mvo));
 			model.addAttribute("curPage", curPage);
 			return "member/admin_member_detail";
 		}

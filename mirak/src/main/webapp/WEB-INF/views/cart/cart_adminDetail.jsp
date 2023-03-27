@@ -15,6 +15,16 @@
       </div>
       
       <form action="/admin/cartUpdate" method="post" enctype="multipart/form-data" class="p-5 bg-light mb-4">
+      <table>
+      	<tr></tr>
+      	<td class="cart_info"> 
+			<input type="hidden" class="price_input" value="${c.pro_price }">
+			<input type="hidden" class="count_input" value="${c.cart_cnt }"> 
+			<input type="hidden" class="totalPrice_input" value="${c.pro_price * c.cart_cnt }">
+			<input type="hidden" class="pro_code" value="${c.pro_code }">
+			<input type="hidden" class="cart_code" value="${c.cart_code }">
+		</td>
+      </table>
          <div class="row">
             <div class="col-md-12">
                <div class="form-group">
@@ -152,6 +162,27 @@ function selectAll(selectAll)  {
      })
    }
    
+function setTotalInfo() {
+	let totalPrice = 0; // 총 가격
+	let totalCount = 0; // 총 갯수
+	
+	$(".cart_info")
+			.each(
+					function(index, element) {
+							// 총 가격
+							totalPrice += parseInt($(element).find(
+									".totalPrice_input").val());
+							// 총 갯수
+							totalCount += parseInt($(element).find(
+									".count_input").val());
+					});
+	
+	
+	// 총 가격
+	$(".totalPrice_span").text(totalPrice.toLocaleString());
+	// 총 갯수
+	$(".totalCount_span").text(totalCount);
+}
 
 	
 </script>

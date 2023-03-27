@@ -17,6 +17,14 @@ public class CartVO {
 	private int pro_price;
 	private String pro_desc;
 	private String pro_image;
+	private int mem_code;
+	public int getMem_code() {
+		return mem_code;
+	}
+	public void setMem_code(int mem_code) {
+		this.mem_code = mem_code;
+	}
+	
 	
 	public int getCart_code() {
 		return cart_code;
