@@ -68,7 +68,7 @@
 	<select id="getMemberInfo" parameterType="String"
 		resultType="member">
 		<![CDATA[
-			SELECT MEM_ID, 
+			SELECT MEM_ID, MEM_PW,
 				MEM_NAME, MEM_AGE, 
 				MEM_GENDER, MEM_PHONE, 
 				MEM_REGDATE, 

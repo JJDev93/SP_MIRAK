@@ -25,7 +25,7 @@
 					</ul>
 				</div>
 
-				<form action="memupdate" method="post" class="contact-form"
+				<form action="memupdate" method="post" class="contact-form billing-form"
 					id="delForm">
 					<h3 class="mb-4 billing-heading">회원정보 수정</h3>
 					<div class="row align-items-end">
@@ -33,19 +33,42 @@
 							<div class="form-group">
 								<label for="ID">아이디</label> 
 								<input type="text" name="mem_id" id="id" class="form-control" placeholder="이메일(ID)" required="required" value="${member.mem_id }" readonly>
+								<c:choose>
+									<c:when test="${member.mem_isapi == 'google'}">
+										Google 빠른로그인 회원입니다
+			                        </c:when>
+									<c:when test="${member.mem_isapi == 'naver' }">
+										Naver 빠른로그인 회원입니다
+									</c:when>
+									<c:when test="${member.mem_isapi == 'kakao' }">
+										Kakao 빠른로그인 회원입니다
+									</c:when>
+									<c:otherwise> 
+										일반 회원입니다.
+									</c:otherwise>
+								</c:choose>
 							</div>
-							<div class="form-group">
-								<label for="pw">비밀번호</label> <input type="password"
-									name="mem_pw" class="form-control" id="pw"
-									onchange="check_pw()" placeholder="수정할 비밀번호 입력"
-									required="required">
-							</div>
-							<div class="form-group">
-								<label for="pw2">비밀번호 확인</label> <input type="password"
-									class="form-control" id="pw2" onchange="check_pw()"
-									placeholder="비밀번호 확인" required="required"> <span
-									id="check"></span>
-							</div>
+							<c:choose>
+							    <c:when test="${not empty member.mem_isapi}">
+							    	<input type="text" name="mem_pw" class="form-control" value="${member.mem_pw }" readonly="readonly">
+							    	<input type="text" name="mem_isapi" class="form-control" value="${member.mem_isapi}" readonly="readonly">
+							    </c:when>
+							    <c:otherwise>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-12">
+												<label for="id">비밀번호</label>
+											</div>
+											<div class="col-sm-9" style="padding-top:0 !important;">
+												<input type="password" name="mem_pw" class="form-control" id="pw" onchange="check_pw()" placeholder="비밀번호를 입력해주세요" required="required">
+											</div>
+											<div class="col-sm-3" style="padding-top:0 !important;">
+												<button type="button" class="btn btn-primary joinBtn mb-3" data-toggle="modal" data-target="#pwUpdate">비밀번호 변경</button>
+											</div>
+										</div>
+									</div>
+							    </c:otherwise>
+							</c:choose>
 						</div>
 						
 						<div class="w-100"></div>
@@ -73,16 +96,14 @@
 								<div>
 									<c:choose>
 										<c:when test="${member.mem_gender == '1'}">
-											<input type="radio" name="mem_gender" value="1" checked>남
-                                          &nbsp;&nbsp;&nbsp; 
-                                          <input type="radio"
-												name="mem_gender" value="2">여
+											<input type="radio" name="mem_gender" value="1" checked> 남
+                                        	&nbsp;&nbsp;&nbsp; 
+                                         	<input type="radio" name="mem_gender" value="2"> 여
                                          </c:when>
 										<c:when test="${member.mem_gender == '2' }">
-											<input type="radio" name="mem_gender" value="1">남
-                                          &nbsp;&nbsp;&nbsp; 
-                                          <input type="radio"
-												name="mem_gender" value="2" checked>여
+											<input type="radio" name="mem_gender" value="1"> 남
+                                            &nbsp;&nbsp;&nbsp; 
+                                            <input type="radio" name="mem_gender" value="2" checked> 여
                                        </c:when>
 									</c:choose>
 								</div>
@@ -157,6 +178,29 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 						<button type="button" class="btn btn-primary" id="memberCheck" onclick="fn_memberCheck();">탈퇴하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	
+	<!-- Modal -->
+	<form action="pwUpdate" method="post">
+		<div class="modal fade" id="pwUpdate" tabindex="9999" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">비밀번호 변경</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">수정하기</button>
 					</div>
 				</div>
 			</div>

@@ -20,10 +20,8 @@ public class mypageController {
 	// 마이페이지 이동
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public String mypageview(Model model, HttpSession session) {
-		System.out.println("마이페이지로 이동..");
-
+		System.out.println("마이페이지로 이동");
 		MemberVO member = memberService.getMemberInfo(session);
-//		model.addAttribute("message", message);
 		model.addAttribute("member", member);
 		System.out.println(member);
 		return "member/mypage";
@@ -33,7 +31,7 @@ public class mypageController {
 	@RequestMapping(value = "/memupdate", method = RequestMethod.POST)
 	public String memupdate(MemberVO vo, Model model) {
 		memberService.memupdate(vo);
-		System.out.println("회원정보 수정 완료...");
+		System.out.println("회원정보 수정 완료");
 		return "redirect:mypage";
 	}
 
