@@ -7,24 +7,21 @@ $(function () {
     contentType: "application/json; charset=utf-8",
     success: function (data) {
       var totalByMenuList = data["totalByMenuList"];
-      var ByMenuTotalPrice = totalByMenuList["totalPrice"];
-      var pro_name = totalByMenuList["pro_name"];
-
-      var totalByMonthList = data["totalByMonthList"];
-      var ByMonthTotalPrice = totalByMonthList["totalPrice"];
-      var pay_month = totalByMonthList["pay_month"];
+      var purchaseRateList = data["purchaseRateList"];
 
       function changeClass(element, removeClass, addClass) {
         element.classList.remove(removeClass);
         element.classList.add(addClass);
       }
       const ctx1 = document.getElementById("myChart1").getContext("2d");
+      const ctx4 = document.getElementById("myChart4").getContext("2d");
+
       const byMenuChartData = {
-        labels: pro_name,
+        labels: totalByMenuList.pro_name,
         datasets: [
           {
             label: "판매량",
-            data: ByMenuTotalPrice,
+            data: totalByMenuList.totalPrice,
             backgroundColor: [
               "rgba(255, 99, 71, 0.2)",
               "rgba(255, 140, 0, 0.2)",
@@ -60,12 +57,6 @@ $(function () {
             display: true,
             text: "판매량 TOP20",
           },
-          datalabels: {
-            formatter: (value, ctx) => {
-              return value;
-            },
-            color: "#fff",
-          },
         },
       };
 
@@ -75,7 +66,8 @@ $(function () {
         options: byMenuChartDataOpt,
       });
 
-      ctx1.canvas.addEventListener("click", function (e) {
+      myChart1.canvas.addEventListener("click", function (e) {
+        console.log("chart1 클릭이벤트~");
         const activePoints = myChart1.getElementsAtEventForMode(
           e,
           "nearest",
@@ -84,10 +76,10 @@ $(function () {
         );
         if (activePoints.length > 0) {
           const clickedIndex = activePoints[0].index;
-          const clickedMenu = pro_name[clickedIndex];
+          const clickedMenu = totalByMenuList.pro_name[clickedIndex];
 
-          let myChart5 = null,
-            myChart6 = null;
+          let myChart2 = null,
+            myChart3 = null;
 
           const chartWrapper1 = document.getElementById("chartWrapper1");
           const chartWrapper2 = document.getElementById("chartWrapper2");
@@ -109,17 +101,17 @@ $(function () {
                 }
               });
 
-              if (myChart5 !== null) {
-                myChart5.destroy();
+              if (myChart2 !== null) {
+                myChart2.destroy();
               }
-              if (myChart6 !== null) {
-                myChart6.destroy();
+              if (myChart3 !== null) {
+                myChart3.destroy();
               }
             });
           });
 
-          const ctx5 = document.getElementById("myChart5").getContext("2d");
-          const ctx6 = document.getElementById("myChart6").getContext("2d");
+          const ctx2 = document.getElementById("myChart2").getContext("2d");
+          const ctx3 = document.getElementById("myChart3").getContext("2d");
 
           $.ajax({
             type: "GET",
@@ -128,18 +120,15 @@ $(function () {
               clickedMenu: clickedMenu,
             },
             success: function (data) {
-              console.log("data반환 success~~~");
-              const mem_gender = data.countByGender.mem_gender;
-              const countByGender = data.countByGender.countByGender;
-              const countByAge = data.countByAge.countByAge;
-              const mem_age = data.countByAge.mem_age;
+              const countByGender = data.countByGender;
+              const countByAge = data.countByAge;
 
               const genderChartData = {
                 labels: ["남성", "여성"],
                 datasets: [
                   {
                     label: clickedMenu,
-                    data: countByGender,
+                    data: countByGender.countByGender,
                     backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
                     hoverOffset: 4,
                   },
@@ -154,33 +143,27 @@ $(function () {
                     text: clickedMenu + " 주문 성별 비율",
                   },
                   datalabels: {
-                    formatter: (value, ctx) => {
-                      console.log("datalabels~~~~~~~~~~~~~");
-                      let datasets = ctx.chart.data.datasets[0].data;
-                      if (value != 0) {
-                        let sum = 0;
-                        dataArr = ctx.chart.data.datasets[0].data;
-                        dataArr.map((data) => {
-                          sum += parseInt(data);
-                        });
-                        let percentage = Math.round((value * 100) / sum) + "%";
-                        return percentage;
-                      } else {
-                        let percentage = "";
-                        return percentage;
-                      }
-                    },
                     color: "#fff",
+                    formatter: (value, ctx) => {
+                      return value + "명";
+                    },
                   },
                 },
+                datasets: [
+                  {
+                    data: countByGender.mem_gender,
+                    backgroundColor: ["#007aff", "#ff2d55"],
+                    label: "성별 비율",
+                  },
+                ],
               };
 
               const ageChartData = {
-                labels: mem_age,
+                labels: countByAge.mem_age,
                 datasets: [
                   {
                     label: "나이대별 판매 현황",
-                    data: countByAge,
+                    data: countByAge.countByAge,
                     backgroundColor: [
                       "#007aff",
                       "#ff2d55",
@@ -201,26 +184,22 @@ $(function () {
                     text: "나이대별 판매 현황",
                   },
                   datalabels: {
-                    formatter: (value, ctx) => {
-                      let datasets = ctx.chart.data.datasets[0].data;
-                      if (value != 0) {
-                        let sum = 0;
-                        datasets.map((data) => {
-                          sum += parseInt(data);
-                        });
-                        let percentage = Math.round((value * 100) / sum) + "%";
-                        return percentage;
-                      } else {
-                        let percentage = "";
-                        return percentage;
-                      }
-                    },
                     color: "#fff",
+                    anchor: "end",
+                    align: "start",
+                    offset: 10,
+                    font: {
+                      weight: "bold",
+                      size: "14",
+                    },
+                    formatter: (value, ctx) => {
+                      return value + "명";
+                    },
                   },
                 },
                 datasets: [
                   {
-                    data: countByAge,
+                    data: countByAge.countByAge,
                     backgroundColor: [
                       "#007aff",
                       "#ff2d55",
@@ -232,19 +211,89 @@ $(function () {
                   },
                 ],
               };
-              myChart5 = new Chart(ctx5, {
+              myChart2 = new Chart(ctx2, {
                 type: "doughnut",
                 data: genderChartData,
                 options: genderChartDataOpt,
+                plugins: [ChartDataLabels],
               });
-              myChart6 = new Chart(ctx6, {
-                type: "doughnut",
+              myChart3 = new Chart(ctx3, {
+                type: "pie",
                 data: ageChartData,
                 options: ageChartDataOpt,
+                plugins: [ChartDataLabels],
               });
             },
           });
         }
+      });
+
+      const purchaseRateData = {
+        datasets: [
+          {
+            type: "bar",
+            label: "장바구니에 담긴 횟수",
+            data: purchaseRateList.cart_cnt,
+            borderColor: "rgb(255, 99, 132)",
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            order: 1,
+            datalabels: {
+              color: function (context) {
+                var index = context.dataIndex;
+                var value = purchaseRateList.rec[index];
+                if (value === "강추") {
+                  return "red";
+                } else {
+                  return "blue";
+                }
+              },
+              font: {
+                weight: "bold",
+              },
+              anchor: "begin",
+              align: "middle",
+              formatter: function (value, context) {
+                var index = context.dataIndex;
+                var ratio = purchaseRateList.ratio[index];
+                var rec = purchaseRateList.rec[index];
+                return ratio.toFixed(1) + "%\n\n" + rec;
+              },
+            },
+          },
+          {
+            type: "bar",
+            label: "실제 구매횟수",
+            data: purchaseRateList.cart_show,
+            borderColor: "rgb(54, 162, 235)",
+            backgroundColor: "rgba(54, 162, 235, 0.2)",
+            order: 2,
+            datalabels: {
+              display: false,
+            },
+          },
+        ],
+        labels: purchaseRateList.pro_name,
+      };
+
+      const purchaseRateOpt = {
+        maintainAspectRatio: false,
+        responsive: false,
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
+      };
+
+      const myChart4 = new Chart(ctx4, {
+        type: "bar",
+        data: purchaseRateData,
+        options: purchaseRateOpt,
+        plugins: [ChartDataLabels],
       });
     },
   });

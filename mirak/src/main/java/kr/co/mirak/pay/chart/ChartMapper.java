@@ -13,6 +13,8 @@ public interface ChartMapper {
 	List<RatioByVO> getCountByGender(RatioByVO vo, @Param("clickedMenu") String clickedMenu);
 	
 	List<RatioByVO> getCountByAge(RatioByVO vo, @Param("clickedMenu") String clickedMenu);
+	
+	List<PurchaseRateVO> getPurchaseRateList(PurchaseRateVO vo);
 
 	List<TotalByDayVO> getTotalByMonthList(TotalByDayVO vo);
 

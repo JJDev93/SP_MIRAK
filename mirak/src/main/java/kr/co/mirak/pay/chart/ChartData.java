@@ -8,10 +8,12 @@ public class ChartData {
 	public Map<String, List<Object>> totalByMenuList;
 
 	public Map<String, List<Object>> totalByMonthList;
-	
+
 	public Map<String, List<Object>> countByGender;
-	
+
 	public Map<String, List<Object>> countByAge;
+
+	public Map<String, List<Object>> purchaseRateList;
 
 	public Map<String, List<Object>> getTotalByMenuList() {
 		return totalByMenuList;
@@ -45,5 +47,12 @@ public class ChartData {
 		this.countByAge = countByAge;
 	}
 
+	public Map<String, List<Object>> getPurchaseRateList() {
+		return purchaseRateList;
+	}
+
+	public void setPurchaseRateList(Map<String, List<Object>> purchaseRateList) {
+		this.purchaseRateList = purchaseRateList;
+	}
 
 }
