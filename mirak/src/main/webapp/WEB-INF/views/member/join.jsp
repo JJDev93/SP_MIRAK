@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
+
+
+
+
 <div class="hero-wrap hero-bread"
 	style="background-image: url('${path}/resources/images/bg_1.jpg');">
 	<div class="container">
@@ -64,7 +68,7 @@
 												</div>
 											</div>
 											<div class="col-sm-3">
-												<button type="button" tabIndex="3" id="mail_check_button" class="form-control mb-2 doubleChk">인증번호발송</button>
+												<button type="button" tabIndex="3" id="mail_check_button" class="btn btn-light joinBtn mb-2 doubleChk">인증번호발송</button>
 											</div>
 										</div>
 									</div>
@@ -192,7 +196,7 @@
 	const IDCHECK = document.getElementById("id");
 	function IDCHECKFORM() {
 		if (IDCHECK.value === "") {
-			alert("아이디를 입력해주세요");
+			alert("이메일(ID)를 입력해주세요");
 			return false;
 		}
 		return true;
@@ -259,11 +263,11 @@
 	function checkAll() {
 
 		if (IDCHECK.value === "") {
-			alert("아이디를 입력해주세요");
+			alert("이메일(ID)를 입력해주세요");
 			return false;
 
 		} else if ($("button[id='idCheck']").val() == "N") {
-			alert('아이디 중복 확인을 해주세요.');
+			alert('이메일(ID) 중복 확인을 해주세요.');
 			$("input[name='checked_id']").eq(0).focus();
 			return false;
 
