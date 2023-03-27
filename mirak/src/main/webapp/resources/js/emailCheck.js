@@ -1,3 +1,4 @@
+
 var code="";  //이메일전송 인증번호 저장위한 코드
 
 
@@ -21,6 +22,8 @@ $("#mail_check_button").click(function(){
         success:function(data){
         	alert("인증번호가 발송되었습니다");
         	//console.log("data :" + data);
+        	$("#mail_check_button").text("발송완료");
+        	$("#mail_check_button").prop('disabled', true);
         	cehckBox.attr("disabled",false);
         	boxWrap.attr("id", "mail_check_input_box_true");
         	code = data;

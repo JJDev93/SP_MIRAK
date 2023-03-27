@@ -68,7 +68,7 @@
 	<select id="getMemberInfo" parameterType="String"
 		resultType="member">
 		<![CDATA[
-			SELECT MEM_ID, 
+			SELECT MEM_ID, MEM_PW,
 				MEM_NAME, MEM_AGE, 
 				MEM_GENDER, MEM_PHONE, 
 				MEM_REGDATE, 
@@ -88,8 +88,7 @@
 	<!-- 회원탈퇴 -->
 	<delete id="memdelete" parameterType="member">
 		<![CDATA[
-			DELETE FROM MEMBER
-			WHERE MEM_ID = #{mem_id} and MEM_PW = #{mem_pw}
+			DELETE FROM MEMBER WHERE MEM_ID = #{mem_id}
 		]]>
 	</delete>
 

@@ -47,7 +47,9 @@
                   <input type="password" id="PW" class="form-control" name="mem_pw" placeholder="비밀번호" required="required">
                </div>
                <div>
-                  <label style="color: red">${message }</label>
+                    <c:if test="${message } != '로그인후 이용해주세요'">
+                        <label style="color: red">${message }</label>
+                     </c:if>
                </div>
                <div class="form-group row">
                   <div class="col-md-12">
@@ -119,105 +121,85 @@
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
 
-<!-- 네이버 스크립트 -->
-<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
-<script src="${path}/resources/js/naverapi.js"></script>
-
 <script>
-	$(document).ready(function() {
-		console.log("message : "+"${message}");
-		console.log("mem_id : "+"${mem_id}");
-	 	if("${message}" !=""){
-	 		alert("${message}");
- 		 	<%session.setAttribute("message","");%>
-	 	}
-		if("${mem_id}" !=""){
-			location.href = "/";
-		}
-	})
-   var naverLogin = new naver.LoginWithNaverId({
-      clientId : "zkOzac5hPC_Qw6v8eOzQ", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
-      callbackUrl : "http://localhost:8080/login", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
-      isPopup : false,
-      callbackHandle : true
-   });
+   $(document).ready(function() {
+   console.log("message : "+"${message}");
+   console.log("mem_id : "+"${mem_id}");
+   if ("${message}" != "") {
+        if ("${message}" == "로그인 후 이용해주세요.") {
+          alert("${message}");
+        }
+        <% session.setAttribute("message", ""); %>
+      }
+      
+      if("${mem_id}" !=""){
+      location.href = "/";
+      }
+   })
+</script>
 
-   naverLogin.init();
+<!-- 네이버 스크립트 -->
+<script src="${path}/resources/js/naverapi.js"></script>
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"charset="utf-8"></script>
+<script>
+var naverLogin = new naver.LoginWithNaverId({
+	  clientId: "zkOzac5hPC_Qw6v8eOzQ",
+	  callbackUrl: "http://localhost:8080/login",
+	  isPopup: false,
+	  callbackHandle: false,
+	});
 
-   $(document).on("click", "#naverIdLogin_loginButton", function() {
-      naverLogin.getLoginStatus(function(status) {
-         if (status) {
-            var accessToken = naverLogin.accessToken.accessToken;
+	naverLogin.init();
 
-            var mem_id = naverLogin.user.getEmail();
-            if (naverLogin.user.getGender() == 'F') {
-               var mem_gender = 2
-            } else {
-               var mem_gender = 1
-            }
-            var mem_pw = naverLogin.user.getId();
-            var mem_name = naverLogin.user.getName();
+	$(document).on("click", "#naverIdLogin_loginButton", function() {
+	  naverLogin.getLoginStatus(function(status) {
+	    if (status != null) {
+	      var mem_id = naverLogin.user.getEmail();
+	      var mem_gender = naverLogin.user.getGender() == 'F' ? 2 : 1;
+	      var mem_pw = naverLogin.user.getId();
+	      var mem_name = naverLogin.user.getName();
 
-            console.log(naverLogin.user);
-            
-            
-            $.ajax({
-                type : 'post',
-                url : '/naverSave',
-                data : {
-                   'mem_id' : mem_id,
-                   'mem_gender' : mem_gender,
-                   'mem_pw' : mem_pw,
-                   'mem_name' : mem_name
-                },
-                dataType : "text",
-                success : function(responseData) {
-                   console.log("로그인 AJAXX~~~~~~~~~~~~~~~~");
-                   console.log(responseData);
+	      $.ajax({
+	        type: 'post',
+	        url: '/naverSave',
+	        data: {
+	          'mem_id': mem_id,
+	          'mem_gender': mem_gender,
+	          'mem_pw': mem_pw,
+	          'mem_name': mem_name
+	        },
+	        dataType: "text",
+	        success: function(responseData) {
+	          console.log("로그인 AJAXX~~~~~~~~~~~~~~~~");
+	          console.log(responseData);
 
-                   if (responseData == 'login') {
-                      location.href = "/";
-                   } else if (responseData == 'join') {
-                	   
-                	   document.querySelector('#mem_id').value=mem_id,
-                	   document.querySelector('#mem_gender').value=mem_gender,
-                	   document.querySelector('#mem_pw').value=mem_pw,
-                	   document.querySelector('#mem_name').value=mem_name,
-                	   document.querySelector('#naverJoin').submit()
-                	        	   
-                   } else {
-                      alert('로그인실패');
-                      console.log('실패')
-                      return false;
-                   }
-                },
-                error : function(responseData) {
-                   alert('오류발생');
-                   console.log('오류 발생')
-                   return false;
-                }
-
-             })
-         } else {
-            console.log("callback 처리에 실패하였습니다.");
-            return false;
-         }
-      });
-   });
-
-//    var testPopUp;
-//    function openPopUp() {
-//       testPopUp = window.open("https://nid.naver.com/nidlogin.logout","_blank","toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
-//    }
-//    function closePopUp() {
-//       testPopUp.close();
-//    }
-
-//    function naverLogout() {
-//       openPopUp();
-//       setTimeout(function() {
-//          closePopUp();
-//       }, 1);
-
-//    }
+	          if (responseData == 'login') {
+	            location.href = "/";
+	          } else if (responseData == 'join') {
+	            document.querySelector('#mem_id').value = mem_id;
+	            document.querySelector('#mem_gender').value = mem_gender;
+	            document.querySelector('#mem_pw').value = mem_pw;
+	            document.querySelector('#mem_name').value = mem_name;
+	            document.querySelector('#naverJoin').submit();
+	          } else {
+	            alert('로그인실패');
+	            console.log('실패');
+	          }
+	        },
+	        error: function(responseData) {
+	          alert('오류발생');
+	          console.log('오류 발생');
+	          naverLogin.login(); // Retry login
+	        },
+	        retries: 3
+	      });
+	      return false; // 추가된 코드
+	    } else {
+	      console.log("callback 처리에 실패하였습니다.");
+	      console.log("status is null. Retry login.");
+	      naverLogin.login(); // Retry login
+	      return false;
+	    }
+	  });
+	});
 </script>
