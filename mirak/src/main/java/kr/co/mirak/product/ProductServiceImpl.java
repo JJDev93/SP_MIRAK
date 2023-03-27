@@ -1,6 +1,8 @@
 package kr.co.mirak.product;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +13,25 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-
-	public List<ProductVO> productList(ProductVO vo) {
-
+	
+	public Map<String, List<ProductVO>> productList(List<String> cateList) {
 		ProductMapper mapper = sqlSessionTemplate.getMapper(ProductMapper.class);
-		List<ProductVO> productList = mapper.productList(vo);
+		Map<String, List<ProductVO>> productList = new HashMap<>();
 
-		return productList;
+	    for (String cate : cateList) {
+	        List<ProductVO> byCateProduct = mapper.productList(cate);
+	        String category = "";
+	        if(cate.equals("O")) {
+	        	category = "1인세트";
+	        } else if(cate.equals("T")) {
+	        	category = "2·3인세트";
+	        } else {
+	        	category = "프리미엄";
+	        }
+	        productList.put(category, byCateProduct);
+	    }
 
+	    return productList;
 	}
 
 	public List<ProductVO> productList1(Criteria cri) {
