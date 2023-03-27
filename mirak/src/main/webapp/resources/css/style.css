@@ -2227,13 +2227,13 @@ fieldset:disabled a.btn {
       box-shadow: 0 0 0 0.2rem rgba(225, 83, 97, 0.5); }
 
 .btn-light {
-  color: #212529;
-  background-color: #f8f9fa;
-  border-color: #f8f9fa; }
+  color: #82ae46;
+  background-color: #ffffff;
+  border-color: #ffffff; }
   .btn-light:hover {
-    color: #212529;
-    background-color: #e2e6ea;
-    border-color: #dae0e5; }
+    color: #ffffff;
+    background-color: #82ae46;
+    border-color: #ffffff; }
   .btn-light:focus, .btn-light.focus {
     -webkit-box-shadow: 0 0 0 0.2rem rgba(216, 217, 219, 0.5);
     box-shadow: 0 0 0 0.2rem rgba(216, 217, 219, 0.5); }
@@ -9043,7 +9043,7 @@ h1, h2, h3, h4, h5,
   height: 58px !important;
   padding-left: 15px;
   padding-right: 15px;
-  background: white !important;
+
   color: rgba(0, 0, 0, 0.4) !important;
   font-size: 18px;
   border-radius: 0px;
