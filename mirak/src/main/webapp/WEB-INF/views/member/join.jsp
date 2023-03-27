@@ -76,11 +76,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="firstname">이름</label> 
-<<<<<<< HEAD
-									<input type="text" name="mem_name" id="name" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required" >
-=======
-									<input type="text" name="mem_name" tabIndex="7" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required" >
->>>>>>> branch 'member' of https://github.com/ywshin0112/mirak.git
+									<input type="text" name="mem_name" id="name" tabIndex="7" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required" >
 								</div>
 							</div>
 							<div class="w-100"></div>
@@ -107,11 +103,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="phone">Phone</label> 
-<<<<<<< HEAD
-									<input type="text" name="mem_phone" id="phone" class="form-control" placeholder=" ' - ' 빼고 입력해주세요 " required="required" value="${member.mem_phone}" maxlength="11" pattern="[0-9]{11}">
-=======
-									<input type="text" name="mem_phone" tabIndex="11" class="form-control" placeholder=" ' - ' 빼고 입력해주세요 " required="required" value="${member.mem_phone}" maxlength="11" pattern="[0-9]{11}">
->>>>>>> branch 'member' of https://github.com/ywshin0112/mirak.git
+									<input type="text" name="mem_phone" id="phone" tabIndex="11" class="form-control" placeholder=" ' - ' 빼고 입력해주세요 " required="required" value="${member.mem_phone}" maxlength="11" pattern="[0-9]{11}">
 								</div>
 							</div>
 	
@@ -256,30 +248,3 @@
  		return true;
 	}
  </script>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-

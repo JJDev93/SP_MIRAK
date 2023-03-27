@@ -130,7 +130,6 @@ public class LoginController {
             System.out.println("unlink :" + user_api);
             return "redirect:/kakaounlink";
          }
-         session.invalidate();
          System.out.println(user_api + "로그아웃 성공!!");
       }else if(user_api == null) {
     	  
