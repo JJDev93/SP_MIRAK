@@ -124,7 +124,7 @@
 								<label for="streetaddress">주소</label>
 								<div class="row mb-4">
 									<div class="col-sm-8">
-										<input type="text" class="form-control" id="address_input_1" name="mem_zipcode" placeholder="우편번호" readonly>
+										<input type="text" class="form-control" id="address_input_1" name="mem_zipcode" placeholder="우편번호" required="required" onkeydown="event.preventDefault();" autocomplete="off">
 									</div>
 									<div class="col-sm-4">
 										<button type="button" class="btn btn-primary joinBtn address button" tabIndex="12" onclick="execution_daum_address();">우편번호찾기</button>
