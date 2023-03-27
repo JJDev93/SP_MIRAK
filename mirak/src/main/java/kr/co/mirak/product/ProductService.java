@@ -1,11 +1,12 @@
 package kr.co.mirak.product;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProductService {
 
 	// 상품 목록 조회
-	List<ProductVO> productList(ProductVO vo);
+	Map<String, List<ProductVO>> productList(List<String> cateList);
 
 	// 상품 프리미엄 목록 조회
 	List<ProductVO> productList1(Criteria cri);

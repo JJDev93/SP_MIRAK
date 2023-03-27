@@ -4,10 +4,21 @@
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <style>
-.container {
-	
+.chart-wrapper {
+	position: relative;
+}
+
+.chart-visible {
+	display: inline-block;
+}
+
+.chart-hidden {
+	display: none;
 }
 
 canvas {
@@ -26,19 +37,30 @@ canvas {
 		<div class="bd-example-snippet bd-code-snippet">
 			<div class="bd-example">
 				<div class="row">
-					<div class="col-md-7">
-						<canvas id="myChart1" width="600" height="450"></canvas>
+					<div class="col-md-1"></div>
+					<div class="col-md-10">
+						<div id="chartWrapper1" class="chart-visible">
+							<canvas id="myChart1" width="1000" height="400"></canvas>
+						</div>
+						<div id="chartWrapper2" class="chart-hidden">
+							<canvas id="myChart5" width="400" height="400"></canvas>
+						</div>
+						<div id="chartWrapper3" class="chart-hidden">
+							<canvas id="myChart6" width="400" height="400"></canvas>
+						</div>
 					</div>
-					<div class="col-md-5">
-						<canvas id="myChart2" width="500" height="400"></canvas>
-					</div>
+					<div class="col-md-1"></div>
 				</div>
 
-				<div class="row">
-					<div class="col-md-12">
-						<canvas id="myChart3" width="1200" height="450"></canvas>
-					</div>
-				</div>
+				<!-- 				<div class="row"> -->
+				<!-- 					<div class="col-md-5"> -->
+				<%-- 						<canvas id="myChart2" width="500" height="400"></canvas> --%>
+				<!-- 					</div> -->
+				<!-- 					<div class="col-md-2"></div> -->
+				<!-- 					<div class="col-md-5"> -->
+				<%-- 						<canvas id="myChart3" width="500" height="450"></canvas> --%>
+				<!-- 					</div> -->
+				<!-- 				</div> -->
 			</div>
 		</div>
 	</div>

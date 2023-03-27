@@ -16,7 +16,7 @@ public interface PayMapper {
 	
 	List<PayVO> getPayListDetail(String group_id);
 	
-	int updateStatus(@Param("group_id") String group_id);
+	int updatePayments(PayVO payVO);
 	
 	List<PayVO> getProductInfo(String group_id);
 	

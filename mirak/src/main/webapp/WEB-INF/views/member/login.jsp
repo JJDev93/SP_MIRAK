@@ -47,7 +47,9 @@
                   <input type="password" id="PW" class="form-control" name="mem_pw" placeholder="비밀번호" required="required">
                </div>
                <div>
-                  <label style="color: red">${message }</label>
+              		<c:if test="${message } != '로그인후 이용해주세요'">
+                  		<label style="color: red">${message }</label>
+                  	</c:if>
                </div>
                <div class="form-group row">
                   <div class="col-md-12">
@@ -119,22 +121,28 @@
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
 
-<!-- 네이버 스크립트 -->
-<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
-<script src="${path}/resources/js/naverapi.js"></script>
-
 <script>
 	$(document).ready(function() {
-		console.log("message : "+"${message}");
-		console.log("mem_id : "+"${mem_id}");
-	 	if("${message}" !=""){
-	 		alert("${message}");
- 		 	<%session.setAttribute("message","");%>
-	 	}
+<<<<<<< HEAD
+	console.log("message : "+"${message}");
+	console.log("mem_id : "+"${mem_id}");
+		if("${message}" !=""){
+			if("${message}" =="로그인 후 이용해주세요."){
+			alert("${message}";)
+			}
+		<%session.setAttribute("message","");%>
+		}
+		
 		if("${mem_id}" !=""){
-			location.href = "/";
+		location.href = "/";
 		}
 	})
+</script>
+
+<!-- 네이버 스크립트 -->
+<script src="${path}/resources/js/naverapi.js"></script>
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"charset="utf-8"></script>
+<script>
    var naverLogin = new naver.LoginWithNaverId({
       clientId : "zkOzac5hPC_Qw6v8eOzQ", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
       callbackUrl : "http://localhost:8080/login", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
@@ -204,20 +212,4 @@
          }
       });
    });
-
-//    var testPopUp;
-//    function openPopUp() {
-//       testPopUp = window.open("https://nid.naver.com/nidlogin.logout","_blank","toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
-//    }
-//    function closePopUp() {
-//       testPopUp.close();
-//    }
-
-//    function naverLogout() {
-//       openPopUp();
-//       setTimeout(function() {
-//          closePopUp();
-//       }, 1);
-
-//    }
-</script>
+ </script>

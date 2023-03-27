@@ -11,9 +11,9 @@
 
 	<select id="getAdminPayList" resultType="kr.co.mirak.pay.PayVO">
 	
-		select * from (select group_id,
+		select * from (select group_id, pro_code, pro_price,
 		pro_name, count(cart_cnt) as cart_cnt, sum(totalPrice) as totalPrice, mem_name, mem_phone, mem_add1, mem_add2, pay_req, pay_date, status
-		from pay group by group_id order by pay_date desc)
+		from pay group by group_id order by group_id desc)
 		as T1 limit #{skip},#{amount}
 		
 	</select>
@@ -25,12 +25,14 @@
 	</select>
 
 	<select id="getPayListDetail" resultType="kr.co.mirak.pay.PayVO">
-		select pay_code, pro_name, cart_cnt, totalPrice, cart_day, cart_start, status, group_id
- 		from pay where group_id = #{group_id};
+		select pay_code, pro_code, pro_price, pro_name, cart_cnt, totalPrice, cart_day, cart_start, pay_req, status, group_id
+ 		from pay where group_id = #{group_id} order by pay_code;
 	</select>
 	
-	<update id="updateStatus" parameterType="kr.co.mirak.pay.PayVO">
-    	update pay set status = '배송중' where group_id = #{group_id};
+	<update id="updatePayments" parameterType="kr.co.mirak.pay.PayVO">
+    	UPDATE pay SET pro_code = #{pro_code}, pro_name = #{pro_name}, cart_cnt = #{cart_cnt}, totalPrice = #{totalPrice},
+    	cart_day = #{cart_day}, cart_start = #{cart_start}, pay_req = #{pay_req}
+		WHERE pay_code = #{pay_code};
 	</update>
 	
 	
