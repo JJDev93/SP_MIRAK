@@ -243,7 +243,7 @@ function CheckTest() {
 			return true;	// 계속 진행 (체크된 값 진행)
 		}
 	}
-	// 값이 없을 경우 for 건너뛰고 출력
+	// 값이 없을 경우 for 건너뛰고 출력 
 	alert ('요일을 선택하세요');	// 체크된 값 없을 경우 
 	return false;
 }
