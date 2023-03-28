@@ -8,7 +8,7 @@
 	<!-- 카트 목록 -->
 	<select id="cartClientList" resultType="kr.co.mirak.cart.CartVO">
 	
-		SELECT * FROM CART WHERE MEM_ID = #{mem_id} and CART_SHOW =1 ORDER BY CART_CODE DESC
+		SELECT * FROM cart WHERE MEM_ID = #{mem_id} and CART_SHOW =1 ORDER BY CART_CODE DESC
 	
 	</select>
 	
@@ -18,7 +18,7 @@
 	<!-- 카트 추가 -->
 	<insert id="cartInsert">
    
-      INSERT INTO CART (MEM_ID, PRO_CODE, CART_DAY, CART_START, CART_CNT, PRO_NAME, PRO_PRICE, PRO_DESC, PRO_IMAGE)
+      INSERT INTO cart (MEM_ID, PRO_CODE, CART_DAY, CART_START, CART_CNT, PRO_NAME, PRO_PRICE, PRO_DESC, PRO_IMAGE)
       VALUES (#{mem_id}, #{pro_code}, #{cart_day}, #{cart_start}, #{cart_cnt}, #{pro_name}, #{pro_price}, #{pro_desc}, #{pro_image} )
       
    </insert>
@@ -27,17 +27,17 @@
 	<!-- 카트 옵션 수정 -->
 	<update id="cartUpdate">
 	<![CDATA[
-		UPDATE CART SET CART_DAY = #{cart_day}, CART_START = #{cart_start}, CART_CNT = #{cart_cnt} WHERE cart_code = #{cart_code}
+		UPDATE cart SET CART_DAY = #{cart_day}, CART_START = #{cart_start}, CART_CNT = #{cart_cnt} WHERE cart_code = #{cart_code}
 	]]>
 	</update>
 	<update id="cartUpdateCheckAll">
 		<![CDATA[
-			UPDATE CART SET CART_CHECK = 0 WHERE MEM_ID = #{mem_id}
+			UPDATE cart SET CART_CHECK = 0 WHERE MEM_ID = #{mem_id}
 		]]>
 	</update>
 	<update id="cartUpdateCheck">
 		<![CDATA[
-			UPDATE CART SET CART_CHECK = 1 WHERE CART_CODE = #{cart_code}
+			UPDATE cart SET CART_CHECK = 1 WHERE CART_CODE = #{cart_code}
 		]]>
 	</update>
 
@@ -70,21 +70,23 @@
 	<!-- 어드민 카트 전체 목록 -->
 	<select id="cartAdminList" resultType="kr.co.mirak.cart.CartVO">
 	
-		SELECT * FROM CART
+
+		SELECT * FROM cart
+		ORDER BY CART_CODE DESC
 
 	</select>
 	
 	<!-- 어드민 카트 삭제 -->
 	<delete id="cartAdminDelete">
 	<![CDATA[
-			DELETE FROM CART WHERE cart_code=#{cart_code}
+			DELETE FROM cart WHERE cart_code=#{cart_code}
 		]]>
 	</delete>
 	
 	<!-- 어드민 카트 수정 -->
 	<update id="cartAdminUpdate">
 	<![CDATA[
-		UPDATE CART SET CART_DAY = #{cart_day}, CART_START = #{cart_start}, CART_CNT = #{cart_cnt}, CART_SHOW = #{cart_show} WHERE cart_code = #{cart_code}
+		UPDATE cart SET CART_DAY = #{cart_day}, CART_START = #{cart_start}, CART_CNT = #{cart_cnt}, CART_SHOW = #{cart_show} WHERE cart_code = #{cart_code}
 	]]>
 	</update>
 		
@@ -93,7 +95,7 @@
    <select id="productToCart" resultType="kr.co.mirak.cart.CartVO">
       <![CDATA[
       SELECT *
-      FROM PRODUCT
+      FROM product
       WHERE pro_code = #{pro_code}
       ]]>
    </select>
@@ -118,7 +120,7 @@
 	<select id="cartDetail" resultType="kr.co.mirak.cart.CartVO">
 		<![CDATA[
 		SELECT *
-		FROM CART
+		FROM cart
 		WHERE cart_code = #{cart_code};
 		]]>
 	</select>

@@ -4,22 +4,22 @@
 <mapper namespace="kr.co.mirak.product.ProductMapper">
 
 	<insert id="insertProduct" parameterType="product">
-		<![CDATA[
-		INSERT INTO PRODUCT(pro_code, pro_name, pro_price,pro_desc,pro_desc2,pro_image)
+		
+		INSERT INTO product(pro_code, pro_name, pro_price,pro_desc,pro_desc2,pro_image)
 		VALUES(#{pro_code}, #{pro_name}, #{pro_price},#{pro_desc},#{pro_desc2},#{pro_image})
 		
 		
-		]]>
+		
 	</insert>
 	
 	
 
 	<select id="productList" resultType="product">
 		
-		<![CDATA[
+	
  		SELECT pro_code, pro_name, pro_price from product WHERE pro_code LIKE CONCAT('%', #{cate}, '%')
 		
- 		]]>
+ 		
 
 	</select>
 
@@ -33,7 +33,7 @@
 	<!-- 인덱스 페이지 이미지 -->
 	<select id="productListIndex1" resultType="product">
 
-		select * from (select * from product order by rand())  as T1  where pro_code like '%P%' limit 4;
+		select * from (select * from product order by rand())  as T1  where pro_code like '%P%' limit 4; 
 
 	</select>
 	
@@ -60,69 +60,69 @@
 
 
 	<select id="productDetail" resultType="product">
-		<![CDATA[
+		
 		SELECT *
-		FROM PRODUCT
+		FROM product
 		WHERE pro_code = #{pro_code};
-		]]>
+		
 	</select>
 
 
 	<update id="updateProduct">
-		<![CDATA[
-			UPDATE PRODUCT SET
+		
+			UPDATE product SET
 				pro_name = #{pro_name},
 				pro_price = #{pro_price},
 				pro_desc = #{pro_desc},
 				pro_desc2 = #{pro_desc2},
 				pro_image = #{pro_image}
 			WHERE pro_code = #{pro_code}
-		]]>
+		
 	</update>
 
 
 	<delete id="deleteProduct">
-	<![CDATA[
-			DELETE FROM PRODUCT WHERE pro_code=#{pro_code}
-		]]>
+	
+			DELETE FROM product WHERE pro_code=#{pro_code}
+		
 	</delete>
 	
 	<!-- 	페이징 처리 (상품 총 개수 출력) -->
 	<select id="getTotal" resultType="int">
-		<![CDATA[
+		
 		select count(*) from product
-		]]>
+		
 	</select>
 	
 	<!-- 	페이징 처리 (프리미엄 상품 개수 출력) -->
 	<select id="getTotalP" resultType="int">
-		<![CDATA[
+		
 		select count(*) from product where pro_code like "%P%";
-		]]>
+		
 	</select>
 	
 	<!-- 	페이징 처리 (2,3인 상품 개수 출력) -->
 	<select id="getTotalT" resultType="int">
-		<![CDATA[
+		
 		select count(*) from product where pro_code like "%T%";
-		]]>
+		
 	</select>
 	
 	<!-- 	페이징 처리 (1인 상품 개수 출력) -->
 	<select id="getTotalO" resultType="int">
-		<![CDATA[
+		
 		select count(*) from product where pro_code like "%O%";
-		]]>
+	
 	</select>
 	
 	
 
 	<select id="getListPaging" resultType="product">
 		
-		<![CDATA[
+		
   		 
 		select * from (select * from product) as T1 limit #{skip},#{amount}
- 		]]>
+ 		
 
 	</select>
 
