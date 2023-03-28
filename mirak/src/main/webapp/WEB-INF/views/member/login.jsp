@@ -37,7 +37,7 @@
    <div class="container">
       <div class="row justify-content-center">
          <div class="col-md-5 ftco-animate">
-            <form action="login" method="post" class="contact-form">
+            <form action="login" method="post" class="contact-form" id="login">
                <div class="form-group">
                   <label for="ID">아이디</label> 
                   <input type="text" class="form-control" id="ID" name="mem_id" placeholder="이메일(ID)" required="required">
@@ -203,3 +203,5 @@ var naverLogin = new naver.LoginWithNaverId({
 	  });
 	});
 </script>
+
+
