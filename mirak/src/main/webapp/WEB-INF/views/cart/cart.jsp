@@ -105,11 +105,7 @@ session = request.getSession();
 								</p>
 								<p class="d-flex">
 									<span>상품합계</span> <span class="totalPrice_span"></span>
-								</p>
-								<hr>
-								<p class="d-flex total-price">
-									<span>총 결제금액</span> <span class="finalTotalPrice_span"></span>
-								</p>
+								</p>							
 							</div>
 							<p>
 								<input type="submit" value="결제하기" class="btn btn-primary py-3 px-5">
@@ -156,7 +152,7 @@ session = request.getSession();
 											<span class="font-weight-bold text-dark">배송 시작일</span>
 											<input type="date" id="start" name="cart_start" class="form-control input-number" value="${c.cart_start }"  required="required">
 										</p>		
-										<p>
+										<p class="daycheck">
 											<span  class="font-weight-bold text-dark">배송 요일</span><br>
 											&nbsp;
 											<label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform: scale(1.5);" value="월" <c:if test = "${fn : contains(c.cart_day, '월')}">checked</c:if>>&nbsp;&nbsp;월</label>&nbsp;&nbsp; 
@@ -235,19 +231,18 @@ function selectAll(selectAll)  {
 //체크박스가 체크되었는지 확인
 function CheckTest() {
 		
-	var day = document.getElementsByName('cart_day');
+	const checkPart = document.querySelector('.daycheck');
+    const checkboxes = checkPart.querySelectorAll('input');
 
-	for (var i=0; i<day.length; i++) {
-		// 체크된 값을 가져오기. day 값의 체크된 (checked)
-		if (day[i].checked) {
-			return true;	// 계속 진행 (체크된 값 진행)
-		}
-	}
-	// 값이 없을 경우 for 건너뛰고 출력 
-	alert ('요일을 선택하세요');	// 체크된 값 없을 경우 
-	return false;
+    for( let i = 0; i < checkboxes.length; i ++){
+        if(checkboxes[i].checked === true)
+        	return;	
+        // 체크박스 돌다가 checked가 있으면 바로 return!!
+    }
+    alert('요일을 선택해주세요'); 
+    // 체크없으면 바로 return해서 alert 띄우기!
+    return false;
 }
-
 
 
 	$(function() {

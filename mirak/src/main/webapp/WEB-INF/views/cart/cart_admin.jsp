@@ -48,7 +48,7 @@
 							<th scope="col">배송요일</th>
 							<th scope="col">배송횟수</th>
 							<th scope="col">총가격</th>
-							<th scope="col">결제여부</th>
+							<th scope="col">상태</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -56,7 +56,7 @@
 						<tr>
 							<td><a href="/admin/cart/${curPage}/${c.cart_code}">${c.cart_code }</a></td>
 							<td>
-								<a href="/admin/member/${curPage}/${c.mem_code}">${c.mem_id }</a>
+								<a href="/admin/cartmember/${curPage}/${member.mem_code}">${c.mem_id }</a>
 							</td>
 							<td><a href="/admin/cart/${curPage}/${c.cart_code}">${c.pro_code }</a></td>
 							<td>
@@ -71,8 +71,9 @@
 							<td>${c.cart_cnt }</td>
 							<td>${c.pro_price * c.cart_cnt }</td>
 							<td>
-								<c:if test="${c.cart_show == 0}"> 결제 전</c:if>
-								<c:if test="${c.cart_show == 1}"> 결제 완료</c:if>
+								<c:if test="${c.cart_show == 0}"> 결제완료</c:if>
+								<c:if test="${c.cart_show == 1}"> 장바구니</c:if>
+								<c:if test="${c.cart_show == 2}"> 장바구니 삭제</c:if>
 							</td>
 						</tr>
 						</c:forEach> 

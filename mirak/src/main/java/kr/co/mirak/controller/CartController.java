@@ -25,8 +25,6 @@ import kr.co.mirak.member.MemberVO;
 public class CartController {
 	@Autowired 
 	private CartService cartService;
-	@Autowired
-	private MemberService memberService;
 
 	// list select
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)   
@@ -118,7 +116,7 @@ public class CartController {
 		public String adminMemDetail2(MemberVO mvo, Model model, @PathVariable("mem_code") String mem_code, @PathVariable("curPage") int curPage) {
 			System.out.println("====== 관리자 회원 상세페이지로 이동 ======");
 			mvo.setMem_code(Integer.parseInt(mem_code));
-			model.addAttribute("member", memberService.adminMemberDetail(mvo));
+			model.addAttribute("cartmember", cartService.adminMemberDetail2(mvo));
 			model.addAttribute("curPage", curPage);
 			return "member/admin_member_detail";
 		}
