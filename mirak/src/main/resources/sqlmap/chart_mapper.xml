@@ -47,14 +47,16 @@
 	<![CDATA[
 		SELECT REPLACE(pro_name, '도시락', '') as pro_name , SUM(cart_cnt) as cart_cnt, SUM(cart_show=0) as cart_show, 
 		ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) as ratio, 
-		CASE WHEN ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) > 60 AND ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) <= 80 THEN '강추'
-		WHEN ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) > 40 AND ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) <= 60 THEN '추천'
+		CASE 
+			WHEN ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) >= 60 AND ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) < 80 THEN '추천'
+			WHEN ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) >= 80 THEN '강추'
+			WHEN ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) < 60 THEN '인기'
 		END as rec
 		FROM cart
 		GROUP BY pro_name
 		HAVING ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) NOT IN (0, 100)
 		ORDER BY ratio DESC
-		LIMIT 10;
+		LIMIT 5;
 		]]>
 	</select>
 </mapper>

@@ -2,7 +2,6 @@ package kr.co.mirak.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,17 +26,26 @@ public class apiController {
 	@Autowired
 	private SnsLoginService snsLoginService;
 
-	@RequestMapping(value = "/naverResult", method = RequestMethod.GET)
-	public String naverResult(@RequestParam String code, HttpSession session) {
-		String result = null;
+	@RequestMapping(value = "/naverResult", method = RequestMethod.POST)
+	@ResponseBody
+	public String naverResult(MemberVO member, HttpSession session, Model model) throws Exception {
 		try {
-			
-			
-			
+			if (member != null) {
+				int idCheck = memberService.idCheck(member.getMem_id());
+				if (idCheck == 0) {
+					member.setMem_isapi("naver");
+					model.addAttribute("member", member);
+					return "jsonView";
+				} else if (idCheck == 1) {
+					String mem_id = memberService.login(member).getMem_id();
+					session.setAttribute("mem_id", mem_id);
+					return "success";
+				}
+			}
 		} catch (Exception e) {
 			throw new RuntimeException();
 		}
-		return result;
+		return "fail";
 	}
 
 	@RequestMapping(value = "/naverJoin", method = RequestMethod.GET)

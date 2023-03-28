@@ -86,10 +86,8 @@
 
 					<!-- 네이버 -->
 					<div class="col-sm-4 text-center ftco-animate">
-						<a id="naverIdLogin_loginButton"
-							href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=W_XBZ8KSSrZT5ts3cW9K&state=authorization_code&redirect_uri=http://localhost:8080/naverResult"><span><img
-								alt="" src="resources/images/ico_member_naver.png"
-								style="cursor: pointer"></span> </a>
+						<a id="naverIdLogin_loginButton">
+						<span><img alt="" src="resources/images/ico_member_naver.png"style="cursor: pointer"></span></a>
 					</div>
 
 					<!-- 카카오 -->
@@ -106,14 +104,67 @@
 			</div>
 		</div>
 	</div>
-	<!-- <ul> -->
-
-	<!--    <li onclick="naverLogout(); return false;"> -->
-	<!--       <a href="javascript:void(0)"> -->
-	<!--           <span>네이버 로그아웃</span> -->
-	<!--       </a> -->
-	<!--    </li> -->
-	<!-- </ul> -->
-
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
+<script>
+   $(document).ready(function() {
+   console.log("message : "+"${message}");
+   console.log("mem_id : "+"${mem_id}");
+   if ("${message}" != "") {
+        if ("${message}" == "로그인 후 이용해주세요.") {
+          alert("${message}");
+        }
+        <% session.setAttribute("message", ""); %>
+      }
+      
+      if("${mem_id}" !=""){
+      location.href = "/";
+      }
+   })
+</script>
+
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"charset="utf-8"></script>
+<script>
+var naverLogin = new naver.LoginWithNaverId({
+	  clientId: "W_XBZ8KSSrZT5ts3cW9K",
+	  callbackUrl: "http://localhost:8080/naverResult",
+	  isPopup: false,
+	  callbackHandle: true,
+	});
+	naverLogin.init();
+	$(document).on("click", "#naverIdLogin_loginButton", function () {
+	  console.log("클릭이벤트실행");
+	  console.log(naverLogin);
+	  naverLogin.getLoginStatus(function (status) {
+	    if (status != null) {
+	      var userInfo = {
+	        mem_id: naverLogin.user.getEmail(),
+	        mem_gender: naverLogin.user.getGender() == "F" ? 2 : 1,
+	        mem_pw: naverLogin.user.getId(),
+	        mem_name: naverLogin.user.getName(),
+	      };
+
+	      $.ajax({
+	        url: "/naverResult",
+	        method: "POST",
+	        data: userInfo,
+	        dataType: "json",
+	        success: function (data) {
+	          if (data == "jsonView") {
+	            window.location.href = "/join";
+	          } else if (data == "success") {
+	            window.location.href = "/";
+	          } else {
+	            alert("Error occurred.");
+	          }
+	        },
+	        error: function (jqXHR, textStatus, errorThrown) {
+	          console.log(textStatus, errorThrown);
+	        },
+	      });
+	    } else {
+	      console.log("Naver login user object is not defined.");
+	    }
+	  });
+	});
+</script>
