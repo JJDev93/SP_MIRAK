@@ -228,7 +228,7 @@ function selectAll(selectAll)  {
    }
 
 
-//체크박스가 체크되었는지 확인
+//요일 체크되었는지 확인
 function CheckTest() {
 		
 	const checkPart = document.querySelector('.daycheck');
@@ -237,10 +237,10 @@ function CheckTest() {
     for( let i = 0; i < checkboxes.length; i ++){
         if(checkboxes[i].checked === true)
         	return;	
-        // 체크박스 돌다가 checked가 있으면 바로 return!!
+        // 체크박스 돌다가 checked가 있으면 바로 return
     }
     alert('요일을 선택해주세요'); 
-    // 체크없으면 바로 return해서 alert 띄우기!
+    // 체크없으면 바로 return해서 alert
     return false;
 }
 

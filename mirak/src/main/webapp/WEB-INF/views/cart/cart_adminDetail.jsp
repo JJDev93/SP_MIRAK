@@ -15,16 +15,13 @@
       </div>
       
       <form action="/admin/cartUpdate" method="post" enctype="multipart/form-data" class="p-5 bg-light mb-4">
-      <table>
-      	<tr></tr>
-      	<td class="cart_info"> 
-			<input type="hidden" class="price_input" value="${c.pro_price }">
-			<input type="hidden" class="count_input" value="${c.cart_cnt }"> 
-			<input type="hidden" class="totalPrice_input" value="${c.pro_price * c.cart_cnt }">
-			<input type="hidden" class="pro_code" value="${c.pro_code }">
-			<input type="hidden" class="cart_code" value="${c.cart_code }">
-		</td>
-      </table>
+      	<div class="cart_info"> 
+			<input type="hidden" class="price_input" value="${cart.pro_price }">
+			<input type="hidden" class="count_input" value="${cart.cart_cnt }"> 
+			<input type="hidden" class="totalPrice_input" value="${cart.pro_price * cart.cart_cnt }">
+			<input type="hidden" class="pro_code" value="${cart.pro_code }">
+			<input type="hidden" class="cart_code" value="${cart.cart_code }">
+		</div>
          <div class="row">
             <div class="col-md-12">
                <div class="form-group">
@@ -63,7 +60,7 @@
             </div>
             
             <div class="col-md-12">
-               <div class="form-group">
+               <div class="daycheck">
                   <label for="cart_day">배송요일</label><br>
 	                <label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform: scale(1.5);" value="월" <c:if test = "${fn : contains(cart.cart_day, '월')}">checked</c:if>>&nbsp;&nbsp;월</label>&nbsp;&nbsp; 
 					<label for="tue"><input type="checkbox" name="cart_day" id="tue" style="transform: scale(1.5);" value="화" <c:if test = "${fn : contains(cart.cart_day, '화')}">checked</c:if>>&nbsp;&nbsp;화</label>&nbsp;&nbsp; 
@@ -89,15 +86,16 @@
             
             <div class="col-md-12">
                <div class="form-group">
-                  <label for="cart_totprice">총 가격</label> <input type="text" class="form-control" id="cart_totprice" name="cart_totprice" value="${cart.pro_price * cart.cart_cnt} ">
+                  <label for="cart_totprice">총 가격</label> <input type="text" class="form-control" id="cart_totprice" name="cart_totprice" class="totalPrice_span" value="${cart.cart_cnt * cart.pro_price }">
                </div>
             </div>
             
             <div class="col-md-12">
                <div class="form-group">
                   <label for="cart_show">결제여부</label> <br>
-      	            <label for="0"><input type="radio" name="cart_show" id="0" value="0" <c:if test = "${fn : contains(cart.cart_show, '0')}">checked</c:if>> 결제 전</label>
-      				<label for="1"><input type="radio" name="cart_show" id="1" value="1" <c:if test = "${fn : contains(cart.cart_show, '1')}">checked</c:if>> 결제 완료 </label>
+      	            <label for="0"><input type="radio" name="cart_show" id="0" value="0" <c:if test = "${fn : contains(cart.cart_show, '0')}">checked</c:if>> 결제 완료</label>
+      				<label for="1"><input type="radio" name="cart_show" id="1" value="1" <c:if test = "${fn : contains(cart.cart_show, '1')}">checked</c:if>> 장바구니 담김 </label>
+      				<label for="2"><input type="radio" name="cart_show" id="2" value="2" <c:if test = "${fn : contains(cart.cart_show, '2')}">checked</c:if>> 삭제된 장바구니 </label>
       			</div>
             </div>
             
@@ -107,7 +105,7 @@
             
             <div class="col-md-12">
                <div class="form-group">
-                  <input type="submit" class="form-control" value="장바구니 수정">
+                  <input type="submit" class="form-control" value="장바구니 수정" onclick="return CheckTest();">
                </div>
             </div>
          </div>
@@ -162,6 +160,31 @@ function selectAll(selectAll)  {
      })
    }
    
+   
+//요일 체크되었는지 확인
+function CheckTest() {
+		
+	const checkPart = document.querySelector('.daycheck');
+    const checkboxes = checkPart.querySelectorAll('input');
+
+    for( let i = 0; i < checkboxes.length; i ++){
+        if(checkboxes[i].checked === true)
+        	return;	
+        // 체크박스 돌다가 checked가 있으면 바로 return
+    }
+    alert('요일을 선택해주세요'); 
+    // 체크없으면 바로 return해서 alert
+    return false;
+}
+
+
+
+   
+$(document).ready(function() {
+	// 종합 정보 삽입
+	setTotalInfo();
+});
+   
 function setTotalInfo() {
 	let totalPrice = 0; // 총 가격
 	let totalCount = 0; // 총 갯수
@@ -176,7 +199,6 @@ function setTotalInfo() {
 							totalCount += parseInt($(element).find(
 									".count_input").val());
 					});
-	
 	
 	// 총 가격
 	$(".totalPrice_span").text(totalPrice.toLocaleString());

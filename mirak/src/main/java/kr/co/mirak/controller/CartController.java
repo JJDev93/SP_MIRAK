@@ -111,15 +111,15 @@ public class CartController {
 			return "redirect:/admin/carts/1";
 		}
 		
-	// Admin 에서 회원정보 열람
-		@RequestMapping(value="/admin/cartmember/{curPage}/{mem_code}", method=RequestMethod.GET)	
-		public String adminMemDetail2(MemberVO mvo, Model model, @PathVariable("mem_code") String mem_code, @PathVariable("curPage") int curPage) {
-			System.out.println("====== 관리자 회원 상세페이지로 이동 ======");
-			mvo.setMem_code(Integer.parseInt(mem_code));
-			model.addAttribute("cartmember", cartService.adminMemberDetail2(mvo));
-			model.addAttribute("curPage", curPage);
-			return "member/admin_member_detail";
-		}
+//		// Admin 에서 회원정보 열람
+//		@RequestMapping(value="/admin/member/{curPage}/{mem_code}", method=RequestMethod.GET)	
+//		public String adminMemDetail2(MemberVO mvo, Model model, @PathVariable("mem_code") String mem_code, @PathVariable("curPage") int curPage) {
+//			System.out.println("====== 관리자 회원 상세페이지로 이동 ======");
+//			mvo.setMem_code(Integer.parseInt(mem_code));
+//			model.addAttribute("member", cartService.adminMemberDetail2(mvo));
+//			model.addAttribute("curPage", curPage);
+//			return "member/admin_member_detail";
+//		}
 		
 		
 	   

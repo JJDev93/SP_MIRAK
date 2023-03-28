@@ -56,7 +56,7 @@
 						<tr>
 							<td><a href="/admin/cart/${curPage}/${c.cart_code}">${c.cart_code }</a></td>
 							<td>
-								<a href="/admin/cartmember/${curPage}/${member.mem_code}">${c.mem_id }</a>
+								<a href="/admin/member/${curPage}/${member.mem_code}">${c.mem_id }</a>
 							</td>
 							<td><a href="/admin/cart/${curPage}/${c.cart_code}">${c.pro_code }</a></td>
 							<td>
@@ -71,9 +71,9 @@
 							<td>${c.cart_cnt }</td>
 							<td>${c.pro_price * c.cart_cnt }</td>
 							<td>
-								<c:if test="${c.cart_show == 0}"> 결제완료</c:if>
-								<c:if test="${c.cart_show == 1}"> 장바구니</c:if>
-								<c:if test="${c.cart_show == 2}"> 장바구니 삭제</c:if>
+								<c:if test="${c.cart_show == 0}">결제 완료</c:if>
+								<c:if test="${c.cart_show == 1}">장바구니 담김</c:if>
+								<c:if test="${c.cart_show == 2}">삭제된 장바구니</c:if>
 							</td>
 						</tr>
 						</c:forEach> 
