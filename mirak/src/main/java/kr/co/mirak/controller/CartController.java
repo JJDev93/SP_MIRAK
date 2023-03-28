@@ -125,7 +125,7 @@ public class CartController {
 	   
 
 	@RequestMapping(value = "/goPay", method = RequestMethod.POST)   // 결제하기
-	public String goPay(Model model, HttpSession session) {
+	public String goPay(Model model, HttpSession session) { 
 
 		model.addAttribute("CartVO", "");
 
