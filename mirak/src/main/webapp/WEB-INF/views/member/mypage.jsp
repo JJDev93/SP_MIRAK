@@ -35,7 +35,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="mem_id">아이디</label> 
-								<input type="text" name="mem_id" id="mem_id" class="form-control" placeholder="이메일(ID)" required="required" value="${member.mem_id }" readonly>
+								<input type="text" name="mem_id" id="mem_id" class="form-control emaill mail_input" placeholder="이메일(ID)" required="required" value="${member.mem_id }" readonly>
 								<c:choose>
 									<c:when test="${member.mem_isapi == 'google'}">
 										Google 빠른로그인 회원입니다
@@ -165,14 +165,49 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						회원탈퇴시 모든 정보가 삭제됩니다. 비밀번호를 입력해 주세요. <input type="password" class="form-control" id="pw_1" required="required">
+					<c:choose>
+					<c:when test="${not empty member.mem_isapi}">
+					회원탈퇴시 모든 정보가 삭제됩니다. 인증번호를 입력해주세요.
+					<div class="row">
+							<div class="col-sm-9 mail_check_wrap">  
+								<div class="mail_check_input_box" id="mail_check_input_box_false">
+									<input class="form-control" id="mail_check_input" disabled="disabled" placeholder="인증번호 6자리를 입력해주세요!" maxlength="6">
+									<div class="clearfix"></div>
+									<span id="mail_check_input_box_warn"></span>
+								</div>
+							</div>
+								<div class="col-sm-3">
+									<button type="button" id="mail_check_button"
+											class="btn btn-light joinBtn mb-2 doubleChk">인증번호</button>
+								</div>
 					</div>
+					</c:when>
+					<c:otherwise>
+					<div class="modal-body">
+						회원탈퇴시 모든 정보가 삭제됩니다. 비밀번호를 입력해 주세요. 
+						<input type="password" class="form-control" id="pw_1" required="required">
+					</div>
+					</c:otherwise>
+					</c:choose>
+					</div>
+					
+					
 					<div class="modal-footer">
+					
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Close</button>
+							<c:choose>
+							<c:when test="${not empty member.mem_isapi}">
 						<button type="button" class="btn btn-primary" id="memberCheck"
+							onclick="apiDelete();">탈퇴하기</button>
+							</c:when>
+							<c:otherwise>
+							<button type="button" class="btn btn-primary" id="memberCheck"
 							onclick="confirmDeleteMem();">탈퇴하기</button>
+							</c:otherwise>
+							</c:choose>
 					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -317,3 +352,43 @@
 		}
 	}
 </script>
+
+<script>
+	function apiDelete() {
+		// 인증번호 입력란에서 값을 가져옴
+		var authCode = document.getElementById("mail_check_input").value;
+
+		// 인증번호가 비어 있으면 경고창을 띄우고 함수를 종료
+		if (authCode.trim() === '') {
+			alert("인증번호를 입력해주세요.");
+			return;
+		} 
+		 // 탈퇴 API 호출
+		  $.ajax({
+		    url: "/memdelete",
+		    type: "POST",
+		    data: {
+		      authCode: authCode
+		    },
+		    success: function(response) {
+		      if (response.success) {
+		        alert("계정이 성공적으로 삭제되었습니다.");
+		        window.location.href = "/"; // 삭제 후, 홈페이지로 이동
+		      } else {
+		        alert("계정 삭제 중 오류가 발생했습니다.");
+		      }
+		    },
+		    error: function(xhr, status, error) {
+		      alert("서버 오류로 인해 계정 삭제가 실패했습니다.");
+		    }
+		  });
+		}
+	
+
+	
+		
+	
+</script>
+
+
+

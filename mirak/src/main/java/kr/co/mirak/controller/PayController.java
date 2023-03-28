@@ -31,8 +31,8 @@ import kr.co.mirak.pay.PayStringVO;
 import kr.co.mirak.pay.PayVO;
 import kr.co.mirak.pay.chart.ChartData;
 import kr.co.mirak.pay.chart.ChartService;
+import kr.co.mirak.pay.chart.PurchaseRateVO;
 import kr.co.mirak.pay.chart.RatioByVO;
-import kr.co.mirak.pay.chart.TotalByDayVO;
 import kr.co.mirak.pay.chart.TotalByMenuVO;
 import kr.co.mirak.product.ProductService;
 import kr.co.mirak.product.ProductVO;
@@ -240,16 +240,17 @@ public class PayController {
 	    ObjectMapper objectMapper = new ObjectMapper();
 
 	    TotalByMenuVO mvo = new TotalByMenuVO();
-	    TotalByDayVO dvo = new TotalByDayVO();
+	    PurchaseRateVO pvo = new PurchaseRateVO();
 
 		Map<String, List<Object>> totalBymenulist = chartService.getTotalByMenuList(mvo);
-		Map<String, List<Object>> totalByMonthList = chartService.getTotalByMonthList(dvo);
+		Map<String, List<Object>> purchaseRateList = chartService.getPurchaseRateList(pvo);
 
 		chartData.setTotalByMenuList(totalBymenulist);
-		chartData.setTotalByMonthList(totalByMonthList);
-
+		chartData.setPurchaseRateList(purchaseRateList);
+		
 		String data = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(chartData);
-
+		System.out.println("data ::::::::::::::::: " + data);
+		
 		return data;
 	}
 	
@@ -274,20 +275,5 @@ public class PayController {
 		
 		return data;
 	}
-	
-//	@ResponseBody
-//	@RequestMapping(value = "/admin/charts/getTotalByDayList/{clickedMonth}", produces = "application/json;charset=UTF-8", method = RequestMethod.GET)
-//	public String getTotalByDayList(@PathVariable String clickedMonth) throws Exception {
-//		
-//	    TotalByDayVO dvo = new TotalByDayVO();
-//	    dvo.setPay_date(clickedMonth);
-//	    Map<String, List<Object>> totalByDayList = chartService.getTotalByDayList(dvo, clickedMonth);
-//
-//	    ObjectMapper objectMapper = new ObjectMapper();
-//	    String data = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(totalByDayList);
-//
-//	    return data;
-//	}
-
 
 }
