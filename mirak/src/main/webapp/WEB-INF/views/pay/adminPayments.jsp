@@ -1,15 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.css">
-<script type="text/javascript" src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style>
-   li {
+li {
       float:left;
       margin-right:10px;
    }
+   
+.detail_td {
+	color: #333333;
+    cursor: pointer;
+    text-decoration: underline;
+  }
 
 .detail-row .hidden-row {
 	display: none;
@@ -28,6 +32,7 @@ tr .tr-custom {
 .table-hover tbody .detail-row:nth-child(even):hover {
 	background-color: initial;
 }
+
 </style>
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <div class="ftco-section">
@@ -46,15 +51,13 @@ tr .tr-custom {
 						<tr>
 							<th scope="col">주문번호</th>
 							<th scope="col">상품명</th>
-							<th scope="col">도시락 종류</th>
 							<th scope="col">총 가격</th>
 							<th scope="col">주문자이름</th>
 							<th scope="col">전화번호</th>
 							<th scope="col">배송지주소</th>
-							<th scope="col">요청사항</th>
 							<th scope="col">결제일</th>
 							<th scope="col">주문상태</th>
-							<th scope="col">배송상태</th>
+							<th scope="col">결제취소</th>
 							<th scope="col">상세정보</th>
 						</tr>
 					</thead>
@@ -62,37 +65,32 @@ tr .tr-custom {
 						<c:forEach var="payList" items="${payList}">
 							<tr class="tr-custom">
 								<td>${payList.group_id}</td>
-								<td><c:choose>
-										<c:when test="${payList.cart_cnt == 1}">
-                        ${payList.pro_name}
-                    </c:when>
-										<c:otherwise>
-                        ${payList.pro_name}외 ${payList.cart_cnt-1}종
-                    </c:otherwise>
-									</c:choose></td>
-								<td>${payList.cart_cnt}</td>
-								<td>${payList.totalPrice}</td>
+								<td class="detail_td" id="pro_name_${payList.group_id}"
+									data-toggle="collapse"
+									data-target="#collapse-${payList.group_id}"
+									aria-expanded="false"
+									aria-controls="collapse-${payList.group_id}"
+									data-group_id="${payList.group_id}">${payList.pro_name} <c:if test="${payList.cart_cnt > 1 }"> 외 ${payList.cart_cnt - 1 }개 품목</c:if>
+								</td>
+								<td id="totalPrice_${payList.group_id}">${payList.totalPrice}</td>
 								<td>${payList.mem_name}</td>
 								<td>${payList.mem_phone}</td>
 								<td>${payList.mem_add1} ${payList.mem_add2}</td>
-								<td>${payList.pay_req}</td>
 								<td>${payList.pay_date}</td>
 								<td id="statusTd_${payList.group_id}">${payList.status}</td>
+								
+								
 								<td>
-								<c:choose>
- 								 <c:when test="${payList.status == '결제 완료'}">
-    								<button id="statusBtn_${payList.group_id}" class="btn btn-secondary" type="button" onclick="updateStatus(${payList.group_id})">배송시작</button>
-  								</c:when>
-  								<c:when test="${payList.status == '배송중'}">
-    								<button id="statusBtn_${payList.group_id}" class="btn btn-secondary" type="button" disabled>배송중</button>
-  								</c:when>
-								  <c:when test="${payList.status == '구매 확정'}">
-  								</c:when>
-								</c:choose>
+									<button class="btn btn-dark py-2 px-3 payCancel"
+											id="payCancel_${payList.group_id}"
+											data-group_id="${payList.group_id}"
+											data-total_price="${payList.totalPrice}"
+											data-pro_name='${payList.pro_name} <c:if test="${payList.cart_cnt > 1 }"> 외 ${payList.cart_cnt - 1 }개 품목</c:if>'
+											<c:if test="${payList.status eq '주문 취소'}">disabled</c:if>>결제취소</button>
 								</td>
 								<td>
 									<div class="accordion">
-										<button class="detail_btn btn btn-secondary" type="button"
+										<button class="detail_btn btn btn-secondary py-2 px-3" type="button"
 											data-toggle="collapse"
 											data-target="#collapse-${payList.group_id}"
 											aria-expanded="false"
@@ -104,19 +102,22 @@ tr .tr-custom {
 								</td>
 							</tr>
 							<tr class="detail-row">
-								<td class="detail-col" style="padding: 2px;" colspan="12">
+								<td class="detail-col" style="padding: 2px;" colspan="10">
 									<div class="collapse" id="collapse-${payList.group_id}">
 										<div class="table-responsive"
-											style="width: 90%; float: right;">
-											<table class="table table-hover table-striped table-bordered">
+											style="float: right;">
+											<table class="table table-hover table-striped table-bordered table-sm">
 												<thead class="thead-custom">
 													<tr>
-														<th>상품명</th>
-														<th>수량</th>
-														<th>가격</th>
-														<th>희망요일</th>
-														<th>배송시작일</th>
-														<th>주문상태</th>
+														<th>카테고리</th>
+														<th style="width:200px;">상품명</th>
+														<th style="width:100px;">수량</th>
+														<th style="width:100px;">결제 금액</th>
+														<th style="width:100px;">변경 금액</th>
+														<th style="width:330px;">희망 요일</th>
+														<th style="width:150px;">배송시작일</th>
+														<th>요청 사항</th>
+														<th style="width:120px;">수정하기</th>
 													</tr>
 												</thead>
 												<tbody id="accordianBody-${payList.group_id}"></tbody>
@@ -124,6 +125,7 @@ tr .tr-custom {
 										</div>
 									</div>
 								</td>
+
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -161,91 +163,279 @@ tr .tr-custom {
                   </div>
                </div>
 			</div>
+		</div>
 	</div>
 </div>
 
-<jsp:include page="/common/admin_ft.jsp"></jsp:include>
-</div>
+	<jsp:include page="/common/admin_ft.jsp"></jsp:include>
 <script>
-function updateStatus(group_id) {
-	  var statusTd = $('#statusTd_' + group_id);
-	  var statusBtn = $('#statusBtn_' + group_id);
-	  $.ajax({
-	    url: "/admin/payment/" + group_id + "/updateStatus",
-	    method: "PUT",
-	    success: function (data) {
-	      alert("배송 상태가 업데이트 되었습니다.");
-	      var updatedStatus = '';
-	      for (var i = 0; i < data.length; i++) {
-	        if (data[i].group_id == group_id) {
-	          updatedStatus = data[i].status;
-	          break;
-	        }
-	      }
-	      statusTd.text(updatedStatus);
-	      if (updatedStatus === '배송중') {
-	        statusBtn.prop('disabled', true);
-	      }
-	    },
-	    error: function () {
-	      alert("배송 상태 업데이트에 실패하였습니다.");
-	    },
-	  });
-	}
-
-	function detailTable(data, group_id) {
-	  var tbody = $("#accordianBody-" + group_id);
-	  tbody.empty();
-
-	  data.forEach(function (item) {
-	    var date = new Date(item.cart_start);
-	    var cart_start = date.toISOString().substring(0, 10);
-
-	    tbody.append(
-	      $("<tr>").append(
-	        $("<td>").text(item.pro_name),
-	        $("<td>").text(item.cart_cnt),
-	        $("<td>").text(item.totalPrice),
-	        $("<td>").text(item.cart_day),
-	        $("<td>").text(cart_start),
-	        $("<td>").text(item.status)
-	      )
-	    );
-	  });
-	}
-	$(document).on("click", ".detail_btn", function () {
-	  var open_collapse = $(".collapse.show");
-	  if (open_collapse.length > 0) {
-	    open_collapse.each(function () {
-	      $(this).collapse("hide");
-	    });
-	  }
-
-	  var group_id = $(this).data("group_id");
-	  var tbody = $("#accordianBody-" + group_id);
-	  var detail_btn = $('.detail_btn[data-group_id="' + group_id + '"]');
-
-	  $.ajax({
-	    url: "/admin/payment/" + group_id,
-	    method: "GET",
-	    success: function (data) {
-	      detailTable(data, group_id);
-	    },
-	    error: function () {
-	      alert("데이터를 가져올 수 없습니다.");
-	    },
-	  });
+$('.payCancel[disabled]').each(function() {
+	  $(this).text('취소된 주문');
 	});
 
-	$(".collapse").on("hidden.bs.collapse", function () {
-	  var group_id = $(this).attr("id").split("-")[1];
-	  var detailBtn = $('.detail_btn[data-group_id="' + group_id + '"]');
-	  detailBtn.html("상세보기<i class='fas fa-angle-down'></i>");
-	});
+$(document).on("click", ".detail_btn, .detail_td", function () {
+	console.log("클릭이벤트 실행");
+    var open_collapse = $(".collapse.show");
+    if (open_collapse.length > 0) {
+      open_collapse.each(function () {
+        $(this).collapse("hide");
+      });
+    }
 
-	$(".collapse").on("shown.bs.collapse", function () {
-	  var group_id = $(this).attr("id").split("-")[1];
-	  var detailBtn = $('.detail_btn[data-group_id="' + group_id + '"]');
-	  detailBtn.html("닫기<i class='fas fa-angle-up'></i>");
-	});
+    var group_id = $(this).data("group_id");
+    var tbody = $("#accordianBody-" + group_id);
+    var detail_btn = $('.detail_btn[data-group_id="' + group_id + '"]');
+
+    $.ajax({
+      url: "/admin/payment/" + group_id,
+      method: "GET",
+      success: function (data) {
+        detailTable(data, group_id);
+      },
+      error: function () {
+        alert("데이터를 가져올 수 없습니다.");
+      },
+    });
+  });
+
+	$(".payCancel").on("click", function() {
+			let totalPrice = $(this).data('total_price');
+			console.log(totalPrice);
+			let group_id = $(this).data('group_id');
+			let pro_name = $(this).data('pro_name');
+
+			let result = confirm("선택하신 상품은 <<" + pro_name + ">>입니다. \n 주문을 취소하시겠습니까?")
+
+			if (result) {
+				$.ajax({
+					type : "get",
+					url : "/pay/kakao/cancel",
+					data : {
+						group_id : group_id,
+						totalPrice : totalPrice,
+					},
+					success : function(response) {
+						alert("결제가 취소되었습니다.");
+						var status = $("#statusTd_" + group_id).text();
+						$('#statusTd_' + group_id).text("주문 취소");
+						$('#payCancel_' + group_id).attr("disabled", true).val("취소된 주문");
+						
+					},
+		            error: function(xhr, status, error) {
+		                alert("결제취소가 실패했습니다.");
+		              }
+				});
+			};
+		});
+
+function detailTable(data, group_id) {
+    var tbody = $("#accordianBody-" + group_id);
+    tbody.empty();	  
+    var productList = JSON.parse('${productList}');
+    let selectCate;
+    let pro_code;
+    data.forEach(function (item) {
+          pro_code = item.pro_code;
+          var pay_code = item.pay_code;
+    	  var cate = $("<select>").addClass("form-control").attr("id", "cate_" + pay_code).css({"max-width":"250px", "height":"40px", "text-align":"center", "font-size":"14px"});
+    	  var keys = Object.keys(productList);
+    	  keys.forEach(function(key) {
+    	    var option = $("<option>").val(key).text(key);
+    	    cate.append(option);
+    	  });
+    	  if (pro_code.substr(0, 1) === 'P') {
+    	    cate.val('프리미엄');
+    	  } else if (pro_code.substr(0, 1) === 'O') {
+    	    cate.val('1인세트');
+    	  } else {
+    	    cate.val('2·3인세트');
+    	  }
+
+  	        selectCate = cate.val();
+    	    var pro_name = $("<select>").addClass("form-control").attr("id", "pro_name_" + pay_code).css({"max-width":"250px", "height":"40px", "text-align":"center", "font-size":"14px"});
+    	    var productListByCate = productList[selectCate];
+    	    
+    	    if (productListByCate) {
+    	    	  productListByCate.forEach(function(product) {
+    	    		  var option = $("<option>").val(product.pro_name).text(product.pro_name);
+    	    		  if (product.pro_name === item.pro_name) {
+    	    		    option.attr("selected", true);
+    	    		  }
+    	    		  pro_name.append(option);
+    	    	  });
+    	    	} else {
+    	    	  console.log("해당 카테고리의 상품이 존재하지 않습니다.");
+    	    	}
+    	    
+    	    var selectProduct = productListByCate.find(function(product) {
+    	    	return product.pro_name === pro_name.val();
+    	      });
+    	    if (selectProduct) {
+    	    	  var selectPrice = selectProduct.pro_price;
+    	    	  var totalPrice = item.cart_cnt * selectPrice;
+    	    	  var changePrice = item.cart_cnt * selectPrice;
+    	    	} else {
+    	    	  console.log("상품을 찾을 수 없습니다.");
+    	    	}
+    
+        var cart_cnt = $("<input>").addClass("form-control").attr({
+            "type": "number",
+            "min": "0",
+            "max": "99",
+            "step": "1",
+            "value": item.cart_cnt,
+          }).attr("id", "cart_cnt_" + pay_code).css({"text-align":"center","padding-left":"20px"});
+        
+        cate.on("change", function() {
+        	
+        	  var pay_code = $(this).attr("id").replace("cate_", "");
+        	  selectCate = $(this).val();
+        	  var productListByCate = productList[selectCate];
+        	  var pro_name = $("#pro_name_" + pay_code);
+        	  pro_name.empty();
+        	  if (productListByCate) {
+        	    productListByCate.forEach(function(product) {
+        	      var option = $("<option>").val(product.pro_name).text(product.pro_name);
+        	      pro_name.append(option);
+        	    });
+        	  } else {
+        	    console.log("해당 카테고리의 상품이 존재하지 않습니다.");
+        	  }
+        	});
+        
+        var cnt = parseInt((cart_cnt).val());
+        
+        pro_name.on("change", function() {
+        	  var pay_code = $(this).attr("id").replace("pro_name_", "");
+        	  var selectPro_name = $(this).val();
+        	  var selectCate = $("#cate_" + pay_code).val();
+        	  var productListByCate = productList[selectCate];
+        	  var selectProduct = productListByCate.find(function(product) {
+        	    return product.pro_name === selectPro_name;
+        	  });
+        	  pro_code = selectProduct.pro_code;
+        	  var selectPrice = selectProduct ? selectProduct.pro_price : 0;
+        	  var cnt = parseInt($("#cart_cnt_" + pay_code).val());
+        	  var changePrice = cnt * selectPrice;
+        	  $("#changePrice_" + pay_code).text(changePrice);
+        	});
+        
+        cart_cnt.on("change", function() {
+        	var cnt = parseInt($(this).val());
+        	var changePrice = cnt * selectPrice;
+  		  $("#changePrice_" + pay_code).text(changePrice);
+        });
+
+      var cart_day = $("<div>").addClass("cart_day");
+      
+      var days = ["월", "화", "수", "목", "금", "토", "일"];
+      for (var i = 0; i < days.length; i++) {
+        var isChecked = item.cart_day.includes(days[i]);
+        var input = $("<input>").attr({
+          "type": "checkbox",
+          "name": "cart_day_" + pay_code,
+          "id": days[i],
+          "value": days[i],
+          "class": "form-check-input cart_day_" + pay_code + "",
+        }).css({"margin-left":"-0.8rem","text-align":"center"}).prop("checked", isChecked);
+        var label = $("<label>").attr({
+          "class": "form-check-label",
+        }).text(days[i]);
+        label.prepend(input);
+        var div = $("<div>").addClass("form-check").css({"display":"inline-block"}).append(label);
+        cart_day.append(div);
+      }
+      
+
+      
+      var dateString = new Date(item.cart_start);
+      var localDateString = dateString.getFullYear() + "-" + ("0" + (dateString.getMonth() + 1)).slice(-2) + "-" + ("0" + dateString.getDate()).slice(-2);
+      var cart_start = $("<input>").attr({
+          "type": "text",
+          "name": "cart_start",
+          "class": "form-control input-number",
+          "readonly": true,
+      }).val(localDateString).datepicker({dateFormat: "yy-mm-dd"}).css({"text-align":"center"});
+      
+      var pay_req =  $("<input>").attr({
+          "type": "text",
+          "name": "pay_req",
+          "class": "form-control input-number",
+      }).val(item.pay_req);
+      
+      var modify = $("<input>").attr({
+          "type": "button",
+          "name": "modify",
+          "value": "변경하기",
+          "class": "btn btn-secondary py-2 px-3",
+      });
+      if($("#statusTd_" + group_id).text() == "주문 취소") {
+    	  modify.attr("disabled", true).val("취소된 주문");
+      }
+      
+      
+      modify.on("click", function() {
+          const checkedValues = [];
+          const checkboxes = document.querySelectorAll("input[name='cart_day_" + pay_code + "']:checked");
+          checkboxes.forEach(function(checkbox) {
+            checkedValues.push(checkbox.value);
+          });
+
+          if (confirm("정보를 변경하시겠습니까?")) {
+            $.ajax({
+              type: "POST",
+              url: "/admin/pays/update",
+              data: {
+              pro_code: pro_code,
+                pay_code: pay_code,
+                pro_name: pro_name.val(),
+                cart_cnt: cart_cnt.val(),
+                totalPrice: $("#changePrice_" + pay_code).text(),
+                cart_day: checkedValues.join(""),
+                cart_start: cart_start.val(),
+                pay_req: pay_req.val(),
+              },
+              success: function(data) {
+                alert("정보가 변경되었습니다.");
+
+                	  var productName = cart_cnt.val() == 1 ? pro_name.val() : pro_name.val() + "외 " + (cart_cnt.val() - 1) + "종";
+                	  var totalPrice = $("#changePrice_" + pay_code).text();
+                	  $('#pro_name_' + group_id).text(productName);
+                	  $('#totalPrice_' + group_id).text(totalPrice);
+                	  
+                      },
+              error: function(xhr, status, error) {
+                alert("업데이트가 실패했습니다.");
+              }
+          })
+        }
+      });
+      
+        
+        tbody.append(
+          $("<tr>").append(
+            $("<td>").css("height", "40px").attr("name", "cate").append(cate),
+            $("<td>").css("height", "40px").attr("name", "pro_name").append(pro_name),
+            $("<td>").css("height", "40px").attr("name", "cart_cnt").append(cart_cnt),
+            $("<td>").css("height", "40px").attr("name", "totalPrice").text(totalPrice),
+            $("<td>").css("height", "40px").attr("name", "changePrice").attr("id", "changePrice_" + pay_code).text(changePrice),
+            $("<td>").css("height", "40px").append(cart_day),
+            $("<td>").css("height", "40px").append(cart_start),
+            $("<td>").css("height", "40px").attr("name", "pay_req").append(pay_req),
+            $("<td>").css("height", "40px").attr("name", "modify").append(modify)
+          )
+        );
+      })};
+    
+  $(".collapse").on("hidden.bs.collapse", function () {
+    var group_id = $(this).attr("id").split("-")[1];
+    var detailBtn = $('.detail_btn[data-group_id="' + group_id + '"]');
+    detailBtn.html("상세보기<i class='fas fa-angle-down'></i>");
+  });
+
+  $(".collapse").on("shown.bs.collapse", function () {
+    var group_id = $(this).attr("id").split("-")[1];
+    var detailBtn = $('.detail_btn[data-group_id="' + group_id + '"]');
+    detailBtn.html("닫기<i class='fas fa-angle-up'></i>");
+  });
 </script>

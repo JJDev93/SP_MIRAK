@@ -4,7 +4,7 @@ import java.util.List;
 
 
 public interface ProductMapper {
-	List<ProductVO> productList(ProductVO vo);
+	List<ProductVO> productList(String cate);
 	
 	List<ProductVO> productList1(Criteria cri);
 

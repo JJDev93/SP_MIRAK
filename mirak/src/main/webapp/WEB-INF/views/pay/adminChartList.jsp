@@ -4,10 +4,27 @@
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+
 <style>
-.container {
-	
+.chart-wrapper {
+	position: relative;
+}
+#chartWrapper2 {
+	margin-left : 100px;
+}
+#chartWrapper3 {
+	float: right;
+	margin-right : 100px;
+}
+
+.chart-visible {
+	display: inline-block;
+}
+
+.chart-hidden {
+	display: none;
 }
 
 canvas {
@@ -26,22 +43,33 @@ canvas {
 		<div class="bd-example-snippet bd-code-snippet">
 			<div class="bd-example">
 				<div class="row">
-					<div class="col-md-7">
-						<canvas id="myChart1" width="600" height="450"></canvas>
+					<div class="col-md-1"></div>
+					<div class="col-md-10">
+						<div id="chartWrapper1" class="chart-visible">
+							<canvas id="myChart1" width="950" height="400"></canvas>
+						</div>
+						<div id="chartWrapper2" class="chart-hidden">
+							<canvas id="myChart2" width="300" height="300"></canvas>
+						</div>
+						<div id="chartWrapper3" class="chart-hidden">
+							<canvas id="myChart3" width="300" height="300"></canvas>
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-1"></div>
+					<div class="col-md-5">
+						<canvas id="myChart4" width="450" height="400"></canvas>
 					</div>
 					<div class="col-md-5">
-						<canvas id="myChart2" width="500" height="400"></canvas>
+<%-- 						<canvas id="myChart4" width="450" height="400"></canvas> --%>
 					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-12">
-						<canvas id="myChart3" width="1200" height="450"></canvas>
-					</div>
+					<div class="col-md-1"></div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<script src="${path}/resources/js/chart.js"></script>
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>
+<script src="${path}/resources/js/chart.js"></script>
