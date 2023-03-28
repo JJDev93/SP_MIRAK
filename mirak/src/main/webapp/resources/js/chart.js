@@ -8,9 +8,7 @@ $(function () {
     success: function (data) {
       var totalByMenuList = data["totalByMenuList"];
       var purchaseRateList = data["purchaseRateList"];
-      
-      console.log(totalByMenuList.totalRatio);
-      
+
       function changeClass(element, removeClass, addClass) {
         element.classList.remove(removeClass);
         element.classList.add(addClass);
@@ -24,29 +22,35 @@ $(function () {
           {
             label: "판매량",
             data: totalByMenuList.totalPrice,
-            backgroundColor: [
-              "rgba(255, 99, 71, 0.2)",
-              "rgba(255, 140, 0, 0.2)",
-              "rgba(255, 215, 0, 0.2)",
-              "rgba(144, 238, 144, 0.2)",
-              "rgba(173, 216, 230, 0.2)",
-              "rgba(221, 160, 221, 0.2)",
-              "rgba(255, 192, 203, 0.2)",
-            ],
-            borderColor: [
-              "rgb(255, 99, 71)",
-              "rgb(255, 140, 0)",
-              "rgb(255, 215, 0)",
-              "rgb(144, 238, 144)",
-              "rgb(173, 216, 230)",
-              "rgb(221, 160, 221)",
-              "rgb(255, 192, 203)",
-            ],
+            backgroundColor: function (context) {
+              if (context.dataIndex <= 4) {
+                return [
+                  "rgba(238, 32, 77, 0.8)",
+                  "rgba(238, 32, 77, 0.6)",
+                  "rgba(238, 32, 77, 0.4)",
+                  "rgba(238, 32, 77, 0.2)",
+                  "rgba(238, 32, 77, 0.1)",
+                ];
+              }
+              return "rgba(54, 162, 235, 0.2)";
+            },
+            borderColor: function (context) {
+              if (context.dataIndex <= 4) {
+                [
+                  "rgba(122, 41, 69, 0.1)",
+                  "rgba(147, 68, 88, 0.1)",
+                  "rgba(183, 107, 120, 0.1)",
+                  "rgba(219, 156, 161, 0.1)",
+                  "rgba(255, 214, 214, 0.1)",
+                ];
+              }
+              return "rgba(102, 102, 102)";
+            },
             borderWidth: 2,
             datalabels: {
               color: "black",
               font: {
-              	size : 14,
+                size: 14,
                 weight: "bold",
               },
               anchor: "begin",
@@ -60,18 +64,24 @@ $(function () {
           },
         ],
       };
+
       const byMenuChartDataOpt = {
         maintainAspectRatio: false,
         responsive: false,
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
         plugins: {
           title: {
             display: true,
             text: "판매량 TOP20",
+          },
+        },
+        scales: {
+          x: {
+            font : {
+              size : 8,
+            }
+          },
+          y: {
+            beginAtZero: true,
           },
         },
       };
@@ -157,7 +167,7 @@ $(function () {
                 plugins: {
                   title: {
                     display: true,
-                    text: " 주문 성별 비율",
+                    text: "성별 비율",
                   },
                   datalabels: {
                     color: "#fff",
@@ -274,7 +284,7 @@ $(function () {
                 var index = context.dataIndex;
                 var ratio = purchaseRateList.ratio[index];
                 var rec = purchaseRateList.rec[index];
-                return "ㅤ"+ratio.toFixed(1) + "%\n\n" + "ㅤ"+rec;
+                return ratio.toFixed(1) + "%\n\n" + rec;
               },
             },
           },
@@ -304,13 +314,9 @@ $(function () {
           },
         },
         scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true,
-              },
-            },
-          ],
+          y: {
+            beginAtZero: true,
+          },
         },
       };
 
