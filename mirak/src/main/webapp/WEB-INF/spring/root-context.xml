@@ -24,7 +24,7 @@
 <!-- 		<property name="url" value="jdbc:mariadb://database-1.crynjzcfluth.ap-northeast-2.rds.amazonaws.com:3306/mirak?allowMultiQueries=true" /> -->
 
 		<property name="username" value="root" />
-		<property name="password" value="12345678" />
+		<property name="password" value="1234" />
 	</bean>
 
 	<bean id="sqlSessionFactory"
