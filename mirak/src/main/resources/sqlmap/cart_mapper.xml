@@ -50,10 +50,27 @@
 	
 	
 	
-	
+	<!-- 어드민 회원 정보 상세보기 -->
+	<select id="adminMemberDetail2">
+		<![CDATA[
+			SELECT MEM_CODE, MEM_ID, 
+				MEM_NAME, MEM_AGE, 
+				MEM_GENDER, MEM_PHONE, 
+				MEM_REGDATE, 
+				MEM_ADD1,
+				MEM_ADD2,
+				MEM_ZIPCODE,
+				MEM_ISAPI FROM MEMBER
+			LEFT OUTER JOIN CART ON MEMBER.mem_id = CART.mem_id
+		]]>
+	</select>
+
+
+
 	<!-- 어드민 카트 전체 목록 -->
 	<select id="cartAdminList" resultType="kr.co.mirak.cart.CartVO">
 	
+
 		SELECT * FROM cart
 		ORDER BY CART_CODE DESC
 
@@ -87,7 +104,7 @@
 		
 		<![CDATA[
   		 
-		select * from (select * from cart) as T1 limit #{skip},#{amount}
+		select * from (select * from cart order by cart_code desc limit #{skip},#{amount}) as T1;
  		]]>
 
 	</select>

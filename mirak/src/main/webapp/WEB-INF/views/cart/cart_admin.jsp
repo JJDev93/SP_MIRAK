@@ -2,12 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<style>
-   li{
-      float:left;
-      margin-right:10px;
-   }
-</style>
+
 
 <div id="test">
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
@@ -57,12 +52,11 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="c" items="${cartList }">
+						<c:forEach var="c" items="${cartList }">	
 						<tr>
-<%-- 							<a href="/adminMembers/${c.mem_id}"></a> --%>
 							<td><a href="/admin/cart/${curPage}/${c.cart_code}">${c.cart_code }</a></td>
 							<td>
-								<a href="/admin/member/${c.mem_id}">${c.mem_id }</a>
+								<a href="/admin/member/${curPage}/${c.mem_code}">${c.mem_id }</a>
 							</td>
 							<td><a href="/admin/cart/${curPage}/${c.cart_code}">${c.pro_code }</a></td>
 							<td>
@@ -89,37 +83,24 @@
 	
                
 			<div class="row mt-5">
-                  <div class="col text-center">
-                     <div class="block-27">
-                        <!-- 각 번호 페이지 버튼 -->
-                        <table>
-                           <tr>
-                              <!-- 이전페이지 버튼 -->
-                              <c:if test="${pageMaker.prev}">
-                                 <ul>
-                                    <li class="pageInfo_btn previous">
-                                       <a href="javascript:acyncMovePage('/admin/carts/${pageMaker.startPage-1}');">&lt;</a>
-                                    </li>
-                                 </ul>
-                              </c:if>
-                              <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-                                 <ul style="text-align: center;" id="abc">
-                                    <li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="/admin/carts/${num}">${num}</a></li>
-                                 </ul>
-                              </c:forEach>
-                              <!-- 다음페이지 버튼 -->
-                              <c:if test="${pageMaker.next}">
-                                 <ul>
-                                    <li class="pageInfo_btn next">
-                                       <a href="javascript:acyncMovePage('/admin/carts/${pageMaker.endPage + 1 }');">&gt;</a>
-                                    </li>
-                                 </ul>
-                              </c:if>
-                           </tr>
-                        </table>
-                     </div>
-                  </div>
+            <div class="col text-center">
+               <div class="block-27">
+                  <ul>
+                     <!-- 이전페이지 버튼 -->
+                     <c:if test="${pageMaker.prev}">
+                        <li class="pageInfo_btn next"><a href="javascript:acyncMovePage('/admin/carts/${pageMaker.startPage-1}');">&lt;</a></li>
+                     </c:if>
+                     <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+                        <li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="javascript:acyncMovePage('/admin/carts/${num}');">${num}</a></li>
+                     </c:forEach>
+                     <!-- 다음페이지 버튼 -->
+                     <c:if test="${pageMaker.next}">
+                        <li class="pageInfo_btn next"><a href="javascript:acyncMovePage('/admin/carts/${pageMaker.endPage + 1 }');">&gt;</a></li>
+                     </c:if>
+                  </ul>
                </div>
+            </div>
+         </div>
 <!-- 		<div class="row mt-5"> -->
 <!-- 			<div class="col text-center"> -->
 <!-- 				<div class="block-27"> -->

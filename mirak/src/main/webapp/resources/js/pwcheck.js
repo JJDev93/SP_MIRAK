@@ -7,7 +7,7 @@
             if(document.getElementById('pw').value !='' && document.getElementById('pw2').value!=''){
                 if(document.getElementById('pw').value==document.getElementById('pw2').value){
                     document.getElementById('check').innerHTML='비밀번호가 일치합니다.'
-                    document.getElementById('check').style.color='blue';
+                    document.getElementById('check').style.color='green';
                 }
                 else{
                     document.getElementById('check').innerHTML='비밀번호가 일치하지 않습니다.';

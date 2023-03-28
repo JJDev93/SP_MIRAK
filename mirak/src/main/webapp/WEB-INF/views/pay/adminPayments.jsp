@@ -82,6 +82,7 @@ tr .tr-custom {
 								
 								<td>
 									<button class="btn btn-dark py-2 px-3 payCancel"
+											id="payCancel_${payList.group_id}"
 											data-group_id="${payList.group_id}"
 											data-total_price="${payList.totalPrice}"
 											data-pro_name='${payList.pro_name} <c:if test="${payList.cart_cnt > 1 }"> 외 ${payList.cart_cnt - 1 }개 품목</c:if>'
@@ -217,6 +218,8 @@ $(document).on("click", ".detail_btn, .detail_td", function () {
 						alert("결제가 취소되었습니다.");
 						var status = $("#statusTd_" + group_id).text();
 						$('#statusTd_' + group_id).text("주문 취소");
+						$('#payCancel_' + group_id).attr("disabled", true).val("취소된 주문");
+						
 					},
 		            error: function(xhr, status, error) {
 		                alert("결제취소가 실패했습니다.");

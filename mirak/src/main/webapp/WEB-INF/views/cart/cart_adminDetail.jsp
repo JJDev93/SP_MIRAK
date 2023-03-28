@@ -15,34 +15,44 @@
       </div>
       
       <form action="/admin/cartUpdate" method="post" enctype="multipart/form-data" class="p-5 bg-light mb-4">
+      <table>
+      	<tr></tr>
+      	<td class="cart_info"> 
+			<input type="hidden" class="price_input" value="${c.pro_price }">
+			<input type="hidden" class="count_input" value="${c.cart_cnt }"> 
+			<input type="hidden" class="totalPrice_input" value="${c.pro_price * c.cart_cnt }">
+			<input type="hidden" class="pro_code" value="${c.pro_code }">
+			<input type="hidden" class="cart_code" value="${c.cart_code }">
+		</td>
+      </table>
          <div class="row">
             <div class="col-md-12">
                <div class="form-group">
-                  <label for="cart_code">장바구니 코드</label> <input type="text" readonly="readonly" class="form-control" id="cart_code" name="cart_code" value="${cart.cart_code }" readonly>
+                  <label for="cart_code">장바구니 코드</label> <input type="text" readonly="readonly" style="cursor:default" class="form-control" id="cart_code" name="cart_code" value="${cart.cart_code }" readonly>
                </div>
             </div>
             
             <div class="col-md-12">
                <div class="form-group">
-                  <label for="mem_id">아이디</label> <input type="text" readonly="readonly" class="form-control" id="mem_id" name="mem_id" value="${cart.mem_id }">
+                  <label for="mem_id">아이디</label> <input type="text" readonly="readonly" style="cursor:default" class="form-control" id="mem_id" name="mem_id" value="${cart.mem_id }">
                </div>
             </div>
             
             <div class="col-md-12">
                <div class="form-group">
-                  <label for="pro_code">상품코드</label> <input type="text" readonly="readonly" class="form-control" id="pro_code" name="pro_code" value="${cart.pro_code }">
+                  <label for="pro_code">상품코드</label> <input type="text" class="form-control" id="pro_code" name="pro_code" value="${cart.pro_code }">
                </div>
             </div>
             
             <div class="col-md-12">
                <div class="form-group">
-                  <label for="pro_name">상품명</label> <input type="text" readonly="readonly" class="form-control" id="pro_name" name="pro_name" value="${cart.pro_name }">
+                  <label for="pro_name">상품명</label> <input type="text" class="form-control" id="pro_name" name="pro_name" value="${cart.pro_name }">
                </div>
             </div>
             
             <div class="col-md-12">
                <div class="form-group">
-                  <label for="pro_price">상품가격</label> <input type="text" readonly="readonly" class="form-control" id="pro_price" name="pro_price" value="${cart.pro_price }">
+                  <label for="pro_price">상품가격</label> <input type="text" class="form-control" id="pro_price" name="pro_price" value="${cart.pro_price }">
                </div>
             </div>
             
@@ -151,7 +161,28 @@ function selectAll(selectAll)  {
        checkbox.checked = selectAll.checked;
      })
    }
+   
+function setTotalInfo() {
+	let totalPrice = 0; // 총 가격
+	let totalCount = 0; // 총 갯수
 	
+	$(".cart_info")
+			.each(
+					function(index, element) {
+							// 총 가격
+							totalPrice += parseInt($(element).find(
+									".totalPrice_input").val());
+							// 총 갯수
+							totalCount += parseInt($(element).find(
+									".count_input").val());
+					});
+	
+	
+	// 총 가격
+	$(".totalPrice_span").text(totalPrice.toLocaleString());
+	// 총 갯수
+	$(".totalCount_span").text(totalCount);
+}
 
 	
 </script>
