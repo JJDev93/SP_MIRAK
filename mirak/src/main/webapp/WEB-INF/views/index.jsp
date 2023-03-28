@@ -99,6 +99,7 @@
 	    			</div>
 				</c:forEach>
 			</div>
+			
 		</section>
 	</div>
 </div>
