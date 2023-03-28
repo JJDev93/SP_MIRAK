@@ -4,15 +4,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 <style>
-.product{
-	border:none; 
-	border-radius: 6px;
-	box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
-	background: white;
-	margin-top: 20px;
-	padding: 10px;
-}
-
+.heading-section h2{color:#82ae46;}
 </style>
 <!-- START 슬라이더 -->
 <section id="home-section" class="hero">
@@ -31,7 +23,6 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="slider-item" style="background-image: url(${path}/resources/images/bg_1.jpg);">
 			<div class="overlay"></div>
 			<div class="container">
@@ -50,68 +41,65 @@
 </section>
 
 <!-- START 공지, 추천 -->
-<div class="container-fluid ">
-	<div class="row" style="">
-		<div class="col-md-6">
-			<section class="ftco-section ftco-category">
-				<div class="justify-content-center mb-3 pb-1">
-					<div class="heading-section text-center ftco-animate">
-						<h2 class="mb-4">인기상품</h2>
-					</div>
+<div class="ftco-section">
+	<div class="container">
+		<section class=" ftco-category">
+			<div class="justify-content-center mb-3 pb-1">
+				<div class="heading-section text-center ftco-animate">
+					<h2 class="mb-4">인기상품</h2>
 				</div>
-				<div class="row" style="border-radius: 6px; background: #f6f9f6; padding:10px;">
-					<c:forEach items="${productList2}" var="product">
-						<div class="col-md-6 ftco-animate">
-		    				<div class="product">
-		    					<a href="ProductClientDetail/${product.pro_code}" class="img-prod" >
-		    						<div class="imgDiv" style="width: 100%; height: 250px; background: url(${path}/resources/images/product/${product.pro_image}) no-repeat 50% 50%; background-size: contain;"></div>
-		    					</a>
-		    					<div class="text py-3 pb-4 px-3 text-center">
-									<h3 class="text-center">
-										<a href="ProductClientDetail/${product.pro_code}"  class="text_wrap">${product.pro_name}</a>
-									</h3>
-		    						<div class="d-flex">
-		    							<div class="pricing">
-				    						<p class="price"><span class="mr-2 price-dc"></span><span class="price-sale">${product.pro_price} 원</span></p>
-				    					</div>
+			</div>
+			<div class="row">
+				<c:forEach items="${productList2}" var="product">
+					<div class="col-md-6 col-lg-4 ftco-animate">
+	    				<div class="product">
+	    					<a href="ProductClientDetail/${product.pro_code}" class="img-prod" >
+	    						<div class="imgDiv" style="width: 100%; height: 250px; background: url(${path}/resources/images/product/${product.pro_image}) no-repeat 50% 50%; background-size: contain;"></div>
+	    					</a>
+	    					<div class="text py-3 pb-4 px-3 text-center">
+								<h3 class="text-center">
+									<a href="ProductClientDetail/${product.pro_code}"  class="text_wrap">${product.pro_name}</a>
+								</h3>
+	    						<div class="d-flex">
+	    							<div class="pricing">
+			    						<p class="price"><span class="mr-2 price-dc"></span><span class="price-sale">${product.pro_price} 원</span></p>
 			    					</div>
 		    					</div>
-		    				</div>
-		    			</div>
-					</c:forEach>
+	    					</div>
+	    				</div>
+	    			</div>
+				</c:forEach>
+			</div>
+		</section>
+		<hr style="margin-top:100px; margin-bottom:100px;">
+		<section class="ftco-category mt-5">
+			<div class="justify-content-center mb-3 pb-1">
+				<div class="heading-section text-center ftco-animate">
+					<h2 class="mb-4">추천상품</h2>
 				</div>
-			</section>
-		</div>
-		<div class="col-md-6">
-			<section class="ftco-section ftco-category">
-				<div class="justify-content-center mb-3 pb-1">
-					<div class="heading-section text-center ftco-animate">
-						<h2 class="mb-4">추천상품</h2>
-					</div>
-				</div>
-				<div class="row" style="border-radius: 6px; background: #f6f9f6; padding:10px;">
-					<c:forEach items="${productList1}" var="product">						
-						<div class="col-md-6 ftco-animate">
-		    				<div class="product">
-		    					<a href="ProductClientDetail/${product.pro_code}" class="img-prod">
-		    						<div class="imgDiv" style="width: 100%; height: 250px; background: url(${path}/resources/images/product/${product.pro_image}) no-repeat 50% 50%; background-size: contain;"></div>
-		    					</a>
-		    					<div class="text py-3 pb-4 px-3 text-center">
-									<h3 class="text-center">
-										<a href="ProductClientDetail/${product.pro_code}" class="text_wrap">${product.pro_name}</a>
-									</h3>
-		    						<div class="d-flex">
-		    							<div class="pricing">
-				    						<p class="price"><span class="mr-2 price-dc"></span><span class="price-sale">${product.pro_price} 원</span></p>
-				    					</div>
+			</div>
+			<div class="row">
+				<c:forEach items="${productList1}" var="product">						
+					<div class="col-md-6 col-lg-4 ftco-animate">
+	    				<div class="product">
+	    					<a href="ProductClientDetail/${product.pro_code}" class="img-prod">
+	    						<div class="imgDiv" style="width: 100%; height: 250px; background: url(${path}/resources/images/product/${product.pro_image}) no-repeat 50% 50%; background-size: contain;"></div>
+	    					</a>
+	    					<div class="text py-3 pb-4 px-3 text-center">
+								<h3 class="text-center">
+									<a href="ProductClientDetail/${product.pro_code}" class="text_wrap">${product.pro_name}</a>
+								</h3>
+	    						<div class="d-flex">
+	    							<div class="pricing">
+			    						<p class="price"><span class="mr-2 price-dc"></span><span class="price-sale">${product.pro_price} 원</span></p>
 			    					</div>
 		    					</div>
-		    				</div>
-		    			</div>
-					</c:forEach>
-				</div>
-			</section>
-		</div>
+	    					</div>
+	    				</div>
+	    			</div>
+				</c:forEach>
+			</div>
+		</section>
 	</div>
 </div>
 <!-- END 공지, 추천 -->
