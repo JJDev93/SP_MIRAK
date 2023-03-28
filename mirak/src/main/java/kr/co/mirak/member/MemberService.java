@@ -22,16 +22,9 @@ public interface MemberService {
 
 	int memupdate(MemberVO vo);
 
-	int memdelete(MemberVO vo);
-
-	// List<MemberVO> getMemberList(Optional<Integer> pageStart);
 	MemberVO getMemberDetail(String memId);
 
 	int idCheck(String id) throws Exception;
-
-	// 카카오 로그인
-//	String getAccessToken(String code);
-//	MemberVO getUserInfo(String access_Token);
 
 	String getAccessToken(String code);
 
@@ -40,8 +33,9 @@ public interface MemberService {
 	void kakaoLogout(String access_Token);
 	
 	void unlink(String attribute);
-
-	// 김원중이 건드린 부분
+	
+	int memdelete(MemberVO vo);
+	
 	/* 게시판 총 갯수 */
 	public int getTotal(CriteriaM cri);
 	List<MemberVO> getListPaging(CriteriaM cri);
@@ -49,4 +43,6 @@ public interface MemberService {
 	int adminMemberUpdate(MemberVO vo);
 	int adminMemberDel(MemberVO vo);
 	// 여기까지
+
+	
 }

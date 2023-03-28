@@ -22,7 +22,6 @@ import kr.co.mirak.member.MemberVO;
 @Controller
 public class JoinController {
 
-//	private SqlSessionTemplate sqlSessionTemplate;
 
 	@Autowired
 	private MemberService memberService;
@@ -99,33 +98,9 @@ public class JoinController {
 			session.setAttribute("message", "중복된 아이디 입니다.");
 			return "member/join";
 		}
-		
-		
-		
-
-		
-		
-/*
-		int idResult = memberService.idCheck(id);
-
-		try {
-			if (idResult == 1) {
-				return "/join";
-			} else if (idResult == 0) {
-				memberService.createUser(vo);
-				System.out.println("가입성공");
-//				return "member/login";
-			}
-		} catch (Exception e) {
-			throw new RuntimeException();
-		}
-*/		
 		return "redirect:/";
 	}
 	
-
-	// 이메일인증
-
 	/* 이메일 인증 */
 	@RequestMapping(value = "/mailCheck", method = RequestMethod.GET)
 	@ResponseBody

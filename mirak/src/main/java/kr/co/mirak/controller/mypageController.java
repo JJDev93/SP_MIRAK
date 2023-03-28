@@ -68,6 +68,7 @@ public class mypageController {
 	public int memdelete(MemberVO vo, HttpSession session, @RequestParam("rawPw") String rawPw) {
 		String encodePw = vo.getMem_pw();
 		int success = 0;
+		System.out.println(vo);
 		if (true == pwEncoder.matches(rawPw, encodePw)) {
 			success = memberService.memdelete(vo);
 			session.invalidate();
@@ -76,17 +77,15 @@ public class mypageController {
 	}
 	
 	
-	/*
-	//api회원탈퇴
-	@RequestMapping(value="/apidelete", method = RequestMethod.POST)
-	@ResponseBody
-	public int apidelete(MemberVO vo , HttpSession session) {
-		
-		
-		
-		return 0;
-		
-	}
-	*/
 	
+	//api회원탈퇴
+	   @RequestMapping(value="/apidelete", method = RequestMethod.POST)
+	   @ResponseBody
+	   public int apidelete(MemberVO vo , HttpSession session) {
+	      int success = 0;
+	      success = memberService.memdelete(vo);
+	      session.invalidate();
+	      return success;
+	      
+	   }
 }
