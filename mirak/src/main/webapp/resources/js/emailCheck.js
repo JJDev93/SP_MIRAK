@@ -42,7 +42,8 @@ $("#mail_check_input").blur(function(){
      
     if(inputCode == code){                            // 일치할 경우
         checkResult.html("인증번호가 일치합니다.");
-        checkResult.attr("class", "correct");        
+        checkResult.attr("class", "correct");  
+              
     } else {                                            // 일치하지 않을 경우
         checkResult.html("인증번호를 다시 확인해주세요.");
         checkResult.attr("class", "incorrect");
