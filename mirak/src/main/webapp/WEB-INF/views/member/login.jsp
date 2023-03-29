@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
@@ -65,21 +64,19 @@
             </form>
          </div>
       </div>
-
-      <div class="hr-sect">or</div>
-
+      <div class="row justify-content-center">
+         <div class="col-md-6 ftco-animate">
+         	<div class="hr-sect">or</div>
+         </div>
+      </div>
       <div class="row justify-content-center" style="margin: 2rem; margin-bottom: 50px;">
-
-         <div class="col-md-6">
+         <div class="col-md-5">
             <div class="row justify-content-center ftco-services"> 
-
                <!-- 구글 -->
                <div class="col-sm-4 text-center ftco-animate">
                   <a id="custom-login-btn" href="${googleUrl}"><img alt=""
                      src="resources/images/ico_member_google.png"></a>
                </div>
-
-
                <!-- 네이버 -->
                <div class="col-sm-4 text-center ftco-animate">
                   <a id="naverIdLogin_loginButton" href="javascript:void(0)"> <span><img
@@ -87,7 +84,6 @@
                         style="cursor: pointer"></span>
                   </a>
                </div>
-
                <!-- 카카오 -->
                <div class="col-sm-4 text-center ftco-animate">
                   <div class="media block-6 services mb-md-0 mb-4 kakao">
@@ -97,27 +93,16 @@
                      </a>
                   </div>
                </div>
-
             </div>
          </div>
       </div>
    </div>
-<!-- <ul> -->
-
-<!--    <li onclick="naverLogout(); return false;"> -->
-<!--       <a href="javascript:void(0)"> -->
-<!--           <span>네이버 로그아웃</span> -->
-<!--       </a> -->
-<!--    </li> -->
-<!-- </ul> -->
-
-<form id="naverJoin" action="/naverjoin" method="post">
-<input type="hidden" name="mem_id" value="" id="mem_id">
-<input type="hidden" name="mem_gender" value="" id="mem_gender">
-<input type="hidden" name="mem_pw" value="" id="mem_pw">
-<input type="hidden" name="mem_name" value="" id="mem_name">
-</form>
-
+	<form id="naverJoin" action="/naverjoin" method="post">
+		<input type="hidden" name="mem_id" value="" id="mem_id">
+		<input type="hidden" name="mem_gender" value="" id="mem_gender">
+		<input type="hidden" name="mem_pw" value="" id="mem_pw">
+		<input type="hidden" name="mem_name" value="" id="mem_name">
+	</form>
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
 
@@ -203,5 +188,3 @@ var naverLogin = new naver.LoginWithNaverId({
 	  });
 	});
 </script>
-
-
