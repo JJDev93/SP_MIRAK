@@ -183,7 +183,7 @@ function CheckTest() {
 $(document).ready(function() {
 	// 종합 정보 삽입
 	setTotalInfo();
-});
+}); 
    
 function setTotalInfo() {
 	let totalPrice = 0; // 총 가격
