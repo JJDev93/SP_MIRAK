@@ -44,7 +44,7 @@
 	<!-- 카트 삭제 -->
 	<update id="cartDelete">
 	<![CDATA[
-		UPDATE cart SET CART_SHOW = 0 WHERE CART_CODE = #{cart_code}
+		UPDATE CART SET CART_SHOW = 2 WHERE CART_CODE = #{cart_code}
 	]]>
 	</update>
 	
@@ -53,15 +53,8 @@
 	<!-- 어드민 회원 정보 상세보기 -->
 	<select id="adminMemberDetail2">
 		<![CDATA[
-			SELECT MEM_CODE, MEM_ID, 
-				MEM_NAME, MEM_AGE, 
-				MEM_GENDER, MEM_PHONE, 
-				MEM_REGDATE, 
-				MEM_ADD1,
-				MEM_ADD2,
-				MEM_ZIPCODE,
-				MEM_ISAPI FROM MEMBER
-			LEFT OUTER JOIN CART ON MEMBER.mem_id = CART.mem_id
+			SELECT mem_code FROM MEMBER 
+			LEFT JOIN CART ON MEMBER.mem_id = CART.mem_id
 		]]>
 	</select>
 
