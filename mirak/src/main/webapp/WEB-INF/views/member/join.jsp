@@ -46,7 +46,8 @@
 							<c:otherwise>
 								<div class="col-md-12">
 									<div class="form-group">
-										<label for="id">이메일(ID)</label>
+										<p style="color:red; font-size: 14px;">* 표시 항목은 필수 입력 사항 입니다.</p>
+										<label for="id">이메일(ID) <span class="text-danger">*</span></label>
 										<div class="row mb-2">
 											<div class="col-sm-9">
 												<input type="email" name="mem_id" id="id" class="form-control emaill mail_input"
@@ -75,12 +76,12 @@
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
-										<label for="pw">비밀번호</label> 
+										<label for="pw">비밀번호 <span class="text-danger">*</span></label> 
 										<input type="password" tabIndex="5" name="mem_pw" class="form-control" id="pw"
 																				onchange="check_pw()" placeholder="비밀번호" required="required" value="${member.mem_pw }">
 									</div>
 									<div class="form-group">
-										<label for="pw2">비밀번호 확인</label> 
+										<label for="pw2">비밀번호 확인 <span class="text-danger">*</span></label> 
 										<input type="password" tabIndex="6" class="form-control" id="pw2" onchange="check_pw()" placeholder="비밀번호 확인" required="required">
 											<span id="check"></span>
 										</div>
@@ -90,14 +91,14 @@
 							<div class="w-100"></div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="firstname">이름</label> 
+									<label for="firstname">이름 <span class="text-danger">*</span></label> 
 									<input type="text" name="mem_name" id="name" tabIndex="7" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required" >
 								</div>
 							</div>
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="age">나이</label> 
+									<label for="age">나이 <span class="text-danger">*</span></label> 
 									<input type="text" name="mem_age" tabIndex="8" id="age" class="form-control" placeholder="나이를 입력해주세요" value="${member.mem_age }" required="required">
 								</div>
 							</div>
@@ -105,7 +106,7 @@
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="gender">성별</label>
+									<label for="gender">성별 <span class="text-danger">*</span></label>
 									<div>
 										<input type="radio" name="mem_gender" value="1" checked tabIndex="9"> 남
 										&nbsp;&nbsp;&nbsp; 
@@ -117,7 +118,7 @@
 						<div class="w-100"></div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="phone">Phone</label>
+								<label for="phone">Phone <span class="text-danger">*</span></label>
 								<input type="text" name="mem_phone" id="phone" class="form-control" placeholder=" ' - ' 빼고 입력해주세요 " required="required"value="${member.mem_phone}" maxlength="11" pattern="[0-9]{11}">
 							</div>
 						</div>
@@ -125,7 +126,7 @@
 						<div class="w-100"></div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label for="streetaddress">주소</label>
+								<label for="streetaddress">주소 <span class="text-danger">*</span></label>
 								<div class="row mb-4">
 									<div class="col-sm-8">
 										<input type="text" class="form-control" id="address_input_1" name="mem_zipcode" placeholder="우편번호" required="required" onkeydown="event.preventDefault();" autocomplete="off">
