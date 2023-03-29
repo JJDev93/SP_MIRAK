@@ -217,6 +217,7 @@ public class LoginController {
             rttr.addFlashAttribute("message", "일치하는 아이디가 없습니다.");
          }
          if (vo.getMem_id() != null && vo.getMem_pw() != null) {
+        	 memberService.idfind_pw(vo).getMem_id();
         	 System.out.println("비밀번호 재설정중2....");
             // 암호화 1
 
@@ -235,8 +236,8 @@ public class LoginController {
          return "member/pwreset";
       } catch (Exception e) {
          e.printStackTrace();
-         rttr.addFlashAttribute("message", "정보를 다시 입력해주세요....");
+         rttr.addFlashAttribute("message", "정보를 다시 입력해주세요.");
+         return "member/pwreset";
       }
-      return "member/pwreset";
    }
 }
