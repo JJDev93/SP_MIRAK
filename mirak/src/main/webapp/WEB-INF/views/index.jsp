@@ -3,9 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
-<style>
-.heading-section h2{color:#82ae46;}
-</style>
 <!-- START 슬라이더 -->
 <section id="home-section" class="hero">
 	<div class="home-slider owl-carousel">
@@ -46,7 +43,7 @@
 		<section class=" ftco-category mt-5">
 			<div class="justify-content-center mb-3 pb-1">
 				<div class="heading-section text-center ftco-animate">
-					<h2 class="mb-4">인기상품</h2>
+					<h2 class="mb-4 main-color">인기상품</h2>
 				</div>
 			</div>
 			<div class="row">
@@ -74,7 +71,7 @@
 		<section class="ftco-category mt-10">
 			<div class="justify-content-center mb-3 pb-1">
 				<div class="heading-section text-center ftco-animate">
-					<h2 class="mb-4">추천상품</h2>
+					<h2 class="mb-4 main-color">추천상품</h2>
 				</div>
 			</div>
 			<div class="row">
