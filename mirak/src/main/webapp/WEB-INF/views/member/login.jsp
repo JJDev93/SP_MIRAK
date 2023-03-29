@@ -107,17 +107,19 @@
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
 
 <script>
+
    $(document).ready(function() {
    console.log("message : "+"${message}");
    console.log("mem_id : "+"${mem_id}");
    if ("${message}" != "") {
         if ("${message}" == "로그인 후 이용해주세요.") {
-          alert("${message}");
         }
+        alert("${message}");
         <% session.setAttribute("message", ""); %>
       }
       
       if("${mem_id}" !=""){
+    	  
       location.href = "/";
       }
    })

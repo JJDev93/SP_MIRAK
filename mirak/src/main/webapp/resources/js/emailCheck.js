@@ -50,7 +50,6 @@ $("#mail_check_input").blur(function(){
     }    
     
 });
- 
 
 
 
