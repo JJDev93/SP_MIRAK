@@ -131,7 +131,7 @@
 <script>
 var naverLogin = new naver.LoginWithNaverId({
 	  clientId: "zkOzac5hPC_Qw6v8eOzQ",
-	  callbackUrl: "http://localhost:8080/login",
+	  callbackUrl: "http://mirak.shop/login",
 	  isPopup: false,
 	  callbackHandle: false,
 	});
