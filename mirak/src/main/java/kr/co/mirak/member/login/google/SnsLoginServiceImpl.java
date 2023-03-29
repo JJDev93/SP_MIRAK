@@ -50,7 +50,7 @@ public class SnsLoginServiceImpl implements SnsLoginService {
 	        sb.append("grant_type=authorization_code");
 	        sb.append("&client_id=" + googleUtils.getGoogleClientId());
 	        sb.append("&client_secret=" + googleUtils.getGoogleSecret());
-	        sb.append("&redirect_uri=http://localhost:8080/login/google/auth");
+	        sb.append("&redirect_uri=https://mirak.shop/login/google/auth");
 	        sb.append("&code="+authorize_code);
 	        sb.append("&approval_prompt=force");
 	        bw.write(sb.toString());
