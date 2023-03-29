@@ -32,7 +32,7 @@
             
             <div class="col-md-12">
                <div class="form-group">
-                  <label for="desc">상품 요약설명</label> <textarea name="pro_desc2" cols="10" rows="1" class="form-control" id="desc">${product.pro_desc2 }</textarea>
+                  <label for="desc2">상품 요약설명</label> <textarea name="pro_desc2" cols="10" rows="1" class="form-control" id="desc2">${product.pro_desc2 }</textarea>
                </div>
             </div>
             

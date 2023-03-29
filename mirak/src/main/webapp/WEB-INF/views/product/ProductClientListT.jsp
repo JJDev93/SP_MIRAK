@@ -15,15 +15,17 @@
 			</div>
 		</div>
 	</div>
+	
+	<div style="width:100%; height:100px; margin: 0 auto;"><p style="text-align:center; line-height:200px; font-size:35px;">미락의 2·3인세트 메뉴입니다.</p></div>
 
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="tagcloud">
-						<a href="/ProductClientList" class="tag-cloud-link">전체메뉴</a>&nbsp;&gt;&nbsp;
-						<a href="/ProductClientListT" class="tag-cloud-link">2·3인세트</a>
-					</div>
+<!-- 					<div class="tagcloud"> -->
+<!-- 						<a href="/ProductClientList" class="tag-cloud-link">전체메뉴</a>&nbsp;&gt;&nbsp; -->
+<!-- 						<a href="/ProductClientListT" class="tag-cloud-link">2·3인세트</a> -->
+<!-- 					</div> -->
 				</div>
 			</div>
 			<div class="row">
