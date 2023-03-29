@@ -3,7 +3,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
-<div class="ftco-section">
+<div class="ftco-section admin-list">
    <div class="container">
       <div class="justify-content-center mb-3 pb-3">
          <div class="heading-section text-center">

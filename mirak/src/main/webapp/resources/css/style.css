@@ -10062,4 +10062,5 @@ textarea.form-control {
 #RETURNPOLICY .table tbody tr td{ text-align: left !important; border: 1px solid #dee2e6  !important; }
     
 .main-color{ color:#fb8622 !important; }
+.admin-list table th, .admin-list table td{ white-space: nowrap; }
     
