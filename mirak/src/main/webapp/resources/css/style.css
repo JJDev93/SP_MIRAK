@@ -6516,10 +6516,11 @@ button.bg-dark:focus {
 
 .m-5 {
   margin: 3rem !important; }
-
 .mt-5,
 .my-5 {
   margin-top: 3rem !important; }
+
+.mt-10{ margin-top: 10rem !important;}
 
 .mr-5,
 .mx-5 {
@@ -9302,7 +9303,7 @@ textarea.form-control {
     color: #82ae46; }
   .heading-section h2 {
     position: relative;
-    font-size: 30px;
+    font-size: 40px;
     font-weight: 600;
     color: #000000;
     font-family: "S-CoreDream-3Light", Arial, sans-serif; }
