@@ -79,7 +79,7 @@ session = request.getSession();
 											<h3>${c.pro_name }</h3>
 										</td>
 										<td>${c.pro_price }</td>
-										<td><fmt:formatDate value="${c.cart_start }" pattern="yyyy-MM-dd" /></td>
+										<td>${c.cart_start }</td>
 										<td>${c.cart_day }</td>
 										<td>${c.cart_cnt }</td>
 										<td>${c.pro_price * c.cart_cnt}</td>
@@ -122,7 +122,7 @@ session = request.getSession();
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<form action="/cartUpdate" method="post" name="day">
-						<input type="hidden" name="cart_code" value="${c.cart_code }">		
+						<input type="hidden" name="cart_code" value="${c.cart_code }">
 						<input type="hidden" name="cart_totprice" value="${c.cart_cnt * c.pro_price}">		
 						<div class="modal-header">
 							<h5 class="modal-title" id="exampleModalLabel">구매 옵션 변경</h5>
@@ -141,10 +141,7 @@ session = request.getSession();
 										<h3 class="heading">${c.pro_name }</h3>								
 										<p>
 											<span class="font-weight-bold text-dark">상품 상세</span> ${c.pro_desc}
-										</p>						
-										<p>
-											<span class="font-weight-bold text-dark">상품 코드</span> ${c.cart_code }
-										</p>											
+										</p>												
 										<p>
 											<span class="font-weight-bold text-dark">상품 가격</span> ${c.pro_price }원 <br>
 										</p>					
@@ -245,6 +242,7 @@ function CheckTest() {
 }
 
 
+
 	$(function() {
 		$('input[name="daterange"]').daterangepicker(
 				{
@@ -260,7 +258,7 @@ function CheckTest() {
 	let today = new Date().toISOString().substr(0, 10);
 	document.getElementById("start").min = today;	
 	document.getElementById('start').valueAsDate = new Date();
-	
+
 	
 	
 	$(document).ready(function() {
