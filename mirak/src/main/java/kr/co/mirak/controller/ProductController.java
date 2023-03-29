@@ -180,11 +180,15 @@ public class ProductController {
 	@RequestMapping(value = "/admin/productRegister", method = RequestMethod.POST)
 	public String productregister(ProductVO vo, MultipartHttpServletRequest request) throws IOException {
 		// 파일 업로드 처리
+		
+//		String url = "C:/Users/hi/git/mirak/mirak/src/main/webapp/resources/images/product/";
+		String url = "/home/tomcat/apache-tomcat-9.0.73/webapps/mirak/resources/images/product/";
+		
 		MultipartFile uploadFile = vo.getUploadFile();
-		if (!uploadFile.isEmpty()) {
+			if (!uploadFile.isEmpty()) {
 			String fileName = uploadFile.getOriginalFilename();
 			uploadFile.transferTo(
-					new File("C:/Users/hi/git/mirak/mirak/src/main/webapp/resources/images/product/" + fileName));
+					new File( url + fileName));
 			
 		}
 		productService.insertProduct(vo);
