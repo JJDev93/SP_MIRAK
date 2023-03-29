@@ -15,8 +15,8 @@
                     document.getElementById('pw2').value='';
                 }
             }
-            if(pw.length < 6 || pw.length>16){
-                document.getElementById('check').innerHTML='비밀번호는 6글자 이상, 16글자 이하만 이용 가능합니다.'
+            if(pw.length < 8 || pw.length>16){
+                document.getElementById('check').innerHTML='비밀번호는 8글자 이상, 16글자 이하만 이용 가능합니다.'
                 document.getElementById('check').style.color='red';
                 document.getElementById('pw').value='';
             }
