@@ -79,7 +79,7 @@ session = request.getSession();
 											<h3>${c.pro_name }</h3>
 										</td>
 										<td>${c.pro_price }</td>
-										<td><fmt:formatDate value="${c.cart_start }" pattern="yyyy-MM-dd" /></td>
+										<td>${c.cart_start }</td>
 										<td>${c.cart_day }</td>
 										<td>${c.cart_cnt }</td>
 										<td>${c.pro_price * c.cart_cnt}</td>
@@ -105,11 +105,7 @@ session = request.getSession();
 								</p>
 								<p class="d-flex">
 									<span>상품합계</span> <span class="totalPrice_span"></span>
-								</p>
-								<hr>
-								<p class="d-flex total-price">
-									<span>총 결제금액</span> <span class="finalTotalPrice_span"></span>
-								</p>
+								</p>							
 							</div>
 							<p>
 								<input type="submit" value="결제하기" class="btn btn-primary py-3 px-5">
@@ -126,7 +122,7 @@ session = request.getSession();
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<form action="/cartUpdate" method="post" name="day">
-						<input type="hidden" name="cart_code" value="${c.cart_code }">		
+						<input type="hidden" name="cart_code" value="${c.cart_code }">
 						<input type="hidden" name="cart_totprice" value="${c.cart_cnt * c.pro_price}">		
 						<div class="modal-header">
 							<h5 class="modal-title" id="exampleModalLabel">구매 옵션 변경</h5>
@@ -145,10 +141,7 @@ session = request.getSession();
 										<h3 class="heading">${c.pro_name }</h3>								
 										<p>
 											<span class="font-weight-bold text-dark">상품 상세</span> ${c.pro_desc}
-										</p>						
-										<p>
-											<span class="font-weight-bold text-dark">상품 코드</span> ${c.cart_code }
-										</p>											
+										</p>												
 										<p>
 											<span class="font-weight-bold text-dark">상품 가격</span> ${c.pro_price }원 <br>
 										</p>					
@@ -156,7 +149,7 @@ session = request.getSession();
 											<span class="font-weight-bold text-dark">배송 시작일</span>
 											<input type="date" id="start" name="cart_start" class="form-control input-number" value="${c.cart_start }"  required="required">
 										</p>		
-										<p>
+										<p class="daycheck">
 											<span  class="font-weight-bold text-dark">배송 요일</span><br>
 											&nbsp;
 											<label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform: scale(1.5);" value="월" <c:if test = "${fn : contains(c.cart_day, '월')}">checked</c:if>>&nbsp;&nbsp;월</label>&nbsp;&nbsp; 
@@ -232,20 +225,20 @@ function selectAll(selectAll)  {
    }
 
 
-//체크박스가 체크되었는지 확인
+//요일 체크되었는지 확인
 function CheckTest() {
 		
-	var day = document.getElementsByName('cart_day');
+	const checkPart = document.querySelector('.daycheck');
+    const checkboxes = checkPart.querySelectorAll('input');
 
-	for (var i=0; i<day.length; i++) {
-		// 체크된 값을 가져오기. day 값의 체크된 (checked)
-		if (day[i].checked) {
-			return true;	// 계속 진행 (체크된 값 진행)
-		}
-	}
-	// 값이 없을 경우 for 건너뛰고 출력 
-	alert ('요일을 선택하세요');	// 체크된 값 없을 경우 
-	return false;
+    for( let i = 0; i < checkboxes.length; i ++){
+        if(checkboxes[i].checked === true)
+        	return;	
+        // 체크박스 돌다가 checked가 있으면 바로 return
+    }
+    alert('요일을 선택해주세요'); 
+    // 체크없으면 바로 return해서 alert
+    return false;
 }
 
 
@@ -265,7 +258,7 @@ function CheckTest() {
 	let today = new Date().toISOString().substr(0, 10);
 	document.getElementById("start").min = today;	
 	document.getElementById('start').valueAsDate = new Date();
-	
+
 	
 	
 	$(document).ready(function() {
