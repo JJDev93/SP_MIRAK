@@ -65,7 +65,7 @@ public class LoginController {
       String encodePw = "";
 
       MemberVO lvo = memberService.login(memberVO); // 제출한아이디와 일치하는 아이디있는지
-
+      try {
       if (lvo != null) { // 일치하는 아이디 존재시
 
          rawPw = memberVO.getMem_pw(); // 사용자가 제출한 비번
@@ -104,13 +104,17 @@ public class LoginController {
             return "member/login"; // 로그인 페이지로 이동
          }
       } else { // 일치하는 아이디가 존재하지 않을시 (로그인 실패)
-
     	 session.setAttribute("result", 0);
          session.setAttribute("message", "일치하는 아이디가 없습니다.");
          logger.info("로그인 실패");
          return "member/login"; // 로그인페이지로 이동
       }
-
+      }catch(Exception e) {
+    	  session.setAttribute("result", 0);
+          session.setAttribute("message", "일치하는 아이디가 없습니다.");
+          logger.info("로그인 실패");
+          return "member/login"; // 로그인페이지로 이동
+      }
    }
 
    // 로그아웃
@@ -210,8 +214,10 @@ public class LoginController {
       try {
          if (vo.getMem_id() == null) {
             memberService.idfind_pw(vo).getMem_id();
+            rttr.addFlashAttribute("message", "일치하는 아이디가 없습니다.");
          }
          if (vo.getMem_id() != null && vo.getMem_pw() != null) {
+        	 System.out.println("비밀번호 재설정중2....");
             // 암호화 1
 
             String rawPw = ""; // 인코딩 전 비밀번호
@@ -222,14 +228,14 @@ public class LoginController {
             vo.setMem_pw(encodePw); // 인코딩된 비밀번호 vo객체에 다시 저장
 
             memberService.pwreset(vo);
-            rttr.addFlashAttribute("message", "비밀번호가 변경되었습니다.");
+            rttr.addFlashAttribute("message", "메일로 임시비밀번호가 전송되었습니다.");
             return "redirect:/";
          }
          model.addAttribute("mem_id", vo.getMem_id());
          return "member/pwreset";
       } catch (Exception e) {
          e.printStackTrace();
-         model.addAttribute("message", "정보를 다시 입력해주세요....");
+         rttr.addFlashAttribute("message", "정보를 다시 입력해주세요....");
       }
       return "member/pwreset";
    }
