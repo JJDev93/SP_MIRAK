@@ -16,7 +16,7 @@
 			<div class="col-md-9 ftco-animate text-center">
 				<h1 class="mb-0 bread">장바구니</h1>
 			</div>
-		</div>
+		</div> 
 	</div>
 </div>
 <%
