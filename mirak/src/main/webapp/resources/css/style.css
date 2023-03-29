@@ -6508,7 +6508,7 @@ button.bg-dark:focus {
 
 .mb-4,
 .my-4 {
-  margin-bottom: 1.5rem !important; }
+  margin-bottom: 3rem !important; }
 
 .ml-4,
 .mx-4 {
@@ -6516,11 +6516,11 @@ button.bg-dark:focus {
 
 .m-5 {
   margin: 3rem !important; }
-.mt-5,
+
 .my-5 {
   margin-top: 3rem !important; }
 
-.mt-10{ margin-top: 10rem !important;}
+.mt-5{ margin-top: 3rem !important;}
 
 .mr-5,
 .mx-5 {
@@ -8273,10 +8273,9 @@ h1, h2, h3, h4, h5,
     }
 
 .mouse {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -30px;
+  position: fixed;
+  right: 20px;
+  bottom: 30px;
   z-index: 99; }
 
 .mouse-icon {
