@@ -185,6 +185,7 @@ public class ProductController {
 			String fileName = uploadFile.getOriginalFilename();
 			uploadFile.transferTo(
 					new File("C:/Users/hi/git/mirak/mirak/src/main/webapp/resources/images/product/" + fileName));
+			
 		}
 		productService.insertProduct(vo);
 		System.out.println(vo);
