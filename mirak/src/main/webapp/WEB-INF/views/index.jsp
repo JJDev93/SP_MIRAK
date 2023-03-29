@@ -46,7 +46,7 @@
 		<section class=" ftco-category">
 			<div class="justify-content-center mb-3 pb-1">
 				<div class="heading-section text-center ftco-animate">
-					<h2 class="mb-4">인기상품</h2>
+					<h2>인기상품</h2>
 				</div>
 			</div>
 			<div class="row">
@@ -71,11 +71,10 @@
 				</c:forEach>
 			</div>
 		</section>
-		<hr style="margin-top:100px; margin-bottom:100px;">
 		<section class="ftco-category mt-5">
 			<div class="justify-content-center mb-3 pb-1">
 				<div class="heading-section text-center ftco-animate">
-					<h2 class="mb-4">추천상품</h2>
+					<h2>추천상품</h2>
 				</div>
 			</div>
 			<div class="row">
@@ -99,6 +98,7 @@
 	    			</div>
 				</c:forEach>
 			</div>
+			
 		</section>
 	</div>
 </div>

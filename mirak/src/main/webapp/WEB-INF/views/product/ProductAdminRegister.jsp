@@ -63,7 +63,7 @@
          </div>
          <input type="reset" value="다시 입력" class="btn btn-secondary">
       </form>      
-      <a href="/admin/products" class="btn btn-secondary">목록</a>
+      <a href="/admin/products/1" class="btn btn-secondary">목록</a>
       
 
    </div>
