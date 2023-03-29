@@ -84,14 +84,14 @@
                   <ul>
                      <!-- 이전페이지 버튼 -->
                      <c:if test="${pageMaker.prev}">
-                        <li class="pageInfo_btn next"><a href="javascript:acyncMovePage('/admin/carts/${pageMaker.startPage-1}');">&lt;</a></li>
+                        <li class="pageInfo_btn next"><a href="/admin/carts/${pageMaker.startPage-1}">&lt;</a></li>
                      </c:if>
                      <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-                        <li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="javascript:acyncMovePage('/admin/carts/${num}');">${num}</a></li>
+                        <li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="/admin/carts/${num}">${num}</a></li>
                      </c:forEach>
                      <!-- 다음페이지 버튼 -->
                      <c:if test="${pageMaker.next}">
-                        <li class="pageInfo_btn next"><a href="javascript:acyncMovePage('/admin/carts/${pageMaker.endPage + 1 }');">&gt;</a></li>
+                        <li class="pageInfo_btn next"><a href="/admin/carts/${pageMaker.endPage + 1 }">&gt;</a></li>
                      </c:if>
                   </ul>
                </div>
