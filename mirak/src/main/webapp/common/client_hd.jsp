@@ -48,9 +48,9 @@
 							<li class="nav-item"><a href="/admin/charts" class="nav-link">Admin</a></li>
 							<%} else {
 								if (session.getAttribute("mem_isapi") == null || !session.getAttribute("mem_isapi").equals("NAVER")) {%>
-								<li class="nav-item" onclick="naverLogout(); return false;"><a href="javascript:void(0)" class="nav-link"><span>로그아웃</span></a></li>
-								<%} else if (session.getAttribute("mem_isapi").equals("NAVER")) { %>
 								<li class="nav-item"><a href="/logout" class="nav-link">로그아웃</a></li>
+								<%} else if (session.getAttribute("mem_isapi").equals("NAVER")) { %>
+								<li class="nav-item" onclick="naverLogout(); return false;"><a href="javascript:;" class="nav-link"><span>로그아웃</span></a></li>
 								<%} %>
 								<li class="nav-item <c:if test="${fn : contains(cate, 'mypage')}">active</c:if>"><a href="/mypage" class="nav-link">마이페이지</a></li>
 								<%} %>
