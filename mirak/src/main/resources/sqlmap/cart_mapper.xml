@@ -54,7 +54,8 @@
 	<select id="adminMemberDetail2">
 		<![CDATA[
 			SELECT mem_code FROM MEMBER 
-			LEFT JOIN CART ON MEMBER.mem_id = CART.mem_id
+			LEFT OUTER JOIN CART ON MEMBER.mem_code = CART.mem_code
+			WHERE CART.mem_code IS NULL
 		]]>
 	</select>
 
@@ -69,12 +70,12 @@
 
 	</select>
 	
-	<!-- 어드민 카트 삭제 -->
-	<delete id="cartAdminDelete">
+	<!-- 어드민 카http://localhost:8080/admin/cart/1/230트 삭제 -->
+	<update id="cartAdminDelete">
 	<![CDATA[
-			DELETE FROM cart WHERE cart_code=#{cart_code}
+			UPDATE CART SET CART_SHOW = 2 WHERE CART_CODE = #{cart_code}
 		]]>
-	</delete>
+	</update>
 	
 	<!-- 어드민 카트 수정 -->
 	<update id="cartAdminUpdate">

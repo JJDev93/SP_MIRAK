@@ -4,12 +4,12 @@
 <mapper namespace="kr.co.mirak.pay.chart.ChartMapper">
 	<select id="getTotalByMenuList"
 		resultType="kr.co.mirak.pay.chart.TotalByMenuVO">
-		SELECT pro_name, SUM(totalPrice) AS totalPrice, 
+		SELECT REPLACE(pro_name, '도시락', '') as pro_name, SUM(totalPrice) AS totalPrice, 
         (SUM(totalPrice) / (SELECT SUM(totalPrice) FROM pay WHERE status = '결제 완료') * 100) AS totalRatio
         FROM pay WHERE status = '결제 완료'
         GROUP BY pro_name
         ORDER BY totalPrice DESC
-        LIMIT 20;
+        LIMIT 10;
 	</select>
 
 	<select id="getCountByGender"
@@ -17,16 +17,14 @@
 		SELECT g.gender as mem_gender, COUNT(p.mem_gender) as count
 		FROM (SELECT 1 as gender UNION SELECT 2 as gender) as g
 		LEFT JOIN pay
-		as p ON g.gender = p.mem_gender AND p.pro_name = #{clickedMenu}
+		as p ON g.gender = p.mem_gender AND REPLACE(pro_name, '도시락', '') = #{clickedMenu}
 		GROUP
 		BY g.gender;
 	</select>
 
 	<select id="getCountByAge"
 		resultType="kr.co.mirak.pay.chart.RatioByVO">
-		SELECT CASE
-		WHEN mem_age BETWEEN 0 AND 19 THEN '10'
-		WHEN
+		SELECT CASE WHEN mem_age BETWEEN 0 AND 19 THEN '10' WHEN
 		mem_age BETWEEN 20 AND 29 THEN '20'
 		WHEN mem_age BETWEEN 30 AND 39 THEN
 		'30'
@@ -39,26 +37,26 @@
 		(SELECT COUNT(*) as count,
 		FLOOR(p.mem_age/10)*10 as mem_age FROM pay
 		as p
-		WHERE p.pro_name = #{clickedMenu}
+		WHERE REPLACE(pro_name, '도시락', '') = #{clickedMenu}
 		GROUP BY mem_age) as t
-		GROUP BY
-		mem_age
-		ORDER BY mem_age ASC;
+		GROUP BY mem_age ORDER BY mem_age ASC;
 	</select>
 
 	<select id="getPurchaseRateList"
 		resultType="kr.co.mirak.pay.chart.PurchaseRateVO">
 	<![CDATA[
-		SELECT pro_name, SUM(cart_cnt) as cart_cnt, SUM(cart_show=0) as cart_show, 
-		ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) as ratio, CASE 
-		WHEN ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) > 60 AND ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) <= 80 THEN '강추'
-		WHEN ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) > 40 AND ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) <= 60 THEN '추천'
+		SELECT REPLACE(pro_name, '도시락', '') as pro_name , SUM(cart_cnt) as cart_cnt, SUM(cart_show=0) as cart_show, 
+		ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) as ratio, 
+		CASE 
+			WHEN ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) >= 60 AND ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) < 80 THEN '추천'
+			WHEN ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) >= 80 THEN '강추'
+			WHEN ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) < 60 THEN '인기'
 		END as rec
 		FROM cart
 		GROUP BY pro_name
 		HAVING ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) NOT IN (0, 100)
 		ORDER BY ratio DESC
-		LIMIT 10;
+		LIMIT 5;
 		]]>
 	</select>
 </mapper>

@@ -15,6 +15,7 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
+							<th scope="col" style="width:60px;">번호</th>
 							<th scope="col">ID</th>
 							<th scope="col">이름</th>
 							<th scope="col">나이</th>
@@ -28,7 +29,8 @@
 					<tbody>
 						<c:forEach items="${memberList}" var="member">
 						<tr>
-							<td scope="row"><a href="/admin/member/${curPage}/${member.mem_code}">${member.mem_id }</a></td>
+							<td scope="row">${member.mem_code}</td>
+							<td><a href="/admin/member/${curPage}/${member.mem_code}">${member.mem_id }</a></td>
 							<td>${member.mem_name }</td>
 							<td>${member.mem_age }</td>
 							<td>

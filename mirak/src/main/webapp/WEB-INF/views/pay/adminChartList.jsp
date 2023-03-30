@@ -12,11 +12,12 @@
 	position: relative;
 }
 #chartWrapper2 {
-	margin-left : 100px;
+	float: left;
+	margin-left : 40px;
 }
 #chartWrapper3 {
 	float: right;
-	margin-right : 100px;
+	margin-right : 40px;
 }
 
 .chart-visible {
@@ -49,10 +50,10 @@ canvas {
 							<canvas id="myChart1" width="950" height="400"></canvas>
 						</div>
 						<div id="chartWrapper2" class="chart-hidden">
-							<canvas id="myChart2" width="300" height="300"></canvas>
+							<canvas id="myChart2" width="400" height="300"></canvas>
 						</div>
 						<div id="chartWrapper3" class="chart-hidden">
-							<canvas id="myChart3" width="300" height="300"></canvas>
+							<canvas id="myChart3" width="400" height="300"></canvas>
 						</div>
 					</div>
 					<div class="col-md-1"></div>

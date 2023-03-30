@@ -16,7 +16,7 @@
 			<div class="col-md-9 ftco-animate text-center">
 				<h1 class="mb-0 bread">장바구니</h1>
 			</div>
-		</div>
+		</div> 
 	</div>
 </div>
 <%
@@ -64,7 +64,7 @@ session = request.getSession();
 									<tr class="text-center">
 										<td class="cart_info">
 											<input type="checkbox" class="cart_checkbox" name="cart_check" checked="checked" value="${c.cart_code }"> 
-											<input type="hidden" class="price_input" value="${c.pro_price }">
+											<input type="hidden" class="price_input" value="${c.pro_price }"> 
 											<input type="hidden" class="count_input" value="${c.cart_cnt }"> 
 											<input type="hidden" class="totalPrice_input" value="${c.pro_price * c.cart_cnt }">
 											<input type="hidden" class="pro_code" value="${c.pro_code }">
@@ -167,8 +167,8 @@ session = request.getSession();
                 <label for="jumal"><input type="checkbox" name="cart_jumal" id="jumal" style="transform: scale(1.5);" value="jumal" onclick='selectjumal(this)'>&nbsp;&nbsp;주말선택</label>
 										</p>						
 										<p>
-											<label for="cnt"><span class="font-weight-bold text-dark">상품 개수</span><br></label>
-											<input type="number" id="cnt" name="cart_cnt" value="${c.cart_cnt}" class="quantity_input" min="1">
+											<span  class="font-weight-bold text-dark">상품 개수</span><br>
+											<input type="text" pattern="\d*" maxlength="3" id="cnt" name="cart_cnt" value="${c.cart_cnt}" class="quantity_input" min="1">
 										</p>
 										<hr>
 										<p><span class="font-weight-bold text-dark">총 금액</span> ${c.cart_cnt * c.pro_price} 원</p>
