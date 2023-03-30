@@ -3,7 +3,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
-<div class="ftco-section">
+<div class="ftco-section admin-list">
    <div class="container">
       <div class="justify-content-center mb-3 pb-3">
          <div class="heading-section text-center">
@@ -68,22 +68,3 @@
    </div>
 </div>
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>
-<script>
-   function acyncMovePage(url) {
-      // ajax option
-      var ajaxOption = {
-         url : url,
-         async : true,
-         type : "POST",
-         dataType : "html",
-         cache : false
-      };
-
-      $.ajax(ajaxOption).done(function(data) {
-         // Contents 영역 삭제
-         $('#test').children().remove();
-         // Contents 영역 교체
-         $('#test').html(data);
-      });
-   }
-</script>
