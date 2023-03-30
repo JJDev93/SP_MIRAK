@@ -320,3 +320,14 @@ function CheckTest() {
 		$(".totalKind_span").text(totalKind);
 	}
 </script>
+
+<script>
+	$(document).ready(function() {
+		console.log("message : "+"${message}");
+		console.log("mem_id : "+"${mem_id}");
+		if("${message}" !=""){
+			alert("${message}");
+			 <%session.setAttribute("message","");%>
+		}
+	})
+</script>
