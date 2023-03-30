@@ -61,8 +61,8 @@
 					<h3 class="mb-4 billing-heading" style="text-align: center;">비밀번호재설정</h3>
 					<input type="hidden" id="reset" value="reset">
 					<div class="form-group">
-						<label for="ID">아이디</label>
-						<input type="text"class="form-control mail_reset" id="ID" name="mem_id" placeholder="아이디를 입력해주세요."required="required" onchange="pwcheck_reset()">
+						<label for="id">아이디</label>
+						<input type="text"class="form-control mail_reset" id="id" name="mem_id" placeholder="아이디를 입력해주세요."required="required" onchange="pwcheck_reset()">
 					</div>
 					<div class="form-group">
 						<label for="name">이름</label>
