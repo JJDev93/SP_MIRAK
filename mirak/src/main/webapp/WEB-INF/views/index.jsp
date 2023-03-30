@@ -48,7 +48,7 @@
 			</div>
 			<div class="row">
 				<c:forEach items="${productList2}" var="product">
-					<div class="col-md-6 col-lg-4 ftco-animate">
+					<div class="col-md-4 ftco-animate">
 	    				<div class="product">
 	    					<a href="ProductClientDetail/${product.pro_code}" class="img-prod" >
 	    						<div class="imgDiv" style="width: 100%; height: 250px; background: url(${path}/resources/images/product/${product.pro_image}) no-repeat 50% 50%; background-size: contain;"></div>
@@ -76,7 +76,7 @@
 			</div>
 			<div class="row">
 				<c:forEach items="${productList1}" var="product">						
-					<div class="col-md-6 col-lg-4 ftco-animate">
+					<div class="col-md-4 ftco-animate">
 	    				<div class="product">
 	    					<a href="ProductClientDetail/${product.pro_code}" class="img-prod">
 	    						<div class="imgDiv" style="width: 100%; height: 250px; background: url(${path}/resources/images/product/${product.pro_image}) no-repeat 50% 50%; background-size: contain;"></div>
