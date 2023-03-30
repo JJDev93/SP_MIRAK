@@ -207,36 +207,31 @@ public class LoginController {
 
    // 비번재설정
    @RequestMapping(value = "/pwreset", method = RequestMethod.POST)
-   public String pwreset(MemberVO vo, Model model, RedirectAttributes rttr) {
+   public String pwreset(MemberVO vo, Model model, HttpSession session) {
       System.out.println("비밀번호 재설정중....");
       System.out.println(vo);
-
       try {
-         if (vo.getMem_id() == null) {
-            memberService.idfind_pw(vo).getMem_id();
-            rttr.addFlashAttribute("message", "일치하는 아이디가 없습니다.");
-         }
-         if (vo.getMem_id() != null && vo.getMem_pw() != null) {
-        	 memberService.idfind_pw(vo).getMem_id();
+        	 if(memberService.idfind_pw(vo) == 0) {
+        		System.out.println("아이디 확인중..");
+        		session.setAttribute("message", "일치하는 아이디가 없습니다.");
+             	return "member/pwreset";
+        	 }else {
         	 System.out.println("비밀번호 재설정중2....");
-            // 암호화 1
+        	 // 암호화 1
+        	 String rawPw = ""; // 인코딩 전 비밀번호
+        	 String encodePw = ""; // 인코딩 후 비밀번호
 
-            String rawPw = ""; // 인코딩 전 비밀번호
-            String encodePw = ""; // 인코딩 후 비밀번호
+        	 rawPw = vo.getMem_pw(); // 비밀번호 데이터 얻음
+        	 encodePw = pwEncoder.encode(rawPw); // 비밀번호 인코딩
+        	 vo.setMem_pw(encodePw); // 인코딩된 비밀번호 vo객체에 다시 저장
 
-            rawPw = vo.getMem_pw(); // 비밀번호 데이터 얻음
-            encodePw = pwEncoder.encode(rawPw); // 비밀번호 인코딩
-            vo.setMem_pw(encodePw); // 인코딩된 비밀번호 vo객체에 다시 저장
-
-            memberService.pwreset(vo);
-            rttr.addFlashAttribute("message", "메일로 임시비밀번호가 전송되었습니다.");
-            return "redirect:/";
-         }
-         model.addAttribute("mem_id", vo.getMem_id());
-         return "member/pwreset";
+        	 memberService.pwreset(vo);
+        	 session.setAttribute("message", "메일로 임시비밀번호가 전송되었습니다.");
+        	 return "redirect:/";
+        	 }
       } catch (Exception e) {
          e.printStackTrace();
-         rttr.addFlashAttribute("message", "정보를 다시 입력해주세요.");
+         session.setAttribute("message", "정보를 다시 입력해주세요.");
          return "member/pwreset";
       }
    }

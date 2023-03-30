@@ -10,7 +10,7 @@ public interface MemberService {
 
 	MemberVO idfind(MemberVO vo);
 
-	MemberVO idfind_pw(MemberVO vo);
+	int idfind_pw(MemberVO vo);
 
 	int pwreset(MemberVO vo);
 

@@ -44,7 +44,7 @@ public class apiController {
 				} else if (idCheck == 1) {
 					String mem_id = memberService.login(vo).getMem_id();
 					session.setAttribute("mem_id", mem_id);
-					rttr.addFlashAttribute("message", "로그인에 성공하였습니다.");
+					session.setAttribute("message", "네이버 로그인 되었습니다!");
 					System.out.println("naverapi 로그인 완료!");
 					result = "login";
 				}
@@ -96,6 +96,7 @@ public class apiController {
 		} else {
 			session.setAttribute("mem_id", user_id);
 			session.setAttribute("access_Token", access_Token);
+			session.setAttribute("message", "카카오 로그인 되었습니다!");
 			memberService.login(memberVO);
 			System.out.println("세션설정 mem_id : " + user_id);
 			return "redirect:/replayBefo";
@@ -151,6 +152,7 @@ public class apiController {
 		} else {
 			session.setAttribute("mem_id", user_id);
 			session.setAttribute("access_Token", access_token);
+			session.setAttribute("message", "구글 로그인 되었습니다!");
 			memberService.login(member);
 			System.out.println("세션설정 mem_id : " + user_id);
 			return "redirect:/returnBefo";
