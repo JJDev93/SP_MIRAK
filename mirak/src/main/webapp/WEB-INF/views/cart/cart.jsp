@@ -64,7 +64,7 @@ session = request.getSession();
 									<tr class="text-center">
 										<td class="cart_info">
 											<input type="checkbox" class="cart_checkbox" name="cart_check" checked="checked" value="${c.cart_code }"> 
-											<input type="hidden" class="price_input" value="${c.pro_price }">
+											<input type="hidden" class="price_input" value="${c.pro_price }"> 
 											<input type="hidden" class="count_input" value="${c.cart_cnt }"> 
 											<input type="hidden" class="totalPrice_input" value="${c.pro_price * c.cart_cnt }">
 											<input type="hidden" class="pro_code" value="${c.pro_code }">

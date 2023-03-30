@@ -54,7 +54,8 @@
 	<select id="adminMemberDetail2">
 		<![CDATA[
 			SELECT mem_code FROM MEMBER 
-			LEFT JOIN CART ON MEMBER.mem_id = CART.mem_id
+			LEFT OUTER JOIN CART ON MEMBER.mem_code = CART.mem_code
+			WHERE CART.mem_code IS NULL
 		]]>
 	</select>
 
