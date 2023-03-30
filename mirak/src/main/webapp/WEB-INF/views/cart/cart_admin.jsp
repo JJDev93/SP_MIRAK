@@ -51,7 +51,7 @@
 					<tbody>
 						<c:forEach var="c" items="${cartList }">	
 						<tr>
-							<td><a href="/admin/cart/${curPage}/${c.cart_code}">${c.cart_code }</a></td>
+							<td>${c.cart_code }</td>
 							<td>
 								 <a href="/admin/cart/${curPage}/${c.cart_code}">
                                  <img alt="1" src="${path}/resources/images/product/${c.pro_image}" style="width: 70px;">
@@ -60,7 +60,7 @@
 							<td>
 								<a href="/admin/member/${curPage}/${member.mem_code}">${c.mem_id }</a>
 							</td>
-							<td><a href="/admin/cart/${curPage}/${c.cart_code}">${c.pro_code }</a></td>
+							<td>${c.pro_code }</td>
 							<td><a href="/admin/cart/${curPage}/${c.cart_code}">${c.pro_name }</a></td>
 							<td>${c.pro_price }</td>
 							<td><fmt:formatDate pattern="yy-MM-dd" value="${c.cart_start}"/> </td>
