@@ -14,9 +14,9 @@
  			 SELECT MEM_ID FROM MEMBER WHERE MEM_NAME=#{mem_name} AND MEM_PHONE=#{mem_phone} 
  		]]>
 	</select>
-	<select id="idfind_pw" parameterType="member" resultType="member">
+	<select id="idfind_pw" parameterType="member" resultType="int">
   		<![CDATA[
- 			 SELECT MEM_ID FROM MEMBER WHERE MEM_NAME=#{mem_name} AND MEM_PHONE=#{mem_phone} AND MEM_ID=#{mem_id} 
+ 			 SELECT count(*) FROM MEMBER WHERE MEM_NAME=#{mem_name} AND MEM_PHONE=#{mem_phone} AND MEM_ID=#{mem_id} 
  		]]>
 	</select>
 	<update id="pwreset" parameterType="member">
