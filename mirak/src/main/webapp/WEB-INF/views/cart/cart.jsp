@@ -168,7 +168,7 @@ session = request.getSession();
 										</p>						
 										<p>
 											<span  class="font-weight-bold text-dark">상품 개수</span><br>
-											<input type="number" name="cart_cnt" value="${c.cart_cnt}" class="quantity_input" min="1">
+											<input type="text" pattern="\d*" maxlength="3" name="cart_cnt" value="${c.cart_cnt}" class="quantity_input" min="1">
 										</p>
 										<hr>
 										<p><span class="font-weight-bold text-dark">총 금액</span> ${c.cart_cnt * c.pro_price} 원</p>
