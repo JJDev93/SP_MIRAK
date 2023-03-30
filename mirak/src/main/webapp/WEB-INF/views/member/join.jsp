@@ -29,7 +29,7 @@
 							<c:when test="${not empty member.mem_isapi}">
 								<input type="hidden" name="mem_pw" class="form-control" id="pw" value="${member.mem_pw }" readonly="readonly">
 								<input type="hidden" name="mem_isapi" class="form-control" value="${member.mem_isapi}" readonly="readonly">
-								
+								<input type="hidden" id="mail_check_input" class="form-control" value="간편로그인" readonly="readonly">
 								<div class="col-md-12">
 									<div class="form-group">
 										<label for="id">이메일(ID)</label>
