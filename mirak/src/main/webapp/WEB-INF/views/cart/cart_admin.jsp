@@ -123,21 +123,21 @@
 </div>
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>
 </div>
-<script>
-   function acyncMovePage(url) {
-      // ajax option
-      var ajaxOption = {
-         url : url,
-         async : true,
-         type : "GET",
-         dataType : "html",
-         cache : false
-      };
-      $.ajax(ajaxOption).done(function(data) {
-         // Contents 영역 삭제
-         $('#test').children().remove();
-         // Contents 영역 교체
-         $('#test').html(data);
-      });
-   }
-</script>
+<!-- <script> -->
+//    function acyncMovePage(url) {
+//       // ajax option
+//       var ajaxOption = {
+//          url : url,
+//          async : true,
+//          type : "GET",
+//          dataType : "html",
+//          cache : false
+//       };
+//       $.ajax(ajaxOption).done(function(data) {
+//          // Contents 영역 삭제
+//          $('#test').children().remove();
+//          // Contents 영역 교체
+//          $('#test').html(data);
+//       });
+//    }
+<!-- </script> -->
