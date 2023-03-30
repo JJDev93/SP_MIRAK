@@ -146,7 +146,7 @@ session = request.getSession();
 											<span class="font-weight-bold text-dark">상품 가격</span> ${c.pro_price }원 <br>
 										</p>					
 										<p>
-											<span class="font-weight-bold text-dark">배송 시작일</span>
+											<label for="start"><span class="font-weight-bold text-dark">배송 시작일</span></label>
 											<input type="date" id="start" name="cart_start" class="form-control input-number" value="${c.cart_start }"  required="required">
 										</p>		
 										<p class="daycheck">
@@ -168,7 +168,7 @@ session = request.getSession();
 										</p>						
 										<p>
 											<span  class="font-weight-bold text-dark">상품 개수</span><br>
-											<input type="text" pattern="\d*" maxlength="3" name="cart_cnt" value="${c.cart_cnt}" class="quantity_input" min="1">
+											<input type="text" pattern="\d*" maxlength="3" id="cnt" name="cart_cnt" value="${c.cart_cnt}" class="quantity_input" min="1">
 										</p>
 										<hr>
 										<p><span class="font-weight-bold text-dark">총 금액</span> ${c.cart_cnt * c.pro_price} 원</p>
@@ -319,4 +319,15 @@ function CheckTest() {
 		// 총 가짓수
 		$(".totalKind_span").text(totalKind);
 	}
+</script>
+
+<script>
+	$(document).ready(function() {
+		console.log("message : "+"${message}");
+		console.log("mem_id : "+"${mem_id}");
+		if("${message}" !=""){
+			alert("${message}");
+			 <%session.setAttribute("message","");%>
+		}
+	})
 </script>

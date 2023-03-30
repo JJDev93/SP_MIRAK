@@ -92,7 +92,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="firstname">이름 <span class="text-danger">*</span></label> 
-									<input type="text" name="mem_name" id="name" tabIndex="7" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required" >
+									<input type="text" name="mem_name" id="firstname" tabIndex="7" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required" >
 								</div>
 							</div>
 							<div class="w-100"></div>
@@ -127,16 +127,15 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="streetaddress">주소 <span class="text-danger">*</span></label>
-								<div class="row mb-4">
+								<div class="row mb-2">
 									<div class="col-sm-8">
 										<input type="text" class="form-control" id="address_input_1" name="mem_zipcode" placeholder="우편번호" required="required" onkeydown="event.preventDefault();" autocomplete="off">
 									</div>
 									<div class="col-sm-4">
-										<button type="button" class="btn btn-primary joinBtn address button" tabIndex="12" onclick="execution_daum_address();">우편번호찾기</button>
+										<button type="button" id="streetaddress"  class="btn btn-primary joinBtn address button" tabIndex="12" onclick="execution_daum_address();">우편번호찾기</button>
 									</div>
 								</div>
-								
-								<input type="text" id="address_input_2" class="form-control mb-4" name="mem_add1" placeholder="주소지를 입력해주세요" readonly="readonly">
+								<input type="text" id="address_input_2" class="form-control mb-2" name="mem_add1" placeholder="주소지를 입력해주세요" readonly="readonly">
 								<input type="text" id="address_input_3" class="form-control" name="mem_add2" tabIndex="13" placeholder="상세주소를 작성해주세요" readonly>
 							</div>
 						</div>
@@ -163,10 +162,10 @@
 		console.log($("button[id='idCheck']").val() == "N");
 		console.log("message : " + "${message}");
 		console.log("mem_id : " + "${mem_id}");
-		if ("${message}" != "") {
+		if("${message}" !=""){
 			alert("${message}");
-<%session.setAttribute("message", "");%>
-	}
+			 <%session.setAttribute("message","");%>
+		}
 	})
 
 	function Duplicate() {
