@@ -39,7 +39,7 @@ public class NaverLoginServiceImpl implements NaverLoginService {
 
 	private String clientId = "W_XBZ8KSSrZT5ts3cW9K";
 	private String clientSecret = "w7bUjL_Agk";
-	private String callbackUrl = "http://localhost:8080/naverCallback";
+	private String callbackUrl = "https://mirak.shop/naverCallback";
 	private String refreshToken = "";
 
 	public NaverLoginServiceImpl() {
