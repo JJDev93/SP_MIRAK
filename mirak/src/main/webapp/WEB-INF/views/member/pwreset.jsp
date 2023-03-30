@@ -62,14 +62,14 @@
 					<input type="hidden" id="reset" value="reset">
 					<div class="form-group">
 						<label for="ID">아이디</label>
-						<input type="text"class="form-control mail_reset" id="id" name="mem_id" placeholder="아이디를 입력해주세요."required="required" onchange="pwcheck_reset()">
+						<input type="text"class="form-control mail_reset" id="ID" name="mem_id" placeholder="아이디를 입력해주세요."required="required" onchange="pwcheck_reset()">
 					</div>
 					<div class="form-group">
-						<label for="ID">이름</label>
+						<label for="name">이름</label>
 						<input type="text" class="form-control" id="name" name="mem_name" placeholder="이름을 입력해주세요."required="required" onchange="pwcheck_reset()">
 					</div>
 					<div class="form-group">
-						<label for="PW">핸드폰번호</label>
+						<label for="phone">핸드폰번호</label>
 						<input type="text"class="form-control" id="phone" name="mem_phone" placeholder="핸드폰번호를 입력해주세요." required="required" onchange="pwcheck_reset()">
 					</div>
 					<div>
@@ -110,6 +110,7 @@ $(document).ready(function() {
 	console.log("mem_id : "+"${mem_id}");
 	if("${message}" !=""){
 		alert("${message}");
+		<%session.setAttribute("message","");%>
 	}
 	if("${mem_id}" != ""){
 		$("#pwcheckform").modal("show");

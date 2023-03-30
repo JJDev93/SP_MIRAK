@@ -8091,6 +8091,7 @@ h1, h2, h3, h4, h5,
       color: #383838; }
     @media (max-width: 1198.98px) {
       .ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
+      	font-size: 1rem;
         padding-left: 0;
         padding-right: 0;
         padding-top: .9rem;
@@ -8212,7 +8213,7 @@ h1, h2, h3, h4, h5,
       -webkit-transition: .3s all ease-out;
       -o-transition: .3s all ease-out;
       transition: .3s all ease-out; }
-    .ftco-navbar-light.scrolled .navbar-brand { }
+    .ftco-navbar-light.scrolled .navbar-brand { color: #fb8622; }
 
 .navbar-brand {
 	font-family: initial;
@@ -8220,6 +8221,10 @@ h1, h2, h3, h4, h5,
 	text-transform: uppercase;
 	font-weight: bold;
 	letter-spacing: 1.5px;
+	
+}
+@media (max-width: 1199.98px) {
+	.navbar-brand {font-size: 1.5rem;}
 }
 
 .hero-wrap {
@@ -8260,6 +8265,9 @@ h1, h2, h3, h4, h5,
       line-height: 1.3;
       text-shadow: 3px 3px 2px rgba(0,0,0,0.3);
     }
+    @media (max-width: 1199.98px) {
+		.hero-wrap .slider-text .bread{font-size: 2rem;}
+	}
     .hero-wrap .slider-text .btn-primary {
       border: 1px solid rgba(255, 255, 255, 0.4);
       -webkit-border-radius: 30px;
@@ -8417,7 +8425,7 @@ h1, h2, h3, h4, h5,
           font-family: "S-CoreDream-3Light", cursive; }
           @media (max-width: 767.98px) {
             .owl-carousel.home-slider .slider-item .slider-text h1 {
-              font-size: 40px; } }
+              font-size: 1.5rem; } }
         .owl-carousel.home-slider .slider-item .slider-text p {
           color: rgba(0, 0, 0, 0.8);
           font-weight: 400; }
@@ -9240,7 +9248,9 @@ textarea.form-control {
     border: 2px solid #fff !important; }
     .ftco-footer .ftco-footer-widget .btn-primary:hover {
       border: 2px solid #fff !important; }
-
+	@media (max-width: 767.98px) {
+		.ftco-footer { font-size: 1rem; }
+	}
 .ftco-footer-social li {
   list-style: none;
   margin: 0 10px 0 0;
@@ -10063,4 +10073,8 @@ textarea.form-control {
     
 .main-color{ color:#fb8622 !important; }
 .admin-list table th, .admin-list table td{ white-space: nowrap; }
-    
+
+.pro-title{ text-align:center; font-size:35px; }
+@media (max-width: 1199.98px) {
+	.pro-title{ font-size:1.5rem; }
+}

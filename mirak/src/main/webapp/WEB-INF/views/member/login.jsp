@@ -73,22 +73,22 @@
          <div class="col-md-5">
             <div class="row justify-content-center ftco-services"> 
                <!-- 구글 -->
-               <div class="col-sm-4 text-center ftco-animate">
+               <div class="col-sm-4 col-4 text-center ftco-animate">
                   <a id="custom-login-btn" href="${googleUrl}"><img alt=""
                      src="resources/images/ico_member_google.png"></a>
                </div>
                <!-- 네이버 -->
-               <div class="col-sm-4 text-center ftco-animate">
+               <div class="col-sm-4 col-4 text-center ftco-animate">
                   <a id="naverIdLogin_loginButton" href="javascript:void(0)"> <span><img
                         alt="" src="resources/images/ico_member_naver.png"
                         style="cursor: pointer"></span>
                   </a>
                </div>
                <!-- 카카오 -->
-               <div class="col-sm-4 text-center ftco-animate">
+               <div class="col-sm-4 col-4 text-center ftco-animate">
                   <div class="media block-6 services mb-md-0 mb-4 kakao">
                      <a id="btn"
-                        href="https://kauth.kakao.com/oauth/authorize?client_id=e481c91b1136f51f927a619fc062146d&redirect_uri=http://mirak.shop/kakaoLogin&response_type=code">
+                        href="https://kauth.kakao.com/oauth/authorize?client_id=e481c91b1136f51f927a619fc062146d&redirect_uri=https://mirak.shop/kakaoLogin&response_type=code">
                         <img alt="" src="resources/images/ico_member_kakao.png">
                      </a>
                   </div>
@@ -107,31 +107,28 @@
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
 
 <script>
+	$(document).ready(function() {
+		console.log("message : " + "${message}");
+		console.log("mem_id : " + "${mem_id}");
+		if ("${message}" != "") {
+			alert("${message}");
+			<%session.setAttribute("message", "");%>
+			}
 
-   $(document).ready(function() {
-   console.log("message : "+"${message}");
-   console.log("mem_id : "+"${mem_id}");
-   if ("${message}" != "") {
-        if ("${message}" == "로그인 후 이용해주세요.") {
-        }
-        alert("${message}");
-        <% session.setAttribute("message", ""); %>
-      }
-      
-      if("${mem_id}" !=""){
-    	  
-      location.href = "/";
-      }
-   })
+		if ("${mem_id}" != "") {
+			location.href = "/";
+		}
+	})
 </script>
 
 <!-- 네이버 스크립트 -->
 <script src="${path}/resources/js/naverapi.js"></script>
 <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"charset="utf-8"></script>
+
 <script>
 var naverLogin = new naver.LoginWithNaverId({
 	  clientId: "zkOzac5hPC_Qw6v8eOzQ",
-	  callbackUrl: "http://mirak.shop/login",
+	  callbackUrl: "https://www.mirak.shop/login",
 	  isPopup: false,
 	  callbackHandle: false,
 	});
