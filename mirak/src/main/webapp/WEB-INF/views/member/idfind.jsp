@@ -121,12 +121,14 @@
 </section>
 <script src="${path}/resources/js/naverapi.js"></script>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
+
 <script>
 $(document).ready(function() {
 	console.log("message : "+"${message}");
 	console.log("mem_id : "+"${mem_id}");
 	if("${message}" !=""){
 		alert("${message}");
+		<%session.setAttribute("message","");%>
 	}
 	if("${mem_id}" != ""){
 		$("#pwcheckform").modal("show");

@@ -110,6 +110,7 @@ $(document).ready(function() {
 	console.log("mem_id : "+"${mem_id}");
 	if("${message}" !=""){
 		alert("${message}");
+		<%session.setAttribute("message","");%>
 	}
 	if("${mem_id}" != ""){
 		$("#pwcheckform").modal("show");

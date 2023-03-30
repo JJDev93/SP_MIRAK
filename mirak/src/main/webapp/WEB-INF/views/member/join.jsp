@@ -163,10 +163,10 @@
 		console.log($("button[id='idCheck']").val() == "N");
 		console.log("message : " + "${message}");
 		console.log("mem_id : " + "${mem_id}");
-		if ("${message}" != "") {
+		if("${message}" !=""){
 			alert("${message}");
-<%session.setAttribute("message", "");%>
-	}
+			 <%session.setAttribute("message","");%>
+		}
 	})
 
 	function Duplicate() {
