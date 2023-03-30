@@ -127,7 +127,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="streetaddress">주소 <span class="text-danger">*</span></label>
-								<div class="row mb-4">
+								<div class="row mb-2">
 									<div class="col-sm-8">
 										<input type="text" class="form-control" id="address_input_1" name="mem_zipcode" placeholder="우편번호" required="required" onkeydown="event.preventDefault();" autocomplete="off">
 									</div>
@@ -135,8 +135,7 @@
 										<button type="button" id="streetaddress"  class="btn btn-primary joinBtn address button" tabIndex="12" onclick="execution_daum_address();">우편번호찾기</button>
 									</div>
 								</div>
-								
-								<input type="text" id="address_input_2" class="form-control mb-4" name="mem_add1" placeholder="주소지를 입력해주세요" readonly="readonly">
+								<input type="text" id="address_input_2" class="form-control mb-2" name="mem_add1" placeholder="주소지를 입력해주세요" readonly="readonly">
 								<input type="text" id="address_input_3" class="form-control" name="mem_add2" tabIndex="13" placeholder="상세주소를 작성해주세요" readonly>
 							</div>
 						</div>
