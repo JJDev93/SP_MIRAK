@@ -92,7 +92,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="firstname">이름 <span class="text-danger">*</span></label> 
-									<input type="text" name="mem_name" id="name" tabIndex="7" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required" >
+									<input type="text" name="mem_name" id="firstname" tabIndex="7" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required" >
 								</div>
 							</div>
 							<div class="w-100"></div>
@@ -132,7 +132,7 @@
 										<input type="text" class="form-control" id="address_input_1" name="mem_zipcode" placeholder="우편번호" required="required" onkeydown="event.preventDefault();" autocomplete="off">
 									</div>
 									<div class="col-sm-4">
-										<button type="button" class="btn btn-primary joinBtn address button" tabIndex="12" onclick="execution_daum_address();">우편번호찾기</button>
+										<button type="button" id="streetaddress"  class="btn btn-primary joinBtn address button" tabIndex="12" onclick="execution_daum_address();">우편번호찾기</button>
 									</div>
 								</div>
 								
