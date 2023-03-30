@@ -88,7 +88,7 @@
                <div class="col-sm-4 col-4 text-center ftco-animate">
                   <div class="media block-6 services mb-md-0 mb-4 kakao">
                      <a id="btn"
-                        href="https://kauth.kakao.com/oauth/authorize?client_id=e481c91b1136f51f927a619fc062146d&redirect_uri=https://mirak.shop/kakaoLogin&response_type=code">
+                        href="https://kauth.kakao.com/oauth/authorize?client_id=e481c91b1136f51f927a619fc062146d&redirect_uri=https://www.mirak.shop/kakaoLogin&response_type=code">
                         <img alt="" src="resources/images/ico_member_kakao.png">
                      </a>
                   </div>
