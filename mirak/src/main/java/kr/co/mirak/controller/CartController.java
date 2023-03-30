@@ -17,8 +17,6 @@ import kr.co.mirak.cart.CartService;
 import kr.co.mirak.cart.CartVO;
 import kr.co.mirak.cart.CriteriaC;
 import kr.co.mirak.cart.PageMakerDTOC;
-import kr.co.mirak.member.MemberService;
-import kr.co.mirak.member.MemberVO;
 
 
 @Controller
@@ -73,7 +71,7 @@ public class CartController {
 		  cri.setPageNum(page);
 	      model.addAttribute("cartList", cartService.getListPaging(cri));
 	      model.addAttribute("curPage", page);
-	      int total = cartService.getTotal();
+	      int total = cartService.getTotal();//
 	      PageMakerDTOC pageMake = new PageMakerDTOC(cri, total);
 	      model.addAttribute("pageMaker", pageMake);
 	      return "/cart/cart_admin";
@@ -86,7 +84,7 @@ public class CartController {
 	      model.addAttribute("curPage", curPage);
 	      cartService.cartDetail(vo);
 	          
-	      int total = cartService.getTotal();
+	      int total = cartService.getTotal();//
 	      PageMakerDTOC pageMake = new PageMakerDTOC(cri, total);
 	      model.addAttribute("pageMaker", pageMake);
 
@@ -131,5 +129,10 @@ public class CartController {
 
 		return "/cartpay";
 	}
+	
+
+
 
 }
+
+

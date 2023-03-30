@@ -100,9 +100,9 @@
 	</select>
 
 	<select id="getListPaging" resultType="member">
-		<![CDATA[  		 
-			select * from (select * from member where mem_id not in ('admin')) as T1 ORDER BY MEM_REGDATE limit #{skip},#{amount}
- 		]]>
+      <![CDATA[         
+         select * from (select * from member where mem_id not in ('admin')) as T1 ORDER BY MEM_CODE desc limit #{skip},#{amount}
+       ]]>
 	</select>
 
 	<select id="adminMemberDetail" resultType="member">

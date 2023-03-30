@@ -94,12 +94,12 @@
    </select>
    
    <select id="getListPaging" resultType="kr.co.mirak.cart.CartVO">
-		
 		<![CDATA[
-  		 
-		select * from (select * from cart order by cart_code desc limit #{skip},#{amount}) as T1;
+		select * from (
+			select * 
+			from cart order by cart_code 
+			desc limit #{skip},#{amount}) as T1;
  		]]>
-
 	</select>
 	
 	<!-- 	페이징 처리 (카트 총 개수 출력) -->
@@ -117,6 +117,7 @@
 		WHERE cart_code = #{cart_code};
 		]]>
 	</select>
+	
 	
 	
   </mapper>
