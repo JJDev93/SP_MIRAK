@@ -86,7 +86,7 @@
 
 					<!-- 네이버 -->
 					<div class="col-sm-4 text-center ftco-animate">
-						<a id="naverIdLogin_loginButton">
+						<a id="naverIdLogin_loginButton" href="/naverLogin">
 						<span><img alt="" src="resources/images/ico_member_naver.png"style="cursor: pointer"></span></a>
 					</div>
 
@@ -121,50 +121,4 @@
       location.href = "/";
       }
    })
-</script>
-
-<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"charset="utf-8"></script>
-<script>
-var naverLogin = new naver.LoginWithNaverId({
-	  clientId: "W_XBZ8KSSrZT5ts3cW9K",
-	  callbackUrl: "http://localhost:8080/naverResult",
-	  isPopup: false,
-	  callbackHandle: true,
-	});
-	naverLogin.init();
-	$(document).on("click", "#naverIdLogin_loginButton", function () {
-	  console.log("클릭이벤트실행");
-	  console.log(naverLogin);
-	  naverLogin.getLoginStatus(function (status) {
-	    if (status != null) {
-	      var userInfo = {
-	        mem_id: naverLogin.user.getEmail(),
-	        mem_gender: naverLogin.user.getGender() == "F" ? 2 : 1,
-	        mem_pw: naverLogin.user.getId(),
-	        mem_name: naverLogin.user.getName(),
-	      };
-
-	      $.ajax({
-	        url: "/naverResult",
-	        method: "POST",
-	        data: userInfo,
-	        dataType: "json",
-	        success: function (data) {
-	          if (data == "jsonView") {
-	            window.location.href = "/join";
-	          } else if (data == "success") {
-	            window.location.href = "/";
-	          } else {
-	            alert("Error occurred.");
-	          }
-	        },
-	        error: function (jqXHR, textStatus, errorThrown) {
-	          console.log(textStatus, errorThrown);
-	        },
-	      });
-	    } else {
-	      console.log("Naver login user object is not defined.");
-	    }
-	  });
-	});
 </script>

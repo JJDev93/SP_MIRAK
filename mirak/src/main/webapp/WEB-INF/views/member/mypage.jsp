@@ -40,7 +40,7 @@
 									<c:when test="${member.mem_isapi == 'google'}">
 										Google 빠른로그인 회원입니다
 			                        </c:when>
-									<c:when test="${member.mem_isapi == 'naver' }">
+									<c:when test="${member.mem_isapi == 'NAVER' }">
 										Naver 빠른로그인 회원입니다
 									</c:when>
 									<c:when test="${member.mem_isapi == 'kakao' }">

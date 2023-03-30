@@ -24,7 +24,6 @@ public interface MemberService {
 
 	int memdelete(MemberVO vo);
 
-	// List<MemberVO> getMemberList(Optional<Integer> pageStart);
 	MemberVO getMemberDetail(String memId);
 
 	int idCheck(String id) throws Exception;
@@ -32,7 +31,7 @@ public interface MemberService {
 	// 카카오 로그인
 //	String getAccessToken(String code);
 //	MemberVO getUserInfo(String access_Token);
-
+	
 	String getAccessToken(String code);
 
 	HashMap<String, Object> getUserInfo(String access_Token);

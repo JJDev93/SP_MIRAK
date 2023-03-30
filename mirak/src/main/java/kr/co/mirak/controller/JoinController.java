@@ -81,6 +81,8 @@ public class JoinController {
 			String mem_id = vo.getMem_id();
 			session.setAttribute("mem_id", mem_id); // 세션에 사용자정보 저장
 			
+			session.setAttribute("mem_isapi", vo.getMem_isapi()); // 세션에 사용자정보 저장
+			System.out.println("세션에 isapi저장!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			String preUrl = (String) session.getAttribute("pre_url");
             String returnURL = "";
             

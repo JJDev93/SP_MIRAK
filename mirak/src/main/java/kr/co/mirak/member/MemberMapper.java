@@ -15,7 +15,6 @@ public interface MemberMapper {
 	//	List<MemberVO> getMemberList(Integer page);
 	MemberVO getMemberInfo(String mem_code);
 	int idCheck(String id);
-	
 	//카카오 로그인
 	//MemberVO findkakao(HashMap<String, Object> userInfo);
 	//void kakaoinsert(HashMap<String, Object> userInfo);
