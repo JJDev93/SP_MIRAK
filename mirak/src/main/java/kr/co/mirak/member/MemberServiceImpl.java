@@ -127,7 +127,7 @@ public class MemberServiceImpl implements MemberService {
          sb.append("grant_type=authorization_code");
 
          sb.append("&client_id=e481c91b1136f51f927a619fc062146d"); // 본인이 발급받은 key
-         sb.append("&redirect_uri=http://mirak.shop/kakaoLogin"); // 본인이 설정한 주소
+         sb.append("&redirect_uri=https://mirak.shop/kakaoLogin"); // 본인이 설정한 주소
 
          sb.append("&code=" + code);
          bw.write(sb.toString());
