@@ -183,7 +183,8 @@ public class ProductController {
 		
 //		String url = "C:/Users/hi/git/mirak/mirak/src/main/webapp/resources/images/product/";
 //		String url = "/home/tomcat/apache-tomcat-9.0.73/webapps/mirak/resources/images/product/";
-		String url= "/var/lib/tomcat9/webapps/mirak/resources/images/product/";
+		// String url= "/var/lib/tomcat9/webapps/mirak/resources/images/product/";
+		String url = request.getSession().getServletContext().getRealPath("/resources/images/product");
 		
 		MultipartFile uploadFile = vo.getUploadFile();
 			if (!uploadFile.isEmpty()) {
