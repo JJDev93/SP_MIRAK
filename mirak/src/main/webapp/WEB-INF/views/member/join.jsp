@@ -27,8 +27,8 @@
 					
 						<c:choose>
 							<c:when test="${not empty member.mem_isapi}">
-								<input type="text" name="mem_pw" class="form-control" id="pw" value="${member.mem_pw }" readonly="readonly">
-								<input type="text" name="mem_isapi" class="form-control" value="${member.mem_isapi}" readonly="readonly">
+								<input type="hidden" name="mem_pw" class="form-control" id="pw" value="${member.mem_pw }" readonly="readonly">
+								<input type="hidden" name="mem_isapi" class="form-control" value="${member.mem_isapi}" readonly="readonly">
 								
 								<div class="col-md-12">
 									<div class="form-group">
