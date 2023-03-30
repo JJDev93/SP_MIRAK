@@ -80,6 +80,8 @@
       </div>
       
       <!-- 검색 -->
+      
+      <form class="" id="search" method="get" action=""> 
       <div class="form-inline ">
       	<select id="searchType" name="searchType">
       		<option value="">검색 조건</option>
@@ -87,10 +89,10 @@
       		<option value="c">내용</option>
       	</select>
       	
-      	<input
-      	 class="form-control" type="text" id="keyword" name="keyword"
-      			value="${pageMaker.cri.keyword}" placeholder="검색어를 입력하세요">
+      	<input  class="form-control me-2" type="text" id="keyword" name="keyword" value="${pageMaker.cri.keyword}" placeholder="검색어를 입력하세요">
       	<button type="submit" id="searchBtn" class="btn btn-primary">검색</button>
+      	</div>
+      	</form>
       <!-- 검색 -->
       
          <div class="row mt-5">

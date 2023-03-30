@@ -26,7 +26,6 @@ public interface CartMapper {
 	/* 게시판 총 갯수 */
     public int getTotal();
     
-//    public int getTotal(CriteriaC cri);
     
     /* 게시판 목록(페이징 적용) */
     public List<CartVO> getListPaging(CriteriaC cri);	
