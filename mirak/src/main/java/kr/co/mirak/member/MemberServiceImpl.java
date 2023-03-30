@@ -46,10 +46,10 @@ public class MemberServiceImpl implements MemberService {
    }
 
    // 아이디 찾기(비번 리셋용)
-   public MemberVO idfind_pw(MemberVO vo) {
+   public int idfind_pw(MemberVO vo) {
       MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-      MemberVO memVO = mapper.idfind(vo);
-      return memVO;
+      int result = mapper.idfind_pw(vo);
+      return result;
    }
 
    // 비번 리셋

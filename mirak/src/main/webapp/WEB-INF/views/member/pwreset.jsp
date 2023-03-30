@@ -57,7 +57,7 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-5 ftco-animate">
-				<form action="#" class="contact-form">
+				<form action="mailCheck" method="get" class="contact-form">
 					<h3 class="mb-4 billing-heading" style="text-align: center;">비밀번호재설정</h3>
 					<input type="hidden" id="reset" value="reset">
 					<div class="form-group">
@@ -66,11 +66,11 @@
 					</div>
 					<div class="form-group">
 						<label for="ID">이름</label>
-						<input type="text" class="form-control" id="name" placeholder="이름을 입력해주세요."required="required" onchange="pwcheck_reset()">
+						<input type="text" class="form-control" id="name" name="mem_name" placeholder="이름을 입력해주세요."required="required" onchange="pwcheck_reset()">
 					</div>
 					<div class="form-group">
 						<label for="PW">핸드폰번호</label>
-						<input type="text"class="form-control" id="phone" placeholder="핸드폰번호를 입력해주세요." required="required" onchange="pwcheck_reset()">
+						<input type="text"class="form-control" id="phone" name="mem_phone" placeholder="핸드폰번호를 입력해주세요." required="required" onchange="pwcheck_reset()">
 					</div>
 					<div>
 						<span id="check2"></span> 
@@ -94,6 +94,8 @@
 <form id="pwreset" action="/pwreset" method="post">
 <input type="hidden" name="mem_id" id="mem_id" value="">
 <input type="hidden" name="mem_pw" id="mem_pw" value="">
+<input type="hidden" name="mem_name" id="mem_name" value="">
+<input type="hidden" name="mem_phone" id="mem_phone" value="">
 </form>
 
 <script src="${path}/resources/js/pwcheck.js"></script>
@@ -170,6 +172,8 @@ var code="";  //이메일전송 인증번호 저장위한 코드
         	 if (data !== null) {
         		document.querySelector('#mem_id').value = email;
  	            document.querySelector('#mem_pw').value = code;
+ 	           	document.querySelector('#mem_name').value = $("#name").val();
+ 	           	document.querySelector('#mem_phone').value = $("#phone").val();
  	          	document.querySelector('#pwreset').submit();
         	 }
        	 }
