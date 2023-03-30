@@ -1,8 +1,9 @@
 package kr.co.mirak.controller;
 
-import java.sql.Date;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.sql.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,9 @@ import kr.co.mirak.cart.CartService;
 import kr.co.mirak.cart.CartVO;
 import kr.co.mirak.cart.CriteriaC;
 import kr.co.mirak.cart.PageMakerDTOC;
+import kr.co.mirak.member.MemberService;
 import kr.co.mirak.member.MemberVO;
-import kr.co.mirak.product.Criteria;
-import kr.co.mirak.product.PageMakerDTO;
-import kr.co.mirak.product.ProductVO;
+
 
 @Controller
 public class CartController {
@@ -92,15 +92,7 @@ public class CartController {
 
 	      return "/cart/cart_adminDetail";
 	   }
-	   
-	 // 회원정보 열람
-	   @RequestMapping(value="/admin/member/{mem_id}")	
-		public String getMemberDetail(CartVO vo, Model model) {
-			model.addAttribute("member", cartService.getMemberDetail(vo));
-			cartService.getMemberDetail(vo);
-			return "cart/cart_admin";
-		}
-	   
+	
 	   
 	// Admin 카트 진짜 삭제
 		@RequestMapping(value = "/admin/cartAdminDelete")
@@ -118,10 +110,22 @@ public class CartController {
 			cartService.cartAdminUpdate(vo);
 			return "redirect:/admin/carts/1";
 		}
+		
+//		// Admin 에서 회원정보 열람
+//		@RequestMapping(value="/admin/member/{curPage}/{mem_code}", method=RequestMethod.GET)	
+//		public String adminMemDetail2(MemberVO mvo, Model model, @PathVariable("mem_code") String mem_code, @PathVariable("curPage") int curPage) {
+//			System.out.println("====== 관리자 회원 상세페이지로 이동 ======");
+//			mvo.setMem_code(Integer.parseInt(mem_code));
+//			model.addAttribute("member", cartService.adminMemberDetail2(mvo));
+//			model.addAttribute("curPage", curPage);
+//			return "member/admin_member_detail";
+//		}
+		
+		
 	   
 
 	@RequestMapping(value = "/goPay", method = RequestMethod.POST)   // 결제하기
-	public String goPay(Model model, HttpSession session) {
+	public String goPay(Model model, HttpSession session) { 
 
 		model.addAttribute("CartVO", "");
 

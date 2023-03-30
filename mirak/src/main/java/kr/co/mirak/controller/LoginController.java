@@ -59,65 +59,53 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(MemberVO memberVO, Model model, HttpServletRequest request, RedirectAttributes rttr)
 			throws Exception {
-
 		System.out.println("login 메서드 진입");
 		System.out.println("전달된 데이터 : " + "[" + memberVO.getMem_id() + " , " + memberVO.getMem_pw() + "]");
 
 		/* 암호화부분 */
-
 		HttpSession session = request.getSession();
 
 		String rawPw = "";
 		String encodePw = "";
 
 		MemberVO lvo = memberService.login(memberVO); // 제출한아이디와 일치하는 아이디있는지
+		try {
+			if (lvo != null) { // 일치하는 아이디 존재시
+				rawPw = memberVO.getMem_pw(); // 사용자가 제출한 비번
+				encodePw = lvo.getMem_pw(); // db에 저장한 인코딩된 비번
 
-		if (lvo != null) { // 일치하는 아이디 존재시
+				System.out.println("제출한비번:" + rawPw + "인코딩된비번:" + lvo.getMem_pw());
 
-			rawPw = memberVO.getMem_pw(); // 사용자가 제출한 비번
-			encodePw = lvo.getMem_pw(); // db에 저장한 인코딩된 비번
+				String mem_id;
 
-			System.out.println("제출한비번:" + rawPw);
-			System.out.println("인코딩된비번:" + lvo.getMem_pw());
+				if (true == pwEncoder.matches(rawPw, encodePw)) { // 비번 일치 여부 판단
+					// logger.info("일로오나");
+					memberVO.setMem_pw(""); // 인코딩된 비번 정보 지움
+					mem_id = memberVO.getMem_id();
+					session.setAttribute("message", "로그인 되었습니다.");
+					session.setAttribute("mem_id", mem_id); // 세션에 사용자정보 저장
+					logger.info("로그인 성공");
 
-			String mem_id;
+					return "redirect:/replayBefo";
 
-			if (true == pwEncoder.matches(rawPw, encodePw)) { // 비번 일치 여부 판단
-				// logger.info("일로오나");
-				memberVO.setMem_pw(""); // 인코딩된 비번 정보 지움
-				mem_id = memberVO.getMem_id();
-				session.setAttribute("message", "로그인 되었습니다.");
-				session.setAttribute("mem_isapi", memberVO.getMem_isapi());
-				session.setAttribute("mem_id", mem_id); // 세션에 사용자정보 저장
-				logger.info("로그인 성공");
-
-				String preUrl = (String) session.getAttribute("pre_url");
-				String returnURL = "";
-				System.out.println("preUrl : " + preUrl);
-				if (preUrl != null) {
-					System.out.println("이전 페이지로 이동");
-					returnURL = "redirect:" + preUrl;
-					session.removeAttribute("pre_url");
-				} else {
-					System.out.println("메인으로 이동");
-					returnURL = "redirect:/";
+				} else { // 일치하는 아이디가 존재하지 않을 시 (로그인 실패)
+//	               session.setAttribute("result", 0);
+					session.setAttribute("message", "일치하는 아이디가 없습니다.");
+					logger.info("일치하는 아이디가 없습니다");
+					return "member/login"; // 로그인 페이지로 이동
 				}
-				return returnURL;
-
-			} else { // 일치하는 아이디가 존재하지 않을 시 (로그인 실패)
-
-				session.setAttribute("result", 0);
-				logger.info("일치하는 아이디가 없습니다");
-				return "member/login"; // 로그인 페이지로 이동
+			} else { // 일치하는 아이디가 존재하지 않을시 (로그인 실패)
+//	            session.setAttribute("result", 0);
+				session.setAttribute("message", "일치하는 아이디가 없습니다.");
+				logger.info("로그인 실패");
+				return "member/login"; // 로그인페이지로 이동
 			}
-		} else { // 일치하는 아이디가 존재하지 않을시 (로그인 실패)
-
-			session.setAttribute("result", 0);
+		} catch (Exception e) {
+//	         session.setAttribute("result", 0);
 			session.setAttribute("message", "일치하는 아이디가 없습니다.");
 			logger.info("로그인 실패");
 			return "member/login"; // 로그인페이지로 이동
 		}
-
 	}
 
 	// 로그아웃
@@ -137,16 +125,16 @@ public class LoginController {
 			} else if (user_api.equals("kakao")) {
 				System.out.println("unlink :" + user_api);
 				return "redirect:/kakaounlink";
-			} else if(accesstoken != null) {
-						int result = naverLoginService.naverLogout(accesstoken);
-						System.out.println("네이버로그아웃 : " + result);
-				 }
+			} else if (accesstoken != null) {
+				int result = naverLoginService.naverLogout(accesstoken);
+				System.out.println("네이버로그아웃 : " + result);
+			}
 			System.out.println(user_api + "로그아웃 성공!!");
 			System.out.println("access_Token is null");
-			
-		} 
-			session.invalidate();
-			return "redirect:/";
+
+		}
+		session.invalidate();
+		return "redirect:/";
 	}
 
 	// 연결끊기
@@ -210,17 +198,17 @@ public class LoginController {
 
 	// 비번재설정
 	@RequestMapping(value = "/pwreset", method = RequestMethod.POST)
-	public String pwreset(MemberVO vo, Model model, RedirectAttributes rttr) {
+	public String pwreset(MemberVO vo, Model model, HttpSession session) {
 		System.out.println("비밀번호 재설정중....");
 		System.out.println(vo);
-
 		try {
-			if (vo.getMem_id() == null) {
-				memberService.idfind_pw(vo).getMem_id();
-			}
-			if (vo.getMem_id() != null && vo.getMem_pw() != null) {
+			if (memberService.idfind_pw(vo) == 0) {
+				System.out.println("아이디 확인중..");
+				session.setAttribute("message", "일치하는 아이디가 없습니다.");
+				return "member/pwreset";
+			} else {
+				System.out.println("비밀번호 재설정중2....");
 				// 암호화 1
-
 				String rawPw = ""; // 인코딩 전 비밀번호
 				String encodePw = ""; // 인코딩 후 비밀번호
 
@@ -229,15 +217,13 @@ public class LoginController {
 				vo.setMem_pw(encodePw); // 인코딩된 비밀번호 vo객체에 다시 저장
 
 				memberService.pwreset(vo);
-				rttr.addFlashAttribute("message", "비밀번호가 변경되었습니다.");
+				session.setAttribute("message", "메일로 임시비밀번호가 전송되었습니다.");
 				return "redirect:/";
 			}
-			model.addAttribute("mem_id", vo.getMem_id());
-			return "member/pwreset";
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("message", "정보를 다시 입력해주세요....");
+			session.setAttribute("message", "정보를 다시 입력해주세요.");
+			return "member/pwreset";
 		}
-		return "member/pwreset";
 	}
 }

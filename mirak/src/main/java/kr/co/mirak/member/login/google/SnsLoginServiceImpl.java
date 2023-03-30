@@ -34,15 +34,16 @@ public class SnsLoginServiceImpl implements SnsLoginService {
 	public HashMap<String, Object> getGoogleAccessToken(String authorize_code) {
 		HashMap<String, Object> token = new HashMap<String, Object>();
 		String access_Token = "";
-		String refresh_Token = "";
 		String reqURL = "https://www.googleapis.com/oauth2/v4/token";
-		
+		System.out.println("googleUtils.getGoogleRedirectUri() : " + googleUtils.getGoogleRedirectUri());
 		try {
 			URL url = new URL(reqURL);
+			System.out.println("reqURL : " + url);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			//POST 요청을 위해 기본값이 false인 setDoOutput을 true로
 	        conn.setRequestMethod("POST");
 	        conn.setDoOutput(true);
+	        
 	        
 	        //POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
 	        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
@@ -50,14 +51,14 @@ public class SnsLoginServiceImpl implements SnsLoginService {
 	        sb.append("grant_type=authorization_code");
 	        sb.append("&client_id=" + googleUtils.getGoogleClientId());
 	        sb.append("&client_secret=" + googleUtils.getGoogleSecret());
-	        sb.append("&redirect_uri=http://localhost:8080/login/google/auth");
+	        sb.append("&redirect_uri=" + googleUtils.getGoogleRedirectUri());
 	        sb.append("&code="+authorize_code);
 	        sb.append("&approval_prompt=force");
 	        bw.write(sb.toString());
 	        bw.flush();
 	        
-	        System.out.println("url : " + url);
-	        System.out.println("sb : " + sb);
+	        //System.out.println("url : " + url);
+	        //System.out.println("sb : " + sb);
 	        
 	        //결과 코드가 200이라면 성공
 	        int responseCode = conn.getResponseCode();
@@ -78,12 +79,12 @@ public class SnsLoginServiceImpl implements SnsLoginService {
 	            JsonParser parser = new JsonParser();
 				JsonElement element = parser.parse(result);
 	            access_Token = element.getAsJsonObject().get("access_token").getAsString();
-	            refresh_Token = element.getAsJsonObject().get("id_token").getAsString();
-	            //System.out.println("access_token : " + access_Token);
+	            //refresh_Token = element.getAsJsonObject().get("id_token").getAsString();
+	            System.out.println("access_token : " + access_Token);
 				//System.out.println("refresh_token : " + refresh_Token);
 				
 				token.put("access_token", access_Token);
-				token.put("refresh_token", access_Token);
+				//token.put("refresh_token", access_Token);
 				
 	            br.close();
 	            bw.close();

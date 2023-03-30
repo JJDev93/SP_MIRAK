@@ -2,7 +2,8 @@ package kr.co.mirak.cart;
 
 import java.util.List;
 
-import kr.co.mirak.product.ProductVO;
+import kr.co.mirak.member.MemberVO;
+
 
 
 public interface CartMapper {
@@ -29,11 +30,11 @@ public interface CartMapper {
     public List<CartVO> getListPaging(CriteriaC cri);	
 	
     CartVO cartDetail(CartVO vo);
-    
-	CartVO getMemberDetail(CartVO vo);
 	
 	void cartAdminDelete(CartVO vo);
 	
 	void cartAdminUpdate(CartVO vo);
+	
+	MemberVO adminMemberDetail2(MemberVO vo);
 	
 }

@@ -15,15 +15,14 @@
 			</div>
 		</div>
 	</div>
+	
+	
 
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="tagcloud">
-						<a href="/ProductClientList" class="tag-cloud-link">전체메뉴</a>&nbsp;&gt;&nbsp;
-						<a href="/ProductClientListP" class="tag-cloud-link">프리미엄</a>
-					</div>
+					<p class="pro-title">미락의 프리미엄 메뉴입니다.</p>
 				</div>
 			</div>
 			<div class="row">

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +20,11 @@
 			</div>
 			<div class="text-center">
 				<p>
+				
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					&copy Copyright <a href="/admin" style="color: #000000;"> MIRAK. </a>2023<br>
 					신용우 전지혜 김연주 김원중 서현진 안창주 정동하
 					
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				</p>
 			</div>
 		</div>
@@ -46,17 +49,8 @@
 	<script src="${path}/resources/js/daumAddress.js"></script>
 	<script src="${path}/resources/js/emailCheck.js"></script>
 	<script src="${path}/resources/js/inputbox.js"></script>
- 
+	<script src="${path}/resources/js/userdatainfo.js"></script>
+	<script src="${path}/resources/js/apilogindelete.js"></script>
 
-
-	<!-- loader -->
-	<!-- <div id="ftco-loader" class="show fullscreen">
-		<svg class="circular" width="48px" height="48px">
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke="#eeeeee" />
-			<circle class="path" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
-		</svg>
-	</div> -->
 </body>
 </html>

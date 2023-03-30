@@ -11,7 +11,7 @@
 <div class="hero-wrap hero-bread"
 	style="background-image: url('${path}/resources/images/bg_3.jpg');">
 	<div class="container">
-		<div
+	<div
 			class="row no-gutters slider-text align-items-center justify-content-center">
 			<div class="col-md-9 ftco-animate text-center">
 				<c:if test="${fn : contains(product.pro_code, 'P')}">
@@ -28,25 +28,14 @@
 	</div>
 </div>
 
+
 <form method="post">
 	<input type="hidden" value="${product.pro_code}" name="pro_code">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="tagcloud">
-						<a href="/ProductClientList" class="tag-cloud-link">전체메뉴</a>&nbsp;&gt;&nbsp;
-						<c:if test="${fn : contains(product.pro_code, 'P')}">
-							<a href="/ProductClientListP" class="tag-cloud-link">프리미엄</a>
-						</c:if>
-						<c:if test="${fn : contains(product.pro_code, 'T')}">
-							<a href="/ProductClientListT" class="tag-cloud-link">2·3인세트</a>
-						</c:if>
-						<c:if test="${fn : contains(product.pro_code, 'O')}">
-							<a href="/ProductClientListO" class="tag-cloud-link">1인세트</a>
-						</c:if>
-						&nbsp;&gt;&nbsp; <a href="" class="tag-cloud-link">${product.pro_name}</a>
-					</div>
+					
 				</div>
 			</div>
 			<div class="row">
@@ -76,14 +65,14 @@
 						<!--                   </div> -->
 
 						<div class="w-100"></div>
-						<div class="input-group col-md-6 d-flex mb-3">
+						<div class="input-group col-md-8 d-flex mb-3">
 							<span class="input-group-btn mr-2"> 수량 &nbsp;&nbsp;
 								<button type="button" class="quantity-left-minus btn"
 									data-type="minus" data-field="">
 									<i class="ion-ios-remove"></i>
 								</button>
 							</span> <input type="text" id="result" name="result"
-								class="form-control input-number" value="1" min="1" max="100">
+								class="form-control input-number" value="1" min="1" maxlength="2">
 							<span class="input-group-btn ml-2">
 								<button type="button" class="quantity-right-plus btn"
 									data-type="plus" data-field="">

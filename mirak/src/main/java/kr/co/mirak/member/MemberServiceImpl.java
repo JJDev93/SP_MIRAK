@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -46,10 +45,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	// 아이디 찾기(비번 리셋용)
-	public MemberVO idfind_pw(MemberVO vo) {
+	public int idfind_pw(MemberVO vo) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		MemberVO memVO = mapper.idfind(vo);
-		return memVO;
+		int result = mapper.idfind_pw(vo);
+		return result;
 	}
 
 	// 비번 리셋
@@ -127,6 +126,8 @@ public class MemberServiceImpl implements MemberService {
 
 			sb.append("&client_id=e481c91b1136f51f927a619fc062146d"); // 본인이 발급받은 key
 			sb.append("&redirect_uri=http://localhost:8080/kakaoLogin"); // 본인이 설정한 주소
+			sb.append("&client_id=e481c91b1136f51f927a619fc062146d"); // 본인이 발급받은 key
+			sb.append("&redirect_uri=https://www.mirak.shop/kakaoLogin"); // 본인이 설정한 주소
 
 			sb.append("&code=" + code);
 			bw.write(sb.toString());

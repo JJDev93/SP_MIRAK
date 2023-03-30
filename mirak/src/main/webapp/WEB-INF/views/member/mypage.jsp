@@ -193,7 +193,6 @@
 					
 					
 					<div class="modal-footer">
-					
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Close</button>
 							<c:choose>
@@ -203,7 +202,7 @@
 							</c:when>
 							<c:otherwise>
 							<button type="button" class="btn btn-primary" id="memberCheck"
-							onclick="confirmDeleteMem();">탈퇴하기</button>
+							onclick="confirmDeleteMem();" >탈퇴하기</button>
 							</c:otherwise>
 							</c:choose>
 					</div>
@@ -241,7 +240,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary" onclick="confirmUpdatePw();">수정하기</button>
+						<button type="button" class="btn btn-primary" id="updateCheck" onclick="confirmUpdatePw();">수정하기</button>
 					</div>
 				</div>
 			</div>
@@ -249,146 +248,37 @@
 	</form>
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
-<script>	
-	function confirmUpdateApiMember() {
-		if (confirm("회원정보를 수정하시겠습니까?")) {
-			alert("회원 수정 되었습니다.");
-			return true;
-		} else {
-			return false;
+
+<script>
+	$(document).ready(function() {
+		console.log("message : "+"${message}");
+		console.log("mem_id : "+"${mem_id}");
+		if("${message}" !=""){
+			alert("${message}");
+			 <%session.setAttribute("message","");%>
 		}
-	}
-	
-	function confirmUpdateMember() {
-		var gender = $('input[name=mem_gender]:checked').val();
-		if (confirm("회원정보를 수정하시겠습니까?")) {
-			$.ajax({
-				url : "/memupdate",
-				type : "POST",
-				dataType : "JSON",
-				data : {
-					"mem_id" : $("#mem_id").val(),
-					"rawPw" : $("#rawPw").val(),
-					"mem_pw" : $("#mem_pw").val(),
-					"mem_name" : $("#mem_name").val(),
-					"mem_age" : $("#mem_age").val(),
-					"mem_gender" : gender,
-					"mem_phone" : $("#mem_phone").val(),
-					"mem_zipcode" : $("#address_input_1").val(),
-					"mem_add1" : $("#address_input_2").val(),
-					"mem_add2" : $("#address_input_3").val()
-				},
-				success : function(data) {
-					if (data == "0") {
-						alert("비밀번호가 틀렸습니다.");
-						document.getElementById('rawPw').value = '';
-						document.getElementById('rawPw').focus();
-					} else if (data == "1") {
-						alert("회원 수정 되었습니다.");
-						location.href = "/mypage";
-					}
-				}
-			});
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	function confirmUpdatePw() {
-		if (confirm("비밀번호를 수정하시겠습니까?")) {
-			$.ajax({
-				url : "/updatePw",
-				type : "POST",
-				dataType : "JSON",
-				data : {
-					"mem_id" : $("#mem_id").val(),
-					"mem_pw" : $("#mem_pw").val(),
-					"befo_pw" : $("#befo_pw").val(),
-					"new_pw" : $("#new_pw").val()
-				},
-				success : function(data) {
-					if (data == "0") {
-						alert("기존 비밀번호가 틀렸습니다.");
-						document.getElementById('befo_pw').value = '';
-						document.getElementById('befo_pw').focus();
-					} else if (data == "1") {
-						alert("비밀번호가 수정 되었습니다.");
-						location.href = "/mypage";
-					}
-				}
-			});
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	
-	//회원탈퇴
-	function confirmDeleteMem() {
-		if (pw_1.value == "") {
-			alert("비밀번호를 입력해주세요");
-		} else {
-			$.ajax({
-				url : "/memdelete",
-				type : "POST",
-				dataType : "JSON",
-				data : {
-					"mem_id" : $("#mem_id").val(),
-					"mem_pw" : $("#mem_pw").val(),
-					"rawPw" : $("#pw_1").val()
-				},
-				success : function(data) {
-					if (data == "0") {
-						alert("비밀번호가 틀렸습니다.");
-						document.getElementById('pw_1').value = '';
-					} else if (data == "1") {
-						alert("회원탈퇴 되었습니다.");
-						location.href = "/";
-					}
-				}
-			});
-		}
-	}
+	})
 </script>
 
 <script>
-	function apiDelete() {
-		// 인증번호 입력란에서 값을 가져옴
-		var authCode = document.getElementById("mail_check_input").value;
-
-		// 인증번호가 비어 있으면 경고창을 띄우고 함수를 종료
-		if (authCode.trim() === '') {
-			alert("인증번호를 입력해주세요.");
-			return;
-		} 
-		 // 탈퇴 API 호출
-		  $.ajax({
-		    url: "/memdelete",
-		    type: "POST",
-		    data: {
-		      authCode: authCode
-		    },
-		    success: function(response) {
-		      if (response.success) {
-		        alert("계정이 성공적으로 삭제되었습니다.");
-		        window.location.href = "/"; // 삭제 후, 홈페이지로 이동
-		      } else {
-		        alert("계정 삭제 중 오류가 발생했습니다.");
-		      }
-		    },
-		    error: function(xhr, status, error) {
-		      alert("서버 오류로 인해 계정 삭제가 실패했습니다.");
-		    }
-		  });
-		}
-	
-
-	
-		
-	
+$(document).ready(function() {
+  $('.modal').on('shown.bs.modal', function() {
+    var modalId = $(this).attr('id');
+    console.log(modalId);
+    
+    function handleEnterKey(event) {
+      if (event.keyCode === 13) {
+        if (modalId == "exampleModal") {
+          document.getElementById(modalId).querySelector("#memberCheck").click();
+        } else if (modalId == "pwUpdate") {
+          document.getElementById(modalId).querySelector("#updateCheck").click();
+        }
+        setTimeout(function() {
+          document.addEventListener("keydown", handleEnterKey);
+        }, 1000); // 1초 후에 다시 이벤트 핸들러를 등록
+      }
+    }
+    document.addEventListener("keydown", handleEnterKey);
+  });
+});
 </script>
-
-
-

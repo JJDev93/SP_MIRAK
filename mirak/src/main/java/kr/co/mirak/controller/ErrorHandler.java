@@ -21,7 +21,7 @@ public class ErrorHandler {
 		mav.addObject("code", "ERROR_404");
         mav.addObject("message", "NotFoundException occurred");
         mav.setViewName("error");
-        System.out.println(mav);
+//        System.out.println(mav);
 		return mav;
 	}
 	@RequestMapping("/error400")
@@ -30,7 +30,7 @@ public class ErrorHandler {
 		mav.addObject("code", "ERROR_400");
         mav.addObject("message", "IllegalArgumentException occurred");
         mav.setViewName("error");
-        System.out.println(mav);
+//        System.out.println(mav);
 		return mav;
 	}
 	
@@ -40,7 +40,7 @@ public class ErrorHandler {
 		mav.addObject("code", "ERROR_500");
         mav.addObject("message", "NullPointerException occurred");
         mav.setViewName("error");
-        System.out.println(mav);
+//        System.out.println(mav);
 		return mav;
 	}
     

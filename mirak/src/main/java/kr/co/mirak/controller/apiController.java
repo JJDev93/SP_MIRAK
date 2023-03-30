@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -96,6 +95,7 @@ public class apiController {
 		} else {
 			session.setAttribute("mem_id", user_id);
 			session.setAttribute("access_Token", access_Token);
+			session.setAttribute("message", "카카오 로그인 되었습니다!");
 			memberService.login(memberVO);
 			System.out.println("세션설정 mem_id : " + user_id);
 			return "redirect:/replayBefo";
@@ -144,6 +144,7 @@ public class apiController {
 		} else {
 			session.setAttribute("mem_id", user_id);
 			session.setAttribute("access_Token", access_token);
+			session.setAttribute("message", "구글 로그인 되었습니다!");
 			memberService.login(member);
 			System.out.println("세션설정 mem_id : " + user_id);
 			return "redirect:/returnBefo";

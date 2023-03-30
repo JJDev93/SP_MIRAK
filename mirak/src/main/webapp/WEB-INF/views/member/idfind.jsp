@@ -61,12 +61,12 @@
 					<h3 class="mb-4 billing-heading" style="text-align: center;">아이디
 						찾기</h3>
 					<div class="form-group">
-						<label for="ID">이름</label> <input type="text" class="form-control"
+						<label for="ID">이름</label> <input type="text" class="form-control" id="ID"
 							name="mem_name" placeholder="이름을 입력해주세요.." required="required">
 					</div>
 
 					<div class="form-group">
-						<label for="PW">핸드폰번호</label> <input type="text"
+						<label for="PW">핸드폰번호</label> <input type="text" id="PW"
 							class="form-control" name="mem_phone"
 							placeholder="핸드폰번호를 입력해주세요.." required="required">
 					</div>
@@ -121,12 +121,14 @@
 </section>
 <script src="${path}/resources/js/naverapi.js"></script>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
+
 <script>
 $(document).ready(function() {
 	console.log("message : "+"${message}");
 	console.log("mem_id : "+"${mem_id}");
 	if("${message}" !=""){
 		alert("${message}");
+		<%session.setAttribute("message","");%>
 	}
 	if("${mem_id}" != ""){
 		$("#pwcheckform").modal("show");

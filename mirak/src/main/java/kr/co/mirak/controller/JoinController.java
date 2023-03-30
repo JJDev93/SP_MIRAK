@@ -1,6 +1,6 @@
-
 package kr.co.mirak.controller;
 
+import java.util.HashSet;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -22,7 +22,6 @@ import kr.co.mirak.member.MemberVO;
 @Controller
 public class JoinController {
 
-//	private SqlSessionTemplate sqlSessionTemplate;
 
 	@Autowired
 	private MemberService memberService;
@@ -77,7 +76,7 @@ public class JoinController {
 			
 			//회원 가입 쿼리 실행
 			memberService.createUser(vo);
-			session.setAttribute("message2", "회원가입 성공하였습니다!");
+			session.setAttribute("message", "회원가입 성공하였습니다!");
 			String mem_id = vo.getMem_id();
 			session.setAttribute("mem_id", mem_id); // 세션에 사용자정보 저장
 			
@@ -101,56 +100,55 @@ public class JoinController {
 			session.setAttribute("message", "중복된 아이디 입니다.");
 			return "member/join";
 		}
-		
-		
-		
-
-		
-		
-/*
-		int idResult = memberService.idCheck(id);
-
-		try {
-			if (idResult == 1) {
-				return "/join";
-			} else if (idResult == 0) {
-				memberService.createUser(vo);
-				System.out.println("가입성공");
-//				return "member/login";
-			}
-		} catch (Exception e) {
-			throw new RuntimeException();
-		}
-*/		
 		return "redirect:/";
 	}
 	
-
-	// 이메일인증
-
 	/* 이메일 인증 */
 	@RequestMapping(value = "/mailCheck", method = RequestMethod.GET)
 	@ResponseBody
-	public String mailCheckGET(String email) throws Exception {
+	public String mailCheckGET(String email, String reset) throws Exception {
 
 		/* 뷰(View)로부터 넘어온 데이터 확인 */
 		System.out.println("이메일 데이터 전송 확인");
 		System.out.println("이메일 : " + email);
-
-		/* 인증번호(난수) 생성 */
-		Random random = new Random();
-		int checkNum = random.nextInt(888888) + 111111;
-		System.out.println("인증번호 : " + checkNum);
-
+		String title, content, num;
+		Random random = new Random(); /* 인증번호(난수) 생성 */
+		if(reset != null) {
+	        String specialChars = "!@#$%^&*()_+{}[]<>?";
+	        int stringLength = random.nextInt(7) + 6; 
+	        
+	        StringBuilder sb = new StringBuilder();
+	        for (int i = 0; i < stringLength; i++) {
+	            double charValue = Math.random();
+	            if (charValue < 0.5) {
+	                sb.append(String.valueOf((char)((charValue * 26) + 65))); // uppercase letter
+	            } else {
+	                sb.append(specialChars.charAt(random.nextInt(specialChars.length()))); // special character
+	            }
+	        }
+	        String randomString = sb.toString();
+	        System.out.println(randomString);
+	            
+			
+			System.out.println("임시 비밀번호 : "+randomString );
+			title = "비밀번호 재설정 이메일 입니다.";
+			content = "MiRrk에 방문해주셔서 감사합니다." + "<br><br>" + "임시비밀번호는 " + randomString  + "입니다." + "<br>"
+					+ "로그인후 마이페이지에서 비밀번호를 수정해주세요.";
+			num = randomString;
+		}else {
+			
+			int checkNum = random.nextInt(888888) + 111111;
+			System.out.println("인증번호 : " + checkNum);
+			title = "회원가입 인증 이메일 입니다.";
+			content = "MiRrk에 방문해주셔서 감사합니다." + "<br><br>" + "인증 번호는 " + checkNum + "입니다." + "<br>"
+					+ "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
+			num = Integer.toString(checkNum);
+		}
 		/* 이메일 보내기 */
 		String setFrom = "acj119@naver.com";
 		String toMail = email;
-		String title = "회원가입 인증 이메일 입니다.";
-		String content = "MiRrk에 방문해주셔서 감사합니다." + "<br><br>" + "인증 번호는 " + checkNum + "입니다." + "<br>"
-				+ "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
-
+		
 		try {
-
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
 			helper.setFrom(setFrom);
@@ -163,9 +161,6 @@ public class JoinController {
 			e.printStackTrace();
 		}
 
-		String num = Integer.toString(checkNum);
-
 		return num;
 	}
-
 }

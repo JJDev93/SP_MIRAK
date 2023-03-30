@@ -57,19 +57,20 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-5 ftco-animate">
-				<form action="pwreset" method="post" class="contact-form">
+				<form action="mailCheck" method="get" class="contact-form">
 					<h3 class="mb-4 billing-heading" style="text-align: center;">비밀번호재설정</h3>
+					<input type="hidden" id="reset" value="reset">
 					<div class="form-group">
 						<label for="ID">아이디</label>
-						<input type="text"class="form-control" id="id" name="mem_id" placeholder="아이디를 입력해주세요.."required="required" onchange="pwcheck_reset()">
+						<input type="text"class="form-control mail_reset" id="ID" name="mem_id" placeholder="아이디를 입력해주세요."required="required" onchange="pwcheck_reset()">
 					</div>
 					<div class="form-group">
-						<label for="ID">이름</label>
-						<input type="text" class="form-control" id="name" name="mem_name" placeholder="이름을 입력해주세요.."required="required" onchange="pwcheck_reset()">
+						<label for="name">이름</label>
+						<input type="text" class="form-control" id="name" name="mem_name" placeholder="이름을 입력해주세요."required="required" onchange="pwcheck_reset()">
 					</div>
 					<div class="form-group">
-						<label for="PW">핸드폰번호</label>
-						<input type="text"class="form-control" id="phone" name="mem_phone" placeholder="핸드폰번호를 입력해주세요.." required="required" onchange="pwcheck_reset()">
+						<label for="phone">핸드폰번호</label>
+						<input type="text"class="form-control" id="phone" name="mem_phone" placeholder="핸드폰번호를 입력해주세요." required="required" onchange="pwcheck_reset()">
 					</div>
 					<div>
 						<span id="check2"></span> 
@@ -77,7 +78,7 @@
 					</div>
 					<div class="form-group row">
 						<div class="col-md-12 text-center">
-							<input type="submit" id="myBtn" value="비밀번호 재설정" class="btn btn-primary py-3 px-5 w-50"/>
+						<button type="button" id="pwresetmail" class="btn btn-primary py-3 px-5 w-50">임시번호 발송</button>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -89,50 +90,19 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- Modal -->
-	<form action="pwreset" method="post">
-		<div class="modal fade" id="pwcheckform" tabindex="9999"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">비밀번호를 재설정 해주세요.</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<input type="hidden" name="mem_id" value=${mem_id }>
-							<label for="pw">비밀번호</label>
-							<input type="password" name="mem_pw" class="form-control" id="pw" onchange="check_pw()"
-								placeholder="수정할 비밀번호 입력" required="required">
-						</div>
-
-						<div class="form-group">
-							<label for="pw2">비밀번호 확인</label>
-							<input type="password" class="form-control" id="pw2" onchange="check_pw()"
-								placeholder="비밀번호 확인" required="required">
-								<span id="check"></span>
-						</div>
-
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">재설정하기</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</form>
-
 </section>
+<form id="pwreset" action="/pwreset" method="post">
+<input type="hidden" name="mem_id" id="mem_id" value="">
+<input type="hidden" name="mem_pw" id="mem_pw" value="">
+<input type="hidden" name="mem_name" id="mem_name" value="">
+<input type="hidden" name="mem_phone" id="mem_phone" value="">
+</form>
+
 <script src="${path}/resources/js/pwcheck.js"></script>
 <script src="${path}/resources/js/naverapi.js"></script>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
+
+<script>const verificationCodeInput = document.getElementById("mail_check_input");</script>
 
 <script>
 $(document).ready(function() {
@@ -140,6 +110,7 @@ $(document).ready(function() {
 	console.log("mem_id : "+"${mem_id}");
 	if("${message}" !=""){
 		alert("${message}");
+		<%session.setAttribute("message","");%>
 	}
 	if("${mem_id}" != ""){
 		$("#pwcheckform").modal("show");
@@ -182,5 +153,33 @@ function validateEmail(email) {
     var regex = /\S+@\S+\.\S+/;
     return regex.test(email);
 }
+</script>
+<script>
+var code="";  //이메일전송 인증번호 저장위한 코드
+/* 비밀번호 메일 재설정 */
+	$("#pwresetmail").click(function(){
+// 	$('#submit').on("click",function () {
+	var email = $(".mail_reset").val();        // 입력한 이메일
+	var reset = "reset";
+	if(pwcheck_reset()== true){
+    	$.ajax({
+        type:"GET",
+        url:"mailCheck?email=" + email + "&reset=" + reset,
+        success:function(data){
+        	$("#pwresetmail").text("발송완료");
+        	$("#pwresetmail").prop('disabled', true);
+        	code = data;
+        	console.log(email, code);
+        	 if (data !== null) {
+        		document.querySelector('#mem_id').value = email;
+ 	            document.querySelector('#mem_pw').value = code;
+ 	           	document.querySelector('#mem_name').value = $("#name").val();
+ 	           	document.querySelector('#mem_phone').value = $("#phone").val();
+ 	          	document.querySelector('#pwreset').submit();
+        	 }
+       	 }
+    	});
+	}
+});
 </script>
 

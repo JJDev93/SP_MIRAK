@@ -66,9 +66,9 @@ public class KakaoPayService {
 		parameters.add("quantity", Integer.toString(quantity));
 		parameters.add("total_amount", Integer.toString(total_amount));
 		parameters.add("tax_free_amount", "0");
-		parameters.add("approval_url", "http://localhost:8080/order/pay/completed"); // 결제승인시 넘어갈 url
-		parameters.add("cancel_url", "http://localhost:8080/order/pay/cancel"); // 결제취소시 넘어갈 url
-		parameters.add("fail_url", "http://localhost:8080/order/pay/fail"); // 결제 실패시 넘어갈 url
+		parameters.add("approval_url", "https://www.mirak.shop/order/pay/completed"); // 결제승인시 넘어갈 url
+		parameters.add("cancel_url", "https://www.mirak.shop/order/pay/cancel"); // 결제취소시 넘어갈 url
+		parameters.add("fail_url", "https://www.mirak.shop/order/pay/fail"); // 결제 실패시 넘어갈 url
 
 		System.out.println("파트너주문아이디:" + parameters.get("partner_order_id"));
 		HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(parameters,
@@ -144,7 +144,7 @@ public class KakaoPayService {
 	// header() 셋팅
 	private HttpHeaders getHeaders() {
 		HttpHeaders headers = new HttpHeaders();
-		headers.set("Authorization", "KakaoAK e67362eef59249c3dc3f4f2d26d99971");
+		headers.set("Authorization", "KakaoAK e2c4cb4711d6bcfd21d8e41af198f533");
 		headers.set("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
 		return headers;

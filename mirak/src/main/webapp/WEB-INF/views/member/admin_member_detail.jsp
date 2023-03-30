@@ -74,7 +74,7 @@
 					</div>	
 					<div class="col-md-12">
 						<div class="form-group">
-							<label for="phone">가입일자</label> 
+							<label for="regdate">가입일자</label> 
 							<input type="text" class="form-control" id="regdate" name="mem_regdate" value="<fmt:formatDate value="${member.mem_regdate }"/>" readonly>
 						</div>
 					</div>

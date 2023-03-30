@@ -42,14 +42,23 @@ $("#mail_check_input").blur(function(){
      
     if(inputCode == code){                            // 일치할 경우
         checkResult.html("인증번호가 일치합니다.");
-        checkResult.attr("class", "correct");        
+        checkResult.attr("class", "correct");  
+              
     } else {                                            // 일치하지 않을 경우
         checkResult.html("인증번호를 다시 확인해주세요.");
         checkResult.attr("class", "incorrect");
     }    
     
 });
- 
 
+
+$("#joinSubmit").click(function(){
+    var inputCode = $("#mail_check_input").val();        // 입력코드
+    
+    if(inputCode != code){                               // 인증번호가 일치하지 않을 경우
+        alert("인증번호를 다시 확인해주세요.");
+        return false;                                    // submit 막기
+    }
+});
 
 
