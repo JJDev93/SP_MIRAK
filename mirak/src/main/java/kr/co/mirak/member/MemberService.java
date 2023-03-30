@@ -26,23 +26,30 @@ public interface MemberService {
 
 	int idCheck(String id) throws Exception;
 
+	// 카카오 로그인
+//	String getAccessToken(String code);
+//	MemberVO getUserInfo(String access_Token);
+
 	String getAccessToken(String code);
 
 	HashMap<String, Object> getUserInfo(String access_Token);
 
 	void kakaoLogout(String access_Token);
-	
+
 	void unlink(String attribute);
-	
+
 	int memdelete(MemberVO vo);
-	
+
 	/* 게시판 총 갯수 */
 	public int getTotal(CriteriaM cri);
+
 	List<MemberVO> getListPaging(CriteriaM cri);
+
 	MemberVO adminMemberDetail(MemberVO vo);
+
 	int adminMemberUpdate(MemberVO vo);
+
 	int adminMemberDel(MemberVO vo);
 	// 여기까지
 
-	
 }

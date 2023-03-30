@@ -4,6 +4,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="cate" value="${fn:substringAfter(pageContext.request.requestURI, '/views/')}"/>
 <c:set var="cateAll" value="${fn:substringBefore(cate, '.jsp')}"/>
+<c:set var="member" value="${member}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,18 +40,20 @@
 						<li class="nav-item <c:if test="${fn : contains(cate, 'ProductClientListP')}">active</c:if>"><a href="/ProductClientListP" class="nav-link">프리미엄</a></li>
 						<li class="nav-item <c:if test="${fn : contains(cate, 'ProductClientListT')}">active</c:if>"><a href="/ProductClientListT" class="nav-link">2·3인세트</a></li>
 						<li class="nav-item <c:if test="${fn : contains(cate, 'ProductClientListO')}">active</c:if>" ><a href="/ProductClientListO" class="nav-link">1인세트</a></li>
-						<%if (session.getAttribute("mem_id") == null) {%>
+						<% if (session.getAttribute("mem_id") == null) {%>
 							<li class="nav-item <c:if test="${fn : contains(cate, 'login')}">active</c:if>"><a href="/login" class="nav-link">로그인</a></li>
 							<li class="nav-item <c:if test="${fn : contains(cate, 'join')}">active</c:if>"><a href="/join" class="nav-link">회원가입</a></li>
 						<%} else if (session.getAttribute("mem_id").equals("admin")) {%>
 							<li class="nav-item"><a href="/admin/logout" class="nav-link">로그아웃</a></li>
 							<li class="nav-item"><a href="/admin/charts" class="nav-link">Admin</a></li>
-						<%} else {%>
-							<li class="nav-item"><a href="/logout" class="nav-link">로그아웃</a></li>
-							<!-- <li class="nav-item" onclick="naverLogout(); return false;"><a href="javascript:void(0)" class="nav-link"><span>로그아웃</span></a> -->
-							<!-- <li class="nav-item"><a href="/kakaounlink" class="nav-link">연결해제</a></li> -->
-							<li class="nav-item <c:if test="${fn : contains(cate, 'mypage')}">active</c:if>"><a href="/mypage" class="nav-link">마이페이지</a></li>
-						<%}%>
+							<%} else {
+								if (session.getAttribute("mem_isapi") == null || !session.getAttribute("mem_isapi").equals("NAVER")) {%>
+								<li class="nav-item" onclick="naverLogout(); return false;"><a href="javascript:void(0)" class="nav-link"><span>로그아웃</span></a></li>
+								<%} else if (session.getAttribute("mem_isapi").equals("NAVER")) { %>
+								<li class="nav-item"><a href="/logout" class="nav-link">로그아웃</a></li>
+								<%} %>
+								<li class="nav-item <c:if test="${fn : contains(cate, 'mypage')}">active</c:if>"><a href="/mypage" class="nav-link">마이페이지</a></li>
+								<%} %>
 					</ul>
 				</div>
 			</div>
@@ -67,7 +70,6 @@ function openPopUp() {
 function closePopUp() {
    testPopUp.close();
 }
-
 function naverLogout() {
    openPopUp();
    setTimeout(function() {
