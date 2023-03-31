@@ -5,30 +5,20 @@
 
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
-
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-<div class="hero-wrap hero-bread"
-	style="background-image: url('${path}/resources/images/bg_3.jpg');">
-	<div class="container">
-	<div
-			class="row no-gutters slider-text align-items-center justify-content-center">
-			<div class="col-md-9 ftco-animate text-center">
-				<c:if test="${fn : contains(product.pro_code, 'P')}">
-					<h1 class="mb-0 bread">프리미엄</h1>
-				</c:if>
-				<c:if test="${fn : contains(product.pro_code, 'T')}">
-					<h1 class="mb-0 bread">2·3인세트</h1>
-				</c:if>
-				<c:if test="${fn : contains(product.pro_code, 'O')}">
-					<h1 class="mb-0 bread">1인세트</h1>
-				</c:if>
-			</div>
-		</div>
+<link rel="stylesheet" type="text/css"	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<div class="hero-wrap hero-bread" style="background-image: url('${path}/resources/images/bg_3.jpg');">
+	<div class="ftco-animate">
+		<c:if test="${fn : contains(product.pro_code, 'P')}">
+			<h1 class="mb-0 bread">스페셜세트</h1>
+		</c:if>
+		<c:if test="${fn : contains(product.pro_code, 'T')}">
+			<h1 class="mb-0 bread">2·3인세트</h1>
+		</c:if>
+		<c:if test="${fn : contains(product.pro_code, 'O')}">
+			<h1 class="mb-0 bread">1인세트</h1>
+		</c:if>
 	</div>
 </div>
-
-
 <form method="post">
 	<input type="hidden" value="${product.pro_code}" name="pro_code">
 	<section class="ftco-section">
