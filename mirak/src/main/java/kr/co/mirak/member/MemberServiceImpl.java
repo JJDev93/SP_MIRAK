@@ -100,9 +100,15 @@ public class MemberServiceImpl implements MemberService {
 		int result = mapper.idCheck(id);
 		return result;
 	}
-
+	
+	@Override
+	public int existIdAndIsApi(String id, String isApi) {
+		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
+		return mapper.existIdAndIsApi(id, isApi);
+		
+	}
+	
 	// kakao
-
 	@Override
 	public String getAccessToken(String code) {
 		String access_Token = "";

@@ -80,6 +80,10 @@
 		SELECT count(*) FROM MEMBER WHERE mem_id= #{mem_id}
 	</select>
 	
+	<select id="existIdAndIsApi" parameterType="member" resultType="int">
+		SELECT count(*) FROM MEMBER WHERE mem_id= #{mem_id} AND mem_isapi=#{mem_isapi}
+	</select>
+
 	<!-- 회원탈퇴 -->
 	<delete id="memdelete" parameterType="member">
 		<![CDATA[

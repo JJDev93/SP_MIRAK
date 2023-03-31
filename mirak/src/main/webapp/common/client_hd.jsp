@@ -62,19 +62,19 @@
 	<!-- END nav -->
 </body>
 <script>
-	var testPopUp;
-	function openPopUp() {
-	   testPopUp = window.open("https://nid.naver.com/nidlogin.logout","_blank","toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
-	}
-	function closePopUp() {
-	   testPopUp.close();
-	}
-	function naverLogout() {
-	   openPopUp();
-	   setTimeout(function() {
-	      closePopUp();
-	   }, 1);
-	   location.href="logout";
-	}
+var testPopUp;
+function openPopUp() {
+   testPopUp = window.open("https://nid.naver.com/nidlogin.logout","_blank","toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
+}
+function closePopUp() {
+   testPopUp.close();
+}
+function naverLogout() {
+   openPopUp();
+   setTimeout(function() {
+      closePopUp();
+   }, 1);
+   location.href="/logout";
+}
 </script>
 </html>
