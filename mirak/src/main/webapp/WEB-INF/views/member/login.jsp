@@ -57,8 +57,8 @@
                </div>
                <div class="form-group row" style="text-align: right;">
                   <div class="col-md-12 text-center">
-                     <a href="join">회원가입</a>&nbsp;|&nbsp; <a href="idfind">아이디 찾기</a>&nbsp;|&nbsp;
-                     <a href="pwreset">비밀번호재설정</a>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="join">회원가입</a>&nbsp;&nbsp;|&nbsp; <a href="idfind">아이디 찾기</a>&nbsp;&nbsp;
+                  <!--    <a href="pwreset">비밀번호재설정</a> -->
                   </div>
                </div>
             </form>
@@ -73,17 +73,17 @@
          <div class="col-md-5">
             <div class="row justify-content-center ftco-services"> 
                <!-- 구글 -->
-               <div class="col-sm-4 text-center ftco-animate">
+               <div class="col-4 text-center ftco-animate">
                   <a id="custom-login-btn" href="${googleUrl}"><img alt=""
                      src="resources/images/ico_member_google.png"></a>
                </div>
                <!-- 네이버 -->
-				<div class="col-sm-4 text-center ftco-animate">
+				<div class="col-4 text-center ftco-animate">
 					<a id="naverIdLogin_loginButton" href="/naverLogin">
 					<span><img alt="" src="resources/images/ico_member_naver.png"style="cursor: pointer"></span></a>
 				</div>
                <!-- 카카오 -->
-               <div class="col-sm-4 text-center ftco-animate">
+               <div class="col-4 text-center ftco-animate">
                   <div class="media block-6 services mb-md-0 mb-4 kakao">
                      <a id="btn"
                         href="https://kauth.kakao.com/oauth/authorize?client_id=e481c91b1136f51f927a619fc062146d&redirect_uri=https://www.mirak.shop/kakaoLogin&response_type=code">
@@ -102,9 +102,7 @@
    console.log("message : "+"${message}");
    console.log("mem_id : "+"${mem_id}");
    if ("${message}" != "") {
-        if ("${message}" == "로그인 후 이용해주세요.") {
           alert("${message}");
-        }
         <% session.setAttribute("message", ""); %>
       }
       

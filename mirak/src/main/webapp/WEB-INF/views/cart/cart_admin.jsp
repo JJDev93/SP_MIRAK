@@ -32,7 +32,7 @@
 		</form> -->
 		<div class="bd-example-snippet bd-code-snippet">
 			<div class="bd-example">
-				<table class="table table-striped">
+				<table class="table table-hover table-bordered">
 					<thead>
 						<tr>
 							<th scope="col">번호</th>
@@ -58,7 +58,7 @@
                                  </a>
                             </td>
 							<td>
-								<a href="/admin/member/${curPage}/${member.mem_code}">${c.mem_id }</a>
+								${c.mem_id }
 							</td>
 							<td>${c.pro_code }</td>
 							<td><a href="/admin/cart/${curPage}/${c.cart_code}">${c.pro_name }</a></td>

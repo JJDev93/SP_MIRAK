@@ -1,6 +1,6 @@
 package kr.co.mirak.controller;
 
-import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -162,18 +162,19 @@ public class LoginController {
 	// 아이디 찾기
 	@RequestMapping(value = "/idfind", method = RequestMethod.POST)
 	public String idfind(MemberVO vo, HttpSession session, Model model) {
+		
+		
 		String returnURL = "member/idfind";
 		String preUrl = (String) session.getAttribute("pre_url");
 		System.out.println("아이디찾기중... , preUrl : " + preUrl);
 
 		try {
-			MemberVO member = memberService.idfind(vo);
-			model.addAttribute("member", member);
-			System.out.println(member);
+			List<MemberVO> memberList = memberService.idfind(vo);
+//			MemberVO member = memberService.idfind(vo);
+			model.addAttribute("memberList", memberList);
+			System.out.println(memberList);
 
-			if (member.getMem_id() != null) {
-				model.addAttribute("mem_id", member.getMem_id());
-				System.out.println(member.getMem_id());
+
 				if (preUrl != null) {
 					System.out.println("이전 페이지로 이동");
 					returnURL = "member/idfind" + preUrl;
@@ -181,7 +182,7 @@ public class LoginController {
 				} else {
 					returnURL = "member/idfind";
 				}
-			}
+			
 		} catch (Exception e) {
 			returnURL = "member/idfind";
 			model.addAttribute("message", "정보를 다시 입력해주세요....");

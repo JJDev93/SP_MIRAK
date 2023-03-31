@@ -90,9 +90,10 @@ function confirmDeleteMem() {
             if (data == "0") {
                alert("비밀번호가 틀렸습니다.");
                document.getElementById('pw_1').value = '';
-            } else if (data == "1") {
+            }else if (data == "2") {
+               alert("3개월 이내 결제내역이 있습니다. 이후에 탈퇴를 진행해 주세요.");
+            }else if (data == "1") {
                alert("회원탈퇴 되었습니다.");
-               location.href = "/";
             }
          }
       });
