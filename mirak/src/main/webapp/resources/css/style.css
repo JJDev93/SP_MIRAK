@@ -9215,7 +9215,7 @@ textarea.form-control {
   font-size: 24px; }
 
 .ftco-section {
-  padding: 5rem 1em 10rem;
+  padding: 5rem 1em;
   position: relative; }
 
 .ftco-no-pt {
@@ -10078,3 +10078,5 @@ textarea.form-control {
 @media (max-width: 1199.98px) {
 	.pro-title{ font-size:1.5rem; }
 }
+
+.client-hd{ height:78px; }
