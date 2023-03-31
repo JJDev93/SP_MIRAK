@@ -41,23 +41,23 @@ tr .tr-custom {
       <div class="bd-example-snippet bd-code-snippet">
          <div class="bd-example">
             <table class="table table-striped table-hover table-bordered table-sm">
-               <thead class="thead-custom">
+               <thead>
                   <tr>
                      <th scope="col">주문번호</th>
                      <th scope="col">상품명</th>
-                     <th scope="col">총 가격</th>
-                     <th scope="col">주문자이름</th>
-                     <th scope="col">전화번호</th>
-                     <th scope="col">배송지주소</th>
+                     <th scope="col">가격</th>
+                     <th scope="col">이름</th>
+                     <th scope="col">연락처</th>
+                     <th scope="col">주소</th>
                      <th scope="col">결제일</th>
                      <th scope="col">주문상태</th>
                      <th scope="col">결제취소</th>
-                     <th scope="col">상세정보</th>
+                     <th scope="col">상세</th>
                   </tr>
                </thead>
                <tbody>
                   <c:forEach var="payList" items="${payList}">
-                     <tr class="tr-custom">
+                     <tr>
                         <td>${payList.group_id}</td>
                         <td class="detail_td" id="pro_name_${payList.group_id}"
                            data-toggle="collapse"
@@ -75,7 +75,7 @@ tr .tr-custom {
                         
                         
                         <td>
-                           <button class="btn btn-dark py-2 px-3 payCancel"
+                           <button class="btn btn-danger py-2 px-3 payCancel"
                                  id="payCancel_${payList.group_id}"
                                  data-group_id="${payList.group_id}"
                                  data-total_price="${payList.totalPrice}"
@@ -84,13 +84,13 @@ tr .tr-custom {
                         </td>
                         <td>
                            <div class="accordion">
-                              <button class="detail_btn btn btn-secondary py-2 px-3" type="button"
+                              <button class="detail_btn btn btn-primary py-2 px-3" type="button"
                                  data-toggle="collapse"
                                  data-target="#collapse-${payList.group_id}"
                                  aria-expanded="false"
                                  aria-controls="collapse-${payList.group_id}"
                                  data-group_id="${payList.group_id}">
-                                 상세보기<i class='fas fa-angle-down'></i>
+                                 보기<i class='fas fa-angle-down'></i>
                               </button>
                            </div>
                         </td>
@@ -101,17 +101,17 @@ tr .tr-custom {
                               <div class="table-responsive"
                                  style="float: right;">
                                  <table class="table table-hover table-striped table-bordered table-sm">
-                                    <thead class="thead-custom">
+                                    <thead>
                                        <tr>
                                           <th>카테고리</th>
                                           <th style="width:200px;">상품명</th>
                                           <th style="width:100px;">수량</th>
-                                          <th style="width:100px;">결제 금액</th>
-                                          <th style="width:100px;">변경 금액</th>
-                                          <th style="width:330px;">희망 요일</th>
-                                          <th style="width:150px;">배송시작일</th>
-                                          <th>요청 사항</th>
-                                          <th style="width:120px;">수정하기</th>
+                                          <th style="width:100px;">결제금액</th>
+                                          <th style="width:100px;">변경금액</th>
+                                          <th style="width:330px;">요일</th>
+                                          <th style="width:150px;">배송일</th>
+                                          <th>요청사항</th>
+                                          <th style="width:120px;">변경</th>
                                        </tr>
                                     </thead>
                                     <tbody id="accordianBody-${payList.group_id}"></tbody>
@@ -353,8 +353,8 @@ function detailTable(data, group_id) {
       var modify = $("<input>").attr({
           "type": "button",
           "name": "modify",
-          "value": "변경하기",
-          "class": "btn btn-secondary py-2 px-3",
+          "value": "변경",
+          "class": "btn btn-primary",
       });
       if($("#statusTd_" + group_id).text() == "주문 취소") {
          modify.attr("disabled", true).val("취소된 주문");
@@ -417,7 +417,7 @@ function detailTable(data, group_id) {
   $(".collapse").on("hidden.bs.collapse", function () {
     var group_id = $(this).attr("id").split("-")[1];
     var detailBtn = $('.detail_btn[data-group_id="' + group_id + '"]');
-    detailBtn.html("상세보기<i class='fas fa-angle-down'></i>");
+    detailBtn.html("보기<i class='fas fa-angle-down'></i>");
   });
 
   $(".collapse").on("shown.bs.collapse", function () {
