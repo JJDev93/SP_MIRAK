@@ -8301,6 +8301,14 @@ h1, h2, h3, h4, h5,
   text-align: center;
   margin: 0 auto;
   display: block; }
+  @media (max-width: 1199.98px) {
+  		.mouse{ right: 10px;
+  			bottom: 10px; }
+		.mouse-icon{
+			width: 50px;
+ 			height: 50px;
+		}
+	}
 
 .mouse-wheel {
   height: 30px;
@@ -9249,7 +9257,7 @@ textarea.form-control {
     .ftco-footer .ftco-footer-widget .btn-primary:hover {
       border: 2px solid #fff !important; }
 	@media (max-width: 767.98px) {
-		.ftco-footer { font-size: 1rem; }
+		.ftco-footer { font-size: 1rem; padding: 3rem 50px; word-break: keep-all }
 	}
 .ftco-footer-social li {
   list-style: none;
