@@ -1,6 +1,5 @@
 package kr.co.mirak.controller;
 
-import java.util.HashSet;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;

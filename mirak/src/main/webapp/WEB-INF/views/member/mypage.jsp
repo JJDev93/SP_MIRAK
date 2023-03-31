@@ -197,12 +197,10 @@
 							data-dismiss="modal">Close</button>
 							<c:choose>
 							<c:when test="${not empty member.mem_isapi}">
-						<button type="button" class="btn btn-primary" id="memberCheck"
-							onclick="apiDelete();">탈퇴하기</button>
+								<button type="button" class="btn btn-primary" id="memberCheck" onclick="apiDelete();">탈퇴하기</button>
 							</c:when>
 							<c:otherwise>
-							<button type="button" class="btn btn-primary" id="memberCheck"
-							onclick="confirmDeleteMem();" >탈퇴하기</button>
+								<button type="button" class="btn btn-primary" id="memberCheck" onclick="confirmDeleteMem();" >탈퇴하기</button>
 							</c:otherwise>
 							</c:choose>
 					</div>
@@ -253,6 +251,7 @@
 	$(document).ready(function() {
 		console.log("message : "+"${message}");
 		console.log("mem_id : "+"${mem_id}");
+		console.log("mem_isapi : "+"${mem_isapi}");
 		if("${message}" !=""){
 			alert("${message}");
 			 <%session.setAttribute("message","");%>
@@ -269,13 +268,13 @@ $(document).ready(function() {
     function handleEnterKey(event) {
       if (event.keyCode === 13) {
         if (modalId == "exampleModal") {
-          document.getElementById(modalId).querySelector("#memberCheck").click();
+        	document.querySelector("#memberCheck").click();
         } else if (modalId == "pwUpdate") {
-          document.getElementById(modalId).querySelector("#updateCheck").click();
+          document..querySelector("#updateCheck").click();
         }
         setTimeout(function() {
           document.addEventListener("keydown", handleEnterKey);
-        }, 1000); // 1초 후에 다시 이벤트 핸들러를 등록
+        }, 100); // 1초 후에 다시 이벤트 핸들러를 등록
       }
     }
     document.addEventListener("keydown", handleEnterKey);

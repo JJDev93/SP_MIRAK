@@ -57,8 +57,8 @@
                </div>
                <div class="form-group row" style="text-align: right;">
                   <div class="col-md-12 text-center">
-                     <a href="join">회원가입</a>&nbsp;|&nbsp; <a href="idfind">아이디 찾기</a>&nbsp;|&nbsp;
-                     <a href="pwreset">비밀번호재설정</a>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="join">회원가입</a>&nbsp;&nbsp;|&nbsp; <a href="idfind">아이디 찾기</a>&nbsp;&nbsp;
+                  <!--    <a href="pwreset">비밀번호재설정</a> -->
                   </div>
                </div>
             </form>
@@ -102,9 +102,7 @@
    console.log("message : "+"${message}");
    console.log("mem_id : "+"${mem_id}");
    if ("${message}" != "") {
-        if ("${message}" == "로그인 후 이용해주세요.") {
           alert("${message}");
-        }
         <% session.setAttribute("message", ""); %>
       }
       
