@@ -10090,7 +10090,8 @@ textarea.form-control {
 .client-hd{ height:78px; }
 
 .hero-bread{ position: relative; }
-.hero-bread:before{     display: block;
+.hero-bread:before{ 
+	display: block;
     content: "";
     background: black;
     width: 100%;
@@ -10115,4 +10116,5 @@ textarea.form-control {
     width: 100%;
     text-align: center;
     padding: 0 20px;
+    transform: translateY(50%);
 }
