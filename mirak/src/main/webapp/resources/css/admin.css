@@ -1,0 +1,4 @@
+body, .form-control, .btn{ font-size:16px; }
+.table .btn{ font-size:14px; border-radius: 0; padding: 5px 10px !important; white-space: nowrap; }
+.table .main-color{ cursor: pointer; }
+.table tbody tr td{ font-size:16px; padding: 10px 5px;}
