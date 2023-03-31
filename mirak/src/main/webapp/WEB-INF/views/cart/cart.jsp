@@ -86,10 +86,7 @@ session = request.getSession();
 										<td>
 											<input type="button" value="변경" class="btn btn-primary" data-toggle="modal" data-target="#modal${c.cart_code }">
 										</td>
-										<td class="product-remove">
-											<a href="/cart/cartDelete/${c.cart_code }" onclick="return confirm('삭제하시겠습니까?');">
-											<span class="ion-ios-close"></span></a>
-										</td>
+										<td><a href="/cart/cartDelete/${c.cart_code }" class="btn btn-danger" onclick="return confirm('삭제하시겠습니까?');">삭제</a></td>
 									</tr>
 								</c:forEach>
 								<!-- END TR-->
