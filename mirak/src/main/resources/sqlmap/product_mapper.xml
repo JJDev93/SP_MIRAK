@@ -7,20 +7,13 @@
 		
 		INSERT INTO product(pro_code, pro_name, pro_price,pro_desc,pro_desc2,pro_image)
 		VALUES(#{pro_code}, #{pro_name}, #{pro_price},#{pro_desc},#{pro_desc2},#{pro_image})
-		
-		
-		
+				
 	</insert>
 	
-	
-
 	<select id="productList" resultType="product">
-		
-	
+			
  		SELECT pro_code, pro_name, pro_price from product WHERE pro_code LIKE CONCAT('%', #{cate}, '%')
-		
- 		
-
+				
 	</select>
 
 	<select id="productList1" resultType="product">
@@ -28,8 +21,7 @@
 		select * from (select * from product)  as T1  where pro_code like '%P%' limit #{skip},#{amount}
 
 	</select>
-	
-	
+		
 	<!-- 인덱스 페이지 이미지 -->
 	<select id="productListIndex1" resultType="product">
 
@@ -45,11 +37,10 @@
 	
 	<!-- 여기까지 -->
 
-
 	<select id="productList2" resultType="product">
+	
 		select * from (select * from product)  as T1  where pro_code like '%T%' limit #{skip},#{amount}
 		
-
 	</select>
 
 	<select id="productList3" resultType="product">
@@ -66,7 +57,6 @@
 		WHERE pro_code = #{pro_code};
 		
 	</select>
-
 
 	<update id="updateProduct">
 		
@@ -115,18 +105,10 @@
 	
 	</select>
 	
-	
-
 	<select id="getListPaging" resultType="product">
-		
-		
-  		 
+		  		 
 		select * from (select * from product) as T1 limit #{skip},#{amount}
  		
-
 	</select>
-
-
-
 
 </mapper>

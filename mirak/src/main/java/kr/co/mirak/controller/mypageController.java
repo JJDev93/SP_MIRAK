@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.mirak.member.MemberService;
 import kr.co.mirak.member.MemberVO;
+import kr.co.mirak.pay.PayService;
 
 @Controller
 public class mypageController {
+	@Autowired
+	private PayService payService;
 	@Autowired
 	private MemberService memberService;
 	@Autowired
@@ -65,13 +68,22 @@ public class mypageController {
 	// 회원탈퇴
 	@RequestMapping(value="/memdelete", method = RequestMethod.POST)
 	@ResponseBody
-	public int memdelete(MemberVO vo, HttpSession session, @RequestParam("rawPw") String rawPw) {
+	public int memdelete(MemberVO vo, Model model, HttpSession session, @RequestParam("rawPw") String rawPw) {
 		String encodePw = vo.getMem_pw();
-		int success = 0;
 		System.out.println(vo);
-		if (true == pwEncoder.matches(rawPw, encodePw)) {
-			success = memberService.memdelete(vo);
-			session.invalidate();
+		int success = 0;
+			if (true == pwEncoder.matches(rawPw, encodePw)) {
+			
+			if (payService.getClientPayList(session) == null || payService.getClientPayList(session).size() == 0) {
+				success = 1;
+				System.out.println("탈퇴진행중..."+ success);
+				success = memberService.memdelete(vo);
+				session.invalidate();
+			}else {
+				success = 2;
+				System.out.println("결제내역있음."+ success);
+
+			}
 		}
 		return success;
 	}

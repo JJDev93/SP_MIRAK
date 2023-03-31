@@ -58,7 +58,7 @@
                                  </a>
                             </td>
 							<td>
-								<a href="/admin/member/${curPage}/${member.mem_code}">${c.mem_id }</a>
+								${c.mem_id }
 							</td>
 							<td>${c.pro_code }</td>
 							<td><a href="/admin/cart/${curPage}/${c.cart_code}">${c.pro_name }</a></td>

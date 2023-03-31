@@ -70,7 +70,7 @@
 
 	</select>
 	
-	<!-- 어드민 카http://localhost:8080/admin/cart/1/230트 삭제 -->
+	<!-- 어드민 카트 삭제 -->
 	<update id="cartAdminDelete">
 	<![CDATA[
 			UPDATE CART SET CART_SHOW = 2 WHERE CART_CODE = #{cart_code}
