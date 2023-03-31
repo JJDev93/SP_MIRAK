@@ -1,160 +1,124 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.css">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<style>
-.detail_td {
-   color: #333333;
-    cursor: pointer;
-    text-decoration: underline;
-  }
-
-.detail-row .hidden-row {
-   display: none;
-}
-
-.thead-custom {
-   color: #fff;
-   background-color: #6c757d;
-   border-color: #6c757d;
-}
-
-tr .tr-custom {
-   background-color: #000;
-}
-
-.table-hover tbody .detail-row:nth-child(even):hover {
-   background-color: initial;
-}
-
-</style>
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <div class="ftco-section">
-   <div class="container-fluid">
-   <div class="justify-content-center mb-3 pb-3">
-      <div class="heading-section text-center">
-         <h2>결제관리</h2>
-         <p>결제관리 리스트 페이지 입니다.</p>
-      </div>
-   </div>
-      <div class="bd-example-snippet bd-code-snippet">
-         <div class="bd-example">
-            <table class="table table-striped table-hover table-bordered table-sm">
-               <thead class="thead-custom">
-                  <tr>
-                     <th scope="col">주문번호</th>
-                     <th scope="col">상품명</th>
-                     <th scope="col">총 가격</th>
-                     <th scope="col">주문자이름</th>
-                     <th scope="col">전화번호</th>
-                     <th scope="col">배송지주소</th>
-                     <th scope="col">결제일</th>
-                     <th scope="col">주문상태</th>
-                     <th scope="col">결제취소</th>
-                     <th scope="col">상세정보</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  <c:forEach var="payList" items="${payList}">
-                     <tr class="tr-custom">
-                        <td>${payList.group_id}</td>
-                        <td class="detail_td" id="pro_name_${payList.group_id}"
-                           data-toggle="collapse"
-                           data-target="#collapse-${payList.group_id}"
-                           aria-expanded="false"
-                           aria-controls="collapse-${payList.group_id}"
-                           data-group_id="${payList.group_id}">${payList.pro_name} <c:if test="${payList.cart_cnt > 1 }"> 외 ${payList.cart_cnt - 1 }개 품목</c:if>
-                        </td>
-                        <td id="totalPrice_${payList.group_id}">${payList.totalPrice}</td>
-                        <td>${payList.mem_name}</td>
-                        <td>${payList.mem_phone}</td>
-                        <td>${payList.mem_add1} ${payList.mem_add2}</td>
-                        <td>${payList.pay_date}</td>
-                        <td id="statusTd_${payList.group_id}">${payList.status}</td>
-                        
-                        
-                        <td>
-                           <button class="btn btn-dark py-2 px-3 payCancel"
-                                 id="payCancel_${payList.group_id}"
-                                 data-group_id="${payList.group_id}"
-                                 data-total_price="${payList.totalPrice}"
-                                 data-pro_name='${payList.pro_name} <c:if test="${payList.cart_cnt > 1 }"> 외 ${payList.cart_cnt - 1 }개 품목</c:if>'
-                                 <c:if test="${payList.status eq '주문 취소'}">disabled</c:if>>결제취소</button>
-                        </td>
-                        <td>
-                           <div class="accordion">
-                              <button class="detail_btn btn btn-secondary py-2 px-3" type="button"
-                                 data-toggle="collapse"
-                                 data-target="#collapse-${payList.group_id}"
-                                 aria-expanded="false"
-                                 aria-controls="collapse-${payList.group_id}"
-                                 data-group_id="${payList.group_id}">
-                                 상세보기<i class='fas fa-angle-down'></i>
-                              </button>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr class="detail-row">
-                        <td class="detail-col" style="padding: 2px;" colspan="10">
-                           <div class="collapse" id="collapse-${payList.group_id}">
-                              <div class="table-responsive"
-                                 style="float: right;">
-                                 <table class="table table-hover table-striped table-bordered table-sm">
-                                    <thead class="thead-custom">
-                                       <tr>
-                                          <th>카테고리</th>
-                                          <th style="width:200px;">상품명</th>
-                                          <th style="width:100px;">수량</th>
-                                          <th style="width:100px;">결제 금액</th>
-                                          <th style="width:100px;">변경 금액</th>
-                                          <th style="width:330px;">희망 요일</th>
-                                          <th style="width:150px;">배송시작일</th>
-                                          <th>요청 사항</th>
-                                          <th style="width:120px;">수정하기</th>
-                                       </tr>
-                                    </thead>
-                                    <tbody id="accordianBody-${payList.group_id}"></tbody>
-                                 </table>
-                              </div>
-                           </div>
-                        </td>
-
-                     </tr>
-                  </c:forEach>
-               </tbody>
-            </table>
-         </div>
-      </div>
-      
-      <div class="row mt-5">
-            <div class="col text-center">
-               <div class="block-27">
-                           <ul>
-                              <!-- 이전페이지 버튼 -->
-                              <c:if test="${pageMaker.prev}">
-                                    <li class="pageInfo_btn previous">
-                                       <a href="'/admin/pays/${pageMaker.startPage-1}'">&lt;</a>
-                                    </li>
-                              </c:if>
-                              <c:forEach var="num" begin="${pageMaker.startPage}"
-                                 end="${pageMaker.endPage}">
-                                    <li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }""><a href="/admin/pays/${num}">${num}</a></li>
-                              </c:forEach>
-                              <!-- 다음페이지 버튼 -->
-                              <c:if test="${pageMaker.next}">
-                                    <li class="pageInfo_btn next">
-                                       <a href="'/admin/pays/${pageMaker.endPage + 1 }'">&gt;</a>
-                                    </li>
-                              </c:if>
-                           </ul>
-                     </div>
-                  </div>
-               </div>
-   </div>
+	<div class="container-fluid">
+		<div class="justify-content-center mb-3 pb-3">
+			<div class="heading-section text-center">
+				<h2>결제관리</h2>
+				<p>결제관리 리스트 페이지 입니다.</p>
+			</div>
+		</div>
+		<div class="bd-example-snippet bd-code-snippet">
+			<div class="bd-example">
+				<table
+					class="table table-hover table-bordered">
+					<thead>
+						<tr>
+							<th scope="col">주문번호</th>
+							<th scope="col">주문내역</th>
+							<th scope="col">가격</th>
+							<th scope="col">이름</th>
+							<th scope="col">연락처</th>
+							<th scope="col">주소</th>
+							<th scope="col">결제일</th>
+							<th scope="col">주문상태</th>
+							<th scope="col">결제취소</th>
+							<th scope="col">상세</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="payList" items="${payList}">
+							<tr>
+								<td>${payList.group_id}</td>
+								<td class="detail_td" id="pro_name_${payList.group_id}" data-toggle="collapse" data-target="#collapse-${payList.group_id}" aria-expanded="false" aria-controls="collapse-${payList.group_id}" data-group_id="${payList.group_id}"><span class="main-color">${payList.pro_name}<c:if test="${payList.cart_cnt > 1 }"> 외 ${payList.cart_cnt - 1 }개 품목</c:if></span>
+								</td>
+								<td id="totalPrice_${payList.group_id}">${payList.totalPrice}</td>
+								<td>${payList.mem_name}</td>
+								<td>${payList.mem_phone}</td>
+								<td>${payList.mem_add1}${payList.mem_add2}</td>
+								<td>${payList.pay_date}</td>
+								<td id="statusTd_${payList.group_id}">${payList.status}</td>
+								<td>
+									<button class="btn btn-danger py-2 px-3 payCancel"
+										id="payCancel_${payList.group_id}"
+										data-group_id="${payList.group_id}"
+										data-total_price="${payList.totalPrice}"
+										data-pro_name='${payList.pro_name} <c:if test="${payList.cart_cnt > 1 }"> 외 ${payList.cart_cnt - 1 }개 품목</c:if>'
+										<c:if test="${payList.status eq '주문 취소'}">disabled</c:if>>결제취소</button>
+								</td>
+								<td>
+									<div class="accordion">
+										<button class="detail_btn btn btn-primary py-2 px-3"
+											type="button" data-toggle="collapse"
+											data-target="#collapse-${payList.group_id}"
+											aria-expanded="false"
+											aria-controls="collapse-${payList.group_id}"
+											data-group_id="${payList.group_id}">
+											보기 <i class='fas fa-angle-down'></i>
+										</button>
+									</div>
+								</td>
+							</tr>
+							<tr class="detail-row collapse" id="collapse-${payList.group_id}">
+								<td class="detail-col" style="padding: 2px;" colspan="10">
+									<div class="" >
+										<div class="table-responsive" style="float: right;">
+											<table
+												class="table table-hover table-bordered">
+												<thead>
+													<tr>
+														<th>카테고리</th>
+														<th style="width: 200px;">상품명</th>
+														<th style="width: 100px;">수량</th>
+														<th style="width: 100px;">결제금액</th>
+														<th style="width: 100px;">변경금액</th>
+														<th style="width: 330px;">요일</th>
+														<th style="width: 150px;">배송일</th>
+														<th>요청사항</th>
+														<th style="width: 85px;">변경</th>
+													</tr>
+												</thead>
+												<tbody id="accordianBody-${payList.group_id}"></tbody>
+											</table>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row mt-5">
+			<div class="col text-center">
+				<div class="block-27">
+					<ul>
+						<!-- 이전페이지 버튼 -->
+						<c:if test="${pageMaker.prev}">
+							<li class="pageInfo_btn previous"><a
+								href="'/admin/pays/${pageMaker.startPage-1}'">&lt;</a></li>
+						</c:if>
+						<c:forEach var="num" begin="${pageMaker.startPage}"
+							end="${pageMaker.endPage}">
+							<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }""><a
+								href="/admin/pays/${num}">${num}</a></li>
+						</c:forEach>
+						<!-- 다음페이지 버튼 -->
+						<c:if test="${pageMaker.next}">
+							<li class="pageInfo_btn next"><a
+								href="'/admin/pays/${pageMaker.endPage + 1 }'">&gt;</a></li>
+						</c:if>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
-   <jsp:include page="/common/admin_ft.jsp"></jsp:include>
+<jsp:include page="/common/admin_ft.jsp"></jsp:include>
 <script>
 $('.payCancel[disabled]').each(function() {
      $(this).text('취소된 주문');
@@ -353,8 +317,8 @@ function detailTable(data, group_id) {
       var modify = $("<input>").attr({
           "type": "button",
           "name": "modify",
-          "value": "변경하기",
-          "class": "btn btn-secondary py-2 px-3",
+          "value": "변경",
+          "class": "btn btn-primary",
       });
       if($("#statusTd_" + group_id).text() == "주문 취소") {
          modify.attr("disabled", true).val("취소된 주문");
@@ -417,7 +381,7 @@ function detailTable(data, group_id) {
   $(".collapse").on("hidden.bs.collapse", function () {
     var group_id = $(this).attr("id").split("-")[1];
     var detailBtn = $('.detail_btn[data-group_id="' + group_id + '"]');
-    detailBtn.html("상세보기<i class='fas fa-angle-down'></i>");
+    detailBtn.html("보기<i class='fas fa-angle-down'></i>");
   });
 
   $(".collapse").on("shown.bs.collapse", function () {

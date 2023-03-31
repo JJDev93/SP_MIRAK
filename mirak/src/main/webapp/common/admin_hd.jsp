@@ -11,6 +11,7 @@
 	<link rel="icon" href="${path}/resources/images/favicon.gif">
 	<link rel="stylesheet" href="${path}/resources/css/style.css">
 	<link rel="stylesheet" href="${path}/resources/css/ionicons.min.css">
+	<link rel="stylesheet" href="${path}/resources/css/admin.css">
 </head>
 <body>
 	<header>

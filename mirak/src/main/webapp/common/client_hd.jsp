@@ -26,9 +26,9 @@
 	<link rel="stylesheet" href="${path}/resources/css/emailCheck.css">
 </head>
 <body class="goto-here">
-	<header>
+	<header class="client-hd">
 		<!-- START nav -->
-		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
+		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light scrolled awake" id="ftco-navbar">
 			<div class="container">
 				<h1><a class="navbar-brand" href="/" style="left:-20px;">MiRak</a></h1>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,36 +46,35 @@
 						<%} else if (session.getAttribute("mem_id").equals("admin")) {%>
 							<li class="nav-item"><a href="/admin/logout" class="nav-link">로그아웃</a></li>
 							<li class="nav-item"><a href="/admin/charts" class="nav-link">Admin</a></li>
-							<%} else {
-								if (session.getAttribute("mem_isapi") == null || !session.getAttribute("mem_isapi").equals("NAVER")) {%>
+						<%} else {
+							if (session.getAttribute("mem_isapi") == null || !session.getAttribute("mem_isapi").equals("NAVER")) {%>
 								<li class="nav-item"><a href="/logout" class="nav-link">로그아웃</a></li>
-								<%} else if (session.getAttribute("mem_isapi").equals("NAVER")) { %>
+							<%} else if (session.getAttribute("mem_isapi").equals("NAVER")) { %>
 								<li class="nav-item" onclick="naverLogout(); return false;"><a href="javascript:;" class="nav-link"><span>로그아웃</span></a></li>
-								<%} %>
-								<li class="nav-item <c:if test="${fn : contains(cate, 'mypage')}">active</c:if>"><a href="/mypage" class="nav-link">마이페이지</a></li>
-								<%} %>
+							<%} %>
+							<li class="nav-item <c:if test="${fn : contains(cate, 'mypage')}">active</c:if>"><a href="/mypage" class="nav-link">마이페이지</a></li>
+						<%} %>
 					</ul>
 				</div>
 			</div>
 		</nav>
 	</header>
 	<!-- END nav -->
-	
 </body>
 <script>
-var testPopUp;
-function openPopUp() {
-   testPopUp = window.open("https://nid.naver.com/nidlogin.logout","_blank","toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
-}
-function closePopUp() {
-   testPopUp.close();
-}
-function naverLogout() {
-   openPopUp();
-   setTimeout(function() {
-      closePopUp();
-   }, 1);
-   location.href="logout";
-}
+	var testPopUp;
+	function openPopUp() {
+	   testPopUp = window.open("https://nid.naver.com/nidlogin.logout","_blank","toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
+	}
+	function closePopUp() {
+	   testPopUp.close();
+	}
+	function naverLogout() {
+	   openPopUp();
+	   setTimeout(function() {
+	      closePopUp();
+	   }, 1);
+	   location.href="logout";
+	}
 </script>
 </html>
