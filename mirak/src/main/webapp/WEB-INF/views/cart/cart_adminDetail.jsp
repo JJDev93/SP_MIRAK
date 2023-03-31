@@ -77,7 +77,7 @@
             
             <div class="col-md-12">
                <div class="form-group">
-                  <label for="cart_cnt">배송횟수</label> <input type="number" class="form-control" id="cart_cnt" name="cart_cnt" value="${cart.cart_cnt}" min="1">
+                  <label for="cart_cnt">배송횟수</label> <input type="number" class="form-control" id="cart_cnt" name="cart_cnt" value="${cart.cart_cnt}" min="1" onchange="calculateTotalPrice()">
                </div>
             </div>
             
@@ -183,4 +183,13 @@
 		// 총 갯수
 		$(".totalCount_span").text(totalCount);
 	}
+	
+	
+	
+	function calculateTotalPrice() {
+	    const cart_cnt = document.getElementById('cart_cnt').value;
+	    const pro_price = document.getElementById('pro_price').value;
+	    const cart_totprice = document.getElementById('cart_totprice');
+	    cart_totprice.value = cart_cnt * pro_price;
+	  }
 </script>
