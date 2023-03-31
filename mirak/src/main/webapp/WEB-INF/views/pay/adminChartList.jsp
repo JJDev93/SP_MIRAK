@@ -16,11 +16,11 @@
 
 <div class="ftco-section admin-list">
   <div class="justify-content-center mb-3 pb-3">
-			<div class="heading-section text-center">
-				<h2>차트관리</h2>
-				<p>차트관리 리스트 페이지 입니다.</p>
-			</div>
-		</div>
+	<div class="heading-section text-center">
+		<h2>차트관리</h2>
+		<p>차트관리 리스트 페이지 입니다.</p>
+	</div>
+  </div>
   <div class="container" style="max-width: 1400px;">
     <div class="main-panel">
       <div class="content">

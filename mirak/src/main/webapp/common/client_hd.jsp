@@ -30,7 +30,7 @@
 		<!-- START nav -->
 		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light scrolled awake" id="ftco-navbar">
 			<div class="container">
-				<h1><a class="navbar-brand" href="/" style="left:-20px;">MiRak</a></h1>
+				<h1 class="h1-css"><a class="navbar-brand" href="/" style="left:-20px;">MiRak</a></h1>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="oi oi-menu"></span> Menu
 				</button>
