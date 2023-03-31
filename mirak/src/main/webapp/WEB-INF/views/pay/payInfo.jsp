@@ -52,9 +52,9 @@
 
 											</div>
 											<h3 class="heading">
-												<a href="#">${payVO.pro_name} <c:if
+												${payVO.pro_name} <c:if
 														test="${payVO.cart_cnt > 1 }"> 외 ${payVO.cart_cnt - 1 }개 품목</c:if>
-												</a>
+												
 											</h3>
 											<p>총 수량 ${payVO.pro_price }개 &nbsp;&nbsp;&nbsp; 합계
 												${payVO.totalPrice } 원</p>

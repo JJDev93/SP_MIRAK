@@ -32,7 +32,7 @@
 		</form> -->
 		<div class="bd-example-snippet bd-code-snippet">
 			<div class="bd-example">
-				<table class="table table-striped">
+				<table class="table table-hover table-bordered">
 					<thead>
 						<tr>
 							<th scope="col">번호</th>

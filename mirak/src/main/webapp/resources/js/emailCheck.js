@@ -52,13 +52,4 @@ $("#mail_check_input").blur(function(){
 });
 
 
-$("#joinSubmit").click(function(){
-    var inputCode = $("#mail_check_input").val();        // 입력코드
-    
-    if(inputCode != code){                               // 인증번호가 일치하지 않을 경우
-        alert("인증번호를 다시 확인해주세요.");
-        return false;                                    // submit 막기
-    }
-});
-
 

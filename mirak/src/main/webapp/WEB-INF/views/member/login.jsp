@@ -66,26 +66,24 @@
       </div>
       <div class="row justify-content-center">
          <div class="col-md-6 ftco-animate">
-         	<div class="hr-sect">or</div>
+            <div class="hr-sect">or</div>
          </div>
       </div>
       <div class="row justify-content-center" style="margin: 2rem; margin-bottom: 50px;">
          <div class="col-md-5">
             <div class="row justify-content-center ftco-services"> 
                <!-- 구글 -->
-               <div class="col-sm-4 col-4 text-center ftco-animate">
+               <div class="col-4 text-center ftco-animate">
                   <a id="custom-login-btn" href="${googleUrl}"><img alt=""
                      src="resources/images/ico_member_google.png"></a>
                </div>
                <!-- 네이버 -->
-               <div class="col-sm-4 col-4 text-center ftco-animate">
-                  <a id="naverIdLogin_loginButton" href="javascript:void(0)"> <span><img
-                        alt="" src="resources/images/ico_member_naver.png"
-                        style="cursor: pointer"></span>
-                  </a>
-               </div>
+				<div class="col-4 text-center ftco-animate">
+					<a id="naverIdLogin_loginButton" href="/naverLogin">
+					<span><img alt="" src="resources/images/ico_member_naver.png"style="cursor: pointer"></span></a>
+				</div>
                <!-- 카카오 -->
-               <div class="col-sm-4 col-4 text-center ftco-animate">
+               <div class="col-4 text-center ftco-animate">
                   <div class="media block-6 services mb-md-0 mb-4 kakao">
                      <a id="btn"
                         href="https://kauth.kakao.com/oauth/authorize?client_id=e481c91b1136f51f927a619fc062146d&redirect_uri=https://www.mirak.shop/kakaoLogin&response_type=code">
@@ -97,93 +95,21 @@
          </div>
       </div>
    </div>
-	<form id="naverJoin" action="/naverjoin" method="post">
-		<input type="hidden" name="mem_id" value="" id="mem_id">
-		<input type="hidden" name="mem_gender" value="" id="mem_gender">
-		<input type="hidden" name="mem_pw" value="" id="mem_pw">
-		<input type="hidden" name="mem_name" value="" id="mem_name">
-	</form>
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
-
 <script>
-	$(document).ready(function() {
-		console.log("message : " + "${message}");
-		console.log("mem_id : " + "${mem_id}");
-		if ("${message}" != "") {
-			alert("${message}");
-			<%session.setAttribute("message", "");%>
-			}
-
-		if ("${mem_id}" != "") {
-			location.href = "/";
-		}
-	})
-</script>
-
-<!-- 네이버 스크립트 -->
-<script src="${path}/resources/js/naverapi.js"></script>
-<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"charset="utf-8"></script>
-
-<script>
-var naverLogin = new naver.LoginWithNaverId({
-	  clientId: "zkOzac5hPC_Qw6v8eOzQ",
-	  callbackUrl: "https://www.mirak.shop/login",
-	  isPopup: false,
-	  callbackHandle: false,
-	});
-
-	naverLogin.init();
-
-	$(document).on("click", "#naverIdLogin_loginButton", function() {
-	  naverLogin.getLoginStatus(function(status) {
-	    if (status != null) {
-	      var mem_id = naverLogin.user.getEmail();
-	      var mem_gender = naverLogin.user.getGender() == 'F' ? 2 : 1;
-	      var mem_pw = naverLogin.user.getId();
-	      var mem_name = naverLogin.user.getName();
-
-	      $.ajax({
-	        type: 'post',
-	        url: '/naverSave',
-	        data: {
-	          'mem_id': mem_id,
-	          'mem_gender': mem_gender,
-	          'mem_pw': mem_pw,
-	          'mem_name': mem_name
-	        },
-	        dataType: "text",
-	        success: function(responseData) {
-	          console.log("로그인 AJAXX~~~~~~~~~~~~~~~~");
-	          console.log(responseData);
-
-	          if (responseData == 'login') {
-	            location.href = "/";
-	          } else if (responseData == 'join') {
-	            document.querySelector('#mem_id').value = mem_id;
-	            document.querySelector('#mem_gender').value = mem_gender;
-	            document.querySelector('#mem_pw').value = mem_pw;
-	            document.querySelector('#mem_name').value = mem_name;
-	            document.querySelector('#naverJoin').submit();
-	          } else {
-	            alert('로그인실패');
-	            console.log('실패');
-	          }
-	        },
-	        error: function(responseData) {
-	          alert('오류발생');
-	          console.log('오류 발생');
-	          naverLogin.login(); // Retry login
-	        },
-	        retries: 3
-	      });
-	      return false; // 추가된 코드
-	    } else {
-	      console.log("callback 처리에 실패하였습니다.");
-	      console.log("status is null. Retry login.");
-	      naverLogin.login(); // Retry login
-	      return false;
-	    }
-	  });
-	});
+   $(document).ready(function() {
+   console.log("message : "+"${message}");
+   console.log("mem_id : "+"${mem_id}");
+   if ("${message}" != "") {
+        if ("${message}" == "로그인 후 이용해주세요.") {
+          alert("${message}");
+        }
+        <% session.setAttribute("message", ""); %>
+      }
+      
+      if("${mem_id}" !=""){
+      location.href = "/";
+      }
+   })
 </script>

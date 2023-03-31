@@ -3,21 +3,23 @@ package kr.co.mirak.controller;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.mirak.member.MemberService;
 import kr.co.mirak.member.MemberVO;
 import kr.co.mirak.member.login.google.SnsLoginService;
+import kr.co.mirak.member.login.naver.NaverLoginService;
+import kr.co.mirak.member.login.naver.NaverUtils;
 
 @Controller
 public class apiController {
@@ -25,52 +27,49 @@ public class apiController {
 	private MemberService memberService;
 	@Autowired
 	private SnsLoginService snsLoginService;
+	@Autowired
+	private NaverLoginService naverLoginService;
 
-	@RequestMapping(value = "/naverSave", method = RequestMethod.POST)
-	@ResponseBody
-	public String naverSave(MemberVO vo, HttpSession session, RedirectAttributes rttr) {
-		System.out.println("123"+vo);
-		String result = null;
-		try {
-			if (vo != null) {
-				int idCheck = memberService.idCheck(vo.getMem_id());
-				if (idCheck == 0){
-//					vo.setMem_isapi("naver");
-//					memberService.createUser(vo);
-//					session.setAttribute("mem_id", vo.getMem_id());
-//					rttr.addFlashAttribute("message", "회원가입 성공하였습니다.");
-//					System.out.println("naverapi 회원가입 성공");
-					result = "join";
-				} else if (idCheck == 1) {
-					String mem_id = memberService.login(vo).getMem_id();
-					session.setAttribute("mem_id", mem_id);
-					session.setAttribute("message", "네이버 로그인 되었습니다!");
-					System.out.println("naverapi 로그인 완료!");
-					result = "login";
-				}
+	@RequestMapping(value = "/naverLogin", method = RequestMethod.GET)
+	public String naverLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String state = NaverUtils.generateRandomString();
+		request.getSession().setAttribute("state", state);
+		String naverAuthUrl = naverLoginService.getAuthorizationUrl(state);
+		return "redirect:" + naverAuthUrl;
+	}
+
+	@RequestMapping(value = "/naverCallback", method = RequestMethod.GET)
+	public String naverCallback(HttpSession session, Model model, @RequestParam String code, @RequestParam String state,
+			HttpServletRequest request, MemberVO member) throws Exception {
+		String sessionState = (String) session.getAttribute("state");
+		if (!state.equals(sessionState)) {
+			return "redirect:/login?error=invalid_request";
+		} else {
+			OAuth2AccessToken oauthToken = naverLoginService.getAccessToken(request, code, state);
+		   String accesstoken = oauthToken.getValue();
+			String result = naverLoginService.getUserInfo(oauthToken, member);
+			if (result.equals("login")) {
+				session.setAttribute("accesstoken", accesstoken);
+				session.setAttribute("mem_id", member.getMem_id());
+				session.setAttribute("mem_isapi", member.getMem_isapi());
+				memberService.login(member);
+				return "redirect:/replayBefo";
+			} else if (result.equals("join")) {
+				session.setAttribute("accesstoken", accesstoken);
+				session.setAttribute("mem_isapi", member.getMem_isapi());
+				model.addAttribute("member", member);
+				return "member/join";
 			}
-		} catch (Exception e) {
-			throw new RuntimeException();
 		}
-		return result;
+		return "fail";
 	}
 	
 	
-	@RequestMapping(value = "/naverjoin", method = RequestMethod.POST)
-	public String naverTest(MemberVO vo, Model model) {
-		vo.setMem_isapi("naver");
-		model.addAttribute("member", vo);
-		System.out.println("model"+model);
-		
-		return "member/join";
-	}
-	
-
 
 	// 카카오 로그인
 	@RequestMapping(value = "/kakaoLogin")
-	public String kakaoLogin(Model model, @RequestParam(value = "code", required = false) String code, HttpSession session)
-			throws Exception {
+	public String kakaoLogin(Model model, @RequestParam(value = "code", required = false) String code,
+			HttpSession session) throws Exception {
 		System.out.println("#########" + code);
 		String access_Token = memberService.getAccessToken(code);
 
@@ -102,8 +101,7 @@ public class apiController {
 			return "redirect:/replayBefo";
 		}
 	}
-	
-	
+
 	@RequestMapping(value = "/replayBefo", method = RequestMethod.GET)
 	public String replayBefo(HttpSession session) {
 		String preUrl = (String) session.getAttribute("pre_url");
@@ -118,12 +116,6 @@ public class apiController {
 		}
 		return returnURL;
 	}
-
-
-	
-	
-	
-	
 
 	/**
 	 * 구글 로그인~! Authentication Code를 전달 받는 엔드포인트
