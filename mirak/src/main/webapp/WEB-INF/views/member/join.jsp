@@ -3,10 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
-
-
-
-
 <div class="hero-wrap hero-bread"
 	style="background-image: url('${path}/resources/images/bg_1.jpg');">
 	<div class="container">
@@ -24,25 +20,21 @@
 				<form action="/join" method="post" onsubmit="return Duplicate()"
 					class="billing-form">
 					<div class="row align-items-end">
-					
 						<c:choose>
 							<c:when test="${not empty member.mem_isapi}">
 								<input type="hidden" name="mem_pw" class="form-control" id="pw" value="${member.mem_pw }" readonly="readonly">
 								<input type="hidden" name="mem_isapi" class="form-control" value="${member.mem_isapi}" readonly="readonly">
-								<input type="hidden" id="mail_check_input" class="form-control" value="간편로그인" readonly="readonly">
 								<div class="col-md-12">
 									<div class="form-group">
 										<label for="id">이메일(ID)</label>
 										<div class="row">
 											<div class="col-sm-12">
-												<input type="email" name="mem_id" id="id" class="form-control emaill mail_input" 
-																	placeholder="이메일(ID)" value="${member.mem_id }" required="required" readonly="readonly">
+												<input type="email" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required="required" readonly="readonly">
 											</div>
 										</div>
 									</div>
 								</div>
 							</c:when>
-							
 							<c:otherwise>
 								<div class="col-md-12">
 									<div class="form-group">
@@ -50,16 +42,13 @@
 										<label for="id">이메일(ID) <span class="text-danger">*</span></label>
 										<div class="row mb-2">
 											<div class="col-sm-9">
-												<input type="email" name="mem_id" id="id" class="form-control emaill mail_input"
-																	placeholder="이메일(ID)" value="${member.mem_id }" required tabindex="1" autofocus="autofocus">
+												<input type="email" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required tabindex="1" autofocus="autofocus">
 											</div>
-											
 											<div class="col-sm-3"> 
 												<button type="button" tabIndex="2" class="btn btn-primary joinBtn mb-3" id="idCheck" value="N" onclick="return fn_idCheck();">중복확인</button>
 												<span id="idCheckmsg"></span>
 											</div>
 										</div>
-										
 										<div class="row">
 											<div class="col-sm-9 mail_check_wrap">
 												<div class="mail_check_input_box" id="mail_check_input_box_false">
@@ -144,7 +133,14 @@
 					</div>
 					<div class="row mb-5">
 						<div class="col-md-6">
-							<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return checkAll();">
+							<c:choose>
+								<c:when test="${not empty member.mem_isapi}">
+									<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return checkAllAPI();">
+								</c:when>
+								<c:otherwise>
+									<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return checkAll();">
+							    </c:otherwise>
+							</c:choose>
 						</div>
 						<div class="col-md-6">
 							<a href="/" class="btn btn-secondary py-3 px-5 w-100" tabIndex="15">가입취소</a>
@@ -167,134 +163,67 @@
 			 <%session.setAttribute("message","");%>
 		}
 	})
-
-	function Duplicate() {
-		if ($("button[id='idCheck']").val() == "N") {
-			alert('아이디 중복 확인을 해주세요.');
-			$("input[name='checked_id']").eq(0).focus();
-			return false;
-		}
-
-		return true;
-	}
-</script>
-
-
-<script>
+	
 	const verificationCodeInput = document.getElementById("mail_check_input");
-
-	function injungkeyForm() {
-		if (verificationCodeInput.value === "") {
-			alert("인증번호를 입력해주세요.");
-			return false;
-		}
-		return true;
-	}
-</script>
-
-<script>
 	const IDCHECK = document.getElementById("id");
-	function IDCHECKFORM() {
+	const PWCHECK = document.getElementById("pw");
+	const PW2CHECK = document.getElementById("pw2");
+	const NAMECHECK = document.getElementById("name");
+	const AGECHECK = document.getElementById("age");
+	const PHONECHECK = document.getElementById("phone");
+	const ADDERSSCHECK = document.getElementById("address_input_1");
+	var inputCode = $("#mail_check_input").val();        // 입력코드
+    
+    
+	function checkAll() {
 		if (IDCHECK.value === "") {
 			alert("이메일(ID)를 입력해주세요");
 			return false;
-		}
-		return true;
-	}
-
-	const PWCHECK = document.getElementById("pw");
-	function PWCHECKFORM() {
-		if (PWCHECK.value === "") {
+		} else if ($("button[id='idCheck']").val() == "N") {
+			alert('이메일(ID) 중복 확인을 해주세요.');
+			$("input[name='checked_id']").eq(0).focus();
+			return false;
+		} else if (verificationCodeInput.value === "") {
+			alert("인증번호를 입력해주세요.");
+			return false;
+		} else if(inputCode != code){                               // 인증번호가 일치하지 않을 경우
+	        alert("인증번호를 다시 확인해주세요.");
+	        return false;                                    // submit 막기
+	    } else if (PWCHECK.value === "") {
 			alert("비밀번호를 입력해주세요");
 			return false;
-		}
-		return true;
-	}
-
-	const PW2CHECK = document.getElementById("pw2");
-	function PW2CHECKFORM() {
-		if (PW2CHECK.value === "") {
+		} else if (PW2CHECK.value === "") {
 			alert("비밀번호 확인 입력해주세요");
 			return false;
-		}
-		return true;
-	}
-
-	const NAMECHECK = document.getElementById("name");
-	function NAMECHECKFORM() {
-		if (NAMECHECK.value === "") {
-			alert("이름을	입력해주세요");
+		} else if (NAMECHECK.value === "") {
+			alert("이름을 입력해주세요");
 			return false;
-		}
-		return true;
-	}
-
-	const AGECHECK = document.getElementById("age");
-	function AGECHECKFORM() {
-		if (AGECHECK.value === "") {
+		} else if (AGECHECK.value === "") {
 			alert("나이를 입력해주세요");
 			return false;
-		}
-		return true;
-	}
-
-	const PHONECHECK = document.getElementById("phone");
-	function PHONECHECKFORM() {
-		if (PHONECHECK.value === "") {
+		} else if (PHONECHECK.value === "") {
 			alert("휴대폰번호를 입력해주세요");
 			return false;
-		}
-		return true;
-	}
-
-	const ADDERSSCHECK = document.getElementById("address_input_1");
-	function ADDERSSCHECKFORM() {
-		if (ADDERSSCHECK.value === "") {
+		}else if (ADDERSSCHECK.value === "") {
 			alert("주소를 입력해주세요");
 			return false;
 		}
 		return true;
 	}
-</script>
-
-
-
-<script>
-	function checkAll() {
-
+	
+	function checkAllAPI() {
 		if (IDCHECK.value === "") {
 			alert("이메일(ID)를 입력해주세요");
 			return false;
-
-		} else if ($("button[id='idCheck']").val() == "N") {
-			alert('이메일(ID) 중복 확인을 해주세요.');
-			$("input[name='checked_id']").eq(0).focus();
-			return false;
-
-		} else if (verificationCodeInput.value === "") {
-			alert("인증번호를 입력해주세요.");
-			return false;
-
-		} else if (PWCHECK.value === "") {
-			alert("비밀번호를 입력해주세요");
-			return false;
-
-		} else if (PW2CHECK.value === "") {
-			alert("비밀번호 확인 입력해주세요");
-			return false;
-
 		} else if (NAMECHECK.value === "") {
 			alert("이름을 입력해주세요");
 			return false;
-
 		} else if (AGECHECK.value === "") {
 			alert("나이를 입력해주세요");
 			return false;
-
 		} else if (PHONECHECK.value === "") {
 			alert("휴대폰번호를 입력해주세요");
 			return false;
-
 		}else if (ADDERSSCHECK.value === "") {
 			alert("주소를 입력해주세요");
 			return false;
