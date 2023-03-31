@@ -12,7 +12,7 @@
 		</div>
 		<div class="bd-example-snippet bd-code-snippet">
 			<div class="bd-example">
-				<table class="table table-striped">
+				<table class="table table-hover table-bordered">
 					<thead>
 						<tr>
 							<th scope="col" style="width:60px;">번호</th>
@@ -22,8 +22,8 @@
 							<th scope="col">성별</th>
 							<th scope="col">연락처</th>
 							<th scope="col">가입일자</th>
-							<th scope="col" width="95px">수정</th>
-							<th scope="col" width="95px">식제</th>
+							<th scope="col" width="80px">수정</th>
+							<th scope="col" width="80px">식제</th>
 						</tr>
 					</thead>
 					<tbody>

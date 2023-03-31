@@ -62,26 +62,28 @@ body {
 .MIRAK{
 	font-size: 40px;
 	font-weight: bold;	
+	margin:0;
+    line-height: 1;
 }
-
+.mb-self{ margin-bottom:15px !important; }
 </style>
 <body class="text-center">
 	<form class="form-signin" action="/admin" method="post">
-		<h1 class="h3 mb-3 font-weight-normal MIRAK">MIRAK 관리자</h1>
+		<h1 class="h3 font-weight-normal MIRAK">MIRAK 관리자</h1>
 		
 		<label for="ID" class="sr-only">어드민 아이디를 입력하세요</label> 
-		<input type="text" id="ID" name="mem_id" class="form-control mb-3" placeholder="아이디를 입력하세요" required autofocus> 
+		<input type="text" id="ID" name="mem_id" class="form-control mt-5 mb-self" placeholder="아이디를 입력하세요" required autofocus> 
 		
 		<label for="PW" class="sr-only">어드민 비밀번호를 입력하세요</label> 
-		<input type="password" id="PW" name="mem_pw" class="form-control mb-3" placeholder="비밀번호를 입력하세요" required>
+		<input type="password" id="PW" name="mem_pw" class="form-control mb-self" placeholder="비밀번호를 입력하세요" required>
 		
-		<button class="btn btn-lg btn-primary btn-block mb-3" type="submit">로그인</button>
-		<a href="/">Client</a>
+		<button class="btn btn-lg btn-primary btn-block mb-self" type="submit">로그인</button>
+		<a href="/" class="btn btn-lg btn-secondary btn-block">Client</a>
 		
 		<p class="mt-5 mb-3 text-muted">
-         &copy Copyright MIRAK .2023<br>
-               신용우 전지혜 김연주 김원중 서현진 안창주 정동하
-      </p>
+	         &copy Copyright MIRAK .2023<br>
+             신용우 전지혜 김연주 김원중 서현진 안창주 정동하
+      	</p>
 	</form>
 	<script src="${path}/resources/js/bootstrap.min.js"></script>
 </body>

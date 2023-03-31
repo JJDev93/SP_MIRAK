@@ -11,6 +11,7 @@
 	<link rel="icon" href="${path}/resources/images/favicon.gif">
 	<link rel="stylesheet" href="${path}/resources/css/style.css">
 	<link rel="stylesheet" href="${path}/resources/css/ionicons.min.css">
+	<link rel="stylesheet" href="${path}/resources/css/admin.css">
 </head>
 <body>
 	<header>
@@ -22,12 +23,10 @@
 			  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 			    <span class="navbar-toggler-icon"></span>
 			  </button>
-			  <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-			    <ul class="navbar-nav me-auto mb-2 mb-md-0">
-			      <li class="nav-item">
-			        <a class="nav-link" aria-current="page" href="/admin/members/1">회원관리</a>
-
-			      </li>
+			  
+			  <div class="collapse navbar-collapse" id="ftco-nav">
+			    <ul class="navbar-nav ml-auto">
+			      <li class="nav-item"><a class="nav-link" aria-current="page" href="/admin/members/1">회원관리</a></li>
 			      <li class="nav-item">
 			        <a class="nav-link" href="/admin/products/1">상품관리</a>
 			      </li>
@@ -35,20 +34,11 @@
 			        <a class="nav-link" href="/admin/carts/1">장바구니</a>
 			      </li>
 			      <li class="nav-item">
-
 			        <a class="nav-link" href="/admin/pays/1">결제관리</a>
 			      </li>
+			      <li class="nav-item"><a class="nav-link" href="/">Client</a></li>
+			      <li class="nav-item"><a class="nav-link" href="/admin/logout">로그아웃</a></li>
 			    </ul>
-			    <div class="form-inline my-2 my-lg-0">
-				    <ul class="navbar-nav my-2 my-sm-0">
-				      <li class="nav-item">
-				        <a class="nav-link" href="/">Client</a>
-				      </li>
-				      <li class="nav-item">
-				        <a class="nav-link" href="/admin/logout">로그아웃</a>
-				      </li>
-				    </ul>
-			    </div>
 			  </div>
 			</div>
 		</nav>

@@ -4,25 +4,17 @@
 <div id="test">
 	<c:set var="path" value="${pageContext.request.contextPath}" />
 	<jsp:include page="/common/client_hd.jsp"></jsp:include>
-	<div class="hero-wrap hero-bread"
-		style="background-image: url('${path}/resources/images/bg_3.jpg');">
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<h1 class="mb-0 bread">프리미엄</h1>
-				</div>
-			</div>
+	
+	<div class="hero-wrap hero-bread" style="background-image: url('${path}/resources/images/bg_3.jpg');">
+		<div class="ftco-animate">
+			<h1 class="bread">스페셜세트</h1>
 		</div>
 	</div>
-	
-	
-
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<p class="pro-title">미락의 프리미엄 메뉴입니다.</p>
+					<p class="pro-title">미락의 스페셜세트입니다.</p>
 				</div>
 			</div>
 			<div class="row">

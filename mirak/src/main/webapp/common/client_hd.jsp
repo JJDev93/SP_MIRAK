@@ -26,18 +26,18 @@
 	<link rel="stylesheet" href="${path}/resources/css/emailCheck.css">
 </head>
 <body class="goto-here">
-	<header>
+	<header class="client-hd">
 		<!-- START nav -->
-		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
+		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light scrolled awake" id="ftco-navbar">
 			<div class="container">
-				<h1><a class="navbar-brand" href="/" style="left:-20px;">MiRak</a></h1>
+				<h1 class="h1-css"><a class="navbar-brand" href="/" style="left:-20px;">MiRak</a></h1>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="oi oi-menu"></span> Menu
 				</button>
 				<div class="collapse navbar-collapse" id="ftco-nav">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item <c:if test="${fn : contains(cateAll, '/product/ProductClientList') && fn : contains('/product/ProductClientList', cateAll)}">active</c:if>"><a href="/ProductClientList" class="nav-link">전체메뉴</a></li>
-						<li class="nav-item <c:if test="${fn : contains(cate, 'ProductClientListP')}">active</c:if>"><a href="/ProductClientListP" class="nav-link">프리미엄</a></li>
+						<li class="nav-item <c:if test="${fn : contains(cate, 'ProductClientListP')}">active</c:if>"><a href="/ProductClientListP" class="nav-link">스페셜세트</a></li>
 						<li class="nav-item <c:if test="${fn : contains(cate, 'ProductClientListT')}">active</c:if>"><a href="/ProductClientListT" class="nav-link">2·3인세트</a></li>
 						<li class="nav-item <c:if test="${fn : contains(cate, 'ProductClientListO')}">active</c:if>" ><a href="/ProductClientListO" class="nav-link">1인세트</a></li>
 						<% if (session.getAttribute("mem_id") == null) {%>
@@ -46,21 +46,20 @@
 						<%} else if (session.getAttribute("mem_id").equals("admin")) {%>
 							<li class="nav-item"><a href="/admin/logout" class="nav-link">로그아웃</a></li>
 							<li class="nav-item"><a href="/admin/charts" class="nav-link">Admin</a></li>
-							<%} else {
-								if (session.getAttribute("mem_isapi") == null || !session.getAttribute("mem_isapi").equals("NAVER")) {%>
+						<%} else {
+							if (session.getAttribute("mem_isapi") == null || !session.getAttribute("mem_isapi").equals("NAVER")) {%>
 								<li class="nav-item"><a href="/logout" class="nav-link">로그아웃</a></li>
-								<%} else if (session.getAttribute("mem_isapi").equals("NAVER")) { %>
+							<%} else if (session.getAttribute("mem_isapi").equals("NAVER")) { %>
 								<li class="nav-item" onclick="naverLogout(); return false;"><a href="javascript:;" class="nav-link"><span>로그아웃</span></a></li>
-								<%} %>
-								<li class="nav-item <c:if test="${fn : contains(cate, 'mypage')}">active</c:if>"><a href="/mypage" class="nav-link">마이페이지</a></li>
-								<%} %>
+							<%} %>
+							<li class="nav-item <c:if test="${fn : contains(cate, 'mypage')}">active</c:if>"><a href="/mypage" class="nav-link">마이페이지</a></li>
+						<%} %>
 					</ul>
 				</div>
 			</div>
 		</nav>
 	</header>
 	<!-- END nav -->
-	
 </body>
 <script>
 var testPopUp;

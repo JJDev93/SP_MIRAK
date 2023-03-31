@@ -28,18 +28,9 @@
       }
 
 </style>
-<div class="hero-wrap hero-bread"
-	style="background-image: url('${path}/resources/images/bg_1.jpg');">
-	<div class="container">
-		<div
-			class="row no-gutters slider-text align-items-center justify-content-center">
-			<div class="col-md-9 ftco-animate text-center">
-				<p class="breadcrumbs">
-					<span class="mr-2"><a href="/">Home</a></span> <span>idfind</span>
-				</p>
-				<h1 class="mb-0 bread">아이디 찾기</h1>
-			</div>
-		</div>
+<div class="hero-wrap hero-bread" style="background-image: url('${path}/resources/images/bg_1.jpg');">
+	<div class="ftco-animate">
+		<h1 class="bread">아이디 찾기</h1>
 	</div>
 </div>
 
@@ -71,8 +62,11 @@
 							placeholder="핸드폰번호를 입력해주세요.." required="required">
 					</div>
 					<div>
+					
 						<label style="color: red">${message }</label>
-						<label style="color: blue">${mem_id }</label>
+						<c:forEach items="${memberList}" var="member">
+					<label style="color: #fb8622;">${member.mem_id}</label>
+						</c:forEach>
 					</div>
 					<div class="form-group row">
 						<div class="col-md-12 text-center">
@@ -135,4 +129,9 @@ $(document).ready(function() {
 	}
 });
 </script>
+
+
+
+
+
 

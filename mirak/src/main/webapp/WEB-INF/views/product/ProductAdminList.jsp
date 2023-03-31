@@ -11,14 +11,14 @@
             <p>상품관리 리스트 페이지 입니다.</p>
          </div>
       </div>
-      <a href="/admin/productRegister" class="btn btn-primary mb-4">상품 추가</a>
+      <a href="/admin/productRegister" class="btn btn-primary mb-2">상품 추가</a>
       <div class="bd-example-snippet bd-code-snippet">
          <div class="bd-example">
-            <table class="table table-striped">
+            <table class="table table-hover table-bordered">
                <thead>
                   <tr>
-                     <th scope="col" style="width:150px;">이미지</th>
                      <th scope="col" style="width:90px;">상품코드</th>
+                     <th scope="col" style="width:90px;">이미지</th>
                      <th scope="col">상품명</th>
                      <th scope="col" style="width:90px;">상품가격</th>
                      <th scope="col">상품설명</th>
@@ -27,23 +27,19 @@
                <tbody>
                   <c:forEach items="${productList}" var="product">
                      <tr>
+                        <td>${product.pro_code }</td>
                         <td><a href="/admin/product/${curPage}/${product.pro_code}">
                               <img alt="${product.pro_desc2}"
                               src="${path}/resources/images/product/${product.pro_image}"
-                              style="width: 100px; height: 100px;" title="${product.pro_name}">
+                              style="width: 70px;" title="${product.pro_name}">
                         </a></td>
-                        <td>${product.pro_code }</td>
-                       
-                      
                         <td><a href="/admin/product/${curPage}/${product.pro_code}">${product.pro_name }</a></td>
-                       
                         <td>${product.pro_price }</td>
                         <td>${product.pro_desc2}</td>
                      </tr>
                   </c:forEach>
                </tbody>
             </table>
-
          </div>
       </div>
       <div class="row mt-5">

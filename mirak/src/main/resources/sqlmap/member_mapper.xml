@@ -123,6 +123,7 @@
 		<![CDATA[
 			UPDATE MEMBER SET
 				MEM_AGE = #{mem_age},
+				MEM_NAME= #{mem_name},
 				MEM_GENDER = #{mem_gender},
 				MEM_PHONE = #{mem_phone},
 				MEM_ADD1 =#{mem_add1},

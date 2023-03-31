@@ -38,7 +38,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="name">이름</label> 
-								<input type="text" class="form-control" id="name" name="mem_name" value="${member.mem_name }" readonly>
+								<input type="text" class="form-control" id="name" name="mem_name" value="${member.mem_name }">
 							</div>
 						</div>
 						<div class="col-md-12">

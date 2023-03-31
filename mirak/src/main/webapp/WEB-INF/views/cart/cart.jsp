@@ -8,15 +8,9 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 
-<div class="hero-wrap hero-bread"
-	style="background-image: url('${path}/resources/images/bg_1.jpg');">
-	<div class="container">
-		<div
-			class="row no-gutters slider-text align-items-center justify-content-center">
-			<div class="col-md-9 ftco-animate text-center">
-				<h1 class="mb-0 bread">장바구니</h1>
-			</div>
-		</div> 
+<div class="hero-wrap hero-bread" style="background-image: url('${path}/resources/images/bg_1.jpg');">
+	<div class="ftco-animate">
+		<h1 class="bread">장바구니</h1>
 	</div>
 </div>
 <%
@@ -86,10 +80,7 @@ session = request.getSession();
 										<td>
 											<input type="button" value="변경" class="btn btn-primary" data-toggle="modal" data-target="#modal${c.cart_code }">
 										</td>
-										<td class="product-remove">
-											<a href="/cart/cartDelete/${c.cart_code }" onclick="return confirm('삭제하시겠습니까?');">
-											<span class="ion-ios-close"></span></a>
-										</td>
+										<td><a href="/cart/cartDelete/${c.cart_code }" class="btn btn-danger" onclick="return confirm('삭제하시겠습니까?');">삭제</a></td>
 									</tr>
 								</c:forEach>
 								<!-- END TR-->
@@ -143,13 +134,13 @@ session = request.getSession();
 											<span class="font-weight-bold text-dark">상품 상세</span> ${c.pro_desc}
 										</p>												
 										<p>
-											<span class="font-weight-bold text-dark">상품 가격</span> ${c.pro_price }원 <br>
+											<input type="text" readonly="readonly" style="cursor:default" class="form-control" id="pro_price" name="pro_price" value="${c.pro_price }">
 										</p>					
 										<p>
 											<label for="start"><span class="font-weight-bold text-dark">배송 시작일</span></label>
-											<input type="date" id="start" name="cart_start" class="form-control input-number" value="${c.cart_start }"  required="required">
+											<input type="date" id="start" name="cart_start" class="form-control input-number cart_start" value="${c.cart_start }"  required="required">
 										</p>		
-										<p class="daycheck">
+										<p>
 											<span  class="font-weight-bold text-dark">배송 요일</span><br>
 											&nbsp;
 											<label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform: scale(1.5);" value="월" <c:if test = "${fn : contains(c.cart_day, '월')}">checked</c:if>>&nbsp;&nbsp;월</label>&nbsp;&nbsp; 
@@ -160,18 +151,22 @@ session = request.getSession();
 											<label for="sat"><input type="checkbox" name="cart_day" id="sat" style="transform: scale(1.5);" value="토" <c:if test = "${fn : contains(c.cart_day, '토')}">checked</c:if>>&nbsp;&nbsp;토</label>&nbsp;&nbsp; 
 											<label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform: scale(1.5);" value="일" <c:if test = "${fn : contains(c.cart_day, '일')}">checked</c:if>>&nbsp;&nbsp;일</label>
 											
-				<label for="all"><input type="checkbox" name="cart_all" id="all" style="transform: scale(1.5);" value="all" onclick='selectAll(this)'>&nbsp;&nbsp;전체선택</label>
-                &nbsp;&nbsp; 
-                <label for="pyeong"><input type="checkbox" name="cart_pyeong" id="pyeong" style="transform: scale(1.5);" value="pyeong" onclick='selectpyeong(this)'>&nbsp;&nbsp;주중선택</label>
-                &nbsp;&nbsp; 
-                <label for="jumal"><input type="checkbox" name="cart_jumal" id="jumal" style="transform: scale(1.5);" value="jumal" onclick='selectjumal(this)'>&nbsp;&nbsp;주말선택</label>
+											<label for="all"><input type="checkbox" name="cart_all" id="all" style="transform: scale(1.5);" value="all" onclick='selectAll(this)'>&nbsp;&nbsp;전체선택</label>
+               								&nbsp;&nbsp; 
+                							<label for="pyeong"><input type="checkbox" name="cart_pyeong" id="pyeong" style="transform: scale(1.5);" value="pyeong" onclick='selectpyeong(this)'>&nbsp;&nbsp;주중선택</label>
+               								&nbsp;&nbsp; 
+               								<label for="jumal"><input type="checkbox" name="cart_jumal" id="jumal" style="transform: scale(1.5);" value="jumal" onclick='selectjumal(this)'>&nbsp;&nbsp;주말선택</label>
 										</p>						
 										<p>
 											<span  class="font-weight-bold text-dark">상품 개수</span><br>
-											<input type="text" pattern="\d*" maxlength="3" id="cnt" name="cart_cnt" value="${c.cart_cnt}" class="quantity_input" min="1">
+											<!-- <input type="text" pattern="\d*" maxlength="3" id="cnt" name="cart_cnt" value="${c.cart_cnt}" class="quantity_input" min="1"> -->
+											<input type="number" class="cart_cnt" id="cart_cnt" name="cart_cnt" value="${c.cart_cnt}" min="1" onchange="calculateTotalPrice()">
 										</p>
 										<hr>
-										<p><span class="font-weight-bold text-dark">총 금액</span> ${c.cart_cnt * c.pro_price} 원</p>
+										<p>
+											<span class="font-weight-bold text-dark">총 금액 : </span>
+											<input type="text" class="cart_totprice" id="cart_totprice" name="cart_totprice" class="totalPrice_span" value="${c.cart_cnt * c.pro_price }">
+										</p>
 									</div>
 								</div>
 							</div>
@@ -192,54 +187,101 @@ session = request.getSession();
 	</c:forEach>
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
-
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 
 
 
 
 <script>
-function selectjumal(selectjumal)  {
-    var checkboxes3 
-         = document.querySelectorAll('#sat, #sun');
+// function selectjumal(selectjumal)  {
+//     var checkboxes3 
+//          = document.querySelectorAll('#sat, #sun');
     
-    checkboxes3.forEach((checkbox) => {
-      checkbox.checked = selectjumal.checked;
-    })
-  }
-function selectpyeong(selectpyeong)  {
-    var checkboxes2 
-         = document.querySelectorAll('#mon, #tue, #wed, #thu, #fri');
+//     checkboxes3.forEach((checkbox) => {
+//       checkbox.checked = selectjumal.checked;
+//     })
+//   }
+// function selectpyeong(selectpyeong)  {
+//     var checkboxes2 
+//          = document.querySelectorAll('#mon, #tue, #wed, #thu, #fri');
     
-    checkboxes2.forEach((checkbox) => {
-      checkbox.checked = selectpyeong.checked;
-    })
-  }
-function selectAll(selectAll)  {
-     var checkboxes 
-          = document.getElementsByName('cart_day');
+//     checkboxes2.forEach((checkbox) => {
+//       checkbox.checked = selectpyeong.checked;
+//     })
+//   }
+// function selectAll(selectAll)  {
+//      var checkboxes 
+//           = document.getElementsByName('cart_day');
      
-     checkboxes.forEach((checkbox) => {
-       checkbox.checked = selectAll.checked;
-     })
-   }
+//      checkboxes.forEach((checkbox) => {
+//        checkbox.checked = selectAll.checked;
+//      })
+//    }
 
+function selectjumal(selectjumal) {
+  var checkboxes2 = document.getElementsByName('cart_day');
 
-//요일 체크되었는지 확인
-function CheckTest() {
-		
-	const checkPart = document.querySelector('.daycheck');
-    const checkboxes = checkPart.querySelectorAll('input');
+  for (var i = 0; i < checkboxes2.length; i++) {
+    var checkbox2 = checkboxes2[i];
 
-    for( let i = 0; i < checkboxes.length; i ++){
-        if(checkboxes[i].checked === true)
-        	return;	
-        // 체크박스 돌다가 checked가 있으면 바로 return
+    if (checkbox2.value == '토' || checkbox2.value == '일') {
+      checkbox2.checked = selectjumal.checked;
     }
-    alert('요일을 선택해주세요'); 
-    // 체크없으면 바로 return해서 alert
-    return false;
+  }
 }
+function selectpyeong(selectpyeong) {
+  var checkboxes3 = document.getElementsByName('cart_day');
+  
+  for (var i = 0; i < checkboxes3.length; i++) {
+    var checkbox3 = checkboxes3[i];
+    
+    if (checkbox3.value !== '토' && checkbox3.value !== '일') {
+      checkbox3.checked = selectpyeong.checked;
+    }
+  }
+}
+function selectAll(selectAll) {
+  var checkboxes4 = document.getElementsByName('cart_day');
+  for (var checkbox4 of checkboxes4) {
+    checkbox4.checked = selectAll.checked;
+  }
+}
+   
+
+
+
+// // 요일 체크되었는지 확인
+// function CheckTest() {
+		
+// 	const checkPart = document.querySelector('.daycheck');
+//     const checkboxes = checkPart.querySelectorAll('input[type="checkBox"]');
+
+//     for( let i = 0; i < checkboxes.length; i ++){
+//         if(checkboxes[i].checked === true)
+//         	return;	
+//         // 체크박스 돌다가 checked가 있으면 바로 return
+//     }
+//     alert('요일을 선택해주세요'); 
+//     // 체크없으면 바로 return해서 alert
+//     return false;
+// }
+
+function CheckTest() {
+    var checkboxes = document.getElementsByName("cart_day");
+    var checked = false;
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked) {
+        checked = true;
+        break;
+      }
+    }
+    if (!checked) {
+      alert("배송 요일을 선택해주세요!");
+      return false;
+    }
+  }
 
 
 
@@ -255,11 +297,47 @@ function CheckTest() {
 				});
 	});
 	
-	let today = new Date().toISOString().substr(0, 10);
-	document.getElementById("start").min = today;	
-	document.getElementById('start').valueAsDate = new Date();
+//	let today = new Date().toISOString().substr(0, 10);
+//	document.querySelectorAll("#start").min = today;		
+//	document.getElementById("start").min = today;	
+//	document.getElementById('start').valueAsDate = new Date();
 
+	const today = new Date().toISOString().slice(0, 10);
+ 
+	const cartStartInputs = document.querySelectorAll('.form-control.input-number[name="cart_start"]');
+   cartStartInputs.forEach(function(input) {
+     input.min = today;
+   });
+   
+   
+//    // 모달창 내 합계 
+// function calculateTotalPrice() {
+// 	    const cart_cnt = document.getElementById('cart_cnt').value;
+// 	    const pro_price = document.getElementById('pro_price').value;
+// 	    const cart_totprice = document.getElementById('cart_totprice');
+// 	    cart_totprice.value = cart_cnt * pro_price;
+// 	  }
+   
+// const cntInputList = document.querySelectorAll('.form-control[name="cart_cnt"]');
+
+// cntInputList.forEach(cntInput => {
+//   cntInput.addEventListener('input', calculateTotalPrice);
+// });
+
+function calculateTotalPrice() { 
+	  const cart_cnt = parseInt(this.value);
+	  const pro_price = parseInt(this.parentNode.parentNode.querySelector('.form-control[name="pro_price"]').value);
+	  const cart_totprice = this.parentNode.parentNode.querySelector('.cart_totprice');
+	  cart_totprice.value = cart_cnt * pro_price;
+	}
+
+	const cntInputList = document.querySelectorAll('.cart_cnt');
+
+	cntInputList.forEach(cntInput => {
+	  cntInput.addEventListener('input', calculateTotalPrice);
+	});
 	
+
 	
 	$(document).ready(function() {
 		// 종합 정보 삽입

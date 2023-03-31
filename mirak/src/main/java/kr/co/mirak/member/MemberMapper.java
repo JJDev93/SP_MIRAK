@@ -5,7 +5,7 @@ import java.util.List;
 public interface MemberMapper {
 	MemberVO login(MemberVO vo);
 
-	MemberVO idfind(MemberVO vo);
+	List<MemberVO> idfind(MemberVO vo); //
 
 	int idfind_pw(MemberVO vo);
 

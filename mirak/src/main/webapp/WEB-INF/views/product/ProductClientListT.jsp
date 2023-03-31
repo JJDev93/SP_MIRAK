@@ -5,20 +5,17 @@
 <div id="test">
 	<c:set var="path" value="${pageContext.request.contextPath}" />
 	<jsp:include page="/common/client_hd.jsp"></jsp:include>
+	
 	<div class="hero-wrap hero-bread" style="background-image: url('${path}/resources/images/bg_3.jpg');">
-		<div class="container">
-			<div class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<h1 class="mb-0 bread">2·3인세트</h1>
-				</div>
-			</div>
+		<div class="ftco-animate">
+			<h1 class="bread">2·3인세트</h1>
 		</div>
 	</div>
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<p class="pro-title">미락의 2·3인세트 메뉴입니다.</p>
+					<p class="pro-title">미락의 2·3인세트입니다.</p>
 				</div>
 			</div>
 			<div class="row">

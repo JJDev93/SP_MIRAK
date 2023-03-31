@@ -3,14 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
-<div class="hero-wrap hero-bread"
-	style="background-image: url('${path}/resources/images/bg_1.jpg');">
-	<div class="container">
-		<div class="row no-gutters slider-text align-items-center justify-content-center">
-			<div class="col-md-9 ftco-animate text-center">
-				<h1 class="mb-0 bread">회원가입</h1>
-			</div>
-		</div>
+<div class="hero-wrap hero-bread" style="background-image: url('${path}/resources/images/bg_1.jpg');">
+	<div class="ftco-animate">
+		<h1 class="bread">회원가입</h1>
 	</div>
 </div>
 <section class="ftco-section">
@@ -125,7 +120,7 @@
 									</div>
 								</div>
 								<input type="text" id="address_input_2" class="form-control mb-2" name="mem_add1" placeholder="주소지를 입력해주세요" readonly="readonly">
-								<input type="text" id="address_input_3" class="form-control" name="mem_add2" tabIndex="13" placeholder="상세주소를 작성해주세요" readonly>
+								<input type="text" id="address_input_3" class="form-control" name="mem_add2" tabIndex="13" placeholder="상세주소를 작성해주세요" >
 							</div>
 						</div>
 

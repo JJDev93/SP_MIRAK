@@ -3,18 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
-<div class="hero-wrap hero-bread"
-	style="background-image: url('${path}/resources/images/bg_3.jpg');">
-	<div class="container">
-		<div
-			class="row no-gutters slider-text align-items-center justify-content-center">
-			<div class="col-md-9 ftco-animate text-center">
-				<h1 class="mb-0 bread">마이 페이지</h1>
-			</div>
-		</div>
+<div class="hero-wrap hero-bread" style="background-image: url('${path}/resources/images/bg_1.jpg');">
+	<div class="ftco-animate">
+		<h1 class="bread">마이페이지</h1>
 	</div>
 </div>
-
 <section class="ftco-section">
 	<div class="container">
 		<div class="row justify-content-center">
@@ -74,7 +67,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="mem_name">이름</label> 
-								<input type="text" name="mem_name" id="mem_name" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" readonly="readonly">
+								<input type="text" name="mem_name" id="mem_name" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }">
 							</div>
 						</div>
 
@@ -197,12 +190,10 @@
 							data-dismiss="modal">Close</button>
 							<c:choose>
 							<c:when test="${not empty member.mem_isapi}">
-						<button type="button" class="btn btn-primary" id="memberCheck"
-							onclick="apiDelete();">탈퇴하기</button>
+								<button type="button" class="btn btn-primary" id="memberCheck" onclick="apiDelete();">탈퇴하기</button>
 							</c:when>
 							<c:otherwise>
-							<button type="button" class="btn btn-primary" id="memberCheck"
-							onclick="confirmDeleteMem();" >탈퇴하기</button>
+								<button type="button" class="btn btn-primary" id="memberCheck" onclick="confirmDeleteMem();" >탈퇴하기</button>
 							</c:otherwise>
 							</c:choose>
 					</div>
@@ -253,6 +244,7 @@
 	$(document).ready(function() {
 		console.log("message : "+"${message}");
 		console.log("mem_id : "+"${mem_id}");
+		console.log("mem_isapi : "+"${mem_isapi}");
 		if("${message}" !=""){
 			alert("${message}");
 			 <%session.setAttribute("message","");%>
@@ -269,13 +261,13 @@ $(document).ready(function() {
     function handleEnterKey(event) {
       if (event.keyCode === 13) {
         if (modalId == "exampleModal") {
-          document.getElementById(modalId).querySelector("#memberCheck").click();
+        	document.querySelector("#memberCheck").click();
         } else if (modalId == "pwUpdate") {
-          document.getElementById(modalId).querySelector("#updateCheck").click();
+          document..querySelector("#updateCheck").click();
         }
         setTimeout(function() {
           document.addEventListener("keydown", handleEnterKey);
-        }, 1000); // 1초 후에 다시 이벤트 핸들러를 등록
+        }, 100); // 1초 후에 다시 이벤트 핸들러를 등록
       }
     }
     document.addEventListener("keydown", handleEnterKey);
