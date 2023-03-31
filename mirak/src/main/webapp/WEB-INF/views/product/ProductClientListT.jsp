@@ -18,7 +18,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<p class="pro-title">미락의 2·3인세트 메뉴입니다.</p>
+					<p class="pro-title">미락의 2·3인세트입니다.</p>
 				</div>
 			</div>
 			<div class="row">

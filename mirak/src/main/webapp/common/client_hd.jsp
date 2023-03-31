@@ -37,7 +37,7 @@
 				<div class="collapse navbar-collapse" id="ftco-nav">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item <c:if test="${fn : contains(cateAll, '/product/ProductClientList') && fn : contains('/product/ProductClientList', cateAll)}">active</c:if>"><a href="/ProductClientList" class="nav-link">전체메뉴</a></li>
-						<li class="nav-item <c:if test="${fn : contains(cate, 'ProductClientListP')}">active</c:if>"><a href="/ProductClientListP" class="nav-link">프리미엄</a></li>
+						<li class="nav-item <c:if test="${fn : contains(cate, 'ProductClientListP')}">active</c:if>"><a href="/ProductClientListP" class="nav-link">스페셜세트</a></li>
 						<li class="nav-item <c:if test="${fn : contains(cate, 'ProductClientListT')}">active</c:if>"><a href="/ProductClientListT" class="nav-link">2·3인세트</a></li>
 						<li class="nav-item <c:if test="${fn : contains(cate, 'ProductClientListO')}">active</c:if>" ><a href="/ProductClientListO" class="nav-link">1인세트</a></li>
 						<% if (session.getAttribute("mem_id") == null) {%>
