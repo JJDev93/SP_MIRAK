@@ -6,8 +6,7 @@ function fn_idCheck() {
 	  const email = emailInput.value.trim();
 	  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 	
-		
-	
+
     $.ajax({
         url : "/idCheck",
         type : "POST",

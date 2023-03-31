@@ -38,10 +38,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	// 아이디 찾기
-	public MemberVO idfind(MemberVO vo) {
+	public List<MemberVO> idfind(MemberVO vo) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		MemberVO memVO = mapper.idfind(vo);
-		return memVO;
+		return mapper.idfind(vo);
 	}
 
 	// 아이디 찾기(비번 리셋용)

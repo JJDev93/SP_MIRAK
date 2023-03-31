@@ -71,8 +71,11 @@
 							placeholder="핸드폰번호를 입력해주세요.." required="required">
 					</div>
 					<div>
+					
 						<label style="color: red">${message }</label>
-						<label style="color: blue">${mem_id }</label>
+						<c:forEach items="${memberList}" var="member">
+					<label style="color: #fb8622;">${member.mem_id}</label>
+						</c:forEach>
 					</div>
 					<div class="form-group row">
 						<div class="col-md-12 text-center">
@@ -135,4 +138,9 @@ $(document).ready(function() {
 	}
 });
 </script>
+
+
+
+
+
 
