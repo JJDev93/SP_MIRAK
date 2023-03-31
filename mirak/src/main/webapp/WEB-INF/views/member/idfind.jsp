@@ -76,7 +76,7 @@
 					</div>
 					<div class="form-group row">
 						<div class="col-md-12" style="text-align: right;">
-							<a href="pwreset">비밀번호를 잃어버렸습니다.......</a>
+							<a href="pwreset">비밀번호를 잃어버렸습니다.</a>
 						</div>
 					</div>
 				</form>

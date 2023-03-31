@@ -137,7 +137,7 @@
 							    </c:otherwise>
 							</c:choose>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-6"> 
 							<a href="/" class="btn btn-secondary py-3 px-5 w-100" tabIndex="15">가입취소</a>
 						</div>
 					</div>

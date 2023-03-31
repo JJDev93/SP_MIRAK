@@ -55,7 +55,7 @@
 												<input type="password" name="rawPw" class="form-control" id="rawPw" placeholder="비밀번호를 입력해주세요" required="required">
 											</div>
 											<div class="col-sm-3" style="padding-top: 0 !important;">
-												<button type="button" class="btn btn-primary joinBtn mb-3" data-toggle="modal" data-target="#pwUpdate">비밀번호 변경</button>
+												<button type="button" class="btn btn-primary joinBtn mb-3" onclick="location.href='updatePw'">비밀번호 변경</button>
 											</div>
 										</div>
 									</div>
@@ -176,10 +176,8 @@
 					</div>
 					</c:when>
 					<c:otherwise>
-					<div class="modal-body">
 						회원탈퇴시 모든 정보가 삭제됩니다. 비밀번호를 입력해 주세요. 
 						<input type="password" class="form-control" id="pw_1" required="required">
-					</div>
 					</c:otherwise>
 					</c:choose>
 					</div>
@@ -202,41 +200,6 @@
 			</div>
 		</div>
 	</form>
-
-	<!-- Modal -->
-	<form action="pwUpdate" method="post">
-		<div class="modal fade" id="pwUpdate" tabindex="9999"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">비밀번호 변경</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<label for="befo_pw">기존 비밀번호</label> 
-							<input type="password" name="befo_pw" id="befo_pw" class="form-control" placeholder="기존 비밀번호를 입력해주세요">
-						</div>
-						<div class="form-group">
-							<label for="new_pw">변경 할 비밀번호</label> 
-							<input type="password" name="new_pw" id="new_pw" class="form-control" placeholder="새로운 비밀번호를 입력해주세요">
-						</div>
-						<div class="form-group">
-							<label for="new_pw_chk">변경 할 비밀번호 확인</label> 
-							<input type="password" name="new_pw_chk" id="new_pw_chk" class="form-control" placeholder="새로운 비밀번호를 입력해주세요">
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary" id="updateCheck" onclick="confirmUpdatePw();">수정하기</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</form>
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
 
@@ -252,7 +215,7 @@
 	})
 </script>
 
-<script>
+<!-- <script> 
 $(document).ready(function() {
   $('.modal').on('shown.bs.modal', function() {
     var modalId = $(this).attr('id');
@@ -273,4 +236,4 @@ $(document).ready(function() {
     document.addEventListener("keydown", handleEnterKey);
   });
 });
-</script>
+</script>-->

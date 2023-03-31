@@ -52,8 +52,8 @@
                </div>
                <div class="form-group row" style="text-align: right;">
                   <div class="col-md-12 text-center">
-                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="join">회원가입</a>&nbsp;&nbsp;|&nbsp; <a href="idfind">아이디 찾기</a>&nbsp;&nbsp;
-                  <!--    <a href="pwreset">비밀번호재설정</a> -->
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="join">회원가입</a>&nbsp;&nbsp;|&nbsp; <a href="idfind">아이디 찾기</a>&nbsp;&nbsp;|&nbsp;
+                     <a href="pwreset">비밀번호 찾기</a>
                   </div>
                </div>
             </form>
