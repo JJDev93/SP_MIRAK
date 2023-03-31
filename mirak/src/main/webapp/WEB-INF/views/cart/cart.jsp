@@ -333,7 +333,7 @@ function CheckTest() {
 //   cntInput.addEventListener('input', calculateTotalPrice);
 // });
 
-function calculateTotalPrice() {
+function calculateTotalPrice() { 
 	  const cart_cnt = parseInt(this.value);
 	  const pro_price = parseInt(this.parentNode.parentNode.querySelector('.form-control[name="pro_price"]').value);
 	  const cart_totprice = this.parentNode.parentNode.querySelector('.cart_totprice');
