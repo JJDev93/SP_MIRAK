@@ -74,7 +74,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="mem_name">이름</label> 
-								<input type="text" name="mem_name" id="mem_name" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" readonly="readonly">
+								<input type="text" name="mem_name" id="mem_name" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }">
 							</div>
 						</div>
 
