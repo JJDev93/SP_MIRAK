@@ -22,6 +22,9 @@ public interface MemberMapper {
 	MemberVO getMemberInfo(String mem_code);
 
 	int idCheck(String id);
+
+	int existIdAndIsApi(String id, String isApi);
+
 	// 카카오 로그인
 	// MemberVO findkakao(HashMap<String, Object> userInfo);
 	// void kakaoinsert(HashMap<String, Object> userInfo);
@@ -39,5 +42,6 @@ public interface MemberMapper {
 	int adminMemberDel(MemberVO vo);
 
 	int adminMemberUpdate(MemberVO vo);
+
 
 }

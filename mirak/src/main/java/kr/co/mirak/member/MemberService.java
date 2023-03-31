@@ -25,7 +25,9 @@ public interface MemberService {
 	MemberVO getMemberDetail(String memId);
 
 	int idCheck(String id) throws Exception;
-
+	
+	int existIdAndIsApi(String id, String isApi);
+	
 	// 카카오 로그인
 //	String getAccessToken(String code);
 //	MemberVO getUserInfo(String access_Token);

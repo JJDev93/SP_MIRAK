@@ -75,7 +75,7 @@ function naverLogout() {
    setTimeout(function() {
       closePopUp();
    }, 1);
-   location.href="logout";
+   location.href="/logout";
 }
 </script>
 </html>

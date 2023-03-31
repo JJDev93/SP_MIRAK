@@ -70,6 +70,7 @@ public class PayController {
 		if (mem_id == null) {
 			String preUrl = "/pay/" + pro_code + "/" + cart_cnt + "/" + cart_start + "/" + URLEncoder.encode(cart_day, "UTF-8");
 			session.setAttribute("pre_url", preUrl);
+			session.setAttribute("message", "로그인 후 이용해주세요.");
 			return "redirect:/login";
 		}
 		
