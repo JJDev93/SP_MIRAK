@@ -123,12 +123,8 @@ public class MemberServiceImpl implements MemberService {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
-
-			sb.append("&client_id=e481c91b1136f51f927a619fc062146d"); // 본인이 발급받은 key
-			sb.append("&redirect_uri=http://localhost:8080/kakaoLogin"); // 본인이 설정한 주소
 			sb.append("&client_id=e481c91b1136f51f927a619fc062146d"); // 본인이 발급받은 key
 			sb.append("&redirect_uri=https://www.mirak.shop/kakaoLogin"); // 본인이 설정한 주소
-
 			sb.append("&code=" + code);
 			bw.write(sb.toString());
 			bw.flush();

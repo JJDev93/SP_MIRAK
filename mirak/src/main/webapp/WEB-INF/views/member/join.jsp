@@ -174,6 +174,12 @@
 	const ADDERSSCHECK = document.getElementById("address_input_1");
 	var inputCode = $("#mail_check_input").val();        // 입력코드
     
+	/* 
+		else if(inputCode != code){                               // 인증번호가 일치하지 않을 경우
+	        alert("인증번호를 다시 확인해주세요.");
+	        return false;                                    // submit 막기
+	    }
+	*/
     
 	function checkAll() {
 		if (IDCHECK.value === "") {
@@ -186,10 +192,7 @@
 		} else if (verificationCodeInput.value === "") {
 			alert("인증번호를 입력해주세요.");
 			return false;
-		} else if(inputCode != code){                               // 인증번호가 일치하지 않을 경우
-	        alert("인증번호를 다시 확인해주세요.");
-	        return false;                                    // submit 막기
-	    } else if (PWCHECK.value === "") {
+		} else if (PWCHECK.value === "") {
 			alert("비밀번호를 입력해주세요");
 			return false;
 		} else if (PW2CHECK.value === "") {
