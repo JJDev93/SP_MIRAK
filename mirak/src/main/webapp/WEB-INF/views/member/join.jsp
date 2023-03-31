@@ -120,7 +120,7 @@
 									</div>
 								</div>
 								<input type="text" id="address_input_2" class="form-control mb-2" name="mem_add1" placeholder="주소지를 입력해주세요" readonly="readonly">
-								<input type="text" id="address_input_3" class="form-control" name="mem_add2" tabIndex="13" placeholder="상세주소를 작성해주세요" readonly>
+								<input type="text" id="address_input_3" class="form-control" name="mem_add2" tabIndex="13" placeholder="상세주소를 작성해주세요" >
 							</div>
 						</div>
 

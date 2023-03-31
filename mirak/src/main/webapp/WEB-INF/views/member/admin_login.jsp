@@ -76,7 +76,7 @@ body {
 		<input type="password" id="PW" name="mem_pw" class="form-control mb-3" placeholder="비밀번호를 입력하세요" required>
 		
 		<button class="btn btn-lg btn-primary btn-block mb-3" type="submit">로그인</button>
-		<a href="/">Client</a>
+		<a href="/" class="btn btn-lg btn-secondary btn-block mb-3">Client</a>
 		
 		<p class="mt-5 mb-3 text-muted">
          &copy Copyright MIRAK .2023<br>
