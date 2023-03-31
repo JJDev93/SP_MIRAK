@@ -10088,3 +10088,31 @@ textarea.form-control {
 }
 
 .client-hd{ height:78px; }
+
+.hero-bread{ position: relative; }
+.hero-bread:before{     display: block;
+    content: "";
+    background: black;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    left: 0; }
+.hero-bread .bread{     
+	font-weight: 400;
+    color: #fff;
+    font-size: 40px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1.3;
+    text-shadow: 3px 3px 2px rgba(0,0,0,0.3);
+    position: absolute;
+    top: 130px;
+    z-index: 100;
+    margin: 0;
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0 20px;
+}
