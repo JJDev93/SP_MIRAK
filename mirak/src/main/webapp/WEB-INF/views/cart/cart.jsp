@@ -21,89 +21,93 @@ session = request.getSession();
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-10 ftco-animate mb-5">
-				<ul class="nav nav-tabs w-100">
-					<li class="nav-item"><a class="nav-link" href="/mypage">마이페이지</a></li>
-					<li class="nav-item"><a class="nav-link active" href="/cart">장바구니</a></li>
-					<li class="nav-item"><a class="nav-link" href="/payInfo">결제내역</a></li>
-				</ul>
-			</div>
-		</div>
-
-		<div class="row justify-content-center">
-			<div class="col-xl-12 ftco-animate">
-				<form method="post" action="/pay">
-					<div class="cart-list">
-						<table class="table table_wrap">
-							<thead class="thead-primary">
-								<tr class="text-center">
-									<th style="width:40px;">
-										<div class="all_check_input_div">
-											<span class="all_chcek_span"></span> <input type="checkbox"
-												class="all_check" checked="checked">
+				<div class="row mb-5">
+					<ul class="nav nav-tabs w-100">
+						<li class="nav-item"><a class="nav-link" href="/mypage">마이페이지</a></li>
+						<li class="nav-item"><a class="nav-link active" href="/cart">장바구니</a></li>
+						<li class="nav-item"><a class="nav-link" href="/payInfo">결제내역</a></li>
+					</ul>
+				</div>
+				<div class="row ftco-animate">
+					<c:choose>
+						<c:when test="${cartList.size() != 0}">
+							<form method="post" action="/pay">
+								<div class="cart-list">
+									<table class="table table_wrap">
+										<thead class="thead-primary">
+											<tr class="text-center">
+												<th style="width:40px;">
+													<div class="all_check_input_div">
+														<span class="all_chcek_span"></span> <input type="checkbox"
+															class="all_check" checked="checked">
+													</div>
+												</th>
+												<th>이미지</th>
+												<th>상품명</th>
+												<th>가격</th>
+												<th>배송일</th>
+												<th>요일선택</th>
+												<th>갯수</th>
+												<th>총가격</th>
+												<th></th>
+											</tr>
+										</thead>
+			
+										<tbody>
+											<c:forEach var="c" items="${cartList }">
+												<tr class="text-center">
+													<td class="cart_info">
+														<input type="checkbox" class="cart_checkbox" name="cart_check" checked="checked" value="${c.cart_code }"> 
+														<input type="hidden" class="price_input" value="${c.pro_price }"> 
+														<input type="hidden" class="count_input" value="${c.cart_cnt }"> 
+														<input type="hidden" class="totalPrice_input" value="${c.pro_price * c.cart_cnt }">
+														<input type="hidden" class="pro_code" value="${c.pro_code }">
+														<input type="hidden" class="cart_code" value="${c.cart_code }">
+													</td>
+													<td class="image-prod">
+														<div>
+															<img alt="1" src="${path}/resources/images/product/${c.pro_image}" style="width: 100px;">
+														</div>
+													</td>
+													<td class="product-name"><h3>${c.pro_name }</h3></td>
+													<td><fmt:formatNumber value="${c.pro_price }" type="number"/></td>
+													<td>${c.cart_start }</td>
+													<td>${c.cart_day }</td>
+													<td>${c.cart_cnt }</td>
+													<td><fmt:formatNumber value="${c.pro_price * c.cart_cnt}" type="number"/></td>
+													<td>
+														<input type="button" value="변경" class="btn btn-primary" data-toggle="modal" data-target="#modal${c.cart_code }">
+														<a href="/cart/cartDelete/${c.cart_code }" class="btn btn-danger" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
+													</td>
+												</tr>
+											</c:forEach>
+											<!-- END TR-->
+										</tbody>
+									</table>
+								</div>
+								<div class="row">
+									<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+										<div class="cart-total mb-3">
+											<h3>장바구니 합계</h3>
+											<p class="d-flex">
+												<span>상품 가짓수</span> <span class="totalKind_span"></span>
+											</p>
+											<p class="d-flex">
+												<span>상품합계</span> <span class="totalPrice_span"></span>
+											</p>							
 										</div>
-									</th>
-									<th>이미지</th>
-									<th>상품명</th>
-									<th>가격</th>
-									<th>배송일</th>
-									<th>요일선택</th>
-									<th>갯수</th>
-									<th>총가격</th>
-									<th colspan="2"></th>
-								</tr>
-							</thead>
-
-							<tbody>
-								<c:forEach var="c" items="${cartList }">
-									<tr class="text-center">
-										<td class="cart_info">
-											<input type="checkbox" class="cart_checkbox" name="cart_check" checked="checked" value="${c.cart_code }"> 
-											<input type="hidden" class="price_input" value="${c.pro_price }"> 
-											<input type="hidden" class="count_input" value="${c.cart_cnt }"> 
-											<input type="hidden" class="totalPrice_input" value="${c.pro_price * c.cart_cnt }">
-											<input type="hidden" class="pro_code" value="${c.pro_code }">
-											<input type="hidden" class="cart_code" value="${c.cart_code }">
-										</td>
-										<td class="image-prod">
-											<div>
-												<img alt="1" src="${path}/resources/images/product/${c.pro_image}" style="width: 100px;">
-											</div>
-										</td>
-										<td class="product-name">
-											<h3>${c.pro_name }</h3>
-										</td>
-										<td>${c.pro_price }</td>
-										<td>${c.cart_start }</td>
-										<td>${c.cart_day }</td>
-										<td>${c.cart_cnt }</td>
-										<td>${c.pro_price * c.cart_cnt}</td>
-										<td>
-											<input type="button" value="변경" class="btn btn-primary" data-toggle="modal" data-target="#modal${c.cart_code }">
-										</td>
-										<td><a href="/cart/cartDelete/${c.cart_code }" class="btn btn-danger" onclick="return confirm('삭제하시겠습니까?');">삭제</a></td>
-									</tr>
-								</c:forEach>
-								<!-- END TR-->
-							</tbody>
-						</table>
-					</div>
-					<div class="row">
-						<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-							<div class="cart-total mb-3">
-								<h3>장바구니 합계</h3>
-								<p class="d-flex">
-									<span>상품 가짓수</span> <span class="totalKind_span"></span>
-								</p>
-								<p class="d-flex">
-									<span>상품합계</span> <span class="totalPrice_span"></span>
-								</p>							
-							</div>
-							<p>
-								<input type="submit" value="결제하기" class="btn btn-primary py-3 px-5">
-							</p>
-						</div>
-					</div>
-				</form>
+										<p>
+											<input type="submit" value="결제하기" class="btn btn-primary py-3 px-5">
+										</p>
+									</div>
+								</div>
+							</form>
+                        </c:when>
+						<c:otherwise> 
+							등록 된 상품이 없습니다.
+						</c:otherwise>
+					</c:choose>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -116,7 +120,7 @@ session = request.getSession();
 						<input type="hidden" name="cart_code" value="${c.cart_code }">
 						<input type="hidden" name="cart_totprice" value="${c.cart_cnt * c.pro_price}">		
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">구매 옵션 변경</h5>
+							<h5 class="modal-title" id="exampleModalLabel">${c.pro_name } 옵션 변경</h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -129,12 +133,8 @@ session = request.getSession();
 										<img src="${path}/resources/images/product/${c.pro_image}" title="${c.pro_name }" alt="${c.pro_desc }" style="width: 250px;">
 									</div>
 									<div class="text d-block pl-md-4">
-										<h3 class="heading">${c.pro_name }</h3>								
 										<p>
-											<span class="font-weight-bold text-dark">상품 상세</span> ${c.pro_desc}
-										</p>												
-										<p>
-											<input type="text" readonly="readonly" style="cursor:default" class="form-control" id="pro_price" name="pro_price" value="${c.pro_price }">
+											<input type="text" readonly="readonly" style="cursor:default" class="form-control" id="pro_price" name="pro_price" value="<fmt:formatNumber value="${c.pro_price}" type="number"/>">
 										</p>					
 										<p>
 											<label for="start"><span class="font-weight-bold text-dark">배송 시작일</span></label>
@@ -176,7 +176,6 @@ session = request.getSession();
 							<!-- <input type="submit" value="변경" class="btn btn-primary py-3 px-5"> -->
 							<!-- <input type="submit" value="변경" class="btn btn-primary py-3 px-5" onclick="if(document.getElementsByName('cart_start')[0].value==''){alert('배송 시작일을 입력해주세요.');return false;}"> -->
 							<input type="submit" value="변경" class="btn btn-primary py-3 px-5" onclick="return CheckTest();">
-							
 							<button type="button" class="btn btn-black py-3 px-5" data-dismiss="modal">Close</button>
 						</div>
 					</form>

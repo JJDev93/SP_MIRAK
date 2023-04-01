@@ -14,8 +14,7 @@
 			<div class="col-md-10 ftco-animate">
 				<div class="row mb-5">
 					<ul class="nav nav-tabs w-100">
-						<li class="nav-item"><a class="nav-link active"
-							href="/mypage">마이페이지</a></li>
+						<li class="nav-item"><a class="nav-link active" href="/mypage">마이페이지</a></li>
 						<li class="nav-item"><a class="nav-link" href="/cart">장바구니</a></li>
 						<li class="nav-item"><a class="nav-link" href="/payInfo">결제내역</a></li>
 					</ul>

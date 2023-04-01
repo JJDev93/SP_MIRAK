@@ -9094,6 +9094,11 @@ h1, h2, h3, h4, h5,
   .cart-detail .btn-primary {
     display: block;
     width: 100%; }
+  .cart-detail .cart-detail-li { margin-bottom: 3rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 2rem; }
+  .cart-detail .cart-detail-li:first-child{ padding-top:1rem; }
+  .cart-detail .cart-detail-li:last-child{border-bottom:none; padding-bottom:0; margin-bottom:0; }
 
 .circle {
   width: 300px;
