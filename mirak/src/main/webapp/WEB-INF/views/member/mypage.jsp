@@ -22,6 +22,7 @@
 
 				<form action="/apiMemupdate" method="post" class="contact-form billing-form" id="delForm" onsubmit="return confirmUpdateApiMember();">
 					<input type="hidden" name="mem_pw" id="mem_pw" class="form-control" value="${member.mem_pw }" readonly="readonly">
+					<input type="hidden" name="mem_isapi" id="mem_isapi" class="form-control" value="${member.mem_isapi }" readonly="readonly">
 					<h3 class="mb-2 billing-heading">회원정보 수정</h3>
 					<div class="row align-items-end">
 						<div class="col-md-12">
@@ -121,7 +122,7 @@
 						<div class="w-100 mt-4"></div>
 						<div class="col-md-6 text-center">
 							<c:choose>
-								<c:when test="${not member.mem_isapi == 'normal'}">
+								<c:when test="${member.mem_isapi == 'google' || member.mem_isapi == 'NAVER' || member.mem_isapi == 'kakao'}">
 									<input type="submit" value="수정하기" class="btn btn-primary py-3 px-5">
 								</c:when>
 								<c:otherwise>
