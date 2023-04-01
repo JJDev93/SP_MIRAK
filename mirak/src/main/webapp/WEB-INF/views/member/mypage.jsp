@@ -22,7 +22,7 @@
 
 				<form action="apiMemupdate" method="post" class="contact-form billing-form" id="delForm" onsubmit="return confirmUpdateApiMember();">
 					<input type="hidden" name="mem_pw" id="mem_pw" class="form-control" value="${member.mem_pw }" readonly="readonly">
-					<h3 class="mb-4 billing-heading">회원정보 수정</h3>
+					<h3 class="mb-2 billing-heading">회원정보 수정</h3>
 					<div class="row align-items-end">
 						<div class="col-md-12">
 							<div class="form-group">
@@ -43,8 +43,10 @@
 									</c:otherwise>
 								</c:choose>
 							</div>
-							<c:choose>
-								<c:when test="${member.mem_isapi == 'normal'}">
+						</div>
+						<c:choose>
+							<c:when test="${member.mem_isapi == 'normal'}">
+								<div class="col-md-12">
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-12">
@@ -58,26 +60,21 @@
 											</div>
 										</div>
 									</div>
-								</c:when>
-							</c:choose>
-						</div>
-
-						<div class="w-100"></div>
+								</div>	
+							</c:when>
+						</c:choose>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="mem_name">이름</label> 
 								<input type="text" name="mem_name" id="mem_name" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }">
 							</div>
 						</div>
-
-						<div class="w-100"></div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="mem_age">나이</label> 
 								<input type="text" name="mem_age" id="mem_age" class="form-control" placeholder="나이를 입력해주세요" required="required" value="${member.mem_age }">
 							</div>
 						</div>
-
 						<div class="w-100"></div>
 						<div class="col-md-6">
 							<div class="form-group">
@@ -98,7 +95,6 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="w-100"></div>
 						<div class="col-md-6">
 							<div class="form-group">
@@ -106,12 +102,11 @@
 								<input type="text" name="mem_phone" id="mem_phone" class="form-control" placeholder=" ' - ' 빼고 입력해주세요 " required="required" value="${member.mem_phone }" maxlength="11" pattern="[0-9]{11}">
 							</div>
 						</div>
-
 						<div class="w-100"></div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="address_input_1">주소</label>
-								<div class="row mb-4">
+								<div class="row mb-2">
 									<div class="col-sm-8">
 										<input type="text" class="form-control" id="address_input_1" name="mem_zipcode" placeholder="주소지를 입력해주세요" value="${member.mem_zipcode }" readonly="readonly">
 									</div>
@@ -119,12 +114,11 @@
 										<button type="button" class="btn btn-primary joinBtn address button" onclick="execution_daum_address();">우편번호찾기</button>
 									</div>
 								</div>
-								<input type="text" class="form-control mb-4" readonly="readonly" id="address_input_2" placeholder="주소작성" readonly="readonly" value="${member.mem_add1 }" name="mem_add1"> 
-								<input type="text" class="form-control" placeholder="상세주소작성" id="address_input_3" value="${member.mem_add2 }" readonly="readonly" name="mem_add2">
+								<input type="text" class="form-control mb-2" readonly="readonly" id="address_input_2" placeholder="주소작성" readonly="readonly" value="${member.mem_add1 }" name="mem_add1"> 
+								<input type="text" class="form-control" placeholder="상세주소작성" id="address_input_3" value="${member.mem_add2 }" name="mem_add2">
 							</div>
 						</div>
-
-						<div class="w-100 mt-5"></div>
+						<div class="w-100 mt-4"></div>
 						<div class="col-md-6 text-center">
 							<c:choose>
 								<c:when test="${not member.mem_isapi == 'normal'}">

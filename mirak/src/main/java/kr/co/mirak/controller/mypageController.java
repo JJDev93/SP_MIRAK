@@ -29,7 +29,7 @@ public class mypageController {
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public String mypageview(Model model, HttpSession session) {
 		MemberVO member = memberService.getMemberInfo(session);
-		System.out.println("모델에 담을거는 : " + member);
+		System.out.println();
 		model.addAttribute("member", member);
 		return "member/mypage";
 	}

@@ -20,13 +20,10 @@ import kr.co.mirak.member.MemberVO;
 
 @Controller
 public class JoinController {
-
 	@Autowired
 	private MemberService memberService;
-
 	@Autowired
 	private JavaMailSender mailSender;
-
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder;
 
@@ -36,7 +33,6 @@ public class JoinController {
 		System.out.println("회원가입 화면으로 이동!");
 		String preUrl = (String) session.getAttribute("pre_url");
 		System.out.println("preUrl : " + preUrl);
-
 		return "member/join";
 	}
 
@@ -64,26 +60,21 @@ public class JoinController {
 	// 회원가입 기능
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String joincuccess(MemberVO vo, String id, HttpSession session) throws Exception {
-
 		try {
 			// 암호화 1
-
-			String rawPw = ""; // 인코딩 전 비밀번호
-			String encodePw = ""; // 인코딩 후 비밀번호
-
-			rawPw = vo.getMem_pw(); // 비밀번호 데이터 얻음
-			encodePw = pwEncoder.encode(rawPw); // 비밀번호 인코딩
+			String rawPw = vo.getMem_pw(); // 인코딩 전 비밀번호
+			String encodePw = pwEncoder.encode(rawPw); // 인코딩 후 비밀번호
 			vo.setMem_pw(encodePw); // 인코딩된 비밀번호 vo객체에 다시 저장
 
 			// 회원 가입 쿼리 실행
 			memberService.createUser(vo);
+			System.out.println(vo);
+
 			session.setAttribute("message", "회원가입 성공하였습니다!");
-			String mem_id = vo.getMem_id();
-			session.setAttribute("mem_id", mem_id); // 세션에 사용자정보 저장
+			session.setAttribute("mem_id", vo.getMem_id()); // 세션에 사용자정보 저장
 			session.setAttribute("mem_isapi", vo.getMem_isapi()); // 세션에 사용자정보 저장
 			String preUrl = (String) session.getAttribute("pre_url");
 			String returnURL = "";
-
 			System.out.println("preUrl : " + preUrl);
 
 			if (preUrl != null) {
