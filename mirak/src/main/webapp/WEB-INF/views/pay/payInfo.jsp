@@ -20,14 +20,10 @@
 							href="/payInfo">결제내역</a></li>
 					</ul>
 				</div>
-
-
 				<div class="row">
 					<div class="col-lg-12 ftco-animate">
 						<div class="row">
-
 							<c:forEach items="${payVOList}" var="payVO">
-
 								<div class="col-md-12 d-flex ftco-animate">
 									<div class="blog-entry align-self-stretch d-md-flex">
 										<!-- 											<a href="blog-single.html" class="block-20"> </a> -->
@@ -35,20 +31,14 @@
 											style="background-image: url(${path}/resources/images/product/${payVO.pro_image })"></div>
 										<div class="text d-block pl-md-4">
 											<div class="meta mb-3">
-												<div>
-													주문번호 : ${payVO.group_id }<br> 주문일 : ${payVO.pay_date}
-												</div>
-
-
+												<div>주문번호 : ${payVO.group_id }<br> 주문일 : ${payVO.pay_date}</div>
 											</div>
 											<h3 class="heading">
-												${payVO.pro_name} <c:if
-														test="${payVO.cart_cnt > 1 }"> 외 ${payVO.cart_cnt - 1 }개 품목</c:if>
-												
+												${payVO.pro_name} <c:if test="${payVO.cart_cnt > 1 }"> 외 ${payVO.cart_cnt - 1 }개 품목</c:if>
 											</h3>
 											<p>총 수량 ${payVO.pro_price }개 &nbsp;&nbsp;&nbsp; 합계
 												${payVO.totalPrice } 원</p>
-											<p>${payVO.status }(구매확정을하거나배송이 시작되면 주문을 취소 할 수 없습니다.)</p>
+											<p>${payVO.status }</p>
 											<p></p>
 											<p>
 												<a href="/payDetailInfo/${payVO.group_id }" class="btn btn-primary py-2 px-3 detailProduct">상세보기</a>
@@ -64,48 +54,25 @@
 										</div>
 									</div>
 								</div>
-
 							</c:forEach>
-
-							<c:if test="${payVOList.size() == 0}">
-									주문 내역이 없습니다.
-									</c:if>
-
+							<c:if test="${payVOList.size() == 0}">주문 내역이 없습니다.</c:if>
 						</div>
 					</div>
 					<!-- .col-md-8 -->
-
-
 				</div>
-
 			</div>
-
 		</div>
 	</div>
-
-
-
-
-
 </section>
-
-
-
-
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
-
 <script type="text/javascript">
 	$(function() {
-
 		$(".payCancel").click(
 			function() {
-
 				let totalPrice = $(this).data('total_price');
 				let group_id = $(this).data('group_id');
 				let pro_name = $(this).data('pro_name');
-
 				let result = confirm("선택하신 상품은 <<" + pro_name + ">>입니다. \n 주문을 취소하시겠습니까?")
-
 				if (result) {
 					// 카카오페이 결제 취소 전송
 					$.ajax({
@@ -121,33 +88,17 @@
 						}
 					})
 				}
-
 			})
-			
-			
-		
 	$("#payConfirm").click(
 			function() {
-
 				let group_id = $(this).data('group_id');
-
 				let result = confirm("구매 확정을 하시겠습니까?")
-
 				if (result) {
 					// 카카오페이 결제 취소 전송
 					location.href = "/payConfirm/"+group_id
 				}
-
 			})
-					
-			
-			
-	
 	})
-			
-			
-	
 </script>
-
 </body>
 </html>

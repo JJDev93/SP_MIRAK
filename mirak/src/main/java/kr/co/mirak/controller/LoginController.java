@@ -220,7 +220,7 @@ public class LoginController {
 
 				memberService.pwreset(vo);
 				session.setAttribute("message", "메일로 임시비밀번호가 전송되었습니다.");
-				return "redirect:/";
+				return "redirect:/login";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

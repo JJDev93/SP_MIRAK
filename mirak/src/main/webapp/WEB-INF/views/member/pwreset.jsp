@@ -29,7 +29,7 @@
 </style>
 <div class="hero-wrap hero-bread" style="background-image: url('${path}/resources/images/bg_1.jpg');">
 	<div class="ftco-animate">
-		<h1 class="bread">비밀번호변경</h1>
+		<h1 class="bread">비밀번호 찾기</h1>
 	</div>
 </div>
 <section class="ftco-section">
@@ -38,7 +38,7 @@
 			<div class="col-md-8 mb-5 text-center">
 				<ul class="nav nav-tabs">
 					<li class="nav-item"><a class="nav-link" href="idfind">아이디찾기</a></li>
-					<li class="nav-item"><a class="nav-link active" href="pwreset">비밀번호재설정</a></li>
+					<li class="nav-item"><a class="nav-link active" href="pwreset">비밀번호 찾기</a></li>
 				</ul>
 			</div>
 		</div>
@@ -47,7 +47,8 @@
 		<div class="row justify-content-center">
 			<div class="col-md-5 ftco-animate">
 				<form action="mailCheck" method="get" class="contact-form">
-					<h3 class="mb-4 billing-heading" style="text-align: center;">비밀번호재설정</h3>
+					<h1 class="mb-4 billing-heading" style="text-align: center;">비밀번호 찾기</h1>
+					
 					<input type="hidden" id="reset" value="reset">
 					<div class="form-group">
 						<label for="id">아이디</label>
@@ -67,12 +68,12 @@
 					</div>
 					<div class="form-group row">
 						<div class="col-md-12 text-center">
-						<button type="button" id="pwresetmail" class="btn btn-primary py-3 px-5 w-50">임시번호 발송</button>
+						<button type="button" id="pwresetmail" class="btn btn-primary py-3 px-5 w-50">메일 인증</button>
 						</div>
 					</div>
 					<div class="form-group row">
 						<div class="col-md-12 text-right">
-							<a href="idfind">아이디 먼저 찾고싶어요....</a>
+							<a href="idfind">아이디 먼저 찾고싶어요.</a>
 						</div>
 					</div>
 				</form>
