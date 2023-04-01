@@ -38,10 +38,7 @@
 												value="0">
 										</c:otherwise>
 									</c:choose>
-
-
 									<p>
-										<%--                                  <span class="font-weight-bold text-dark">상품 상세</span> ${productVO.pro_desc} <br> --%>
 										<span class="font-weight-bold text-dark">상품 코드</span>
 										${productVO.pro_code } <br> <span
 											class="font-weight-bold text-dark">배송 시작일</span>
@@ -66,17 +63,7 @@
 						</div>
 					</div>
 				</c:forEach>
-
 				<div class="row align-items-end">
-					<div class="col-md-12">
-						<div class="form-group">
-							<label for="address">주소</label> <input type="text"
-								name="mem_address" class="form-control" id="address"
-								style="cursor: default"
-								value="${payVOList[0].mem_zipcode} ${payVOList[0].mem_add1} ${payVOList[0].mem_add2}"
-								readonly>
-						</div>
-					</div>
 					<div class="col-md-12">
 						<div class="form-group">
 							<label for="receiverName">받는 사람</label> <input type="text"
@@ -91,6 +78,12 @@
 								style="cursor: default" name="mem_phone" class="form-control"
 								maxlength="11" pattern="[0-9]{11}" placeholder="" id="phone"
 								value="${payVOList[0].mem_phone}" readonly>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="address">주소</label> 
+							<input type="text" name="mem_address" class="form-control" id="address" style="cursor: default" value="${payVOList[0].mem_zipcode} ${payVOList[0].mem_add1} ${payVOList[0].mem_add2}" readonly>
 						</div>
 					</div>
 					<div class="col-md-12">
