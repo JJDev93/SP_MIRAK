@@ -20,7 +20,7 @@
 					</ul>
 				</div>
 
-				<form action="apiMemupdate" method="post" class="contact-form billing-form" id="delForm" onsubmit="return confirmUpdateApiMember();">
+				<form action="/apiMemupdate" method="post" class="contact-form billing-form" id="delForm" onsubmit="return confirmUpdateApiMember();">
 					<input type="hidden" name="mem_pw" id="mem_pw" class="form-control" value="${member.mem_pw }" readonly="readonly">
 					<h3 class="mb-2 billing-heading">회원정보 수정</h3>
 					<div class="row align-items-end">
@@ -125,7 +125,7 @@
 									<input type="submit" value="수정하기" class="btn btn-primary py-3 px-5">
 								</c:when>
 								<c:otherwise>
-									<button type="button" class="btn btn-primary py-3 px-5" onclick="confirmUpdateMember();">수정하기</button>
+									<button type="button" class="btn btn-primary py-3 px-5" onclick="return confirmUpdateMember();">수정하기</button>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -151,34 +151,31 @@
 						</button>
 					</div>
 					<div class="modal-body">
-					<c:choose>
-					<c:when test="${not member.mem_isapi == 'normal'}">
-					회원탈퇴시 모든 정보가 삭제됩니다. 인증번호를 입력해주세요.
-					<div class="row">
-							<div class="col-sm-9 mail_check_wrap">  
-								<div class="mail_check_input_box" id="mail_check_input_box_false">
-									<input class="form-control" id="mail_check_input" disabled="disabled" placeholder="인증번호 6자리를 입력해주세요!" maxlength="6">
-									<div class="clearfix"></div>
-									<span id="mail_check_input_box_warn"></span>
+						<c:choose>
+							<c:when test="${not member.mem_isapi == 'normal'}">
+								회원탈퇴시 모든 정보가 삭제됩니다. 인증번호를 입력해주세요.
+								<div class="row">
+										<div class="col-sm-9 mail_check_wrap">  
+											<div class="mail_check_input_box" id="mail_check_input_box_false">
+												<input class="form-control" id="mail_check_input" disabled="disabled" placeholder="인증번호 6자리를 입력해주세요!" maxlength="6">
+												<div class="clearfix"></div>
+												<span id="mail_check_input_box_warn"></span>
+											</div>
+										</div>
+											<div class="col-sm-3">
+												<button type="button" id="mail_check_button"
+														class="btn btn-light joinBtn mb-2 doubleChk">인증번호</button>
+											</div>
 								</div>
-							</div>
-								<div class="col-sm-3">
-									<button type="button" id="mail_check_button"
-											class="btn btn-light joinBtn mb-2 doubleChk">인증번호</button>
-								</div>
+							</c:when>
+							<c:otherwise>
+								회원탈퇴시 모든 정보가 삭제됩니다. 비밀번호를 입력해 주세요. 
+								<input type="password" class="form-control" id="pw_1" required="required">
+							</c:otherwise>
+						</c:choose>
 					</div>
-					</c:when>
-					<c:otherwise>
-						회원탈퇴시 모든 정보가 삭제됩니다. 비밀번호를 입력해 주세요. 
-						<input type="password" class="form-control" id="pw_1" required="required">
-					</c:otherwise>
-					</c:choose>
-					</div>
-					
-					
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 							<c:choose>
 							<c:when test="${not member.mem_isapi == 'normal'}">
 								<button type="button" class="btn btn-primary" id="memberCheck" onclick="apiDelete();">탈퇴하기</button>
@@ -188,14 +185,12 @@
 							</c:otherwise>
 							</c:choose>
 					</div>
-					
 				</div>
 			</div>
 		</div>
 	</form>
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
-
 <script>
 	$(document).ready(function() {
 		console.log("message : "+"${message}");
@@ -207,26 +202,3 @@
 		}
 	})
 </script>
-
-<!-- <script> 
-$(document).ready(function() {
-  $('.modal').on('shown.bs.modal', function() {
-    var modalId = $(this).attr('id');
-    console.log(modalId);
-    
-    function handleEnterKey(event) {
-      if (event.keyCode === 13) {
-        if (modalId == "exampleModal") {
-        	document.querySelector("#memberCheck").click();
-        } else if (modalId == "pwUpdate") {
-          document..querySelector("#updateCheck").click();
-        }
-        setTimeout(function() {
-          document.addEventListener("keydown", handleEnterKey);
-        }, 100); // 1초 후에 다시 이벤트 핸들러를 등록
-      }
-    }
-    document.addEventListener("keydown", handleEnterKey);
-  });
-});
-</script>-->

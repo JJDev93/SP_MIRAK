@@ -37,6 +37,7 @@ public class mypageController {
 	// api 회원정보 수정
 	@RequestMapping(value = "/apiMemupdate", method = RequestMethod.POST)
 	public String apiMemupdate(MemberVO vo) {
+		System.out.println(vo);
 		memberService.memupdate(vo);
 		return "redirect:/mypage";	
 	}
