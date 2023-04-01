@@ -34,6 +34,7 @@ import kr.co.mirak.pay.chart.ChartService;
 import kr.co.mirak.pay.chart.PurchaseRateVO;
 import kr.co.mirak.pay.chart.RatioByVO;
 import kr.co.mirak.pay.chart.TotalByMenuVO;
+import kr.co.mirak.pay.chart.TotalUsersVO;
 import kr.co.mirak.product.ProductService;
 import kr.co.mirak.product.ProductVO;
 
@@ -242,15 +243,19 @@ public class PayController {
 
 	    TotalByMenuVO mvo = new TotalByMenuVO();
 	    PurchaseRateVO pvo = new PurchaseRateVO();
+	    TotalUsersVO ivo = new TotalUsersVO();
 
 		Map<String, List<Object>> totalBymenulist = chartService.getTotalByMenuList(mvo);
 		Map<String, List<Object>> purchaseRateList = chartService.getPurchaseRateList(pvo);
+		Map<String, Map<String, List<Object>>> totalUsersList = chartService.getTotalUsersList(ivo);
 
 		chartData.setTotalByMenuList(totalBymenulist);
 		chartData.setPurchaseRateList(purchaseRateList);
+		chartData.setTotalUsersList(totalUsersList);
 		
 		String data = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(chartData);
-		System.out.println("data ::::::::::::::::: " + data);
+		
+		System.out.println("넘어가는 data느느 ??????? " + data);
 		
 		return data;
 	}
@@ -272,9 +277,8 @@ public class PayController {
 		
 		
 		String data = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(chartData);
-		System.out.println("지금 뽑은 data는~~~~~~~~~~~~~~~~~~~ : " + data);
 		
 		return data;
 	}
-
+	
 }

@@ -59,4 +59,18 @@
 		LIMIT 5;
 		]]>
 	</select>
+	
+	<select id="getTotalUsersList" resultType="kr.co.mirak.pay.chart.TotalUsersVO">
+		SELECT mem_regdate as regdate, 
+		CASE WHEN mem_gender = 1 THEN '남자' ELSE '여자' END AS gender,
+		SUM(COUNT(*)) OVER (PARTITION BY mem_gender ORDER BY mem_regdate) AS totalUsers
+		FROM member
+		GROUP BY mem_regdate, mem_gender;
+	</select>
+	
+	
+	
+	
+	
+	
 </mapper>

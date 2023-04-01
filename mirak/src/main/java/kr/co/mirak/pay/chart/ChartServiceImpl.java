@@ -108,4 +108,46 @@ public class ChartServiceImpl implements ChartService {
 		
 		return map;
 	}
+	
+
+	@Override
+	public Map<String, Map<String, List<Object>>> getTotalUsersList(TotalUsersVO vo) {
+	    ChartMapper mapper = sqlSessionTemplate.getMapper(ChartMapper.class);
+
+	    Map<String, List<Object>> maleMap = new HashMap<>();
+	    Map<String, List<Object>> femaleMap = new HashMap<>();
+
+	    List<TotalUsersVO> totalUsersList = mapper.getTotalUsersList(vo);
+	    for (TotalUsersVO item : totalUsersList) {
+	        String gender = item.getGender(); // "남자" 또는 "여자"
+	        List<Object> totalUsers = gender.equals("남자") ? maleMap.get("totalUsers") : femaleMap.get("totalUsers");
+	        List<Object> regdate = gender.equals("남자") ? maleMap.get("regdate") : femaleMap.get("regdate");
+
+	        if (totalUsers == null) {
+	            totalUsers = new ArrayList<>();
+	        }
+	        if (regdate == null) {
+	            regdate = new ArrayList<>();
+	        }
+
+	        totalUsers.add(item.getTotalUsers());
+	        regdate.add(item.getRegdate());
+
+	        if (gender.equals("남자")) {
+	            maleMap.put("totalUsers", totalUsers);
+	            maleMap.put("regdate", regdate);
+	        } else {
+	            femaleMap.put("totalUsers", totalUsers);
+	            femaleMap.put("regdate", regdate);
+	        }
+	    }
+
+	    Map<String, Map<String, List<Object>>> map = new HashMap<>();
+	    map.put("남자", maleMap);
+	    map.put("여자", femaleMap);
+
+	    return map;
+	}
+
+
 }

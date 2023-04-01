@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <c:set var="path" value="${pageContext.request.contextPath}" />
- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <style>
 .chart-wrapper {
 	position: relative;
@@ -125,45 +127,56 @@ canvas {
                 <h5 class="card-title">매출 Top10</h5>
               </div>
               <div class="card-body ">
-					<canvas id="myChart1" width="1300" height="380"></canvas>
+                <div class="col-md-1"></div>
+					<div class="col-md-10">
+						<div id="chartWrapper1" class="chart-visible">
+							<canvas id="myChart1" width="1300" height="400"></canvas>
+						</div>
+						<div id="chartWrapper2" class="chart-hidden">
+							<canvas id="myChart2" width="400" height="300"></canvas>
+						</div>
+						<div id="chartWrapper3" class="chart-hidden">
+							<canvas id="myChart3" width="400" height="300"></canvas>
+						</div>
+					</div>
+					<div class="col-md-1"></div>
               </div>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-5">
             <div class="card ">
               <div class="card-header ">
-                <h5 class="card-title">실 구매율</h5>
+                <h5 class="card-title">Top5 판매비율</h5>
               </div>
               <div class="card-body ">
-						<canvas id="myChart2" width="478" height="239"></canvas>
+						<canvas id="myChart4" style="width: 100%; height: 380px;"></canvas>
               </div>
               <div class="card-footer ">
                 <div class="legend">
-                  <i class="fa fa-circle text-primary"></i> Opened
-                  <i class="fa fa-circle text-warning"></i> Read
-                  <i class="fa fa-circle text-danger"></i> Deleted
-                  <i class="fa fa-circle text-gray"></i> Unopened
+                  <i class="fa fa-circle text-primary"></i> <span class="menu1"> menu1</span>
+                  <i class="fa fa-circle text-warning"></i> <span class="menu2"> menu2</span>
+                  <i class="fa fa-circle text-danger"></i> <span class="menu3"> menu3</span>
+                  <br><i class="fa fa-circle text-gray"></i> <span class="menu4"> menu4</span>
+                  <i class="fa fa-circle text-info"></i> <span class="menu5"> menu5</span>
                 </div>
-                <hr>
               </div>
             </div>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-7">
             <div class="card card-chart">
               <div class="card-header">
-                <h5 class="card-title">NASDAQ: AAPL</h5>
+                <h5 class="card-title">회원 증가율</h5>
               </div>
               <div class="card-body">
-                <canvas id="myChart3" width="1015" height="253"></canvas>
+                <canvas id="myChart5" width="800" height="410"></canvas>
               </div>
               <div class="card-footer">
                 <div class="chart-legend">
-                  <i class="fa fa-circle text-info"></i> Tesla Model S
-                  <i class="fa fa-circle text-warning"></i> BMW 5 Series
+                  <i class="fa fa-circle text-info"></i> 남자
+                  <i class="fa fa-circle text-danger"></i> 여자
                 </div>
-                <hr />
               </div>
             </div>
           </div>
@@ -173,5 +186,4 @@ canvas {
   </div>
  </div>
 	<jsp:include page="/common/admin_ft.jsp"></jsp:include>
-	<script src="${path}/resources/js/chartjs.min.js"></script>
 	<script src="${path}/resources/js/mirakChart.js"></script>
