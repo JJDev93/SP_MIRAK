@@ -68,6 +68,13 @@
 		GROUP BY mem_regdate, mem_gender;
 	</select>
 	
+	<select id="getChartMainList" resultType="kr.co.mirak.pay.chart.ChartMainVO">
+		SELECT 
+		(SELECT COUNT(*) FROM MEMBER) AS totalUsers, SUM(totalPrice) AS totalPrice, 
+		SUM(CASE WHEN MONTH(pay_date) = MONTH(NOW()) THEN totalPrice ELSE 0 END) AS monthPrice 
+		FROM pay 
+		WHERE status = '결제 완료';
+	</select>
 	
 	
 	

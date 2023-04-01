@@ -6,6 +6,7 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+
 <style>
 .chart-wrapper {
 	position: relative;
@@ -55,7 +56,7 @@ canvas {
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category">총 매출</p>
-                      <p class="card-title">1234<p>
+                      <p class="card-title totalPrice_title"><p>
                     </div>
                   </div>
                 </div>
@@ -74,7 +75,7 @@ canvas {
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category">월 매출</p>
-                      <p class="card-title">123<p>
+                      <p class="card-title monthPrice_title"><p>
                     </div>
                   </div>
                 </div>
@@ -93,7 +94,7 @@ canvas {
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category">회원 수</p>
-                      <p class="card-title">123<p>
+                      <p class="card-title totalUsers_title"><p>
                     </div>
                   </div>
                 </div>
@@ -160,5 +161,5 @@ canvas {
     </div>
   </div>
  </div>
-	<jsp:include page="/common/admin_ft.jsp"></jsp:include>
 	<script src="${path}/resources/js/mirakChart.js"></script>
+	<jsp:include page="/common/admin_ft.jsp"></jsp:include>

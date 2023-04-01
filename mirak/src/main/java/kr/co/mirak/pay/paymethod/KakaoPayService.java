@@ -38,7 +38,10 @@ public class KakaoPayService {
 		String groupId = Long.toString(currentTimeMillis) + Long.toString(randomInt);
 
 		String mem_id = (String) session.getAttribute("mem_id");
+		String mem_isapi = (String) session.getAttribute("mem_isapi");
+		
 		System.out.println("mem_id : " + mem_id);
+		System.out.println("mem_isapi : " + mem_isapi);
 		String item_name = "";
 
 		if (list.size() - 1 == 0) {

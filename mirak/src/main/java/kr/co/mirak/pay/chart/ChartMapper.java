@@ -17,5 +17,7 @@ public interface ChartMapper {
 	List<PurchaseRateVO> getPurchaseRateList(PurchaseRateVO vo);
 	
 	List<TotalUsersVO> getTotalUsersList(TotalUsersVO vo);
+	
+	List<ChartMainVO> getChartMainList(ChartMainVO vo);
 
 }

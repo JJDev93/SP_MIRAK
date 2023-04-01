@@ -13,5 +13,7 @@ public interface ChartService {
 	Map<String, List<Object>> getPurchaseRateList(PurchaseRateVO vo);
 	
 	Map<String, Map<String, List<Object>>> getTotalUsersList(TotalUsersVO vo);
+	
+	Map<String, List<Object>> getChartMainList(ChartMainVO vo);
 
 }

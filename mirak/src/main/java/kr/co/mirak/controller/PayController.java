@@ -30,6 +30,7 @@ import kr.co.mirak.pay.PayService;
 import kr.co.mirak.pay.PayStringVO;
 import kr.co.mirak.pay.PayVO;
 import kr.co.mirak.pay.chart.ChartData;
+import kr.co.mirak.pay.chart.ChartMainVO;
 import kr.co.mirak.pay.chart.ChartService;
 import kr.co.mirak.pay.chart.PurchaseRateVO;
 import kr.co.mirak.pay.chart.RatioByVO;
@@ -244,14 +245,17 @@ public class PayController {
 	    TotalByMenuVO mvo = new TotalByMenuVO();
 	    PurchaseRateVO pvo = new PurchaseRateVO();
 	    TotalUsersVO ivo = new TotalUsersVO();
+	    ChartMainVO cvo = new ChartMainVO();
 
 		Map<String, List<Object>> totalBymenulist = chartService.getTotalByMenuList(mvo);
 		Map<String, List<Object>> purchaseRateList = chartService.getPurchaseRateList(pvo);
 		Map<String, Map<String, List<Object>>> totalUsersList = chartService.getTotalUsersList(ivo);
+		Map<String, List<Object>> chartMainList = chartService.getChartMainList(cvo);
 
 		chartData.setTotalByMenuList(totalBymenulist);
 		chartData.setPurchaseRateList(purchaseRateList);
 		chartData.setTotalUsersList(totalUsersList);
+		chartData.setChartMainList(chartMainList);
 		
 		String data = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(chartData);
 		

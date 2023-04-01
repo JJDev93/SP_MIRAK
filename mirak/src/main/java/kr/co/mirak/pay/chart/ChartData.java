@@ -17,6 +17,8 @@ public class ChartData {
 	
 	public Map<String, Map<String, List<Object>>> totalUsersList;
 
+	public Map<String, List<Object>> chartMainList;
+
 	public Map<String, List<Object>> getTotalByMenuList() {
 		return totalByMenuList;
 	}
@@ -63,6 +65,14 @@ public class ChartData {
 
 	public void setTotalUsersList(Map<String, Map<String, List<Object>>> totalUsersList) {
 		this.totalUsersList = totalUsersList;
+	}
+
+	public Map<String, List<Object>> getChartMainList() {
+		return chartMainList;
+	}
+
+	public void setChartMainList(Map<String, List<Object>> chartMainList) {
+		this.chartMainList = chartMainList;
 	}
 
 }
