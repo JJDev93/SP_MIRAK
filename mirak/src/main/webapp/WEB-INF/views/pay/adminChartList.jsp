@@ -3,16 +3,32 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-  <!--     Fonts and icons     -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-  <!-- CSS Files -->
-  <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="../assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="../assets/demo/demo.css" rel="stylesheet" />
+ <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+<style>
+.chart-wrapper {
+	position: relative;
+}
+#chartWrapper2 {
+	float: left;
+	margin-left : 40px;
+}
+#chartWrapper3 {
+	float: right;
+	margin-right : 40px;
+}
+
+.chart-visible {
+	display: inline-block;
+}
+
+.chart-hidden {
+	display: none;
+}
+
+canvas {
+	display: inline-block;
+}
+</style>
 
 <div class="ftco-section admin-list">
   <div class="justify-content-center mb-3 pb-3">
@@ -36,8 +52,8 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Capacity</p>
-                      <p class="card-title">150GB<p>
+                      <p class="card-category">총 매출</p>
+                      <p class="card-title">1234<p>
                     </div>
                   </div>
                 </div>
@@ -55,8 +71,8 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Revenue</p>
-                      <p class="card-title">$ 1,345<p>
+                      <p class="card-category">평균 일매출</p>
+                      <p class="card-title">123<p>
                     </div>
                   </div>
                 </div>
@@ -74,8 +90,8 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Errors</p>
-                      <p class="card-title">23<p>
+                      <p class="card-category">회원 수</p>
+                      <p class="card-title">123<p>
                     </div>
                   </div>
                 </div>
@@ -93,8 +109,8 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Followers</p>
-                      <p class="card-title">+45K<p>
+                      <p class="card-category">뭐넣지</p>
+                      <p class="card-title">ASD<p>
                     </div>
                   </div>
                 </div>
@@ -106,11 +122,10 @@
           <div class="col-md-12">
             <div class="card ">
               <div class="card-header ">
-                <h5 class="card-title">Users Behavior</h5>
-                <p class="card-category">24 Hours performance</p>
+                <h5 class="card-title">매출 Top10</h5>
               </div>
               <div class="card-body ">
-                <canvas id=chartHours width="400" height="100"></canvas>
+					<canvas id="myChart1" width="1300" height="380"></canvas>
               </div>
             </div>
           </div>
@@ -119,11 +134,10 @@
           <div class="col-md-4">
             <div class="card ">
               <div class="card-header ">
-                <h5 class="card-title">Email Statistics</h5>
-                <p class="card-category">Last Campaign Performance</p>
+                <h5 class="card-title">실 구매율</h5>
               </div>
               <div class="card-body ">
-                <canvas id="chartEmail"></canvas>
+						<canvas id="myChart2" width="478" height="239"></canvas>
               </div>
               <div class="card-footer ">
                 <div class="legend">
@@ -133,9 +147,6 @@
                   <i class="fa fa-circle text-gray"></i> Unopened
                 </div>
                 <hr>
-                <div class="stats">
-                  <i class="fa fa-calendar"></i> Number of emails sent
-                </div>
               </div>
             </div>
           </div>
@@ -143,10 +154,9 @@
             <div class="card card-chart">
               <div class="card-header">
                 <h5 class="card-title">NASDAQ: AAPL</h5>
-                <p class="card-category">Line Chart with Points</p>
               </div>
               <div class="card-body">
-                <canvas id="speedChart" width="400" height="100"></canvas>
+                <canvas id="myChart3" width="1015" height="253"></canvas>
               </div>
               <div class="card-footer">
                 <div class="chart-legend">
@@ -154,9 +164,6 @@
                   <i class="fa fa-circle text-warning"></i> BMW 5 Series
                 </div>
                 <hr />
-                <div class="card-stats">
-                  <i class="fa fa-check"></i> Data information certified
-                </div>
               </div>
             </div>
           </div>
@@ -165,25 +172,6 @@
     </div>
   </div>
  </div>
-  <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js"></script>
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <!-- Chart JS -->
-  <script src="../assets/js/plugins/chartjs.min.js"></script>
-  <!--  Notifications Plugin    -->
-  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
-  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script><!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-  <script src="../assets/demo/demo.js"></script>
-  <script>
-    $(document).ready(function() {
-      // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-      demo.initChartsPages();
-    });
-  </script>
 	<jsp:include page="/common/admin_ft.jsp"></jsp:include>
-	<%-- <script src="${path}/resources/js/chart.js"></script> --%>
+	<script src="${path}/resources/js/chartjs.min.js"></script>
+	<script src="${path}/resources/js/mirakChart.js"></script>

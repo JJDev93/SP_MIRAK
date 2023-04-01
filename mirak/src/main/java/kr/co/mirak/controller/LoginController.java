@@ -60,15 +60,14 @@ public class LoginController {
 	public String login(MemberVO memberVO, Model model, HttpServletRequest request, RedirectAttributes rttr)
 			throws Exception {
 		System.out.println("login 메서드 진입");
-		System.out.println("전달된 데이터 : " + "[" + memberVO.getMem_id() + " , " + memberVO.getMem_pw() + "]");
-
+		System.out.println("전달된 데이터 : " + "["+ memberVO.getMem_isapi() + "," + memberVO.getMem_id() + " , " + memberVO.getMem_pw() + "]");
 		/* 암호화부분 */
 		HttpSession session = request.getSession();
-
 		String rawPw = "";
 		String encodePw = "";
-
+		memberVO.setMem_isapi("normal");
 		MemberVO lvo = memberService.login(memberVO); // 제출한아이디와 일치하는 아이디있는지
+		System.out.println(lvo); 
 		try {
 			if (lvo != null) { // 일치하는 아이디 존재시
 				rawPw = memberVO.getMem_pw(); // 사용자가 제출한 비번
@@ -77,44 +76,48 @@ public class LoginController {
 				System.out.println("제출한비번:" + rawPw + "인코딩된비번:" + lvo.getMem_pw());
 
 				String mem_id;
+				
 
 				if (true == pwEncoder.matches(rawPw, encodePw)) { // 비번 일치 여부 판단
 					// logger.info("일로오나");
 					memberVO.setMem_pw(""); // 인코딩된 비번 정보 지움
 					mem_id = memberVO.getMem_id();
+					String mem_isapi = memberVO.getMem_isapi();
 					session.setAttribute("message", "로그인 되었습니다.");
 					session.setAttribute("mem_id", mem_id); // 세션에 사용자정보 저장
+					session.setAttribute("mem_isapi", mem_isapi);
 					logger.info("로그인 성공");
 
 					return "redirect:/replayBefo";
 
-				} else { // 일치하는 아이디가 존재하지 않을 시 (로그인 실패)
-//	               session.setAttribute("result", 0);
-					session.setAttribute("message", "일치하는 아이디가 없습니다.");
+				} else { // 비밀번호가 틀렸을때 (로그인 실패)
+//		               session.setAttribute("result", 0);
+					session.setAttribute("message", "입력하신 정보가 올바르지 않습니다.");
 					logger.info("일치하는 아이디가 없습니다");
 					return "member/login"; // 로그인 페이지로 이동
 				}
-			} else { // 일치하는 아이디가 존재하지 않을시 (로그인 실패)
-//	            session.setAttribute("result", 0);
+			} else {
+				 // 일치하는 아이디가 존재하지 않을 시 (로그인 실패)
+//	               session.setAttribute("result", 0);
 				session.setAttribute("message", "일치하는 아이디가 없습니다.");
-				logger.info("로그인 실패");
-				return "member/login"; // 로그인페이지로 이동
+				logger.info("일치하는 아이디가 없습니다");
+				return "member/login"; // 로그인 페이지로 이동
 			}
 		} catch (Exception e) {
-//	         session.setAttribute("result", 0);
-			session.setAttribute("message", "일치하는 아이디가 없습니다.");
+//		         session.setAttribute("result", 0);
+			session.setAttribute("message", "로그인에 실패했습니다.");
 			logger.info("로그인 실패");
 			return "member/login"; // 로그인페이지로 이동
 		}
 	}
-
 	// 로그아웃
 	@RequestMapping("/logout")
 	public String logout(HttpSession session, HttpServletResponse response) throws Exception {
 		String mem_id = (String) session.getAttribute("mem_id");
+		String mem_isapi = (String) session.getAttribute("mem_isapi");
 		String access_Token = (String) session.getAttribute("access_Token");
 		String accesstoken = (String) session.getAttribute("accesstoken");
-		MemberVO member = memberService.getMemberDetail(mem_id);
+		MemberVO member = memberService.getMemberDetail(mem_id, mem_isapi);
 		String user_api = member.getMem_isapi();
 		System.out.println("user_api : " + user_api);
 
@@ -162,8 +165,7 @@ public class LoginController {
 	// 아이디 찾기
 	@RequestMapping(value = "/idfind", method = RequestMethod.POST)
 	public String idfind(MemberVO vo, HttpSession session, Model model) {
-		
-		
+
 		String returnURL = "member/idfind";
 		String preUrl = (String) session.getAttribute("pre_url");
 		System.out.println("아이디찾기중... , preUrl : " + preUrl);
@@ -174,15 +176,14 @@ public class LoginController {
 			model.addAttribute("memberList", memberList);
 			System.out.println(memberList);
 
+			if (preUrl != null) {
+				System.out.println("이전 페이지로 이동");
+				returnURL = "member/idfind" + preUrl;
+				session.removeAttribute("pre_url");
+			} else {
+				returnURL = "member/idfind";
+			}
 
-				if (preUrl != null) {
-					System.out.println("이전 페이지로 이동");
-					returnURL = "member/idfind" + preUrl;
-					session.removeAttribute("pre_url");
-				} else {
-					returnURL = "member/idfind";
-				}
-			
 		} catch (Exception e) {
 			returnURL = "member/idfind";
 			model.addAttribute("message", "정보를 다시 입력해주세요....");
