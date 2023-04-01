@@ -43,7 +43,7 @@ canvas {
     <div class="main-panel">
       <div class="content">
         <div class="row">
-          <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="card card-stats">
               <div class="card-body ">
                 <div class="row">
@@ -62,7 +62,7 @@ canvas {
               </div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="card card-stats">
               <div class="card-body ">
                 <div class="row">
@@ -73,7 +73,7 @@ canvas {
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">평균 일매출</p>
+                      <p class="card-category">월 매출</p>
                       <p class="card-title">123<p>
                     </div>
                   </div>
@@ -81,7 +81,7 @@ canvas {
               </div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="card card-stats">
               <div class="card-body ">
                 <div class="row">
@@ -100,46 +100,21 @@ canvas {
               </div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats">
-              <div class="card-body ">
-                <div class="row">
-                  <div class="col-5 col-md-4">
-                    <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-favourite-28 text-primary"></i>
-                    </div>
-                  </div>
-                  <div class="col-7 col-md-8">
-                    <div class="numbers">
-                      <p class="card-category">뭐넣지</p>
-                      <p class="card-title">ASD<p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="row">
           <div class="col-md-12">
             <div class="card ">
               <div class="card-header ">
-                <h5 class="card-title">매출 Top10</h5>
+                <h5 class="card-title">실 구매율 현황</h5>
               </div>
               <div class="card-body ">
-                <div class="col-md-1"></div>
-					<div class="col-md-10">
-						<div id="chartWrapper1" class="chart-visible">
-							<canvas id="myChart1" width="1300" height="400"></canvas>
-						</div>
-						<div id="chartWrapper2" class="chart-hidden">
-							<canvas id="myChart2" width="400" height="300"></canvas>
-						</div>
-						<div id="chartWrapper3" class="chart-hidden">
-							<canvas id="myChart3" width="400" height="300"></canvas>
-						</div>
-					</div>
-					<div class="col-md-1"></div>
+					<canvas id="myChart1" width="1300" height="400"></canvas>
+              </div>
+              <div class="card-footer ">
+                <div class="chart-legend">
+                  <i class="fa fa-circle" style="color: #87CEFA;"></i> 장바구니에 담긴 횟수
+                  <i class="fa fa-circle" style="color: #F08080;"></i> 실제 구매횟수
+                </div>
               </div>
             </div>
           </div>
@@ -148,7 +123,7 @@ canvas {
           <div class="col-md-5">
             <div class="card ">
               <div class="card-header ">
-                <h5 class="card-title">Top5 판매비율</h5>
+                <h5 class="card-title">판매비율</h5>
               </div>
               <div class="card-body ">
 						<canvas id="myChart4" style="width: 100%; height: 380px;"></canvas>
