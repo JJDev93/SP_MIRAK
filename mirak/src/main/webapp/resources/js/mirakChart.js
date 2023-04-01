@@ -12,9 +12,12 @@ $(function () {
       var chartMainList = data["chartMainList"];
       var totalRatio = totalByMenuList.totalRatio;
 
-      document.querySelector(".totalPrice_title").textContent = chartMainList.totalPrice;
-      document.querySelector(".monthPrice_title").textContent = chartMainList.monthPrice;
-      document.querySelector(".totalUsers_title").textContent = chartMainList.totalUsers;
+      document.querySelector(".totalPrice_title").textContent =
+        chartMainList.totalPrice;
+      document.querySelector(".monthPrice_title").textContent =
+        chartMainList.monthPrice;
+      document.querySelector(".totalUsers_title").textContent =
+        chartMainList.totalUsers;
 
       const ctx1 = document.getElementById("myChart1").getContext("2d");
       const ctx4 = document.getElementById("myChart4").getContext("2d");
@@ -25,8 +28,8 @@ $(function () {
             type: "bar",
             label: "장바구니에 담긴 횟수",
             data: purchaseRateList.cart_cnt,
-            borderColor: "rgba(128, 128, 128, 0.5)",
-            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "#696969",
+            backgroundColor: "#87CEFA",
             borderWidth: 1,
             order: 1,
             datalabels: {
@@ -36,7 +39,7 @@ $(function () {
                 if (value === "강추") {
                   return "red";
                 } else {
-                  return "blue";
+                  return "black";
                 }
               },
               font: {
@@ -56,8 +59,8 @@ $(function () {
             type: "bar",
             label: "실제 구매횟수",
             data: purchaseRateList.cart_show,
-            borderColor: "rgba(128, 128, 128, 0.5)",
-            backgroundColor: "rgba(54, 162, 235, 0.2)",
+            borderColor: "#696969",
+            backgroundColor: "#F08080",
             borderWidth: 1,
             order: 2,
             datalabels: {
@@ -72,9 +75,8 @@ $(function () {
         maintainAspectRatio: false,
         responsive: false,
         plugins: {
-          title: {
-            display: true,
-            text: "구매율",
+          legend: {
+            display: false,
           },
         },
         scales: {
