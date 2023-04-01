@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.google.gson.JsonElement;
@@ -31,10 +32,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	// 로그인
-	public MemberVO login(MemberVO vo) {
+	public MemberVO login(MemberVO memberVO) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		MemberVO memVO = mapper.login(vo);
-		return memVO;
+		return mapper.login(memberVO);
 	}
 
 	// 아이디 찾기
@@ -74,9 +74,12 @@ public class MemberServiceImpl implements MemberService {
 
 	// 세션 값으로 회원 정보 확인
 	public MemberVO getMemberInfo(HttpSession session) {
-		String myid = (String) session.getAttribute("mem_id");
+		String mem_id = (String) session.getAttribute("mem_id");
+		String mem_isapi = (String) session.getAttribute("mem_isapi");
+		System.out.println("아이디는 : " + mem_id);
+		System.out.println("mem_isapi : " + mem_isapi);
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		MemberVO memVO = mapper.getMemberInfo(myid);
+		MemberVO memVO = mapper.getMemberInfo(mem_id, mem_isapi);
 		return memVO;
 	}
 
@@ -102,9 +105,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public int existIdAndIsApi(String id, String isApi) {
+	public int existIdAndIsApi(@Param("mem_id")String mem_id,@Param("isApi") String isApi) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		return mapper.existIdAndIsApi(id, isApi);
+		return mapper.existIdAndIsApi(mem_id, isApi);
 		
 	}
 	
@@ -129,7 +132,7 @@ public class MemberServiceImpl implements MemberService {
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=e481c91b1136f51f927a619fc062146d"); // 본인이 발급받은 key
-			sb.append("&redirect_uri=https://www.mirak.shop/kakaoLogin"); // 본인이 설정한 주소
+			sb.append("&redirect_uri=https://localhost:8080/kakaoLogin"); // 본인이 설정한 주소
 			sb.append("&code=" + code);
 			bw.write(sb.toString());
 			bw.flush();
@@ -271,9 +274,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	// ADMIN ID값으로 회원 정보 확인
-	public MemberVO getMemberDetail(String memId) {
+	public MemberVO getMemberDetail(String mem_id, String mem_isapi) {
 		MemberMapper mapper = sqlSessionTemplate.getMapper(MemberMapper.class);
-		MemberVO memVO = mapper.getMemberInfo(memId);
+		MemberVO memVO = mapper.getMemberInfo(mem_id, mem_isapi);
 		return memVO;
 	}
 

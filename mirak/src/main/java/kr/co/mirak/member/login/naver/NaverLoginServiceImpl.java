@@ -39,7 +39,7 @@ public class NaverLoginServiceImpl implements NaverLoginService {
 
 	private String clientId = "W_XBZ8KSSrZT5ts3cW9K";
 	private String clientSecret = "w7bUjL_Agk";
-	private String callbackUrl = "http://localhost:8080/naverCallback";
+	private String callbackUrl = "https://www.mirak.shop/naverCallback";
 	private String refreshToken = "";
 
 	public NaverLoginServiceImpl() {
@@ -100,7 +100,8 @@ public class NaverLoginServiceImpl implements NaverLoginService {
 			JSONObject jsonObject = new JSONObject(userInfo);
 			JSONObject response = jsonObject.getJSONObject("response");
 			String mem_id = response.getString("email");
-			int result = memberService.existIdAndIsApi(mem_id, "NAVER");
+			String mem_isapi = "NAVER";
+			int result = memberService.existIdAndIsApi(mem_id, mem_isapi);
 			if (result == 0) {
 				member.setMem_isapi("NAVER");
 				member.setMem_id(mem_id);

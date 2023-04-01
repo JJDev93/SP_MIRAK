@@ -73,7 +73,7 @@ function naverLogout() {
    openPopUp();
    setTimeout(function() {
       closePopUp();
-   }, 1);
+   }, 100);
    location.href="/logout";
 }
 </script>

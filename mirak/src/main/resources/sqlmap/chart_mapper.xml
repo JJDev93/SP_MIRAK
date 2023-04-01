@@ -9,7 +9,7 @@
         FROM pay WHERE status = '결제 완료'
         GROUP BY pro_name
         ORDER BY totalPrice DESC
-        LIMIT 10;
+        LIMIT 5;
 	</select>
 
 	<select id="getCountByGender"
