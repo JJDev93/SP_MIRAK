@@ -74,10 +74,7 @@ public class LoginController {
 				encodePw = lvo.getMem_pw(); // db에 저장한 인코딩된 비번
 
 				System.out.println("제출한비번:" + rawPw + "인코딩된비번:" + lvo.getMem_pw());
-
 				String mem_id;
-				
-
 				if (true == pwEncoder.matches(rawPw, encodePw)) { // 비번 일치 여부 판단
 					// logger.info("일로오나");
 					memberVO.setMem_pw(""); // 인코딩된 비번 정보 지움

@@ -197,19 +197,21 @@ function selectAll(selectAll) {
   }
 }
 function CheckTest() {
-    var checkboxes = document.getElementsByName("cart_day");
-    var checked = false;
-    for (var i = 0; i < checkboxes.length; i++) {
-      if (checkboxes[i].checked) {
-        checked = true;
-        break;
-      }
-    }
-    if (!checked) {
-      alert("배송 요일을 선택해주세요!");
-      return false;
-    }
-  }
+	var checkboxes = document.getElementsByName("cart_day");
+	var checked = false;
+	for (var i = 0; i < checkboxes.length; i++) {
+	  if (checkboxes[i].checked) {
+	    checked = true;
+	    break;
+	  }
+	}
+	if (!checked) {
+	  alert("배송 요일을 선택해주세요!");
+	  return false;
+	}
+}
+  
+  
 	$(function() {
 		$('input[name="daterange"]').daterangepicker(
 				{
@@ -223,9 +225,11 @@ function CheckTest() {
 	});
 	const today = new Date().toISOString().slice(0, 10);
 	const cartStartInputs = document.querySelectorAll('.form-control.input-number[name="cart_start"]');
-   cartStartInputs.forEach(function(input) {
-     input.min = today;
-   });
+    cartStartInputs.forEach(function(input) {
+    	input.min = today;
+    });
+   
+   	//총금액 구하기
 	function calculateTotalPrice() { 
 	  const cart_cnt = parseInt(this.value);
 	  const pro_price = parseInt(this.parentNode.parentNode.querySelector('.form-control[name="pro_price"]').value);

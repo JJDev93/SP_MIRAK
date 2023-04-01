@@ -145,10 +145,12 @@ public class apiController {
 			return "member/join";
 		} else {
 			session.setAttribute("mem_id", user_id);
+			session.setAttribute("mem_isapi", member.getMem_isapi());
 			session.setAttribute("access_Token", access_token);
 			session.setAttribute("message", "구글 로그인 되었습니다!");
 			memberService.login(member);
 			System.out.println("세션설정 mem_id : " + user_id);
+			System.out.println("세션설정 mem_isapi : " + member.getMem_isapi());
 			return "redirect:/returnBefo";
 		}
 	}
