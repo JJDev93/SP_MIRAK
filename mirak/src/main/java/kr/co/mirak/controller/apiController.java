@@ -96,10 +96,12 @@ public class apiController {
 			return "member/join";
 		} else {
 			session.setAttribute("mem_id", user_id);
+			session.setAttribute("mem_isapi", memberVO.getMem_isapi());
 			session.setAttribute("access_Token", access_Token);
 			session.setAttribute("message", "카카오 로그인 되었습니다!");
 			memberService.login(memberVO);
 			System.out.println("세션설정 mem_id : " + user_id);
+			System.out.println("세션설정 mem_isapi : " + memberVO.getMem_isapi());
 			return "redirect:/replayBefo";
 		}
 	}
