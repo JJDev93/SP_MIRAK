@@ -21,4 +21,5 @@ public interface PayService {
 	List<CartVO> cartCheckList(HttpSession session);
 	List<PayVO> adaptPayVO(PayStringVO payStringVO, HttpSession session);
 	List<ProductVO> payFromProduct(ProductVO productVO, String cart_cnt, Date cart_start, String cart_day);
+	int updateDetailInfo(PayVO payVO);
 }

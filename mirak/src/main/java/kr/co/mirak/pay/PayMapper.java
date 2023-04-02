@@ -23,6 +23,8 @@ public interface PayMapper {
 	PayVO info(int id);
 	
 	int updateStatusConfirm(String group_id);
+	
+	int updateDetailInfo(PayVO payVO);
 
 	int update(PayVO vo);
 
