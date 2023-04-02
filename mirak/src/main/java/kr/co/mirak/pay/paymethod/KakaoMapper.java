@@ -4,20 +4,22 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
+
 import kr.co.mirak.pay.PayVO;
 
 public interface KakaoMapper {
 	int insertOrder(PayKakaoVO payKakaoVO);
 
-	PayKakaoVO selectTid(String mem_id);
+	PayKakaoVO selectTid(@Param("mem_id")String mem_id, @Param("mem_isapi")String mem_isapi);
 	
 	PayKakaoVO getTid(String group_id);
 	
 	int cancelStatus(String group_id);
 
-	List<PayVO> selectOrderList(String mem_id);
+	List<PayVO> selectOrderList(@Param("mem_id")String mem_id, @Param("mem_isapi")String mem_isapi);
 
-	int updateOrderList(String mem_id);
+	int updateOrderList(@Param("mem_id")String mem_id, @Param("mem_isapi")String mem_isapi);
 
 	void insertPayList(List<PayVO> payList);
 

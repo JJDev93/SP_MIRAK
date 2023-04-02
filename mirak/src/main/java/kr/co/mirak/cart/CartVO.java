@@ -18,6 +18,15 @@ public class CartVO {
 	private String pro_desc;
 	private String pro_image;
 	private int mem_code;
+	private String mem_isapi;
+	
+	
+	public String getMem_isapi() {
+		return mem_isapi;
+	}
+	public void setMem_isapi(String mem_isapi) {
+		this.mem_isapi = mem_isapi;
+	}
 	public int getMem_code() {
 		return mem_code;
 	}
@@ -110,7 +119,8 @@ public class CartVO {
 		return "CartVO [cart_code=" + cart_code + ", cart_day=" + cart_day + ", cart_start=" + cart_start
 				+ ", cart_cnt=" + cart_cnt + ", cart_totprice=" + cart_totprice + ", cart_show=" + cart_show
 				+ ", cart_check=" + cart_check + ", mem_id=" + mem_id + ", pro_code=" + pro_code + ", pro_name="
-				+ pro_name + ", pro_price=" + pro_price + ", pro_desc=" + pro_desc + ", pro_image=" + pro_image + "]";
+				+ pro_name + ", pro_price=" + pro_price + ", pro_desc=" + pro_desc + ", pro_image=" + pro_image
+				+ ", mem_code=" + mem_code + ", mem_isapi=" + mem_isapi + "]";
 	}
 	
 }

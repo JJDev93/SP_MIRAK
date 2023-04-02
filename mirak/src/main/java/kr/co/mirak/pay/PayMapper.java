@@ -12,7 +12,7 @@ public interface PayMapper {
 	
 	public int getTotal();
 
-	List<PayVO> getClientPayList(String mem_id);
+	List<PayVO> getClientPayList(@Param("mem_id")String mem_id, @Param("mem_isapi")String mem_isapi);
 	
 	List<PayVO> getPayListDetail(String group_id);
 	

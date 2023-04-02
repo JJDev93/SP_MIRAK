@@ -28,7 +28,11 @@ public class CartController {
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)   
 	public String getCartList(CartVO vo, Model model, HttpSession session) {
 		String mem_id = (String)session.getAttribute("mem_id");
+		String mem_isapi = (String) session.getAttribute("mem_isapi");
+		
 		vo.setMem_id(mem_id);
+		vo.setMem_isapi(mem_isapi);
+		
 		model.addAttribute("cartList", cartService.cartClientList(vo));
 		return "cart/cart";
 	}
@@ -37,6 +41,7 @@ public class CartController {
 	@RequestMapping(value = "/cart/{pro_code}/{cart_cnt}/{cart_start}/{cart_day}")
 	public String cartInsert(CartVO vo, HttpSession session, Model model, @PathVariable("pro_code") String pro_code, @PathVariable("cart_cnt") int cart_cnt, @PathVariable("cart_start") Date cart_start, @PathVariable("cart_day") String cart_day) throws UnsupportedEncodingException {
 		String mem_id = (String) session.getAttribute("mem_id");
+		String mem_isapi = (String) session.getAttribute("mem_isapi");
 		if (mem_id == null) {
 			String preUrl = "/cart/" + pro_code + "/" + cart_cnt + "/" + cart_start + "/" + URLEncoder.encode(cart_day, "UTF-8");
 			session.setAttribute("pre_url", preUrl);
