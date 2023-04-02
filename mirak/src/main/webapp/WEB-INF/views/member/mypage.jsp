@@ -39,8 +39,12 @@
 									<c:when test="${member.mem_isapi == 'kakao' }">
 										Kakao 빠른로그인 회원입니다
 									</c:when>
+								
+									<c:when test="${member.mem_isapi == 'normal' }">
+										일반회원입니다
+									</c:when>
+									
 									<c:otherwise> 
-										일반 회원입니다.
 									</c:otherwise>
 								</c:choose>
 							</div>
@@ -153,7 +157,7 @@
 					</div>
 					<div class="modal-body">
 						<c:choose>
-							<c:when test="${not member.mem_isapi == 'normal'}">
+							<c:when test="${member.mem_isapi == 'google' || member.mem_isapi == 'NAVER' || member.mem_isapi == 'kakao'}">
 								회원탈퇴시 모든 정보가 삭제됩니다. 인증번호를 입력해주세요.
 								<div class="row">
 										<div class="col-sm-9 mail_check_wrap">  
@@ -178,7 +182,7 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 							<c:choose>
-							<c:when test="${not member.mem_isapi == 'normal'}">
+							<c:when test="${not empty member.mem_isapi == 'normal'}">
 								<button type="button" class="btn btn-primary" id="memberCheck" onclick="apiDelete();">탈퇴하기</button>
 							</c:when>
 							<c:otherwise>
