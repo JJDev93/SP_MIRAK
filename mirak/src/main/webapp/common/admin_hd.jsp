@@ -8,7 +8,7 @@
 	<title>MiRak Admin</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	
-	<link rel="icon" href="${path}/resources/images/favicon.gif">
+	<link rel="icon" href="${path}/resources/images/favicon.png">
 	<link rel="stylesheet" href="${path}/resources/css/style.css">
 	<link rel="stylesheet" href="${path}/resources/css/ionicons.min.css">
 	<link rel="stylesheet" href="${path}/resources/css/admin.css">
