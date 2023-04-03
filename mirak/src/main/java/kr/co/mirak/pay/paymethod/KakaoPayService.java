@@ -93,6 +93,7 @@ public class KakaoPayService {
 		KakaoMapper kakaoMapper = sqlSessionTemplate.getMapper(KakaoMapper.class);
 		for (int i = 0; i < list.size(); i++) {
 			list.get(i).setMem_id(mem_id);
+			list.get(i).setMem_isapi(mem_isapi);
 			list.get(i).setGroup_id(groupId);
 			list.get(i).setTid(readyResponse.getTid());
 			list.get(i).setPay_type("kakaoPay");
@@ -106,9 +107,9 @@ public class KakaoPayService {
 	// tid 불러오기
 	public PayKakaoVO selectTid(HttpSession session) {
 		String mem_id = (String) session.getAttribute("mem_id");
-
+		String mem_isapi = (String) session.getAttribute("mem_isapi");
 		KakaoMapper kakaoMapper = sqlSessionTemplate.getMapper(KakaoMapper.class);
-		PayKakaoVO payKakaoVO = kakaoMapper.selectTid(mem_id);
+		PayKakaoVO payKakaoVO = kakaoMapper.selectTid(mem_id, mem_isapi);
 
 		return payKakaoVO;
 	}
@@ -196,13 +197,15 @@ public class KakaoPayService {
 	@Transactional
 	public void updateAndInsertPay(HttpSession session) {
 		String mem_id = (String) session.getAttribute("mem_id");
+		String mem_isapi = (String) session.getAttribute("mem_isapi");
 		KakaoMapper kakaoMapper = sqlSessionTemplate.getMapper(KakaoMapper.class);
 
-		List<PayVO> orderList = kakaoMapper.selectOrderList(mem_id);
+		List<PayVO> orderList = kakaoMapper.selectOrderList(mem_id, mem_isapi);
 		List<PayVO> payList = new ArrayList<>();
 		for (PayVO kakaoOrder : orderList) {
 			PayVO order = new PayVO();
 			order.setMem_id(kakaoOrder.getMem_id());
+			order.setMem_isapi(kakaoOrder.getMem_isapi());
 			order.setPro_code(kakaoOrder.getPro_code());
 			order.setPro_name(kakaoOrder.getPro_name());
 			order.setPro_price(kakaoOrder.getPro_price());
@@ -225,7 +228,7 @@ public class KakaoPayService {
 			payList.add(order);
 		}
 		System.out.println("payList는 ~~~~~~~~~~~~~~:::::" + payList);
-		kakaoMapper.updateOrderList(mem_id);
+		kakaoMapper.updateOrderList(mem_id, mem_isapi);
 		kakaoMapper.insertPayList(payList);
 	}
 

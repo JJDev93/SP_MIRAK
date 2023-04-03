@@ -8,7 +8,7 @@
 	<!-- 카트 목록 -->
 	<select id="cartClientList" resultType="kr.co.mirak.cart.CartVO">
 	
-		SELECT * FROM cart WHERE MEM_ID = #{mem_id} and CART_SHOW =1 ORDER BY CART_CODE DESC
+		SELECT * FROM cart WHERE MEM_ID = #{mem_id} and mem_isapi=#{mem_isapi} and CART_SHOW =1 ORDER BY CART_CODE DESC
 	
 	</select>
 	
@@ -18,8 +18,8 @@
 	<!-- 카트 추가 -->
 	<insert id="cartInsert">
    
-      INSERT INTO cart (MEM_ID, PRO_CODE, CART_DAY, CART_START, CART_CNT, PRO_NAME, PRO_PRICE, PRO_DESC, PRO_IMAGE)
-      VALUES (#{mem_id}, #{pro_code}, #{cart_day}, #{cart_start}, #{cart_cnt}, #{pro_name}, #{pro_price}, #{pro_desc}, #{pro_image} )
+      INSERT INTO cart (MEM_ID, PRO_CODE, CART_DAY, CART_START, CART_CNT, PRO_NAME, PRO_PRICE, PRO_DESC, PRO_IMAGE, MEM_ISAPI)
+      VALUES (#{mem_id}, #{pro_code}, #{cart_day}, #{cart_start}, #{cart_cnt}, #{pro_name}, #{pro_price}, #{pro_desc}, #{pro_image}, #{mem_isapi} )
       
    </insert>
 	

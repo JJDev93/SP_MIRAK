@@ -18,10 +18,10 @@
 		
 	</select>
 	
-	<select id="getClientPayList" resultType="kr.co.mirak.pay.PayVO">
+	<select id="getClientPayList" resultType="kr.co.mirak.pay.PayVO" parameterType="map">
 		select group_id, pro_image, pay_date, status, sum(cart_cnt) as pro_price,
 		pro_name, count(group_id) as cart_cnt, sum(totalPrice) as totalPrice
-		from pay where mem_id=#{mem_id} and status not in ('주문 취소') and pay_date BETWEEN DATE_ADD (NOW(), INTERVAL -3 MONTH) AND NOW() group by group_id order by pay_code desc
+		from pay where mem_id=#{mem_id} and mem_isapi=#{mem_isapi} and status not in ('주문 취소') and pay_date BETWEEN DATE_ADD (NOW(), INTERVAL -3 MONTH) AND NOW() group by group_id order by pay_code desc
 	</select>
 
 	<select id="getPayListDetail" resultType="kr.co.mirak.pay.PayVO">
@@ -50,7 +50,11 @@
 		select *
  		from pay where group_id = #{group_id};
 	</select>
-
+	
+	
+	<update id="updateDetailInfo" parameterType="kr.co.mirak.pay.PayVO">
+    	update pay set mem_name=#{mem_name} , mem_phone=#{mem_phone}, mem_add1=#{mem_add1}, mem_add2=#{mem_add2}, mem_zipcode=#{mem_zipcode}, pay_req=#{pay_req} where group_id = #{group_id};
+	</update>
 
 
 	<!-- 카트 목록 -->

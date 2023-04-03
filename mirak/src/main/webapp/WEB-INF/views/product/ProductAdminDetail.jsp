@@ -15,7 +15,7 @@
          <div class="row">
             <div class="col-md-12">
                <div class="form-group">
-                  <label for="code">상품코드</label> <input type="text" class="form-control" id="code" name="pro_code" value="${product.pro_code }" readonly>
+                  <label for="code">상품코드</label> <input type="text" class="form-control" id="code" name="pro_code" value="${product.pro_code }">
                </div>
             </div>
             <div class="col-md-12">

@@ -73,8 +73,8 @@
 							<div class="w-100"></div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="firstname">이름 <span class="text-danger">*</span></label> 
-									<input type="text" name="mem_name" id="firstname" tabIndex="7" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required" >
+									<label for="name">이름 <span class="text-danger">*</span></label> 
+									<input type="text" name="mem_name" id="name" tabIndex="7" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required" >
 								</div>
 							</div>
 							<div class="w-100"></div>
@@ -125,7 +125,7 @@
 					<div class="row mb-5">
 						<div class="col-md-6">
 							<c:choose>
-								<c:when test="${not empty member.mem_isapi}">
+								<c:when test="${member.mem_isapi == 'google' || member.mem_isapi == 'NAVER' || member.mem_isapi == 'kakao'}">
 									<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return checkAllAPI();">
 								</c:when>
 								<c:otherwise>
@@ -225,5 +225,3 @@
 		return true;
 	}
 </script>
-
-
