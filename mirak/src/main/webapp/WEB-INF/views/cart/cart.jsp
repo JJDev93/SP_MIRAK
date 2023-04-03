@@ -147,7 +147,7 @@
 							</div>						
 							<div class="mb-2">
 								<span  class="font-weight-bold text-dark">상품 개수</span><br>
-								<input type="number" class="form-control cart_cnt" id="cart_cnt" name="cart_cnt" value="${c.cart_cnt}" min="1" onchange="calculateTotalPrice()">
+								<input type="number" class="form-control cart_cnt" id="cart_cnt" name="cart_cnt" value="${c.cart_cnt}" min="1" max="99" onchange="calculateTotalPrice()" oninput="if(parseInt(this.value)<1) this.value='1'; if(parseInt(this.value)>99) this.value='99';">
 							</div>
 							<hr>		
 							<div>
@@ -157,7 +157,7 @@
 						</div>
 						<div class="modal-footer">
 							<input type="submit" value="변경" class="btn btn-primary py-3 px-5" onclick="return CheckTest();">
-							<button type="button" class="btn btn-black py-3 px-5" data-dismiss="modal">Close</button>
+							<button type="button" id="modalCloseBtn" class="btn btn-black py-3 px-5" data-dismiss="modal">Close</button>
 						</div>
 					</form>
 				</div>
@@ -306,4 +306,19 @@ function CheckTest() {
 			 <%session.setAttribute("message", "");%>
 		}
 	})
+</script>
+
+<script>
+const closeBtn = document.querySelector("#modalCloseBtn");
+closeBtn.addEventListener("click", () => {
+  const cartCntInput = document.querySelector("#cart_cnt");
+  cartCntInput.value = c.cart_cnt;
+
+  const modal = document.querySelector("#modal");
+  const modalBackdrop = document.querySelector(".modal-backdrop");
+  modal.classList.remove("show");
+  modal.style.display = "none";
+  modalBackdrop.remove();
+});
+
 </script>

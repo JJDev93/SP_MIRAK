@@ -4,12 +4,16 @@
 <mapper namespace="kr.co.mirak.pay.chart.ChartMapper">
 	<select id="getTotalByMenuList"
 		resultType="kr.co.mirak.pay.chart.TotalByMenuVO">
-		SELECT REPLACE(pro_name, '도시락', '') as pro_name, SUM(totalPrice) AS totalPrice, 
-        (SUM(totalPrice) / (SELECT SUM(totalPrice) FROM pay WHERE status = '결제 완료') * 100) AS totalRatio
-        FROM pay WHERE status = '결제 완료'
-        GROUP BY pro_name
-        ORDER BY totalPrice DESC
-        LIMIT 5;
+		SELECT REPLACE(pro_name, '도시락', '') as pro_name,
+		SUM(totalPrice) AS totalPrice,
+		(SUM(totalPrice) / (SELECT
+		SUM(totalPrice) FROM pay WHERE status = '결제 완료') * 100) AS
+		totalRatio
+		FROM pay WHERE status = '결제 완료'
+		GROUP BY pro_name
+		ORDER BY totalPrice
+		DESC
+		LIMIT 5;
 	</select>
 
 	<select id="getCountByGender"
@@ -17,7 +21,8 @@
 		SELECT g.gender as mem_gender, COUNT(p.mem_gender) as count
 		FROM (SELECT 1 as gender UNION SELECT 2 as gender) as g
 		LEFT JOIN pay
-		as p ON g.gender = p.mem_gender AND REPLACE(pro_name, '도시락', '') = #{clickedMenu}
+		as p ON g.gender = p.mem_gender AND REPLACE(pro_name, '도시락', '') =
+		#{clickedMenu}
 		GROUP
 		BY g.gender;
 	</select>
@@ -38,7 +43,8 @@
 		FLOOR(p.mem_age/10)*10 as mem_age FROM pay
 		as p
 		WHERE REPLACE(pro_name, '도시락', '') = #{clickedMenu}
-		GROUP BY mem_age) as t
+		GROUP BY
+		mem_age) as t
 		GROUP BY mem_age ORDER BY mem_age ASC;
 	</select>
 
@@ -56,28 +62,49 @@
 		GROUP BY pro_name
 		HAVING ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) NOT IN (0, 100)
 		ORDER BY ratio DESC
-		LIMIT 15;
+		LIMIT 10;
 		]]>
 	</select>
-	
-	<select id="getTotalUsersList" resultType="kr.co.mirak.pay.chart.TotalUsersVO">
-		SELECT mem_regdate as regdate, 
-		CASE WHEN mem_gender = 1 THEN '남자' ELSE '여자' END AS gender,
-		SUM(COUNT(*)) OVER (PARTITION BY mem_gender ORDER BY mem_regdate) AS totalUsers
-		FROM member
-		GROUP BY mem_regdate, mem_gender;
+
+	<select id="getTotalUsersList"
+		resultType="kr.co.mirak.pay.chart.TotalUsersVO">
+		SELECT mem_regdate as regdate,
+		CASE WHEN mem_gender = 1 THEN
+		'남자' ELSE '여자' END AS gender,
+		SUM(COUNT(*))
+		OVER (PARTITION BY
+		mem_gender ORDER BY mem_regdate) AS totalUsers
+		FROM
+		member
+		GROUP BY
+		mem_regdate, mem_gender;
 	</select>
-	
-	<select id="getChartMainList" resultType="kr.co.mirak.pay.chart.ChartMainVO">
-		SELECT 
-		(SELECT COUNT(*) FROM MEMBER) AS totalUsers, SUM(totalPrice) AS totalPrice, 
-		SUM(CASE WHEN MONTH(pay_date) = MONTH(NOW()) THEN totalPrice ELSE 0 END) AS monthPrice 
-		FROM pay 
-		WHERE status = '결제 완료';
+
+	<select id="getChartMainList"
+		resultType="kr.co.mirak.pay.chart.ChartMainVO">
+		SELECT
+		(SELECT COUNT(*) FROM MEMBER) AS totalUsers,
+		SUM(totalPrice) AS totalPrice,
+		SUM(CASE WHEN MONTH(pay_date) =
+		MONTH(NOW()) THEN totalPrice ELSE 0
+		END) AS monthPrice
+		FROM pay
+		WHERE
+		status = '결제 완료';
 	</select>
-	
-	
-	
-	
-	
+
+	<select id="getAgeTopFiveList"
+		resultType="kr.co.mirak.pay.chart.BestByGenderVO">
+	<![CDATA[
+		SELECT
+		SUM(CASE WHEN mem_age >= #{param1} AND mem_age < #{param2} THEN totalPrice ELSE 0 END) / SUM(totalPrice) * 100 AS ratio,
+		SUM(totalPrice) AS total_price,
+		REPLACE(pro_name, '도시락', '') AS pro_name
+		FROM pay
+		WHERE status = '결제 완료'
+		GROUP BY pro_name
+		ORDER BY total_price DESC
+		LIMIT 5;
+		]]>
+	</select>
 </mapper>

@@ -5,11 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class ChartServiceImpl implements ChartService {
@@ -151,7 +149,7 @@ public class ChartServiceImpl implements ChartService {
 	@Override
 	public Map<String, List<Object>> getChartMainList(ChartMainVO vo) {
 		ChartMapper mapper = sqlSessionTemplate.getMapper(ChartMapper.class);
-		
+
 		List<Integer> totalPrice = new ArrayList<>();
 		List<Integer> monthPrice = new ArrayList<>();
 		List<Integer> totalUsers = new ArrayList<>();
@@ -171,4 +169,35 @@ public class ChartServiceImpl implements ChartService {
 		return map;
 
 	}
+	
+	@Override
+	public Map<String, Map<String, List<Object>>> getAgeTopFiveList(BestByGenderVO bvo) {
+	    Map<String, Map<String, List<Object>>> resultMap = new HashMap<>();
+
+	    ChartMapper mapper = sqlSessionTemplate.getMapper(ChartMapper.class);
+	    for (int age = 20; age <= 50; age += 10) {
+	        List<BestByGenderVO> ageTopFiveList = mapper.getAgeTopFiveList(age, age + 10);
+
+	        Map<String, List<Object>> map = new HashMap<>();
+	        List<Object> pro_name = new ArrayList<>();
+	        List<Object> raito = new ArrayList<>();
+	        List<Object> total_Price = new ArrayList<>();
+
+	        for (BestByGenderVO item : ageTopFiveList) {
+	        	pro_name.add(item.getPro_name());
+	        	raito.add(item.getRatio());
+	        	total_Price.add(item.getTotal_Price());
+	        }
+
+	        map.put("pro_name", pro_name);
+	        map.put("raito", raito);
+	        map.put("total_Price", total_Price);
+
+	        resultMap.put(age + "대", map);
+	    }
+
+	    return resultMap;
+	}
+
+
 }
