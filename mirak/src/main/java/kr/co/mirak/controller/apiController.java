@@ -88,8 +88,9 @@ public class apiController {
 		memberVO.setMem_name(user_name);
 		memberVO.setMem_pw(user_pw);
 		memberVO.setMem_isapi("kakao");
-
+		System.out.println("카카오 memberVO : " + memberVO);
 		MemberVO lvo = memberService.login(memberVO);
+		System.out.println("lvo : " + lvo);
 		if (lvo == null) { // 회원가입
 			System.out.println("카카오 회원가입!!!!!!!");
 			model.addAttribute("member", memberVO);

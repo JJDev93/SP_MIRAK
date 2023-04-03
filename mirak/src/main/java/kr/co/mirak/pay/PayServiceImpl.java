@@ -125,6 +125,15 @@ public class PayServiceImpl implements PayService {
 	public List<PayVO> adaptPayVO(PayStringVO payStringVO, HttpSession session) {
 		return null;
 	}
+	
+	
+	@Override
+	public int updateDetailInfo(PayVO payVO) {
+		// String mem_name , mem_phone, mem_add1, mem_add2, mem_zipcode, group_id, pay_req
+		PayMapper mapper = sqlSessionTemplate.getMapper(PayMapper.class);
+		int result = mapper.updateDetailInfo(payVO);
+		return result;
+	}
 
 
 }

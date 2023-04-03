@@ -184,6 +184,15 @@ public class PayController {
 		// mypage 결제내역으로 이동 아직 페이지 없음
 		return "redirect:/mypage";
 	}
+	
+	@RequestMapping(value = "/updateDetailInfo", method = RequestMethod.POST)
+	public String updateDetailInfo(Model model, PayVO payVO) {
+		System.out.println(payVO);
+		
+		int result = payService.updateDetailInfo(payVO);
+		
+		return "redirect:/payInfo";
+	}
 
 	@RequestMapping(value = "/admin/pays/{num}", method = RequestMethod.GET)
 	public String getAdminPayList(ProductVO productVO, PayVO payVO, Model model, CriteriaP criP, @PathVariable("num") int num) {

@@ -182,7 +182,7 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 							<c:choose>
-							<c:when test="${not empty member.mem_isapi == 'normal'}">
+							<c:when test="${member.mem_isapi == 'google' || member.mem_isapi == 'NAVER' || member.mem_isapi == 'kakao'}">
 								<button type="button" class="btn btn-primary" id="memberCheck" onclick="apiDelete();">탈퇴하기</button>
 							</c:when>
 							<c:otherwise>

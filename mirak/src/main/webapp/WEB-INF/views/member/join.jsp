@@ -125,7 +125,7 @@
 					<div class="row mb-5">
 						<div class="col-md-6">
 							<c:choose>
-								<c:when test="${member.mem_isapi == 'google' || member.mem_isapi == 'NAVER' || member.mem_isapi == 'kakao}">
+								<c:when test="${member.mem_isapi == 'google' || member.mem_isapi == 'NAVER' || member.mem_isapi == 'kakao'}">
 									<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return checkAllAPI();">
 								</c:when>
 								<c:otherwise>
@@ -225,5 +225,3 @@
 		return true;
 	}
 </script>
-
-
