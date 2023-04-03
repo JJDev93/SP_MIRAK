@@ -218,30 +218,14 @@ resultInput.addEventListener('change', function() {
 
       var result=0;
          $('.quantity-right-plus').click(function(e){
-              
-              // Stop acting like a button
               e.preventDefault();
-              // Get the field name
               var result = parseInt($('#result').val());
-              
-              // If is not undefined
-                  
                   $('#result').val(result + 1);
-
-                
-                  // Increment
-              
           });
 
            $('.quantity-left-minus').click(function(e){
-              // Stop acting like a button
               e.preventDefault();
-              // Get the field name
               var result = parseInt($('#result').val());
-              
-              // If is not undefined
-            
-                  // Increment
                   if(result>1){
                   $('#result').val(result - 1);
                   }
