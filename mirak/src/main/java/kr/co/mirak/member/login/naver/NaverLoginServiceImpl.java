@@ -88,7 +88,7 @@ public class NaverLoginServiceImpl implements NaverLoginService {
 		return oauthToken;
 	}
 
-	@Override
+	@Override	
 	public String getUserInfo(OAuth2AccessToken oauth, MemberVO member) throws Exception {
 		String userInfo = "";
 		try {
