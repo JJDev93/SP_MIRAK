@@ -15,5 +15,7 @@ public interface ChartService {
 	Map<String, Map<String, List<Object>>> getTotalUsersList(TotalUsersVO vo);
 	
 	Map<String, List<Object>> getChartMainList(ChartMainVO vo);
+	
+	Map<String, Map<String, List<Object>>> getAgeTopFiveList(BestByGenderVO bvo);
 
 }

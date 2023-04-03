@@ -29,6 +29,7 @@ import kr.co.mirak.pay.PageMakerDTOP;
 import kr.co.mirak.pay.PayService;
 import kr.co.mirak.pay.PayStringVO;
 import kr.co.mirak.pay.PayVO;
+import kr.co.mirak.pay.chart.BestByGenderVO;
 import kr.co.mirak.pay.chart.ChartData;
 import kr.co.mirak.pay.chart.ChartMainVO;
 import kr.co.mirak.pay.chart.ChartService;
@@ -255,16 +256,19 @@ public class PayController {
 	    PurchaseRateVO pvo = new PurchaseRateVO();
 	    TotalUsersVO ivo = new TotalUsersVO();
 	    ChartMainVO cvo = new ChartMainVO();
+	    BestByGenderVO bvo = new BestByGenderVO();
 
 		Map<String, List<Object>> totalBymenulist = chartService.getTotalByMenuList(mvo);
 		Map<String, List<Object>> purchaseRateList = chartService.getPurchaseRateList(pvo);
 		Map<String, Map<String, List<Object>>> totalUsersList = chartService.getTotalUsersList(ivo);
 		Map<String, List<Object>> chartMainList = chartService.getChartMainList(cvo);
+		Map<String, Map<String, List<Object>>> bestByGenderList = chartService.getAgeTopFiveList(bvo);
 
 		chartData.setTotalByMenuList(totalBymenulist);
 		chartData.setPurchaseRateList(purchaseRateList);
 		chartData.setTotalUsersList(totalUsersList);
 		chartData.setChartMainList(chartMainList);
+		chartData.setBestByGenderList(bestByGenderList);
 		
 		String data = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(chartData);
 		

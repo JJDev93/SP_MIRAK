@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 <div class="hero-wrap hero-bread" style="background-image: url('${path}/resources/images/bg_1.jpg');">
@@ -37,7 +38,7 @@
 												${payVO.pro_name} <c:if test="${payVO.cart_cnt > 1 }"> 외 ${payVO.cart_cnt - 1 }개 품목</c:if>
 											</h3>
 											<p>총 수량 ${payVO.pro_price }개 &nbsp;&nbsp;&nbsp; 합계
-												${payVO.totalPrice } 원</p>
+												<fmt:formatNumber value="${payVO.totalPrice }" type="number"/> 원</p>
 											<p>${payVO.status }</p>
 											<p></p>
 											<p>

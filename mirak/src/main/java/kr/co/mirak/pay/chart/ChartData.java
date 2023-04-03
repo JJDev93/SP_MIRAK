@@ -14,10 +14,12 @@ public class ChartData {
 	public Map<String, List<Object>> countByAge;
 
 	public Map<String, List<Object>> purchaseRateList;
-	
+
 	public Map<String, Map<String, List<Object>>> totalUsersList;
 
 	public Map<String, List<Object>> chartMainList;
+
+	public Map<String, Map<String, List<Object>>> bestByGenderList;
 
 	public Map<String, List<Object>> getTotalByMenuList() {
 		return totalByMenuList;
@@ -73,6 +75,14 @@ public class ChartData {
 
 	public void setChartMainList(Map<String, List<Object>> chartMainList) {
 		this.chartMainList = chartMainList;
+	}
+
+	public Map<String, Map<String, List<Object>>> getBestByGenderList() {
+		return bestByGenderList;
+	}
+
+	public void setBestByGenderList(Map<String, Map<String, List<Object>>> bestByGenderList) {
+		this.bestByGenderList = bestByGenderList;
 	}
 
 }

@@ -99,7 +99,7 @@
 						<!-- 이전페이지 버튼 -->
 						<c:if test="${pageMaker.prev}">
 							<li class="pageInfo_btn previous"><a
-								href="'/admin/pays/${pageMaker.startPage-1}'">&lt;</a></li>
+								href="/admin/pays/${pageMaker.startPage-1}">&lt;</a></li>
 						</c:if>
 						<c:forEach var="num" begin="${pageMaker.startPage}"
 							end="${pageMaker.endPage}">
@@ -109,7 +109,7 @@
 						<!-- 다음페이지 버튼 -->
 						<c:if test="${pageMaker.next}">
 							<li class="pageInfo_btn next"><a
-								href="'/admin/pays/${pageMaker.endPage + 1 }'">&gt;</a></li>
+								href="/admin/pays/${pageMaker.endPage + 1 }">&gt;</a></li>
 						</c:if>
 					</ul>
 				</div>
