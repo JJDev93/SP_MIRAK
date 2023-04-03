@@ -60,9 +60,9 @@ public class PayServiceImpl implements PayService {
 	public List<PayVO> getClientPayList(HttpSession session) {
 
 		String mem_id = (String) session.getAttribute("mem_id");
-		
+		String mem_isapi = (String) session.getAttribute("mem_isapi");
 		PayMapper payMapper = sqlSessionTemplate.getMapper(PayMapper.class);
-		List<PayVO> list = payMapper.getClientPayList(mem_id);
+		List<PayVO> list = payMapper.getClientPayList(mem_id, mem_isapi);
 		System.out.println(list.size());
 		return list;
 	}

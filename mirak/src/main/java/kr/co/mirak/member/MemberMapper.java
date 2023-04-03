@@ -2,8 +2,10 @@ package kr.co.mirak.member;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface MemberMapper {
-	MemberVO login(MemberVO vo);
+	MemberVO login(MemberVO memberVO);
 
 	List<MemberVO> idfind(MemberVO vo); //
 
@@ -19,9 +21,12 @@ public interface MemberMapper {
 
 	int memdelete(MemberVO vo);
 
-	MemberVO getMemberInfo(String mem_code);
+	MemberVO getMemberInfo(@Param("mem_id") String mem_id, @Param("mem_isapi") String mem_isapi);
 
 	int idCheck(String id);
+
+	int existIdAndIsApi(@Param("mem_id") String mem_id, @Param("mem_isapi")String mem_isapi);
+
 	// 카카오 로그인
 	// MemberVO findkakao(HashMap<String, Object> userInfo);
 	// void kakaoinsert(HashMap<String, Object> userInfo);
@@ -39,5 +44,6 @@ public interface MemberMapper {
 	int adminMemberDel(MemberVO vo);
 
 	int adminMemberUpdate(MemberVO vo);
+
 
 }

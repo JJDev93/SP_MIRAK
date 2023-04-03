@@ -67,15 +67,6 @@
 					<div class="row align-items-end">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label for="address">주소</label> 
-								<input type="hidden" name="mem_address" class="form-control" id="address" style="cursor: default" value="${memberVO.mem_zipcode} ${memberVO.mem_add1} ${memberVO.mem_add2}" readonly>
-								<input type="text" name="mem_zipcode" class="form-control mb-2" value="${memberVO.mem_zipcode}" readonly>
-								<input type="text" name="mem_add1" class="form-control mb-2" value="${memberVO.mem_add1}" readonly>
-								<input type="text" name="mem_add2" class="form-control mb-2" value="${memberVO.mem_add2}" readonly>
-							</div>
-						</div>
-						<div class="col-md-12">
-							<div class="form-group">
 								<label for="receiverName">받는 사람</label> <input type="text"
 									style="cursor: default" name="mem_name" class="form-control"
 									placeholder="이름" id="receiverName" value="${memberVO.mem_name}"
@@ -88,6 +79,15 @@
 									style="cursor: default" name="mem_phone" class="form-control"
 									maxlength="11" pattern="[0-9]{11}" placeholder="" id="phone"
 									value="${memberVO.mem_phone}" readonly>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="address">주소</label> 
+								<input type="hidden" name="mem_address" class="form-control" id="address" style="cursor: default" value="${memberVO.mem_zipcode} ${memberVO.mem_add1} ${memberVO.mem_add2}" readonly>
+								<input type="text" name="mem_zipcode" class="form-control mb-2" value="${memberVO.mem_zipcode}" readonly>
+								<input type="text" name="mem_add1" class="form-control mb-2" value="${memberVO.mem_add1}" readonly>
+								<input type="text" name="mem_add2" class="form-control mb-2" value="${memberVO.mem_add2}" readonly>
 							</div>
 						</div>
 						<div class="col-md-12">
@@ -121,7 +121,15 @@
 					</div>
 					<p>
 						<input type="button" id="btn-kakao-pay" class="btn btn-primary py-3 px-5 l-100 mb-2" value="주문하기">
-						<a href="/" class="btn btn-black py-3 px-5 d-block">취소</a><br>
+						<!-- <a href="/" class="btn btn-black py-3 px-5 d-block">취소</a><br> -->
+						<c:choose>
+		                     <c:when test="${codecheck == 1}">
+		                        <a href="/cart" class="btn btn-black py-3 px-5 d-block">취소</a><br>
+		                     </c:when>
+		                     <c:otherwise>
+		                        <a href="/ProductClientDetail/${productList[0].pro_code}" class="btn btn-black py-3 px-5 d-block">취소</a><br>
+		                     </c:otherwise>
+		                  </c:choose>
 					</p>
 				</div>
 			</div>

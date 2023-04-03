@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,7 @@ public class mypageController {
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public String mypageview(Model model, HttpSession session) {
 		MemberVO member = memberService.getMemberInfo(session);
+		System.out.println();
 		model.addAttribute("member", member);
 		return "member/mypage";
 	}
@@ -35,6 +37,7 @@ public class mypageController {
 	// api 회원정보 수정
 	@RequestMapping(value = "/apiMemupdate", method = RequestMethod.POST)
 	public String apiMemupdate(MemberVO vo) {
+		System.out.println(vo);
 		memberService.memupdate(vo);
 		return "redirect:/mypage";	
 	}
@@ -51,18 +54,35 @@ public class mypageController {
 		return success;	
 	}
 	
+	
+	// 비밀번호 수정 페이지 이동
+	@RequestMapping(value = "/updatePw", method = RequestMethod.GET)
+	public String pwUpdate(Model model, HttpSession session) {
+		MemberVO member = memberService.getMemberInfo(session);
+		model.addAttribute("member", member);
+		return "member/updatePw";
+	}
+		
 	// 비밀번호 수정
 	@RequestMapping(value = "/updatePw", method = RequestMethod.POST)
 	@ResponseBody
 	public int updatePw(MemberVO vo, @RequestParam("befo_pw") String befo_pw, @RequestParam("new_pw") String new_pw) {
+		System.out.println("비밀번호 수정중.."+vo);
 		String encodePw = vo.getMem_pw();
 		int success = 0;
+		System.out.println("비밀번호 수정중..!"+ "befo_pw: "+befo_pw+ " / encodePw: "+ encodePw);
+		
 		if (true == pwEncoder.matches(befo_pw, encodePw)) {
+			System.out.println("비밀번호 수정중..!"+ befo_pw+ encodePw);
 			String encodeNewPw = pwEncoder.encode(new_pw);
 			vo.setMem_pw(encodeNewPw);
+			System.out.println("비밀번호 수정중..1"+vo);
 			success = memberService.pwreset(vo);
+			System.out.println("비밀번호 수정중..2"+success);
+		}else {
+			System.out.println("비밀번호 수정중..모야ㅕ!!");
 		}
-		return success;	
+		return success;
 	}
 
 	// 회원탈퇴
@@ -87,8 +107,6 @@ public class mypageController {
 		}
 		return success;
 	}
-	
-	
 	
 	//api회원탈퇴
 	   @RequestMapping(value="/apidelete", method = RequestMethod.POST)

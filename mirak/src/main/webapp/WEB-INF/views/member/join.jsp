@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
@@ -12,11 +11,11 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-xl-7 ftco-animate">
-				<form action="/join" method="post" onsubmit="return Duplicate()"
-					class="billing-form">
+				<form action="/join" method="post" onsubmit="return Duplicate()" class="billing-form">
+					<p style="color:red; font-size: 14px;">* 표시 항목은 필수 입력 사항 입니다.</p>
 					<div class="row align-items-end">
 						<c:choose>
-							<c:when test="${not empty member.mem_isapi}">
+							<c:when test="${member.mem_isapi == 'google' || member.mem_isapi == 'NAVER' || member.mem_isapi == 'kakao'}">
 								<input type="hidden" name="mem_pw" class="form-control" id="pw" value="${member.mem_pw }" readonly="readonly">
 								<input type="hidden" name="mem_isapi" class="form-control" value="${member.mem_isapi}" readonly="readonly">
 								<div class="col-md-12">
@@ -31,16 +30,16 @@
 								</div>
 							</c:when>
 							<c:otherwise>
+								<input type="hidden" name="mem_isapi" class="form-control" value="normal" readonly="readonly">
 								<div class="col-md-12">
 									<div class="form-group">
-										<p style="color:red; font-size: 14px;">* 표시 항목은 필수 입력 사항 입니다.</p>
 										<label for="id">이메일(ID) <span class="text-danger">*</span></label>
-										<div class="row mb-2">
+										<div class="row">
 											<div class="col-sm-9">
 												<input type="email" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required tabindex="1" autofocus="autofocus">
 											</div>
 											<div class="col-sm-3"> 
-												<button type="button" tabIndex="2" class="btn btn-primary joinBtn mb-3" id="idCheck" value="N" onclick="return fn_idCheck();">중복확인</button>
+												<button type="button" tabIndex="2" class="btn btn-primary joinBtn" id="idCheck" value="N" onclick="return fn_idCheck();">중복확인</button>
 												<span id="idCheckmsg"></span>
 											</div>
 										</div>
@@ -53,7 +52,7 @@
 												</div>
 											</div>
 											<div class="col-sm-3">
-												<button type="button" tabIndex="3" id="mail_check_button" class="btn btn-light joinBtn mb-2 doubleChk">인증번호발송</button>
+												<button type="button" tabIndex="3" id="mail_check_button" class="btn btn-light joinBtn doubleChk">인증번호발송</button>
 											</div>
 										</div>
 									</div>
@@ -61,8 +60,7 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<label for="pw">비밀번호 <span class="text-danger">*</span></label> 
-										<input type="password" tabIndex="5" name="mem_pw" class="form-control" id="pw"
-																				onchange="check_pw()" placeholder="비밀번호" required="required" value="${member.mem_pw }">
+										<input type="password" tabIndex="5" name="mem_pw" class="form-control" id="pw" onchange="check_pw()" placeholder="비밀번호" required="required" value="${member.mem_pw }">
 									</div>
 									<div class="form-group">
 										<label for="pw2">비밀번호 확인 <span class="text-danger">*</span></label> 
@@ -75,8 +73,8 @@
 							<div class="w-100"></div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="firstname">이름 <span class="text-danger">*</span></label> 
-									<input type="text" name="mem_name" id="firstname" tabIndex="7" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required" >
+									<label for="name">이름 <span class="text-danger">*</span></label> 
+									<input type="text" name="mem_name" id="name" tabIndex="7" class="form-control" placeholder="이름을 입력해주세요" value="${member.mem_name }" required="required" >
 								</div>
 							</div>
 							<div class="w-100"></div>
@@ -86,7 +84,6 @@
 									<input type="text" name="mem_age" tabIndex="8" id="age" class="form-control" placeholder="나이를 입력해주세요" value="${member.mem_age }" required="required">
 								</div>
 							</div>
-	
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
@@ -95,10 +92,9 @@
 										<input type="radio" name="mem_gender" value="1" checked tabIndex="9"> 남
 										&nbsp;&nbsp;&nbsp; 
 										<input type="radio" name="mem_gender" value="2" tabIndex="10"> 여
-
 									</div>
 								</div>
-						</div>
+							</div>
 						<div class="w-100"></div>
 						<div class="col-md-6">
 							<div class="form-group">
@@ -113,7 +109,7 @@
 								<label for="streetaddress">주소 <span class="text-danger">*</span></label>
 								<div class="row mb-2">
 									<div class="col-sm-8">
-										<input type="text" class="form-control" id="address_input_1" name="mem_zipcode" placeholder="우편번호" required="required" onkeydown="event.preventDefault();" autocomplete="off">
+										<input type="text" class="form-control" id="address_input_1" name="mem_zipcode" placeholder="우편번호" required="required" onkeydown="event.preventDefault();" autocomplete="off" readonly>
 									</div>
 									<div class="col-sm-4">
 										<button type="button" id="streetaddress"  class="btn btn-primary joinBtn address button" tabIndex="12" onclick="execution_daum_address();">우편번호찾기</button>
@@ -129,7 +125,7 @@
 					<div class="row mb-5">
 						<div class="col-md-6">
 							<c:choose>
-								<c:when test="${not empty member.mem_isapi}">
+								<c:when test="${member.mem_isapi == 'google' || member.mem_isapi == 'NAVER' || member.mem_isapi == 'kakao}">
 									<input type="submit" value="회원가입" id="joinSubmit" class="btn btn-primary py-3 px-5 w-100" onclick="return checkAllAPI();">
 								</c:when>
 								<c:otherwise>
@@ -137,7 +133,7 @@
 							    </c:otherwise>
 							</c:choose>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-6"> 
 							<a href="/" class="btn btn-secondary py-3 px-5 w-100" tabIndex="15">가입취소</a>
 						</div>
 					</div>

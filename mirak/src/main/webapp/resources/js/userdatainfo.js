@@ -43,35 +43,6 @@ function confirmUpdateMember() {
    }
 }
 
-function confirmUpdatePw() {
-   if (confirm("비밀번호를 수정하시겠습니까?")) {
-      $.ajax({
-         url : "/updatePw",
-         type : "POST",
-         dataType : "JSON",
-         data : {
-            "mem_id" : $("#mem_id").val(),
-            "mem_pw" : $("#mem_pw").val(),
-            "befo_pw" : $("#befo_pw").val(),
-            "new_pw" : $("#new_pw").val()
-         },
-         success : function(data) {
-            if (data == "0") {
-               alert("기존 비밀번호가 틀렸습니다.");
-               document.getElementById('befo_pw').value = '';
-               document.getElementById('befo_pw').focus();
-            } else if (data == "1") {
-               alert("비밀번호가 수정 되었습니다.");
-               location.href = "/mypage";
-            }
-         }
-      });
-      return true;
-   } else {
-      return false;
-   }
-}
-
 //회원탈퇴
 function confirmDeleteMem() {
    if (pw_1.value == "") {

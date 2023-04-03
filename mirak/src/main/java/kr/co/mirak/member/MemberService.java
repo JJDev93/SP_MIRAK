@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface MemberService {
-	MemberVO login(MemberVO vo);
+	MemberVO login(MemberVO memberVO);
 
 	List<MemberVO> idfind(MemberVO vo); //
 
@@ -22,10 +24,12 @@ public interface MemberService {
 
 	int memupdate(MemberVO vo);
 
-	MemberVO getMemberDetail(String memId);
+	MemberVO getMemberDetail(String mem_id, String mem_isapi);
 
 	int idCheck(String id) throws Exception;
-
+	
+	int existIdAndIsApi(@Param("mem_id") String mem_id, @Param("mem_isapi")String mem_isapi);
+	
 	// 카카오 로그인
 //	String getAccessToken(String code);
 //	MemberVO getUserInfo(String access_Token);

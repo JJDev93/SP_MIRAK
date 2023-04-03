@@ -51,8 +51,9 @@ public class apiController {
 			if (result.equals("login")) {
 				session.setAttribute("accesstoken", accesstoken);
 				session.setAttribute("mem_id", member.getMem_id());
+				System.out.println("네이버 로그인했을떄 api는!!!!!!!!! : " + member.getMem_isapi());
 				session.setAttribute("mem_isapi", member.getMem_isapi());
-				memberService.login(member);
+				session.setAttribute("message", "네이버 로그인 되었습니다!");
 				return "redirect:/replayBefo";
 			} else if (result.equals("join")) {
 				session.setAttribute("accesstoken", accesstoken);
@@ -90,14 +91,17 @@ public class apiController {
 
 		MemberVO lvo = memberService.login(memberVO);
 		if (lvo == null) { // 회원가입
+			System.out.println("카카오 회원가입!!!!!!!");
 			model.addAttribute("member", memberVO);
 			return "member/join";
 		} else {
 			session.setAttribute("mem_id", user_id);
+			session.setAttribute("mem_isapi", memberVO.getMem_isapi());
 			session.setAttribute("access_Token", access_Token);
 			session.setAttribute("message", "카카오 로그인 되었습니다!");
 			memberService.login(memberVO);
 			System.out.println("세션설정 mem_id : " + user_id);
+			System.out.println("세션설정 mem_isapi : " + memberVO.getMem_isapi());
 			return "redirect:/replayBefo";
 		}
 	}
@@ -143,10 +147,12 @@ public class apiController {
 			return "member/join";
 		} else {
 			session.setAttribute("mem_id", user_id);
+			session.setAttribute("mem_isapi", member.getMem_isapi());
 			session.setAttribute("access_Token", access_token);
 			session.setAttribute("message", "구글 로그인 되었습니다!");
 			memberService.login(member);
 			System.out.println("세션설정 mem_id : " + user_id);
+			System.out.println("세션설정 mem_isapi : " + member.getMem_isapi());
 			return "redirect:/returnBefo";
 		}
 	}

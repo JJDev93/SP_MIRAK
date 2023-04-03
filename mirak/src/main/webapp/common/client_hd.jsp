@@ -30,7 +30,7 @@
 		<!-- START nav -->
 		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light scrolled awake" id="ftco-navbar">
 			<div class="container">
-				<h1><a class="navbar-brand" href="/" style="left:-20px;">MiRak</a></h1>
+				<h1 class="h1-css"><a class="navbar-brand" href="/" style="left:-20px;">MiRak</a></h1>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="oi oi-menu"></span> Menu
 				</button>
@@ -62,19 +62,19 @@
 	<!-- END nav -->
 </body>
 <script>
-	var testPopUp;
-	function openPopUp() {
-	   testPopUp = window.open("https://nid.naver.com/nidlogin.logout","_blank","toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
-	}
-	function closePopUp() {
-	   testPopUp.close();
-	}
-	function naverLogout() {
-	   openPopUp();
-	   setTimeout(function() {
-	      closePopUp();
-	   }, 1);
-	   location.href="logout";
-	}
+var testPopUp;
+function openPopUp() {
+   testPopUp = window.open("https://nid.naver.com/nidlogin.logout","_blank","toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
+}
+function closePopUp() {
+   testPopUp.close();
+}
+function naverLogout() {
+   openPopUp();
+   setTimeout(function() {
+      closePopUp();
+   }, 100);
+   location.href="/logout";
+}
 </script>
 </html>

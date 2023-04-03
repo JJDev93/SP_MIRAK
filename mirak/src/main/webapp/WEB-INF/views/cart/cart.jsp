@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<% session = request.getSession(); %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
 
 <div class="hero-wrap hero-bread" style="background-image: url('${path}/resources/images/bg_1.jpg');">
@@ -13,213 +13,161 @@
 		<h1 class="bread">장바구니</h1>
 	</div>
 </div>
-<%
-session = request.getSession();
-%>
-
 <section class="ftco-section">
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-10 ftco-animate mb-5">
-				<ul class="nav nav-tabs w-100">
-					<li class="nav-item"><a class="nav-link" href="/mypage">마이페이지</a></li>
-					<li class="nav-item"><a class="nav-link active" href="/cart">장바구니</a></li>
-					<li class="nav-item"><a class="nav-link" href="/payInfo">결제내역</a></li>
-				</ul>
-			</div>
-		</div>
-
-		<div class="row justify-content-center">
-			<div class="col-xl-12 ftco-animate">
-				<form method="post" action="/pay">
-					<div class="cart-list">
-						<table class="table table_wrap">
-							<thead class="thead-primary">
-								<tr class="text-center">
-									<th style="width:40px;">
-										<div class="all_check_input_div">
-											<span class="all_chcek_span"></span> <input type="checkbox"
-												class="all_check" checked="checked">
+				<div class="row mb-5">
+					<ul class="nav nav-tabs w-100">
+						<li class="nav-item"><a class="nav-link" href="/mypage">마이페이지</a></li>
+						<li class="nav-item"><a class="nav-link active" href="/cart">장바구니</a></li>
+						<li class="nav-item"><a class="nav-link" href="/payInfo">결제내역</a></li>
+					</ul>
+				</div>
+				<div class="row ftco-animate">
+					<c:choose>
+						<c:when test="${cartList.size() != 0}">
+							<form method="post" action="/pay">
+								<div class="cart-list">
+									<table class="table table_wrap">
+										<thead class="thead-primary">
+											<tr class="text-center">
+												<th style="width:40px;">
+													<div class="all_check_input_div">
+														<span class="all_chcek_span"></span> <input type="checkbox"
+															class="all_check" checked="checked">
+													</div>
+												</th>
+												<th>이미지</th>
+												<th>상품명</th>
+												<th>가격</th>
+												<th>배송일</th>
+												<th>요일선택</th>
+												<th>갯수</th>
+												<th>총가격</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="c" items="${cartList }">
+												<tr class="text-center">
+													<td class="cart_info">
+														<input type="checkbox" class="cart_checkbox" name="cart_check" checked="checked" value="${c.cart_code }"> 
+														<input type="hidden" class="price_input" value="${c.pro_price }"> 
+														<input type="hidden" class="count_input" value="${c.cart_cnt }"> 
+														<input type="hidden" class="totalPrice_input" value="${c.pro_price * c.cart_cnt }">
+														<input type="hidden" class="pro_code" value="${c.pro_code }">
+														<input type="hidden" class="cart_code" value="${c.cart_code }">
+													</td>
+													<td class="image-prod">
+														<div>
+															<img alt="1" src="${path}/resources/images/product/${c.pro_image}" style="width: 100px;">
+														</div>
+													</td>
+													<td class="product-name"><h3>${c.pro_name }</h3></td>
+													<td><fmt:formatNumber value="${c.pro_price }" type="number"/></td>
+													<td>${c.cart_start }</td>
+													<td>${c.cart_day }</td>
+													<td>${c.cart_cnt }</td>
+													<td><fmt:formatNumber value="${c.pro_price * c.cart_cnt}" type="number"/></td>
+													<td>
+														<input type="button" value="변경" class="btn btn-primary" data-toggle="modal" data-target="#modal${c.cart_code }">
+														<a href="/cart/cartDelete/${c.cart_code }" class="btn btn-danger" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
+													</td>
+												</tr>
+											</c:forEach>
+											<!-- END TR-->
+										</tbody>
+									</table>
+								</div>
+								<div class="row">
+									<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+										<div class="cart-total mb-3">
+											<h3>장바구니 합계</h3>
+											<p class="d-flex">
+												<span>상품 가짓수</span> <span class="totalKind_span"></span>
+											</p>
+											<p class="d-flex">
+												<span>상품합계</span> <span class="totalPrice_span"></span>
+											</p>							
 										</div>
-									</th>
-									<th>이미지</th>
-									<th>상품명</th>
-									<th>가격</th>
-									<th>배송일</th>
-									<th>요일선택</th>
-									<th>갯수</th>
-									<th>총가격</th>
-									<th colspan="2"></th>
-								</tr>
-							</thead>
-
-							<tbody>
-								<c:forEach var="c" items="${cartList }">
-									<tr class="text-center">
-										<td class="cart_info">
-											<input type="checkbox" class="cart_checkbox" name="cart_check" checked="checked" value="${c.cart_code }"> 
-											<input type="hidden" class="price_input" value="${c.pro_price }"> 
-											<input type="hidden" class="count_input" value="${c.cart_cnt }"> 
-											<input type="hidden" class="totalPrice_input" value="${c.pro_price * c.cart_cnt }">
-											<input type="hidden" class="pro_code" value="${c.pro_code }">
-											<input type="hidden" class="cart_code" value="${c.cart_code }">
-										</td>
-										<td class="image-prod">
-											<div>
-												<img alt="1" src="${path}/resources/images/product/${c.pro_image}" style="width: 100px;">
-											</div>
-										</td>
-										<td class="product-name">
-											<h3>${c.pro_name }</h3>
-										</td>
-										<td>${c.pro_price }</td>
-										<td>${c.cart_start }</td>
-										<td>${c.cart_day }</td>
-										<td>${c.cart_cnt }</td>
-										<td>${c.pro_price * c.cart_cnt}</td>
-										<td>
-											<input type="button" value="변경" class="btn btn-primary" data-toggle="modal" data-target="#modal${c.cart_code }">
-										</td>
-										<td><a href="/cart/cartDelete/${c.cart_code }" class="btn btn-danger" onclick="return confirm('삭제하시겠습니까?');">삭제</a></td>
-									</tr>
-								</c:forEach>
-								<!-- END TR-->
-							</tbody>
-						</table>
-					</div>
-					<div class="row">
-						<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-							<div class="cart-total mb-3">
-								<h3>장바구니 합계</h3>
-								<p class="d-flex">
-									<span>상품 가짓수</span> <span class="totalKind_span"></span>
-								</p>
-								<p class="d-flex">
-									<span>상품합계</span> <span class="totalPrice_span"></span>
-								</p>							
-							</div>
-							<p>
-								<input type="submit" value="결제하기" class="btn btn-primary py-3 px-5">
-							</p>
-						</div>
-					</div>
-				</form>
+										<p>
+											<input type="submit" value="결제하기" class="btn btn-primary py-3 px-5">
+										</p>
+									</div>
+								</div>
+							</form>
+                        </c:when>
+						<c:otherwise> 
+							등록 된 상품이 없습니다.
+						</c:otherwise>
+					</c:choose>
+				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Modal -->
 	<c:forEach var="c" items="${cartList}">
 		<div class="modal fade" id="modal${c.cart_code }" tabindex="9999" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-md">
 				<div class="modal-content">
-					<form action="/cartUpdate" method="post" name="day">
+					<form action="/cartUpdate" method="post" name="day">	
 						<input type="hidden" name="cart_code" value="${c.cart_code }">
-						<input type="hidden" name="cart_totprice" value="${c.cart_cnt * c.pro_price}">		
+						<input type="hidden" name="cart_totprice" value="${c.cart_cnt * c.pro_price}">	
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">구매 옵션 변경</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
+							<h5 class="modal-title" id="exampleModalLabel">옵션 변경</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<div class="modal-body">
-							<div class="ftco-animated">
-								<div class="blog-entry align-self-stretch d-md-flex">
-									<div>
-										<img src="${path}/resources/images/product/${c.pro_image}" title="${c.pro_name }" alt="${c.pro_desc }" style="width: 250px;">
-									</div>
-									<div class="text d-block pl-md-4">
-										<h3 class="heading">${c.pro_name }</h3>								
-										<p>
-											<span class="font-weight-bold text-dark">상품 상세</span> ${c.pro_desc}
-										</p>												
-										<p>
-											<input type="text" readonly="readonly" style="cursor:default" class="form-control" id="pro_price" name="pro_price" value="${c.pro_price }">
-										</p>					
-										<p>
-											<label for="start"><span class="font-weight-bold text-dark">배송 시작일</span></label>
-											<input type="date" id="start" name="cart_start" class="form-control input-number cart_start" value="${c.cart_start }"  required="required">
-										</p>		
-										<p>
-											<span  class="font-weight-bold text-dark">배송 요일</span><br>
-											&nbsp;
-											<label for="mon"><input type="checkbox" name="cart_day" id="mon" style="transform: scale(1.5);" value="월" <c:if test = "${fn : contains(c.cart_day, '월')}">checked</c:if>>&nbsp;&nbsp;월</label>&nbsp;&nbsp; 
-											<label for="tue"><input type="checkbox" name="cart_day" id="tue" style="transform: scale(1.5);" value="화" <c:if test = "${fn : contains(c.cart_day, '화')}">checked</c:if>>&nbsp;&nbsp;화</label>&nbsp;&nbsp; 
-											<label for="wed"><input type="checkbox" name="cart_day" id="wed" style="transform: scale(1.5);" value="수" <c:if test = "${fn : contains(c.cart_day, '수')}">checked</c:if>>&nbsp;&nbsp;수</label>&nbsp;&nbsp; 
-											<label for="thu"><input type="checkbox" name="cart_day" id="thu" style="transform: scale(1.5);" value="목" <c:if test = "${fn : contains(c.cart_day, '목')}">checked</c:if>>&nbsp;&nbsp;목</label>&nbsp;&nbsp; 
-											<label for="fri"><input type="checkbox" name="cart_day" id="fri" style="transform: scale(1.5);" value="금" <c:if test = "${fn : contains(c.cart_day, '금')}">checked</c:if>>&nbsp;&nbsp;금</label>&nbsp;&nbsp; 
-											<label for="sat"><input type="checkbox" name="cart_day" id="sat" style="transform: scale(1.5);" value="토" <c:if test = "${fn : contains(c.cart_day, '토')}">checked</c:if>>&nbsp;&nbsp;토</label>&nbsp;&nbsp; 
-											<label for="sun"><input type="checkbox" name="cart_day" id="sun" style="transform: scale(1.5);" value="일" <c:if test = "${fn : contains(c.cart_day, '일')}">checked</c:if>>&nbsp;&nbsp;일</label>
-											
-											<label for="all"><input type="checkbox" name="cart_all" id="all" style="transform: scale(1.5);" value="all" onclick='selectAll(this)'>&nbsp;&nbsp;전체선택</label>
-               								&nbsp;&nbsp; 
-                							<label for="pyeong"><input type="checkbox" name="cart_pyeong" id="pyeong" style="transform: scale(1.5);" value="pyeong" onclick='selectpyeong(this)'>&nbsp;&nbsp;주중선택</label>
-               								&nbsp;&nbsp; 
-               								<label for="jumal"><input type="checkbox" name="cart_jumal" id="jumal" style="transform: scale(1.5);" value="jumal" onclick='selectjumal(this)'>&nbsp;&nbsp;주말선택</label>
-										</p>						
-										<p>
-											<span  class="font-weight-bold text-dark">상품 개수</span><br>
-											<!-- <input type="text" pattern="\d*" maxlength="3" id="cnt" name="cart_cnt" value="${c.cart_cnt}" class="quantity_input" min="1"> -->
-											<input type="number" class="cart_cnt" id="cart_cnt" name="cart_cnt" value="${c.cart_cnt}" min="1" onchange="calculateTotalPrice()">
-										</p>
-										<hr>
-										<p>
-											<span class="font-weight-bold text-dark">총 금액 : </span>
-											<input type="text" class="cart_totprice" id="cart_totprice" name="cart_totprice" class="totalPrice_span" value="${c.cart_cnt * c.pro_price }">
-										</p>
-									</div>
-								</div>
+						<div class="modal-body ftco-animated">
+							<h3 class="heading">${c.pro_name }</h3>
+							<input type="hidden" readonly="readonly" style="cursor:default" class="form-control" id="pro_price" name="pro_price" value="${c.pro_price }">
+							<div class="mb-2">
+								<label for="start"><span class="font-weight-bold">배송 시작일</span></label>
+								<input type="date" id="start" name="cart_start" class="form-control input-number cart_start" value="${c.cart_start }"  required="required">
+							</div>			
+							<div class="mb-2">
+								<span  class="font-weight-bold">배송 요일</span>
+								<div>
+									<label for="mon"><input type="checkbox" name="cart_day" id="mon" value="월" <c:if test = "${fn : contains(c.cart_day, '월')}">checked</c:if>> 월</label>&nbsp;&nbsp; 
+									<label for="tue"><input type="checkbox" name="cart_day" id="tue" value="화" <c:if test = "${fn : contains(c.cart_day, '화')}">checked</c:if>> 화</label>&nbsp;&nbsp; 
+									<label for="wed"><input type="checkbox" name="cart_day" id="wed" value="수" <c:if test = "${fn : contains(c.cart_day, '수')}">checked</c:if>> 수</label>&nbsp;&nbsp; 
+									<label for="thu"><input type="checkbox" name="cart_day" id="thu" value="목" <c:if test = "${fn : contains(c.cart_day, '목')}">checked</c:if>> 목</label>&nbsp;&nbsp; 
+									<label for="fri"><input type="checkbox" name="cart_day" id="fri" value="금" <c:if test = "${fn : contains(c.cart_day, '금')}">checked</c:if>> 금</label>&nbsp;&nbsp; 
+									<label for="sat"><input type="checkbox" name="cart_day" id="sat" value="토" <c:if test = "${fn : contains(c.cart_day, '토')}">checked</c:if>> 토</label>&nbsp;&nbsp; 
+									<label for="sun"><input type="checkbox" name="cart_day" id="sun" value="일" <c:if test = "${fn : contains(c.cart_day, '일')}">checked</c:if>> 일</label>
+									<br>
+									<label for="all"><input type="checkbox" name="cart_all" id="all" value="all" onclick='selectAll(this)'> 전체선택</label>
+	            					&nbsp;&nbsp; 
+	             					<label for="pyeong"><input type="checkbox" name="cart_pyeong" id="pyeong" value="pyeong" onclick='selectpyeong(this)'> 주중선택</label>
+	            					&nbsp;&nbsp; 
+	            					<label for="jumal"><input type="checkbox" name="cart_jumal" id="jumal" value="jumal" onclick='selectjumal(this)'> 주말선택</label>
+            					</div>
+							</div>						
+							<div class="mb-2">
+								<span  class="font-weight-bold text-dark">상품 개수</span><br>
+								<input type="number" class="form-control cart_cnt" id="cart_cnt" name="cart_cnt" value="${c.cart_cnt}" min="1" onchange="calculateTotalPrice()">
 							</div>
+							<hr>		
+							<div>
+								<span class="font-weight-bold text-dark">총 금액</span>
+								<input type="text" class="form-control cart_totprice" id="cart_totprice" name="cart_totprice" class="totalPrice_span" value="${c.cart_cnt * c.pro_price }">
+							</div>			
 						</div>
 						<div class="modal-footer">
-							<%-- <a href="/cartUpdate/${c.cart_code}" class="btn btn-primary py-3 px-5">변경</a> --%>
-							<!-- <input type="submit" value="변경" class="btn btn-primary py-3 px-5"> -->
-							<!-- <input type="submit" value="변경" class="btn btn-primary py-3 px-5" onclick="if(document.getElementsByName('cart_start')[0].value==''){alert('배송 시작일을 입력해주세요.');return false;}"> -->
 							<input type="submit" value="변경" class="btn btn-primary py-3 px-5" onclick="return CheckTest();">
-							
 							<button type="button" class="btn btn-black py-3 px-5" data-dismiss="modal">Close</button>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
-
 	</c:forEach>
 </section>
 <jsp:include page="/common/client_ft.jsp"></jsp:include>
-<script type="text/javascript"
-	src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-
-
-
-
-
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script>
-// function selectjumal(selectjumal)  {
-//     var checkboxes3 
-//          = document.querySelectorAll('#sat, #sun');
-    
-//     checkboxes3.forEach((checkbox) => {
-//       checkbox.checked = selectjumal.checked;
-//     })
-//   }
-// function selectpyeong(selectpyeong)  {
-//     var checkboxes2 
-//          = document.querySelectorAll('#mon, #tue, #wed, #thu, #fri');
-    
-//     checkboxes2.forEach((checkbox) => {
-//       checkbox.checked = selectpyeong.checked;
-//     })
-//   }
-// function selectAll(selectAll)  {
-//      var checkboxes 
-//           = document.getElementsByName('cart_day');
-     
-//      checkboxes.forEach((checkbox) => {
-//        checkbox.checked = selectAll.checked;
-//      })
-//    }
-
 function selectjumal(selectjumal) {
   var checkboxes2 = document.getElementsByName('cart_day');
 
@@ -248,43 +196,22 @@ function selectAll(selectAll) {
     checkbox4.checked = selectAll.checked;
   }
 }
-   
-
-
-
-// // 요일 체크되었는지 확인
-// function CheckTest() {
-		
-// 	const checkPart = document.querySelector('.daycheck');
-//     const checkboxes = checkPart.querySelectorAll('input[type="checkBox"]');
-
-//     for( let i = 0; i < checkboxes.length; i ++){
-//         if(checkboxes[i].checked === true)
-//         	return;	
-//         // 체크박스 돌다가 checked가 있으면 바로 return
-//     }
-//     alert('요일을 선택해주세요'); 
-//     // 체크없으면 바로 return해서 alert
-//     return false;
-// }
-
 function CheckTest() {
-    var checkboxes = document.getElementsByName("cart_day");
-    var checked = false;
-    for (var i = 0; i < checkboxes.length; i++) {
-      if (checkboxes[i].checked) {
-        checked = true;
-        break;
-      }
-    }
-    if (!checked) {
-      alert("배송 요일을 선택해주세요!");
-      return false;
-    }
-  }
-
-
-
+	var checkboxes = document.getElementsByName("cart_day");
+	var checked = false;
+	for (var i = 0; i < checkboxes.length; i++) {
+	  if (checkboxes[i].checked) {
+	    checked = true;
+	    break;
+	  }
+	}
+	if (!checked) {
+	  alert("배송 요일을 선택해주세요!");
+	  return false;
+	}
+}
+  
+  
 	$(function() {
 		$('input[name="daterange"]').daterangepicker(
 				{
@@ -296,35 +223,14 @@ function CheckTest() {
 							+ end.format('YYYY-MM-DD'));
 				});
 	});
-	
-//	let today = new Date().toISOString().substr(0, 10);
-//	document.querySelectorAll("#start").min = today;		
-//	document.getElementById("start").min = today;	
-//	document.getElementById('start').valueAsDate = new Date();
-
 	const today = new Date().toISOString().slice(0, 10);
- 
 	const cartStartInputs = document.querySelectorAll('.form-control.input-number[name="cart_start"]');
-   cartStartInputs.forEach(function(input) {
-     input.min = today;
-   });
+    cartStartInputs.forEach(function(input) {
+    	input.min = today;
+    });
    
-   
-//    // 모달창 내 합계 
-// function calculateTotalPrice() {
-// 	    const cart_cnt = document.getElementById('cart_cnt').value;
-// 	    const pro_price = document.getElementById('pro_price').value;
-// 	    const cart_totprice = document.getElementById('cart_totprice');
-// 	    cart_totprice.value = cart_cnt * pro_price;
-// 	  }
-   
-// const cntInputList = document.querySelectorAll('.form-control[name="cart_cnt"]');
-
-// cntInputList.forEach(cntInput => {
-//   cntInput.addEventListener('input', calculateTotalPrice);
-// });
-
-function calculateTotalPrice() { 
+   	//총금액 구하기
+	function calculateTotalPrice() { 
 	  const cart_cnt = parseInt(this.value);
 	  const pro_price = parseInt(this.parentNode.parentNode.querySelector('.form-control[name="pro_price"]').value);
 	  const cart_totprice = this.parentNode.parentNode.querySelector('.cart_totprice');
@@ -336,9 +242,6 @@ function calculateTotalPrice() {
 	cntInputList.forEach(cntInput => {
 	  cntInput.addEventListener('input', calculateTotalPrice);
 	});
-	
-
-	
 	$(document).ready(function() {
 		// 종합 정보 삽입
 		setTotalInfo();
@@ -372,7 +275,6 @@ function calculateTotalPrice() {
 		let totalPrice = 0; // 총 가격
 		let totalCount = 0; // 총 갯수
 		let totalKind = 0; // 총 종류
-		
 		$(".cart_info")
 				.each(
 						function(index, element) {
@@ -388,8 +290,6 @@ function calculateTotalPrice() {
 								totalKind += 1;
 							}
 						});
-		
-		
 		// 총 가격
 		$(".totalPrice_span").text(totalPrice.toLocaleString());
 		// 총 갯수
@@ -397,15 +297,13 @@ function calculateTotalPrice() {
 		// 총 가짓수
 		$(".totalKind_span").text(totalKind);
 	}
-</script>
-
-<script>
+	
 	$(document).ready(function() {
 		console.log("message : "+"${message}");
 		console.log("mem_id : "+"${mem_id}");
 		if("${message}" !=""){
 			alert("${message}");
-			 <%session.setAttribute("message","");%>
+			 <%session.setAttribute("message", "");%>
 		}
 	})
 </script>

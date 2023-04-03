@@ -9,7 +9,7 @@
         FROM pay WHERE status = '결제 완료'
         GROUP BY pro_name
         ORDER BY totalPrice DESC
-        LIMIT 10;
+        LIMIT 5;
 	</select>
 
 	<select id="getCountByGender"
@@ -56,7 +56,28 @@
 		GROUP BY pro_name
 		HAVING ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) NOT IN (0, 100)
 		ORDER BY ratio DESC
-		LIMIT 5;
+		LIMIT 15;
 		]]>
 	</select>
+	
+	<select id="getTotalUsersList" resultType="kr.co.mirak.pay.chart.TotalUsersVO">
+		SELECT mem_regdate as regdate, 
+		CASE WHEN mem_gender = 1 THEN '남자' ELSE '여자' END AS gender,
+		SUM(COUNT(*)) OVER (PARTITION BY mem_gender ORDER BY mem_regdate) AS totalUsers
+		FROM member
+		GROUP BY mem_regdate, mem_gender;
+	</select>
+	
+	<select id="getChartMainList" resultType="kr.co.mirak.pay.chart.ChartMainVO">
+		SELECT 
+		(SELECT COUNT(*) FROM MEMBER) AS totalUsers, SUM(totalPrice) AS totalPrice, 
+		SUM(CASE WHEN MONTH(pay_date) = MONTH(NOW()) THEN totalPrice ELSE 0 END) AS monthPrice 
+		FROM pay 
+		WHERE status = '결제 완료';
+	</select>
+	
+	
+	
+	
+	
 </mapper>

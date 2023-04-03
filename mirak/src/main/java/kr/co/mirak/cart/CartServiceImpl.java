@@ -48,6 +48,8 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public int cartInsert(CartVO vo, HttpSession session) {
 		String mem_id = (String)session.getAttribute("mem_id");
+		String mem_isapi = (String) session.getAttribute("mem_isapi");
+		
 	      int cart_cnt = vo.getCart_cnt();
 	      Date cart_start = vo.getCart_start();
 	      String cart_day = vo.getCart_day();
@@ -58,6 +60,7 @@ public class CartServiceImpl implements CartService {
 	      vo.setCart_cnt(cart_cnt);
 	      vo.setCart_start(cart_start);
 	      vo.setCart_day(cart_day);
+	      vo.setMem_isapi(mem_isapi);
 	      int result = mapper.cartInsert(vo);
 
 	      return result;

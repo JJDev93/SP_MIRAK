@@ -26,6 +26,7 @@ public class PayVO {
 	private Date pay_date;
 	private String status;
 	private String group_id;
+	private String mem_isapi;
 
 	public int getPay_code() {
 		return pay_code;
@@ -203,6 +204,14 @@ public class PayVO {
 		this.group_id = group_id;
 	}
 
+	public String getMem_isapi() {
+		return mem_isapi;
+	}
+
+	public void setMem_isapi(String mem_isapi) {
+		this.mem_isapi = mem_isapi;
+	}
+
 	@Override
 	public String toString() {
 		return "PayVO [pay_code=" + pay_code + ", mem_id=" + mem_id + ", pro_code=" + pro_code + ", pro_name="
@@ -211,7 +220,7 @@ public class PayVO {
 				+ mem_phone + ", mem_gender=" + mem_gender + ", mem_age=" + mem_age + ", mem_add1=" + mem_add1
 				+ ", mem_add2=" + mem_add2 + ", mem_zipcode=" + mem_zipcode + ", pay_req=" + pay_req + ", cart_day="
 				+ cart_day + ", cart_start=" + cart_start + ", pay_date=" + pay_date + ", status=" + status
-				+ ", group_id=" + group_id + "]";
+				+ ", group_id=" + group_id + ", mem_isapi=" + mem_isapi + "]";
 	}
 
 }

@@ -30,6 +30,8 @@ public class AdminLoginController {
 		System.out.println("=== 어드민 로그인 시도중 ===");
 		String rawPw = memberVO.getMem_pw(); // 사용자가 제출한 비번
 		String encodePw = ""; 
+		memberVO.setMem_isapi("normal");
+		System.out.println(memberVO);
 		MemberVO lvo = memberService.login(memberVO);
 		try {
 			if (lvo != null) { 

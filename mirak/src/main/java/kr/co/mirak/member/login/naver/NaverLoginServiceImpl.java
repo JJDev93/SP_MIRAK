@@ -100,7 +100,8 @@ public class NaverLoginServiceImpl implements NaverLoginService {
 			JSONObject jsonObject = new JSONObject(userInfo);
 			JSONObject response = jsonObject.getJSONObject("response");
 			String mem_id = response.getString("email");
-			int result = memberService.idCheck(mem_id);
+			String mem_isapi = "NAVER";
+			int result = memberService.existIdAndIsApi(mem_id, mem_isapi);
 			if (result == 0) {
 				member.setMem_isapi("NAVER");
 				member.setMem_id(mem_id);

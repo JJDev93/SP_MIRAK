@@ -6,7 +6,7 @@
 	<select id="login" parameterType="member" resultType="member">
   		<![CDATA[
  			 SELECT MEM_ID, MEM_PW , MEM_NAME, MEM_AGE, MEM_GENDER ,MEM_PHONE, MEM_ADD1, MEM_ADD2, MEM_ZIPCODE, MEM_ISAPI FROM MEMBER 
- 			 	WHERE MEM_ID=#{mem_id}  
+ 			 	WHERE MEM_ID=#{mem_id} AND MEM_ISAPI = #{mem_isapi} 
  		]]>
 	</select>
 	<select id="idfind" parameterType="member" resultType="member">
@@ -61,7 +61,7 @@
 			LIMIT 10 OFFSET #{page}
 		]]>
 	</select>
-	<select id="getMemberInfo" parameterType="String"
+	<select id="getMemberInfo" parameterType="member"
 		resultType="member">
 		<![CDATA[
 			SELECT MEM_ID, MEM_PW,
@@ -72,7 +72,7 @@
 				MEM_ADD2,
 				MEM_ZIPCODE,
 				MEM_ISAPI FROM MEMBER
-			WHERE MEM_ID=#{myid}
+			WHERE MEM_ID = #{mem_id} AND MEM_ISAPI = #{mem_isapi}
 		]]>
 	</select>
 	<!-- 아이디 확인 -->
@@ -80,6 +80,10 @@
 		SELECT count(*) FROM MEMBER WHERE mem_id= #{mem_id}
 	</select>
 	
+	<select id="existIdAndIsApi" parameterType="member" resultType="int">
+		SELECT count(*) FROM MEMBER WHERE mem_id = #{mem_id} AND mem_isApi = #{mem_isapi}
+	</select>
+
 	<!-- 회원탈퇴 -->
 	<delete id="memdelete" parameterType="member">
 		<![CDATA[
@@ -119,6 +123,7 @@
 		<![CDATA[
 			UPDATE MEMBER SET
 				MEM_AGE = #{mem_age},
+				MEM_NAME= #{mem_name},
 				MEM_GENDER = #{mem_gender},
 				MEM_PHONE = #{mem_phone},
 				MEM_ADD1 =#{mem_add1},

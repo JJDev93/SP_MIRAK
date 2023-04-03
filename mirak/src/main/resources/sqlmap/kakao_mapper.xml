@@ -5,18 +5,18 @@
 
 	<insert id="insertOrder">
 		<![CDATA[
-		insert into order_table (mem_id, pro_code, pro_name, pro_price, pro_desc, pro_image, cart_cnt, totalPrice, group_id, cart_day, cart_start, pay_req, tid, pay_type, cart_code)
-		values(#{mem_id}, #{pro_code}, #{pro_name}, #{pro_price}, #{pro_desc}, #{pro_image}, #{cart_cnt}, #{totalPrice}, #{group_id}, #{cart_day}, #{cart_start}, #{pay_req}, #{tid}, #{pay_type}, #{cart_code})
+		insert into order_table (mem_id, pro_code, pro_name, pro_price, pro_desc, pro_image, cart_cnt, totalPrice, group_id, cart_day, cart_start, pay_req, tid, pay_type, cart_code, mem_isapi)
+		values(#{mem_id}, #{pro_code}, #{pro_name}, #{pro_price}, #{pro_desc}, #{pro_image}, #{cart_cnt}, #{totalPrice}, #{group_id}, #{cart_day}, #{cart_start}, #{pay_req}, #{tid}, #{pay_type}, #{cart_code}, #{mem_isapi})
 		
 		
 		]]>
 	</insert>
 
 
-	<select id="selectTid" resultType="kr.co.mirak.pay.paymethod.PayKakaoVO">
+	<select id="selectTid" resultType="kr.co.mirak.pay.paymethod.PayKakaoVO" parameterType="map">
 		
 		<![CDATA[
- 		select tid, group_id, mem_id from order_table where order_id= (select max(order_id) from order_table where mem_id=#{mem_id});
+ 		select tid, group_id, mem_id from order_table where order_id= (select max(order_id) from order_table where mem_id=#{mem_id} and mem_isapi=#{mem_isapi});
 		
  		]]>
 
@@ -57,34 +57,34 @@
 			typeHandler="org.apache.ibatis.type.StringTypeHandler" />
 	</resultMap>
 
-	<select id="selectOrderList" resultMap="orderListMap">
+	<select id="selectOrderList" resultMap="orderListMap" parameterType="map">
 		<![CDATA[
 		
 		SELECT m.MEM_ID, o.PRO_CODE, o.PRO_NAME, o.PRO_PRICE, o.PRO_DESC, o.PRO_IMAGE, o.CART_CNT, o.totalPrice,
 		m.MEM_NAME, m.MEM_PHONE, m.MEM_GENDER, m.MEM_AGE, m.MEM_ADD1, m.MEM_ADD2, m.MEM_ZIPCODE,
-		o.CART_DAY, o.CART_START, o.PAY_REQ,  o.STATUS, o.group_id
+		o.CART_DAY, o.CART_START, o.PAY_REQ,  o.STATUS, o.group_id, o.mem_isapi
 		FROM order_table o
-		JOIN member m ON o.MEM_ID = m.MEM_ID
-		WHERE o.MEM_ID = #{mem_id} AND o.STATUS = '주문 완료'
+		JOIN member m ON o.MEM_ID = m.MEM_ID and o.mem_isapi = m.mem_isapi
+		WHERE o.MEM_ID = #{mem_id} and o.mem_isapi= #{mem_isapi} AND o.STATUS = '주문 완료'
 		AND o.group_id = (select group_id from order_table where order_id= 
-		(select max(order_id) from order_table where mem_id=  #{mem_id}));
+		(select max(order_id) from order_table where mem_id= #{mem_id} and mem_isapi= #{mem_isapi}));
 	
  		]]>
 	</select>
 
-	<update id="updateOrderList">
+	<update id="updateOrderList" parameterType="map">
 		UPDATE cart	SET cart_show = 0 WHERE cart_code IN (
 		SELECT o.cart_code FROM order_table o
-		WHERE o.MEM_ID = #{mem_id} AND o.STATUS = '주문 완료'
+		WHERE o.MEM_ID = #{mem_id} and mem_isapi= #{mem_isapi} AND o.STATUS = '주문 완료'
 		AND o.group_id = (
 		SELECT group_id	FROM order_table WHERE order_id = (
-		SELECT MAX(order_id) FROM order_table WHERE mem_id = #{mem_id})) );
+		SELECT MAX(order_id) FROM order_table WHERE mem_id = #{mem_id} and mem_isapi= #{mem_isapi})) );
 
-		UPDATE order_table SET status = '결제 완료' WHERE MEM_ID = #{mem_id}
+		UPDATE order_table SET status = '결제 완료' WHERE MEM_ID = #{mem_id} and mem_isapi= #{mem_isapi}
 		AND STATUS = '주문 완료' AND group_id = (
 		SELECT group_id FROM order_table
 		WHERE order_id = ( SELECT MAX(order_id) FROM order_table
-		WHERE mem_id = #{mem_id} ) );
+		WHERE mem_id = #{mem_id} and mem_isapi= #{mem_isapi}) );
 	</update>
 
 	<insert id="insertPayList" parameterType="java.util.List">
@@ -93,7 +93,7 @@
 		pro_image, cart_cnt, totalPrice, mem_name, mem_phone, mem_gender,
 		mem_age, mem_add1, mem_add2, mem_zipcode, pay_req, cart_day,
 		cart_start,
-		pay_date, status, group_id)
+		pay_date, status, group_id, mem_isapi)
 		VALUES
 		<foreach collection="list" item="item" separator=",">
 			(
@@ -105,7 +105,7 @@
 			#{item.mem_add1}, #{item.mem_add2}, #{item.mem_zipcode},
 			#{item.pay_req}, #{item.cart_day}, #{item.cart_start},
 			now(),
-			#{item.status}, #{item.group_id})
+			#{item.status}, #{item.group_id}, #{item.mem_isapi})
 		</foreach>
 	</insert>
 	
