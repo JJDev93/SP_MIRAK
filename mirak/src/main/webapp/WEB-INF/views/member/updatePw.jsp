@@ -96,6 +96,7 @@
 						document.getElementById('befo_pw').focus();
 					} else if (data == "1") {
 						alert("비밀번호가 수정 되었습니다.");
+						location.href="/mypage";
 					}
 				}
 			});
