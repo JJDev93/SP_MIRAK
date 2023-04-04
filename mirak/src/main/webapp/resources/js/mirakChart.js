@@ -12,12 +12,19 @@ $(function () {
       var chartMainList = data["chartMainList"];
       var totalRatio = totalByMenuList.totalRatio;
 
-      document.querySelector(".totalPrice_title").textContent =
-        chartMainList.totalPrice;
-      document.querySelector(".monthPrice_title").textContent =
-        chartMainList.monthPrice;
-      document.querySelector(".totalUsers_title").textContent =
-        chartMainList.totalUsers;
+      function addCommas(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+
+      document.querySelector(".totalPrice_title").textContent = addCommas(
+        chartMainList.totalPrice
+      );
+      document.querySelector(".monthPrice_title").textContent = addCommas(
+        chartMainList.monthPrice
+      );
+      document.querySelector(".totalUsers_title").textContent = addCommas(
+        chartMainList.totalUsers
+      );
 
       const ctx1 = document.getElementById("myChart1").getContext("2d");
       const ctx4 = document.getElementById("myChart4").getContext("2d");
@@ -28,8 +35,8 @@ $(function () {
             type: "bar",
             label: "장바구니에 담긴 횟수",
             data: purchaseRateList.cart_cnt,
-            borderColor: "#696969",
-            backgroundColor: "#87CEFA",
+            borderColor: "rgba(255, 99, 132, 0.2)",
+            backgroundColor: "#51CACF",
             borderWidth: 1,
             order: 1,
             datalabels: {
@@ -59,8 +66,8 @@ $(function () {
             type: "bar",
             label: "실제 구매횟수",
             data: purchaseRateList.cart_show,
-            borderColor: "#696969",
-            backgroundColor: "#F08080",
+            borderColor: "rgba(255, 99, 132, 0.2)",
+            backgroundColor: "#dc3545",
             borderWidth: 1,
             order: 2,
             datalabels: {
@@ -110,7 +117,7 @@ $(function () {
                 "#ffc107",
                 "#dc3545",
                 "#212529",
-                "#17a2b8",
+                "#51CACF",
               ],
               borderWidth: 0,
               data: totalByMenuList.totalPrice,
@@ -209,8 +216,15 @@ $(function () {
         pointBorderWidth: 8,
       };
 
+      const femaleDates = totalUsersList.여자.regdate;
+      const maleDates = totalUsersList.남자.regdate;
+
+      const uniqueDates = [...new Set([...femaleDates, ...maleDates])].map(
+        (date) => date.substr(5, 5)
+      );
+
       var speedData = {
-        labels: totalUsersList.여자.regdate,
+        labels: uniqueDates,
         datasets: [dataFirst, dataSecond],
       };
 
@@ -227,6 +241,138 @@ $(function () {
         hover: false,
         data: speedData,
         options: chartOptions,
+      });
+
+      var bestByGenderList = data["bestByGenderList"];
+
+      var ctx2 = document.getElementById("myChart2").getContext("2d");
+
+      var data = {
+        labels: bestByGenderList["30대"]["pro_name"],
+        datasets: [
+          {
+            label: "30대",
+            data: bestByGenderList["30대"]["total_Price"].map(
+              (price, index) =>
+                (price / 100) * bestByGenderList["30대"]["raito"][index]
+            ),
+            backgroundColor: "#51CACF",
+            borderColor: "rgba(255, 99, 132, 0.2)",
+            borderWidth: 1,
+          },
+          {
+            label: "20대",
+            data: bestByGenderList["20대"]["total_Price"].map(
+              (price, index) =>
+                (price / 100) * bestByGenderList["20대"]["raito"][index]
+            ),
+            backgroundColor: "#fb8622",
+            borderColor: "rgba(54, 162, 235, 0.2)",
+            borderWidth: 1,
+          },
+          {
+            label: "50대",
+            data: bestByGenderList["50대"]["total_Price"].map(
+              (price, index) =>
+                (price / 100) * bestByGenderList["50대"]["raito"][index]
+            ),
+            backgroundColor: "#dc3545",
+            borderColor: "rgba(255, 206, 86, 0.2)",
+            borderWidth: 1,
+          },
+          {
+            label: "40대",
+            data: bestByGenderList["40대"]["total_Price"].map(
+              (price, index) =>
+                (price / 100) * bestByGenderList["40대"]["raito"][index]
+            ),
+            backgroundColor: "#343a40",
+            borderColor: "rgba(75, 192, 192, 0.2)",
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      var options = {
+        responsive: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+          datalabels: {
+            color: "#fff",
+            font: {
+              weight: "bold",
+              size: "14",
+            },
+            formatter: function (value, context) {
+              var ageGroups = Object.keys(bestByGenderList);
+              var ratiosByMenu = {};
+              ageGroups.forEach(function (ageGroup) {
+                var ratios = bestByGenderList[ageGroup]["raito"];
+                var proNames = bestByGenderList[ageGroup]["pro_name"];
+                for (var i = 0; i < proNames.length; i++) {
+                  var proName = proNames[i];
+                  var ratio = ratios[i];
+                  if (!(proName in ratiosByMenu)) {
+                    ratiosByMenu[proName] = Array(ageGroups.length).fill(null);
+                  }
+                  var ageIndex = ageGroups.indexOf(ageGroup);
+                  ratiosByMenu[proName][ageIndex] = ratio;
+                }
+              });
+              var proNames = Object.keys(ratiosByMenu);
+              var proName = proNames[context.dataIndex];
+              var ratios = ratiosByMenu[proName];
+              if (ratios) {
+                var maxRatio = Math.max(...ratios);
+                var maxRatioIndex = ratios.indexOf(maxRatio);
+                if (context.datasetIndex === maxRatioIndex) {
+                  return maxRatio.toFixed(1) + "%";
+                } else {
+                  return "";
+                }
+              } else {
+                return "";
+              }
+            },
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                var label = context.dataset.label || "";
+                if (label) {
+                  label += ": ";
+                }
+                if (context.parsed.y !== null) {
+                  label += Math.ceil(context.parsed.y);
+                }
+                return label;
+              },
+            },
+          },
+        },
+        scales: {
+          y: {
+            stacked: true,
+            ticks: {
+              beginAtZero: true,
+            },
+          },
+          x: {
+            stacked: true,
+            ticks: {
+              autoSkip: false,
+            },
+          },
+        },
+      };
+
+      var myChart2 = new Chart(ctx2, {
+        type: "bar",
+        data: data,
+        options: options,
+        plugins: [ChartDataLabels],
       });
     },
   });

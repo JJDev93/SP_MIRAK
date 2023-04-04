@@ -70,7 +70,6 @@
                         </button>
                      </span>
                   </div>
-
                </div>
 
                <label for="start">배송 시작일<input type="date"
@@ -198,57 +197,46 @@
 
 
 <script>
-const resultInput = document.getElementById('result');
+const resultInput = document.getElementById("result");
 
-resultInput.addEventListener('change', function() {
+resultInput.addEventListener("change", function () {
   const resultValue = parseFloat(resultInput.value);
 
-  if (isNaN(resultValue) || resultValue <= 0 || !Number.isInteger(resultValue)) {
-    alert('최소 1이상의 수량을 선택해 주세요');
+  if (
+    isNaN(resultValue) ||
+    resultValue <= 0 ||
+    !Number.isInteger(resultValue)
+  ) {
+    alert("최소 1이상의 수량을 선택해 주세요");
     resultInput.value = 1;
   }
 });
-
 </script>
 
 
 <!-- 수량 변경 기능 -->
 <script>
-      $(document).ready(function(){
+$(document).ready(function () {
+	  var result = 0;
+	  $(".quantity-right-plus").click(function (e) {
+	    e.preventDefault();
+	    var result = parseInt($("#result").val());
 
-      var result=0;
-         $('.quantity-right-plus').click(function(e){
-              
-              // Stop acting like a button
-              e.preventDefault();
-              // Get the field name
-              var result = parseInt($('#result').val());
-              
-              // If is not undefined
-                  
-                  $('#result').val(result + 1);
+	    if (result < 99) {
+	      $("#result").val(result + 1);
+	    }
+	  });
 
-                
-                  // Increment
-              
-          });
+	  $(".quantity-left-minus").click(function (e) {
+	    e.preventDefault();
+	    var result = parseInt($("#result").val());
 
-           $('.quantity-left-minus').click(function(e){
-              // Stop acting like a button
-              e.preventDefault();
-              // Get the field name
-              var result = parseInt($('#result').val());
-              
-              // If is not undefined
-            
-                  // Increment
-                  if(result>1){
-                  $('#result').val(result - 1);
-                  }
-          });
-          
-      });
-   </script>
+	    if (result > 1) {
+	      $("#result").val(result - 1);
+	    }
+	  });
+	});
+</script>
 
 <script>
 

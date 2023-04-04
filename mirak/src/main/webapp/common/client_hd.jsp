@@ -12,7 +12,18 @@
 	<title>MiRak</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	
-	<link rel="icon" href="${path}/resources/images/favicon.gif">	
+	<link rel="apple-touch-icon" href="${path}/resources/images/favicon.png">
+	<link rel="shortcut icon" type="image/x-icon" href="${path}/resources/images/favicon.png">
+	
+	<meta name="keywords" content="도시락,배달,쇼핑몰,구독">
+	<meta name="description" content="MIRAK 도시락 배달 서비스">
+	<link rel="canonical" href="https://www.mirak.shop">
+	<meta property="og:title" content="MIRAK">
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="MIRAK 도시락 배달 서비스">
+	<meta property="og:image" content="${path}/resources/images/ogimg01.png">
+	<meta property="og:url" content="https://www.mirak.shop">
+	
 	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="${path}/resources/css/open-iconic-bootstrap.min.css">
 	<link rel="stylesheet" href="${path}/resources/css/animate.css">

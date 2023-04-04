@@ -1,11 +1,8 @@
 package kr.co.mirak.pay.chart;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
-
-import kr.co.mirak.pay.PayVO;
 
 public interface ChartMapper {
 	List<TotalByMenuVO> getTotalByMenuList(TotalByMenuVO vo);
@@ -19,5 +16,6 @@ public interface ChartMapper {
 	List<TotalUsersVO> getTotalUsersList(TotalUsersVO vo);
 	
 	List<ChartMainVO> getChartMainList(ChartMainVO vo);
-
+	
+	List<BestByGenderVO> getAgeTopFiveList(int param1, int param2);
 }

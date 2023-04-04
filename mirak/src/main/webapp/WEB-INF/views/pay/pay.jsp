@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="/common/client_hd.jsp" />
 
@@ -49,12 +50,12 @@
 <%-- 											<span class="font-weight-bold text-dark">상품 상세</span> ${productVO.pro_desc} <br> --%>
 											<span class="font-weight-bold text-dark">상품 코드</span> ${productVO.pro_code } <br>
 											<span class="font-weight-bold text-dark">배송 시작일</span> ${productVO.cart_start } <br>
-											<span class="font-weight-bold text-dark">상품 가격</span> ${productVO.pro_price }원 <br>
+											<span class="font-weight-bold text-dark">상품 가격</span> <fmt:formatNumber value="${productVO.pro_price}" type="number"/>원 <br>
 											<span  class="font-weight-bold text-dark">배송 요일</span> ${productVO.cart_day } <br>
 											<span  class="font-weight-bold text-dark">상품 개수</span> ${productVO.cart_cnt }
 										</p>
 										<hr>
-										<p><span  class="font-weight-bold text-dark">상품별 합계</span> ${productVO.cart_cnt * productVO.pro_price}원</p>
+										<p><span  class="font-weight-bold text-dark">상품별 합계</span> <fmt:formatNumber value="${productVO.cart_cnt * productVO.pro_price}" type="number"/>원</p>
 <!-- 										<p> -->
 <!-- 											<a href="blog-single.html" class="btn btn-primary py-2 px-3">삭제</a> -->
 <!-- 										</p> -->
@@ -107,7 +108,8 @@
 					<h3 class="billing-heading mb-4">Cart Total</h3>
 					<hr>
 					<p class="d-flex total-price">
-						<span>총 결제금액</span> <span id="totalPrice"></span><span>원</span>
+						<span>총 결제금액</span> <span class="totalPriceComma"></span><span>원</span>
+						<input type="hidden" id="totalPrice">
 					</p>
 				</div>
 				<div class="cart-detail p-3 p-md-4">
@@ -185,6 +187,8 @@
 			let mem_name = document.querySelector('#receiverName').value
 			let mem_phone = document.querySelector('#phone').value
 			let pay_req = document.querySelector('#req').value
+			
+			console.log(totalPrice);
 
 			// 카카오페이 결제전송
 			$.ajax({
@@ -208,6 +212,7 @@
 
 				},
 				success : function(response) {
+					
 
 					location.href = response.next_redirect_pc_url
 				}
@@ -216,12 +221,17 @@
 	})
 </script>
 <script>
-	document.addEventListener('DOMContentLoaded', function() {
-		let totalPrice = 0;
-		document.querySelectorAll('.totalPrice').forEach(function(item) {
-			totalPrice = totalPrice + Number(item.value)
-		})
-		document.querySelector('#totalPrice').innerText = totalPrice
-		document.querySelector('#payPrice').value = totalPrice
-	})
+document.addEventListener("DOMContentLoaded", function () {
+	  let totalPrice = 0;
+	  document.querySelectorAll(".totalPrice").forEach(function (item) {
+	    totalPrice = totalPrice + Number(item.value);
+	  });
+	  function addCommas(num) {
+	    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	  }
+
+	  document.querySelector(".totalPriceComma").textContent =
+	    addCommas(totalPrice);
+	  document.querySelector("#payPrice").value = totalPrice;
+	});
 </script>
