@@ -144,7 +144,7 @@
 	</div>
 
 	<!-- Modal -->
-	<form action="memdelete" method="post">
+	<form action="memdelete" method="post" onsubmit="return false;">
 		<div class="modal fade" id="exampleModal" tabindex="9999"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -183,10 +183,10 @@
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 							<c:choose>
 							<c:when test="${member.mem_isapi == 'google' || member.mem_isapi == 'NAVER' || member.mem_isapi == 'kakao'}">
-								<button type="button" class="btn btn-primary" id="memberCheck" onclick="apiDelete();">탈퇴하기</button>
+								<button type="button" class="btn btn-primary" id="memberCheck" onclick="apiDelete();" onkeydown="if(event.keyCode==13){apiDelete();}">탈퇴하기</button>
 							</c:when>
 							<c:otherwise>
-								<button type="button" class="btn btn-primary" id="memberCheck" onclick="confirmDeleteMem();" >탈퇴하기</button>
+								<button type="button" class="btn btn-primary" id="memberCheck" onclick="confirmDeleteMem();" onkeydown="if(event.keyCode==13){confirmDeleteMem();}">탈퇴하기</button>
 							</c:otherwise>
 							</c:choose>
 					</div>
