@@ -23,7 +23,8 @@
 										<label for="id">이메일(ID)</label>
 										<div class="row">
 											<div class="col-sm-12">
-												<input type="email" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required="required" readonly="readonly">
+												<input type="email" name="mem_id" id="id" class="form-control emaill mail_input" 
+													placeholder="이메일(ID)" value="${member.mem_id }" required="required" readonly="readonly">
 											</div>
 										</div>
 									</div>
@@ -36,7 +37,8 @@
 										<label for="id">이메일(ID) <span class="text-danger">*</span></label>
 										<div class="row">
 											<div class="col-sm-9">
-												<input type="email" name="mem_id" id="id" class="form-control emaill mail_input" placeholder="이메일(ID)" value="${member.mem_id }" required tabindex="1" autofocus="autofocus">
+												<input type="email" name="mem_id" id="id" class="form-control emaill mail_input" 
+													placeholder="이메일(ID)" value="${member.mem_id }" required tabindex="1" autofocus="autofocus">
 											</div>
 											<div class="col-sm-3"> 
 												<button type="button" tabIndex="2" class="btn btn-primary joinBtn" id="idCheck" value="N" onclick="return fn_idCheck();">중복확인</button>
@@ -46,7 +48,8 @@
 										<div class="row">
 											<div class="col-sm-9 mail_check_wrap">
 												<div class="mail_check_input_box" id="mail_check_input_box_false">
-													<input class="form-control" tabIndex="4" id="mail_check_input" disabled="disabled" placeholder="인증번호 6자리를 입력해주세요!" maxlength="6">
+													<input class="form-control" tabIndex="4" id="mail_check_input" disabled="disabled" 
+														placeholder="인증번호 6자리를 입력해주세요!" maxlength="6">
 													<div class="clearfix"></div>
 													<span id="mail_check_input_box_warn"></span>
 												</div>

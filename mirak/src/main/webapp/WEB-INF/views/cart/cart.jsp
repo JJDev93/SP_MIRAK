@@ -7,6 +7,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 <jsp:include page="/common/client_hd.jsp"></jsp:include>
+<style>.more{position: relative; left:90%; top:10px;}</style>
 
 <div class="hero-wrap hero-bread" style="background-image: url('${path}/resources/images/bg_1.jpg');">
 	<div class="ftco-animate">
@@ -23,6 +24,12 @@
 						<li class="nav-item"><a class="nav-link active" href="/cart">장바구니</a></li>
 						<li class="nav-item"><a class="nav-link" href="/payInfo">결제내역</a></li>
 					</ul>
+					
+					<p class="more"><a href="/" >+ 쇼핑 더하기</a></p>
+					
+					
+					
+					
 				</div>
 				<div class="row ftco-animate">
 					<c:choose>
