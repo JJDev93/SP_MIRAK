@@ -109,17 +109,17 @@ $(function () {
           labels: totalByMenuList.pro_name,
           datasets: [
             {
-              label: "Emails",
+              label: "Menus",
               pointRadius: 0,
               pointHoverRadius: 0,
               backgroundColor: [
                 "#fb8622",
                 "#ffc107",
                 "#dc3545",
-                "#212529",
+                "#6c757d",
                 "#51CACF",
               ],
-              borderWidth: 0,
+              borderWidth: 1,
               data: totalByMenuList.totalPrice,
             },
           ],
@@ -244,50 +244,67 @@ $(function () {
       });
 
       var bestByGenderList = data["bestByGenderList"];
+      
+      var sortedAgeGroups = Object.keys(bestByGenderList).sort();
+
+      var sortedBestByGenderList = {};
+      sortedAgeGroups.forEach(function (ageGroup) {
+      sortedBestByGenderList[ageGroup] = bestByGenderList[ageGroup];
+      });
 
       var ctx2 = document.getElementById("myChart2").getContext("2d");
 
       var data = {
-        labels: bestByGenderList["30대"]["pro_name"],
+        labels: sortedBestByGenderList["10대"]["pro_name"],
         datasets: [
           {
-            label: "30대",
-            data: bestByGenderList["30대"]["total_Price"].map(
+            label: "10대",
+            data: sortedBestByGenderList["10대"]["total_Price"].map(
               (price, index) =>
-                (price / 100) * bestByGenderList["30대"]["raito"][index]
+                (price / 100) * sortedBestByGenderList["10대"]["ratio"][index]
             ),
-            backgroundColor: "#51CACF",
-            borderColor: "rgba(255, 99, 132, 0.2)",
+            backgroundColor: "#ffc107",
+            borderColor: "white",
             borderWidth: 1,
           },
           {
             label: "20대",
-            data: bestByGenderList["20대"]["total_Price"].map(
+            data: sortedBestByGenderList["20대"]["total_Price"].map(
               (price, index) =>
-                (price / 100) * bestByGenderList["20대"]["raito"][index]
+                (price / 100) * sortedBestByGenderList["20대"]["ratio"][index]
             ),
             backgroundColor: "#fb8622",
-            borderColor: "rgba(54, 162, 235, 0.2)",
+            borderColor: "white",
             borderWidth: 1,
           },
           {
-            label: "50대",
-            data: bestByGenderList["50대"]["total_Price"].map(
+            label: "30대",
+            data: sortedBestByGenderList["30대"]["total_Price"].map(
               (price, index) =>
-                (price / 100) * bestByGenderList["50대"]["raito"][index]
+                (price / 100) * sortedBestByGenderList["30대"]["ratio"][index]
             ),
-            backgroundColor: "#dc3545",
-            borderColor: "rgba(255, 206, 86, 0.2)",
+            backgroundColor: "#51CACF",
+            borderColor: "white",
             borderWidth: 1,
           },
           {
             label: "40대",
-            data: bestByGenderList["40대"]["total_Price"].map(
+            data: sortedBestByGenderList["40대"]["total_Price"].map(
               (price, index) =>
-                (price / 100) * bestByGenderList["40대"]["raito"][index]
+                (price / 100) * sortedBestByGenderList["40대"]["ratio"][index]
             ),
-            backgroundColor: "#343a40",
-            borderColor: "rgba(75, 192, 192, 0.2)",
+            backgroundColor: "#6c757d",
+            borderColor: "white",
+            borderWidth: 1,
+          },
+          {
+            label: "50대",
+            data: sortedBestByGenderList["50대"]["total_Price"].map(
+              (price, index) =>
+                (price / 100) * sortedBestByGenderList["50대"]["ratio"][index]
+            ),
+            backgroundColor: "#dc3545",
+            borderColor: "white",
             borderWidth: 1,
           },
         ],
@@ -306,11 +323,13 @@ $(function () {
               size: "14",
             },
             formatter: function (value, context) {
-              var ageGroups = Object.keys(bestByGenderList);
+              var ageGroups = Object.keys(sortedBestByGenderList);
               var ratiosByMenu = {};
               ageGroups.forEach(function (ageGroup) {
-                var ratios = bestByGenderList[ageGroup]["raito"];
-                var proNames = bestByGenderList[ageGroup]["pro_name"];
+                var proNames = sortedBestByGenderList[ageGroup]["pro_name"];
+                console.log(proNames);
+                var ratios = sortedBestByGenderList[ageGroup]["ratio"];
+                console.log(ratios);
                 for (var i = 0; i < proNames.length; i++) {
                   var proName = proNames[i];
                   var ratio = ratios[i];
@@ -321,14 +340,22 @@ $(function () {
                   ratiosByMenu[proName][ageIndex] = ratio;
                 }
               });
+
               var proNames = Object.keys(ratiosByMenu);
               var proName = proNames[context.dataIndex];
               var ratios = ratiosByMenu[proName];
+
               if (ratios) {
-                var maxRatio = Math.max(...ratios);
-                var maxRatioIndex = ratios.indexOf(maxRatio);
+                var sortedRatios = ratios.slice().sort(function (a, b) {
+                  return b - a;
+                });
+                var maxRatioIndex = ratios.indexOf(sortedRatios[0]);
+                var secondMaxRatioIndex = ratios.indexOf(sortedRatios[1]);
+
                 if (context.datasetIndex === maxRatioIndex) {
-                  return maxRatio.toFixed(1) + "%";
+                  return sortedRatios[0].toFixed(1) + "%";
+                } else if (context.datasetIndex === secondMaxRatioIndex) {
+                  return sortedRatios[1].toFixed(1) + "%";
                 } else {
                   return "";
                 }
