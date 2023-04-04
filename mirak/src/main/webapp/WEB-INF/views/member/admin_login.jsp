@@ -85,6 +85,11 @@ body {
              신용우 전지혜 김연주 김원중 서현진 안창주 정동하
       	</p>
 	</form>
+	<c:if test="${not empty result}">
+		<script>
+		alert("${result}");
+		</script>
+	</c:if>
 	<script src="${path}/resources/js/bootstrap.min.js"></script>
 </body>
 </html>
