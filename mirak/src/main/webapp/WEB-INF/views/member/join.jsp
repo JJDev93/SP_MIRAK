@@ -81,7 +81,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="age">나이 <span class="text-danger">*</span></label> 
-									<input type="text" name="mem_age" tabIndex="8" id="age" class="form-control" placeholder="나이를 입력해주세요" value="${member.mem_age }" required="required">
+									<input type="text" name="mem_age" tabIndex="8" id="age" class="form-control" placeholder="나이를 입력해주세요" value="${member.mem_age }" required="required" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 								</div>
 							</div>
 							<div class="w-100"></div>
@@ -99,7 +99,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="phone">Phone <span class="text-danger">*</span></label>
-								<input type="text" name="mem_phone" id="phone" class="form-control" placeholder=" ' - ' 빼고 입력해주세요 " required="required"value="${member.mem_phone}" maxlength="11" pattern="[0-9]{11}">
+								<input type="text" name="mem_phone" id="phone" class="form-control" placeholder=" ' - ' 빼고 입력해주세요 " required="required" value="${member.mem_phone}" maxlength="11" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 							</div>
 						</div>
 
