@@ -43,7 +43,7 @@ $(function () {
               color: function (context) {
                 var index = context.dataIndex;
                 var value = purchaseRateList.rec[index];
-                if (value === "대박") {
+                if (value === "대박!") {
                   return "red";
                 }if (value === "강추") {
                   return "blue";
