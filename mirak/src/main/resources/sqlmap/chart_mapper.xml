@@ -51,17 +51,19 @@
 	<select id="getPurchaseRateList"
 		resultType="kr.co.mirak.pay.chart.PurchaseRateVO">
 	<![CDATA[
-		SELECT REPLACE(pro_name, '도시락', '') as pro_name , SUM(cart_cnt) as cart_cnt, SUM(cart_show=0) as cart_show, 
-		ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) as ratio, 
+		SELECT REPLACE(pro_name, '도시락', '') as pro_name, SUM(cart_cnt) as cart_cnt,
+		SUM(CASE WHEN cart_show=0 THEN cart_cnt ELSE 0 END) as cart_show,
+		ROUND(SUM(CASE WHEN cart_show=0 THEN cart_cnt ELSE 0 END) * 100 / SUM(cart_cnt), 2) as ratio, 
 		CASE 
-			WHEN ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) >= 60 AND ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) < 80 THEN '추천'
-			WHEN ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) >= 80 THEN '강추'
-			WHEN ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) < 60 THEN '인기'
-		END as rec
-		FROM cart
+		WHEN ROUND(SUM(CASE WHEN cart_show=0 THEN cart_cnt ELSE 0 END) * 100 / SUM(cart_cnt), 2) > 70 AND ROUND(SUM(CASE WHEN cart_show=0 THEN cart_cnt ELSE 0 END) * 100 / SUM(cart_cnt), 2) < 80 THEN '강추'
+		WHEN ROUND(SUM(CASE WHEN cart_show=0 THEN cart_cnt ELSE 0 END) * 100 / SUM(cart_cnt), 2) >= 80 THEN '대박'
+		WHEN ROUND(SUM(CASE WHEN cart_show=0 THEN cart_cnt ELSE 0 END) * 100 / SUM(cart_cnt), 2) > 55 THEN '추천'
+		ELSE '인기'
+			END as rec
+		FROM cart where cart_cnt > 5
 		GROUP BY pro_name
-		HAVING ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) NOT IN (0, 100)
-		ORDER BY ratio DESC
+		HAVING ratio BETWEEN 1 AND 90 
+		ORDER BY ratio desc
 		LIMIT 10;
 		]]>
 	</select>
