@@ -121,7 +121,7 @@
 	
 	<select id="getListPaging" resultType="product">
 		  		 
-		select * from (select * from product) as T1 limit #{skip},#{amount}
+		select * from product order by addtime desc limit #{skip},#{amount};
  		
 	</select>
 
