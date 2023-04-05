@@ -65,7 +65,7 @@
 							<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="/admin/members/${num}">${num}</a></li>
 						</c:forEach>
 						<c:if test="${pageMaker.next}">
-							<li class="pageInfo_btn next" id="abc"><a href="/admin/products/${pageMaker.endPage + 1 }">&gt;</a></li>
+							<li class="pageInfo_btn next" id="abc"><a href="/admin/members/${pageMaker.endPage + 1 }">&gt;</a></li>
 						</c:if>
 						<!-- 다음페이지 버튼 -->
 					</ul>
