@@ -35,8 +35,7 @@ public class AdminLoginController {
 		System.out.println(memberVO);
 		MemberVO lvo = memberService.login(memberVO);
 		String url = "member/admin_login";
-		String result = "";
-		try {
+				try {
 			if (lvo != null) { 
 				encodePw = lvo.getMem_pw(); 
 				memberService.login(memberVO);
@@ -49,19 +48,22 @@ public class AdminLoginController {
 					url = "redirect:/admin/charts";
 					
 				}else {
-					result = "관리자가 아닙니다.";
+					String result = "관리자가 아닙니다.";
+					model.addAttribute("result", result);
 					System.out.println("관리자가 아닙니다.");
 				}
 			} else {
-				result = "관리자가 아닙니다.";
+				String result = "관리자가 아닙니다.";
+				model.addAttribute("result", result);
 				System.out.println("로그인 실패. 존재하지 않는 아이디입니다.");
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
-			result = "로그인에 실패하였습니다.";
+			String result = "로그인에 실패하였습니다.";
+			model.addAttribute("result", result);
 			System.out.println("로그인 실패.");
 		}
-		model.addAttribute("result", result);
+		
 		return url;
 	}
 	
