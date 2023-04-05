@@ -121,15 +121,15 @@ public class JoinController {
 
 			System.out.println("임시 비밀번호 : " + randomString);
 			title = "비밀번호 재설정 이메일 입니다.";
-			content = "MiRrk에 방문해주셔서 감사합니다." + "<br><br>" + "임시비밀번호는 " + randomString + "입니다." + "<br>"
+			content = "MiRak에 방문해주셔서 감사합니다." + "<br><br>" + "임시비밀번호는 " + randomString + "입니다." + "<br>"
 					+ "로그인후 마이페이지에서 비밀번호를 수정해주세요.";
 			num = randomString;
 		} else {
 
 			int checkNum = random.nextInt(888888) + 111111;
 			System.out.println("인증번호 : " + checkNum);
-			title = "회원가입 인증 이메일 입니다.";
-			content = "MiRrk에 방문해주셔서 감사합니다." + "<br><br>" + "인증 번호는 " + checkNum + "입니다." + "<br>"
+			title = "MiRak 인증 이메일 입니다.";
+			content = "MiRak에 방문해주셔서 감사합니다." + "<br><br>" + "인증 번호는 " + checkNum + "입니다." + "<br>"
 					+ "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
 			num = Integer.toString(checkNum);
 		}
