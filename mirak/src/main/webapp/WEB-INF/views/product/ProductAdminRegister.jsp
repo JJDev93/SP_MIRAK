@@ -37,11 +37,11 @@
                   <label for="desc">상품 상세설명</label> <textarea name="pro_desc" cols="40" rows="10" class="form-control" id="desc" required></textarea>
                </div>
             </div>         
-            <div class="col-md-12">
-               <div class="form-group">
-                  <label for="image">이미지</label> <input type="text" class="form-control" id="image" name="pro_image" required>
-               </div>
-            </div>
+<!--             <div class="col-md-12"> -->
+<!--                <div class="form-group"> -->
+<!--                   <label for="image">이미지</label> <input type="text" class="form-control" id="image" name="pro_image"> -->
+<!--                </div> -->
+<!--             </div> -->
             <div class="col-md-12">
                <div class="form-group">
                   <label for="ifile">이미지 파일</label> <input type="file" class="form-control" id="ifile" name="uploadFile">
