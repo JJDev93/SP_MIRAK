@@ -125,7 +125,10 @@
                   </div>
                   <div class="modal-body ftco-animated">
                      <h3 class="heading">${c.pro_name }</h3>
-                     <input type="hidden" readonly="readonly" style="cursor:default" class="form-control" id="pro_price" name="pro_price" value="${c.pro_price }">
+                     <div class="mb-2">
+                        <label for="start"><span class="font-weight-bold">가격</span></label>
+                        <input type="text" readonly="readonly" style="cursor:default" class="form-control" id="pro_price" name="pro_price" value="${c.pro_price }">
+                     </div>
                      <div class="mb-2">
                         <label for="start"><span class="font-weight-bold">배송 시작일</span></label>
                         <input type="date" id="start" name="cart_start" class="form-control input-number cart_start" value="${c.cart_start }"  required="required">
@@ -151,15 +154,15 @@
                      <div class="mb-2">
                         <span  class="font-weight-bold text-dark">상품 개수</span><br>
                         <!--  <input type="number" class="form-control cart_cnt" id="cart_cnt" name="cart_cnt" value="${c.cart_cnt}" min="1" max="99" onchange="calculateTotalPrice()" oninput="if(parseInt(this.value)<1) this.value='1'; if(parseInt(this.value)>99) this.value='99';"> -->
-                        <div class="input-group">
+                        <div class="input-group product-details">
                                  <span class="input-group-btn mr-2">
-                                    <button type="button" class="btn btn-outline-secondary" data-type="minus" data-field="">
+                                    <button type="button" class="btn quantity-left-minus" data-type="minus" data-field="">
                                        <i class="ion-ios-remove"></i>
                                     </button>
                                  </span>
-                                 <input type="text"class="form-control input-number cart_cnt" name="cart_cnt" value="${c.cart_cnt}" min="1" max="99"> 
-                                 <span class="input-group-btn mr-2">
-                                    <button type="button" class="btn btn-outline-secondary" data-type="plus" data-field="">
+                                 <input type="text"class="form-control input-number cart_cnt mr-2" name="cart_cnt" value="${c.cart_cnt}" min="1" max="99"> 
+                                 <span class="input-group-btn ">
+                                    <button type="button" class="btn quantity-right-plus" data-type="plus" data-field="">
                                        <i class="ion-ios-add"></i>
                                     </button>
                                  </span>
