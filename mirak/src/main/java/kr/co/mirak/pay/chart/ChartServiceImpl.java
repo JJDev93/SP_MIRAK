@@ -175,22 +175,22 @@ public class ChartServiceImpl implements ChartService {
 	    Map<String, Map<String, List<Object>>> resultMap = new HashMap<>();
 
 	    ChartMapper mapper = sqlSessionTemplate.getMapper(ChartMapper.class);
-	    for (int age = 20; age <= 50; age += 10) {
+	    for (int age = 10; age <= 50; age += 10) {
 	        List<BestByGenderVO> ageTopFiveList = mapper.getAgeTopFiveList(age, age + 10);
 
 	        Map<String, List<Object>> map = new HashMap<>();
 	        List<Object> pro_name = new ArrayList<>();
-	        List<Object> raito = new ArrayList<>();
+	        List<Object> ratio = new ArrayList<>();
 	        List<Object> total_Price = new ArrayList<>();
 
 	        for (BestByGenderVO item : ageTopFiveList) {
 	        	pro_name.add(item.getPro_name());
-	        	raito.add(item.getRatio());
+	        	ratio.add(item.getRatio());
 	        	total_Price.add(item.getTotal_Price());
 	        }
 
 	        map.put("pro_name", pro_name);
-	        map.put("raito", raito);
+	        map.put("ratio", ratio);
 	        map.put("total_Price", total_Price);
 
 	        resultMap.put(age + "대", map);

@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,14 +27,15 @@ public class AdminLoginController {
 	}
 	
 	@RequestMapping(value={"/admin"}, method=RequestMethod.POST)
-	public String adminLoginPost(MemberVO memberVO, HttpSession session) {
+	public String adminLoginPost(MemberVO memberVO, HttpSession session, Model model) {
 		System.out.println("=== 어드민 로그인 시도중 ===");
 		String rawPw = memberVO.getMem_pw(); // 사용자가 제출한 비번
 		String encodePw = ""; 
 		memberVO.setMem_isapi("normal");
 		System.out.println(memberVO);
 		MemberVO lvo = memberService.login(memberVO);
-		try {
+		String url = "member/admin_login";
+				try {
 			if (lvo != null) { 
 				encodePw = lvo.getMem_pw(); 
 				memberService.login(memberVO);
@@ -43,27 +45,33 @@ public class AdminLoginController {
 				if (true == pwEncoder.matches(rawPw, encodePw) && mem_id.equals("admin")) {
 					session.setAttribute("mem_id", mem_id);
 					System.out.println("관리자 로그인 성공. 차트페이지로 이동.");
-					return "redirect:/admin/charts";
+					url = "redirect:/admin/charts";
 					
+				}else {
+					String result = "관리자가 아닙니다.";
+					model.addAttribute("result", result);
+					System.out.println("관리자가 아닙니다.");
 				}
-				System.out.println("관리자가 아닙니다.");
-				return "redirect:/admin";
 			} else {
+				String result = "관리자가 아닙니다.";
+				model.addAttribute("result", result);
 				System.out.println("로그인 실패. 존재하지 않는 아이디입니다.");
-				return "redirect:/admin";
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
+			String result = "로그인에 실패하였습니다.";
+			model.addAttribute("result", result);
 			System.out.println("로그인 실패.");
-			return "redirect:/admin";
 		}
+		
+		return url;
 	}
 	
 	// 로그아웃
 	@RequestMapping("/admin/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		System.out.println("로그아웃 성공!!");
+		System.out.println("어드민 로그아웃 성공!!");
 		return "redirect:/admin";
 	}
 }

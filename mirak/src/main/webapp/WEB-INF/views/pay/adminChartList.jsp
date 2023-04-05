@@ -4,13 +4,16 @@
 <jsp:include page="/common/admin_hd.jsp"></jsp:include>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
-<script src="https://kit.fontawesome.com/090692be94.js" crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script src="https://kit.fontawesome.com/090692be94.js"
+	crossorigin="anonymous"></script>
 
 <style>
 .numbers {
-	text-align : right;
+	text-align: right;
 }
 
 .chart-wrapper {
@@ -57,7 +60,7 @@ canvas {
 								<div class="row">
 									<div class="col-5 col-md-4">
 										<div class="icon-big text-center icon-warning">
-										<i class="fa-solid fa-won-sign fa-2xl"></i>
+											<i class="fa-solid fa-won-sign fa-2xl"></i>
 										</div>
 									</div>
 									<div class="col-7 col-md-8">
@@ -77,7 +80,7 @@ canvas {
 								<div class="row">
 									<div class="col-5 col-md-4">
 										<div class="icon-big text-center icon-warning">
-										<i class="fa-solid fa-coins fa-2xl"></i>
+											<i class="fa-solid fa-coins fa-2xl"></i>
 										</div>
 									</div>
 									<div class="col-7 col-md-8">
@@ -97,7 +100,7 @@ canvas {
 								<div class="row">
 									<div class="col-5 col-md-4">
 										<div class="icon-big text-center icon-warning">
-										<i class="fa-solid fa-users fa-2xl"></i>
+											<i class="fa-solid fa-users fa-2xl"></i>
 										</div>
 									</div>
 									<div class="col-7 col-md-8">
@@ -123,9 +126,8 @@ canvas {
 							</div>
 							<div class="card-footer ">
 								<div class="chart-legend">
-								<i class="fa fa-circle" style="color:#51CACF"></i> 장바구니에 담긴
-									횟수 <i
-										class="fa fa-circle text-danger"></i>  실제 구매횟수
+									<i class="fa fa-circle" style="color: #51CACF"></i> 장바구니에 담긴 횟수
+									<i class="fa fa-circle text-danger"></i> 실제 구매횟수
 								</div>
 							</div>
 						</div>
@@ -144,9 +146,9 @@ canvas {
 										menu1</span> <i class="fa fa-circle text-warning"></i> <span
 										class="menu2"> menu2</span> <i
 										class="fa fa-circle text-danger"></i> <span class="menu3">
-										menu3</span> <br> <i class="fa fa-circle text-gray"></i> <span
-										class="menu4"> menu4</span> <i class="fa fa-circle" style="color:#51CACF"></i>
-									<span class="menu5"> menu5</span>
+										menu3</span> <br> <i class="fa fa-circle text-secondary"></i> <span
+										class="menu4"> menu4</span> <i class="fa fa-circle"
+										style="color: #51CACF"></i> <span class="menu5"> menu5</span>
 								</div>
 							</div>
 						</div>
@@ -163,9 +165,10 @@ canvas {
 							</div>
 							<div class="card-footer ">
 								<div class="chart-legend">
-									<i class="fa fa-circle text-primary"></i> 20대 <i
-										class="fa fa-circle" style="color:#51CACF"></i> 30대 <i
-										class="fa fa-circle text-gray"></i> 40대 <i
+									<i class="fa fa-circle text-warning"></i> 10대 <i
+										class="fa fa-circle text-primary"></i> 20대 <i
+										class="fa fa-circle" style="color: #51CACF"></i> 30대 <i
+										class="fa fa-circle text-secondary"></i> 40대 <i
 										class="fa fa-circle text-danger"></i> 50대
 								</div>
 							</div>
@@ -181,7 +184,7 @@ canvas {
 							</div>
 							<div class="card-footer">
 								<div class="chart-legend">
-									<i class="fa fa-circle" style="color:#51CACF"></i> 남자 <i
+									<i class="fa fa-circle" style="color: #51CACF"></i> 남자 <i
 										class="fa fa-circle text-danger"></i> 여자
 								</div>
 							</div>

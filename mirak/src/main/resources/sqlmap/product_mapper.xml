@@ -36,14 +36,17 @@
 	
 	<select id="productListIndex2" resultType="product">
 
-       SELECT * FROM product WHERE pro_name IN (
-       SELECT pro_name FROM (SELECT pro_name, SUM(cart_cnt) as cart_cnt, SUM(cart_show=0) as cart_show, 
-       ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) as ratio FROM cart
-       GROUP BY pro_name
-       HAVING ROUND(SUM(cart_show=0) * 100 / SUM(cart_cnt), 2) NOT IN (0, 100)
-       ORDER BY ratio desc LIMIT 3) AS subquery)
-       ORDER BY pro_name;
-        
+        SELECT * FROM (SELECT pro_name, SUM(cart_cnt) as cart_cnt,
+        SUM(CASE WHEN cart_show=0 THEN cart_cnt ELSE 0 END) as cart_show,
+        ROUND(SUM(CASE WHEN cart_show=0 THEN cart_cnt ELSE 0 END) * 100 / SUM(cart_cnt), 2) as ratio 
+		FROM cart
+		GROUP BY pro_name
+		HAVING SUM(CASE WHEN cart_show=0 THEN cart_cnt ELSE 0 END) >= 50 and ratio BETWEEN 1 AND 90 
+		ORDER BY ratio DESC
+		LIMIT 3) AS subquery
+		JOIN product ON product.pro_name = subquery.pro_name
+		ORDER BY subquery.ratio DESC;
+
 	</select>
 	
 	<!-- 여기까지 -->

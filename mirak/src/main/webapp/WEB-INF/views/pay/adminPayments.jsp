@@ -119,6 +119,7 @@
 </div>
 
 <jsp:include page="/common/admin_ft.jsp"></jsp:include>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script>
 $('.payCancel[disabled]').each(function() {
      $(this).text('취소된 주문');
@@ -184,6 +185,7 @@ function detailTable(data, group_id) {
     tbody.empty();     
     var productList = JSON.parse('${productList}');
     let selectCate;
+    let selectPrice;
     let pro_code;
     data.forEach(function (item) {
           pro_code = item.pro_code;
@@ -222,7 +224,7 @@ function detailTable(data, group_id) {
               return product.pro_name === pro_name.val();
              });
            if (selectProduct) {
-                var selectPrice = selectProduct.pro_price;
+                selectPrice = selectProduct.pro_price;
                 var totalPrice = item.cart_cnt * selectPrice;
                 var changePrice = item.cart_cnt * selectPrice;
               } else {
@@ -265,7 +267,7 @@ function detailTable(data, group_id) {
                return product.pro_name === selectPro_name;
              });
              pro_code = selectProduct.pro_code;
-             var selectPrice = selectProduct ? selectProduct.pro_price : 0;
+             selectPrice = selectProduct ? selectProduct.pro_price : 0;
              var cnt = parseInt($("#cart_cnt_" + pay_code).val());
              var changePrice = cnt * selectPrice;
              $("#changePrice_" + pay_code).text(changePrice);

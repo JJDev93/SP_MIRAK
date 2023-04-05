@@ -38,11 +38,11 @@
                   <label for="desc">상품 상세설명</label> <textarea name="pro_desc" cols="40" rows="10" class="form-control" id="desc">${product.pro_desc }</textarea>
                </div>
             </div>
-            <div class="col-md-12">
-               <div class="form-group">
-                  <label for="image">이미지</label> <input type="text" class="form-control" id="image" name="pro_image" value="${product.pro_image }">
-               </div>
-            </div>
+<!--             <div class="col-md-12"> -->
+<!--                <div class="form-group"> -->
+<%--                   <label for="image">이미지</label> <input type="text" class="form-control" id="image" name="pro_image" value="${product.pro_image }"> --%>
+<!--                </div> -->
+<!--             </div> -->
             <div class="col-md-12">
                <div class="form-group">
                   <label for="imagefile">이미지 파일</label>

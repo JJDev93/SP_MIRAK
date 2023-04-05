@@ -61,8 +61,8 @@
                            data-type="minus" data-field="">
                            <i class="ion-ios-remove"></i>
                         </button>
-                     </span> <input type="text" id="result" name="result"
-                        class="form-control input-number" value="1" min="1" maxlength="2">
+                     </span> 
+                     <input type="text" id="result" name="result"  class="form-control input-number" value="1" min="1" maxlength="2">
                      <span class="input-group-btn ml-2">
                         <button type="button" class="quantity-right-plus btn"
                            data-type="plus" data-field="">

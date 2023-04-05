@@ -187,12 +187,16 @@ public class ProductController {
 		String url = request.getSession().getServletContext().getRealPath("/resources/images/product/");
 		
 		MultipartFile uploadFile = vo.getUploadFile();
+		String fileName = "";
 			if (!uploadFile.isEmpty()) {
-			String fileName = uploadFile.getOriginalFilename();
+			fileName = uploadFile.getOriginalFilename();
 			uploadFile.transferTo(
 					new File( url + fileName));
+			vo.setPro_image(fileName);
 			
 		}
+		
+		
 		productService.insertProduct(vo);
 		System.out.println(vo);
 		return "redirect:/admin/products/1";
@@ -214,7 +218,17 @@ public class ProductController {
 
 	// 상품 수정
 	@RequestMapping(value = "/admin/productUpdate")
-	public String updateProduct(ProductVO vo, Model model, Criteria cri, @RequestParam("curPage") int curPage) {
+	public String updateProduct(ProductVO vo, MultipartHttpServletRequest request, Model model, Criteria cri, @RequestParam("curPage") int curPage) throws IOException  {
+		String url = request.getSession().getServletContext().getRealPath("/resources/images/product/");
+		MultipartFile uploadFile = vo.getUploadFile();
+		String fileName = "";
+			if (!uploadFile.isEmpty()) {
+			fileName = uploadFile.getOriginalFilename();
+			uploadFile.transferTo(
+					new File( url + fileName));
+			vo.setPro_image(fileName);
+			
+		}
 		productService.updateProduct(vo);
 		model.addAttribute("curPage", curPage);
 		return "redirect:/admin/products/{curPage}";
