@@ -174,7 +174,8 @@
 								</div>
 							</c:when>
 							<c:otherwise>
-								회원탈퇴시 모든 정보가 삭제됩니다. 비밀번호를 입력해 주세요. 
+								회원탈퇴시 모든 정보가 삭제됩니다. 비밀번호를 입력해 주세요. <br>
+								3개월 이내에 결제내역이 있을 시 탈퇴가 제한됩니다.
 								<input type="password" class="form-control" id="pw_1" required="required">
 							</c:otherwise>
 						</c:choose>

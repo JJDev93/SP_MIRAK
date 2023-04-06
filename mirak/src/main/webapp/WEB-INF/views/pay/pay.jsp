@@ -67,6 +67,7 @@
 
 					<div class="row align-items-end">
 						<div class="col-md-12">
+							<h2 class="mb-2 billing-heading">배송지 정보</h2>
 							<div class="form-group">
 								<label for="receiverName">받는 사람</label> <input type="text"
 									style="cursor: default" name="mem_name" class="form-control"
