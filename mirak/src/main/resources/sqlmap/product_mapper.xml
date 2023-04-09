@@ -78,7 +78,8 @@
 				pro_name = #{pro_name},
 				pro_price = #{pro_price},
 				pro_desc = #{pro_desc},
-				pro_desc2 = #{pro_desc2}
+				pro_desc2 = #{pro_desc2},
+				pro_image = #{pro_image}
 			WHERE pro_code = #{pro_code}
 		
 	</update>
