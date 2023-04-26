@@ -1,7 +1,6 @@
 ![Alt text](/mirak/src/main/webapp/resources/images/favicon.png)
-# MIRAK
-## URL
-https://www.mirak.shop
+
+# MIRAK https://www.mirak.shop
 
 ## **작업 기간**
 2023.02.17 ~ 2023.04.07 (5주)
