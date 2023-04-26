@@ -21,7 +21,8 @@ https://www.mirak.shop
 ## **인력 구성**
 ### 신용우
 > __담당업무__ 
-> 팀장, 클라이언트 결제 관리, 결제 API, AWS 호스팅
+> 팀장, 클라이언트 결제 관리, 결제 API, AWS 호스팅 
+> &nbsp;
 > __상세내용__
 > 패키지 관리, 데이터 흐름 조율, 결제 UI/UX 설계, 결제 데이터베이스 설계, 결제 서비스 구현, Kakao Pay API 연동, AWS 호스팅, Git/Github 협업 관리
 
@@ -45,7 +46,7 @@ https://www.mirak.shop
 
 ### 서현진
 > __담당업무__
-> 관리자 결제 관리, 통계 Chart API, 결제 API, 로그인 API
+> 관리자 결제 관리, 통계 Chart API, 결제 API, 로그인 API 
 > __상세내용__
 > 상품 결제 데이터베이스 설계, 구축, 관리자 결제 내역 기능 구현, DATA 통계 Chart API 연동, Kakao Pay 결제 API 연동, Naver 로그인 API 연동
 
