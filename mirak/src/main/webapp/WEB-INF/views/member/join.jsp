@@ -64,6 +64,7 @@
 									<div class="form-group">
 										<label for="pw">비밀번호 <span class="text-danger">*</span></label> 
 										<input type="password" tabIndex="5" name="mem_pw" class="form-control" id="pw" onchange="check_pw()" placeholder="비밀번호" required="required" value="${member.mem_pw }">
+										<span>비밀번호는 특수문자 포함 8~16글자로 작성해주세요.<span>
 									</div>
 									<div class="form-group">
 										<label for="pw2">비밀번호 확인 <span class="text-danger">*</span></label> 
